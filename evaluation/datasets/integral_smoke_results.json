@@ -1,0 +1,6 @@
+{
+  "dataset_id": "integral-smoke-v1",
+  "results": {
+    "EVAL-ISR-001": "traceability/fixtures/trace_test.json"
+  }
+}

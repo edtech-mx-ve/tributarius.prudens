@@ -1,0 +1,10 @@
+{
+  "taxpayer_type": "individual",
+  "activity": "servicios profesionales",
+  "tax": "ISR",
+  "problem_type": "determinacion de obligaciones",
+  "authority_act": null,
+  "procedural_stage": "orientacion",
+  "fiscal_year": 2026,
+  "top_k": 3
+}

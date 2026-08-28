@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description"
+        content="Tributarius prudens: orientación fiscal explicable y trazable.">
+  <title>{{ app_name }}</title>
+  <link rel="stylesheet" href="{{ url_for('static', path='/css/app.css') }}">
+  <script src="{{ url_for('static', path='/js/app.js') }}" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Saltar al contenido principal</a>
+
+  <header class="site-header">
+    <div class="shell header-inner">
+      <a class="brand" href="/" aria-label="Tributarius prudens, inicio">
+        <span class="brand-mark" aria-hidden="true">TP</span>
+        <span>
+          <strong>Tributarius prudens</strong>
+          <small>Orientación fiscal explicable y trazable</small>
+        </span>
+      </a>
+      <nav aria-label="Navegación principal">
+        <a href="#consulta">Consulta</a>
+        <a href="#como-funciona">Cómo funciona</a>
+        <a href="/docs">API</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main-content">
+    <section class="hero shell" aria-labelledby="hero-title">
+      <div>
+        <p class="eyebrow">Sistema híbrido de apoyo fiscal</p>
+        <h1 id="hero-title">Comprende la evidencia antes de aceptar una respuesta.</h1>
+        <p class="hero-copy">
+          Tributarius prudens combina recuperación documental, normativa,
+          reglas, cálculos deterministas, casos semejantes y explicación
+          asistida. La trazabilidad conserva qué evidencia produjo el resultado.
+        </p>
+        <a class="button primary" href="#consulta">Iniciar consulta</a>
+      </div>
+      <aside class="principle-card" aria-label="Principio de funcionamiento">
+        <strong>Principio rector</strong>
+        <p>
+          Las fuentes aportan conocimiento; las reglas infieren; los algoritmos
+          calculan; CBR aporta experiencia; Llama explica; la trazabilidad permite
+          comprobar.
+        </p>
+      </aside>
+    </section>
+
+    <section class="consult-section" id="consulta" aria-labelledby="consult-title">
+      <div class="shell consultation-grid">
+        <div>
+          <p class="eyebrow">Consulta</p>
+          <h2 id="consult-title">Describe tu situación fiscal</h2>
+          <p>
+            No incluyas RFC, CURP, contraseñas, cuentas bancarias, domicilio ni
+            otros datos personales innecesarios.
+          </p>
+
+          <form id="consultation-form" novalidate>
+            <label for="mode">Modo de explicación</label>
+            <select id="mode" name="mode">
+              <option value="taxpayer">Contribuyente</option>
+              <option value="student">Estudiante</option>
+              <option value="professional">Profesional</option>
+            </select>
+
+            <label for="fiscal-year">Ejercicio fiscal <span>(opcional)</span></label>
+            <input id="fiscal-year" name="fiscal_year" type="number"
+                   min="1900" max="2200" inputmode="numeric"
+                   placeholder="2026">
+
+            <label for="query">Consulta</label>
+            <textarea id="query" name="query" rows="7" minlength="3"
+                      maxlength="4000" required
+                      aria-describedby="query-help query-error"
+                      placeholder="Ejemplo: ¿Qué obligaciones debo revisar si...?"></textarea>
+            <div class="field-meta">
+              <small id="query-help">Máximo 4,000 caracteres.</small>
+              <small id="character-count">0 / 4000</small>
+            </div>
+            <p class="field-error" id="query-error" role="alert"></p>
+
+            <button class="button primary" type="submit" id="submit-button">
+              Analizar consulta
+            </button>
+          </form>
+        </div>
+
+        <section class="result-panel" aria-labelledby="result-title">
+          <div class="result-heading">
+            <p class="eyebrow">Resultado</p>
+            <h2 id="result-title">Estado de la consulta</h2>
+          </div>
+          <div id="status-message" class="status neutral" role="status"
+               aria-live="polite">
+            Completa el formulario para comenzar.
+          </div>
+          <div id="result-content" hidden>
+            <section class="result-block" id="summary-block" hidden>
+              <h3>Orientación</h3>
+              <p id="result-explanation"></p>
+            </section>
+            <section class="result-block" id="norms-block" hidden>
+              <h3>Normativa aplicable</h3>
+              <ul id="result-norms"></ul>
+            </section>
+            <section class="result-block" id="evidence-block" hidden>
+              <h3>Evidencia y trazabilidad</h3>
+              <p id="result-folio"></p>
+              <ul id="result-evidence"></ul>
+            </section>
+            <section class="result-block" id="uncertainty-block" hidden>
+              <h3>Incertidumbre y revisión</h3>
+              <ul id="result-uncertainties"></ul>
+            </section>
+          </div>
+        </section>
+      </div>
+    </section>
+
+    <section class="shell process-section" id="como-funciona"
+             aria-labelledby="process-title">
+      <p class="eyebrow">Cómo funciona</p>
+      <h2 id="process-title">Una respuesta no es suficiente: debe poder rastrearse.</h2>
+      <div class="process-grid">
+        <article>
+          <span>01</span>
+          <h3>Evidencia</h3>
+          <p>Recuperación documental con referencias verificables.</p>
+        </article>
+        <article>
+          <span>02</span>
+          <h3>Determinación</h3>
+          <p>Normativa, reglas y cálculos permanecen fuera de la improvisación del LLM.</p>
+        </article>
+        <article>
+          <span>03</span>
+          <h3>Experiencia</h3>
+          <p>CBR aporta casos semejantes sin sustituir la normativa vigente.</p>
+        </article>
+        <article>
+          <span>04</span>
+          <h3>Trazabilidad</h3>
+          <p>Folio, fuentes, incertidumbre y revisión humana quedan registrados.</p>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="shell">
+      <p>
+        Herramienta de orientación y apoyo. Los asuntos de alto impacto,
+        controversia o evidencia insuficiente requieren revisión profesional.
+      </p>
+    </div>
+  </footer>
+</body>
+</html>

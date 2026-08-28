@@ -1,0 +1,21 @@
+{
+  "schema_version": "1.0",
+  "rules": [
+    {
+      "rule_id": "OBL_ISR_INDIVIDUAL_001",
+      "version": "1.0.0",
+      "description": "Ejemplo técnico de regla versionada para pruebas.",
+      "priority": 100,
+      "enabled": true,
+      "conditions": [
+        {"fact": "taxpayer_type", "operator": "eq", "value": "individual"},
+        {"fact": "fiscal_year", "operator": "eq", "value": 2026}
+      ],
+      "conclusion_code": "review_isr_obligations",
+      "conclusion": "Revisar las obligaciones de ISR aplicables al perfil.",
+      "normative_refs": ["NORM_TEST_ISR_2026"],
+      "source_refs": ["TEST_SOURCE"],
+      "requires_human_review": false
+    }
+  ]
+}

@@ -1,0 +1,147 @@
+# ---------------------------------------------------------------------------
+# Python / entornos / caches
+# ---------------------------------------------------------------------------
+.venv/
+venv/
+env/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.cache/
+.hypothesis/
+
+# ---------------------------------------------------------------------------
+# Build / cobertura / logs / temporales
+# ---------------------------------------------------------------------------
+dist/
+build/
+*.egg-info/
+.coverage
+.coverage.*
+coverage.xml
+htmlcov/
+*.log
+logs/
+tmp/
+temp/
+*.tmp
+
+# ---------------------------------------------------------------------------
+# IDE / SO
+# ---------------------------------------------------------------------------
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# ---------------------------------------------------------------------------
+# Configuración local, secretos y credenciales
+# Mantener solo la plantilla pública sin valores reales.
+# ---------------------------------------------------------------------------
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+*.jks
+*.keystore
+credentials*.json
+secrets*.json
+secret*.json
+*.secrets.*
+.auth/
+.netrc
+
+# ---------------------------------------------------------------------------
+# Bases de datos y persistencia local
+# ---------------------------------------------------------------------------
+*.db
+*.sqlite
+*.sqlite3
+*.db-journal
+*.sqlite-journal
+*.sqlite-wal
+*.sqlite-shm
+
+# ---------------------------------------------------------------------------
+# Modelos / pesos / caches ML: no subir binarios pesados al repositorio
+# ---------------------------------------------------------------------------
+*.gguf
+*.safetensors
+*.pt
+*.pth
+*.onnx
+*.ckpt
+/models/
+/model_cache/
+/huggingface/
+.huggingface/
+hf_cache/
+
+# ---------------------------------------------------------------------------
+# Corpus jurídico-fiscal operativo
+# Los originales, Markdown normalizado y chunks se revisan/licencian aparte.
+# Solo se conserva la estructura del repositorio.
+# ---------------------------------------------------------------------------
+knowledge/sources/**
+!knowledge/sources/**/
+!knowledge/sources/**/.gitkeep
+
+knowledge/normalized/**
+!knowledge/normalized/**/
+!knowledge/normalized/**/.gitkeep
+
+knowledge/chunks/**
+!knowledge/chunks/**/
+!knowledge/chunks/**/.gitkeep
+
+# Metadata: publicar solo lo expresamente revisado.
+knowledge/metadata/*
+!knowledge/metadata/.gitkeep
+!knowledge/metadata/master_matrix.json
+
+# ---------------------------------------------------------------------------
+# Índices y artefactos RAG generados
+# ---------------------------------------------------------------------------
+indexes/*
+!indexes/.gitkeep
+
+deployment/runtime_artifacts/*
+!deployment/runtime_artifacts/.gitkeep
+!deployment/runtime_artifacts/README.md
+
+# ---------------------------------------------------------------------------
+# Datos potencialmente sensibles / persistencia de ejecución
+# ---------------------------------------------------------------------------
+traceability/exports/*
+!traceability/exports/.gitkeep
+
+cbr/data/*
+!cbr/data/.gitkeep
+
+uploads/
+exports/
+private/
+private_data/
+data/private/
+data/raw_private/
+
+# ---------------------------------------------------------------------------
+# Reportes generados
+# ---------------------------------------------------------------------------
+evaluation/reports/*
+!evaluation/reports/.gitkeep
+
+# ---------------------------------------------------------------------------
+# Archivos comprimidos y paquetes locales generados
+# ---------------------------------------------------------------------------
+*.zip
+*.7z
+*.rar
+*.tar
+*.tar.gz

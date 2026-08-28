@@ -1,0 +1,305 @@
+{
+  "schema_version": "1.0",
+  "execution_id": "TP-1BFB3D1CF5A34A89998CCC21B22A7CD2",
+  "folio": "TP-20260828-1BFB3D1CF5A3",
+  "created_at_utc": "2026-08-28T12:00:00Z",
+  "query_analysis": {
+    "original_query": "Calcula ISR",
+    "normalized_query": "Calcula ISR",
+    "primary_intent": "calculate_isr",
+    "secondary_intents": [],
+    "facts": [
+      {
+        "name": "fiscal_year",
+        "value": "2026",
+        "origin": "explicit"
+      },
+      {
+        "name": "taxpayer_type",
+        "value": "individual",
+        "origin": "explicit"
+      }
+    ],
+    "entities": [],
+    "missing_fields": [],
+    "ambiguities": [],
+    "jurisprudence_requested": false,
+    "requires_clarification": false,
+    "requires_human_review": false
+  },
+  "retrieval": {
+    "query": "Calcula ISR",
+    "requested_top_k": 5,
+    "candidate_count": 1,
+    "returned_count": 1,
+    "hits": [
+      {
+        "rank": 1,
+        "score": 0.95,
+        "chunk_id": "normativa-test-chunk-00001",
+        "text": "Evidencia normativa sintética de prueba.",
+        "metadata": {
+          "document_id": "normativa-test",
+          "source_type": "normativa",
+          "source_filename": "norma.md",
+          "chunk_index": 0,
+          "chunk_type": "article",
+          "legal_identifier": "Artículo test",
+          "page_start": 1,
+          "page_end": 1,
+          "hierarchy": {
+            "title": null,
+            "chapter": null,
+            "section": null,
+            "article": "Artículo test",
+            "fraction": null,
+            "subsection": null
+          },
+          "source_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "fiscal_year": 2026,
+          "version_label": "2026-A"
+        }
+      }
+    ]
+  },
+  "normative": {
+    "results": [
+      {
+        "legal_unit_id": 1,
+        "version_label": "2026-A",
+        "decision": "applicable",
+        "applicable": true,
+        "query_date": "2026-08-28",
+        "query_fiscal_year": 2026,
+        "effective_from": "2026-01-01",
+        "effective_to": "2026-12-31",
+        "fiscal_year": 2026,
+        "reason": "La versión satisface los criterios temporales disponibles.",
+        "requires_human_review": false
+      }
+    ],
+    "applicable_refs": [
+      "NORM_TEST_ISR_2026"
+    ]
+  },
+  "rules": {
+    "matched_rules": [
+      {
+        "rule_id": "ISR_RULE_001",
+        "version": "1.0",
+        "conclusion_code": "isr_profile",
+        "conclusion": "Perfil sujeto a revisión ISR.",
+        "normative_refs": [
+          "NORM_TEST_ISR_2026"
+        ],
+        "source_refs": [],
+        "requires_human_review": false
+      }
+    ],
+    "traces": [
+      {
+        "rule_id": "ISR_RULE_001",
+        "version": "1.0",
+        "priority": 100,
+        "matched": true,
+        "skipped_reason": null,
+        "conditions": [
+          {
+            "fact": "taxpayer_type",
+            "operator": "eq",
+            "expected": "individual",
+            "actual": "individual",
+            "matched": true
+          }
+        ]
+      }
+    ],
+    "requires_human_review": false
+  },
+  "calculations": {
+    "isr": {
+      "fiscal_year": 2026,
+      "period": "annual",
+      "taxable_base": "17000.00",
+      "selected_lower_limit": "10000.01",
+      "selected_upper_limit": null,
+      "fixed_fee": "1000",
+      "rate_percent": "20",
+      "tax_before_credits": "2400.00",
+      "credits": "100",
+      "final_tax": "2300.00",
+      "normative_ref": "NORM_TEST_ISR_2026",
+      "tariff_version": "TEST-1.0",
+      "source_reference": "FIXTURE_ONLY",
+      "steps": [
+        {
+          "code": "taxable_base",
+          "formula": "gross_income - exempt_income - authorized_deductions",
+          "result": "17000.00"
+        },
+        {
+          "code": "excess_over_lower_limit",
+          "formula": "taxable_base - lower_limit",
+          "result": "6999.99"
+        },
+        {
+          "code": "marginal_tax",
+          "formula": "excess_over_lower_limit * rate_percent / 100",
+          "result": "1400.00"
+        },
+        {
+          "code": "tax_before_credits",
+          "formula": "fixed_fee + marginal_tax",
+          "result": "2400.00"
+        },
+        {
+          "code": "final_tax",
+          "formula": "max(0, tax_before_credits - credits)",
+          "result": "2300.00"
+        }
+      ]
+    }
+  },
+  "cbr": {
+    "retrieval": null,
+    "reuse_assessments": []
+  },
+  "explanation": {
+    "question": "Calcula ISR",
+    "provider_name": "mock",
+    "model_name": "deterministic-mock",
+    "generation_performed": true,
+    "retrieved_count": 1,
+    "answer": {
+      "summary": "Respuesta de prueba basada en evidencia recuperada.",
+      "analysis": "El proveedor mock confirma el contrato estructurado sin ejecutar un LLM.",
+      "evidence_ids": [
+        "normativa-test-chunk-00001"
+      ],
+      "uncertainties": [],
+      "requires_human_review": false
+    }
+  },
+  "uncertainty": {
+    "requires_human_review": false,
+    "items": []
+  },
+  "traceability": {
+    "schema_version": "1.0",
+    "execution_id": "TP-1BFB3D1CF5A34A89998CCC21B22A7CD2",
+    "folio": "TP-20260828-1BFB3D1CF5A3",
+    "created_at_utc": "2026-08-28T12:00:00Z",
+    "query_sha256": "e942e2a8d2db94a9b75b3dd5952dd60e370a18936cc47b1da7726adffb59d550",
+    "primary_intent": "calculate_isr",
+    "query_fiscal_year": 2026,
+    "events": [
+      {
+        "sequence": 1,
+        "stage": "query_analysis",
+        "status": "completed",
+        "summary": "Intento principal: calculate_isr.",
+        "evidence_refs": [],
+        "requires_human_review": false
+      },
+      {
+        "sequence": 2,
+        "stage": "retrieval",
+        "status": "completed",
+        "summary": "Chunks recuperados: 1.",
+        "evidence_refs": [
+          "normativa-test-chunk-00001"
+        ],
+        "requires_human_review": false
+      },
+      {
+        "sequence": 3,
+        "stage": "normative",
+        "status": "completed",
+        "summary": "Referencias normativas aplicables: 1.",
+        "evidence_refs": [
+          "NORM_TEST_ISR_2026"
+        ],
+        "requires_human_review": false
+      },
+      {
+        "sequence": 4,
+        "stage": "rules",
+        "status": "completed",
+        "summary": "Reglas activadas: 1.",
+        "evidence_refs": [
+          "ISR_RULE_001@1.0"
+        ],
+        "requires_human_review": false
+      },
+      {
+        "sequence": 5,
+        "stage": "isr",
+        "status": "completed",
+        "summary": "Cálculo ISR ejecutado de forma determinista.",
+        "evidence_refs": [
+          "ISR@TEST-1.0"
+        ],
+        "requires_human_review": false
+      },
+      {
+        "sequence": 6,
+        "stage": "cbr",
+        "status": "skipped",
+        "summary": "No se solicitó recuperación de casos semejantes.",
+        "evidence_refs": [],
+        "requires_human_review": false
+      },
+      {
+        "sequence": 7,
+        "stage": "explanation",
+        "status": "completed",
+        "summary": "Explicación generada con evidencia recuperada y resultados deterministas.",
+        "evidence_refs": [
+          "normativa-test-chunk-00001"
+        ],
+        "requires_human_review": false
+      }
+    ],
+    "evidence": [
+      {
+        "ref_id": "normativa-test-chunk-00001",
+        "kind": "document",
+        "source_type": "normativa",
+        "source_reference": "norma.md",
+        "version": "2026-A",
+        "fiscal_year": 2026,
+        "score": 0.95
+      },
+      {
+        "ref_id": "NORM_TEST_ISR_2026",
+        "kind": "normative",
+        "source_type": null,
+        "source_reference": null,
+        "version": "2026-A",
+        "fiscal_year": 2026,
+        "score": null
+      },
+      {
+        "ref_id": "ISR_RULE_001@1.0",
+        "kind": "rule",
+        "source_type": null,
+        "source_reference": null,
+        "version": "1.0",
+        "fiscal_year": null,
+        "score": null
+      },
+      {
+        "ref_id": "ISR@TEST-1.0",
+        "kind": "calculation",
+        "source_type": null,
+        "source_reference": "FIXTURE_ONLY",
+        "version": "TEST-1.0",
+        "fiscal_year": 2026,
+        "score": null
+      }
+    ],
+    "uncertainties": [],
+    "requires_human_review": false,
+    "canonical_result_sha256": "abdb25be39ef20d3accac5b3e2ac95eea5dfdc1563174a49edb0ea33eab50d2d"
+  }
+}

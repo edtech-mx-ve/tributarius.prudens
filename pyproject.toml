@@ -1,0 +1,56 @@
+[build-system]
+requires = ["hatchling>=1.25"]
+build-backend = "hatchling.build"
+
+[project]
+name = "tributarius-prudens"
+version = "0.1.0"
+description = "Sistema inteligente, explicable y trazable de orientación fiscal."
+requires-python = ">=3.12"
+dependencies = [
+    "fastapi>=0.116,<1.0",
+    "jinja2>=3.1,<4.0",
+    "uvicorn[standard]>=0.35,<1.0",
+    "pydantic>=2.11,<3.0",
+    "pydantic-settings>=2.10,<3.0",
+    "sqlalchemy>=2.0,<3.0",
+    "alembic>=1.16,<2.0",
+    "psycopg[binary]>=3.2,<4.0",
+    "pypdf>=5.9,<6.0",
+    "numpy>=1.26,<3.0",
+    "sentence-transformers>=6.0,<7.0",
+    "faiss-cpu>=1.15,<2.0",
+]
+
+[project.optional-dependencies]
+llama = [
+    "llama-cpp-python>=0.3.35,<0.4.0",
+]
+
+dev = [
+    "pytest>=8.4,<9.0",
+    "httpx>=0.28,<1.0",
+    "ruff>=0.12,<1.0",
+    "mypy>=1.17,<2.0",
+    "PyYAML>=6.0,<7.0",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]
+
+[tool.mypy]
+python_version = "3.12"
+strict = true
+plugins = ["pydantic.mypy"]
+exclude = ["migrations"]
+
+[tool.hatch.build.targets.wheel]
+packages = ["app", "scripts", "rag", "llm", "calculators", "cbr", "evaluation", "jurisprudence"]

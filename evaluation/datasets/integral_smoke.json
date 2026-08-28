@@ -1,0 +1,29 @@
+[
+  {
+    "case_id": "EVAL-ISR-001",
+    "kind": "normal",
+    "expected_intent": "calculate_isr",
+    "expected_relevant_chunk_ids": [
+      "normativa-test-chunk-00001"
+    ],
+    "expected_applicable_normative_refs": [
+      "NORM_TEST_ISR_2026"
+    ],
+    "expected_rule_ids": [
+      "ISR_RULE_001"
+    ],
+    "expected_calculations": {
+      "isr.final_tax": "2300.00"
+    },
+    "expected_evidence_ids": [
+      "normativa-test-chunk-00001"
+    ],
+    "expect_human_review": false,
+    "expect_abstention": false,
+    "tags": [
+      "synthetic",
+      "isr",
+      "happy_path"
+    ]
+  }
+]

@@ -1,0 +1,23 @@
+{
+  "schema_version": "1.0",
+  "version": "TEST-1.0",
+  "fiscal_year": 2026,
+  "period": "annual",
+  "normative_ref": "NORM_TEST_ISR_2026",
+  "source_reference": "FIXTURE_ONLY_NOT_FOR_FISCAL_USE",
+  "verified": true,
+  "brackets": [
+    {
+      "lower_limit": "0.00",
+      "upper_limit": "10000.00",
+      "fixed_fee": "0.00",
+      "rate_percent": "10.0000"
+    },
+    {
+      "lower_limit": "10000.01",
+      "upper_limit": null,
+      "fixed_fee": "1000.00",
+      "rate_percent": "20.0000"
+    }
+  ]
+}

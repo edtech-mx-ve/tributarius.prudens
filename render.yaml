@@ -1,0 +1,35 @@
+services:
+  - type: web
+    name: tributarius-prudens
+    runtime: python
+    plan: free
+    buildCommand: python -m pip install --upgrade pip && python -m pip install -e .
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT --workers 1
+    healthCheckPath: /health
+    autoDeployTrigger: checksPass
+    maxShutdownDelaySeconds: 20
+    envVars:
+      - key: ENVIRONMENT
+        value: production
+      - key: ENABLE_DOCS
+        value: "false"
+      - key: DATABASE_URL
+        value: sqlite:////tmp/tributarius-prudens.db
+      - key: TRUSTED_HOSTS_CSV
+        value: "*.onrender.com"
+      - key: DEPLOYMENT_PLATFORM
+        value: render
+      - key: RUNTIME_PROFILE
+        value: stateless_free
+      - key: RAG_ARTIFACT_DIR
+        value: deployment/runtime_artifacts
+      - key: REQUIRE_RAG_ARTIFACTS
+        value: "false"
+      - key: MAX_REQUEST_BODY_BYTES
+        value: "1048576"
+      - key: CONSULTATION_RATE_LIMIT
+        value: "30"
+      - key: CONSULTATION_RATE_WINDOW_SECONDS
+        value: "60"
+      - key: PYTHONUNBUFFERED
+        value: "1"
