@@ -10,7 +10,6 @@ services:
     startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT --workers 1
     healthCheckPath: /health
     autoDeployTrigger: checksPass
-    maxShutdownDelaySeconds: 20
     envVars:
       - key: ENVIRONMENT
         value: production
