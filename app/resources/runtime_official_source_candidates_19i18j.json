@@ -1,0 +1,97 @@
+{
+  "schema_version": "1.0",
+  "review_date": "2026-08-29",
+  "policy": "Las URLs son candidatas oficiales, no evidencia suficiente por sí mismas. La procedencia se verifica únicamente cuando el SHA-256 del PDF remoto coincide exactamente con el SHA-256 del PDF local ya enlazado al runtime.",
+  "documents": [
+    {
+      "document_id": "cff",
+      "candidate_urls": [
+        "https://www.diputados.gob.mx/LeyesBiblio/pdf/CFF.pdf"
+      ]
+    },
+    {
+      "document_id": "cpeum",
+      "candidate_urls": [
+        "https://www.diputados.gob.mx/LeyesBiblio/pdf/CPEUM.pdf"
+      ]
+    },
+    {
+      "document_id": "lfdc",
+      "candidate_urls": [
+        "https://www.diputados.gob.mx/LeyesBiblio/pdf/LFDC.pdf"
+      ]
+    },
+    {
+      "document_id": "lfisan",
+      "candidate_urls": [
+        "https://www.diputados.gob.mx/LeyesBiblio/pdf/LFISAN.pdf"
+      ]
+    },
+    {
+      "document_id": "lfpca",
+      "candidate_urls": [
+        "https://www.diputados.gob.mx/LeyesBiblio/pdf/LFPCA.pdf"
+      ]
+    },
+    {
+      "document_id": "lieps",
+      "candidate_urls": [
+        "https://www.diputados.gob.mx/LeyesBiblio/pdf/LIEPS.pdf"
+      ]
+    },
+    {
+      "document_id": "lif_2026",
+      "candidate_urls": [
+        "https://www.diputados.gob.mx/LeyesBiblio/pdf/LIF_2026.pdf"
+      ]
+    },
+    {
+      "document_id": "lisr",
+      "candidate_urls": [
+        "https://www.diputados.gob.mx/LeyesBiblio/pdf/LISR.pdf"
+      ]
+    },
+    {
+      "document_id": "liva",
+      "candidate_urls": [
+        "https://www.diputados.gob.mx/LeyesBiblio/pdf/LIVA.pdf"
+      ]
+    },
+    {
+      "document_id": "lotfja",
+      "candidate_urls": [
+        "https://www.diputados.gob.mx/LeyesBiblio/pdf/LOTFJA.pdf"
+      ]
+    },
+    {
+      "document_id": "reg_cff",
+      "candidate_urls": [
+        "https://www.diputados.gob.mx/LeyesBiblio/regley/Reg_CFF.pdf"
+      ]
+    },
+    {
+      "document_id": "reg_lisr_060516",
+      "candidate_urls": [
+        "https://www.diputados.gob.mx/LeyesBiblio/regley/Reg_LISR_060516.pdf"
+      ]
+    },
+    {
+      "document_id": "reg_liva_250914",
+      "candidate_urls": [
+        "https://www.diputados.gob.mx/LeyesBiblio/regley/Reg_LIVA_250914.pdf"
+      ]
+    },
+    {
+      "document_id": "rmf_2026",
+      "candidate_urls": [
+        "https://dof.gob.mx/2025/SHCP/SHCP_281225_01.pdf"
+      ]
+    }
+  ],
+  "allowed_authority_hosts": [
+    "www.diputados.gob.mx",
+    "diputados.gob.mx",
+    "www.dof.gob.mx",
+    "dof.gob.mx"
+  ]
+}

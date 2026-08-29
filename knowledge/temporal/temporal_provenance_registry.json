@@ -1,0 +1,47 @@
+{
+  "coverage_gaps": [
+    {
+      "canonical_id": "liva",
+      "gap_type": "document_wide_temporal_validity",
+      "reason": "No se detectó fecha explícita candidata en la evidencia prioritaria.",
+      "status": "unknown_fail_closed"
+    },
+    {
+      "canonical_id": "cpeum",
+      "gap_type": "document_wide_temporal_validity",
+      "reason": "Existen candidatos temporales, pero ninguno está verificado como vigencia documental completa.",
+      "status": "unknown_fail_closed"
+    }
+  ],
+  "entries": [
+    {
+      "canonical_id": "cpeum",
+      "document_wide_applicable": false,
+      "effective_from": null,
+      "effective_to": null,
+      "evidence_classification": "strong_entry_into_force",
+      "explicit_date_signal": "31 de diciembre de 1999",
+      "promotion_status": "blocked_scope_specific",
+      "scope_classification": "amendment_specific_candidate",
+      "scope_reason": "El contexto contiene señales de decreto/reforma/transitorio ligado a una unidad normativa; no debe trasladarse al documento completo.",
+      "source_line": 11168,
+      "source_path": "D:\\DISCO C\\Antonio Toro\\Proyectos_IA\\Tributarius_Prudens\\tributarius-prudens\\knowledge\\normalized\\normativa\\cpeum.md"
+    },
+    {
+      "canonical_id": "cpeum",
+      "document_wide_applicable": false,
+      "effective_from": null,
+      "effective_to": null,
+      "evidence_classification": "transitory_context",
+      "explicit_date_signal": "2 de septiembre de 1993",
+      "promotion_status": "blocked_scope_specific",
+      "scope_classification": "amendment_specific_candidate",
+      "scope_reason": "El contexto contiene señales de decreto/reforma/transitorio ligado a una unidad normativa; no debe trasladarse al documento completo.",
+      "source_line": 11491,
+      "source_path": "D:\\DISCO C\\Antonio Toro\\Proyectos_IA\\Tributarius_Prudens\\tributarius-prudens\\knowledge\\normalized\\normativa\\cpeum.md"
+    }
+  ],
+  "policy": "No se deriva vigencia documental desde publicación, última reforma ni disposiciones de alcance específico. effective_from/effective_to permanecen nulos hasta verificación jurídica de alcance.",
+  "schema_version": "1.0",
+  "source_sprint": "19I.13"
+}

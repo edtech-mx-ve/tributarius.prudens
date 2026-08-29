@@ -1,0 +1,37 @@
+{
+  "schema_version": "1.0",
+  "review_date": "2026-08-29",
+  "jurisdiction": "MX",
+  "purpose": "normative_publication_legal_basis_gate",
+  "sources": [
+    {
+      "id": "mx_lfda_art14_viii",
+      "authority": "Cámara de Diputados del H. Congreso de la Unión",
+      "title": "Ley Federal del Derecho de Autor",
+      "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LFDA.pdf",
+      "verified_current_revision_label": "Última Reforma DOF 14-05-2026",
+      "proposition": "El artículo 14, fracción VIII, excluye de la protección por derecho de autor los textos legislativos, reglamentarios, administrativos o judiciales y sus traducciones oficiales; si se publican deben apegarse al texto oficial. Las concordancias, interpretaciones, estudios comparativos, anotaciones, comentarios y trabajos originales similares sí pueden estar protegidos.",
+      "scope": "statutory_regulatory_administrative_judicial_text"
+    },
+    {
+      "id": "mx_dof_legal_notice",
+      "authority": "Diario Oficial de la Federación / SEGOB",
+      "title": "Aviso Legal del Diario Oficial de la Federación",
+      "url": "https://dof.gob.mx/aviso_legal.html",
+      "proposition": "El aviso permite la reproducción total o parcial del contenido publicado en el sitio sin fines de lucro cuando se cite la fuente; el acceso no implica licencia para reproducción o distribución con fines de lucro y exige preservar la integridad del texto.",
+      "scope": "dof_site_reproduction_notice"
+    }
+  ],
+  "decision_policy": {
+    "automatic_publication_promotion": false,
+    "requires_exact_official_provenance": true,
+    "requires_content_conformity": true,
+    "requires_runtime_to_local_pdf_bridge": true,
+    "requires_explicit_redistribution_review": true,
+    "requires_use_context_review": true,
+    "separate_review_documents": [
+      "manual_derecho_fiscal_unam",
+      "prodecon_contribuyente"
+    ]
+  }
+}

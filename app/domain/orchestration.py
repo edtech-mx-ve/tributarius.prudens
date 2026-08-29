@@ -73,6 +73,7 @@ class HybridOrchestrationRequest(BaseModel):
 class HybridOrchestrationResult(BaseModel):
     analysis: QueryAnalysis
     retrieval: RetrievalResult
+    normative_candidates: list[NormativeCandidate] = Field(default_factory=list)
     normative_results: list[NormativeApplicabilityResult]
     applicable_normative_refs: list[str]
     jurisprudence_result: JurisprudenceRetrievalResult | None = None

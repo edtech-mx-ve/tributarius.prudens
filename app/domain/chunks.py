@@ -40,6 +40,30 @@ class ChunkMetadata(BaseModel):
     source_sha256: str = Field(min_length=64, max_length=64)
     fiscal_year: int | None = Field(default=None, ge=1900, le=2200)
     version_label: str | None = Field(default=None, max_length=100)
+    canonical_id: str | None = Field(default=None, max_length=80)
+    source_role: str | None = Field(default=None, max_length=80)
+    document_type: str | None = Field(default=None, max_length=120)
+    title: str | None = Field(default=None, max_length=500)
+    source_unit_type: str | None = Field(default=None, max_length=80)
+    source_unit_label: str | None = Field(default=None, max_length=300)
+    matter: list[str] = Field(default_factory=list)
+    jurisdiction: str | None = Field(default=None, max_length=100)
+    publication_date: str | None = Field(default=None, max_length=40)
+    last_reform_date: str | None = Field(default=None, max_length=40)
+    effective_from: str | None = Field(default=None, max_length=40)
+    effective_to: str | None = Field(default=None, max_length=40)
+    text_sha256: str | None = Field(default=None, min_length=64, max_length=64)
+
+    # Sprint 19F: identidad canónica y trazabilidad del subchunk de recuperación.
+    parent_chunk_id: str | None = Field(default=None, min_length=8, max_length=300)
+    retrieval_subchunk_index: int | None = Field(default=None, ge=0)
+    retrieval_subchunk_count: int | None = Field(default=None, ge=1)
+    retrieval_strategy: str | None = Field(default=None, max_length=80)
+    retrieval_text_sha256: str | None = Field(
+        default=None,
+        min_length=64,
+        max_length=64,
+    )
 
     @model_validator(mode="after")
     def validate_page_range(self) -> ChunkMetadata:
@@ -49,6 +73,30 @@ class ChunkMetadata(BaseModel):
             and self.page_end < self.page_start
         ):
             raise ValueError("page_end no puede ser anterior a page_start")
+        return self
+
+    @model_validator(mode="after")
+    def validate_retrieval_trace(self) -> ChunkMetadata:
+        fields = (
+            self.retrieval_subchunk_index,
+            self.retrieval_subchunk_count,
+            self.retrieval_strategy,
+            self.retrieval_text_sha256,
+        )
+        if self.parent_chunk_id is None and any(value is not None for value in fields):
+            raise ValueError(
+                "Los metadatos de recuperación requieren parent_chunk_id."
+            )
+        if self.parent_chunk_id is not None:
+            if self.retrieval_subchunk_index is None:
+                raise ValueError("Falta retrieval_subchunk_index.")
+            if self.retrieval_subchunk_count is None:
+                raise ValueError("Falta retrieval_subchunk_count.")
+            if self.retrieval_subchunk_index >= self.retrieval_subchunk_count:
+                raise ValueError(
+                    "retrieval_subchunk_index debe ser menor que "
+                    "retrieval_subchunk_count."
+                )
         return self
 
 

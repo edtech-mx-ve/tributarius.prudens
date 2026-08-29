@@ -1,0 +1,233 @@
+[
+  {
+    "canonical_id": "cff",
+    "filename": "CFF.pdf",
+    "title": "Código Fiscal de la Federación",
+    "authority": "Cámara de Diputados del H. Congreso de la Unión",
+    "layer": "normativa",
+    "source_role": "ley",
+    "document_type": "código",
+    "matter": [
+      "fiscal_general",
+      "procedimiento_fiscal"
+    ],
+    "last_reform_date": "2026-04-09",
+    "chunking_profile": "legal_article",
+    "validity_note": "Conservar versión y vigencia por unidad normativa; validar reformas aplicables al caso."
+  },
+  {
+    "canonical_id": "cpeum",
+    "filename": "CPEUM.pdf",
+    "title": "Constitución Política de los Estados Unidos Mexicanos",
+    "authority": "Cámara de Diputados del H. Congreso de la Unión",
+    "layer": "normativa",
+    "source_role": "constitucional",
+    "document_type": "constitución",
+    "matter": [
+      "constitucional",
+      "principios_tributarios"
+    ],
+    "last_reform_date": "2026-06-02",
+    "chunking_profile": "legal_article",
+    "validity_note": "Fuente constitucional; la fecha corresponde a la reforma indicada por el documento local."
+  },
+  {
+    "canonical_id": "lfdc",
+    "filename": "LFDC.pdf",
+    "title": "Ley Federal de los Derechos del Contribuyente",
+    "authority": "Cámara de Diputados del H. Congreso de la Unión",
+    "layer": "normativa",
+    "source_role": "ley",
+    "document_type": "ley",
+    "matter": [
+      "derechos_contribuyente",
+      "procedimiento_fiscal"
+    ],
+    "chunking_profile": "legal_article"
+  },
+  {
+    "canonical_id": "lfisan",
+    "filename": "LFISAN.pdf",
+    "title": "Ley Federal del Impuesto sobre Automóviles Nuevos",
+    "authority": "Cámara de Diputados del H. Congreso de la Unión",
+    "layer": "normativa",
+    "source_role": "ley",
+    "document_type": "ley",
+    "matter": [
+      "isan"
+    ],
+    "last_reform_date": "2021-11-12",
+    "chunking_profile": "legal_article",
+    "validity_note": "Los montos o cuotas actualizados deben contrastarse con disposiciones vigentes del ejercicio."
+  },
+  {
+    "canonical_id": "lfpca",
+    "filename": "LFPCA.pdf",
+    "title": "Ley Federal de Procedimiento Contencioso Administrativo",
+    "authority": "Cámara de Diputados del H. Congreso de la Unión",
+    "layer": "normativa",
+    "source_role": "defensa",
+    "document_type": "ley",
+    "matter": [
+      "defensa",
+      "contencioso_administrativo"
+    ],
+    "last_reform_date": "2026-06-09",
+    "chunking_profile": "legal_article"
+  },
+  {
+    "canonical_id": "lieps",
+    "filename": "LIEPS.pdf",
+    "title": "Ley del Impuesto Especial sobre Producción y Servicios",
+    "authority": "Cámara de Diputados del H. Congreso de la Unión",
+    "layer": "normativa",
+    "source_role": "ley",
+    "document_type": "ley",
+    "matter": [
+      "ieps"
+    ],
+    "last_reform_date": "2025-11-07",
+    "chunking_profile": "legal_article",
+    "validity_note": "Contiene disposiciones con vigencias diferenciadas; validar temporalidad y cuotas aplicables antes de razonar."
+  },
+  {
+    "canonical_id": "lif_2026",
+    "filename": "LIF_2026.pdf",
+    "title": "Ley de Ingresos de la Federación para el Ejercicio Fiscal de 2026",
+    "authority": "Congreso de la Unión",
+    "layer": "normativa",
+    "source_role": "norma_anual",
+    "document_type": "ley_anual",
+    "matter": [
+      "ingresos_federacion",
+      "ejercicio_2026"
+    ],
+    "effective_from": "2026-01-01",
+    "fiscal_year": 2026,
+    "chunking_profile": "legal_article"
+  },
+  {
+    "canonical_id": "lisr",
+    "filename": "LISR.pdf",
+    "title": "Ley del Impuesto sobre la Renta",
+    "authority": "Cámara de Diputados del H. Congreso de la Unión",
+    "layer": "normativa",
+    "source_role": "ley",
+    "document_type": "ley",
+    "matter": [
+      "isr"
+    ],
+    "last_reform_date": "2024-04-01",
+    "chunking_profile": "legal_article"
+  },
+  {
+    "canonical_id": "liva",
+    "filename": "LIVA.pdf",
+    "title": "Ley del Impuesto al Valor Agregado",
+    "authority": "Cámara de Diputados del H. Congreso de la Unión",
+    "layer": "normativa",
+    "source_role": "ley",
+    "document_type": "ley",
+    "matter": [
+      "iva"
+    ],
+    "last_reform_date": "2021-11-12",
+    "chunking_profile": "legal_article"
+  },
+  {
+    "canonical_id": "lotfja",
+    "filename": "LOTFJA.pdf",
+    "title": "Ley Orgánica del Tribunal Federal de Justicia Administrativa",
+    "authority": "Cámara de Diputados del H. Congreso de la Unión",
+    "layer": "normativa",
+    "source_role": "defensa",
+    "document_type": "ley_orgánica",
+    "matter": [
+      "defensa",
+      "tribunal_federal_justicia_administrativa"
+    ],
+    "last_reform_date": "2025-10-16",
+    "chunking_profile": "legal_article"
+  },
+  {
+    "canonical_id": "manual_derecho_fiscal_unam",
+    "filename": "Manual Derecho Fiscal.pdf",
+    "title": "Manual de Derecho Fiscal",
+    "authority": "Universidad Nacional Autónoma de México - Instituto de Investigaciones Jurídicas",
+    "layer": "unam",
+    "source_role": "doctrina",
+    "document_type": "manual_académico",
+    "matter": [
+      "derecho_fiscal",
+      "doctrina",
+      "interpretacion",
+      "obligacion_tributaria",
+      "calculo_contribuciones"
+    ],
+    "publication_date": "2020-01-01",
+    "chunking_profile": "academic_chapter",
+    "validity_note": "Fuente doctrinal y académica; no debe presentarse como norma jurídica vinculante."
+  },
+  {
+    "canonical_id": "reg_cff",
+    "filename": "Reg_CFF.pdf",
+    "title": "Reglamento del Código Fiscal de la Federación",
+    "authority": "Presidencia de la República",
+    "layer": "normativa",
+    "source_role": "reglamento",
+    "document_type": "reglamento",
+    "matter": [
+      "fiscal_general",
+      "procedimiento_fiscal"
+    ],
+    "publication_date": "2014-04-02",
+    "chunking_profile": "legal_article"
+  },
+  {
+    "canonical_id": "reg_lisr_060516",
+    "filename": "Reg_LISR_060516.pdf",
+    "title": "Reglamento de la Ley del Impuesto sobre la Renta",
+    "authority": "Presidencia de la República",
+    "layer": "normativa",
+    "source_role": "reglamento",
+    "document_type": "reglamento",
+    "matter": [
+      "isr"
+    ],
+    "last_reform_date": "2016-05-06",
+    "chunking_profile": "legal_article"
+  },
+  {
+    "canonical_id": "reg_liva_250914",
+    "filename": "Reg_LIVA_250914.pdf",
+    "title": "Reglamento de la Ley del Impuesto al Valor Agregado",
+    "authority": "Presidencia de la República",
+    "layer": "normativa",
+    "source_role": "reglamento",
+    "document_type": "reglamento",
+    "matter": [
+      "iva"
+    ],
+    "last_reform_date": "2014-09-25",
+    "chunking_profile": "legal_article"
+  },
+  {
+    "canonical_id": "rmf_2026",
+    "filename": "SHCP_281225_01.pdf",
+    "title": "Resolución Miscelánea Fiscal para 2026",
+    "authority": "Secretaría de Hacienda y Crédito Público / Servicio de Administración Tributaria",
+    "layer": "normativa",
+    "source_role": "regla_administrativa",
+    "document_type": "resolución_miscelánea_fiscal",
+    "matter": [
+      "reglas_administrativas",
+      "cumplimiento",
+      "ejercicio_2026"
+    ],
+    "publication_date": "2025-12-28",
+    "effective_from": "2026-01-01",
+    "fiscal_year": 2026,
+    "chunking_profile": "administrative_rule",
+    "validity_note": "Debe segmentarse por título, capítulo, sección y regla; validar modificaciones y anexos aplicables."
+  }
+]

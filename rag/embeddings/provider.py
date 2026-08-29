@@ -74,6 +74,37 @@ class SentenceTransformerEmbedder:
     def model_name(self) -> str:
         return self._model_name
 
+    @property
+    def max_seq_length(self) -> int:
+        model = self._load_model()
+        value = getattr(model, "max_seq_length", None)
+        if not isinstance(value, int) or value < 1:
+            raise EmbeddingError("El modelo no expone un max_seq_length válido.")
+        return value
+
+    def count_tokens(self, text: str) -> int:
+        clean = text.strip()
+        if not clean:
+            raise EmbeddingError("El texto para conteo de tokens no puede estar vacío.")
+        model = self._load_model()
+        tokenizer = getattr(model, "tokenizer", None)
+        if tokenizer is None or not callable(tokenizer):
+            raise EmbeddingError("El modelo no expone un tokenizer utilizable.")
+        try:
+            encoded = tokenizer(
+                clean,
+                add_special_tokens=True,
+                truncation=False,
+                return_attention_mask=False,
+                return_token_type_ids=False,
+            )
+            input_ids = encoded.get("input_ids")
+        except Exception as exc:
+            raise EmbeddingError("Falló el conteo de tokens del embedding.") from exc
+        if not isinstance(input_ids, list):
+            raise EmbeddingError("El tokenizer devolvió una estructura inesperada.")
+        return len(input_ids)
+
     def _load_model(self) -> object:
         if self._model is not None:
             return self._model

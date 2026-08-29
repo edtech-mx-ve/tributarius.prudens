@@ -1,0 +1,119 @@
+{
+  "schema_version": "1.0",
+  "policy": "fail_closed_public_redistribution",
+  "allowed_status": "public_redistribution_verified",
+  "documents": [
+    {
+      "document_id": "cff",
+      "redistribution_status": "unknown_requires_review",
+      "evidence": null,
+      "reviewed_by": null,
+      "reviewed_at": null
+    },
+    {
+      "document_id": "cpeum",
+      "redistribution_status": "unknown_requires_review",
+      "evidence": null,
+      "reviewed_by": null,
+      "reviewed_at": null
+    },
+    {
+      "document_id": "lfdc",
+      "redistribution_status": "unknown_requires_review",
+      "evidence": null,
+      "reviewed_by": null,
+      "reviewed_at": null
+    },
+    {
+      "document_id": "lfisan",
+      "redistribution_status": "unknown_requires_review",
+      "evidence": null,
+      "reviewed_by": null,
+      "reviewed_at": null
+    },
+    {
+      "document_id": "lfpca",
+      "redistribution_status": "unknown_requires_review",
+      "evidence": null,
+      "reviewed_by": null,
+      "reviewed_at": null
+    },
+    {
+      "document_id": "lieps",
+      "redistribution_status": "unknown_requires_review",
+      "evidence": null,
+      "reviewed_by": null,
+      "reviewed_at": null
+    },
+    {
+      "document_id": "lif_2026",
+      "redistribution_status": "unknown_requires_review",
+      "evidence": null,
+      "reviewed_by": null,
+      "reviewed_at": null
+    },
+    {
+      "document_id": "lisr",
+      "redistribution_status": "unknown_requires_review",
+      "evidence": null,
+      "reviewed_by": null,
+      "reviewed_at": null
+    },
+    {
+      "document_id": "liva",
+      "redistribution_status": "unknown_requires_review",
+      "evidence": null,
+      "reviewed_by": null,
+      "reviewed_at": null
+    },
+    {
+      "document_id": "lotfja",
+      "redistribution_status": "unknown_requires_review",
+      "evidence": null,
+      "reviewed_by": null,
+      "reviewed_at": null
+    },
+    {
+      "document_id": "manual_derecho_fiscal_unam",
+      "redistribution_status": "unknown_requires_review",
+      "evidence": null,
+      "reviewed_by": null,
+      "reviewed_at": null
+    },
+    {
+      "document_id": "prodecon_contribuyente",
+      "redistribution_status": "unknown_requires_review",
+      "evidence": null,
+      "reviewed_by": null,
+      "reviewed_at": null
+    },
+    {
+      "document_id": "reg_cff",
+      "redistribution_status": "unknown_requires_review",
+      "evidence": null,
+      "reviewed_by": null,
+      "reviewed_at": null
+    },
+    {
+      "document_id": "reg_lisr_060516",
+      "redistribution_status": "unknown_requires_review",
+      "evidence": null,
+      "reviewed_by": null,
+      "reviewed_at": null
+    },
+    {
+      "document_id": "reg_liva_250914",
+      "redistribution_status": "unknown_requires_review",
+      "evidence": null,
+      "reviewed_by": null,
+      "reviewed_at": null
+    },
+    {
+      "document_id": "rmf_2026",
+      "redistribution_status": "unknown_requires_review",
+      "evidence": null,
+      "reviewed_by": null,
+      "reviewed_at": null
+    }
+  ]
+}

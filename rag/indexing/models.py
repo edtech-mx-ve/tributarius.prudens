@@ -18,6 +18,12 @@ class IndexManifest(BaseModel):
     chunks_filename: str = "chunks.jsonl"
     index_sha256: str = Field(min_length=64, max_length=64)
     chunks_sha256: str = Field(min_length=64, max_length=64)
+    source_chunks_sha256: str | None = Field(default=None, min_length=64, max_length=64)
+    index_bytes: int | None = Field(default=None, ge=1)
+    chunks_bytes: int | None = Field(default=None, ge=1)
+    build_seconds: float | None = Field(default=None, ge=0)
+    python_peak_memory_bytes: int | None = Field(default=None, ge=0)
+    max_embedding_text_chars: int | None = Field(default=None, ge=1)
 
 
 class VectorSearchHit(BaseModel):

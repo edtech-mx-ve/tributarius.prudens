@@ -44,16 +44,42 @@ def _rag_capability(settings: Settings) -> RuntimeCapability:
     )
 
 
+def _consultation_runtime_capability(settings: Settings) -> RuntimeCapability:
+    policy = Path(settings.legal_retrieval_policy_path).expanduser()
+    rules = Path(settings.runtime_rule_set_path).expanduser()
+    missing: list[str] = []
+    if not policy.is_file():
+        missing.append("legal_retrieval_policy")
+    if not rules.is_file():
+        missing.append("runtime_rule_set")
+    if missing:
+        return RuntimeCapability(
+            name="consultation_runtime",
+            available=False,
+            detail="Configuración del runtime ausente: " + ", ".join(missing),
+        )
+    return RuntimeCapability(
+        name="consultation_runtime",
+        available=True,
+        detail="Política jurídica y reglas del runtime disponibles.",
+    )
+
+
 def build_readiness_report(settings: Settings) -> ReadinessReport:
-    capabilities = [_database_capability(), _rag_capability(settings)]
+    capabilities = [
+        _database_capability(),
+        _rag_capability(settings),
+        _consultation_runtime_capability(settings),
+    ]
     database_ok = capabilities[0].available
     rag_ok = capabilities[1].available
+    runtime_config_ok = capabilities[2].available
 
     if not database_ok:
         state = ReadinessState.NOT_READY
-    elif settings.require_rag_artifacts and not rag_ok:
+    elif settings.require_rag_artifacts and (not rag_ok or not runtime_config_ok):
         state = ReadinessState.NOT_READY
-    elif not rag_ok:
+    elif not rag_ok or not runtime_config_ok:
         state = ReadinessState.DEGRADED
     else:
         state = ReadinessState.READY

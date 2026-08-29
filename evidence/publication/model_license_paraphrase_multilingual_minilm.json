@@ -1,0 +1,9 @@
+{
+  "evidence_verified": true,
+  "license": "apache-2.0",
+  "model_id": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+  "retrieved_date": "2026-08-29",
+  "source_kind": "official_model_repository_metadata",
+  "source_url": "https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+  "verification_note": "Official Hugging Face model repository metadata identifies the model license as apache-2.0."
+}

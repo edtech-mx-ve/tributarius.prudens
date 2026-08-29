@@ -28,8 +28,16 @@ class Settings(BaseSettings):
     runtime_profile: str = Field(
         default="development", pattern="^(development|stateless_free)$"
     )
-    rag_artifact_dir: str = "indexes/runtime"
+    rag_artifact_dir: str = "deployment/runtime_artifacts_semantic_v2"
     require_rag_artifacts: bool = False
+    rag_local_files_only: bool = True
+    verify_rag_integrity: bool = True
+    legal_retrieval_policy_path: str = "app/resources/legal_retrieval_policy.json"
+    runtime_rule_set_path: str = "rules/examples/basic_obligations.json"
+    temporal_provenance_registry_path: str = (
+        "knowledge/temporal/temporal_provenance_registry.json"
+    )
+    require_temporal_provenance_registry: bool = False
 
     def trusted_hosts(self) -> list[str]:
         """Hosts permitidos, normalizados desde una variable de entorno simple."""

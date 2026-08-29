@@ -100,6 +100,10 @@ knowledge/chunks/**
 !knowledge/chunks/**/
 !knowledge/chunks/**/.gitkeep
 
+# Chunks de recuperación generados: nunca versionar.
+knowledge/retrieval_chunks/
+knowledge/retrieval_chunks_semantic_v2/
+
 # Metadata: publicar solo lo expresamente revisado.
 knowledge/metadata/*
 !knowledge/metadata/.gitkeep
@@ -114,6 +118,10 @@ indexes/*
 deployment/runtime_artifacts/*
 !deployment/runtime_artifacts/.gitkeep
 !deployment/runtime_artifacts/README.md
+
+# Variantes de runtime generadas durante Sprint 19.
+deployment/runtime_artifacts_19f/
+deployment/runtime_artifacts_semantic_v2/
 
 # ---------------------------------------------------------------------------
 # Datos potencialmente sensibles / persistencia de ejecución
@@ -136,6 +144,12 @@ data/raw_private/
 # ---------------------------------------------------------------------------
 evaluation/reports/*
 !evaluation/reports/.gitkeep
+reports/
+
+# ---------------------------------------------------------------------------
+# Archivos locales de auditoría / inspección
+# ---------------------------------------------------------------------------
+git-status-prepublish.txt
 
 # ---------------------------------------------------------------------------
 # Archivos comprimidos y paquetes locales generados

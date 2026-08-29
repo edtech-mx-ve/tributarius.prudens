@@ -100,23 +100,85 @@
                aria-live="polite">
             Completa el formulario para comenzar.
           </div>
+
           <div id="result-content" hidden>
             <section class="result-block" id="summary-block" hidden>
               <h3>Orientación</h3>
               <p id="result-explanation"></p>
             </section>
+
             <section class="result-block" id="norms-block" hidden>
               <h3>Normativa aplicable</h3>
               <ul id="result-norms"></ul>
             </section>
+
             <section class="result-block" id="evidence-block" hidden>
-              <h3>Evidencia y trazabilidad</h3>
-              <p id="result-folio"></p>
-              <ul id="result-evidence"></ul>
+              <div class="block-heading">
+                <div>
+                  <h3>Evidencia recuperada</h3>
+                  <p class="section-help">
+                    Separa fuentes normativas de doctrina, orientación y otros apoyos.
+                  </p>
+                </div>
+                <span id="evidence-count" class="count-badge"></span>
+              </div>
+
+              <div class="evidence-group" id="normative-evidence-group" hidden>
+                <h4>Fuentes normativas</h4>
+                <div id="result-evidence-normative" class="evidence-list"></div>
+              </div>
+
+              <div class="evidence-group" id="supporting-evidence-group" hidden>
+                <h4>Doctrina y orientación de apoyo</h4>
+                <div id="result-evidence-supporting" class="evidence-list"></div>
+              </div>
+
+              <div class="evidence-group" id="jurisprudence-evidence-group" hidden>
+                <h4>Jurisprudencia relacionada</h4>
+                <div id="result-evidence-jurisprudence" class="evidence-list"></div>
+              </div>
+
+              <div class="evidence-group" id="other-evidence-group" hidden>
+                <h4>Otras evidencias del razonamiento</h4>
+                <div id="result-evidence-other" class="evidence-list"></div>
+              </div>
             </section>
+
             <section class="result-block" id="uncertainty-block" hidden>
               <h3>Incertidumbre y revisión</h3>
               <ul id="result-uncertainties"></ul>
+            </section>
+
+            <section class="result-block" id="trace-block" hidden>
+              <div class="block-heading">
+                <div>
+                  <h3>Trazabilidad</h3>
+                  <p class="section-help">
+                    Identidad de ejecución y etapas que produjeron este resultado.
+                  </p>
+                </div>
+                <span id="review-badge" class="review-badge" hidden></span>
+              </div>
+
+              <dl class="trace-summary">
+                <div><dt>Folio</dt><dd id="result-folio"></dd></div>
+                <div><dt>Intención</dt><dd id="result-intent"></dd></div>
+                <div><dt>Ejercicio</dt><dd id="result-trace-year"></dd></div>
+                <div><dt>Fecha UTC</dt><dd id="result-created-at"></dd></div>
+              </dl>
+
+              <details class="trace-details">
+                <summary>Ver etapas de razonamiento</summary>
+                <ol id="result-trace-events" class="trace-events"></ol>
+              </details>
+
+              <details class="trace-details">
+                <summary>Ver identificadores técnicos</summary>
+                <dl class="technical-trace">
+                  <div><dt>ID de ejecución</dt><dd id="result-execution-id"></dd></div>
+                  <div><dt>Huella del resultado</dt><dd id="result-result-hash"></dd></div>
+                </dl>
+              </details>
             </section>
           </div>
         </section>

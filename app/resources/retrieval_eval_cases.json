@@ -1,0 +1,123 @@
+[
+  {
+    "case_id": "prodecon_derechos",
+    "query": "¿Cuáles son los derechos y obligaciones de los contribuyentes?",
+    "expected_primary_document_ids": [
+      "lfdc"
+    ],
+    "expected_supporting_document_ids": [
+      "prodecon_contribuyente"
+    ],
+    "top_k": 5
+  },
+  {
+    "case_id": "unam_interpretacion",
+    "query": "¿Cómo se interpreta una norma tributaria y cuáles son los métodos de interpretación fiscal?",
+    "expected_primary_document_ids": [
+      "manual_derecho_fiscal_unam"
+    ],
+    "expected_supporting_document_ids": [
+      "cff",
+      "prodecon_contribuyente"
+    ],
+    "top_k": 5
+  },
+  {
+    "case_id": "cpeum_principios",
+    "query": "principios constitucionales tributarios proporcionalidad equidad legalidad contribuciones",
+    "expected_primary_document_ids": [
+      "cpeum"
+    ],
+    "expected_supporting_document_ids": [
+      "manual_derecho_fiscal_unam"
+    ],
+    "top_k": 5
+  },
+  {
+    "case_id": "cff_rfc",
+    "query": "Código Fiscal obligación inscripción RFC contribuyentes",
+    "expected_primary_document_ids": [
+      "cff"
+    ],
+    "expected_supporting_document_ids": [],
+    "top_k": 5
+  },
+  {
+    "case_id": "lisr_deducciones_personales",
+    "query": "Ley del Impuesto sobre la Renta deducciones personales de personas físicas",
+    "expected_primary_document_ids": [
+      "lisr"
+    ],
+    "expected_supporting_document_ids": [
+      "reg_lisr_060516"
+    ],
+    "top_k": 5
+  },
+  {
+    "case_id": "liva_tasa",
+    "query": "Ley del IVA tasa general impuesto al valor agregado actos gravados",
+    "expected_primary_document_ids": [
+      "liva"
+    ],
+    "expected_supporting_document_ids": [],
+    "top_k": 5
+  },
+  {
+    "case_id": "rmf_2026",
+    "query": "Resolución Miscelánea Fiscal para 2026 reglas de carácter general SAT",
+    "expected_primary_document_ids": [
+      "rmf_2026"
+    ],
+    "expected_supporting_document_ids": [],
+    "top_k": 5
+  },
+  {
+    "case_id": "lif_2026",
+    "query": "Ley de Ingresos de la Federación ejercicio fiscal 2026 ingresos federales",
+    "expected_primary_document_ids": [
+      "lif_2026"
+    ],
+    "expected_supporting_document_ids": [],
+    "top_k": 5
+  },
+  {
+    "case_id": "lfpca_juicio",
+    "query": "juicio contencioso administrativo federal demanda ante el Tribunal Federal de Justicia Administrativa",
+    "expected_primary_document_ids": [
+      "lfpca"
+    ],
+    "expected_supporting_document_ids": [
+      "lotfja"
+    ],
+    "top_k": 5
+  },
+  {
+    "case_id": "lotfja_competencia",
+    "query": "competencia y organización del Tribunal Federal de Justicia Administrativa",
+    "expected_primary_document_ids": [
+      "lotfja"
+    ],
+    "expected_supporting_document_ids": [
+      "lfpca"
+    ],
+    "top_k": 5
+  },
+  {
+    "case_id": "lieps",
+    "query": "impuesto especial sobre producción y servicios IEPS bebidas alcohólicas",
+    "expected_primary_document_ids": [
+      "lieps"
+    ],
+    "expected_supporting_document_ids": [],
+    "top_k": 5
+  },
+  {
+    "case_id": "lfisan",
+    "query": "impuesto sobre automóviles nuevos sujetos y cálculo",
+    "expected_primary_document_ids": [
+      "lfisan"
+    ],
+    "expected_supporting_document_ids": [],
+    "top_k": 5
+  }
+]

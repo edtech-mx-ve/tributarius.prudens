@@ -145,9 +145,10 @@ def _normative_evidence(
     request: HybridOrchestrationRequest,
     result: HybridOrchestrationResult,
 ) -> list[EvidenceReference]:
+    del request
     by_identity = {
         (candidate.legal_unit_id, candidate.version_label): candidate
-        for candidate in request.normative_candidates
+        for candidate in result.normative_candidates
     }
     refs: list[EvidenceReference] = []
     for item in result.normative_results:

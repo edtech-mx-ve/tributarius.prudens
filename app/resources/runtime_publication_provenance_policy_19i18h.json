@@ -1,0 +1,240 @@
+{
+  "schema_version": "1.0",
+  "review_date": "2026-08-29",
+  "legal_basis": {
+    "lfda_art14_viii": {
+      "authority": "Cámara de Diputados del H. Congreso de la Unión",
+      "official_url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LFDA.pdf",
+      "basis": "Artículo 14, fracción VIII: los textos legislativos, reglamentarios, administrativos o judiciales y sus traducciones oficiales no son objeto de protección como derecho de autor; al publicarse deben apegarse al texto oficial. Los trabajos editoriales originales añadidos sí pueden estar protegidos."
+    },
+    "dof_notice": {
+      "authority": "Diario Oficial de la Federación / Secretaría de Gobernación",
+      "official_url": "https://dof.gob.mx/aviso_legal.html",
+      "basis": "El aviso legal del DOF permite la reproducción total o parcial de la información o documentos publicados en su sitio sin fines de lucro, siempre que se cite la fuente, y exige preservar la integridad del texto."
+    }
+  },
+  "documents": [
+    {
+      "document_id": "cff",
+      "candidate_class": "official_legal_text",
+      "legal_basis_ids": [
+        "lfda_art14_viii"
+      ],
+      "allowed_authority_hosts": [
+        "diputados.gob.mx",
+        "www.diputados.gob.mx",
+        "dof.gob.mx",
+        "www.dof.gob.mx"
+      ],
+      "requires_exact_source_provenance": true,
+      "requires_content_conformity_pass": true,
+      "promotion_status": "blocked_pending_provenance"
+    },
+    {
+      "document_id": "cpeum",
+      "candidate_class": "official_legal_text",
+      "legal_basis_ids": [
+        "lfda_art14_viii"
+      ],
+      "allowed_authority_hosts": [
+        "diputados.gob.mx",
+        "www.diputados.gob.mx",
+        "dof.gob.mx",
+        "www.dof.gob.mx"
+      ],
+      "requires_exact_source_provenance": true,
+      "requires_content_conformity_pass": true,
+      "promotion_status": "blocked_pending_provenance"
+    },
+    {
+      "document_id": "lfdc",
+      "candidate_class": "official_legal_text",
+      "legal_basis_ids": [
+        "lfda_art14_viii"
+      ],
+      "allowed_authority_hosts": [
+        "diputados.gob.mx",
+        "www.diputados.gob.mx",
+        "dof.gob.mx",
+        "www.dof.gob.mx"
+      ],
+      "requires_exact_source_provenance": true,
+      "requires_content_conformity_pass": true,
+      "promotion_status": "blocked_pending_provenance"
+    },
+    {
+      "document_id": "lfisan",
+      "candidate_class": "official_legal_text",
+      "legal_basis_ids": [
+        "lfda_art14_viii"
+      ],
+      "allowed_authority_hosts": [
+        "diputados.gob.mx",
+        "www.diputados.gob.mx",
+        "dof.gob.mx",
+        "www.dof.gob.mx"
+      ],
+      "requires_exact_source_provenance": true,
+      "requires_content_conformity_pass": true,
+      "promotion_status": "blocked_pending_provenance"
+    },
+    {
+      "document_id": "lfpca",
+      "candidate_class": "official_legal_text",
+      "legal_basis_ids": [
+        "lfda_art14_viii"
+      ],
+      "allowed_authority_hosts": [
+        "diputados.gob.mx",
+        "www.diputados.gob.mx",
+        "dof.gob.mx",
+        "www.dof.gob.mx"
+      ],
+      "requires_exact_source_provenance": true,
+      "requires_content_conformity_pass": true,
+      "promotion_status": "blocked_pending_provenance"
+    },
+    {
+      "document_id": "lieps",
+      "candidate_class": "official_legal_text",
+      "legal_basis_ids": [
+        "lfda_art14_viii"
+      ],
+      "allowed_authority_hosts": [
+        "diputados.gob.mx",
+        "www.diputados.gob.mx",
+        "dof.gob.mx",
+        "www.dof.gob.mx"
+      ],
+      "requires_exact_source_provenance": true,
+      "requires_content_conformity_pass": true,
+      "promotion_status": "blocked_pending_provenance"
+    },
+    {
+      "document_id": "lif_2026",
+      "candidate_class": "official_legal_text",
+      "legal_basis_ids": [
+        "lfda_art14_viii"
+      ],
+      "allowed_authority_hosts": [
+        "dof.gob.mx",
+        "www.dof.gob.mx",
+        "diputados.gob.mx",
+        "www.diputados.gob.mx"
+      ],
+      "requires_exact_source_provenance": true,
+      "requires_content_conformity_pass": true,
+      "promotion_status": "blocked_pending_provenance"
+    },
+    {
+      "document_id": "lisr",
+      "candidate_class": "official_legal_text",
+      "legal_basis_ids": [
+        "lfda_art14_viii"
+      ],
+      "allowed_authority_hosts": [
+        "diputados.gob.mx",
+        "www.diputados.gob.mx",
+        "dof.gob.mx",
+        "www.dof.gob.mx"
+      ],
+      "requires_exact_source_provenance": true,
+      "requires_content_conformity_pass": true,
+      "promotion_status": "blocked_pending_provenance"
+    },
+    {
+      "document_id": "liva",
+      "candidate_class": "official_legal_text",
+      "legal_basis_ids": [
+        "lfda_art14_viii"
+      ],
+      "allowed_authority_hosts": [
+        "diputados.gob.mx",
+        "www.diputados.gob.mx",
+        "dof.gob.mx",
+        "www.dof.gob.mx"
+      ],
+      "requires_exact_source_provenance": true,
+      "requires_content_conformity_pass": true,
+      "promotion_status": "blocked_pending_provenance"
+    },
+    {
+      "document_id": "lotfja",
+      "candidate_class": "official_legal_text",
+      "legal_basis_ids": [
+        "lfda_art14_viii"
+      ],
+      "allowed_authority_hosts": [
+        "diputados.gob.mx",
+        "www.diputados.gob.mx",
+        "dof.gob.mx",
+        "www.dof.gob.mx"
+      ],
+      "requires_exact_source_provenance": true,
+      "requires_content_conformity_pass": true,
+      "promotion_status": "blocked_pending_provenance"
+    },
+    {
+      "document_id": "reg_cff",
+      "candidate_class": "official_legal_text",
+      "legal_basis_ids": [
+        "lfda_art14_viii"
+      ],
+      "allowed_authority_hosts": [
+        "diputados.gob.mx",
+        "www.diputados.gob.mx",
+        "dof.gob.mx",
+        "www.dof.gob.mx"
+      ],
+      "requires_exact_source_provenance": true,
+      "requires_content_conformity_pass": true,
+      "promotion_status": "blocked_pending_provenance"
+    },
+    {
+      "document_id": "reg_lisr_060516",
+      "candidate_class": "official_legal_text",
+      "legal_basis_ids": [
+        "lfda_art14_viii"
+      ],
+      "allowed_authority_hosts": [
+        "diputados.gob.mx",
+        "www.diputados.gob.mx",
+        "dof.gob.mx",
+        "www.dof.gob.mx"
+      ],
+      "requires_exact_source_provenance": true,
+      "requires_content_conformity_pass": true,
+      "promotion_status": "blocked_pending_provenance"
+    },
+    {
+      "document_id": "reg_liva_250914",
+      "candidate_class": "official_legal_text",
+      "legal_basis_ids": [
+        "lfda_art14_viii"
+      ],
+      "allowed_authority_hosts": [
+        "diputados.gob.mx",
+        "www.diputados.gob.mx",
+        "dof.gob.mx",
+        "www.dof.gob.mx"
+      ],
+      "requires_exact_source_provenance": true,
+      "requires_content_conformity_pass": true,
+      "promotion_status": "blocked_pending_provenance"
+    },
+    {
+      "document_id": "rmf_2026",
+      "candidate_class": "official_legal_text",
+      "legal_basis_ids": [
+        "lfda_art14_viii"
+      ],
+      "allowed_authority_hosts": [
+        "dof.gob.mx",
+        "www.dof.gob.mx"
+      ],
+      "requires_exact_source_provenance": true,
+      "requires_content_conformity_pass": true,
+      "promotion_status": "blocked_pending_provenance"
+    }
+  ]
+}

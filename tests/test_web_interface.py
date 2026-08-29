@@ -33,14 +33,21 @@ def test_consultation_validates_payload() -> None:
 
 
 def test_consultation_does_not_fake_backend_result() -> None:
-    response = client.post(
-        "/api/v1/consultations",
-        json={
-            "query": "¿Qué obligaciones debo revisar?",
-            "mode": "taxpayer",
-            "fiscal_year": 2026,
-        },
+    app.dependency_overrides[get_web_consultation_service] = lambda: (
+        WebConsultationService()
     )
+    try:
+        response = client.post(
+            "/api/v1/consultations",
+            json={
+                "query": "¿Qué obligaciones debo revisar?",
+                "mode": "taxpayer",
+                "fiscal_year": 2026,
+            },
+        )
+    finally:
+        app.dependency_overrides.clear()
+
     assert response.status_code == 200
     payload = response.json()
     assert payload["status"] == "not_configured"

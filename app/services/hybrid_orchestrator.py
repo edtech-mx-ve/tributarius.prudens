@@ -21,6 +21,8 @@ from app.domain.query import QueryAnalysis, QueryIntent
 from app.domain.rules import RuleEvaluationResult, RuleSet
 from app.services.cbr_reasoning import assess_case_reuse
 from app.services.normative_engine import evaluate_normative_applicability
+from app.services.normative_rag_bridge import build_normative_candidates
+from app.services.normative_temporal_runtime_guard import TemporalRuntimeGuard
 from app.services.rule_engine import evaluate_rules
 from calculators.isr import ISRCalculationError, calculate_isr
 from cbr.engine import retrieve_similar_cases
@@ -179,6 +181,7 @@ class HybridOrchestrator:
         isr_tariff: ISRTariff | None = None,
         cbr_cases: list[CBRCase] | None = None,
         jurisprudence_retriever: JurisprudenceRetriever | None = None,
+        temporal_guard: TemporalRuntimeGuard | None = None,
     ) -> None:
         self._query_analyzer = query_analyzer
         self._retriever = retriever
@@ -187,6 +190,7 @@ class HybridOrchestrator:
         self._isr_tariff = isr_tariff
         self._cbr_cases = list(cbr_cases or [])
         self._jurisprudence_retriever = jurisprudence_retriever
+        self._temporal_guard = temporal_guard
 
     def run(self, request: HybridOrchestrationRequest) -> HybridOrchestrationResult:
         traces: list[StageTrace] = []
@@ -213,7 +217,21 @@ class HybridOrchestrator:
             )
         )
 
-        normative_results, applicable_refs = _evaluate_normative_candidates(request)
+        rag_normative_candidates = build_normative_candidates(
+            retrieval,
+            temporal_guard=self._temporal_guard,
+        )
+        effective_request = request.model_copy(
+            update={
+                "normative_candidates": [
+                    *request.normative_candidates,
+                    *rag_normative_candidates,
+                ]
+            }
+        )
+        normative_results, applicable_refs = _evaluate_normative_candidates(
+            effective_request
+        )
         traces.append(
             StageTrace(
                 stage=OrchestrationStage.NORMATIVE,
@@ -444,6 +462,7 @@ class HybridOrchestrator:
         return HybridOrchestrationResult(
             analysis=analysis,
             retrieval=retrieval,
+            normative_candidates=effective_request.normative_candidates,
             normative_results=normative_results,
             applicable_normative_refs=applicable_refs,
             jurisprudence_result=jurisprudence_result,

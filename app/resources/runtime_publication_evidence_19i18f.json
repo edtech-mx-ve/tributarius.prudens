@@ -1,0 +1,141 @@
+{
+  "schema_version": "1.0",
+  "review_date": "2026-08-29",
+  "legal_basis": {
+    "id": "mx_lfda_art14_viii",
+    "title": "Ley Federal del Derecho de Autor, artículo 14, fracción VIII",
+    "authority": "Cámara de Diputados del H. Congreso de la Unión",
+    "official_url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LFDA.pdf",
+    "scope_note": "Los textos legislativos, reglamentarios, administrativos o judiciales y sus traducciones oficiales no son objeto de protección autoral; trabajos originales añadidos como concordancias, interpretaciones, estudios, anotaciones o comentarios sí pueden estar protegidos."
+  },
+  "documents": [
+    {
+      "document_id": "cff",
+      "evidence_class": "statutory_text_exclusion_candidate",
+      "legal_basis_id": "mx_lfda_art14_viii",
+      "content_conformity_required": true,
+      "publication_policy_status": "unknown_requires_review",
+      "reason": "El tipo documental encaja prima facie en texto legislativo, reglamentario o administrativo. Antes de promover a publicable debe verificarse que los chunks no incluyan aportaciones editoriales protegibles y que el texto derive del contenido oficial."
+    },
+    {
+      "document_id": "cpeum",
+      "evidence_class": "statutory_text_exclusion_candidate",
+      "legal_basis_id": "mx_lfda_art14_viii",
+      "content_conformity_required": true,
+      "publication_policy_status": "unknown_requires_review",
+      "reason": "El tipo documental encaja prima facie en texto legislativo, reglamentario o administrativo. Antes de promover a publicable debe verificarse que los chunks no incluyan aportaciones editoriales protegibles y que el texto derive del contenido oficial."
+    },
+    {
+      "document_id": "lfdc",
+      "evidence_class": "statutory_text_exclusion_candidate",
+      "legal_basis_id": "mx_lfda_art14_viii",
+      "content_conformity_required": true,
+      "publication_policy_status": "unknown_requires_review",
+      "reason": "El tipo documental encaja prima facie en texto legislativo, reglamentario o administrativo. Antes de promover a publicable debe verificarse que los chunks no incluyan aportaciones editoriales protegibles y que el texto derive del contenido oficial."
+    },
+    {
+      "document_id": "lfisan",
+      "evidence_class": "statutory_text_exclusion_candidate",
+      "legal_basis_id": "mx_lfda_art14_viii",
+      "content_conformity_required": true,
+      "publication_policy_status": "unknown_requires_review",
+      "reason": "El tipo documental encaja prima facie en texto legislativo, reglamentario o administrativo. Antes de promover a publicable debe verificarse que los chunks no incluyan aportaciones editoriales protegibles y que el texto derive del contenido oficial."
+    },
+    {
+      "document_id": "lfpca",
+      "evidence_class": "statutory_text_exclusion_candidate",
+      "legal_basis_id": "mx_lfda_art14_viii",
+      "content_conformity_required": true,
+      "publication_policy_status": "unknown_requires_review",
+      "reason": "El tipo documental encaja prima facie en texto legislativo, reglamentario o administrativo. Antes de promover a publicable debe verificarse que los chunks no incluyan aportaciones editoriales protegibles y que el texto derive del contenido oficial."
+    },
+    {
+      "document_id": "lieps",
+      "evidence_class": "statutory_text_exclusion_candidate",
+      "legal_basis_id": "mx_lfda_art14_viii",
+      "content_conformity_required": true,
+      "publication_policy_status": "unknown_requires_review",
+      "reason": "El tipo documental encaja prima facie en texto legislativo, reglamentario o administrativo. Antes de promover a publicable debe verificarse que los chunks no incluyan aportaciones editoriales protegibles y que el texto derive del contenido oficial."
+    },
+    {
+      "document_id": "lif_2026",
+      "evidence_class": "statutory_text_exclusion_candidate",
+      "legal_basis_id": "mx_lfda_art14_viii",
+      "content_conformity_required": true,
+      "publication_policy_status": "unknown_requires_review",
+      "reason": "El tipo documental encaja prima facie en texto legislativo, reglamentario o administrativo. Antes de promover a publicable debe verificarse que los chunks no incluyan aportaciones editoriales protegibles y que el texto derive del contenido oficial."
+    },
+    {
+      "document_id": "lisr",
+      "evidence_class": "statutory_text_exclusion_candidate",
+      "legal_basis_id": "mx_lfda_art14_viii",
+      "content_conformity_required": true,
+      "publication_policy_status": "unknown_requires_review",
+      "reason": "El tipo documental encaja prima facie en texto legislativo, reglamentario o administrativo. Antes de promover a publicable debe verificarse que los chunks no incluyan aportaciones editoriales protegibles y que el texto derive del contenido oficial."
+    },
+    {
+      "document_id": "liva",
+      "evidence_class": "statutory_text_exclusion_candidate",
+      "legal_basis_id": "mx_lfda_art14_viii",
+      "content_conformity_required": true,
+      "publication_policy_status": "unknown_requires_review",
+      "reason": "El tipo documental encaja prima facie en texto legislativo, reglamentario o administrativo. Antes de promover a publicable debe verificarse que los chunks no incluyan aportaciones editoriales protegibles y que el texto derive del contenido oficial."
+    },
+    {
+      "document_id": "lotfja",
+      "evidence_class": "statutory_text_exclusion_candidate",
+      "legal_basis_id": "mx_lfda_art14_viii",
+      "content_conformity_required": true,
+      "publication_policy_status": "unknown_requires_review",
+      "reason": "El tipo documental encaja prima facie en texto legislativo, reglamentario o administrativo. Antes de promover a publicable debe verificarse que los chunks no incluyan aportaciones editoriales protegibles y que el texto derive del contenido oficial."
+    },
+    {
+      "document_id": "manual_derecho_fiscal_unam",
+      "evidence_class": "separate_license_review_required",
+      "legal_basis_id": null,
+      "content_conformity_required": false,
+      "publication_policy_status": "unknown_requires_review",
+      "reason": "Fuente doctrinal u orientativa; el artículo 14 fracción VIII no basta para autorizar su redistribución."
+    },
+    {
+      "document_id": "prodecon_contribuyente",
+      "evidence_class": "separate_license_review_required",
+      "legal_basis_id": null,
+      "content_conformity_required": false,
+      "publication_policy_status": "unknown_requires_review",
+      "reason": "Fuente doctrinal u orientativa; el artículo 14 fracción VIII no basta para autorizar su redistribución."
+    },
+    {
+      "document_id": "reg_cff",
+      "evidence_class": "statutory_text_exclusion_candidate",
+      "legal_basis_id": "mx_lfda_art14_viii",
+      "content_conformity_required": true,
+      "publication_policy_status": "unknown_requires_review",
+      "reason": "El tipo documental encaja prima facie en texto legislativo, reglamentario o administrativo. Antes de promover a publicable debe verificarse que los chunks no incluyan aportaciones editoriales protegibles y que el texto derive del contenido oficial."
+    },
+    {
+      "document_id": "reg_lisr_060516",
+      "evidence_class": "statutory_text_exclusion_candidate",
+      "legal_basis_id": "mx_lfda_art14_viii",
+      "content_conformity_required": true,
+      "publication_policy_status": "unknown_requires_review",
+      "reason": "El tipo documental encaja prima facie en texto legislativo, reglamentario o administrativo. Antes de promover a publicable debe verificarse que los chunks no incluyan aportaciones editoriales protegibles y que el texto derive del contenido oficial."
+    },
+    {
+      "document_id": "reg_liva_250914",
+      "evidence_class": "statutory_text_exclusion_candidate",
+      "legal_basis_id": "mx_lfda_art14_viii",
+      "content_conformity_required": true,
+      "publication_policy_status": "unknown_requires_review",
+      "reason": "El tipo documental encaja prima facie en texto legislativo, reglamentario o administrativo. Antes de promover a publicable debe verificarse que los chunks no incluyan aportaciones editoriales protegibles y que el texto derive del contenido oficial."
+    },
+    {
+      "document_id": "rmf_2026",
+      "evidence_class": "statutory_text_exclusion_candidate",
+      "legal_basis_id": "mx_lfda_art14_viii",
+      "content_conformity_required": true,
+      "publication_policy_status": "unknown_requires_review",
+      "reason": "El tipo documental encaja prima facie en texto legislativo, reglamentario o administrativo. Antes de promover a publicable debe verificarse que los chunks no incluyan aportaciones editoriales protegibles y que el texto derive del contenido oficial."
+    }
+  ]
+}

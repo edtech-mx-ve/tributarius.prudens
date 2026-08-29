@@ -1,0 +1,150 @@
+{
+  "candidate_pool": 100,
+  "target_candidates": 5,
+  "max_hits_per_document": 3,
+  "weights": {
+    "lexical": 0.1,
+    "route": 0.12,
+    "authority": 0.05,
+    "doctrine": 0.08
+  },
+  "authority_by_role": {
+    "constitucional": 1.0,
+    "ley": 0.95,
+    "defensa": 0.95,
+    "norma_anual": 0.92,
+    "reglamento": 0.82,
+    "regla_administrativa": 0.72,
+    "doctrina": 0.4,
+    "orientacion": 0.35
+  },
+  "doctrinal_markers": [
+    "como se interpreta",
+    "metodos de interpretacion",
+    "interpretacion fiscal",
+    "doctrina",
+    "concepto",
+    "explicar",
+    "que significa"
+  ],
+  "normative_markers": [
+    "ley",
+    "codigo",
+    "constitucional",
+    "constitucionales",
+    "impuesto",
+    "tasa",
+    "obligacion",
+    "obligaciones",
+    "derechos",
+    "rfc",
+    "juicio",
+    "competencia",
+    "reglamento",
+    "resolucion",
+    "articulo",
+    "contribuciones"
+  ],
+  "document_routes": [
+    {
+      "document_id": "cpeum",
+      "aliases": [
+        "constitucion",
+        "constitucional",
+        "constitucionales",
+        "principios constitucionales",
+        "proporcionalidad equidad legalidad"
+      ]
+    },
+    {
+      "document_id": "lfdc",
+      "aliases": [
+        "derechos contribuyentes",
+        "derechos del contribuyente"
+      ]
+    },
+    {
+      "document_id": "cff",
+      "aliases": [
+        "codigo fiscal",
+        "cff",
+        "rfc",
+        "registro federal de contribuyentes"
+      ]
+    },
+    {
+      "document_id": "liva",
+      "aliases": [
+        "iva",
+        "valor agregado",
+        "impuesto al valor agregado"
+      ]
+    },
+    {
+      "document_id": "lisr",
+      "aliases": [
+        "isr",
+        "impuesto sobre la renta",
+        "deducciones personales"
+      ]
+    },
+    {
+      "document_id": "lieps",
+      "aliases": [
+        "ieps",
+        "impuesto especial sobre produccion y servicios"
+      ]
+    },
+    {
+      "document_id": "lfisan",
+      "aliases": [
+        "automoviles nuevos",
+        "isan",
+        "impuesto sobre automoviles nuevos"
+      ]
+    },
+    {
+      "document_id": "lif_2026",
+      "aliases": [
+        "ley de ingresos de la federacion",
+        "ingresos de la federacion 2026",
+        "lif 2026"
+      ]
+    },
+    {
+      "document_id": "rmf_2026",
+      "aliases": [
+        "resolucion miscelanea fiscal",
+        "rmf 2026",
+        "miscelanea fiscal 2026"
+      ]
+    },
+    {
+      "document_id": "lfpca",
+      "aliases": [
+        "procedimiento contencioso administrativo",
+        "contencioso administrativo",
+        "juicio contencioso"
+      ]
+    },
+    {
+      "document_id": "lotfja",
+      "aliases": [
+        "tribunal federal de justicia administrativa",
+        "organizacion del tribunal",
+        "competencia del tribunal"
+      ]
+    },
+    {
+      "document_id": "manual_derecho_fiscal_unam",
+      "aliases": [
+        "interpretacion fiscal",
+        "metodos de interpretacion",
+        "principios tributarios"
+      ],
+      "modes": [
+        "doctrinal"
+      ]
+    }
+  ]
+}

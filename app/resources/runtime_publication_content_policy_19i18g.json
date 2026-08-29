@@ -1,0 +1,77 @@
+{
+  "schema_version": "1.0",
+  "candidate_document_ids": [
+    "cff",
+    "cpeum",
+    "lfdc",
+    "lfisan",
+    "lfpca",
+    "lieps",
+    "lif_2026",
+    "lisr",
+    "liva",
+    "lotfja",
+    "reg_cff",
+    "reg_lisr_060516",
+    "reg_liva_250914",
+    "rmf_2026"
+  ],
+  "expected_source_type": "normativa",
+  "expected_roles": {
+    "cff": [
+      "ley"
+    ],
+    "cpeum": [
+      "constitucional"
+    ],
+    "lfdc": [
+      "ley"
+    ],
+    "lfisan": [
+      "ley"
+    ],
+    "lfpca": [
+      "defensa"
+    ],
+    "lieps": [
+      "ley"
+    ],
+    "lif_2026": [
+      "norma_anual"
+    ],
+    "lisr": [
+      "ley"
+    ],
+    "liva": [
+      "ley"
+    ],
+    "lotfja": [
+      "defensa"
+    ],
+    "reg_cff": [
+      "reglamento"
+    ],
+    "reg_lisr_060516": [
+      "reglamento"
+    ],
+    "reg_liva_250914": [
+      "reglamento"
+    ],
+    "rmf_2026": [
+      "regla_administrativa"
+    ]
+  },
+  "editorial_review_markers": [
+    "todos los derechos reservados",
+    "nota del editor",
+    "notas del editor",
+    "isbn",
+    "copyright",
+    "©",
+    "bibliografía",
+    "bibliografia",
+    "referencias bibliográficas",
+    "referencias bibliograficas"
+  ],
+  "rule": "El resultado es únicamente una auditoría técnica de conformidad. No promueve derechos de redistribución ni sustituye revisión jurídica."
+}

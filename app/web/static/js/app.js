@@ -10,6 +10,25 @@ const resultContent = document.querySelector("#result-content");
 const queryError = document.querySelector("#query-error");
 const characterCount = document.querySelector("#character-count");
 
+const roleTargets = {
+  normative: {
+    group: document.querySelector("#normative-evidence-group"),
+    list: document.querySelector("#result-evidence-normative"),
+  },
+  supporting: {
+    group: document.querySelector("#supporting-evidence-group"),
+    list: document.querySelector("#result-evidence-supporting"),
+  },
+  jurisprudence: {
+    group: document.querySelector("#jurisprudence-evidence-group"),
+    list: document.querySelector("#result-evidence-jurisprudence"),
+  },
+  other: {
+    group: document.querySelector("#other-evidence-group"),
+    list: document.querySelector("#result-evidence-other"),
+  },
+};
+
 function setStatus(kind, message) {
   statusMessage.className = `status ${kind}`;
   statusMessage.textContent = message;
@@ -34,6 +53,197 @@ function appendTextItem(list, text) {
   list.append(item);
 }
 
+function displayValue(value, fallback = "No disponible") {
+  if (value === null || value === undefined || value === "") {
+    return fallback;
+  }
+  return String(value);
+}
+
+function formatScore(score) {
+  if (typeof score !== "number" || !Number.isFinite(score)) {
+    return null;
+  }
+  return `${Math.round(score * 100)}%`;
+}
+
+function formatPages(item) {
+  if (!item.page_start) {
+    return null;
+  }
+  if (!item.page_end || item.page_end === item.page_start) {
+    return `p. ${item.page_start}`;
+  }
+  return `pp. ${item.page_start}–${item.page_end}`;
+}
+
+function appendMeta(container, label, value) {
+  if (value === null || value === undefined || value === "") {
+    return;
+  }
+  const pair = document.createElement("span");
+  pair.className = "evidence-meta-item";
+  const strong = document.createElement("strong");
+  strong.textContent = `${label}: `;
+  pair.append(strong, document.createTextNode(String(value)));
+  container.append(pair);
+}
+
+function renderEvidenceCard(item) {
+  const article = document.createElement("article");
+  article.className = "evidence-card";
+
+  const header = document.createElement("div");
+  header.className = "evidence-card-header";
+
+  const heading = document.createElement("h5");
+  heading.textContent = (
+    item.title
+    || item.unit
+    || item.source_reference
+    || item.ref_id
+    || "Evidencia"
+  );
+
+  const sourceBadge = document.createElement("span");
+  sourceBadge.className = `source-badge ${item.role || "other"}`;
+  sourceBadge.textContent = item.source_label || "Otra evidencia";
+  header.append(heading, sourceBadge);
+
+  const meta = document.createElement("div");
+  meta.className = "evidence-meta";
+  appendMeta(meta, "Unidad", item.unit);
+  appendMeta(meta, "Versión", item.version);
+  appendMeta(meta, "Ejercicio", item.fiscal_year);
+  appendMeta(meta, "Páginas", formatPages(item));
+  appendMeta(meta, "Score", formatScore(item.score));
+
+  article.append(header);
+  if (meta.childElementCount > 0) {
+    article.append(meta);
+  }
+
+  if (item.snippet) {
+    const excerpt = document.createElement("p");
+    excerpt.className = "evidence-snippet";
+    excerpt.textContent = item.snippet;
+    article.append(excerpt);
+  }
+
+  const technical = document.createElement("details");
+  technical.className = "evidence-technical";
+  const summary = document.createElement("summary");
+  summary.textContent = "Detalles de referencia";
+  const reference = document.createElement("dl");
+  reference.className = "technical-trace";
+  const pairs = [
+    ["Referencia", item.ref_id],
+    ["Archivo", item.source_reference],
+    ["Documento", item.document_id],
+    ["Publicación", item.publication_date],
+    ["Vigente desde", item.effective_from],
+    ["Vigente hasta", item.effective_to],
+  ];
+  pairs.forEach(([label, value]) => {
+    if (value === null || value === undefined || value === "") {
+      return;
+    }
+    const row = document.createElement("div");
+    const dt = document.createElement("dt");
+    const dd = document.createElement("dd");
+    dt.textContent = label;
+    dd.textContent = String(value);
+    row.append(dt, dd);
+    reference.append(row);
+  });
+  technical.append(summary, reference);
+  article.append(technical);
+
+  return article;
+}
+
+function resetEvidenceGroups() {
+  Object.values(roleTargets).forEach(({group, list}) => {
+    list.replaceChildren();
+    group.hidden = true;
+  });
+}
+
+function renderEvidence(items) {
+  resetEvidenceGroups();
+  const evidenceCount = document.querySelector("#evidence-count");
+  evidenceCount.textContent = `${items.length} evidencia${items.length === 1 ? "" : "s"}`;
+
+  items.forEach((item) => {
+    const target = roleTargets[item.role] || roleTargets.other;
+    target.list.append(renderEvidenceCard(item));
+    target.group.hidden = false;
+  });
+}
+
+function renderTraceability(result) {
+  const trace = result.traceability;
+  const traceBlock = document.querySelector("#trace-block");
+  if (!trace || typeof trace !== "object") {
+    traceBlock.hidden = true;
+    return;
+  }
+
+  document.querySelector("#result-folio").textContent = displayValue(result.folio);
+  document.querySelector("#result-intent").textContent = displayValue(trace.primary_intent);
+  document.querySelector("#result-trace-year").textContent = displayValue(
+    trace.query_fiscal_year,
+    "No especificado"
+  );
+  document.querySelector("#result-created-at").textContent = displayValue(
+    trace.created_at_utc
+  );
+  document.querySelector("#result-execution-id").textContent = displayValue(
+    trace.execution_id
+  );
+  document.querySelector("#result-result-hash").textContent = displayValue(
+    trace.canonical_result_sha256
+  );
+
+  const reviewBadge = document.querySelector("#review-badge");
+  if (result.requires_human_review) {
+    reviewBadge.textContent = "Revisión humana requerida";
+    reviewBadge.hidden = false;
+  } else {
+    reviewBadge.hidden = true;
+  }
+
+  const events = document.querySelector("#result-trace-events");
+  events.replaceChildren();
+  const traceEvents = Array.isArray(trace.events) ? trace.events : [];
+  traceEvents.forEach((event) => {
+    const item = document.createElement("li");
+    item.className = "trace-event";
+
+    const top = document.createElement("div");
+    top.className = "trace-event-heading";
+    const stage = document.createElement("strong");
+    stage.textContent = `${event.sequence}. ${event.stage}`;
+    const status = document.createElement("span");
+    status.className = `trace-status ${event.status || "unknown"}`;
+    status.textContent = event.status || "unknown";
+    top.append(stage, status);
+
+    const summary = document.createElement("p");
+    summary.textContent = event.summary || "Sin resumen.";
+    item.append(top, summary);
+
+    if (event.requires_human_review) {
+      const note = document.createElement("small");
+      note.textContent = "Esta etapa requiere revisión humana.";
+      item.append(note);
+    }
+    events.append(item);
+  });
+
+  traceBlock.hidden = false;
+}
+
 function renderResult(payload) {
   const result = payload.result;
   if (!result) {
@@ -46,13 +256,10 @@ function renderResult(payload) {
   const normsBlock = document.querySelector("#norms-block");
   const norms = document.querySelector("#result-norms");
   const evidenceBlock = document.querySelector("#evidence-block");
-  const evidence = document.querySelector("#result-evidence");
-  const folio = document.querySelector("#result-folio");
   const uncertaintyBlock = document.querySelector("#uncertainty-block");
   const uncertainties = document.querySelector("#result-uncertainties");
 
   norms.replaceChildren();
-  evidence.replaceChildren();
   uncertainties.replaceChildren();
 
   explanation.textContent = result.explanation || "Sin explicación disponible.";
@@ -64,20 +271,19 @@ function renderResult(payload) {
   normativeRefs.forEach((ref) => appendTextItem(norms, ref));
   normsBlock.hidden = normativeRefs.length === 0;
 
-  folio.textContent = `Folio: ${result.folio || "no disponible"}`;
   const evidenceItems = Array.isArray(result.evidence) ? result.evidence : [];
-  evidenceItems.forEach((item) => {
-    appendTextItem(
-      evidence,
-      `${item.kind}: ${item.ref_id}${item.version ? ` · ${item.version}` : ""}`
-    );
-  });
+  renderEvidence(evidenceItems);
   evidenceBlock.hidden = evidenceItems.length === 0;
 
   const uncertaintyItems = Array.isArray(result.uncertainties)
     ? result.uncertainties
     : [];
-  uncertaintyItems.forEach((item) => appendTextItem(uncertainties, item.message));
+  uncertaintyItems.forEach((item) => {
+    appendTextItem(
+      uncertainties,
+      item.message || "Incertidumbre registrada sin descripción."
+    );
+  });
   if (result.requires_human_review) {
     appendTextItem(uncertainties, "El resultado requiere revisión humana.");
   }
@@ -85,6 +291,7 @@ function renderResult(payload) {
     uncertaintyItems.length === 0 && !result.requires_human_review
   );
 
+  renderTraceability(result);
   resultContent.hidden = false;
 }
 

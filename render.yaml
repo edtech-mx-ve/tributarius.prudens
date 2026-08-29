@@ -3,10 +3,14 @@ services:
     name: tributarius-prudens
     runtime: python
     plan: free
-    buildCommand: python -m pip install --upgrade pip && python -m pip install -e .
+    buildCommand: >-
+      python -m pip install --upgrade pip &&
+      python -m pip install -e . &&
+      python -m scripts.bootstrap_runtime_release_19i18c
     startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT --workers 1
     healthCheckPath: /health
     autoDeployTrigger: checksPass
+    maxShutdownDelaySeconds: 20
     envVars:
       - key: ENVIRONMENT
         value: production
@@ -21,9 +25,21 @@ services:
       - key: RUNTIME_PROFILE
         value: stateless_free
       - key: RAG_ARTIFACT_DIR
-        value: deployment/runtime_artifacts
+        value: deployment/runtime_artifacts_semantic_v2
       - key: REQUIRE_RAG_ARTIFACTS
-        value: "false"
+        value: "true"
+      - key: RAG_LOCAL_FILES_ONLY
+        value: "true"
+      - key: VERIFY_RAG_INTEGRITY
+        value: "true"
+      - key: TEMPORAL_PROVENANCE_REGISTRY_PATH
+        value: knowledge/temporal/temporal_provenance_registry.json
+      - key: REQUIRE_TEMPORAL_PROVENANCE_REGISTRY
+        value: "true"
+      - key: RUNTIME_RELEASE_URL
+        sync: false
+      - key: RUNTIME_RELEASE_SHA256
+        value: 4766b49014c5f40aa509b325ddb7268ca7032348559937d2ebae74b0dcefe360
       - key: MAX_REQUEST_BODY_BYTES
         value: "1048576"
       - key: CONSULTATION_RATE_LIMIT

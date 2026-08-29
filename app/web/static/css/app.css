@@ -254,3 +254,170 @@ footer {
   nav a:not(:first-child) { display: none; }
   .brand small { display: none; }
 }
+
+
+/* Sprint 19I: evidencia y trazabilidad */
+.block-heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.section-help {
+  margin-top: -.15rem;
+  color: var(--muted);
+  font-size: .92rem;
+}
+
+.count-badge,
+.review-badge,
+.source-badge,
+.trace-status {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  padding: .25rem .6rem;
+  font-size: .76rem;
+  font-weight: 800;
+  line-height: 1.3;
+}
+
+.count-badge { background: var(--soft); color: var(--accent-strong); }
+.review-badge { background: #f6ead8; color: var(--warning); }
+
+.evidence-group { margin-top: 1rem; }
+.evidence-group h4 { margin-bottom: .65rem; }
+
+.evidence-list {
+  display: grid;
+  gap: .75rem;
+}
+
+.evidence-card {
+  border: 1px solid var(--line);
+  border-radius: .8rem;
+  padding: .9rem;
+  background: #fbfcfa;
+}
+
+.evidence-card-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: .75rem;
+}
+
+.evidence-card h5 {
+  margin: .1rem 0;
+  font-size: 1rem;
+  line-height: 1.35;
+}
+
+.source-badge { flex: 0 0 auto; background: var(--paper); color: var(--muted); }
+.source-badge.normative { background: #e6efe9; color: var(--accent-strong); }
+.source-badge.supporting { background: #edf0f4; color: #425268; }
+.source-badge.jurisprudence { background: #f2ebf5; color: #694078; }
+
+.evidence-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .35rem .8rem;
+  margin-top: .6rem;
+  color: var(--muted);
+  font-size: .82rem;
+}
+
+.evidence-snippet {
+  margin: .7rem 0 0;
+  border-left: .2rem solid var(--line);
+  padding-left: .75rem;
+  color: #35413d;
+}
+
+.evidence-technical,
+.trace-details {
+  margin-top: .75rem;
+  border-top: 1px solid var(--line);
+  padding-top: .6rem;
+}
+
+.evidence-technical summary,
+.trace-details summary {
+  cursor: pointer;
+  color: var(--accent-strong);
+  font-weight: 700;
+}
+
+.trace-summary,
+.technical-trace {
+  display: grid;
+  gap: .55rem;
+  margin: .75rem 0 0;
+}
+
+.trace-summary div,
+.technical-trace div {
+  display: grid;
+  grid-template-columns: minmax(7rem, .55fr) minmax(0, 1fr);
+  gap: .6rem;
+}
+
+.trace-summary dt,
+.technical-trace dt {
+  color: var(--muted);
+  font-weight: 700;
+}
+
+.trace-summary dd,
+.technical-trace dd {
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
+.trace-events {
+  display: grid;
+  gap: .65rem;
+  padding-left: 1.25rem;
+}
+
+.trace-event {
+  padding: .75rem;
+  border: 1px solid var(--line);
+  border-radius: .7rem;
+  background: #fbfcfa;
+}
+
+.trace-event-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: .75rem;
+}
+
+.trace-event p { margin: .4rem 0 0; }
+.trace-event small { color: var(--warning); font-weight: 700; }
+
+.trace-status { background: var(--paper); color: var(--muted); }
+.trace-status.completed { background: var(--soft); color: var(--accent-strong); }
+.trace-status.review_required { background: #f6ead8; color: var(--warning); }
+.trace-status.degraded { background: #f8eeee; color: var(--danger); }
+
+@media (max-width: 42rem) {
+  .block-heading,
+  .evidence-card-header,
+  .trace-event-heading {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .trace-summary div,
+  .technical-trace div {
+    grid-template-columns: 1fr;
+    gap: .1rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+}
