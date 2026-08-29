@@ -37,7 +37,6 @@ def validate_render_blueprint(path: Path) -> list[str]:
     payload = yaml.safe_load(path.read_text(encoding="utf-8"))
     if not isinstance(payload, dict):
         raise DeploymentValidationError("render.yaml debe contener un objeto raíz.")
-
     services = payload.get("services")
     if not isinstance(services, list) or len(services) != 1:
         raise DeploymentValidationError("Se requiere exactamente un Web Service.")
@@ -45,7 +44,6 @@ def validate_render_blueprint(path: Path) -> list[str]:
     service = services[0]
     if not isinstance(service, dict):
         raise DeploymentValidationError("La definición del servicio es inválida.")
-
     build_command = str(service.get("buildCommand", ""))
     checks = {
         "type=web": service.get("type") == "web",
@@ -61,7 +59,6 @@ def validate_render_blueprint(path: Path) -> list[str]:
         "no-databases": "databases" not in payload,
         "no-disk": "disk" not in service and "diskPath" not in service,
     }
-
     env = _env_items(service)
     release_url_item = env.get("RUNTIME_RELEASE_URL", {})
     checks.update(
@@ -103,11 +100,10 @@ def validate_render_blueprint(path: Path) -> list[str]:
             ),
             "release-sha-pinned": (
                 _env_value(env, "RUNTIME_RELEASE_SHA256")
-                == "687c9f6bba0b166b3728ce387d560644523d260cde1f7a298655954e490cbda4"
+                == "4766b49014c5f40aa509b325ddb7268ca7032348559937d2ebae74b0dcefe360"
             ),
         }
     )
-
     failed = [name for name, ok in checks.items() if not ok]
     if failed:
         raise DeploymentValidationError(

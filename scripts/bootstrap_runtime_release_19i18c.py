@@ -3,10 +3,10 @@ from __future__ import annotations
 import os
 from pathlib import Path
 
-from app.services.runtime_release_installer import (
-    RuntimeReleaseInstallError,
-    install_runtime_release,
-)
+from app.services import runtime_public_release_installer_19s_r4 as public_installer
+
+RuntimeReleaseInstallError = public_installer.RuntimeReleaseInstallError
+install_runtime_release = public_installer.install_public_runtime_release
 
 
 def _required_env(name: str) -> str:
@@ -26,7 +26,6 @@ def main() -> int:
             raise RuntimeReleaseInstallError(
                 "RUNTIME_RELEASE_URL debe usar HTTPS en despliegue."
             )
-
         summary = install_runtime_release(
             source=source,
             expected_sha256=expected_sha256,
@@ -37,7 +36,6 @@ def main() -> int:
     except RuntimeReleaseInstallError as exc:
         print(f"ERROR: bootstrap runtime rechazado: {exc}")
         return 1
-
     print("OK: Sprint 19I.18C; runtime de despliegue instalado y verificado")
     print(f"- bundle_sha256={summary.bundle_sha256}")
     print(f"- bundle_size_bytes={summary.bundle_size_bytes}")
