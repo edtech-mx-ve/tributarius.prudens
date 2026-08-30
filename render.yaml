@@ -5,7 +5,9 @@ services:
     plan: free
     buildCommand: >-
       python -m pip install --upgrade pip &&
+      python -m pip install "torch==2.13.0" --index-url https://download.pytorch.org/whl/cpu &&
       python -m pip install -e . &&
+      python -m scripts.verify_cpu_runtime_19s_r14 &&
       python -m scripts.bootstrap_runtime_release_19i18c
     startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT --workers 1
     healthCheckPath: /health
@@ -27,6 +29,8 @@ services:
         value: deployment/runtime_artifacts_semantic_v2
       - key: REQUIRE_RAG_ARTIFACTS
         value: "true"
+      - key: RAG_RUNTIME_BACKEND
+        value: lexical_cpu
       - key: RAG_LOCAL_FILES_ONLY
         value: "true"
       - key: VERIFY_RAG_INTEGRITY
@@ -39,6 +43,16 @@ services:
         sync: false
       - key: RUNTIME_RELEASE_SHA256
         value: 18ac85d3b2612a3057dd6e24660487457af078eb8abdf2bb94e122c9bc97c514
+      - key: OMP_NUM_THREADS
+        value: "1"
+      - key: MKL_NUM_THREADS
+        value: "1"
+      - key: OPENBLAS_NUM_THREADS
+        value: "1"
+      - key: NUMEXPR_NUM_THREADS
+        value: "1"
+      - key: TOKENIZERS_PARALLELISM
+        value: "false"
       - key: MAX_REQUEST_BODY_BYTES
         value: "1048576"
       - key: CONSULTATION_RATE_LIMIT

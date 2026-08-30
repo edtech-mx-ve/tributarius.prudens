@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import os
 from dataclasses import dataclass
 from pathlib import Path
 
@@ -19,10 +20,12 @@ from llm.query_analyzer import QueryAnalyzer
 from llm.service import LlamaRAGService
 from rag.embeddings.provider import EmbeddingError, SentenceTransformerEmbedder
 from rag.indexing.models import IndexManifest
-from rag.retrieval.legal_hybrid import LegalHybridRetriever
+from rag.retrieval.legal_hybrid import LegalHybridRetriever, RetrieverLike
+from rag.retrieval.lexical_cpu import CpuLexicalRetriever
 from rag.retrieval.retriever import FaissRetriever, RetrievalError
 
 _REQUIRED_RAG_FILES = ("index.faiss", "chunks.jsonl", "manifest.json")
+_ALLOWED_RUNTIME_BACKENDS = frozenset({"semantic", "lexical_cpu"})
 
 
 class RuntimeBuildError(RuntimeError):
@@ -34,6 +37,7 @@ class RuntimeComponents:
     runner: WebHybridRunner
     artifact_dir: Path
     model_name: str
+    retrieval_backend: str = "semantic"
 
 
 def _validated_file(path_value: str, *, label: str, suffix: str) -> Path:
@@ -75,6 +79,18 @@ def validate_runtime_assets(settings: Settings) -> tuple[Path, IndexManifest]:
     return artifact_dir, manifest
 
 
+def runtime_backend_name() -> str:
+    """Backend explícito y validado; nunca degrada silenciosamente."""
+    raw = os.environ.get("RAG_RUNTIME_BACKEND", "semantic")
+    backend = raw.strip().casefold()
+    if backend not in _ALLOWED_RUNTIME_BACKENDS:
+        allowed = ", ".join(sorted(_ALLOWED_RUNTIME_BACKENDS))
+        raise RuntimeBuildError(
+            f"RAG_RUNTIME_BACKEND inválido. Valores permitidos: {allowed}."
+        )
+    return backend
+
+
 def _runtime_initialization_error(exc: Exception) -> RuntimeBuildError:
     """Conserva diagnóstico técnico acotado sin exponer contexto de petición."""
     detail = str(exc).strip() or "<sin detalle>"
@@ -84,14 +100,35 @@ def _runtime_initialization_error(exc: Exception) -> RuntimeBuildError:
     )
 
 
-def build_runtime_components(settings: Settings) -> RuntimeComponents:
-    artifact_dir, manifest = validate_runtime_assets(settings)
+def _build_base_retriever(
+    *,
+    backend: str,
+    artifact_dir: Path,
+    manifest: IndexManifest,
+    settings: Settings,
+) -> RetrieverLike:
+    if backend == "lexical_cpu":
+        return CpuLexicalRetriever(
+            artifact_dir,
+            verify_integrity=settings.verify_rag_integrity,
+        )
 
     embedder = SentenceTransformerEmbedder(
         manifest.model_name,
         device="cpu",
         local_files_only=settings.rag_local_files_only,
     )
+    return FaissRetriever(
+        artifact_dir,
+        embedder,
+        verify_integrity=settings.verify_rag_integrity,
+    )
+
+
+def build_runtime_components(settings: Settings) -> RuntimeComponents:
+    artifact_dir, manifest = validate_runtime_assets(settings)
+    backend = runtime_backend_name()
+
     temporal_registry_path = Path(
         settings.temporal_provenance_registry_path
     ).expanduser().resolve()
@@ -109,10 +146,11 @@ def build_runtime_components(settings: Settings) -> RuntimeComponents:
         )
 
     try:
-        base_retriever = FaissRetriever(
-            artifact_dir,
-            embedder,
-            verify_integrity=settings.verify_rag_integrity,
+        base_retriever = _build_base_retriever(
+            backend=backend,
+            artifact_dir=artifact_dir,
+            manifest=manifest,
+            settings=settings,
         )
         legal_retriever = LegalHybridRetriever.from_policy_file(
             base_retriever,
@@ -131,11 +169,16 @@ def build_runtime_components(settings: Settings) -> RuntimeComponents:
     )
     runner = WebHybridRunner(
         orchestrator=orchestrator,
-        retrieval_runtime="legal_hybrid_19g",
+        retrieval_runtime=(
+            "legal_hybrid_lexical_cpu_19s_r14"
+            if backend == "lexical_cpu"
+            else "legal_hybrid_19g"
+        ),
         explanation_runtime="deterministic_mock_until_sprint20",
     )
     return RuntimeComponents(
         runner=runner,
         artifact_dir=artifact_dir,
         model_name=manifest.model_name,
+        retrieval_backend=backend,
     )

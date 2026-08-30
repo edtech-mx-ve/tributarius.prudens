@@ -17,10 +17,12 @@ def _env_items(service: dict[str, Any]) -> dict[str, dict[str, Any]]:
         raise DeploymentValidationError("envVars debe ser una lista.")
     for item in raw_env:
         if not isinstance(item, dict):
-            raise DeploymentValidationError("envVars contiene una entrada invÃ¡lida.")
+            raise DeploymentValidationError("envVars contiene una entrada inválida.")
         key = item.get("key")
         if not isinstance(key, str) or not key.strip():
-            raise DeploymentValidationError("envVars contiene una key invÃ¡lida.")
+            raise DeploymentValidationError("envVars contiene una key inválida.")
+        if key in result:
+            raise DeploymentValidationError(f"envVar duplicada: {key}.")
         result[key] = item
     return result
 
@@ -36,14 +38,14 @@ def _env_value(items: dict[str, dict[str, Any]], key: str) -> str | None:
 def validate_render_blueprint(path: Path) -> list[str]:
     payload = yaml.safe_load(path.read_text(encoding="utf-8"))
     if not isinstance(payload, dict):
-        raise DeploymentValidationError("render.yaml debe contener un objeto raÃz.")
+        raise DeploymentValidationError("render.yaml debe contener un objeto raíz.")
     services = payload.get("services")
     if not isinstance(services, list) or len(services) != 1:
         raise DeploymentValidationError("Se requiere exactamente un Web Service.")
 
     service = services[0]
     if not isinstance(service, dict):
-        raise DeploymentValidationError("La definiciÃ³n del servicio es invÃ¡lida.")
+        raise DeploymentValidationError("La definición del servicio es inválida.")
     build_command = str(service.get("buildCommand", ""))
     checks = {
         "type=web": service.get("type") == "web",
@@ -52,7 +54,14 @@ def validate_render_blueprint(path: Path) -> list[str]:
         "health=/health": service.get("healthCheckPath") == "/health",
         "start-binds-host": "0.0.0.0" in str(service.get("startCommand", "")),
         "start-uses-port": "$PORT" in str(service.get("startCommand", "")),
+        "build-installs-cpu-torch": (
+            'torch==2.13.0' in build_command
+            and "download.pytorch.org/whl/cpu" in build_command
+        ),
         "build-installs-package": "pip install -e ." in build_command,
+        "build-validates-cpu-runtime": (
+            "scripts.verify_cpu_runtime_19s_r14" in build_command
+        ),
         "build-bootstraps-runtime": (
             "scripts.bootstrap_runtime_release_19i18c" in build_command
         ),
@@ -63,15 +72,9 @@ def validate_render_blueprint(path: Path) -> list[str]:
     release_url_item = env.get("RUNTIME_RELEASE_URL", {})
     checks.update(
         {
-            "environment=production": (
-                _env_value(env, "ENVIRONMENT") == "production"
-            ),
-            "deployment=render": (
-                _env_value(env, "DEPLOYMENT_PLATFORM") == "render"
-            ),
-            "stateless-profile": (
-                _env_value(env, "RUNTIME_PROFILE") == "stateless_free"
-            ),
+            "environment=production": _env_value(env, "ENVIRONMENT") == "production",
+            "deployment=render": _env_value(env, "DEPLOYMENT_PLATFORM") == "render",
+            "stateless-profile": _env_value(env, "RUNTIME_PROFILE") == "stateless_free",
             "sqlite-is-ephemeral": (
                 _env_value(env, "DATABASE_URL") or ""
             ).startswith("sqlite:////tmp/"),
@@ -85,6 +88,9 @@ def validate_render_blueprint(path: Path) -> list[str]:
             "rag-required": (
                 _env_value(env, "REQUIRE_RAG_ARTIFACTS") or ""
             ).lower() == "true",
+            "rag-backend-lexical-cpu": (
+                _env_value(env, "RAG_RUNTIME_BACKEND") == "lexical_cpu"
+            ),
             "rag-local-only": (
                 _env_value(env, "RAG_LOCAL_FILES_ONLY") or ""
             ).lower() == "true",
@@ -102,12 +108,20 @@ def validate_render_blueprint(path: Path) -> list[str]:
                 _env_value(env, "RUNTIME_RELEASE_SHA256")
                 == "18ac85d3b2612a3057dd6e24660487457af078eb8abdf2bb94e122c9bc97c514"
             ),
+            "omp-one-thread": _env_value(env, "OMP_NUM_THREADS") == "1",
+            "mkl-one-thread": _env_value(env, "MKL_NUM_THREADS") == "1",
+            "openblas-one-thread": _env_value(env, "OPENBLAS_NUM_THREADS") == "1",
+            "numexpr-one-thread": _env_value(env, "NUMEXPR_NUM_THREADS") == "1",
+            "tokenizers-no-parallelism": (
+                _env_value(env, "TOKENIZERS_PARALLELISM") or ""
+            ).lower() == "false",
         }
     )
     failed = [name for name, ok in checks.items() if not ok]
     if failed:
         raise DeploymentValidationError(
-            "Blueprint incompatible con el perfil gratuito: " + ", ".join(failed)
+            "Blueprint incompatible con el perfil gratuito CPU: "
+            + ", ".join(failed)
         )
     return sorted(checks)
 
