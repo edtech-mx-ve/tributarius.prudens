@@ -75,6 +75,15 @@ def validate_runtime_assets(settings: Settings) -> tuple[Path, IndexManifest]:
     return artifact_dir, manifest
 
 
+def _runtime_initialization_error(exc: Exception) -> RuntimeBuildError:
+    """Conserva diagnóstico técnico acotado sin exponer contexto de petición."""
+    detail = str(exc).strip() or "<sin detalle>"
+    return RuntimeBuildError(
+        "No fue posible inicializar el runtime RAG. "
+        f"root_type={type(exc).__name__} root_cause={detail}"
+    )
+
+
 def build_runtime_components(settings: Settings) -> RuntimeComponents:
     artifact_dir, manifest = validate_runtime_assets(settings)
 
@@ -111,7 +120,7 @@ def build_runtime_components(settings: Settings) -> RuntimeComponents:
         )
         rule_set = load_rule_set(Path(settings.runtime_rule_set_path))
     except (EmbeddingError, RetrievalError, RuleLoadError) as exc:
-        raise RuntimeBuildError("No fue posible inicializar el runtime RAG.") from exc
+        raise _runtime_initialization_error(exc) from exc
 
     orchestrator = HybridOrchestrator(
         query_analyzer=QueryAnalyzer(RuntimeQueryAnalyzerProvider()),
