@@ -1,3 +1,4 @@
+from pathlib import Path
 from datetime import date
 
 from app.domain.chunks import ChunkMetadata, LegalChunkType, LegalHierarchy
@@ -140,7 +141,7 @@ def test_hyphenated_article_identifier_mismatch_is_rejected() -> None:
 
 
 def test_verified_permanent_cff_snapshot_becomes_candidate_without_invented_dates(
-    tmp_path,
+    tmp_path: Path,
 ) -> None:
     import json
 
@@ -206,3 +207,78 @@ def test_unverified_cff_snapshot_remains_fail_closed() -> None:
     hit.metadata.publication_date = None
 
     assert candidate_from_normative_hit(hit) is None
+
+
+def test_verified_cff_legal_unit_reform_chain_isolated_to_article_27(
+    tmp_path: Path,
+) -> None:
+    import json
+
+    from app.domain.normative import NormativeValidityBasis, NormativeValidityScope
+    from app.services.normative_temporal_runtime_guard import load_temporal_runtime_guard
+
+    registry = tmp_path / "registry.json"
+    registry.write_text(
+        json.dumps(
+            {
+                "schema_version": "2.1",
+                "source_sprint": "temporal-integrity-legal-unit",
+                "policy": "fail-closed",
+                "coverage_gaps": [
+                    {
+                        "canonical_id": "cff",
+                        "gap_type": "document_wide_temporal_validity",
+                        "status": "unknown_fail_closed",
+                        "reason": "Vigencia documental completa no verificada.",
+                    }
+                ],
+                "entries": [],
+                "verified_validity": [
+                    {
+                        "canonical_id": "cff",
+                        "legal_identifier": "Artículo 27",
+                        "validity_status": "verified_in_force",
+                        "validity_scope": "legal_unit",
+                        "validity_basis": "verified_reform_chain",
+                        "validity_verified_at": "2026-08-31",
+                        "official_source": "https://www.diputados.gob.mx/LeyesBiblio/pdf/CFF.pdf",
+                        "reason": "Cadena de reforma verificada para el Artículo 27.",
+                    }
+                ],
+            }
+        ),
+        encoding="utf-8",
+    )
+    guard = load_temporal_runtime_guard(registry)
+
+    article_27 = _hit(
+        unit="Artículo 27",
+        text="Artículo 27. Las personas deberán solicitar su inscripción en el RFC.",
+        effective_from=None,
+        effective_to=None,
+        version="2026-04-09",
+    )
+    article_27.metadata.document_id = "cff"
+    article_27.metadata.source_filename = "cff.md"
+    article_27.metadata.title = "Código Fiscal de la Federación"
+
+    article_28 = _hit(
+        unit="Artículo 28",
+        text="Artículo 28. Las personas que de acuerdo con las disposiciones fiscales...",
+        effective_from=None,
+        effective_to=None,
+        version="2026-04-09",
+    )
+    article_28.metadata.document_id = "cff"
+    article_28.metadata.source_filename = "cff.md"
+    article_28.metadata.title = "Código Fiscal de la Federación"
+
+    candidate_27 = candidate_from_normative_hit(article_27, temporal_guard=guard)
+    candidate_28 = candidate_from_normative_hit(article_28, temporal_guard=guard)
+
+    assert candidate_27 is not None
+    assert candidate_27.validity_scope is NormativeValidityScope.LEGAL_UNIT
+    assert candidate_27.validity_basis is NormativeValidityBasis.VERIFIED_REFORM_CHAIN
+    assert candidate_27.effective_from is None
+    assert candidate_27.effective_to is None
+    assert candidate_28 is None

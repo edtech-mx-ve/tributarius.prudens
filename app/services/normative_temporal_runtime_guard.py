@@ -22,6 +22,7 @@ class TemporalValidityVerification:
     """Verificación explícita de vigencia sin convertir otras fechas en vigencia."""
 
     canonical_id: str
+    legal_identifier: str | None
     validity_status: NormativeValidityStatus
     validity_scope: NormativeValidityScope
     validity_basis: NormativeValidityBasis
@@ -45,16 +46,42 @@ class TemporalRuntimeGuard:
     def verification_for_document(
         self,
         document_id: str,
+        legal_identifier: str | None = None,
     ) -> TemporalValidityVerification | None:
-        normalized = document_id.casefold()
+        normalized_document = document_id.casefold()
+        normalized_unit = _normalize_legal_identifier(legal_identifier)
+
+        if normalized_unit is not None:
+            legal_unit_match = next(
+                (
+                    item
+                    for item in self.verified_validity
+                    if item.canonical_id == normalized_document
+                    and item.validity_scope is NormativeValidityScope.LEGAL_UNIT
+                    and _normalize_legal_identifier(item.legal_identifier)
+                    == normalized_unit
+                ),
+                None,
+            )
+            if legal_unit_match is not None:
+                return legal_unit_match
+
         return next(
             (
                 item
                 for item in self.verified_validity
-                if item.canonical_id == normalized
+                if item.canonical_id == normalized_document
+                and item.validity_scope is NormativeValidityScope.DOCUMENT
             ),
             None,
         )
+
+
+def _normalize_legal_identifier(value: str | None) -> str | None:
+    if value is None:
+        return None
+    normalized = " ".join(value.split()).casefold()
+    return normalized or None
 
 
 def _as_dict(value: object, *, label: str) -> dict[str, Any]:
@@ -116,8 +143,28 @@ def _load_verification(raw: object) -> TemporalValidityVerification:
             "La verificación requiere fuente consolidada oficial o cadena de reformas."
         )
 
+    legal_identifier_raw = item.get("legal_identifier")
+    if legal_identifier_raw is not None and not isinstance(legal_identifier_raw, str):
+        raise TemporalRuntimeGuardError(
+            "legal_identifier debe ser texto cuando se proporciona."
+        )
+    legal_identifier = (
+        legal_identifier_raw.strip()
+        if isinstance(legal_identifier_raw, str) and legal_identifier_raw.strip()
+        else None
+    )
+    if scope is NormativeValidityScope.LEGAL_UNIT and legal_identifier is None:
+        raise TemporalRuntimeGuardError(
+            "Una verificación legal_unit requiere legal_identifier."
+        )
+    if scope is NormativeValidityScope.DOCUMENT and legal_identifier is not None:
+        raise TemporalRuntimeGuardError(
+            "Una verificación document no debe declarar legal_identifier."
+        )
+
     return TemporalValidityVerification(
         canonical_id=_required_str(item, "canonical_id").casefold(),
+        legal_identifier=legal_identifier,
         validity_status=status,
         validity_scope=scope,
         validity_basis=basis,
@@ -165,12 +212,25 @@ def load_temporal_runtime_guard(path: Path) -> TemporalRuntimeGuard:
             blocked.add(canonical_id)
 
     verified = tuple(_load_verification(item) for item in verified_raw)
-    verified_ids = [item.canonical_id for item in verified]
-    if len(verified_ids) != len(set(verified_ids)):
-        raise TemporalRuntimeGuardError(
-            "verified_validity contiene canonical_id duplicados."
+    verified_keys = [
+        (
+            item.canonical_id,
+            item.validity_scope.value,
+            _normalize_legal_identifier(item.legal_identifier),
         )
-    overlap = blocked.intersection(verified_ids)
+        for item in verified
+    ]
+    if len(verified_keys) != len(set(verified_keys)):
+        raise TemporalRuntimeGuardError(
+            "verified_validity contiene verificaciones duplicadas por alcance."
+        )
+
+    verified_documents = {
+        item.canonical_id
+        for item in verified
+        if item.validity_scope is NormativeValidityScope.DOCUMENT
+    }
+    overlap = blocked.intersection(verified_documents)
     if overlap:
         raise TemporalRuntimeGuardError(
             "Un documento no puede estar simultáneamente bloqueado y verificado: "

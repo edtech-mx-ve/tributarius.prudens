@@ -72,8 +72,19 @@ def candidate_from_normative_hit(
     metadata = hit.metadata
     if metadata.source_type != SourceType.NORMATIVA:
         return None
-    if temporal_guard is not None and temporal_guard.blocks_document(
-        metadata.document_id
+    legal_identifier = metadata.source_unit_label or metadata.legal_identifier
+    verification = (
+        temporal_guard.verification_for_document(
+            metadata.document_id,
+            legal_identifier=legal_identifier,
+        )
+        if temporal_guard is not None
+        else None
+    )
+    if (
+        temporal_guard is not None
+        and temporal_guard.blocks_document(metadata.document_id)
+        and verification is None
     ):
         return None
     if not metadata.version_label:
@@ -95,10 +106,7 @@ def candidate_from_normative_hit(
     # puede autoautorizar su propia vigencia.
     has_interval = effective_from is not None or effective_to is not None
     if not has_interval:
-        if temporal_guard is None:
-            return None
-        verification = temporal_guard.verification_for_document(metadata.document_id)
-        if verification is None:
+        if temporal_guard is None or verification is None:
             return None
         validity_status = verification.validity_status
         validity_scope = verification.validity_scope

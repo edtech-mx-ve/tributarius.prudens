@@ -162,3 +162,127 @@ def test_guard_rejects_document_that_is_both_blocked_and_verified(tmp_path: Path
 
     with pytest.raises(TemporalRuntimeGuardError):
         load_temporal_runtime_guard(registry)
+
+
+def test_guard_loads_legal_unit_verification_and_matches_only_that_unit(
+    tmp_path: Path,
+) -> None:
+    registry = tmp_path / "registry.json"
+    payload = {
+        "schema_version": "2.1",
+        "source_sprint": "temporal-integrity-legal-unit",
+        "policy": "fail-closed",
+        "entries": [],
+        "coverage_gaps": [],
+        "verified_validity": [
+            {
+                "canonical_id": "cff",
+                "legal_identifier": "Artículo 27",
+                "validity_status": "verified_in_force",
+                "validity_scope": "legal_unit",
+                "validity_basis": "verified_reform_chain",
+                "validity_verified_at": "2026-08-31",
+                "official_source": "https://www.diputados.gob.mx/LeyesBiblio/pdf/CFF.pdf",
+                "reason": "Cadena de reforma verificada para el Artículo 27.",
+            }
+        ],
+    }
+    registry.write_text(json.dumps(payload), encoding="utf-8")
+
+    guard = load_temporal_runtime_guard(registry)
+
+    verification = guard.verification_for_document("CFF", "  artículo   27 ")
+    assert verification is not None
+    assert verification.legal_identifier == "Artículo 27"
+    assert guard.verification_for_document("cff", "Artículo 28") is None
+
+
+def test_guard_rejects_legal_unit_verification_without_identifier(
+    tmp_path: Path,
+) -> None:
+    registry = tmp_path / "registry.json"
+    payload = {
+        "schema_version": "2.1",
+        "source_sprint": "temporal-integrity-legal-unit",
+        "policy": "fail-closed",
+        "entries": [],
+        "coverage_gaps": [],
+        "verified_validity": [
+            {
+                "canonical_id": "cff",
+                "validity_status": "verified_in_force",
+                "validity_scope": "legal_unit",
+                "validity_basis": "verified_reform_chain",
+                "validity_verified_at": "2026-08-31",
+                "official_source": "official://cff",
+                "reason": "Identificador omitido intencionalmente para probar fail-closed.",
+            }
+        ],
+    }
+    registry.write_text(json.dumps(payload), encoding="utf-8")
+
+    with pytest.raises(TemporalRuntimeGuardError):
+        load_temporal_runtime_guard(registry)
+
+
+def test_guard_allows_document_gap_with_verified_legal_unit(tmp_path: Path) -> None:
+    registry = tmp_path / "registry.json"
+    payload = {
+        "schema_version": "2.1",
+        "source_sprint": "temporal-integrity-legal-unit",
+        "policy": "fail-closed",
+        "entries": [],
+        "coverage_gaps": [
+            {
+                "canonical_id": "cff",
+                "gap_type": "document_wide_temporal_validity",
+                "status": "unknown_fail_closed",
+                "reason": "Vigencia documental completa no verificada.",
+            }
+        ],
+        "verified_validity": [
+            {
+                "canonical_id": "cff",
+                "legal_identifier": "Artículo 27",
+                "validity_status": "verified_in_force",
+                "validity_scope": "legal_unit",
+                "validity_basis": "verified_reform_chain",
+                "validity_verified_at": "2026-08-31",
+                "official_source": "official://cff",
+                "reason": "Unidad jurídica verificada sin promover todo el documento.",
+            }
+        ],
+    }
+    registry.write_text(json.dumps(payload), encoding="utf-8")
+
+    guard = load_temporal_runtime_guard(registry)
+
+    assert guard.blocks_document("cff")
+    assert guard.verification_for_document("cff", "Artículo 27") is not None
+    assert guard.verification_for_document("cff", "Artículo 28") is None
+
+
+def test_guard_rejects_duplicate_legal_unit_verifications(tmp_path: Path) -> None:
+    registry = tmp_path / "registry.json"
+    item = {
+        "canonical_id": "cff",
+        "legal_identifier": "Artículo 27",
+        "validity_status": "verified_in_force",
+        "validity_scope": "legal_unit",
+        "validity_basis": "verified_reform_chain",
+        "validity_verified_at": "2026-08-31",
+        "official_source": "official://cff",
+        "reason": "Unidad jurídica verificada.",
+    }
+    payload = {
+        "schema_version": "2.1",
+        "source_sprint": "temporal-integrity-legal-unit",
+        "policy": "fail-closed",
+        "entries": [],
+        "coverage_gaps": [],
+        "verified_validity": [item, {**item, "legal_identifier": " artículo  27 "}],
+    }
+    registry.write_text(json.dumps(payload), encoding="utf-8")
+
+    with pytest.raises(TemporalRuntimeGuardError):
+        load_temporal_runtime_guard(registry)
