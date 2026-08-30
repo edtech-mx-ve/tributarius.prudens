@@ -1,4 +1,4 @@
-from __future__ import annotations
+﻿from __future__ import annotations
 
 from typing import Protocol
 
@@ -13,16 +13,23 @@ from app.domain.normative import (
 from app.domain.orchestration import (
     HybridOrchestrationRequest,
     HybridOrchestrationResult,
+    NormativeCandidate,
     OrchestrationStage,
     StageStatus,
     StageTrace,
 )
-from app.domain.query import QueryAnalysis, QueryIntent
+from app.domain.query import (
+    ExtractedFact,
+    FactOrigin,
+    QueryAnalysis,
+    QueryIntent,
+)
 from app.domain.rules import RuleEvaluationResult, RuleSet
 from app.services.cbr_reasoning import assess_case_reuse
 from app.services.normative_engine import evaluate_normative_applicability
 from app.services.normative_rag_bridge import build_normative_candidates
 from app.services.normative_temporal_runtime_guard import TemporalRuntimeGuard
+from app.services.query_fact_compat_19s_r15 import query_fact_value
 from app.services.rule_engine import evaluate_rules
 from calculators.isr import ISRCalculationError, calculate_isr
 from cbr.engine import retrieve_similar_cases
@@ -67,6 +74,125 @@ def build_fact_map(analysis: QueryAnalysis) -> dict[str, object]:
     return result
 
 
+
+_MATERIAL_STOPWORDS = frozenset(
+    {
+        "a", "al", "ante", "como", "con", "de", "del", "el", "en", "es", "fiscal",
+        "fiscales", "impuesto", "impuestos", "la", "las", "lo", "los", "mexico",
+        "para", "persona", "por", "que", "se", "sin", "su", "sus", "tasa", "una",
+        "un", "y", "iva", "isr", "2026", "pagar", "aplicar", "regla", "norma",
+    }
+)
+
+
+def _fold_tokens(text: str) -> set[str]:
+    import re
+    import unicodedata
+
+    folded = unicodedata.normalize("NFKD", text.casefold())
+    ascii_text = "".join(
+        char for char in folded if not unicodedata.combining(char)
+    )
+    return {
+        token
+        for token in re.findall(r"[a-z0-9][a-z0-9_-]{2,}", ascii_text)
+        if token not in _MATERIAL_STOPWORDS
+    }
+
+
+def _merge_request_context(
+    analysis: QueryAnalysis,
+    request: HybridOrchestrationRequest,
+) -> QueryAnalysis:
+    """Propaga contexto estructurado sin inferir hechos no proporcionados."""
+    facts = list(analysis.facts)
+    missing = list(analysis.missing_fields)
+    if request.query_fiscal_year is not None:
+        names = {item.name.strip().casefold() for item in facts}
+        if "fiscal_year" not in names:
+            facts.append(
+                ExtractedFact(
+                    name="fiscal_year",
+                    value=str(request.query_fiscal_year),
+                    origin=FactOrigin.EXPLICIT,
+                )
+            )
+        missing = [
+            item for item in missing
+            if item.name.strip().casefold() != "fiscal_year"
+        ]
+    return analysis.model_copy(
+        update={
+            "facts": facts,
+            "missing_fields": missing,
+            "requires_clarification": (
+                analysis.requires_clarification
+                or bool(missing)
+                or bool(analysis.ambiguities)
+            ),
+        }
+    )
+
+
+def _materially_relevant_hit(
+    analysis: QueryAnalysis,
+    hit: object,
+) -> bool:
+    """Gate conservador de pertinencia antes de promoción normativa.
+
+    La temporalidad se evalúa después. Este gate impide que una disposición
+    temporalmente conocida se convierta en aplicable solo por compartir
+    vocabulario fiscal genérico.
+    """
+    metadata = getattr(hit, "metadata", None)
+    text = getattr(hit, "text", "")
+    if metadata is None:
+        return False
+
+    document_id = str(getattr(metadata, "document_id", "")).casefold()
+    matter = (_query_matter(analysis) or "").casefold()
+
+    if analysis.primary_intent == QueryIntent.KNOW_RIGHTS:
+        return document_id in {"lfdc", "cff"}
+
+    if analysis.primary_intent == QueryIntent.CALCULATE_ISR or matter == "isr":
+        allowed = {"lisr", "reg_lisr_060516", "rmf_2026"}
+        if document_id not in allowed:
+            return False
+
+    if analysis.primary_intent == QueryIntent.CALCULATE_IVA or matter == "iva":
+        allowed = {"liva", "reg_liva_250914", "rmf_2026"}
+        if document_id not in allowed:
+            return False
+
+    # La RMF contiene miles de supuestos especiales. Para una consulta genérica
+    # exige contexto material específico compartido, no solo IVA/ISR/año/tasa.
+    if document_id == "rmf_2026":
+        query_tokens = _fold_tokens(analysis.normalized_query)
+        hit_tokens = _fold_tokens(str(text))
+        if len(query_tokens & hit_tokens) < 2:
+            return False
+
+    return True
+
+
+def _filter_material_candidates(
+    analysis: QueryAnalysis,
+    retrieval: RetrievalResult,
+    candidates: list[NormativeCandidate],
+) -> list[NormativeCandidate]:
+    relevant_refs = {
+        hit.chunk_id
+        for hit in retrieval.hits
+        if _materially_relevant_hit(analysis, hit)
+    }
+    return [
+        candidate
+        for candidate in candidates
+        if getattr(candidate, "ref", None) in relevant_refs
+    ]
+
+
 def _retrieval_filters(analysis: QueryAnalysis) -> RetrievalFilters:
     del analysis
     return RetrievalFilters(
@@ -79,10 +205,7 @@ def _retrieval_filters(analysis: QueryAnalysis) -> RetrievalFilters:
 
 
 def _query_matter(analysis: QueryAnalysis) -> str | None:
-    for fact in analysis.facts:
-        if fact.name.strip().casefold() == "matter":
-            return fact.value.strip()
-    return None
+    return query_fact_value(analysis.facts, "matter")
 
 
 def _evaluate_normative_candidates(
@@ -196,6 +319,7 @@ class HybridOrchestrator:
         traces: list[StageTrace] = []
 
         analysis = self._query_analyzer.analyze(request.query)
+        analysis = _merge_request_context(analysis, request)
         traces.append(
             StageTrace(
                 stage=OrchestrationStage.QUERY_ANALYSIS,
@@ -220,6 +344,11 @@ class HybridOrchestrator:
         rag_normative_candidates = build_normative_candidates(
             retrieval,
             temporal_guard=self._temporal_guard,
+        )
+        rag_normative_candidates = _filter_material_candidates(
+            analysis,
+            retrieval,
+            rag_normative_candidates,
         )
         effective_request = request.model_copy(
             update={
@@ -455,6 +584,12 @@ class HybridOrchestrator:
         normative_review = any(
             result.requires_human_review for result in normative_results
         )
+        has_material_normative_evidence = any(
+            _materially_relevant_hit(analysis, hit)
+            for hit in retrieval.hits
+        )
+        if has_material_normative_evidence and not applicable_refs:
+            normative_review = True
         explanation_review = (
             explanation.answer.requires_human_review if explanation is not None else False
         )

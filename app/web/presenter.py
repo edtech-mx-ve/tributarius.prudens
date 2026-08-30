@@ -8,6 +8,16 @@ from app.web.schemas import WebConsultationRequest
 _SNIPPET_LIMIT = 360
 
 
+def _repair_mojibake(value: object) -> object:
+    if not isinstance(value, str) or not any(mark in value for mark in ("Ã", "Â", "â")):
+        return value
+    try:
+        repaired = value.encode("latin-1").decode("utf-8")
+    except (UnicodeEncodeError, UnicodeDecodeError):
+        return value
+    return repaired
+
+
 def _safe_explanation(result: CanonicalExecutionResult) -> str | None:
     explanation = result.explanation
     if not isinstance(explanation, dict):
@@ -15,8 +25,11 @@ def _safe_explanation(result: CanonicalExecutionResult) -> str | None:
     answer = explanation.get("answer")
     if not isinstance(answer, dict):
         return None
-    value = answer.get("answer")
-    return value if isinstance(value, str) else None
+    for key in ("summary", "analysis", "answer"):
+        value = answer.get(key)
+        if isinstance(value, str) and value.strip():
+            return str(_repair_mojibake(value))
+    return None
 
 
 def _source_label(source_type: str | None) -> str:
@@ -64,8 +77,8 @@ def _retrieval_details(result: CanonicalExecutionResult) -> dict[str, dict[str, 
             )
         details[chunk_id] = {
             "document_id": metadata_dict.get("document_id"),
-            "title": metadata_dict.get("title"),
-            "unit": (
+            "title": _repair_mojibake(metadata_dict.get("title")),
+            "unit": _repair_mojibake(
                 metadata_dict.get("source_unit_label")
                 or metadata_dict.get("legal_identifier")
             ),
@@ -74,7 +87,7 @@ def _retrieval_details(result: CanonicalExecutionResult) -> dict[str, dict[str, 
             "publication_date": metadata_dict.get("publication_date"),
             "effective_from": metadata_dict.get("effective_from"),
             "effective_to": metadata_dict.get("effective_to"),
-            "snippet": snippet,
+            "snippet": _repair_mojibake(snippet),
         }
     return details
 
@@ -89,7 +102,11 @@ def _present_evidence(
         list(result.traceability.evidence)
         + list(result.traceability.jurisprudential_sources)
     )
+    seen_refs: set[str] = set()
     for item in all_evidence:
+        if item.ref_id in seen_refs:
+            continue
+        seen_refs.add(item.ref_id)
         detail = retrieval.get(item.ref_id, {})
         items.append(
             {

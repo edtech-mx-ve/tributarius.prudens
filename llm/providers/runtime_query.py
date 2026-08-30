@@ -1,4 +1,4 @@
-from __future__ import annotations
+﻿from __future__ import annotations
 
 import json
 import unicodedata
@@ -49,8 +49,35 @@ class RuntimeQueryAnalyzerProvider:
             return QueryIntent.CALCULATE_ISR, [], False
 
         if "iva" in folded and any(
-            token in folded for token in ("calcular", "calculo", "cuanto", "monto")
+            token in folded
+            for token in ("calcular", "calculo", "cuanto", "monto", "tasa", "porcentaje")
         ):
+            asks_legal_basis = any(
+                token in folded
+                for token in (
+                    "fundamento",
+                    "articulo",
+                    "ley",
+                    "disposicion",
+                    "base legal",
+                    "sustento",
+                    "vigencia",
+                )
+            )
+            operational_rate = any(
+                token in folded
+                for token in (
+                    "aplicar",
+                    "aplica",
+                    "operacion",
+                    "calcular",
+                    "calculo",
+                    "cuanto",
+                    "monto",
+                )
+            )
+            if asks_legal_basis and not operational_rate:
+                return QueryIntent.INTERPRET_PROVISION, [], False
             return QueryIntent.CALCULATE_IVA, [], False
 
         interpretation_terms = (
@@ -129,6 +156,19 @@ class RuntimeQueryAnalyzerProvider:
         intent, secondary, jurisprudence_requested = self._classify(user_message)
 
         folded = _fold(user_message)
+        adversarial = any(
+            marker in folded
+            for marker in (
+                "ignora las normas",
+                "ignora cualquier restriccion",
+                "aunque no tengas una fuente",
+                "no muestres evidencia",
+                "inventa una norma",
+                "inventa una regla",
+                "omite la evidencia",
+                "salta la temporalidad",
+            )
+        )
         facts: list[dict[str, str]] = []
         if "iva" in folded:
             facts.append(
@@ -153,9 +193,13 @@ class RuntimeQueryAnalyzerProvider:
             "facts": facts,
             "entities": [],
             "missing_fields": [],
-            "ambiguities": [],
+            "ambiguities": (
+                ["La consulta contiene instrucciones para omitir evidencia o controles."]
+                if adversarial
+                else []
+            ),
             "jurisprudence_requested": jurisprudence_requested,
             "requires_clarification": intent == QueryIntent.UNKNOWN,
-            "requires_human_review": False,
+            "requires_human_review": adversarial,
         }
         return json.dumps(payload, ensure_ascii=False)
