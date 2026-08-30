@@ -3,7 +3,7 @@ from pathlib import Path
 import yaml
 
 PUBLIC_RUNTIME_SHA256 = (
-    "4766b49014c5f40aa509b325ddb7268ca7032348559937d2ebae74b0dcefe360"
+    "18ac85d3b2612a3057dd6e24660487457af078eb8abdf2bb94e122c9bc97c514"
 )
 
 

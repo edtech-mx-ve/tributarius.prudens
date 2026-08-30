@@ -24,9 +24,25 @@ def _candidate(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> tuple[Path, s
     staging = tmp_path / "staging"
     runtime = staging / "runtime"
     runtime.mkdir(parents=True)
-    (runtime / "index.faiss").write_bytes(b"index")
-    (runtime / "chunks.jsonl").write_bytes(b"{}\n")
-    (runtime / "manifest.json").write_bytes(b"{}\n")
+
+    index_path = runtime / "index.faiss"
+    chunks_path = runtime / "chunks.jsonl"
+    runtime_manifest_path = runtime / "manifest.json"
+
+    index_path.write_bytes(b"index")
+    chunks_path.write_bytes(b"{}\n")
+
+    runtime_manifest = {
+        "chunk_count": 1,
+        "chunks_bytes": chunks_path.stat().st_size,
+        "chunks_filename": "chunks.jsonl",
+        "chunks_sha256": hashlib.sha256(chunks_path.read_bytes()).hexdigest(),
+        "index_bytes": index_path.stat().st_size,
+        "index_filename": "index.faiss",
+        "index_sha256": hashlib.sha256(index_path.read_bytes()).hexdigest(),
+        "vector_dimension": 384,
+    }
+    runtime_manifest_path.write_bytes(_json_bytes(runtime_manifest))
 
     metadata = {
         "candidate_only": True,
@@ -103,7 +119,13 @@ def test_installs_public_candidate_into_runtime_destination(
     runtime = root / "deployment/runtime_artifacts_semantic_v2"
     assert (runtime / "index.faiss").read_bytes() == b"index"
     assert (runtime / "chunks.jsonl").read_bytes() == b"{}\n"
-    assert (runtime / "manifest.json").read_bytes() == b"{}\n"
+
+    runtime_manifest = json.loads(
+        (runtime / "manifest.json").read_text(encoding="utf-8")
+    )
+    assert runtime_manifest["chunk_count"] == 1
+    assert runtime_manifest["chunks_sha256"] == hashlib.sha256(b"{}\n").hexdigest()
+    assert runtime_manifest["index_sha256"] == hashlib.sha256(b"index").hexdigest()
     assert result.bundle_sha256 == digest
     assert len(result.installed_files) == 4
 

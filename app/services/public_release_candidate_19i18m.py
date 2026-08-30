@@ -9,6 +9,11 @@ from dataclasses import asdict, dataclass
 from pathlib import Path, PurePosixPath, PureWindowsPath
 from typing import Any
 
+from app.services.runtime_inner_integrity_19s_r10 import (
+    RuntimeInnerIntegrityError,
+    validate_runtime_inner_integrity,
+)
+
 PUBLIC_CANONICAL_SHA256 = (
     "7b4bb564cdfbd849a961790bcfad938d09369ffc41edc2de4cedce1cab2c49b0"
 )
@@ -329,6 +334,33 @@ def sanitize_runtime_private_paths(runtime_dir: Path) -> int:
     return changed
 
 
+
+def refresh_runtime_inner_manifest(runtime_dir: Path) -> dict[str, int | str]:
+    """Recalcula la integridad interna después de sanitizar JSON/JSONL."""
+
+    manifest_path = runtime_dir / "manifest.json"
+    chunks_path = runtime_dir / "chunks.jsonl"
+    index_path = runtime_dir / "index.faiss"
+    for path in (manifest_path, chunks_path, index_path):
+        if not path.is_file():
+            raise ReleaseCandidateError(
+                f"Falta artefacto requerido para integridad interna: {path.name}"
+            )
+
+    manifest = load_json(manifest_path)
+    manifest["chunks_sha256"] = sha256_file(chunks_path)
+    manifest["chunks_bytes"] = chunks_path.stat().st_size
+    manifest["index_sha256"] = sha256_file(index_path)
+    manifest["index_bytes"] = index_path.stat().st_size
+    write_json(manifest_path, manifest)
+
+    try:
+        return validate_runtime_inner_integrity(runtime_dir)
+    except RuntimeInnerIntegrityError as exc:
+        raise ReleaseCandidateError(
+            f"Integridad interna del runtime inválida después de sanitización: {exc}"
+        ) from exc
+
 def audit_runtime_tree(
     runtime_dir: Path,
     *,
@@ -351,7 +383,7 @@ def audit_runtime_tree(
         relative = path.relative_to(runtime_dir).as_posix()
         suffix = path.suffix.casefold()
         if suffix in FORBIDDEN_SUFFIXES:
-            violations.append(f"Extensión no permitida: {relative}")
+            violations.append(f"ExtensiÃ³n no permitida: {relative}")
 
         size = path.stat().st_size
         total_bytes += size
@@ -390,7 +422,7 @@ def audit_runtime_tree(
         )
     if violations:
         raise ReleaseCandidateError(
-            "Auditoría de runtime falló:\n- " + "\n- ".join(violations)
+            "Auditoría de runtime fallÃ³:\n- " + "\n- ".join(violations)
         )
     return digests
 
@@ -504,6 +536,7 @@ def execute(
     sanitized_private_path_values = sanitize_runtime_private_paths(
         staging / "runtime"
     )
+    refresh_runtime_inner_manifest(staging / "runtime")
 
     runtime_digests = audit_runtime_tree(staging / "runtime")
 

@@ -38,7 +38,7 @@ services:
       - key: RUNTIME_RELEASE_URL
         sync: false
       - key: RUNTIME_RELEASE_SHA256
-        value: 4766b49014c5f40aa509b325ddb7268ca7032348559937d2ebae74b0dcefe360
+        value: 18ac85d3b2612a3057dd6e24660487457af078eb8abdf2bb94e122c9bc97c514
       - key: MAX_REQUEST_BODY_BYTES
         value: "1048576"
       - key: CONSULTATION_RATE_LIMIT

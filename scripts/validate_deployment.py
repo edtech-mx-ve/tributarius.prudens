@@ -17,10 +17,10 @@ def _env_items(service: dict[str, Any]) -> dict[str, dict[str, Any]]:
         raise DeploymentValidationError("envVars debe ser una lista.")
     for item in raw_env:
         if not isinstance(item, dict):
-            raise DeploymentValidationError("envVars contiene una entrada inválida.")
+            raise DeploymentValidationError("envVars contiene una entrada invÃ¡lida.")
         key = item.get("key")
         if not isinstance(key, str) or not key.strip():
-            raise DeploymentValidationError("envVars contiene una key inválida.")
+            raise DeploymentValidationError("envVars contiene una key invÃ¡lida.")
         result[key] = item
     return result
 
@@ -36,14 +36,14 @@ def _env_value(items: dict[str, dict[str, Any]], key: str) -> str | None:
 def validate_render_blueprint(path: Path) -> list[str]:
     payload = yaml.safe_load(path.read_text(encoding="utf-8"))
     if not isinstance(payload, dict):
-        raise DeploymentValidationError("render.yaml debe contener un objeto raíz.")
+        raise DeploymentValidationError("render.yaml debe contener un objeto raÃz.")
     services = payload.get("services")
     if not isinstance(services, list) or len(services) != 1:
         raise DeploymentValidationError("Se requiere exactamente un Web Service.")
 
     service = services[0]
     if not isinstance(service, dict):
-        raise DeploymentValidationError("La definición del servicio es inválida.")
+        raise DeploymentValidationError("La definiciÃ³n del servicio es invÃ¡lida.")
     build_command = str(service.get("buildCommand", ""))
     checks = {
         "type=web": service.get("type") == "web",
@@ -100,7 +100,7 @@ def validate_render_blueprint(path: Path) -> list[str]:
             ),
             "release-sha-pinned": (
                 _env_value(env, "RUNTIME_RELEASE_SHA256")
-                == "4766b49014c5f40aa509b325ddb7268ca7032348559937d2ebae74b0dcefe360"
+                == "18ac85d3b2612a3057dd6e24660487457af078eb8abdf2bb94e122c9bc97c514"
             ),
         }
     )

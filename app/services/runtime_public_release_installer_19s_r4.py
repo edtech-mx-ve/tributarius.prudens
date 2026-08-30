@@ -10,6 +10,10 @@ from typing import Final
 
 from app.services import public_release_cold_start_19i18n as cold_start
 from app.services import runtime_release_installer as legacy_installer
+from app.services.runtime_inner_integrity_19s_r10 import (
+    RuntimeInnerIntegrityError,
+    validate_runtime_inner_integrity,
+)
 from app.services.runtime_release_installer import RuntimeReleaseInstallSummary
 
 RuntimeReleaseInstallError = legacy_installer.RuntimeReleaseInstallError
@@ -23,9 +27,7 @@ _PUBLIC_RUNTIME_FILES: Final[frozenset[str]] = frozenset(
         "release_manifest.json",
     }
 )
-_RUNTIME_DESTINATION: Final[Path] = Path(
-    "deployment/runtime_artifacts_semantic_v2"
-)
+_RUNTIME_DESTINATION: Final[Path] = Path("deployment/runtime_artifacts_semantic_v2")
 _TEMPORAL_REGISTRY: Final[Path] = Path(
     "knowledge/temporal/temporal_provenance_registry.json"
 )
@@ -115,9 +117,7 @@ def _materialize_bundle(
         )
     local_source = Path(source).expanduser().resolve()
     if not local_source.is_file():
-        raise RuntimeReleaseInstallError(
-            f"No existe bundle local: {local_source}"
-        )
+        raise RuntimeReleaseInstallError(f"No existe bundle local: {local_source}")
     if local_source.stat().st_size > max_bytes:
         raise RuntimeReleaseInstallError(
             "El bundle excede el límite máximo permitido."
@@ -142,9 +142,6 @@ def _replace_tree(source: Path, destination: Path) -> None:
             shutil.rmtree(transient)
 
     try:
-        # TemporaryDirectory puede vivir en /tmp y el checkout de Render en
-        # /opt. copytree materializa primero dentro del filesystem destino;
-        # los rename posteriores sí son locales y atómicos.
         shutil.copytree(source, staged)
         if destination.exists():
             destination.replace(backup)
@@ -177,9 +174,10 @@ def _validate_public_contract(bundle_path: Path, extracted: Path) -> None:
             )
         cold_start.extract_candidate(bundle_path, extracted)
         cold_start.verify_release_contract(extracted)
+        validate_runtime_inner_integrity(extracted / "runtime")
     except RuntimeReleaseInstallError:
         raise
-    except cold_start.ColdStartError as exc:
+    except (cold_start.ColdStartError, RuntimeInnerIntegrityError) as exc:
         raise RuntimeReleaseInstallError(
             f"Contrato del candidato público inválido: {exc}"
         ) from exc
@@ -193,7 +191,7 @@ def install_public_runtime_release(
     timeout_seconds: float = 60.0,
     max_bytes: int = 100_000_000,
 ) -> RuntimeReleaseInstallSummary:
-    """Instala el candidato público 19M sin relajar el contrato legacy 19B."""
+    """Instala el candidato público sin relajar el contrato legacy."""
 
     normalized_sha = _normalized_sha256(expected_sha256)
     root = project_root.expanduser().resolve()
@@ -206,9 +204,7 @@ def install_public_runtime_release(
             f"{_TEMPORAL_REGISTRY.as_posix()}"
         )
 
-    with tempfile.TemporaryDirectory(
-        prefix="tributarius-public-runtime-"
-    ) as temp_dir:
+    with tempfile.TemporaryDirectory(prefix="tributarius-public-runtime-") as temp_dir:
         temp_root = Path(temp_dir)
         bundle_path = temp_root / "runtime.zip"
         _materialize_bundle(
