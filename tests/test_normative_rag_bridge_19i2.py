@@ -1,5 +1,5 @@
-from pathlib import Path
 from datetime import date
+from pathlib import Path
 
 from app.domain.chunks import ChunkMetadata, LegalChunkType, LegalHierarchy
 from app.domain.documents import SourceType
