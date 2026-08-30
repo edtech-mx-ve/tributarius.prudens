@@ -131,20 +131,36 @@ def _materialize_bundle(
 
 
 def _replace_tree(source: Path, destination: Path) -> None:
+    """Activa un árbol ya validado sin asumir el mismo filesystem temporal."""
+
     destination.parent.mkdir(parents=True, exist_ok=True)
+    staged = destination.with_name(f".{destination.name}.staged")
     backup = destination.with_name(f".{destination.name}.backup")
-    if backup.exists():
-        shutil.rmtree(backup)
-    if destination.exists():
-        destination.replace(backup)
+
+    for transient in (staged, backup):
+        if transient.exists():
+            shutil.rmtree(transient)
+
     try:
-        source.replace(destination)
+        # TemporaryDirectory puede vivir en /tmp y el checkout de Render en
+        # /opt. copytree materializa primero dentro del filesystem destino;
+        # los rename posteriores sí son locales y atómicos.
+        shutil.copytree(source, staged)
+        if destination.exists():
+            destination.replace(backup)
+        staged.replace(destination)
     except OSError as exc:
+        if staged.exists():
+            shutil.rmtree(staged, ignore_errors=True)
         if backup.exists() and not destination.exists():
             backup.replace(destination)
         raise RuntimeReleaseInstallError(
             f"No se pudo activar {destination}."
         ) from exc
+    finally:
+        if staged.exists():
+            shutil.rmtree(staged, ignore_errors=True)
+
     if backup.exists():
         shutil.rmtree(backup)
 
