@@ -11,6 +11,7 @@ from app.api.routes.web import router as web_router
 from app.core.config import get_settings
 from app.core.errors import register_exception_handlers
 from app.core.logging import configure_logging
+from app.middleware.public_unicode_19s_r16 import PublicUnicodeNormalizationMiddleware
 from app.security.middleware import RequestBodyLimitMiddleware, SecurityHeadersMiddleware
 
 settings = get_settings()
@@ -25,7 +26,6 @@ app = FastAPI(
     redoc_url="/redoc" if docs_enabled else None,
 )
 
-
 app.add_middleware(
     TrustedHostMiddleware,
     allowed_hosts=settings.trusted_hosts(),
@@ -38,13 +38,13 @@ app.add_middleware(
     SecurityHeadersMiddleware,
     enable_hsts=settings.environment == "production",
 )
+app.add_middleware(PublicUnicodeNormalizationMiddleware)
 register_exception_handlers(app)
 
 app.include_router(health_router)
 app.include_router(knowledge_router)
 app.include_router(normative_router)
 app.include_router(web_router)
-
 WEB_DIR = Path(__file__).resolve().parent / "web"
 app.mount(
     "/static",
