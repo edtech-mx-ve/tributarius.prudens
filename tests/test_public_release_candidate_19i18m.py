@@ -75,7 +75,7 @@ def _fixture(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> tuple[Path, Pat
         runtime / "metadata.json",
         {
             "document_id": "cff",
-            "source_path": r"C:\Users\HP\Corpus app\CFF.pdf",
+            "source_path": r"D:\Fixture\Corpus app\CFF.pdf",
         },
     )
     _write_runtime_integrity_fixture(runtime)
