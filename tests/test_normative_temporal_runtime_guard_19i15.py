@@ -3,10 +3,13 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
+import pytest
+
 from app.domain.chunks import ChunkMetadata, LegalChunkType, LegalHierarchy
 from app.domain.documents import SourceType
 from app.services.normative_rag_bridge import candidate_from_normative_hit
 from app.services.normative_temporal_runtime_guard import (
+    TemporalRuntimeGuardError,
     load_temporal_runtime_guard,
 )
 from rag.retrieval.models import RetrievalHit
@@ -96,3 +99,66 @@ def test_guard_preserves_non_blocked_temporally_valid_norm(tmp_path: Path) -> No
     )
 
     assert candidate is not None
+
+
+def test_guard_loads_verified_snapshot_without_inventing_effective_dates(tmp_path: Path) -> None:
+    registry = tmp_path / "registry.json"
+    payload = {
+        "schema_version": "2.0",
+        "source_sprint": "temporal-integrity",
+        "policy": "fail-closed",
+        "entries": [],
+        "coverage_gaps": [],
+        "verified_validity": [
+            {
+                "canonical_id": "cff",
+                "validity_status": "verified_in_force",
+                "validity_scope": "document",
+                "validity_basis": "official_consolidated_version",
+                "validity_verified_at": "2026-08-30",
+                "official_source": "https://www.diputados.gob.mx/LeyesBiblio/pdf/CFF.pdf",
+                "reason": "Fuente oficial consolidada verificada para la fecha.",
+            }
+        ],
+    }
+    registry.write_text(json.dumps(payload), encoding="utf-8")
+
+    guard = load_temporal_runtime_guard(registry)
+    verification = guard.verification_for_document("CFF")
+
+    assert verification is not None
+    assert verification.validity_verified_at.isoformat() == "2026-08-30"
+    assert not guard.blocks_document("cff")
+
+
+def test_guard_rejects_document_that_is_both_blocked_and_verified(tmp_path: Path) -> None:
+    registry = tmp_path / "registry.json"
+    payload = {
+        "schema_version": "2.0",
+        "source_sprint": "temporal-integrity",
+        "policy": "fail-closed",
+        "entries": [],
+        "coverage_gaps": [
+            {
+                "canonical_id": "cff",
+                "gap_type": "document_wide_temporal_validity",
+                "status": "unknown_fail_closed",
+                "reason": "Pendiente.",
+            }
+        ],
+        "verified_validity": [
+            {
+                "canonical_id": "cff",
+                "validity_status": "verified_in_force",
+                "validity_scope": "document",
+                "validity_basis": "official_consolidated_version",
+                "validity_verified_at": "2026-08-30",
+                "official_source": "official://cff",
+                "reason": "Verificado.",
+            }
+        ],
+    }
+    registry.write_text(json.dumps(payload), encoding="utf-8")
+
+    with pytest.raises(TemporalRuntimeGuardError):
+        load_temporal_runtime_guard(registry)

@@ -82,6 +82,11 @@ def _metadata_from_spec(spec: dict[str, Any]) -> dict[str, Any]:
         "last_reform_date": spec.get("last_reform_date"),
         "effective_from": spec.get("effective_from"),
         "effective_to": spec.get("effective_to"),
+        "validity_status": spec.get("validity_status"),
+        "validity_scope": spec.get("validity_scope"),
+        "validity_basis": spec.get("validity_basis"),
+        "validity_verified_at": spec.get("validity_verified_at"),
+        "official_source": spec.get("official_source"),
     }
 
 
@@ -123,6 +128,11 @@ def _make_chunks(
                 last_reform_date=metadata["last_reform_date"],
                 effective_from=metadata["effective_from"],
                 effective_to=metadata["effective_to"],
+                validity_status=metadata.get("validity_status"),
+                validity_scope=metadata.get("validity_scope"),
+                validity_basis=metadata.get("validity_basis"),
+                validity_verified_at=metadata.get("validity_verified_at"),
+                official_source=metadata.get("official_source"),
             )
         )
     if not chunks:
@@ -242,6 +252,11 @@ def build_legal_chunks(
         "last_reform_date": None,
         "effective_from": None,
         "effective_to": None,
+        "validity_status": None,
+        "validity_scope": None,
+        "validity_basis": None,
+        "validity_verified_at": None,
+        "official_source": None,
     }
     prodecon_chunks = _make_chunks(
         canonical_id="prodecon_contribuyente",

@@ -1,4 +1,4 @@
-﻿from __future__ import annotations
+from __future__ import annotations
 
 from typing import Protocol
 
@@ -221,6 +221,11 @@ def _evaluate_normative_candidates(
                 effective_from=candidate.effective_from,
                 effective_to=candidate.effective_to,
                 fiscal_year=candidate.fiscal_year,
+                validity_status=candidate.validity_status,
+                validity_scope=candidate.validity_scope,
+                validity_basis=candidate.validity_basis,
+                validity_verified_at=candidate.validity_verified_at,
+                official_source=candidate.official_source,
                 query_date=request.query_date,
                 query_fiscal_year=request.query_fiscal_year,
             )

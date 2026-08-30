@@ -137,3 +137,72 @@ def test_hyphenated_article_identifier_mismatch_is_rejected() -> None:
             text="Artículo 1o. Texto distinto.",
         )
     ) is None
+
+
+def test_verified_permanent_cff_snapshot_becomes_candidate_without_invented_dates(
+    tmp_path,
+) -> None:
+    import json
+
+    from app.domain.normative import NormativeValidityStatus
+    from app.services.normative_temporal_runtime_guard import load_temporal_runtime_guard
+
+    hit = _hit(
+        unit="Artículo 27",
+        text="Artículo 27. Las personas deberán solicitar su inscripción en el RFC.",
+        effective_from=None,
+        effective_to=None,
+        version="2026-04-09",
+    )
+    hit.metadata.document_id = "cff"
+    hit.metadata.source_filename = "cff.md"
+    hit.metadata.title = "Código Fiscal de la Federación"
+
+    registry = tmp_path / "registry.json"
+    registry.write_text(
+        json.dumps(
+            {
+                "schema_version": "2.0",
+                "source_sprint": "temporal-integrity",
+                "policy": "fail-closed",
+                "coverage_gaps": [],
+                "entries": [],
+                "verified_validity": [
+                    {
+                        "canonical_id": "cff",
+                        "validity_status": "verified_in_force",
+                        "validity_scope": "document",
+                        "validity_basis": "official_consolidated_version",
+                        "validity_verified_at": "2026-08-30",
+                        "official_source": "https://www.diputados.gob.mx/LeyesBiblio/pdf/CFF.pdf",
+                        "reason": "Fuente oficial consolidada verificada para la fecha.",
+                    }
+                ],
+            }
+        ),
+        encoding="utf-8",
+    )
+    guard = load_temporal_runtime_guard(registry)
+
+    candidate = candidate_from_normative_hit(hit, temporal_guard=guard)
+
+    assert candidate is not None
+    assert candidate.effective_from is None
+    assert candidate.effective_to is None
+    assert candidate.validity_status is NormativeValidityStatus.VERIFIED_IN_FORCE
+    assert candidate.validity_verified_at == date(2026, 8, 30)
+
+
+def test_unverified_cff_snapshot_remains_fail_closed() -> None:
+    hit = _hit(
+        unit="Artículo 27",
+        text="Artículo 27. Las personas deberán solicitar su inscripción en el RFC.",
+        effective_from=None,
+        effective_to=None,
+        version="2026-04-09",
+    )
+    hit.metadata.document_id = "cff"
+    hit.metadata.last_reform_date = "2026-04-09"
+    hit.metadata.publication_date = None
+
+    assert candidate_from_normative_hit(hit) is None

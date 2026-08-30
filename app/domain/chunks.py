@@ -52,6 +52,11 @@ class ChunkMetadata(BaseModel):
     last_reform_date: str | None = Field(default=None, max_length=40)
     effective_from: str | None = Field(default=None, max_length=40)
     effective_to: str | None = Field(default=None, max_length=40)
+    validity_status: str | None = Field(default=None, max_length=40)
+    validity_scope: str | None = Field(default=None, max_length=40)
+    validity_basis: str | None = Field(default=None, max_length=80)
+    validity_verified_at: str | None = Field(default=None, max_length=40)
+    official_source: str | None = Field(default=None, max_length=1000)
     text_sha256: str | None = Field(default=None, min_length=64, max_length=64)
 
     # Sprint 19F: identidad canónica y trazabilidad del subchunk de recuperación.

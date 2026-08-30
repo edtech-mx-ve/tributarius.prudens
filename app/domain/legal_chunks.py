@@ -38,6 +38,11 @@ class LegalChunk(BaseModel):
     last_reform_date: str | None = None
     effective_from: str | None = None
     effective_to: str | None = None
+    validity_status: str | None = None
+    validity_scope: str | None = None
+    validity_basis: str | None = None
+    validity_verified_at: str | None = None
+    official_source: str | None = None
 
     @model_validator(mode="after")
     def validate_pages(self) -> LegalChunk:

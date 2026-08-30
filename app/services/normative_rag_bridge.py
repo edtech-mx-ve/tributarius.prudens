@@ -2,12 +2,29 @@ from __future__ import annotations
 
 import hashlib
 from datetime import date
+from enum import StrEnum
 
 from app.domain.documents import SourceType
+from app.domain.normative import (
+    NormativeValidityBasis,
+    NormativeValidityScope,
+    NormativeValidityStatus,
+)
 from app.domain.orchestration import NormativeCandidate
 from app.services.legal_unit_integrity import ArticleConsistency, compare_article_unit
 from app.services.normative_temporal_runtime_guard import TemporalRuntimeGuard
 from rag.retrieval.models import RetrievalHit, RetrievalResult
+
+
+def _parse_enum[EnumT: StrEnum](
+    value: str | None, enum_type: type[EnumT]
+) -> EnumT | None:
+    if not value:
+        return None
+    try:
+        return enum_type(value)
+    except ValueError:
+        return None
 
 
 def _parse_date(value: str | None) -> date | None:
@@ -66,11 +83,28 @@ def candidate_from_normative_hit(
 
     effective_from = _parse_date(metadata.effective_from)
     effective_to = _parse_date(metadata.effective_to)
+    validity_verified_at = _parse_date(metadata.validity_verified_at)
+    validity_status = _parse_enum(metadata.validity_status, NormativeValidityStatus)
+    validity_scope = _parse_enum(metadata.validity_scope, NormativeValidityScope)
+    validity_basis = _parse_enum(metadata.validity_basis, NormativeValidityBasis)
+    official_source = metadata.official_source
 
     # Nunca se infiere vigencia a partir de fecha de reforma/publicación.
-    # El motor normativo exige al menos un límite temporal verificable.
-    if effective_from is None and effective_to is None:
-        return None
+    # Si no hay intervalo, la única vía de promoción es una verificación
+    # independiente cargada por el guard temporal. La metadata del chunk no
+    # puede autoautorizar su propia vigencia.
+    has_interval = effective_from is not None or effective_to is not None
+    if not has_interval:
+        if temporal_guard is None:
+            return None
+        verification = temporal_guard.verification_for_document(metadata.document_id)
+        if verification is None:
+            return None
+        validity_status = verification.validity_status
+        validity_scope = verification.validity_scope
+        validity_basis = verification.validity_basis
+        validity_verified_at = verification.validity_verified_at
+        official_source = verification.official_source
 
     return NormativeCandidate(
         ref=hit.chunk_id,
@@ -79,6 +113,11 @@ def candidate_from_normative_hit(
         effective_from=effective_from,
         effective_to=effective_to,
         fiscal_year=metadata.fiscal_year,
+        validity_status=(validity_status or NormativeValidityStatus.UNKNOWN),
+        validity_scope=(validity_scope or NormativeValidityScope.UNKNOWN),
+        validity_basis=(validity_basis or NormativeValidityBasis.UNKNOWN),
+        validity_verified_at=validity_verified_at,
+        official_source=official_source,
     )
 
 

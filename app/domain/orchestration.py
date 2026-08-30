@@ -8,7 +8,12 @@ from pydantic import BaseModel, Field, model_validator
 from app.domain.cbr import CBRQuery, CBRRetrievalResult, CBRReuseAssessment
 from app.domain.isr import ISRCalculationInput, ISRCalculationResult
 from app.domain.jurisprudence import JurisprudenceRetrievalResult
-from app.domain.normative import NormativeApplicabilityResult
+from app.domain.normative import (
+    NormativeApplicabilityResult,
+    NormativeValidityBasis,
+    NormativeValidityScope,
+    NormativeValidityStatus,
+)
 from app.domain.query import QueryAnalysis
 from app.domain.rules import RuleEvaluationResult
 from llm.models import RAGExplanation
@@ -45,6 +50,11 @@ class NormativeCandidate(BaseModel):
     effective_from: date | None = None
     effective_to: date | None = None
     fiscal_year: int | None = Field(default=None, ge=1900, le=2200)
+    validity_status: NormativeValidityStatus = NormativeValidityStatus.UNKNOWN
+    validity_scope: NormativeValidityScope = NormativeValidityScope.UNKNOWN
+    validity_basis: NormativeValidityBasis = NormativeValidityBasis.UNKNOWN
+    validity_verified_at: date | None = None
+    official_source: str | None = Field(default=None, max_length=1000)
 
     @model_validator(mode="after")
     def validate_interval(self) -> NormativeCandidate:

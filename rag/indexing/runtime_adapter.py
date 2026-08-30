@@ -110,6 +110,11 @@ def adapt_corpus_chunk(
             last_reform_date=chunk.last_reform_date,
             effective_from=chunk.effective_from,
             effective_to=chunk.effective_to,
+            validity_status=chunk.validity_status,
+            validity_scope=chunk.validity_scope,
+            validity_basis=chunk.validity_basis,
+            validity_verified_at=chunk.validity_verified_at,
+            official_source=chunk.official_source,
             text_sha256=chunk.text_sha256,
         ),
     )

@@ -15,12 +15,41 @@ class NormativeDecision(StrEnum):
     INVALID_DATA = "invalid_data"
 
 
+class NormativeValidityStatus(StrEnum):
+    VERIFIED_IN_FORCE = "verified_in_force"
+    VERIFIED_FUTURE = "verified_future"
+    VERIFIED_EXPIRED = "verified_expired"
+    UNKNOWN = "unknown"
+    CONFLICTING = "conflicting"
+
+
+class NormativeValidityScope(StrEnum):
+    DOCUMENT = "document"
+    LEGAL_UNIT = "legal_unit"
+    AMENDMENT = "amendment"
+    FISCAL_YEAR = "fiscal_year"
+    UNKNOWN = "unknown"
+
+
+class NormativeValidityBasis(StrEnum):
+    EXPLICIT_EFFECTIVE_DATE = "explicit_effective_date"
+    OFFICIAL_CONSOLIDATED_VERSION = "official_consolidated_version"
+    VERIFIED_REFORM_CHAIN = "verified_reform_chain"
+    FISCAL_YEAR_RULE = "fiscal_year_rule"
+    UNKNOWN = "unknown"
+
+
 class NormativeApplicabilityRequest(BaseModel):
     legal_unit_id: int = Field(gt=0)
     version_label: str = Field(min_length=1, max_length=200)
     effective_from: date | None = None
     effective_to: date | None = None
     fiscal_year: int | None = Field(default=None, ge=1900, le=2200)
+    validity_status: NormativeValidityStatus = NormativeValidityStatus.UNKNOWN
+    validity_scope: NormativeValidityScope = NormativeValidityScope.UNKNOWN
+    validity_basis: NormativeValidityBasis = NormativeValidityBasis.UNKNOWN
+    validity_verified_at: date | None = None
+    official_source: str | None = Field(default=None, max_length=1000)
     query_date: date
     query_fiscal_year: int | None = Field(default=None, ge=1900, le=2200)
 
@@ -45,6 +74,11 @@ class NormativeApplicabilityResult(BaseModel):
     effective_from: date | None
     effective_to: date | None
     fiscal_year: int | None
+    validity_status: NormativeValidityStatus = NormativeValidityStatus.UNKNOWN
+    validity_scope: NormativeValidityScope = NormativeValidityScope.UNKNOWN
+    validity_basis: NormativeValidityBasis = NormativeValidityBasis.UNKNOWN
+    validity_verified_at: date | None = None
+    official_source: str | None = None
     reason: str = Field(min_length=1, max_length=1000)
     requires_human_review: bool = False
 
@@ -61,4 +95,9 @@ class NormativeVersionView(BaseModel):
     effective_to: date | None = None
     fiscal_year: int | None = Field(default=None, ge=1900, le=2200)
     publication_date: date | None = None
+    validity_status: NormativeValidityStatus = NormativeValidityStatus.UNKNOWN
+    validity_scope: NormativeValidityScope = NormativeValidityScope.UNKNOWN
+    validity_basis: NormativeValidityBasis = NormativeValidityBasis.UNKNOWN
+    validity_verified_at: date | None = None
+    official_source: str | None = None
     source_reference: str | None = None
