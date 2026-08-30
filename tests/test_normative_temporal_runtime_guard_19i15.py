@@ -75,7 +75,7 @@ def test_guard_loads_fail_closed_documents(tmp_path: Path) -> None:
     assert not guard.blocks_document("lif_2026")
 
 
-def test_guard_blocks_stale_temporal_metadata_for_liva(tmp_path: Path) -> None:
+def test_guard_does_not_block_foundational_normative_evidence(tmp_path: Path) -> None:
     registry = tmp_path / "registry.json"
     _write_registry(registry)
     guard = load_temporal_runtime_guard(registry)
@@ -85,7 +85,9 @@ def test_guard_blocks_stale_temporal_metadata_for_liva(tmp_path: Path) -> None:
         temporal_guard=guard,
     )
 
-    assert candidate is None
+    assert candidate is not None
+    assert candidate.effective_from is not None
+    assert candidate.validity_status.value == "unknown"
 
 
 def test_guard_preserves_non_blocked_temporally_valid_norm(tmp_path: Path) -> None:

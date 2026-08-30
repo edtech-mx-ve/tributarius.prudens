@@ -68,10 +68,18 @@ def candidate_from_normative_hit(
     *,
     temporal_guard: TemporalRuntimeGuard | None = None,
 ) -> NormativeCandidate | None:
-    """Promueve evidencia RAG a candidato solo con metadatos temporales suficientes."""
+    """Promueve evidencia normativa válida de la base a candidato de razonamiento."""
     metadata = hit.metadata
+
     if metadata.source_type != SourceType.NORMATIVA:
         return None
+
+    if not metadata.version_label:
+        return None
+
+    if not _unit_consistent(hit):
+        return None
+
     legal_identifier = metadata.source_unit_label or metadata.legal_identifier
     verification = (
         temporal_guard.verification_for_document(
@@ -81,16 +89,6 @@ def candidate_from_normative_hit(
         if temporal_guard is not None
         else None
     )
-    if (
-        temporal_guard is not None
-        and temporal_guard.blocks_document(metadata.document_id)
-        and verification is None
-    ):
-        return None
-    if not metadata.version_label:
-        return None
-    if not _unit_consistent(hit):
-        return None
 
     effective_from = _parse_date(metadata.effective_from)
     effective_to = _parse_date(metadata.effective_to)
@@ -100,14 +98,11 @@ def candidate_from_normative_hit(
     validity_basis = _parse_enum(metadata.validity_basis, NormativeValidityBasis)
     official_source = metadata.official_source
 
-    # Nunca se infiere vigencia a partir de fecha de reforma/publicación.
-    # Si no hay intervalo, la única vía de promoción es una verificación
-    # independiente cargada por el guard temporal. La metadata del chunk no
-    # puede autoautorizar su propia vigencia.
+    # La evidencia temporal complementa la norma, pero no condiciona
+    # su ingreso al razonamiento. La base normativa es conocimiento
+    # fundacional utilizable aunque no exista verificación temporal.
     has_interval = effective_from is not None or effective_to is not None
-    if not has_interval:
-        if temporal_guard is None or verification is None:
-            return None
+    if not has_interval and verification is not None:
         validity_status = verification.validity_status
         validity_scope = verification.validity_scope
         validity_basis = verification.validity_basis
@@ -127,7 +122,6 @@ def candidate_from_normative_hit(
         validity_verified_at=validity_verified_at,
         official_source=official_source,
     )
-
 
 def build_normative_candidates(
     retrieval: RetrievalResult,

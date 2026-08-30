@@ -62,8 +62,12 @@ def test_supporting_sources_never_become_normative_candidates() -> None:
     assert candidate_from_normative_hit(_hit(source_type=SourceType.UNAM)) is None
 
 
-def test_unknown_validity_is_not_silently_promoted() -> None:
-    assert candidate_from_normative_hit(_hit(effective_from=None)) is None
+def test_unknown_validity_enters_reasoning_without_temporal_claim() -> None:
+    candidate = candidate_from_normative_hit(_hit(effective_from=None))
+
+    assert candidate is not None
+    assert candidate.effective_from is None
+    assert candidate.validity_status.value == "unknown"
 
 
 def test_inconsistent_article_label_and_text_is_rejected() -> None:
@@ -194,10 +198,10 @@ def test_verified_permanent_cff_snapshot_becomes_candidate_without_invented_date
     assert candidate.validity_verified_at == date(2026, 8, 30)
 
 
-def test_unverified_cff_snapshot_remains_fail_closed() -> None:
+def test_unverified_cff_snapshot_enters_reasoning_without_temporal_claim() -> None:
     hit = _hit(
-        unit="Artículo 27",
-        text="Artículo 27. Las personas deberán solicitar su inscripción en el RFC.",
+        unit="Art?culo 27",
+        text="Art?culo 27. Las personas deber?n solicitar su inscripci?n en el RFC.",
         effective_from=None,
         effective_to=None,
         version="2026-04-09",
@@ -206,7 +210,12 @@ def test_unverified_cff_snapshot_remains_fail_closed() -> None:
     hit.metadata.last_reform_date = "2026-04-09"
     hit.metadata.publication_date = None
 
-    assert candidate_from_normative_hit(hit) is None
+    candidate = candidate_from_normative_hit(hit)
+
+    assert candidate is not None
+    assert candidate.effective_from is None
+    assert candidate.effective_to is None
+    assert candidate.validity_status.value == "unknown"
 
 
 def test_verified_cff_legal_unit_reform_chain_isolated_to_article_27(
@@ -281,4 +290,6 @@ def test_verified_cff_legal_unit_reform_chain_isolated_to_article_27(
     assert candidate_27.validity_basis is NormativeValidityBasis.VERIFIED_REFORM_CHAIN
     assert candidate_27.effective_from is None
     assert candidate_27.effective_to is None
-    assert candidate_28 is None
+    assert candidate_28 is not None
+    assert candidate_28.validity_scope.value == "unknown"
+    assert candidate_28.validity_basis.value == "unknown"
