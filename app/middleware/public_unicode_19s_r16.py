@@ -5,17 +5,25 @@ from typing import Any
 
 from starlette.types import ASGIApp, Message, Receive, Scope, Send
 
+from app.services.public_evidence_quality_19s_r16e import (
+    reconcile_public_evidence_payload,
+)
 from app.services.public_response_quality_19s_r16 import normalize_public_value
 from app.services.trace_integrity_19s_r16 import reconcile_traceability_payload
 
 
 class PublicUnicodeNormalizationMiddleware:
-    """Normaliza JSON público y reconcilia trazabilidad sin alterar el dominio."""
+    """Normaliza JSON público, evidencia visible y trazabilidad."""
 
     def __init__(self, app: ASGIApp) -> None:
         self.app = app
 
-    async def __call__(self, scope: Scope, receive: Receive, send: Send) -> None:
+    async def __call__(
+        self,
+        scope: Scope,
+        receive: Receive,
+        send: Send,
+    ) -> None:
         if scope["type"] != "http":
             await self.app(scope, receive, send)
             return
@@ -44,7 +52,9 @@ class PublicUnicodeNormalizationMiddleware:
             return
 
         start = next(
-            message for message in messages if message["type"] == "http.response.start"
+            message
+            for message in messages
+            if message["type"] == "http.response.start"
         )
         headers = [
             (name, value)
@@ -64,7 +74,12 @@ class PublicUnicodeNormalizationMiddleware:
                 "headers": headers,
             }
         )
-        await send({"type": "http.response.body", "body": normalized})
+        await send(
+            {
+                "type": "http.response.body",
+                "body": normalized,
+            }
+        )
 
 
 def _is_json_response(messages: list[Message]) -> bool:
@@ -83,8 +98,11 @@ def _normalize_json_bytes(body: bytes) -> bytes | None:
     except (UnicodeDecodeError, json.JSONDecodeError):
         return None
 
-    reconciled = reconcile_traceability_payload(payload)
-    normalized = normalize_public_value(reconciled)
+    trace_reconciled = reconcile_traceability_payload(payload)
+    evidence_reconciled = reconcile_public_evidence_payload(
+        trace_reconciled
+    )
+    normalized = normalize_public_value(evidence_reconciled)
     return json.dumps(
         normalized,
         ensure_ascii=False,
