@@ -5,6 +5,8 @@ import json
 import zipfile
 from pathlib import Path
 
+import faiss
+import numpy as np
 import pytest
 
 import app.services.public_release_candidate_19i18m as m
@@ -13,6 +15,41 @@ import app.services.public_release_candidate_19i18m as m
 def _write_json(path: Path, value: object) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(json.dumps(value), encoding="utf-8")
+
+
+def _sha256(path: Path) -> str:
+    return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def _write_runtime_integrity_fixture(runtime: Path) -> None:
+    """Crea el contrato interno mínimo que r11 exige al constructor 19M."""
+    chunks = runtime / "chunks.jsonl"
+    chunk_payload = {
+        "chunk_id": "cff::fixture::0001",
+        "text": "Artículo 1. Fixture normativo para pruebas.",
+        "metadata": {"document_id": "cff"},
+    }
+    chunks.write_text(
+        json.dumps(chunk_payload, ensure_ascii=False) + "\n",
+        encoding="utf-8",
+    )
+
+    index = faiss.IndexFlatIP(3)
+    index.add(np.ones((1, 3), dtype="float32"))
+    index_path = runtime / "index.faiss"
+    faiss.write_index(index, str(index_path))
+
+    _write_json(
+        runtime / "manifest.json",
+        {
+            "chunks_sha256": _sha256(chunks),
+            "chunks_bytes": chunks.stat().st_size,
+            "index_sha256": _sha256(index_path),
+            "index_bytes": index_path.stat().st_size,
+            "chunk_count": 1,
+            "vector_dimension": 3,
+        },
+    )
 
 
 def _fixture(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> tuple[Path, Path]:
@@ -41,7 +78,7 @@ def _fixture(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> tuple[Path, Pat
             "source_path": r"C:\Users\HP\Corpus app\CFF.pdf",
         },
     )
-    (runtime / "index.faiss").write_bytes(b"FAISS")
+    _write_runtime_integrity_fixture(runtime)
 
     acceptance_l = tmp_path / "19l.json"
     _write_json(
@@ -128,9 +165,7 @@ def test_real_windows_path_is_sanitized(tmp_path: Path) -> None:
     )
     changed = m.sanitize_runtime_private_paths(runtime)
     assert changed == 1
-    payload = json.loads(
-        (runtime / "chunks.jsonl").read_text(encoding="utf-8")
-    )
+    payload = json.loads((runtime / "chunks.jsonl").read_text(encoding="utf-8"))
     assert payload["text"] == "build source: CFF.pdf"
     m.audit_runtime_tree(runtime)
 
@@ -185,3 +220,5 @@ def test_zip_has_only_manifested_files(
         assert "release_manifest.json" in archive.namelist()
         assert "release_metadata.json" in archive.namelist()
         assert "runtime/index.faiss" in archive.namelist()
+        assert "runtime/manifest.json" in archive.namelist()
+        assert "runtime/chunks.jsonl" in archive.namelist()

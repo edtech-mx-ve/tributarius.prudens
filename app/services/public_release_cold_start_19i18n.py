@@ -21,39 +21,17 @@ EXPECTED_CANONICAL_SHA256 = (
 EXPECTED_PARENT_COUNT = 2962
 
 ALLOWED_NORMATIVE_DOCUMENTS = {
-    "cff",
-    "cpeum",
-    "lfdc",
-    "lfisan",
-    "lfpca",
-    "lieps",
-    "lif_2026",
-    "lisr",
-    "liva",
-    "lotfja",
-    "reg_cff",
-    "reg_lisr_060516",
-    "reg_liva_250914",
-    "rmf_2026",
+    "cff", "cpeum", "lfdc", "lfisan", "lfpca", "lieps", "lif_2026",
+    "lisr", "liva", "lotfja", "reg_cff", "reg_lisr_060516",
+    "reg_liva_250914", "rmf_2026",
 }
 BLOCKED_DOCUMENTS = {
-    "manual_unam",
-    "manual_derecho_fiscal_unam",
-    "prodecon",
-    "prodecon_contribuyente",
+    "manual_unam", "manual_derecho_fiscal_unam",
+    "prodecon", "prodecon_contribuyente",
 }
 FORBIDDEN_SUFFIXES = {
-    ".pdf",
-    ".md",
-    ".db",
-    ".sqlite",
-    ".sqlite3",
-    ".pem",
-    ".key",
-    ".safetensors",
-    ".pt",
-    ".pth",
-    ".onnx",
+    ".pdf", ".md", ".db", ".sqlite", ".sqlite3", ".pem", ".key",
+    ".safetensors", ".pt", ".pth", ".onnx",
 }
 
 
@@ -84,7 +62,7 @@ def load_json(path: Path) -> dict[str, Any]:
     try:
         value = json.loads(path.read_text(encoding="utf-8"))
     except (OSError, json.JSONDecodeError) as exc:
-        raise ColdStartError(f"JSON invÃ¡lido: {path}") from exc
+        raise ColdStartError(f"JSON inválido: {path}") from exc
     if not isinstance(value, dict):
         raise ColdStartError(f"Objeto JSON esperado: {path}")
     return value
@@ -108,15 +86,13 @@ def validate_zip_member_name(name: str) -> None:
     if ".." in posix.parts:
         raise ColdStartError(f"Path traversal en ZIP: {name}")
     if len(posix.parts) == 0:
-        raise ColdStartError(f"Entrada ZIP invÃ¡lida: {name}")
+        raise ColdStartError(f"Entrada ZIP inválida: {name}")
     if posix.parts[0] not in {
-        "runtime",
-        "release_metadata.json",
-        "release_manifest.json",
+        "runtime", "release_metadata.json", "release_manifest.json",
     }:
         raise ColdStartError(f"Entrada fuera del contrato del bundle: {name}")
     if Path(normalized).suffix.casefold() in FORBIDDEN_SUFFIXES:
-        raise ColdStartError(f"ExtensiÃ³n prohibida en candidato: {name}")
+        raise ColdStartError(f"Extensión prohibida en candidato: {name}")
 
 
 def validate_candidate_zip(candidate_zip: Path) -> list[str]:
@@ -133,7 +109,7 @@ def validate_candidate_zip(candidate_zip: Path) -> list[str]:
         with zipfile.ZipFile(candidate_zip, "r") as archive:
             names = archive.namelist()
             if not names:
-                raise ColdStartError("ZIP candidato vacÃo")
+                raise ColdStartError("ZIP candidato vacío")
             seen: set[str] = set()
             for info in archive.infolist():
                 validate_zip_member_name(info.filename)
@@ -210,12 +186,16 @@ def verify_release_contract(extracted: Path) -> tuple[dict[str, Any], dict[str, 
     expected_paths: set[str] = set()
     for item in raw_files:
         if not isinstance(item, dict):
-            raise ColdStartError("Entrada invÃ¡lida en release_manifest.files")
+            raise ColdStartError("Entrada inválida en release_manifest.files")
         rel = item.get("path")
         size = item.get("size")
         digest = item.get("sha256")
-        if not isinstance(rel, str) or not isinstance(size, int) or not isinstance(digest, str):
-            raise ColdStartError("Manifest con tipos invÃ¡lidos")
+        if (
+            not isinstance(rel, str)
+            or not isinstance(size, int)
+            or not isinstance(digest, str)
+        ):
+            raise ColdStartError("Manifest con tipos inválidos")
         if rel in expected_paths:
             raise ColdStartError(f"Ruta duplicada en manifest: {rel}")
         expected_paths.add(rel)
@@ -224,7 +204,7 @@ def verify_release_contract(extracted: Path) -> tuple[dict[str, Any], dict[str, 
         if not target.is_file():
             raise ColdStartError(f"Archivo manifestado ausente: {rel}")
         if target.stat().st_size != size:
-            raise ColdStartError(f"TamaÃ±o divergente: {rel}")
+            raise ColdStartError(f"Tamaño divergente: {rel}")
         if sha256_file(target) != digest:
             raise ColdStartError(f"SHA divergente: {rel}")
 
@@ -258,40 +238,28 @@ def load_chunks(chunks_path: Path) -> tuple[list[dict[str, Any]], set[str]]:
                 chunk = json.loads(line)
             except json.JSONDecodeError as exc:
                 raise ColdStartError(
-                    f"chunks.jsonl invÃ¡lido en lÃnea {line_number}"
+                    f"chunks.jsonl inválido en línea {line_number}"
                 ) from exc
             if not isinstance(chunk, dict):
-                raise ColdStartError(
-                    f"Chunk no es objeto en lÃnea {line_number}"
-                )
+                raise ColdStartError(f"Chunk no es objeto en línea {line_number}")
             chunk_id = chunk.get("chunk_id")
             metadata = chunk.get("metadata")
             if not isinstance(chunk_id, str) or not chunk_id:
-                raise ColdStartError(
-                    f"chunk_id invÃ¡lido en lÃnea {line_number}"
-                )
+                raise ColdStartError(f"chunk_id inválido en línea {line_number}")
             if not isinstance(metadata, dict):
-                raise ColdStartError(
-                    f"metadata invÃ¡lida en lÃnea {line_number}"
-                )
+                raise ColdStartError(f"metadata inválida en línea {line_number}")
             document_id = metadata.get("document_id")
             if not isinstance(document_id, str):
-                raise ColdStartError(
-                    f"document_id invÃ¡lido en lÃnea {line_number}"
-                )
+                raise ColdStartError(f"document_id inválido en línea {line_number}")
             if document_id in BLOCKED_DOCUMENTS:
-                raise ColdStartError(
-                    f"Documento bloqueado encontrado: {document_id}"
-                )
+                raise ColdStartError(f"Documento bloqueado encontrado: {document_id}")
             if document_id not in ALLOWED_NORMATIVE_DOCUMENTS:
                 raise ColdStartError(
                     f"Documento fuera del scope normativo: {document_id}"
                 )
             text = chunk.get("text")
             if not isinstance(text, str) or not text.strip():
-                raise ColdStartError(
-                    f"Texto vacÃo/invÃ¡lido en lÃnea {line_number}"
-                )
+                raise ColdStartError(f"Texto vacío/inválido en línea {line_number}")
             chunks.append(chunk)
             document_ids.add(document_id)
 
@@ -307,9 +275,7 @@ def load_chunks(chunks_path: Path) -> tuple[list[dict[str, Any]], set[str]]:
 
 
 def find_single_runtime_file(runtime_dir: Path, suffix: str) -> Path:
-    matches = sorted(
-        path for path in runtime_dir.rglob(f"*{suffix}") if path.is_file()
-    )
+    matches = sorted(path for path in runtime_dir.rglob(f"*{suffix}") if path.is_file())
     if len(matches) != 1:
         raise ColdStartError(
             f"Se esperaba exactamente un archivo {suffix}; encontrados={matches}"
@@ -327,23 +293,23 @@ def probe_faiss(index_path: Path, chunk_count: int) -> tuple[int, int, int, floa
     dimension = int(index.d)
     if ntotal <= 0 or dimension <= 0:
         raise ColdStartError(
-            f"Ãndice FAISS invÃ¡lido: ntotal={ntotal}, d={dimension}"
+            f"Índice FAISS inválido: ntotal={ntotal}, d={dimension}"
         )
     if ntotal != chunk_count:
         raise ColdStartError(
-            f"DesalineaciÃ³n FAISS/chunks: ntotal={ntotal}, chunks={chunk_count}"
+            f"Desalineación FAISS/chunks: ntotal={ntotal}, chunks={chunk_count}"
         )
 
     try:
         vector = np.asarray(index.reconstruct(0), dtype="float32").reshape(1, -1)
     except Exception as exc:  # noqa: BLE001
         raise ColdStartError(
-            "El Ãndice no permite reconstruir un vector para el smoke aislado"
+            "El índice no permite reconstruir un vector para el smoke aislado"
         ) from exc
 
     if vector.shape != (1, dimension):
         raise ColdStartError(
-            f"Vector reconstruido con dimensiÃ³n inesperada: {vector.shape}"
+            f"Vector reconstruido con dimensión inesperada: {vector.shape}"
         )
     if not np.isfinite(vector).all():
         raise ColdStartError("Vector de prueba contiene NaN/Inf")
@@ -352,9 +318,9 @@ def probe_faiss(index_path: Path, chunk_count: int) -> tuple[int, int, int, floa
     top1 = int(ids[0, 0])
     distance = float(distances[0, 0])
     if not 0 <= top1 < ntotal:
-        raise ColdStartError(f"FAISS devolviÃ³ id fuera de rango: {top1}")
+        raise ColdStartError(f"FAISS devolvió id fuera de rango: {top1}")
     if not math.isfinite(distance):
-        raise ColdStartError("FAISS devolviÃ³ distancia no finita")
+        raise ColdStartError("FAISS devolvió distancia no finita")
     return ntotal, dimension, top1, distance
 
 
@@ -385,8 +351,7 @@ def audit_deployment_sufficiency(extracted: Path) -> dict[str, Any]:
         path
         for path in runtime.rglob("*")
         if path.is_file()
-        and path.suffix.casefold()
-        in {".safetensors", ".pt", ".pth", ".onnx", ".bin"}
+        and path.suffix.casefold() in {".safetensors", ".pt", ".pth", ".onnx", ".bin"}
     ]
     embedding_model_bundled = bool(model_weight_files)
     return {
@@ -395,18 +360,14 @@ def audit_deployment_sufficiency(extracted: Path) -> dict[str, Any]:
         "embedding_model_external_dependency": not embedding_model_bundled,
         "semantic_query_embedding_cold_start_proven": False,
         "semantic_query_embedding_cold_start_reason": (
-            "El bundle pÃºblico 19M excluye pesos de modelo por diseÃ±o; "
+            "El bundle público 19M excluye pesos de modelo por diseño; "
             "19N prueba el runtime FAISS/chunks en aislamiento, no la descarga "
             "o disponibilidad externa del Sentence Transformer."
         ),
     }
 
 
-def execute(
-    *,
-    candidate_zip: Path,
-    output_dir: Path,
-) -> dict[str, Any]:
+def execute(*, candidate_zip: Path, output_dir: Path) -> dict[str, Any]:
     if output_dir.exists():
         raise ColdStartError(
             f"Output ya existe: {output_dir}; revisar antes de reintentar"
@@ -426,7 +387,7 @@ def execute(
         and metadata.get("candidate_only") is True
     )
     if not cold_start_acceptance:
-        raise ColdStartError("Cold-start no cumple criterios mÃnimos")
+        raise ColdStartError("Cold-start no cumple criterios mínimos")
 
     deployment_sufficiency_acceptance = bool(
         cold_start_acceptance
