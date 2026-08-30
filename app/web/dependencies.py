@@ -15,9 +15,12 @@ def get_web_consultation_service() -> WebConsultationService:
     """Construye el runtime real si los artefactos están disponibles."""
     try:
         components = build_runtime_components(get_settings())
-    except RuntimeBuildError:
+    except RuntimeBuildError as exc:
         logger.warning(
-            "Runtime de consulta no configurado; se mantiene degradación segura."
+            "Runtime de consulta no configurado; se mantiene degradación segura. "
+            "cause_type=%s cause=%s",
+            type(exc).__name__,
+            str(exc),
         )
         return WebConsultationService()
     return WebConsultationService(components.runner)
