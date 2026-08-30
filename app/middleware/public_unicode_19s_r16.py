@@ -8,12 +8,15 @@ from starlette.types import ASGIApp, Message, Receive, Scope, Send
 from app.services.public_evidence_quality_19s_r16e import (
     reconcile_public_evidence_payload,
 )
+from app.services.public_explanation_integrity_19s_r16f import (
+    reconcile_public_explanation_payload,
+)
 from app.services.public_response_quality_19s_r16 import normalize_public_value
 from app.services.trace_integrity_19s_r16 import reconcile_traceability_payload
 
 
 class PublicUnicodeNormalizationMiddleware:
-    """Normaliza JSON público, evidencia visible y trazabilidad."""
+    """Normaliza trazabilidad, evidencia, explicación y Unicode público."""
 
     def __init__(self, app: ASGIApp) -> None:
         self.app = app
@@ -102,7 +105,10 @@ def _normalize_json_bytes(body: bytes) -> bytes | None:
     evidence_reconciled = reconcile_public_evidence_payload(
         trace_reconciled
     )
-    normalized = normalize_public_value(evidence_reconciled)
+    explanation_reconciled = reconcile_public_explanation_payload(
+        evidence_reconciled
+    )
+    normalized = normalize_public_value(explanation_reconciled)
     return json.dumps(
         normalized,
         ensure_ascii=False,
