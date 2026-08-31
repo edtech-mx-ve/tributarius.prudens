@@ -13,10 +13,10 @@ from app.services.semantic_source_residual_audit import (
     audit_semantic_source_residuals,
 )
 from rag.chunking.legal_structurer import (
-    _ARTICLE_RE,
     _HEADING_RE,
     _RULE_RE,
     _STRUCTURAL_RE,
+    _detect_boundary,
 )
 
 
@@ -89,9 +89,10 @@ def _identity(unit_type: str, unit_label: str) -> tuple[str, str]:
 
 
 def _detect_identity(line: str) -> tuple[str | None, str | None]:
-    article = _ARTICLE_RE.match(line)
-    if article:
-        return "article", f"Artículo {article.group(2).strip()}"
+    article = _detect_boundary(line, "legal_article")
+    if article is not None:
+        unit_type, label = article
+        return unit_type.value, label
 
     rule = _RULE_RE.match(line)
     if rule:

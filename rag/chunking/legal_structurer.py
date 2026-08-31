@@ -14,13 +14,15 @@ _PAGE_RE = re.compile(
     re.IGNORECASE,
 )
 _ARTICLE_RE = re.compile(
-    r"^\s*(?:#{1,6}\s*)?(art[ií]culo|art\.)\s+"
+    r"^\s*(?:#{1,6}\s*)?"
+    r"(?-i:Art[ií]culo|ART[IÍ]CULO|Art\.|ART\.)\s+"
     r"("
     r"[0-9]+o?"
-    r"(?:\s*-\s*[A-ZÁÉÍÓÚÑ0-9]+)*"
-    r"(?:\s+(?:BIS|TER|QU[AÁ]TER))?"
+    r"(?:\s*\.?\s*-\s*(?-i:[A-ZÁÉÍÓÚÑ0-9]+))*"
+    r"(?:\s*\.?\s+(?:BIS|TER|QU[AÁ]TER))?"
     r")"
-    r"\s*(?:\.-|\.|:|—|–|-(?![A-ZÁÉÍÓÚÑ0-9])|$)",
+    r"\s*(?:\.-|\.|:|—|–|-(?![A-ZÁÉÍÓÚÑ0-9])|$)"
+    r"(?!\s+fracci[oó]n\b)",
     re.IGNORECASE,
 )
 _RULE_RE = re.compile(
@@ -207,7 +209,18 @@ def _detect_boundary(line: str, profile: str) -> tuple[LegalUnitType, str] | Non
     if profile == "legal_article":
         article = _ARTICLE_RE.match(line)
         if article:
-            return LegalUnitType.ARTICLE, f"Artículo {article.group(2).strip()}"
+            identifier = re.sub(
+                r"\s*\.?\s*-\s*",
+                "-",
+                article.group(1).strip(),
+            )
+            identifier = re.sub(
+                r"\.\s+(?=(?:BIS|TER|QU[AÁ]TER)\b)",
+                " ",
+                identifier,
+                flags=re.IGNORECASE,
+            )
+            return LegalUnitType.ARTICLE, f"Artículo {identifier}"
 
     return None
 

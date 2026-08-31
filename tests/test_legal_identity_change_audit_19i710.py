@@ -9,7 +9,7 @@ from app.services.legal_identity_change_audit import (
 def test_detect_identity_normalizes_spaced_article_suffix() -> None:
     unit_type, label = _detect_identity("Artículo 18 -M.- Texto.")
     assert unit_type == "article"
-    assert label == "Artículo 18 -M"
+    assert label == "Artículo 18-M"
 
 
 def test_identity_is_case_and_whitespace_insensitive() -> None:
