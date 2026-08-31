@@ -1,4 +1,4 @@
-﻿from __future__ import annotations
+from __future__ import annotations
 
 import json
 import math
@@ -180,7 +180,8 @@ def route_documents(
 
 
 _ARTICLE_REFERENCE_RE = re.compile(
-    r"\bart(?:iculo)?\.?\s+(\d+(?:-[a-z]+)?)\b",
+    r"\bart(?:iculo)?\.?\s+"
+    r"(\d+o?(?:\s*\.?\s*-\s*[a-z0-9]+)*(?:\s*\.?\s+(?:bis|ter|quater))?)\b",
     re.IGNORECASE,
 )
 
@@ -193,9 +194,17 @@ def extract_article_identifier(query: str) -> str | None:
     match = _ARTICLE_REFERENCE_RE.search(normalized)
     if match is None:
         return None
-    suffix = match.group(1).upper()
-    return f"Artículo {suffix}"
 
+    identifier = re.sub(r"\s*\.?\s*-\s*", "-", match.group(1).strip())
+    identifier = re.sub(
+        r"\.\s+(?=(?:bis|ter|quater)\b)",
+        " ",
+        identifier,
+        flags=re.IGNORECASE,
+    )
+    identifier = re.sub(r"\s+", " ", identifier).upper()
+    identifier = re.sub(r"^(\d+)O(?=-|\s|$)", r"\1o", identifier)
+    return f"Artículo {identifier}"
 
 def _merge_exact_filter(
     filters: RetrievalFilters | None,
