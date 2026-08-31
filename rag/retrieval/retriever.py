@@ -99,6 +99,55 @@ class FaissRetriever:
         if not path.exists() or _sha256_file(path) != expected:
             raise RetrievalError(f"Falló la verificación SHA-256 de {label}.")
 
+    def find_exact_legal_reference(
+        self,
+        *,
+        document_id: str,
+        legal_identifier: str,
+        top_k: int = 5,
+        filters: RetrievalFilters | None = None,
+    ) -> RetrievalResult:
+        if top_k < 1 or top_k > 100:
+            raise RetrievalError("top_k debe estar entre 1 y 100.")
+
+        active = filters or RetrievalFilters()
+        exact_filters = active.model_copy(
+            update={
+                "document_ids": {document_id},
+                "legal_identifier": legal_identifier,
+            }
+        )
+        hits: list[RetrievalHit] = []
+        for chunk in self._chunks:
+            if not exact_filters.matches(
+                source_type=chunk.metadata.source_type,
+                chunk_type=chunk.metadata.chunk_type,
+                fiscal_year=chunk.metadata.fiscal_year,
+                version_label=chunk.metadata.version_label,
+                document_id=chunk.metadata.document_id,
+                legal_identifier=chunk.metadata.legal_identifier,
+            ):
+                continue
+            hits.append(
+                RetrievalHit(
+                    rank=len(hits) + 1,
+                    score=1.0,
+                    chunk_id=chunk.chunk_id,
+                    text=chunk.text,
+                    metadata=chunk.metadata,
+                )
+            )
+            if len(hits) >= top_k:
+                break
+
+        return RetrievalResult(
+            query=legal_identifier,
+            requested_top_k=top_k,
+            candidate_count=len(hits),
+            returned_count=len(hits),
+            hits=hits,
+        )
+
     def search(
         self,
         query: str,
@@ -122,6 +171,7 @@ class FaissRetriever:
                 fiscal_year=chunk.metadata.fiscal_year,
                 version_label=chunk.metadata.version_label,
                 document_id=chunk.metadata.document_id,
+                legal_identifier=chunk.metadata.legal_identifier,
             )
         ]
         if not candidate_positions:

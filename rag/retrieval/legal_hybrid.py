@@ -1,4 +1,4 @@
-from __future__ import annotations
+﻿from __future__ import annotations
 
 import json
 import math
@@ -68,6 +68,7 @@ class LegalScoreTrace(BaseModel):
     doctrine_score: float = Field(ge=0.0, le=1.0)
     final_score: float
     targeted: bool
+    exact_legal_reference: bool = False
     reasons: list[str] = Field(default_factory=list)
 
 
@@ -81,6 +82,15 @@ class LegalHybridRetrievalResult(BaseModel):
 
 
 class RetrieverLike(Protocol):
+    def find_exact_legal_reference(
+        self,
+        *,
+        document_id: str,
+        legal_identifier: str,
+        top_k: int = 5,
+        filters: RetrievalFilters | None = None,
+    ) -> RetrievalResult: ...
+
     def search(
         self,
         query: str,
@@ -169,6 +179,47 @@ def route_documents(
     return routed
 
 
+_ARTICLE_REFERENCE_RE = re.compile(
+    r"\bart(?:iculo)?\.?\s+(\d+(?:-[a-z]+)?)\b",
+    re.IGNORECASE,
+)
+
+
+def extract_article_identifier(query: str) -> str | None:
+    decomposed = unicodedata.normalize("NFKD", query.casefold())
+    normalized = "".join(
+        char for char in decomposed if not unicodedata.combining(char)
+    )
+    match = _ARTICLE_REFERENCE_RE.search(normalized)
+    if match is None:
+        return None
+    suffix = match.group(1).upper()
+    return f"Artículo {suffix}"
+
+
+def _merge_exact_filter(
+    filters: RetrievalFilters | None,
+    document_id: str,
+    legal_identifier: str,
+) -> RetrievalFilters | None:
+    active = filters or RetrievalFilters()
+    if active.document_ids and document_id not in active.document_ids:
+        return None
+    if active.legal_identifier is not None:
+        requested = normalize_search_text(active.legal_identifier)
+        exact = normalize_search_text(legal_identifier)
+        if requested != exact:
+            return None
+    return RetrievalFilters(
+        source_types=set(active.source_types),
+        chunk_types=set(active.chunk_types),
+        fiscal_year=active.fiscal_year,
+        version_label=active.version_label,
+        document_ids={document_id},
+        legal_identifier=legal_identifier,
+    )
+
+
 def lexical_relevance(query: str, hit: RetrievalHit) -> float:
     query_tokens = tokenize_search_text(query)
     if not query_tokens:
@@ -236,6 +287,7 @@ def _merge_target_filter(
         fiscal_year=active.fiscal_year,
         version_label=active.version_label,
         document_ids={document_id},
+        legal_identifier=active.legal_identifier,
     )
 
 
@@ -296,6 +348,25 @@ class LegalHybridRetriever:
 
         mode = classify_query_mode(clean_query, self.policy)
         routed = route_documents(clean_query, mode, self.policy)
+        exact_identifier = extract_article_identifier(clean_query)
+        exact_chunk_ids: set[str] = set()
+        exact_hits: list[RetrievalHit] = []
+        if exact_identifier is not None:
+            for document_id in sorted(routed):
+                exact_filter = _merge_exact_filter(
+                    filters, document_id, exact_identifier
+                )
+                if exact_filter is None:
+                    continue
+                exact = self.base.find_exact_legal_reference(
+                    document_id=document_id,
+                    legal_identifier=exact_identifier,
+                    top_k=self.policy.target_candidates,
+                    filters=filters,
+                )
+                exact_hits.extend(exact.hits)
+                exact_chunk_ids.update(hit.chunk_id for hit in exact.hits)
+
         semantic_k = max(top_k, self.policy.candidate_pool)
         semantic = self.base.search(
             clean_query,
@@ -303,8 +374,8 @@ class LegalHybridRetriever:
             filters=filters,
         )
 
-        hits = list(semantic.hits)
-        enriched_count = 0
+        hits = [*exact_hits, *semantic.hits]
+        enriched_count = len(exact_hits)
 
         # Enriquecimiento dirigido: una ruta jurídica explícita debe recuperar
         # candidatos del documento objetivo incluso si ya aparece de forma débil
@@ -322,16 +393,21 @@ class LegalHybridRetriever:
             enriched_count += len(targeted.hits)
 
         unique = _deduplicate_hits(hits)
-        scored: list[tuple[float, float, str, RetrievalHit, LegalScoreTrace]] = []
+        scored: list[
+            tuple[bool, float, float, str, RetrievalHit, LegalScoreTrace]
+        ] = []
         for hit in unique.values():
             lex = lexical_relevance(clean_query, hit)
             target = hit.metadata.document_id in routed
+            exact_reference = hit.chunk_id in exact_chunk_ids
             route_score = 1.0 if target else 0.0
             authority = _authority_score(hit, self.policy)
             doctrine = _doctrine_score(hit)
 
             final_score = hit.score + self.policy.weights.lexical * lex
             reasons: list[str] = [f"semantic={hit.score:.4f}"]
+            if exact_reference:
+                reasons.append("exact_legal_reference")
 
             if target:
                 final_score += self.policy.weights.route * route_score
@@ -356,10 +432,12 @@ class LegalHybridRetriever:
                 doctrine_score=doctrine,
                 final_score=final_score,
                 targeted=target,
+                exact_legal_reference=exact_reference,
                 reasons=reasons,
             )
             scored.append(
                 (
+                    exact_reference,
                     final_score,
                     hit.score,
                     hit.chunk_id,
@@ -368,11 +446,11 @@ class LegalHybridRetriever:
                 )
             )
 
-        scored.sort(key=lambda row: (-row[0], -row[1], row[2]))
+        scored.sort(key=lambda row: (not row[0], -row[1], -row[2], row[3]))
 
         selected: list[tuple[RetrievalHit, LegalScoreTrace]] = []
         per_document: dict[str, int] = {}
-        for final_score, _vector_score, _chunk_id, hit, trace in scored:
+        for _exact, final_score, _vector_score, _chunk_id, hit, trace in scored:
             document_id = hit.metadata.document_id
             count = per_document.get(document_id, 0)
             if count >= self.policy.max_hits_per_document:
@@ -405,7 +483,7 @@ class LegalHybridRetriever:
             routed_candidate = next(
                 (
                     (hit, trace)
-                    for _final, _vector, _chunk_id, hit, trace in scored
+                    for _exact, _final, _vector, _chunk_id, hit, trace in scored
                     if hit.metadata.document_id == routed_document
                     and hit.chunk_id not in selected_ids
                 ),

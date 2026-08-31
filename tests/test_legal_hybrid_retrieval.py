@@ -9,6 +9,7 @@ from rag.retrieval.legal_hybrid import (
     LegalHybridRetriever,
     LegalRetrievalPolicy,
     classify_query_mode,
+    extract_article_identifier,
     route_documents,
 )
 from rag.retrieval.models import RetrievalHit, RetrievalResult
@@ -22,6 +23,7 @@ def _hit(
     text: str,
     source_type: SourceType = SourceType.NORMATIVA,
     source_role: str = "ley",
+    legal_identifier: str | None = None,
 ) -> RetrievalHit:
     return RetrievalHit(
         rank=rank,
@@ -34,7 +36,8 @@ def _hit(
             source_filename=f"{document_id}.md",
             chunk_index=rank - 1,
             chunk_type=LegalChunkType.ARTICLE,
-            hierarchy=LegalHierarchy(),
+            legal_identifier=legal_identifier,
+            hierarchy=LegalHierarchy(article=legal_identifier),
             source_sha256="a" * 64,
             source_role=source_role,
             title=document_id,
@@ -47,6 +50,31 @@ class FakeRetriever:
         self.hits = list(hits)
         self.calls: list[tuple[int, set[str]]] = []
 
+    def find_exact_legal_reference(
+        self,
+        *,
+        document_id: str,
+        legal_identifier: str,
+        top_k: int = 5,
+        filters: RetrievalFilters | None = None,
+    ) -> RetrievalResult:
+        eligible = [
+            hit
+            for hit in self.hits
+            if hit.metadata.document_id == document_id
+            and hit.metadata.legal_identifier == legal_identifier
+        ][:top_k]
+        return RetrievalResult(
+            query=legal_identifier,
+            requested_top_k=top_k,
+            candidate_count=len(eligible),
+            returned_count=len(eligible),
+            hits=[
+                hit.model_copy(update={"rank": rank})
+                for rank, hit in enumerate(eligible, start=1)
+            ],
+        )
+
     def search(
         self,
         query: str,
@@ -55,11 +83,16 @@ class FakeRetriever:
         filters: RetrievalFilters | None = None,
     ) -> RetrievalResult:
         document_ids = set(filters.document_ids) if filters else set()
+        legal_identifier = filters.legal_identifier if filters else None
         self.calls.append((top_k, document_ids))
         eligible = [
             hit
             for hit in self.hits
-            if not document_ids or hit.metadata.document_id in document_ids
+            if (not document_ids or hit.metadata.document_id in document_ids)
+            and (
+                legal_identifier is None
+                or hit.metadata.legal_identifier == legal_identifier
+            )
         ]
         selected = eligible[:top_k]
         normalized = [
@@ -103,6 +136,10 @@ def _policy() -> LegalRetrievalPolicy:
                 "tasa",
             ],
             "document_routes": [
+                {
+                    "document_id": "cff",
+                    "aliases": ["cff", "codigo fiscal de la federacion"],
+                },
                 {
                     "document_id": "liva",
                     "aliases": ["iva", "valor agregado"],
@@ -422,3 +459,27 @@ def test_explicit_routed_document_is_kept_in_top_k_coverage() -> None:
     )
 
     assert "liva" in [hit.metadata.document_id for hit in result.hits]
+
+
+def test_extract_article_identifier_supports_common_legal_forms() -> None:
+    assert extract_article_identifier("artículo 27 del CFF") == "Artículo 27"
+    assert extract_article_identifier("CFF art. 32-B") == "Artículo 32-B"
+    assert extract_article_identifier("articulo 127") == "Artículo 127"
+
+
+def test_exact_article_reference_is_ranked_first_over_semantic_neighbors() -> None:
+    hits = [
+        _hit(1, 0.97, "cff", text="Artículo 127.", legal_identifier="Artículo 127"),
+        _hit(2, 0.95, "cff", text="Artículo 227.", legal_identifier="Artículo 227"),
+        _hit(3, 0.60, "cff", text="Artículo 27.", legal_identifier="Artículo 27"),
+    ]
+    retriever = LegalHybridRetriever(FakeRetriever(hits), _policy())
+
+    traced = retriever.search_with_trace("¿Qué establece el artículo 27 del CFF?", top_k=3)
+
+    first = traced.result.hits[0]
+    assert first.metadata.document_id == "cff"
+    assert first.metadata.legal_identifier == "Artículo 27"
+    assert first.rank == 1
+    assert traced.traces[first.chunk_id].exact_legal_reference is True
+    assert "exact_legal_reference" in traced.traces[first.chunk_id].reasons
