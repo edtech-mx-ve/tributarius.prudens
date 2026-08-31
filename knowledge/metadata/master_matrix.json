@@ -3,165 +3,189 @@
     "module_key": "entender_sistema_fiscal",
     "module_name": "Entender el sistema fiscal",
     "prodecon_refs": [
-      "por_mapear"
+      "PRODECON-01",
+      "PRODECON-02",
+      "PRODECON-03",
+      "PRODECON-05"
     ],
     "unam_refs": [
-      "por_mapear"
+      "Capítulo I",
+      "Capítulo III"
     ],
     "normative_refs": [
-      "por_mapear"
+      "cpeum",
+      "cff",
+      "lisr",
+      "liva",
+      "lieps",
+      "lfisan",
+      "lif_2026"
     ],
     "jurisprudential_refs": [],
     "rule_refs": [],
     "calculation_refs": [],
     "cbr_refs": [],
-    "notes": "Base conceptual; jurisprudencia solo si surge necesidad interpretativa."
+    "notes": "Base conceptual del sistema fiscal. PRODECON orienta; UNAM fundamenta; la normativa aporta el marco jurídico aplicable."
   },
   {
     "module_key": "identificar_obligaciones",
     "module_name": "Identificar obligaciones",
     "prodecon_refs": [
-      "por_mapear"
+      "PRODECON-04",
+      "PRODECON-05",
+      "PRODECON-07"
     ],
     "unam_refs": [
-      "por_mapear"
+      "Capítulo III",
+      "Capítulo IV"
     ],
     "normative_refs": [
-      "por_mapear"
+      "cff",
+      "lisr",
+      "liva",
+      "reg_cff",
+      "reg_lisr_060516",
+      "reg_liva_250914",
+      "rmf_2026"
     ],
     "jurisprudential_refs": [],
-    "rule_refs": [
-      "por_definir"
-    ],
+    "rule_refs": [],
     "calculation_refs": [],
     "cbr_refs": [],
-    "notes": "La norma vigente y el perfil fiscal determinarán obligaciones."
+    "notes": "La identificación parte del perfil y de la relación tributaria; las obligaciones concretas se determinan con la normativa recuperada para el caso."
   },
   {
     "module_key": "conocer_derechos",
     "module_name": "Conocer derechos",
     "prodecon_refs": [
-      "por_mapear"
+      "PRODECON-07"
     ],
     "unam_refs": [
-      "por_mapear"
+      "Capítulo I",
+      "Capítulo IV",
+      "Capítulo VII"
     ],
     "normative_refs": [
-      "por_mapear"
+      "cpeum",
+      "cff",
+      "lfdc"
     ],
     "jurisprudential_refs": [],
-    "rule_refs": [
-      "por_definir"
-    ],
+    "rule_refs": [],
     "calculation_refs": [],
-    "cbr_refs": []
+    "cbr_refs": [],
+    "notes": "Integra derechos constitucionales y del contribuyente, su posición en la obligación tributaria y las consecuencias del incumplimiento."
   },
   {
     "module_key": "calcular_isr",
     "module_name": "Calcular ISR",
     "prodecon_refs": [
-      "por_mapear"
+      "PRODECON-05",
+      "PRODECON-10",
+      "PRODECON-11",
+      "PRODECON-12"
     ],
     "unam_refs": [
-      "por_mapear"
+      "Capítulo V"
     ],
     "normative_refs": [
-      "por_mapear"
+      "lisr",
+      "reg_lisr_060516",
+      "rmf_2026",
+      "lif_2026"
     ],
     "jurisprudential_refs": [],
-    "rule_refs": [
-      "por_definir"
-    ],
-    "calculation_refs": [
-      "isr_basico_por_definir"
-    ],
+    "rule_refs": [],
+    "calculation_refs": [],
     "cbr_refs": [],
-    "notes": "El cálculo será determinista; Llama solo explicará."
+    "notes": "El cálculo debe ser determinista y trazable. PRODECON aporta orientación por régimen; UNAM aporta fundamento académico y la normativa sustenta los parámetros aplicables."
   },
   {
     "module_key": "calcular_iva",
     "module_name": "Calcular IVA",
     "prodecon_refs": [
-      "por_mapear"
+      "PRODECON-05"
     ],
     "unam_refs": [
-      "por_mapear"
+      "Capítulo V"
     ],
     "normative_refs": [
-      "por_mapear"
+      "liva",
+      "reg_liva_250914",
+      "rmf_2026"
     ],
     "jurisprudential_refs": [],
-    "rule_refs": [
-      "por_definir"
-    ],
-    "calculation_refs": [
-      "iva_por_definir"
-    ],
-    "cbr_refs": []
+    "rule_refs": [],
+    "calculation_refs": [],
+    "cbr_refs": [],
+    "notes": "El cálculo de IVA debe apoyarse en reglas y algoritmos deterministas sobre evidencia normativa recuperada."
   },
   {
     "module_key": "analizar_actos_autoridad",
     "module_name": "Analizar actos de autoridad",
     "prodecon_refs": [
-      "por_mapear"
+      "PRODECON-06",
+      "PRODECON-07"
     ],
     "unam_refs": [
-      "por_mapear"
+      "Capítulo VI",
+      "Capítulo VII"
     ],
     "normative_refs": [
-      "por_mapear"
+      "cpeum",
+      "cff",
+      "lfdc",
+      "reg_cff"
     ],
-    "jurisprudential_refs": [
-      "opcional_por_mapear"
-    ],
-    "rule_refs": [
-      "por_definir"
-    ],
+    "jurisprudential_refs": [],
+    "rule_refs": [],
     "calculation_refs": [],
-    "cbr_refs": [
-      "por_definir"
-    ]
+    "cbr_refs": [],
+    "notes": "Relaciona facultades de cobro, derechos del contribuyente, deuda tributaria e incumplimiento. La jurisprudencia se incorpora solo cuando exista en la base y resulte pertinente."
   },
   {
     "module_key": "opciones_defensa",
     "module_name": "Conocer opciones de defensa",
     "prodecon_refs": [
-      "por_mapear"
+      "PRODECON-07",
+      "PRODECON-08"
     ],
     "unam_refs": [
-      "por_mapear"
+      "Capítulo I",
+      "Capítulo VII"
     ],
     "normative_refs": [
-      "por_mapear"
+      "cpeum",
+      "cff",
+      "lfdc",
+      "lfpca",
+      "lotfja"
     ],
-    "jurisprudential_refs": [
-      "opcional_por_mapear"
-    ],
-    "rule_refs": [
-      "por_definir"
-    ],
+    "jurisprudential_refs": [],
+    "rule_refs": [],
     "calculation_refs": [],
-    "cbr_refs": [
-      "por_definir"
-    ]
+    "cbr_refs": [],
+    "notes": "PRODECON orienta sobre defensa; UNAM aporta fundamento jurídico-académico; la normativa procesal y orgánica delimita las vías aplicables."
   },
   {
     "module_key": "interpretar_disposiciones",
     "module_name": "Interpretar disposiciones",
     "prodecon_refs": [
-      "por_mapear"
+      "PRODECON-02",
+      "PRODECON-09"
     ],
     "unam_refs": [
-      "por_mapear"
+      "Capítulo I",
+      "Capítulo II"
     ],
     "normative_refs": [
-      "por_mapear"
+      "cpeum",
+      "cff"
     ],
-    "jurisprudential_refs": [
-      "opcional_por_mapear"
-    ],
+    "jurisprudential_refs": [],
     "rule_refs": [],
     "calculation_refs": [],
-    "cbr_refs": []
+    "cbr_refs": [],
+    "notes": "La interpretación distingue orientación, doctrina y norma. La jurisprudencia funciona como complemento interpretativo cuando esté incorporada y sea pertinente."
   }
 ]
