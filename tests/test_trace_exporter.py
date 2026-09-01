@@ -5,6 +5,7 @@ from pathlib import Path
 import pytest
 
 from app.domain.orchestration import HybridOrchestrationRequest
+from app.domain.traceability import CanonicalExecutionResult
 from app.services.hybrid_orchestrator import HybridOrchestrator
 from app.services.trace_exporter import TraceExportError, export_canonical_json
 from app.services.traceability import build_canonical_result
@@ -22,7 +23,7 @@ from tests.test_hybrid_orchestrator import (
 )
 
 
-def canonical_result():
+def canonical_result() -> CanonicalExecutionResult:
     request = HybridOrchestrationRequest(
         query="Calcula ISR",
         query_date=date(2026, 8, 28),

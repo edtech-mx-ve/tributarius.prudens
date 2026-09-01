@@ -1,7 +1,9 @@
+from collections.abc import Sequence
 from pathlib import Path
 
 import numpy as np
 import pytest
+from numpy.typing import NDArray
 
 from app.domain.chunks import ChunkMetadata, LegalChunk, LegalChunkType, LegalHierarchy
 from app.domain.documents import SourceType
@@ -16,7 +18,7 @@ from rag.indexing.builder import (
 class FakeEmbedder:
     model_name = "fake/test-model"
 
-    def encode(self, texts: list[str]) -> np.ndarray:
+    def encode(self, texts: Sequence[str]) -> NDArray[np.float32]:
         vectors = []
         for index, text in enumerate(texts, start=1):
             vectors.append([float(index), float(len(text) % 11 + 1), 1.0])

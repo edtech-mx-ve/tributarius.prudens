@@ -1,8 +1,12 @@
 from __future__ import annotations
 
+import tempfile
+from collections.abc import Sequence
 from pathlib import Path
 
 import numpy as np
+import pytest
+from numpy.typing import NDArray
 
 from app.domain.chunks import (
     ChunkMetadata,
@@ -17,7 +21,7 @@ from rag.indexing.builder import build_faiss_index
 class FakeEmbedder:
     model_name = "fake/test-model"
 
-    def encode(self, texts: list[str]) -> np.ndarray:
+    def encode(self, texts: Sequence[str]) -> NDArray[np.float32]:
         return np.ones((len(texts), 3), dtype=np.float32)
 
 
@@ -30,7 +34,7 @@ class FakeStore:
 
 def test_staging_directory_is_created_inside_destination(
     tmp_path: Path,
-    monkeypatch,
+    monkeypatch: pytest.MonkeyPatch,
 ) -> None:
     source = tmp_path / "source.jsonl"
     chunk = LegalChunk(
@@ -49,12 +53,25 @@ def test_staging_directory_is_created_inside_destination(
     source.write_text(chunk.model_dump_json() + "\n", encoding="utf-8")
     output = tmp_path / "runtime"
 
-    real_temp = __import__("tempfile").TemporaryDirectory
+    real_temp = tempfile.TemporaryDirectory
     captured_dirs: list[Path | str | None] = []
 
-    def recording_tempdir(*args: object, **kwargs: object):
-        captured_dirs.append(kwargs.get("dir"))  # type: ignore[arg-type]
-        return real_temp(*args, **kwargs)
+    def recording_tempdir(
+        suffix: str | None = None,
+        prefix: str | None = None,
+        dir: str | Path | None = None,
+        ignore_cleanup_errors: bool = False,
+        *,
+        delete: bool = True,
+    ) -> tempfile.TemporaryDirectory[str]:
+        captured_dirs.append(dir)
+        return real_temp(
+            suffix=suffix,
+            prefix=prefix,
+            dir=dir,
+            ignore_cleanup_errors=ignore_cleanup_errors,
+            delete=delete,
+        )
 
     monkeypatch.setattr(
         "rag.indexing.builder.tempfile.TemporaryDirectory",

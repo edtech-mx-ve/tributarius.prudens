@@ -1,11 +1,14 @@
 from __future__ import annotations
 
+from typing import NoReturn
+
+from app.domain.orchestration import HybridOrchestrationRequest
 from app.web.runtime_runner import WebHybridRunner
 from app.web.schemas import WebConsultationRequest
 
 
 class FakeOrchestrator:
-    def run(self, request):
+    def run(self, request: HybridOrchestrationRequest) -> NoReturn:
         self.last_request = request
         raise RuntimeError("fixture stops before canonical conversion")
 

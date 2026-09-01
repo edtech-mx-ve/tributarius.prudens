@@ -21,6 +21,7 @@ from app.domain.rules import RuleCondition, RuleDefinition, RuleOperator, RuleSe
 from app.services.hybrid_orchestrator import HybridOrchestrator, build_fact_map
 from llm.providers.mock import MockLLMProvider
 from llm.service import LlamaRAGService
+from rag.retrieval.filters import RetrievalFilters
 from rag.retrieval.models import RetrievalHit, RetrievalResult
 
 
@@ -36,9 +37,15 @@ class FakeAnalyzer:
 class FakeRetriever:
     def __init__(self, result: RetrievalResult) -> None:
         self._result = result
-        self.last_filters = None
+        self.last_filters: RetrievalFilters | None = None
 
-    def search(self, query: str, *, top_k: int = 5, filters=None) -> RetrievalResult:
+    def search(
+        self,
+        query: str,
+        *,
+        top_k: int = 5,
+        filters: RetrievalFilters | None = None,
+    ) -> RetrievalResult:
         del query, top_k
         self.last_filters = filters
         return self._result
@@ -167,7 +174,10 @@ def candidate() -> NormativeCandidate:
     )
 
 
-def orchestrator(fake_retriever: FakeRetriever, query_analysis: QueryAnalysis):
+def orchestrator(
+    fake_retriever: FakeRetriever,
+    query_analysis: QueryAnalysis,
+) -> HybridOrchestrator:
     return HybridOrchestrator(
         query_analyzer=FakeAnalyzer(query_analysis),
         retriever=fake_retriever,
@@ -208,6 +218,7 @@ def test_default_retrieval_excludes_jurisprudence() -> None:
             query_date=date(2026, 8, 28),
         )
     )
+    assert fake_retriever.last_filters is not None
     assert SourceType.JURISPRUDENCIA not in fake_retriever.last_filters.source_types
 
 
@@ -226,6 +237,7 @@ def test_explicit_jurisprudence_request_stays_out_of_primary_retriever() -> None
             query_date=date(2026, 8, 28),
         )
     )
+    assert fake_retriever.last_filters is not None
     assert SourceType.JURISPRUDENCIA not in fake_retriever.last_filters.source_types
     assert result.jurisprudence_result is None
     assert result.requires_human_review is True

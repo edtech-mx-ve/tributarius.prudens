@@ -15,6 +15,7 @@ from jurisprudence.loader import load_jurisprudence_metadata
 from jurisprudence.retrieval import JurisprudenceRetriever
 from llm.providers.mock import MockLLMProvider
 from llm.service import LlamaRAGService
+from rag.retrieval.filters import RetrievalFilters
 from rag.retrieval.models import RetrievalHit, RetrievalResult
 from tests.test_hybrid_orchestrator import (
     FakeAnalyzer,
@@ -28,9 +29,15 @@ from tests.test_hybrid_orchestrator import (
 class JurisprudenceFakeRetriever:
     def __init__(self, document_ids: list[str]) -> None:
         self.document_ids = document_ids
-        self.last_filters = None
+        self.last_filters: RetrievalFilters | None = None
 
-    def search(self, query: str, *, top_k: int = 5, filters=None) -> RetrievalResult:
+    def search(
+        self,
+        query: str,
+        *,
+        top_k: int = 5,
+        filters: RetrievalFilters | None = None,
+    ) -> RetrievalResult:
         del top_k
         self.last_filters = filters
         hits = []
@@ -107,6 +114,7 @@ def test_jurisprudence_runs_after_normative_applicability() -> None:
     assert result.jurisprudence_result is not None
     assert result.jurisprudence_result.returned_count == 1
     assert result.jurisprudence_result.hits[0].assessment.relevant_to_norm is True
+    assert raw_jurisprudence.last_filters is not None
     assert raw_jurisprudence.last_filters.source_types == {SourceType.JURISPRUDENCIA}
 
     stages = [item.stage for item in result.traces]

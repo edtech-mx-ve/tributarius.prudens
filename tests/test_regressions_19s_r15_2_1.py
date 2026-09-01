@@ -1,9 +1,9 @@
-from app.domain.query import QueryIntent
+from app.domain.query import QueryAnalysis, QueryIntent
 from llm.providers.runtime_query import RuntimeQueryAnalyzerProvider
 from llm.query_analyzer import QueryAnalyzer
 
 
-def _analyze(query: str):
+def _analyze(query: str) -> QueryAnalysis:
     return QueryAnalyzer(RuntimeQueryAnalyzerProvider()).analyze(query)
 
 

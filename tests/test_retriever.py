@@ -1,9 +1,11 @@
 import hashlib
+from collections.abc import Sequence
 from pathlib import Path
 from types import SimpleNamespace
 
 import numpy as np
 import pytest
+from numpy.typing import NDArray
 
 from app.domain.chunks import ChunkMetadata, LegalChunk, LegalChunkType, LegalHierarchy
 from app.domain.documents import SourceType
@@ -15,7 +17,7 @@ from rag.retrieval.retriever import FaissRetriever, RetrievalError
 class FakeEmbedder:
     model_name = "fake/test-model"
 
-    def encode(self, texts: list[str]) -> np.ndarray:
+    def encode(self, texts: Sequence[str]) -> NDArray[np.float32]:
         assert len(texts) == 1
         return np.asarray([[1.0, 0.0]], dtype=np.float32)
 
@@ -121,7 +123,7 @@ def test_retriever_filters_normativa_by_year(tmp_path: Path) -> None:
 
 def test_retriever_rejects_model_mismatch(tmp_path: Path) -> None:
     embedder = FakeEmbedder()
-    embedder.model_name = "other/model"  # type: ignore[misc]
+    embedder.model_name = "other/model"
 
     with pytest.raises(RetrievalError, match="modelo"):
         FaissRetriever(

@@ -5,7 +5,7 @@ import json
 import zipfile
 from pathlib import Path
 
-import faiss  # type: ignore[import-untyped]
+import faiss
 import numpy as np
 import pytest
 
@@ -76,12 +76,12 @@ def _build_fixture_candidate(
     }
     (staging / "release_metadata.json").write_bytes(_json_bytes(metadata))
 
-    files = []
+    manifest_files = []
     for path in sorted(staging.rglob("*")):
         if not path.is_file():
             continue
         rel = path.relative_to(staging).as_posix()
-        files.append(
+        manifest_files.append(
             {
                 "path": rel,
                 "size": path.stat().st_size,
@@ -91,7 +91,7 @@ def _build_fixture_candidate(
     manifest = {
         "candidate_only": True,
         "canonical_sha256": n.EXPECTED_CANONICAL_SHA256,
-        "files": files,
+        "files": manifest_files,
     }
     (staging / "release_manifest.json").write_bytes(_json_bytes(manifest))
 

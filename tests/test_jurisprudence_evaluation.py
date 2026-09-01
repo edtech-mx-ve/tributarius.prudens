@@ -7,6 +7,7 @@ from app.domain.jurisprudence import JurisprudenceActivationDecision
 from jurisprudence.evaluation import evaluate_jurisprudence_retrieval
 from jurisprudence.loader import load_jurisprudence_metadata
 from jurisprudence.retrieval import JurisprudenceRetriever
+from rag.retrieval.filters import RetrievalFilters
 from rag.retrieval.models import RetrievalHit, RetrievalResult
 
 
@@ -29,7 +30,13 @@ class FakeRetriever:
     def __init__(self, ids: list[str]) -> None:
         self.ids = ids
 
-    def search(self, query: str, *, top_k: int = 5, filters=None) -> RetrievalResult:
+    def search(
+        self,
+        query: str,
+        *,
+        top_k: int = 5,
+        filters: RetrievalFilters | None = None,
+    ) -> RetrievalResult:
         del query, top_k, filters
         hits = [
             RetrievalHit(

@@ -1,8 +1,10 @@
 from __future__ import annotations
 
+from collections.abc import Sequence
 from pathlib import Path
 
 import numpy as np
+from numpy.typing import NDArray
 
 from app.domain.chunks import LegalChunkType
 from app.domain.documents import SourceType
@@ -15,7 +17,7 @@ from rag.indexing.runtime_adapter import adapt_corpus_chunk
 class FakeEmbedder:
     model_name = "fake/test-model"
 
-    def encode(self, texts: list[str]) -> np.ndarray:
+    def encode(self, texts: Sequence[str]) -> NDArray[np.float32]:
         return np.asarray(
             [[float(index + 1), 1.0, 2.0] for index, _ in enumerate(texts)],
             dtype=np.float32,

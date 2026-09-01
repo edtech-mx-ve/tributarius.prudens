@@ -1,6 +1,8 @@
 from __future__ import annotations
 
+import json
 from datetime import date
+from pathlib import Path
 from types import SimpleNamespace
 
 from app.domain.orchestration import HybridOrchestrationRequest
@@ -9,6 +11,7 @@ from app.domain.query import (
     QueryAnalysis,
     QueryIntent,
 )
+from app.domain.traceability import CanonicalExecutionResult
 from app.services.hybrid_orchestrator import (
     _materially_relevant_hit,
     _merge_request_context,
@@ -127,11 +130,16 @@ def test_vat_rate_query_is_classified_specific_intent() -> None:
 
 
 def test_presenter_uses_structured_summary_instead_of_null() -> None:
-    result = SimpleNamespace(
-        explanation={
-            "answer": {
-                "summary": "La evidencia disponible no permite afirmar más.",
-                "analysis": "Detalle.",
+    payload = json.loads(
+        Path("traceability/fixtures/trace_test.json").read_text(encoding="utf-8")
+    )
+    result = CanonicalExecutionResult.model_validate(payload).model_copy(
+        update={
+            "explanation": {
+                "answer": {
+                    "summary": "La evidencia disponible no permite afirmar más.",
+                    "analysis": "Detalle.",
+                }
             }
         }
     )

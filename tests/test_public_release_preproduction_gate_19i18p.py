@@ -14,7 +14,7 @@ from app.services.public_release_preproduction_gate_19i18p import (
 
 
 def reports() -> tuple[dict[str, object], ...]:
-    report_19l = {
+    report_19l: dict[str, object] = {
         "normative_document_count": 14,
         "provenance_complete": True,
         "temporal_fail_closed_complete": True,
@@ -27,7 +27,7 @@ def reports() -> tuple[dict[str, object], ...]:
         "github_release_allowed": False,
         "render_deploy_allowed": False,
     }
-    report_19m = {
+    report_19m: dict[str, object] = {
         "candidate_only": True,
         "zip_sha256": EXPECTED_CANDIDATE_SHA256,
         "technical_release_candidate_acceptance": True,
@@ -45,7 +45,7 @@ def reports() -> tuple[dict[str, object], ...]:
         "github_release_allowed": False,
         "render_deploy_allowed": False,
     }
-    report_19n = {
+    report_19n: dict[str, object] = {
         "candidate_zip_sha256": EXPECTED_CANDIDATE_SHA256,
         "canonical_sha256": EXPECTED_CANONICAL_SHA256,
         "manifest_integrity_passed": True,
@@ -66,7 +66,7 @@ def reports() -> tuple[dict[str, object], ...]:
         "github_release_allowed": False,
         "render_deploy_allowed": False,
     }
-    report_19o = {
+    report_19o: dict[str, object] = {
         "candidate_zip_sha256": EXPECTED_CANDIDATE_SHA256,
         "canonical_sha256": EXPECTED_CANONICAL_SHA256,
         "model_id": EXPECTED_MODEL_ID,

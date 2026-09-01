@@ -124,17 +124,24 @@ def test_integration_refuses_silent_overwrite(tmp_path: Path) -> None:
     mapping = tmp_path / "mapping.json"
     metadata = tmp_path / "metadata.json"
     markdown = tmp_path / "document.md"
+    output_dir = tmp_path / "sections"
+    manifest_path = tmp_path / "manifest.json"
     _mapping(mapping)
     _metadata(metadata)
     markdown.write_text(_markdown(), encoding="utf-8")
 
-    kwargs = dict(
+    integrate_prodecon_sections(
         markdown_path=markdown,
         metadata_path=metadata,
         mapping_path=mapping,
-        output_dir=tmp_path / "sections",
-        manifest_path=tmp_path / "manifest.json",
+        output_dir=output_dir,
+        manifest_path=manifest_path,
     )
-    integrate_prodecon_sections(**kwargs)
     with pytest.raises(ProdeconIntegrationError, match="Ya existen artefactos"):
-        integrate_prodecon_sections(**kwargs)
+        integrate_prodecon_sections(
+            markdown_path=markdown,
+            metadata_path=metadata,
+            mapping_path=mapping,
+            output_dir=output_dir,
+            manifest_path=manifest_path,
+        )

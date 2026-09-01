@@ -2,6 +2,7 @@ from fastapi.testclient import TestClient
 
 from app.main import app
 from app.web.dependencies import get_web_consultation_service
+from app.web.schemas import WebConsultationRequest
 from app.web.service import WebConsultationService
 
 client = TestClient(app)
@@ -14,6 +15,7 @@ def test_home_renders_semantic_interface() -> None:
     assert 'id="consultation-form"' in response.text
     assert 'href="#main-content"' in response.text
     assert "No incluyas RFC" in response.text
+
 
 def test_static_assets_are_served() -> None:
     css = client.get("/static/css/app.css")
@@ -55,7 +57,7 @@ def test_consultation_does_not_fake_backend_result() -> None:
 
 
 class FakeRunner:
-    def run(self, request):
+    def run(self, request: WebConsultationRequest) -> dict[str, object]:
         return {
             "folio": "TP-TEST",
             "mode": request.mode,

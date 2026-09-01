@@ -1,7 +1,10 @@
 import json
 from datetime import UTC, date, datetime
 
-from app.domain.orchestration import HybridOrchestrationRequest
+from app.domain.orchestration import (
+    HybridOrchestrationRequest,
+    HybridOrchestrationResult,
+)
 from app.services.hybrid_orchestrator import HybridOrchestrator
 from app.services.traceability import (
     build_canonical_result,
@@ -23,7 +26,7 @@ from tests.test_hybrid_orchestrator import (
 )
 
 
-def build_result():
+def build_result() -> tuple[HybridOrchestrationRequest, HybridOrchestrationResult]:
     request = HybridOrchestrationRequest(
         query="Calcula ISR sin registrar texto sensible",
         query_date=date(2026, 8, 28),

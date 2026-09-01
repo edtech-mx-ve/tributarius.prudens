@@ -1,5 +1,6 @@
 from datetime import date
 from pathlib import Path
+from typing import NoReturn, cast
 
 from app.domain.orchestration import HybridOrchestrationRequest
 from app.domain.query import QueryAnalysis, QueryIntent
@@ -19,7 +20,7 @@ from tests.test_normative_jurisprudential_reasoning import JurisprudenceFakeRetr
 
 
 class BrokenJurisprudenceRetriever:
-    def search(self, *args, **kwargs):
+    def search(self, *args: object, **kwargs: object) -> NoReturn:
         del args, kwargs
         from jurisprudence.retrieval import JurisprudenceRetrievalError
 
@@ -36,12 +37,13 @@ def explicit_analysis() -> QueryAnalysis:
 
 
 def test_jurisprudential_failure_preserves_normative_result() -> None:
+    broken = cast(JurisprudenceRetriever, BrokenJurisprudenceRetriever())
     hybrid = HybridOrchestrator(
         query_analyzer=FakeAnalyzer(explicit_analysis()),
         retriever=FakeRetriever(retrieval()),
         llm_service=LlamaRAGService(MockLLMProvider()),
         rule_set=rules(),
-        jurisprudence_retriever=BrokenJurisprudenceRetriever(),
+        jurisprudence_retriever=broken,
     )
     result = hybrid.run(
         HybridOrchestrationRequest(

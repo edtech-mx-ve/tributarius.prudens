@@ -11,15 +11,22 @@ from jurisprudence.retrieval import (
     JurisprudenceRetrievalError,
     JurisprudenceRetriever,
 )
+from rag.retrieval.filters import RetrievalFilters
 from rag.retrieval.models import RetrievalHit, RetrievalResult
 
 
 class FakeRetriever:
     def __init__(self, result: RetrievalResult) -> None:
         self.result = result
-        self.last_filters = None
+        self.last_filters: RetrievalFilters | None = None
 
-    def search(self, query: str, *, top_k: int = 5, filters=None) -> RetrievalResult:
+    def search(
+        self,
+        query: str,
+        *,
+        top_k: int = 5,
+        filters: RetrievalFilters | None = None,
+    ) -> RetrievalResult:
         del query, top_k
         self.last_filters = filters
         return self.result
@@ -93,6 +100,7 @@ def test_retrieval_is_separate_and_excludes_superseded_candidate() -> None:
         matter="fiscal",
     )
 
+    assert fake.last_filters is not None
     assert fake.last_filters.source_types == {SourceType.JURISPRUDENCIA}
     assert result.returned_count == 1
     assert result.hits[0].metadata.document_id == "jur-test-current"
@@ -104,7 +112,14 @@ def test_disabled_activation_does_not_call_underlying_retriever() -> None:
     )
 
     class ExplodingRetriever:
-        def search(self, query: str, *, top_k: int = 5, filters=None):
+        def search(
+            self,
+            query: str,
+            *,
+            top_k: int = 5,
+            filters: RetrievalFilters | None = None,
+        ) -> RetrievalResult:
+            del query, top_k, filters
             raise AssertionError("No debe ejecutarse recuperación.")
 
     service = JurisprudenceRetriever(ExplodingRetriever(), registry)

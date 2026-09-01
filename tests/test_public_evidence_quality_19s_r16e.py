@@ -75,9 +75,18 @@ def test_payload_reconciliation_is_non_mutating() -> None:
 
     reconciled = reconcile_public_evidence_payload(payload)
 
-    assert len(reconciled["result"]["evidence"]) == 1
-    assert len(payload["result"]["evidence"]) == 3
-    assert reconciled["result"]["requires_human_review"] is True
+    reconciled_result = reconciled["result"]
+    assert isinstance(reconciled_result, dict)
+    reconciled_evidence = reconciled_result["evidence"]
+    assert isinstance(reconciled_evidence, list)
+    assert len(reconciled_evidence) == 1
+
+    original_result = payload["result"]
+    assert isinstance(original_result, dict)
+    original_evidence = original_result["evidence"]
+    assert isinstance(original_evidence, list)
+    assert len(original_evidence) == 3
+    assert reconciled_result["requires_human_review"] is True
 
 
 def test_payload_without_evidence_is_preserved() -> None:

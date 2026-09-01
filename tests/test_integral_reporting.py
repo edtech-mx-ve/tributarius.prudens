@@ -6,10 +6,11 @@ import pytest
 from app.domain.traceability import CanonicalExecutionResult
 from evaluation.dataset import load_evaluation_dataset
 from evaluation.evaluator import evaluate_integral
+from evaluation.models import IntegralEvaluationReport
 from evaluation.reporting import EvaluationReportError, export_evaluation_report
 
 
-def report():
+def report() -> IntegralEvaluationReport:
     cases, digest = load_evaluation_dataset(
         Path("evaluation/datasets/integral_smoke.json")
     )

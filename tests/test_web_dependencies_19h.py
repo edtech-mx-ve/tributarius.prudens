@@ -1,11 +1,15 @@
+import pytest
+
 from app.services import runtime_factory
 from app.web import dependencies
 
 
-def test_dependency_degrades_safely_when_runtime_build_fails(monkeypatch) -> None:
+def test_dependency_degrades_safely_when_runtime_build_fails(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
     dependencies.get_web_consultation_service.cache_clear()
 
-    def fail(_settings):
+    def fail(_settings: object) -> None:
         raise runtime_factory.RuntimeBuildError("fixture")
 
     monkeypatch.setattr(dependencies, "build_runtime_components", fail)
@@ -16,7 +20,9 @@ def test_dependency_degrades_safely_when_runtime_build_fails(monkeypatch) -> Non
         dependencies.get_web_consultation_service.cache_clear()
 
 
-def test_dependency_injects_runtime_runner_when_build_succeeds(monkeypatch) -> None:
+def test_dependency_injects_runtime_runner_when_build_succeeds(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
     dependencies.get_web_consultation_service.cache_clear()
     sentinel = object()
 

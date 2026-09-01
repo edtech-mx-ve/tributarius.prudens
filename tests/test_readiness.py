@@ -1,7 +1,9 @@
 from pathlib import Path
 
+import pytest
+
 from app.core.config import Settings
-from app.domain.deployment import ReadinessState
+from app.domain.deployment import ReadinessState, RuntimeCapability
 from app.services import runtime_readiness
 
 
@@ -15,12 +17,12 @@ def settings(tmp_path: Path, *, require_rag_artifacts: bool) -> Settings:
 
 def test_readiness_is_degraded_when_optional_rag_artifacts_are_absent(
     tmp_path: Path,
-    monkeypatch,
+    monkeypatch: pytest.MonkeyPatch,
 ) -> None:
     monkeypatch.setattr(
         runtime_readiness,
         "_database_capability",
-        lambda: runtime_readiness.RuntimeCapability(
+        lambda: RuntimeCapability(
             name="database",
             available=True,
             detail="ok",
@@ -34,12 +36,12 @@ def test_readiness_is_degraded_when_optional_rag_artifacts_are_absent(
 
 def test_readiness_fails_when_required_rag_artifacts_are_absent(
     tmp_path: Path,
-    monkeypatch,
+    monkeypatch: pytest.MonkeyPatch,
 ) -> None:
     monkeypatch.setattr(
         runtime_readiness,
         "_database_capability",
-        lambda: runtime_readiness.RuntimeCapability(
+        lambda: RuntimeCapability(
             name="database",
             available=True,
             detail="ok",
@@ -53,7 +55,7 @@ def test_readiness_fails_when_required_rag_artifacts_are_absent(
 
 def test_readiness_is_ready_with_complete_artifacts(
     tmp_path: Path,
-    monkeypatch,
+    monkeypatch: pytest.MonkeyPatch,
 ) -> None:
     directory = tmp_path / "runtime"
     directory.mkdir()
@@ -63,7 +65,7 @@ def test_readiness_is_ready_with_complete_artifacts(
     monkeypatch.setattr(
         runtime_readiness,
         "_database_capability",
-        lambda: runtime_readiness.RuntimeCapability(
+        lambda: RuntimeCapability(
             name="database",
             available=True,
             detail="ok",

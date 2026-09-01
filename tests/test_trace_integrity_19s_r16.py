@@ -62,13 +62,31 @@ def test_reconcile_updates_only_normative_trace_and_does_not_mutate_input() -> N
 
     result = reconcile_traceability_payload(payload)
 
-    original_event = payload["result"]["traceability"]["events"][1]
+    payload_result = payload["result"]
+    assert isinstance(payload_result, dict)
+    payload_traceability = payload_result["traceability"]
+    assert isinstance(payload_traceability, dict)
+    payload_events = payload_traceability["events"]
+    assert isinstance(payload_events, list)
+    original_event = payload_events[1]
+    assert isinstance(original_event, dict)
     assert original_event["requires_human_review"] is False
 
-    events = result["result"]["traceability"]["events"]
-    assert events[0]["requires_human_review"] is False
-    assert events[1]["requires_human_review"] is True
-    assert "revisión humana" in events[1]["summary"]
+    reconciled_result = result["result"]
+    assert isinstance(reconciled_result, dict)
+    reconciled_traceability = reconciled_result["traceability"]
+    assert isinstance(reconciled_traceability, dict)
+    events = reconciled_traceability["events"]
+    assert isinstance(events, list)
+    first_event = events[0]
+    second_event = events[1]
+    assert isinstance(first_event, dict)
+    assert isinstance(second_event, dict)
+    assert first_event["requires_human_review"] is False
+    assert second_event["requires_human_review"] is True
+    summary = second_event["summary"]
+    assert isinstance(summary, str)
+    assert "revisión humana" in summary
 
 
 def test_reconcile_is_noop_when_global_review_is_false() -> None:

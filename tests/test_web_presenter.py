@@ -22,7 +22,9 @@ def test_presenter_exposes_trace_without_raw_query() -> None:
             fiscal_year=2026,
         ),
     )
-    assert result["folio"].startswith("TP-")
+    folio = result["folio"]
+    assert isinstance(folio, str)
+    assert folio.startswith("TP-")
     assert result["mode"] == "professional"
     assert "query_analysis" not in result
     assert isinstance(result["evidence"], list)
