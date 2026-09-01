@@ -98,7 +98,37 @@ class RuleConclusion(BaseModel):
     requires_human_review: bool
 
 
+class RuleFactOrigin(StrEnum):
+    INPUT = "input"
+    INFERRED = "inferred"
+
+
+class RuleConditionEvidence(BaseModel):
+    fact: str
+    operator: RuleOperator
+    expected: Any = None
+    actual: Any = None
+    origin: RuleFactOrigin
+    producer_rule_id: str | None = None
+    producer_rule_version: str | None = None
+
+
+class RuleDerivationTrace(BaseModel):
+    sequence: int = Field(ge=1)
+    cycle: int = Field(ge=1)
+    rule_id: str
+    version: str
+    priority: int
+    conditions: list[RuleConditionEvidence] = Field(default_factory=list)
+    normative_refs: list[str] = Field(default_factory=list)
+    source_refs: list[str] = Field(default_factory=list)
+    conclusion_code: str
+    conclusion: str
+    requires_human_review: bool
+
+
 class RuleEvaluationResult(BaseModel):
     matched_rules: list[RuleConclusion]
     traces: list[RuleTrace]
+    derivations: list[RuleDerivationTrace] = Field(default_factory=list)
     requires_human_review: bool

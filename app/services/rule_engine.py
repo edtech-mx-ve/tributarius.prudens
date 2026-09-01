@@ -8,8 +8,11 @@ from app.domain.rules import (
     ConditionTrace,
     RuleConclusion,
     RuleCondition,
+    RuleConditionEvidence,
     RuleDefinition,
+    RuleDerivationTrace,
     RuleEvaluationResult,
+    RuleFactOrigin,
     RuleOperator,
     RuleSet,
     RuleTrace,
@@ -137,6 +140,47 @@ def _ordered_rules(rule_set: RuleSet) -> list[RuleDefinition]:
     )
 
 
+def _build_derivation(
+    *,
+    sequence: int,
+    cycle: int,
+    rule: RuleDefinition,
+    trace: RuleTrace,
+    conclusion: RuleConclusion,
+    producers: Mapping[str, tuple[str, str] | None],
+) -> RuleDerivationTrace:
+    condition_evidence: list[RuleConditionEvidence] = []
+    for condition in trace.conditions:
+        producer = producers.get(condition.fact)
+        condition_evidence.append(
+            RuleConditionEvidence(
+                fact=condition.fact,
+                operator=condition.operator,
+                expected=condition.expected,
+                actual=condition.actual,
+                origin=(
+                    RuleFactOrigin.INFERRED if producer is not None else RuleFactOrigin.INPUT
+                ),
+                producer_rule_id=producer[0] if producer is not None else None,
+                producer_rule_version=producer[1] if producer is not None else None,
+            )
+        )
+
+    return RuleDerivationTrace(
+        sequence=sequence,
+        cycle=cycle,
+        rule_id=rule.rule_id,
+        version=rule.version,
+        priority=rule.priority,
+        conditions=condition_evidence,
+        normative_refs=list(conclusion.normative_refs),
+        source_refs=list(conclusion.source_refs),
+        conclusion_code=conclusion.conclusion_code,
+        conclusion=conclusion.conclusion,
+        requires_human_review=conclusion.requires_human_review,
+    )
+
+
 def evaluate_rules(
     rule_set: RuleSet,
     facts: Mapping[str, Any],
@@ -151,13 +195,15 @@ def evaluate_rules(
         raise RuleEvaluationError("max_cycles debe ser mayor o igual a 1.")
 
     working_facts = dict(facts)
+    producers: dict[str, tuple[str, str] | None] = {name: None for name in facts}
     ordered = _ordered_rules(rule_set)
     fired: set[tuple[str, str]] = set()
     conclusions: list[RuleConclusion] = []
     traces: list[RuleTrace] = []
+    derivations: list[RuleDerivationTrace] = []
     requires_human_review = False
 
-    for _ in range(max_cycles):
+    for cycle in range(1, max_cycles + 1):
         new_inference = False
         cycle_traces: list[RuleTrace] = []
 
@@ -175,9 +221,20 @@ def evaluate_rules(
             if conclusion is None:
                 continue
 
+            derivations.append(
+                _build_derivation(
+                    sequence=len(derivations) + 1,
+                    cycle=cycle,
+                    rule=rule,
+                    trace=trace,
+                    conclusion=conclusion,
+                    producers=producers,
+                )
+            )
             fired.add(key)
             conclusions.append(conclusion)
             working_facts[conclusion.conclusion_code] = True
+            producers[conclusion.conclusion_code] = (rule.rule_id, rule.version)
             requires_human_review = (
                 requires_human_review or conclusion.requires_human_review
             )
@@ -188,6 +245,7 @@ def evaluate_rules(
             return RuleEvaluationResult(
                 matched_rules=conclusions,
                 traces=traces,
+                derivations=derivations,
                 requires_human_review=requires_human_review,
             )
 
