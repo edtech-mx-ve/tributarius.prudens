@@ -1,0 +1,79 @@
+{
+  "schema_version": "1.0",
+  "rules": [
+    {
+      "rule_id": "PROFILE_INDIVIDUAL_001",
+      "version": "1.0.0",
+      "description": "Representa como perfil de persona física el hecho explícito de que el sujeto analizado es una persona física.",
+      "priority": 400,
+      "enabled": true,
+      "conditions": [
+        {
+          "fact": "taxpayer_type",
+          "operator": "eq",
+          "value": "individual"
+        }
+      ],
+      "conclusion_code": "individual_taxpayer_profile",
+      "conclusion": "El sujeto del caso queda representado como persona física para continuar el razonamiento tributario.",
+      "normative_refs": [
+        "cff:articulo_1"
+      ],
+      "source_refs": [
+        "CFF, artículo 1o., primer párrafo"
+      ],
+      "requires_human_review": false
+    },
+    {
+      "rule_id": "PROFILE_LEGAL_ENTITY_002",
+      "version": "1.0.0",
+      "description": "Representa como perfil de persona moral el hecho explícito de que el sujeto analizado es una persona moral.",
+      "priority": 400,
+      "enabled": true,
+      "conditions": [
+        {
+          "fact": "taxpayer_type",
+          "operator": "eq",
+          "value": "legal_entity"
+        }
+      ],
+      "conclusion_code": "legal_entity_taxpayer_profile",
+      "conclusion": "El sujeto del caso queda representado como persona moral para continuar el razonamiento tributario.",
+      "normative_refs": [
+        "cff:articulo_1"
+      ],
+      "source_refs": [
+        "CFF, artículo 1o., primer párrafo"
+      ],
+      "requires_human_review": false
+    },
+    {
+      "rule_id": "PROFILE_CONTRIBUTION_SITUATION_003",
+      "version": "1.0.0",
+      "description": "Identifica que el análisis tributario debe verificar la ley fiscal específica cuando el sujeto está en una situación jurídica o de hecho prevista por ella.",
+      "priority": 300,
+      "enabled": true,
+      "conditions": [
+        {
+          "fact": "individual_taxpayer_profile",
+          "operator": "eq",
+          "value": true
+        },
+        {
+          "fact": "taxable_legal_or_factual_situation",
+          "operator": "eq",
+          "value": true
+        }
+      ],
+      "conclusion_code": "specific_tax_law_required",
+      "conclusion": "La contribución concreta debe determinarse conforme a la ley fiscal que prevea la situación jurídica o de hecho del caso.",
+      "normative_refs": [
+        "cff:articulo_2"
+      ],
+      "source_refs": [
+        "CFF, artículo 2o., fracción I"
+      ],
+      "requires_human_review": false
+    }
+  ]
+}
