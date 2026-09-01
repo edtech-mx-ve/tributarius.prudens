@@ -1,0 +1,91 @@
+{
+  "schema_version": "1.0",
+  "version": "LISR-ART152-CORPUS-2024",
+  "fiscal_year": 2024,
+  "period": "annual",
+  "normative_ref": "lisr:articulo_152",
+  "source_reference": "LISR.pdf; artículo 152; tarifa anual; página 185 de 313; versión consolidada con Última Reforma DOF 01-04-2024.",
+  "verified": true,
+  "legal_metadata": {
+    "source_document_id": "lisr",
+    "legal_basis_refs": [
+      "lisr:articulo_152"
+    ],
+    "publication_date": null,
+    "effective_from": null,
+    "effective_to": null,
+    "validity_status": "unknown",
+    "validity_scope": "legal_unit",
+    "validity_basis": "official_consolidated_version",
+    "validity_verified_at": null,
+    "official_source": "Base normativa controlada del proyecto: LISR.pdf, artículo 152, tarifa anual, página 185 de 313."
+  },
+  "brackets": [
+    {
+      "lower_limit": "0.01",
+      "upper_limit": "5952.84",
+      "fixed_fee": "0.00",
+      "rate_percent": "1.92"
+    },
+    {
+      "lower_limit": "5952.85",
+      "upper_limit": "50524.92",
+      "fixed_fee": "114.29",
+      "rate_percent": "6.40"
+    },
+    {
+      "lower_limit": "50524.93",
+      "upper_limit": "88793.04",
+      "fixed_fee": "2966.91",
+      "rate_percent": "10.88"
+    },
+    {
+      "lower_limit": "88793.05",
+      "upper_limit": "103218.00",
+      "fixed_fee": "7130.48",
+      "rate_percent": "16.00"
+    },
+    {
+      "lower_limit": "103218.01",
+      "upper_limit": "123580.20",
+      "fixed_fee": "9438.47",
+      "rate_percent": "17.92"
+    },
+    {
+      "lower_limit": "123580.21",
+      "upper_limit": "249243.48",
+      "fixed_fee": "13087.37",
+      "rate_percent": "21.36"
+    },
+    {
+      "lower_limit": "249243.49",
+      "upper_limit": "392841.96",
+      "fixed_fee": "39929.05",
+      "rate_percent": "23.52"
+    },
+    {
+      "lower_limit": "392841.97",
+      "upper_limit": "750000.00",
+      "fixed_fee": "73703.41",
+      "rate_percent": "30.00"
+    },
+    {
+      "lower_limit": "750000.01",
+      "upper_limit": "1000000.00",
+      "fixed_fee": "180850.82",
+      "rate_percent": "32.00"
+    },
+    {
+      "lower_limit": "1000000.01",
+      "upper_limit": "3000000.00",
+      "fixed_fee": "260850.81",
+      "rate_percent": "34.00"
+    },
+    {
+      "lower_limit": "3000000.01",
+      "upper_limit": null,
+      "fixed_fee": "940850.81",
+      "rate_percent": "35.00"
+    }
+  ]
+}
