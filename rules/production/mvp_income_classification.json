@@ -1,0 +1,89 @@
+{
+  "schema_version": "1.0",
+  "rules": [
+    {
+      "rule_id": "INCOME_SALARY_CLASSIFY_001",
+      "version": "1.0.0",
+      "description": "Clasifica el ingreso como salario o prestación derivada de un servicio personal subordinado cuando ese hecho fue identificado expresamente.",
+      "priority": 350,
+      "enabled": true,
+      "conditions": [
+        {
+          "fact": "taxpayer_type",
+          "operator": "eq",
+          "value": "individual"
+        },
+        {
+          "fact": "income_type",
+          "operator": "eq",
+          "value": "subordinate_personal_service"
+        }
+      ],
+      "conclusion_code": "salary_income",
+      "conclusion": "El ingreso corresponde a salarios y, en general, a la prestación de un servicio personal subordinado.",
+      "normative_refs": [
+        "lisr:articulo_94"
+      ],
+      "source_refs": [
+        "LISR, artículo 94, primer párrafo"
+      ],
+      "requires_human_review": false
+    },
+    {
+      "rule_id": "INCOME_BUSINESS_CLASSIFY_002",
+      "version": "1.0.0",
+      "description": "Clasifica como ingreso por actividad empresarial el proveniente de actividades comerciales, industriales, agrícolas, ganaderas, de pesca o silvícolas cuando la actividad ya fue identificada.",
+      "priority": 340,
+      "enabled": true,
+      "conditions": [
+        {
+          "fact": "taxpayer_type",
+          "operator": "eq",
+          "value": "individual"
+        },
+        {
+          "fact": "income_type",
+          "operator": "eq",
+          "value": "business_activity"
+        }
+      ],
+      "conclusion_code": "business_activity_income",
+      "conclusion": "El ingreso corresponde a actividades empresariales para efectos del régimen analizado.",
+      "normative_refs": [
+        "lisr:articulo_100"
+      ],
+      "source_refs": [
+        "LISR, artículo 100, fracción I"
+      ],
+      "requires_human_review": false
+    },
+    {
+      "rule_id": "INCOME_RENTAL_CLASSIFY_003",
+      "version": "1.0.0",
+      "description": "Clasifica como ingreso por arrendamiento o por otorgar el uso o goce temporal oneroso de bienes inmuebles cuando ese hecho fue identificado expresamente.",
+      "priority": 330,
+      "enabled": true,
+      "conditions": [
+        {
+          "fact": "taxpayer_type",
+          "operator": "eq",
+          "value": "individual"
+        },
+        {
+          "fact": "income_type",
+          "operator": "eq",
+          "value": "real_estate_rental"
+        }
+      ],
+      "conclusion_code": "real_estate_rental_income",
+      "conclusion": "El ingreso corresponde al arrendamiento, subarrendamiento o al otorgamiento oneroso del uso o goce temporal de bienes inmuebles.",
+      "normative_refs": [
+        "lisr:articulo_114"
+      ],
+      "source_refs": [
+        "LISR, artículo 114, fracción I"
+      ],
+      "requires_human_review": false
+    }
+  ]
+}
