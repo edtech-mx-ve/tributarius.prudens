@@ -10,6 +10,7 @@ from app.domain.documents import SourceType
 from app.domain.isr import ISRCalculationInput, ISRCalculationResult
 from app.domain.isr_trace import ISRCalculationTrace, ISRTraceVerification
 from app.domain.jurisprudence import JurisprudenceRetrievalResult
+from app.domain.llm_trace import LLMTrace
 from app.domain.normative import (
     NormativeApplicabilityResult,
     NormativeValidityBasis,
@@ -18,7 +19,7 @@ from app.domain.normative import (
 )
 from app.domain.query import QueryAnalysis
 from app.domain.rules import RuleEvaluationResult
-from llm.models import RAGExplanation
+from llm.models import ExplanationMode, RAGExplanation
 from rag.retrieval.models import RetrievalResult
 
 
@@ -92,6 +93,7 @@ class HybridOrchestrationRequest(BaseModel):
     )
     isr_input: ISRCalculationInput | None = None
     cbr_query: CBRQuery | None = None
+    explanation_mode: ExplanationMode = ExplanationMode.PROFESSIONAL
 
 
 def classify_retrieval_evidence(
@@ -151,6 +153,7 @@ class HybridOrchestrationResult(BaseModel):
     cbr_result: CBRRetrievalResult | None = None
     cbr_reuse_assessments: list[CBRReuseAssessment] = Field(default_factory=list)
     explanation: RAGExplanation | None = None
+    llm_trace: LLMTrace | None = None
     traces: list[StageTrace]
     requires_human_review: bool
 

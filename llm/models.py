@@ -1,8 +1,15 @@
 from __future__ import annotations
 
+from enum import StrEnum
+
 from pydantic import BaseModel, Field
 
 from app.domain.documents import SourceType
+
+
+class ExplanationMode(StrEnum):
+    STUDENT = "student"
+    PROFESSIONAL = "professional"
 
 
 class EvidenceItem(BaseModel):
@@ -33,14 +40,23 @@ class LLMGenerationContext(BaseModel):
     question: str = Field(min_length=1, max_length=4000)
     evidence: list[EvidenceItem] = Field(min_length=1, max_length=20)
     deterministic_evidence: DeterministicEvidence | None = None
+    explanation_mode: ExplanationMode = ExplanationMode.PROFESSIONAL
+    presentation_instructions: list[str] = Field(default_factory=list, max_length=10)
 
 
 class LlamaStructuredAnswer(BaseModel):
     summary: str = Field(min_length=1, max_length=4000)
     analysis: str = Field(min_length=1, max_length=12000)
     evidence_ids: list[str] = Field(default_factory=list, max_length=20)
+    normative_refs: list[str] = Field(default_factory=list, max_length=100)
+    rule_refs: list[str] = Field(default_factory=list, max_length=100)
+    calculation_refs: list[str] = Field(default_factory=list, max_length=50)
+    cbr_refs: list[str] = Field(default_factory=list, max_length=20)
+    jurisprudence_refs: list[str] = Field(default_factory=list, max_length=20)
     uncertainties: list[str] = Field(default_factory=list, max_length=20)
     requires_human_review: bool = False
+    changes_deterministic_result: bool = False
+    asserts_external_legal_authority: bool = False
 
 
 class RAGExplanation(BaseModel):

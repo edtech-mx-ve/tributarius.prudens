@@ -32,6 +32,7 @@ from app.services.isr_traceability import (
     build_isr_calculation_trace,
     verify_isr_calculation_trace,
 )
+from app.services.llm_traceability import build_llm_trace
 from app.services.normative_engine import evaluate_normative_applicability
 from app.services.normative_rag_bridge import (
     build_normative_candidates,
@@ -587,11 +588,13 @@ class HybridOrchestrator:
             jurisprudence_result,
         )
         explanation = None
+        llm_trace = None
         llm_review = False
         try:
             explanation = self._llm_service.explain(
                 retrieval,
                 deterministic_evidence=deterministic,
+                explanation_mode=request.explanation_mode,
             )
         except LLMError:
             llm_review = True
@@ -603,12 +606,17 @@ class HybridOrchestrator:
                 )
             )
         else:
+            llm_trace = build_llm_trace(
+                explanation,
+                explanation_mode=request.explanation_mode,
+            )
             traces.append(
                 StageTrace(
                     stage=OrchestrationStage.EXPLANATION,
                     status=StageStatus.COMPLETED,
                     detail=(
-                        "Explicación generada con evidencia recuperada y resultados deterministas."
+                        "Explicación generada con evidencia recuperada y resultados deterministas; "
+                        f"modo={request.explanation_mode.value}."
                     ),
                 )
             )
@@ -638,6 +646,7 @@ class HybridOrchestrator:
             cbr_result=cbr_result,
             cbr_reuse_assessments=cbr_assessments,
             explanation=explanation,
+            llm_trace=llm_trace,
             traces=traces,
             requires_human_review=any(
                 (
