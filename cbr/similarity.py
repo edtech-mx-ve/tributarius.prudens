@@ -18,6 +18,25 @@ FIELD_WEIGHTS: dict[CaseField, float] = {
     CaseField.FISCAL_YEAR: 0.10,
 }
 
+EXACT_FIELDS = frozenset(
+    {
+        CaseField.TAXPAYER_TYPE,
+        CaseField.TAX,
+    }
+)
+SEMANTIC_TOKEN_FIELDS = frozenset(
+    {
+        CaseField.ACTIVITY,
+        CaseField.PROBLEM_TYPE,
+    }
+)
+OPTIONAL_EXACT_FIELDS = frozenset(
+    {
+        CaseField.AUTHORITY_ACT,
+        CaseField.PROCEDURAL_STAGE,
+    }
+)
+
 
 def normalize_text(value: str | None) -> str:
     if value is None:
@@ -115,19 +134,29 @@ def _field_score(
     )
 
 
-def case_similarity(query: CBRQuery, case: CBRCase) -> tuple[float, list[FieldSimilarity]]:
+def case_similarity(
+    query: CBRQuery,
+    case: CBRCase,
+) -> tuple[float, list[FieldSimilarity]]:
     field_scores = [_field_score(field, query, case) for field in FIELD_WEIGHTS]
-    weighted = sum(item.score * item.weight for item in field_scores)
-    total_weight = sum(item.weight for item in field_scores)
+    active_scores = [item for item in field_scores if item.weight > 0]
+    weighted = sum(item.score * item.weight for item in active_scores)
+    total_weight = sum(item.weight for item in active_scores)
     if total_weight == 0:
         return 0.0, field_scores
     return weighted / total_weight, field_scores
 
 
 def explain_similarity(field_scores: Iterable[FieldSimilarity]) -> str:
+    scores = list(field_scores)
+    active = [item for item in scores if item.weight > 0]
     ordered = sorted(
-        field_scores,
-        key=lambda item: (item.score * item.weight, item.weight),
+        active,
+        key=lambda item: (
+            item.score * item.weight,
+            item.weight,
+            item.field.value,
+        ),
         reverse=True,
     )
     strongest = ordered[:3]
@@ -135,4 +164,13 @@ def explain_similarity(field_scores: Iterable[FieldSimilarity]) -> str:
         f"{item.field.value}={item.score:.2f}"
         for item in strongest
     ]
-    return "Coincidencias principales: " + ", ".join(parts) + "."
+
+    mismatches = [
+        item.field.value
+        for item in active
+        if item.score == 0.0
+    ]
+    explanation = "Coincidencias principales: " + ", ".join(parts) + "."
+    if mismatches:
+        explanation += " Diferencias: " + ", ".join(sorted(mismatches)) + "."
+    return explanation

@@ -10,12 +10,25 @@ from app.domain.cbr import (
 )
 from cbr.similarity import case_similarity, explain_similarity
 
+MINIMUM_CBR_SIMILARITY = 0.60
+CRITICAL_FIELDS = ("taxpayer_type", "tax", "problem_type")
+
+
+def _critical_fields_match(field_scores: list[FieldSimilarity]) -> bool:
+    scores = {item.field.value: item.score for item in field_scores}
+    return all(scores.get(field, 0.0) == 1.0 for field in CRITICAL_FIELDS)
+
 
 def retrieve_similar_cases(
     query: CBRQuery,
     cases: list[CBRCase],
 ) -> CBRRetrievalResult:
-    """Recupera casos semejantes sin permitir que sustituyan la normativa vigente."""
+    """Recupera experiencia comparable sin sustituir el marco normativo.
+
+    Un caso solo entra al ranking reutilizable cuando supera el umbral mínimo
+    de similitud y coincide exactamente en los campos jurídicamente críticos:
+    tipo de contribuyente, impuesto y tipo de problema.
+    """
     candidates = [
         case
         for case in cases
@@ -25,6 +38,10 @@ def retrieve_similar_cases(
     scored: list[tuple[float, CBRCase, list[FieldSimilarity]]] = []
     for case in candidates:
         similarity, field_scores = case_similarity(query, case)
+        if similarity < MINIMUM_CBR_SIMILARITY:
+            continue
+        if not _critical_fields_match(field_scores):
+            continue
         scored.append((similarity, case, field_scores))
 
     scored.sort(key=lambda item: (-item[0], item[1].case_id))
