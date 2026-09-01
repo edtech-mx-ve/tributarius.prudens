@@ -6,6 +6,7 @@ from enum import StrEnum
 from pydantic import BaseModel, Field, model_validator
 
 from app.domain.cbr import CBRQuery, CBRRetrievalResult, CBRReuseAssessment
+from app.domain.documents import SourceType
 from app.domain.isr import ISRCalculationInput, ISRCalculationResult
 from app.domain.jurisprudence import JurisprudenceRetrievalResult
 from app.domain.normative import (
@@ -77,9 +78,25 @@ class HybridOrchestrationRequest(BaseModel):
     cbr_query: CBRQuery | None = None
 
 
+def classify_retrieval_evidence(
+    retrieval: RetrievalResult,
+) -> tuple[list[str], list[str]]:
+    """Separa evidencia orientativa PRODECON y fundamento académico UNAM."""
+    prodecon_refs: list[str] = []
+    unam_refs: list[str] = []
+    for hit in retrieval.hits:
+        if hit.metadata.source_type == SourceType.PRODECON:
+            prodecon_refs.append(hit.chunk_id)
+        elif hit.metadata.source_type == SourceType.UNAM:
+            unam_refs.append(hit.chunk_id)
+    return prodecon_refs, unam_refs
+
+
 class HybridOrchestrationResult(BaseModel):
     analysis: QueryAnalysis
     retrieval: RetrievalResult
+    prodecon_evidence_refs: list[str] = Field(default_factory=list)
+    unam_evidence_refs: list[str] = Field(default_factory=list)
     normative_candidates: list[NormativeCandidate] = Field(default_factory=list)
     normative_results: list[NormativeApplicabilityResult]
     normative_evidence_refs: list[str] = Field(default_factory=list)
@@ -92,3 +109,10 @@ class HybridOrchestrationResult(BaseModel):
     explanation: RAGExplanation | None = None
     traces: list[StageTrace]
     requires_human_review: bool
+
+    @model_validator(mode="after")
+    def preserve_complementary_evidence(self) -> HybridOrchestrationResult:
+        prodecon_refs, unam_refs = classify_retrieval_evidence(self.retrieval)
+        self.prodecon_evidence_refs = prodecon_refs
+        self.unam_evidence_refs = unam_refs
+        return self
