@@ -49,7 +49,9 @@
     {
       "document_id": "cpeum",
       "aliases": [
+        "cpeum",
         "constitucion",
+        "constitucion politica de los estados unidos mexicanos",
         "constitucional",
         "constitucionales",
         "principios constitucionales",
@@ -57,71 +59,99 @@
       ]
     },
     {
-      "document_id": "lfdc",
-      "aliases": [
-        "derechos contribuyentes",
-        "derechos del contribuyente"
-      ]
-    },
-    {
       "document_id": "cff",
       "aliases": [
-        "codigo fiscal",
         "cff",
+        "codigo fiscal",
+        "codigo fiscal de la federacion",
         "rfc",
         "registro federal de contribuyentes"
       ]
     },
     {
-      "document_id": "liva",
+      "document_id": "lfdc",
       "aliases": [
-        "iva",
-        "valor agregado",
-        "impuesto al valor agregado"
+        "lfdc",
+        "ley federal de los derechos del contribuyente",
+        "derechos contribuyentes",
+        "derechos del contribuyente"
       ]
     },
     {
       "document_id": "lisr",
       "aliases": [
+        "lisr",
         "isr",
+        "ley del impuesto sobre la renta",
         "impuesto sobre la renta",
         "deducciones personales"
       ]
     },
     {
-      "document_id": "lieps",
+      "document_id": "liva",
       "aliases": [
-        "ieps",
-        "impuesto especial sobre produccion y servicios"
+        "liva",
+        "iva",
+        "ley del impuesto al valor agregado",
+        "valor agregado",
+        "impuesto al valor agregado"
       ]
     },
     {
-      "document_id": "lfisan",
+      "document_id": "reg_cff",
       "aliases": [
-        "automoviles nuevos",
-        "isan",
-        "impuesto sobre automoviles nuevos"
+        "rcff",
+        "reg cff",
+        "reglamento del cff",
+        "reglamento del codigo fiscal",
+        "reglamento del codigo fiscal de la federacion"
       ]
     },
     {
-      "document_id": "lif_2026",
+      "document_id": "reg_lisr_060516",
       "aliases": [
-        "ley de ingresos de la federacion",
-        "ingresos de la federacion 2026",
-        "lif 2026"
+        "rlisr",
+        "reg lisr",
+        "reglamento de la lisr",
+        "reglamento de la ley del impuesto sobre la renta"
+      ]
+    },
+    {
+      "document_id": "reg_liva_250914",
+      "aliases": [
+        "rliva",
+        "reg liva",
+        "reglamento de la liva",
+        "reglamento de la ley del impuesto al valor agregado"
       ]
     },
     {
       "document_id": "rmf_2026",
       "aliases": [
-        "resolucion miscelanea fiscal",
+        "rmf",
         "rmf 2026",
+        "resolucion miscelanea fiscal",
+        "resolucion miscelanea fiscal 2026",
+        "miscelanea fiscal",
         "miscelanea fiscal 2026"
+      ]
+    },
+    {
+      "document_id": "lif_2026",
+      "aliases": [
+        "lif",
+        "lif 2026",
+        "ley de ingresos",
+        "ley de ingresos de la federacion",
+        "ley de ingresos de la federacion 2026",
+        "ingresos de la federacion 2026"
       ]
     },
     {
       "document_id": "lfpca",
       "aliases": [
+        "lfpca",
+        "ley federal de procedimiento contencioso administrativo",
         "procedimiento contencioso administrativo",
         "contencioso administrativo",
         "juicio contencioso"
@@ -130,14 +160,38 @@
     {
       "document_id": "lotfja",
       "aliases": [
+        "lotfja",
+        "ley organica del tribunal federal de justicia administrativa",
         "tribunal federal de justicia administrativa",
         "organizacion del tribunal",
         "competencia del tribunal"
       ]
     },
     {
+      "document_id": "lieps",
+      "aliases": [
+        "lieps",
+        "ieps",
+        "ley del impuesto especial sobre produccion y servicios",
+        "impuesto especial sobre produccion y servicios"
+      ]
+    },
+    {
+      "document_id": "lfisan",
+      "aliases": [
+        "lfisan",
+        "isan",
+        "ley federal del impuesto sobre automoviles nuevos",
+        "automoviles nuevos",
+        "impuesto sobre automoviles nuevos"
+      ]
+    },
+    {
       "document_id": "manual_derecho_fiscal_unam",
       "aliases": [
+        "unam",
+        "manual derecho fiscal",
+        "manual de derecho fiscal",
         "interpretacion fiscal",
         "metodos de interpretacion",
         "principios tributarios"
