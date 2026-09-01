@@ -69,6 +69,7 @@ class NormativeApplicabilityResult(BaseModel):
     version_label: str
     decision: NormativeDecision
     applicable: bool
+    evidence_available: bool = True
     query_date: date
     query_fiscal_year: int | None
     effective_from: date | None

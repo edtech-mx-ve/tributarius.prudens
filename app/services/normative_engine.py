@@ -27,6 +27,7 @@ def _result(
         version_label=request.version_label,
         decision=decision,
         applicable=applicable,
+        evidence_available=True,
         query_date=request.query_date,
         query_fiscal_year=request.query_fiscal_year,
         effective_from=request.effective_from,
@@ -46,7 +47,10 @@ def _verified_snapshot_applies(request: NormativeApplicabilityRequest) -> bool:
     return (
         request.validity_status is NormativeValidityStatus.VERIFIED_IN_FORCE
         and request.validity_scope
-        in {NormativeValidityScope.DOCUMENT, NormativeValidityScope.LEGAL_UNIT}
+        in {
+            NormativeValidityScope.DOCUMENT,
+            NormativeValidityScope.LEGAL_UNIT,
+        }
         and request.validity_basis
         in {
             NormativeValidityBasis.OFFICIAL_CONSOLIDATED_VERSION,
@@ -87,16 +91,14 @@ def evaluate_normative_applicability(
             decision=NormativeDecision.UNKNOWN_VALIDITY,
             applicable=False,
             reason=(
-                "La versión no contiene límites de vigencia suficientes ni una "
-                "verificación de vigencia válida para la fecha consultada."
+                "La norma recuperada se conserva como evidencia jurídica, pero "
+                "su vigencia temporal no puede confirmarse con los metadatos "
+                "disponibles para la fecha consultada."
             ),
             requires_human_review=True,
         )
 
-    if (
-        request.effective_from is not None
-        and request.query_date < request.effective_from
-    ):
+    if request.effective_from is not None and request.query_date < request.effective_from:
         return _result(
             request,
             decision=NormativeDecision.NOT_YET_EFFECTIVE,
@@ -132,11 +134,11 @@ def evaluate_normative_applicability(
     )
 
 
-def select_applicable_versions(
+def evaluate_normative_versions(
     request: NormativeSelectionRequest,
     versions: Iterable[NormativeVersionView],
 ) -> list[NormativeApplicabilityResult]:
-    results = [
+    return [
         evaluate_normative_applicability(
             NormativeApplicabilityRequest(
                 legal_unit_id=request.legal_unit_id,
@@ -155,4 +157,14 @@ def select_applicable_versions(
         )
         for version in versions
     ]
-    return [result for result in results if result.applicable]
+
+
+def select_applicable_versions(
+    request: NormativeSelectionRequest,
+    versions: Iterable[NormativeVersionView],
+) -> list[NormativeApplicabilityResult]:
+    return [
+        result
+        for result in evaluate_normative_versions(request, versions)
+        if result.applicable
+    ]

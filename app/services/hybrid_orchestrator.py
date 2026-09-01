@@ -43,8 +43,7 @@ from rag.retrieval.models import RetrievalResult
 
 
 class QueryAnalyzerLike(Protocol):
-    def analyze(self, query: str) -> QueryAnalysis:
-        ...
+    def analyze(self, query: str) -> QueryAnalysis: ...
 
 
 class RetrieverLike(Protocol):
@@ -54,8 +53,7 @@ class RetrieverLike(Protocol):
         *,
         top_k: int = 5,
         filters: RetrievalFilters | None = None,
-    ) -> RetrievalResult:
-        ...
+    ) -> RetrievalResult: ...
 
 
 def _safe_fact_value(name: str, value: str) -> object:
@@ -74,13 +72,46 @@ def build_fact_map(analysis: QueryAnalysis) -> dict[str, object]:
     return result
 
 
-
 _MATERIAL_STOPWORDS = frozenset(
     {
-        "a", "al", "ante", "como", "con", "de", "del", "el", "en", "es", "fiscal",
-        "fiscales", "impuesto", "impuestos", "la", "las", "lo", "los", "mexico",
-        "para", "persona", "por", "que", "se", "sin", "su", "sus", "tasa", "una",
-        "un", "y", "iva", "isr", "2026", "pagar", "aplicar", "regla", "norma",
+        "a",
+        "al",
+        "ante",
+        "como",
+        "con",
+        "de",
+        "del",
+        "el",
+        "en",
+        "es",
+        "fiscal",
+        "fiscales",
+        "impuesto",
+        "impuestos",
+        "la",
+        "las",
+        "lo",
+        "los",
+        "mexico",
+        "para",
+        "persona",
+        "por",
+        "que",
+        "se",
+        "sin",
+        "su",
+        "sus",
+        "tasa",
+        "una",
+        "un",
+        "y",
+        "iva",
+        "isr",
+        "2026",
+        "pagar",
+        "aplicar",
+        "regla",
+        "norma",
     }
 )
 
@@ -90,9 +121,7 @@ def _fold_tokens(text: str) -> set[str]:
     import unicodedata
 
     folded = unicodedata.normalize("NFKD", text.casefold())
-    ascii_text = "".join(
-        char for char in folded if not unicodedata.combining(char)
-    )
+    ascii_text = "".join(char for char in folded if not unicodedata.combining(char))
     return {
         token
         for token in re.findall(r"[a-z0-9][a-z0-9_-]{2,}", ascii_text)
@@ -117,18 +146,13 @@ def _merge_request_context(
                     origin=FactOrigin.EXPLICIT,
                 )
             )
-        missing = [
-            item for item in missing
-            if item.name.strip().casefold() != "fiscal_year"
-        ]
+        missing = [item for item in missing if item.name.strip().casefold() != "fiscal_year"]
     return analysis.model_copy(
         update={
             "facts": facts,
             "missing_fields": missing,
             "requires_clarification": (
-                analysis.requires_clarification
-                or bool(missing)
-                or bool(analysis.ambiguities)
+                analysis.requires_clarification or bool(missing) or bool(analysis.ambiguities)
             ),
         }
     )
@@ -182,14 +206,10 @@ def _filter_material_candidates(
     candidates: list[NormativeCandidate],
 ) -> list[NormativeCandidate]:
     relevant_refs = {
-        hit.chunk_id
-        for hit in retrieval.hits
-        if _materially_relevant_hit(analysis, hit)
+        hit.chunk_id for hit in retrieval.hits if _materially_relevant_hit(analysis, hit)
     }
     return [
-        candidate
-        for candidate in candidates
-        if getattr(candidate, "ref", None) in relevant_refs
+        candidate for candidate in candidates if getattr(candidate, "ref", None) in relevant_refs
     ]
 
 
@@ -210,9 +230,10 @@ def _query_matter(analysis: QueryAnalysis) -> str | None:
 
 def _evaluate_normative_candidates(
     request: HybridOrchestrationRequest,
-) -> tuple[list[NormativeApplicabilityResult], list[str]]:
+) -> tuple[list[NormativeApplicabilityResult], list[str], list[str]]:
     results: list[NormativeApplicabilityResult] = []
-    refs: list[str] = []
+    evidence_refs: list[str] = []
+    applicable_refs: list[str] = []
     for candidate in request.normative_candidates:
         result = evaluate_normative_applicability(
             NormativeApplicabilityRequest(
@@ -231,9 +252,11 @@ def _evaluate_normative_candidates(
             )
         )
         results.append(result)
+        if result.evidence_available:
+            evidence_refs.append(candidate.ref)
         if result.applicable:
-            refs.append(candidate.ref)
-    return results, refs
+            applicable_refs.append(candidate.ref)
+    return results, evidence_refs, applicable_refs
 
 
 def _deterministic_evidence(
@@ -247,9 +270,7 @@ def _deterministic_evidence(
     if isr_result is not None:
         final_tax = getattr(isr_result, "final_tax", None)
         taxable_base = getattr(isr_result, "taxable_base", None)
-        calculations.append(
-            f"ISR: taxable_base={taxable_base}; final_tax={final_tax}"
-        )
+        calculations.append(f"ISR: taxable_base={taxable_base}; final_tax={final_tax}")
 
     similar_cases: list[str] = []
     if cbr_result is not None:
@@ -363,14 +384,20 @@ class HybridOrchestrator:
                 ]
             }
         )
-        normative_results, applicable_refs = _evaluate_normative_candidates(
-            effective_request
-        )
+        (
+            normative_results,
+            normative_evidence_refs,
+            applicable_refs,
+        ) = _evaluate_normative_candidates(effective_request)
         traces.append(
             StageTrace(
                 stage=OrchestrationStage.NORMATIVE,
                 status=StageStatus.COMPLETED,
-                detail=f"Referencias normativas aplicables: {len(applicable_refs)}.",
+                detail=(
+                    "Evidencia normativa conservada: "
+                    f"{len(normative_evidence_refs)}; "
+                    f"temporalmente aplicable: {len(applicable_refs)}."
+                ),
             )
         )
 
@@ -424,8 +451,7 @@ class HybridOrchestrator:
                 )
             else:
                 jurisprudence_review = (
-                    jurisprudence_review
-                    or jurisprudence_result.requires_human_review
+                    jurisprudence_review or jurisprudence_result.requires_human_review
                 )
                 traces.append(
                     StageTrace(
@@ -540,9 +566,7 @@ class HybridOrchestrator:
                 )
                 for item in cbr_result.matches
             ]
-            cbr_review = any(
-                item.requires_human_review for item in cbr_assessments
-            )
+            cbr_review = any(item.requires_human_review for item in cbr_assessments)
             traces.append(
                 StageTrace(
                     stage=OrchestrationStage.CBR,
@@ -580,18 +604,14 @@ class HybridOrchestrator:
                     stage=OrchestrationStage.EXPLANATION,
                     status=StageStatus.COMPLETED,
                     detail=(
-                        "Explicación generada con evidencia recuperada "
-                        "y resultados deterministas."
+                        "Explicación generada con evidencia recuperada y resultados deterministas."
                     ),
                 )
             )
 
-        normative_review = any(
-            result.requires_human_review for result in normative_results
-        )
+        normative_review = any(result.requires_human_review for result in normative_results)
         has_material_normative_evidence = any(
-            _materially_relevant_hit(analysis, hit)
-            for hit in retrieval.hits
+            _materially_relevant_hit(analysis, hit) for hit in retrieval.hits
         )
         if has_material_normative_evidence and not applicable_refs:
             normative_review = True
@@ -604,6 +624,7 @@ class HybridOrchestrator:
             retrieval=retrieval,
             normative_candidates=effective_request.normative_candidates,
             normative_results=normative_results,
+            normative_evidence_refs=normative_evidence_refs,
             applicable_normative_refs=applicable_refs,
             jurisprudence_result=jurisprudence_result,
             rule_result=rule_result,

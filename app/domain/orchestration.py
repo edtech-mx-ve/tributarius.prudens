@@ -72,10 +72,7 @@ class HybridOrchestrationRequest(BaseModel):
     query_date: date
     query_fiscal_year: int | None = Field(default=None, ge=1900, le=2200)
     top_k: int = Field(default=5, ge=1, le=20)
-    normative_candidates: list[NormativeCandidate] = Field(
-        default_factory=list,
-        max_length=100,
-    )
+    normative_candidates: list[NormativeCandidate] = Field(default_factory=list, max_length=100)
     isr_input: ISRCalculationInput | None = None
     cbr_query: CBRQuery | None = None
 
@@ -85,6 +82,7 @@ class HybridOrchestrationResult(BaseModel):
     retrieval: RetrievalResult
     normative_candidates: list[NormativeCandidate] = Field(default_factory=list)
     normative_results: list[NormativeApplicabilityResult]
+    normative_evidence_refs: list[str] = Field(default_factory=list)
     applicable_normative_refs: list[str]
     jurisprudence_result: JurisprudenceRetrievalResult | None = None
     rule_result: RuleEvaluationResult
