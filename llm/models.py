@@ -18,6 +18,9 @@ class EvidenceItem(BaseModel):
 
 
 class DeterministicEvidence(BaseModel):
+    prodecon_orientation_refs: list[str] = Field(default_factory=list, max_length=100)
+    unam_foundation_refs: list[str] = Field(default_factory=list, max_length=100)
+    normative_evidence_refs: list[str] = Field(default_factory=list, max_length=100)
     applicable_normative_refs: list[str] = Field(default_factory=list, max_length=100)
     rule_conclusions: list[str] = Field(default_factory=list, max_length=100)
     calculations: list[str] = Field(default_factory=list, max_length=50)

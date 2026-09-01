@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from pydantic import ValidationError
 
+from app.domain.documents import SourceType
 from llm.errors import LLMGenerationError, LLMResponseValidationError
 from llm.models import (
     DeterministicEvidence,
@@ -37,10 +38,24 @@ class LlamaRAGService:
             )
             for hit in result.hits
         ]
+        deterministic = (
+            deterministic_evidence.model_copy(deep=True)
+            if deterministic_evidence is not None
+            else DeterministicEvidence()
+        )
+        deterministic.prodecon_orientation_refs = [
+            item.chunk_id for item in evidence if item.source_type == SourceType.PRODECON
+        ]
+        deterministic.unam_foundation_refs = [
+            item.chunk_id for item in evidence if item.source_type == SourceType.UNAM
+        ]
+        deterministic.normative_evidence_refs = [
+            item.chunk_id for item in evidence if item.source_type == SourceType.NORMATIVA
+        ]
         return LLMGenerationContext(
             question=result.query,
             evidence=evidence,
-            deterministic_evidence=deterministic_evidence,
+            deterministic_evidence=deterministic,
         )
 
     def explain(
