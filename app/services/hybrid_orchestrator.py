@@ -27,7 +27,10 @@ from app.domain.query import (
 from app.domain.rules import RuleEvaluationResult, RuleSet
 from app.services.cbr_reasoning import assess_case_reuse
 from app.services.normative_engine import evaluate_normative_applicability
-from app.services.normative_rag_bridge import build_normative_candidates
+from app.services.normative_rag_bridge import (
+    build_normative_candidates,
+    build_rule_normative_refs,
+)
 from app.services.normative_temporal_runtime_guard import TemporalRuntimeGuard
 from app.services.query_fact_compat_19s_r15 import query_fact_value
 from app.services.rule_engine import evaluate_rules
@@ -465,10 +468,18 @@ class HybridOrchestrator:
                 )
 
         fact_map = build_fact_map(analysis)
+
+        # 5.3.5: los chunk_id siguen siendo la referencia externa y trazable.
+        # Solo las normas que el motor normativo declaró aplicables se expanden
+        # a la identidad estable documento:artículo que consumen las reglas.
+        rule_normative_refs = build_rule_normative_refs(
+            retrieval,
+            set(applicable_refs),
+        )
         rule_result = evaluate_rules(
             self._rule_set,
             fact_map,
-            set(applicable_refs),
+            rule_normative_refs,
         )
         traces.append(
             StageTrace(

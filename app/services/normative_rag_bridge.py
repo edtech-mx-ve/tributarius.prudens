@@ -1,6 +1,8 @@
 from __future__ import annotations
 
 import hashlib
+import re
+import unicodedata
 from datetime import date
 from enum import StrEnum
 
@@ -63,6 +65,82 @@ def _stable_legal_unit_id(hit: RetrievalHit) -> int:
     return value or 1
 
 
+def _ascii_fold(value: str) -> str:
+    folded = unicodedata.normalize("NFKD", value.casefold())
+    return "".join(char for char in folded if not unicodedata.combining(char))
+
+
+def _normalize_article_identifier(value: str) -> str | None:
+    """Normaliza una etiqueta jurídica al identificador usado por reglas.
+
+    Ejemplos:
+    Artículo 110 -> articulo_110
+    Artículo 1o. -> articulo_1
+    Artículo 1o.-A -> articulo_1_a
+    Artículo 6o Bis -> articulo_6_bis
+    """
+    clean = _ascii_fold(value)
+    clean = clean.replace("º", "o").replace("°", "o")
+    match = re.search(
+        r"\bart(?:iculo|\.)?\s*([0-9]+)(?:o\.?)?(?:\s*[-.]?\s*([a-z]+))?",
+        clean,
+    )
+    if match is None:
+        match = re.search(r"\b([0-9]+)(?:o\.)?(?:\s*[-.]?\s*([a-z]+))?\b", clean)
+    if match is None:
+        return None
+
+    number = match.group(1)
+    suffix = match.group(2)
+    if suffix:
+        return f"articulo_{number}_{suffix}"
+    return f"articulo_{number}"
+
+
+def stable_legal_ref_from_hit(hit: RetrievalHit) -> str | None:
+    """Obtiene identidad jurídica estable documento:unidad para el RBR."""
+    metadata = hit.metadata
+    if metadata.source_type != SourceType.NORMATIVA:
+        return None
+
+    legal_label = (
+        metadata.source_unit_label
+        or metadata.legal_identifier
+        or metadata.hierarchy.article
+    )
+    if not legal_label:
+        return None
+
+    article_id = _normalize_article_identifier(legal_label)
+    if article_id is None:
+        return None
+
+    document_id = metadata.document_id.strip().casefold()
+    if not document_id:
+        return None
+    return f"{document_id}:{article_id}"
+
+
+def build_rule_normative_refs(
+    retrieval: RetrievalResult,
+    applicable_chunk_refs: set[str],
+) -> set[str]:
+    """Expande solo normas ya declaradas aplicables a refs estables para RBR.
+
+    Conserva los chunk_id para compatibilidad y agrega la identidad jurídica
+    estable que usan las reglas de producción. Un hit recuperado pero no
+    temporalmente aplicable nunca habilita por sí mismo una regla.
+    """
+    refs = set(applicable_chunk_refs)
+    for hit in retrieval.hits:
+        if hit.chunk_id not in applicable_chunk_refs:
+            continue
+        stable_ref = stable_legal_ref_from_hit(hit)
+        if stable_ref is not None:
+            refs.add(stable_ref)
+    return refs
+
+
 def candidate_from_normative_hit(
     hit: RetrievalHit,
     *,
@@ -122,6 +200,7 @@ def candidate_from_normative_hit(
         validity_verified_at=validity_verified_at,
         official_source=official_source,
     )
+
 
 def build_normative_candidates(
     retrieval: RetrievalResult,
