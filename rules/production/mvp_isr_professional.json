@@ -1,0 +1,56 @@
+{
+  "schema_version": "1.0",
+  "rules": [
+    {
+      "rule_id": "ISR_PROFESSIONAL_CLASSIFY_001",
+      "version": "1.0.0",
+      "description": "Clasifica como ingreso por servicios profesionales la remuneración de una persona física derivada de un servicio personal independiente, cuando el hecho ya fue identificado por el analizador.",
+      "priority": 300,
+      "enabled": true,
+      "conditions": [
+        {
+          "fact": "taxpayer_type",
+          "operator": "eq",
+          "value": "individual"
+        },
+        {
+          "fact": "income_type",
+          "operator": "eq",
+          "value": "independent_professional_service"
+        }
+      ],
+      "conclusion_code": "professional_service_income",
+      "conclusion": "El ingreso corresponde al supuesto de prestación de servicios profesionales para efectos del régimen analizado.",
+      "normative_refs": [
+        "lisr:articulo_100"
+      ],
+      "source_refs": [
+        "LISR, artículo 100, fracción II"
+      ],
+      "requires_human_review": false
+    },
+    {
+      "rule_id": "ISR_PROFESSIONAL_PAYMENT_002",
+      "version": "1.0.0",
+      "description": "Deriva la obligación de analizar el pago de ISR en la Sección I del Capítulo II del Título IV cuando ya se clasificó el ingreso profesional.",
+      "priority": 200,
+      "enabled": true,
+      "conditions": [
+        {
+          "fact": "professional_service_income",
+          "operator": "eq",
+          "value": true
+        }
+      ],
+      "conclusion_code": "isr_professional_payment_obligation",
+      "conclusion": "La persona física que percibe ingresos por servicios profesionales queda comprendida en la obligación de pago de ISR prevista para esta Sección.",
+      "normative_refs": [
+        "lisr:articulo_100"
+      ],
+      "source_refs": [
+        "LISR, artículo 100, primer párrafo"
+      ],
+      "requires_human_review": false
+    }
+  ]
+}
