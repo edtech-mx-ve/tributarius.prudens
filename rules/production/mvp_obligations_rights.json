@@ -1,0 +1,143 @@
+{
+  "schema_version": "1.0",
+  "rules": [
+    {
+      "rule_id": "OBL_PROFESSIONAL_RFC_001",
+      "version": "1.0.0",
+      "description": "Identifica la obligación de inscripción en el RFC cuando ya se clasificó el ingreso de una persona física como servicio profesional.",
+      "priority": 300,
+      "enabled": true,
+      "conditions": [
+        {
+          "fact": "professional_service_income",
+          "operator": "eq",
+          "value": true
+        }
+      ],
+      "conclusion_code": "rfc_registration_obligation",
+      "conclusion": "La persona física comprendida en el régimen de actividades empresariales y profesionales debe solicitar su inscripción en el RFC.",
+      "normative_refs": [
+        "lisr:articulo_110"
+      ],
+      "source_refs": [
+        "LISR, artículo 110, fracción I"
+      ],
+      "requires_human_review": false
+    },
+    {
+      "rule_id": "OBL_PROFESSIONAL_ACCOUNTING_002",
+      "version": "1.0.0",
+      "description": "Identifica la obligación de llevar contabilidad para la persona física ya clasificada dentro de servicios profesionales.",
+      "priority": 290,
+      "enabled": true,
+      "conditions": [
+        {
+          "fact": "professional_service_income",
+          "operator": "eq",
+          "value": true
+        }
+      ],
+      "conclusion_code": "accounting_obligation",
+      "conclusion": "La persona física comprendida en el régimen debe llevar contabilidad conforme al CFF y su Reglamento.",
+      "normative_refs": [
+        "lisr:articulo_110"
+      ],
+      "source_refs": [
+        "LISR, artículo 110, fracción II"
+      ],
+      "requires_human_review": false
+    },
+    {
+      "rule_id": "OBL_PROFESSIONAL_CFDI_003",
+      "version": "1.0.0",
+      "description": "Identifica la obligación de expedir comprobantes fiscales por los ingresos percibidos en servicios profesionales.",
+      "priority": 280,
+      "enabled": true,
+      "conditions": [
+        {
+          "fact": "professional_service_income",
+          "operator": "eq",
+          "value": true
+        }
+      ],
+      "conclusion_code": "income_cfdi_obligation",
+      "conclusion": "La persona física comprendida en el régimen debe expedir comprobantes fiscales que acrediten los ingresos percibidos.",
+      "normative_refs": [
+        "lisr:articulo_110"
+      ],
+      "source_refs": [
+        "LISR, artículo 110, fracción III"
+      ],
+      "requires_human_review": false
+    },
+    {
+      "rule_id": "RIGHT_INFORMATION_ASSISTANCE_004",
+      "version": "1.0.0",
+      "description": "Reconoce el derecho general del contribuyente a recibir información y asistencia sobre el cumplimiento, contenido y alcance de sus obligaciones tributarias.",
+      "priority": 200,
+      "enabled": true,
+      "conditions": [
+        {
+          "fact": "individual_taxpayer_profile",
+          "operator": "eq",
+          "value": true
+        }
+      ],
+      "conclusion_code": "right_information_and_assistance",
+      "conclusion": "El contribuyente tiene derecho a ser informado y asistido por las autoridades fiscales respecto del cumplimiento, contenido y alcance de sus obligaciones tributarias.",
+      "normative_refs": [
+        "lfdc:articulo_2"
+      ],
+      "source_refs": [
+        "LFDC, artículo 2o., fracción I"
+      ],
+      "requires_human_review": false
+    },
+    {
+      "rule_id": "RIGHT_TAX_DATA_CONFIDENTIALITY_005",
+      "version": "1.0.0",
+      "description": "Reconoce el derecho general al carácter reservado de los datos, informes y antecedentes fiscales en los términos legales aplicables.",
+      "priority": 190,
+      "enabled": true,
+      "conditions": [
+        {
+          "fact": "individual_taxpayer_profile",
+          "operator": "eq",
+          "value": true
+        }
+      ],
+      "conclusion_code": "right_tax_data_confidentiality",
+      "conclusion": "El contribuyente tiene derecho al carácter reservado de sus datos, informes y antecedentes fiscales en los términos previstos por la ley.",
+      "normative_refs": [
+        "lfdc:articulo_2"
+      ],
+      "source_refs": [
+        "LFDC, artículo 2o., fracción VII"
+      ],
+      "requires_human_review": false
+    },
+    {
+      "rule_id": "RIGHT_RESPECTFUL_TREATMENT_006",
+      "version": "1.0.0",
+      "description": "Reconoce el derecho general del contribuyente a recibir trato respetuoso y considerado por la administración tributaria.",
+      "priority": 180,
+      "enabled": true,
+      "conditions": [
+        {
+          "fact": "individual_taxpayer_profile",
+          "operator": "eq",
+          "value": true
+        }
+      ],
+      "conclusion_code": "right_respectful_treatment",
+      "conclusion": "El contribuyente tiene derecho a ser tratado con el debido respeto y consideración por los servidores públicos de la administración tributaria.",
+      "normative_refs": [
+        "lfdc:articulo_2"
+      ],
+      "source_refs": [
+        "LFDC, artículo 2o., fracción VIII"
+      ],
+      "requires_human_review": false
+    }
+  ]
+}
