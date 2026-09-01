@@ -44,6 +44,18 @@ class StageTrace(BaseModel):
     detail: str = Field(min_length=1, max_length=1000)
 
 
+class EvidenceRole(StrEnum):
+    ORIENTATIVE = "orientative"
+    ACADEMIC_FOUNDATION = "academic_foundation"
+    NORMATIVE = "normative"
+
+
+class EvidenceLayer(BaseModel):
+    role: EvidenceRole
+    source_type: SourceType
+    refs: list[str] = Field(default_factory=list)
+
+
 class NormativeCandidate(BaseModel):
     ref: str = Field(min_length=1, max_length=300)
     legal_unit_id: int = Field(gt=0)
@@ -92,11 +104,37 @@ def classify_retrieval_evidence(
     return prodecon_refs, unam_refs
 
 
+def build_evidence_layers(
+    retrieval: RetrievalResult,
+    normative_evidence_refs: list[str],
+) -> list[EvidenceLayer]:
+    """Expresa la función jurídica de cada capa sin confundir autoridad normativa."""
+    prodecon_refs, unam_refs = classify_retrieval_evidence(retrieval)
+    return [
+        EvidenceLayer(
+            role=EvidenceRole.ORIENTATIVE,
+            source_type=SourceType.PRODECON,
+            refs=prodecon_refs,
+        ),
+        EvidenceLayer(
+            role=EvidenceRole.ACADEMIC_FOUNDATION,
+            source_type=SourceType.UNAM,
+            refs=unam_refs,
+        ),
+        EvidenceLayer(
+            role=EvidenceRole.NORMATIVE,
+            source_type=SourceType.NORMATIVA,
+            refs=list(normative_evidence_refs),
+        ),
+    ]
+
+
 class HybridOrchestrationResult(BaseModel):
     analysis: QueryAnalysis
     retrieval: RetrievalResult
     prodecon_evidence_refs: list[str] = Field(default_factory=list)
     unam_evidence_refs: list[str] = Field(default_factory=list)
+    evidence_layers: list[EvidenceLayer] = Field(default_factory=list)
     normative_candidates: list[NormativeCandidate] = Field(default_factory=list)
     normative_results: list[NormativeApplicabilityResult]
     normative_evidence_refs: list[str] = Field(default_factory=list)
@@ -115,4 +153,8 @@ class HybridOrchestrationResult(BaseModel):
         prodecon_refs, unam_refs = classify_retrieval_evidence(self.retrieval)
         self.prodecon_evidence_refs = prodecon_refs
         self.unam_evidence_refs = unam_refs
+        self.evidence_layers = build_evidence_layers(
+            self.retrieval,
+            self.normative_evidence_refs,
+        )
         return self
