@@ -26,6 +26,7 @@ from app.domain.query import (
 )
 from app.domain.rules import RuleEvaluationResult, RuleSet
 from app.services.cbr_reasoning import assess_case_reuse
+from app.services.hybrid_isr_stage import run_isr_stage
 from app.services.normative_engine import evaluate_normative_applicability
 from app.services.normative_rag_bridge import (
     build_normative_candidates,
@@ -34,7 +35,7 @@ from app.services.normative_rag_bridge import (
 from app.services.normative_temporal_runtime_guard import TemporalRuntimeGuard
 from app.services.query_fact_compat_19s_r15 import query_fact_value
 from app.services.rule_engine import evaluate_rules
-from calculators.isr import ISRCalculationError, calculate_isr
+from calculators.isr_tariff_registry import ISRTariffRegistry
 from cbr.engine import retrieve_similar_cases
 from jurisprudence.activation import decide_jurisprudence_activation
 from jurisprudence.retrieval import JurisprudenceRetrievalError, JurisprudenceRetriever
@@ -331,6 +332,7 @@ class HybridOrchestrator:
         llm_service: LlamaRAGService,
         rule_set: RuleSet,
         isr_tariff: ISRTariff | None = None,
+        isr_tariff_registry: ISRTariffRegistry | None = None,
         cbr_cases: list[CBRCase] | None = None,
         jurisprudence_retriever: JurisprudenceRetriever | None = None,
         temporal_guard: TemporalRuntimeGuard | None = None,
@@ -340,6 +342,7 @@ class HybridOrchestrator:
         self._llm_service = llm_service
         self._rule_set = rule_set
         self._isr_tariff = isr_tariff
+        self._isr_tariff_registry = isr_tariff_registry
         self._cbr_cases = list(cbr_cases or [])
         self._jurisprudence_retriever = jurisprudence_retriever
         self._temporal_guard = temporal_guard
@@ -489,64 +492,26 @@ class HybridOrchestrator:
             )
         )
 
-        isr_result = None
-        isr_review = False
-        if analysis.primary_intent == QueryIntent.CALCULATE_ISR:
-            if analysis.requires_clarification:
-                isr_review = True
-                traces.append(
-                    StageTrace(
-                        stage=OrchestrationStage.ISR,
-                        status=StageStatus.SKIPPED,
-                        detail="Cálculo omitido: faltan datos requeridos.",
-                    )
-                )
-            elif request.isr_input is None or self._isr_tariff is None:
-                isr_review = True
-                traces.append(
-                    StageTrace(
-                        stage=OrchestrationStage.ISR,
-                        status=StageStatus.SKIPPED,
-                        detail="Cálculo omitido: entrada o tarifa ISR no disponible.",
-                    )
-                )
-            elif request.isr_input.normative_ref not in applicable_refs:
-                isr_review = True
-                traces.append(
-                    StageTrace(
-                        stage=OrchestrationStage.ISR,
-                        status=StageStatus.SKIPPED,
-                        detail="Cálculo omitido: referencia normativa no validada.",
-                    )
-                )
-            else:
-                try:
-                    isr_result = calculate_isr(request.isr_input, self._isr_tariff)
-                except ISRCalculationError:
-                    isr_review = True
-                    traces.append(
-                        StageTrace(
-                            stage=OrchestrationStage.ISR,
-                            status=StageStatus.DEGRADED,
-                            detail="El cálculo ISR fue rechazado por validación determinista.",
-                        )
-                    )
-                else:
-                    traces.append(
-                        StageTrace(
-                            stage=OrchestrationStage.ISR,
-                            status=StageStatus.COMPLETED,
-                            detail="Cálculo ISR ejecutado de forma determinista.",
-                        )
-                    )
-        else:
-            traces.append(
-                StageTrace(
-                    stage=OrchestrationStage.ISR,
-                    status=StageStatus.SKIPPED,
-                    detail="La intención principal no requiere cálculo ISR.",
-                )
+        calculation_normative_refs = set(applicable_refs) | set(rule_normative_refs)
+        isr_outcome = run_isr_stage(
+            intent=analysis.primary_intent,
+            requires_clarification=analysis.requires_clarification,
+            rule_result=rule_result,
+            facts=fact_map,
+            structured_input=request.isr_input,
+            applicable_normative_refs=calculation_normative_refs,
+            tariff_registry=self._isr_tariff_registry,
+            legacy_tariff=self._isr_tariff,
+        )
+        isr_result = isr_outcome.result
+        isr_review = isr_outcome.requires_human_review
+        traces.append(
+            StageTrace(
+                stage=OrchestrationStage.ISR,
+                status=isr_outcome.status,
+                detail=isr_outcome.detail,
             )
+        )
 
         cbr_result = None
         cbr_assessments: list[CBRReuseAssessment] = []
