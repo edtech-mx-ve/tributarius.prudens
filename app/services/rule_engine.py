@@ -130,28 +130,67 @@ def evaluate_rule(
     )
 
 
+def _ordered_rules(rule_set: RuleSet) -> list[RuleDefinition]:
+    return sorted(
+        rule_set.rules,
+        key=lambda rule: (-rule.priority, rule.rule_id, rule.version),
+    )
+
+
 def evaluate_rules(
     rule_set: RuleSet,
     facts: Mapping[str, Any],
     applicable_normative_refs: set[str] | None = None,
+    *,
+    max_cycles: int = 20,
 ) -> RuleEvaluationResult:
+    """Evalúa reglas RBR con encadenamiento hacia adelante hasta punto fijo."""
     if len(facts) > 500:
         raise RuleEvaluationError("Máximo 500 hechos por evaluación.")
+    if max_cycles < 1:
+        raise RuleEvaluationError("max_cycles debe ser mayor o igual a 1.")
 
-    ordered = sorted(
-        rule_set.rules,
-        key=lambda rule: (-rule.priority, rule.rule_id, rule.version),
-    )
-    traces: list[RuleTrace] = []
+    working_facts = dict(facts)
+    ordered = _ordered_rules(rule_set)
+    fired: set[tuple[str, str]] = set()
     conclusions: list[RuleConclusion] = []
-    for rule in ordered:
-        trace, conclusion = evaluate_rule(rule, facts, applicable_normative_refs)
-        traces.append(trace)
-        if conclusion is not None:
-            conclusions.append(conclusion)
+    traces: list[RuleTrace] = []
+    requires_human_review = False
 
-    return RuleEvaluationResult(
-        matched_rules=conclusions,
-        traces=traces,
-        requires_human_review=any(item.requires_human_review for item in conclusions),
+    for _ in range(max_cycles):
+        new_inference = False
+        cycle_traces: list[RuleTrace] = []
+
+        for rule in ordered:
+            key = (rule.rule_id, rule.version)
+            if key in fired:
+                continue
+
+            trace, conclusion = evaluate_rule(
+                rule,
+                working_facts,
+                applicable_normative_refs,
+            )
+            cycle_traces.append(trace)
+            if conclusion is None:
+                continue
+
+            fired.add(key)
+            conclusions.append(conclusion)
+            working_facts[conclusion.conclusion_code] = True
+            requires_human_review = (
+                requires_human_review or conclusion.requires_human_review
+            )
+            new_inference = True
+
+        traces.extend(cycle_traces)
+        if not new_inference:
+            return RuleEvaluationResult(
+                matched_rules=conclusions,
+                traces=traces,
+                requires_human_review=requires_human_review,
+            )
+
+    raise RuleEvaluationError(
+        "El encadenamiento RBR excedió el máximo de ciclos permitido."
     )
