@@ -5,7 +5,7 @@ from pathlib import Path
 
 from pydantic import ValidationError
 
-from app.domain.isr import ISRPeriod, ISRTariff
+from app.domain.isr import ISRPeriod, ISRTariff, ISRTariffLegalMetadata
 from calculators.isr import ISRCalculationError, validate_tariff
 
 
@@ -48,6 +48,15 @@ class ISRTariffRegistry:
             self._by_key[key]
             for key in sorted(self._by_key, key=lambda item: (item[0], item[1].value))
         ]
+
+
+def require_tariff_legal_metadata(tariff: ISRTariff) -> ISRTariffLegalMetadata:
+    """Exige metadatos jurídicos antes de promover una tarifa a uso fiscal real."""
+    if tariff.legal_metadata is None:
+        raise ISRTariffRegistryError(
+            "La tarifa ISR no contiene metadatos jurídicos suficientes para uso fiscal real."
+        )
+    return tariff.legal_metadata
 
 
 def load_isr_tariff(path: str | Path) -> ISRTariff:
