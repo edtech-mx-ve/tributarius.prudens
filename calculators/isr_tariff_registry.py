@@ -6,6 +6,7 @@ from pathlib import Path
 from pydantic import ValidationError
 
 from app.domain.isr import ISRPeriod, ISRTariff, ISRTariffLegalMetadata
+from app.domain.normative import NormativeValidityStatus
 from calculators.isr import ISRCalculationError, validate_tariff
 
 
@@ -18,7 +19,9 @@ class ISRTariffRegistry:
 
     def __init__(self, tariffs: list[ISRTariff]) -> None:
         if not tariffs:
-            raise ISRTariffRegistryError("El registro de tarifas ISR no puede estar vacío.")
+            raise ISRTariffRegistryError(
+                "El registro de tarifas ISR no puede estar vacío."
+            )
 
         by_key: dict[tuple[int, ISRPeriod], ISRTariff] = {}
         for tariff in tariffs:
@@ -38,8 +41,32 @@ class ISRTariffRegistry:
             return self._by_key[(fiscal_year, period)]
         except KeyError as exc:
             raise ISRTariffRegistryError(
-                "No existe una tarifa ISR verificada para el ejercicio y periodicidad solicitados."
+                "No existe una tarifa ISR verificada para el ejercicio y periodicidad "
+                "solicitados."
             ) from exc
+
+    def select_for_fiscal_use(
+        self,
+        fiscal_year: int,
+        period: ISRPeriod,
+    ) -> ISRTariff:
+        """Selecciona tarifa exacta con sustento jurídico temporal verificable."""
+        tariff = self.get(fiscal_year, period)
+        metadata = require_tariff_legal_metadata(tariff)
+
+        if metadata.validity_status != NormativeValidityStatus.VERIFIED_IN_FORCE:
+            raise ISRTariffRegistryError(
+                "La tarifa ISR existe en la base controlada, pero su vigencia no está "
+                "verificada para uso fiscal."
+            )
+
+        if metadata.effective_from is None:
+            raise ISRTariffRegistryError(
+                "La tarifa ISR no tiene fecha inicial de vigencia verificable para uso "
+                "fiscal."
+            )
+
+        return tariff
 
     @property
     def tariffs(self) -> list[ISRTariff]:
@@ -54,7 +81,8 @@ def require_tariff_legal_metadata(tariff: ISRTariff) -> ISRTariffLegalMetadata:
     """Exige metadatos jurídicos antes de promover una tarifa a uso fiscal real."""
     if tariff.legal_metadata is None:
         raise ISRTariffRegistryError(
-            "La tarifa ISR no contiene metadatos jurídicos suficientes para uso fiscal real."
+            "La tarifa ISR no contiene metadatos jurídicos suficientes para uso fiscal "
+            "real."
         )
     return tariff.legal_metadata
 
