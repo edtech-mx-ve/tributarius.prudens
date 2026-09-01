@@ -11,7 +11,7 @@ from app.domain.rules import RuleEvaluationResult
 from app.services.rbr_isr_bridge import (
     ISR_PROFESSIONAL_TRIGGER,
     RBRISRBridgeError,
-    calculate_isr_from_rbr,
+    build_isr_input_from_rbr,
 )
 from calculators.isr import ISRCalculationError, calculate_isr
 from calculators.isr_tariff_registry import ISRTariffRegistry, ISRTariffRegistryError
@@ -23,6 +23,9 @@ class ISRStageOutcome:
     status: StageStatus
     detail: str
     requires_human_review: bool
+    calculation_input: ISRCalculationInput | None = None
+    tariff: ISRTariff | None = None
+    rbr_authorized: bool = False
 
 
 def merge_structured_isr_facts(
@@ -165,6 +168,9 @@ def run_isr_stage(
                 "orquestador legado."
             ),
             requires_human_review=False,
+            calculation_input=structured_input,
+            tariff=legacy_tariff,
+            rbr_authorized=False,
         )
 
     merged_facts = merge_structured_isr_facts(facts, structured_input)
@@ -182,7 +188,19 @@ def run_isr_stage(
                 detail="Cálculo omitido: fundamento de la tarifa ISR no validado.",
                 requires_human_review=True,
             )
-        result = calculate_isr_from_rbr(rule_result, merged_facts, tariff)
+        calculation_input = build_isr_input_from_rbr(
+            rule_result,
+            merged_facts,
+            tariff,
+        )
+        if calculation_input is None:
+            return ISRStageOutcome(
+                result=None,
+                status=StageStatus.SKIPPED,
+                detail="Cálculo omitido: el RBR no habilitó la ejecución ISR.",
+                requires_human_review=True,
+            )
+        result = calculate_isr(calculation_input, tariff)
     except (RBRISRBridgeError, ISRTariffRegistryError, ISRCalculationError):
         return ISRStageOutcome(
             result=None,
@@ -191,17 +209,12 @@ def run_isr_stage(
             requires_human_review=True,
         )
 
-    if result is None:
-        return ISRStageOutcome(
-            result=None,
-            status=StageStatus.SKIPPED,
-            detail="Cálculo omitido: el RBR no habilitó la ejecución ISR.",
-            requires_human_review=True,
-        )
-
     return ISRStageOutcome(
         result=result,
         status=StageStatus.COMPLETED,
         detail="Cálculo ISR ejecutado por RBR y motor determinístico.",
         requires_human_review=False,
+        calculation_input=calculation_input,
+        tariff=tariff,
+        rbr_authorized=True,
     )

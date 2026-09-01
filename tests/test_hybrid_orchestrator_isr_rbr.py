@@ -238,6 +238,15 @@ def test_orchestrator_executes_isr_from_rbr_with_safe_registry() -> None:
     trace = next(item for item in result.traces if item.stage == OrchestrationStage.ISR)
     assert trace.status == StageStatus.COMPLETED
     assert "RBR" in trace.detail
+    assert result.isr_trace is not None
+    assert result.isr_trace.final_tax == Decimal("2300.00")
+    assert result.isr_trace.legal.normative_ref == ARTICLE_152_REF
+    assert result.isr_trace.authorization.rule_id == "ISR_PROFESSIONAL_PAYMENT_002"
+    assert result.isr_trace_verification is not None
+    assert result.isr_trace_verification.mathematically_consistent is True
+    assert result.isr_trace_verification.legally_linked is True
+    assert result.isr_trace_verification.rbr_authorized is True
+    assert result.isr_trace_verification.verified is True
 
 
 def test_orchestrator_does_not_calculate_without_rbr_payment_trigger() -> None:
@@ -247,6 +256,8 @@ def test_orchestrator_does_not_calculate_without_rbr_payment_trigger() -> None:
     ).run(_request())
 
     assert result.isr_result is None
+    assert result.isr_trace is None
+    assert result.isr_trace_verification is None
     trace = next(item for item in result.traces if item.stage == OrchestrationStage.ISR)
     assert trace.status == StageStatus.SKIPPED
     assert result.requires_human_review is True

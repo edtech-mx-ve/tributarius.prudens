@@ -27,6 +27,11 @@ from app.domain.query import (
 from app.domain.rules import RuleEvaluationResult, RuleSet
 from app.services.cbr_reasoning import assess_case_reuse
 from app.services.hybrid_isr_stage import run_isr_stage
+from app.services.isr_traceability import (
+    ISRTraceabilityError,
+    build_isr_calculation_trace,
+    verify_isr_calculation_trace,
+)
 from app.services.normative_engine import evaluate_normative_applicability
 from app.services.normative_rag_bridge import (
     build_normative_candidates,
@@ -505,6 +510,29 @@ class HybridOrchestrator:
         )
         isr_result = isr_outcome.result
         isr_review = isr_outcome.requires_human_review
+        isr_trace = None
+        isr_trace_verification = None
+
+        if (
+            isr_result is not None
+            and isr_outcome.rbr_authorized
+            and isr_outcome.calculation_input is not None
+            and isr_outcome.tariff is not None
+        ):
+            try:
+                isr_trace = build_isr_calculation_trace(
+                    isr_outcome.calculation_input,
+                    isr_result,
+                    isr_outcome.tariff,
+                    rule_result,
+                )
+                isr_trace_verification = verify_isr_calculation_trace(isr_trace)
+            except ISRTraceabilityError:
+                isr_review = True
+            else:
+                if not isr_trace_verification.verified:
+                    isr_review = True
+
         traces.append(
             StageTrace(
                 stage=OrchestrationStage.ISR,
@@ -605,6 +633,8 @@ class HybridOrchestrator:
             jurisprudence_result=jurisprudence_result,
             rule_result=rule_result,
             isr_result=isr_result,
+            isr_trace=isr_trace,
+            isr_trace_verification=isr_trace_verification,
             cbr_result=cbr_result,
             cbr_reuse_assessments=cbr_assessments,
             explanation=explanation,

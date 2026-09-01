@@ -8,6 +8,7 @@ from pydantic import BaseModel, Field, model_validator
 from app.domain.cbr import CBRQuery, CBRRetrievalResult, CBRReuseAssessment
 from app.domain.documents import SourceType
 from app.domain.isr import ISRCalculationInput, ISRCalculationResult
+from app.domain.isr_trace import ISRCalculationTrace, ISRTraceVerification
 from app.domain.jurisprudence import JurisprudenceRetrievalResult
 from app.domain.normative import (
     NormativeApplicabilityResult,
@@ -85,7 +86,10 @@ class HybridOrchestrationRequest(BaseModel):
     query_date: date
     query_fiscal_year: int | None = Field(default=None, ge=1900, le=2200)
     top_k: int = Field(default=5, ge=1, le=20)
-    normative_candidates: list[NormativeCandidate] = Field(default_factory=list, max_length=100)
+    normative_candidates: list[NormativeCandidate] = Field(
+        default_factory=list,
+        max_length=100,
+    )
     isr_input: ISRCalculationInput | None = None
     cbr_query: CBRQuery | None = None
 
@@ -142,6 +146,8 @@ class HybridOrchestrationResult(BaseModel):
     jurisprudence_result: JurisprudenceRetrievalResult | None = None
     rule_result: RuleEvaluationResult
     isr_result: ISRCalculationResult | None = None
+    isr_trace: ISRCalculationTrace | None = None
+    isr_trace_verification: ISRTraceVerification | None = None
     cbr_result: CBRRetrievalResult | None = None
     cbr_reuse_assessments: list[CBRReuseAssessment] = Field(default_factory=list)
     explanation: RAGExplanation | None = None
