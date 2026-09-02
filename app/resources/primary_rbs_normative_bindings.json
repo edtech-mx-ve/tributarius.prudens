@@ -1,0 +1,343 @@
+{
+  "schema_version": "1.0",
+  "purpose": "B.6 vincula cada relación RBS primaria consolidada en B.5 con fuentes del corpus normativo interno. Las referencias de artículo sólo se incorporan cuando ya existen en reglas productivas; la vigencia se valida en B.8.",
+  "bindings": [
+    {
+      "binding_id": "B6-BIND-001",
+      "relation_id": "B5-REL-001",
+      "rule_family_ids": [
+        "R-TRI",
+        "R-INT"
+      ],
+      "normative_source_ids": [
+        "cpeum",
+        "cff"
+      ],
+      "exact_normative_refs": [],
+      "precision": "source",
+      "requires_current_corpus_validation": true,
+      "creates_executable_rule": false,
+      "can_control_legal_decision": false
+    },
+    {
+      "binding_id": "B6-BIND-002",
+      "relation_id": "B5-REL-002",
+      "rule_family_ids": [
+        "R-DER"
+      ],
+      "normative_source_ids": [
+        "lfdc",
+        "cff",
+        "cpeum"
+      ],
+      "exact_normative_refs": [
+        "lfdc:articulo_2"
+      ],
+      "precision": "mixed",
+      "requires_current_corpus_validation": true,
+      "creates_executable_rule": false,
+      "can_control_legal_decision": false
+    },
+    {
+      "binding_id": "B6-BIND-003",
+      "relation_id": "B5-REL-003",
+      "rule_family_ids": [
+        "R-INT"
+      ],
+      "normative_source_ids": [
+        "cff"
+      ],
+      "exact_normative_refs": [],
+      "precision": "source",
+      "requires_current_corpus_validation": true,
+      "creates_executable_rule": false,
+      "can_control_legal_decision": false
+    },
+    {
+      "binding_id": "B6-BIND-004",
+      "relation_id": "B5-REL-004",
+      "rule_family_ids": [
+        "R-INT"
+      ],
+      "normative_source_ids": [
+        "cff"
+      ],
+      "exact_normative_refs": [],
+      "precision": "source",
+      "requires_current_corpus_validation": true,
+      "creates_executable_rule": false,
+      "can_control_legal_decision": false
+    },
+    {
+      "binding_id": "B6-BIND-005",
+      "relation_id": "B5-REL-005",
+      "rule_family_ids": [
+        "R-TRI",
+        "R-SUJ"
+      ],
+      "normative_source_ids": [
+        "cff",
+        "lisr",
+        "liva",
+        "lieps",
+        "lfisan"
+      ],
+      "exact_normative_refs": [],
+      "precision": "source",
+      "requires_current_corpus_validation": true,
+      "creates_executable_rule": false,
+      "can_control_legal_decision": false
+    },
+    {
+      "binding_id": "B6-BIND-006",
+      "relation_id": "B5-REL-006",
+      "rule_family_ids": [
+        "R-TRI",
+        "R-CAL"
+      ],
+      "normative_source_ids": [
+        "cff",
+        "lisr",
+        "liva",
+        "lieps",
+        "lfisan"
+      ],
+      "exact_normative_refs": [
+        "cff:articulo_2"
+      ],
+      "precision": "mixed",
+      "requires_current_corpus_validation": true,
+      "creates_executable_rule": false,
+      "can_control_legal_decision": false
+    },
+    {
+      "binding_id": "B6-BIND-007",
+      "relation_id": "B5-REL-007",
+      "rule_family_ids": [
+        "R-SUJ",
+        "R-OBL"
+      ],
+      "normative_source_ids": [
+        "cff",
+        "lisr"
+      ],
+      "exact_normative_refs": [
+        "cff:articulo_1"
+      ],
+      "precision": "mixed",
+      "requires_current_corpus_validation": true,
+      "creates_executable_rule": false,
+      "can_control_legal_decision": false
+    },
+    {
+      "binding_id": "B6-BIND-008",
+      "relation_id": "B5-REL-008",
+      "rule_family_ids": [
+        "R-PER",
+        "R-SUJ"
+      ],
+      "normative_source_ids": [
+        "cff",
+        "lisr"
+      ],
+      "exact_normative_refs": [
+        "cff:articulo_1"
+      ],
+      "precision": "mixed",
+      "requires_current_corpus_validation": true,
+      "creates_executable_rule": false,
+      "can_control_legal_decision": false
+    },
+    {
+      "binding_id": "B6-BIND-009",
+      "relation_id": "B5-REL-009",
+      "rule_family_ids": [
+        "R-TRI",
+        "R-CAL",
+        "R-OBL"
+      ],
+      "normative_source_ids": [
+        "lisr",
+        "liva",
+        "cff",
+        "reg_lisr_060516",
+        "reg_liva_250914",
+        "rmf_2026"
+      ],
+      "exact_normative_refs": [
+        "lisr:articulo_100",
+        "lisr:articulo_110"
+      ],
+      "precision": "mixed",
+      "requires_current_corpus_validation": true,
+      "creates_executable_rule": false,
+      "can_control_legal_decision": false
+    },
+    {
+      "binding_id": "B6-BIND-010",
+      "relation_id": "B5-REL-010",
+      "rule_family_ids": [
+        "R-AUT",
+        "R-DEU",
+        "R-OBL"
+      ],
+      "normative_source_ids": [
+        "cff"
+      ],
+      "exact_normative_refs": [],
+      "precision": "source",
+      "requires_current_corpus_validation": true,
+      "creates_executable_rule": false,
+      "can_control_legal_decision": false
+    },
+    {
+      "binding_id": "B6-BIND-011",
+      "relation_id": "B5-REL-011",
+      "rule_family_ids": [
+        "R-INC",
+        "R-SAN"
+      ],
+      "normative_source_ids": [
+        "cff"
+      ],
+      "exact_normative_refs": [],
+      "precision": "source",
+      "requires_current_corpus_validation": true,
+      "creates_executable_rule": false,
+      "can_control_legal_decision": false
+    },
+    {
+      "binding_id": "B6-BIND-012",
+      "relation_id": "B5-REL-012",
+      "rule_family_ids": [
+        "R-AUT",
+        "R-DEF"
+      ],
+      "normative_source_ids": [
+        "cff",
+        "lfdc",
+        "lfpca",
+        "lotfja"
+      ],
+      "exact_normative_refs": [
+        "lfdc:articulo_2"
+      ],
+      "precision": "mixed",
+      "requires_current_corpus_validation": true,
+      "creates_executable_rule": false,
+      "can_control_legal_decision": false
+    },
+    {
+      "binding_id": "B6-BIND-013",
+      "relation_id": "B5-REL-013",
+      "rule_family_ids": [
+        "R-TRI"
+      ],
+      "normative_source_ids": [
+        "cpeum",
+        "cff"
+      ],
+      "exact_normative_refs": [],
+      "precision": "source",
+      "requires_current_corpus_validation": true,
+      "creates_executable_rule": false,
+      "can_control_legal_decision": false
+    },
+    {
+      "binding_id": "B6-BIND-014",
+      "relation_id": "B5-REL-014",
+      "rule_family_ids": [
+        "R-TRI"
+      ],
+      "normative_source_ids": [
+        "cpeum",
+        "cff",
+        "lisr",
+        "liva",
+        "lieps",
+        "lfisan"
+      ],
+      "exact_normative_refs": [
+        "cff:articulo_2"
+      ],
+      "precision": "mixed",
+      "requires_current_corpus_validation": true,
+      "creates_executable_rule": false,
+      "can_control_legal_decision": false
+    },
+    {
+      "binding_id": "B6-BIND-015",
+      "relation_id": "B5-REL-015",
+      "rule_family_ids": [
+        "R-OBL",
+        "R-AUT",
+        "R-DEF"
+      ],
+      "normative_source_ids": [
+        "cff",
+        "lfdc"
+      ],
+      "exact_normative_refs": [
+        "lfdc:articulo_2"
+      ],
+      "precision": "mixed",
+      "requires_current_corpus_validation": true,
+      "creates_executable_rule": false,
+      "can_control_legal_decision": false
+    },
+    {
+      "binding_id": "B6-BIND-016",
+      "relation_id": "B5-REL-016",
+      "rule_family_ids": [
+        "R-TRI"
+      ],
+      "normative_source_ids": [
+        "lisr"
+      ],
+      "exact_normative_refs": [
+        "lisr:articulo_94"
+      ],
+      "precision": "article",
+      "requires_current_corpus_validation": true,
+      "creates_executable_rule": false,
+      "can_control_legal_decision": false
+    },
+    {
+      "binding_id": "B6-BIND-017",
+      "relation_id": "B5-REL-017",
+      "rule_family_ids": [
+        "R-PER"
+      ],
+      "normative_source_ids": [
+        "lisr",
+        "cff"
+      ],
+      "exact_normative_refs": [
+        "lisr:articulo_100"
+      ],
+      "precision": "mixed",
+      "requires_current_corpus_validation": true,
+      "creates_executable_rule": false,
+      "can_control_legal_decision": false
+    },
+    {
+      "binding_id": "B6-BIND-018",
+      "relation_id": "B5-REL-018",
+      "rule_family_ids": [
+        "R-TEM",
+        "R-TRI"
+      ],
+      "normative_source_ids": [
+        "lisr",
+        "rmf_2026"
+      ],
+      "exact_normative_refs": [],
+      "precision": "source",
+      "requires_current_corpus_validation": true,
+      "creates_executable_rule": false,
+      "can_control_legal_decision": false
+    }
+  ],
+  "total_bindings": 18,
+  "modifies_production_rules": false
+}

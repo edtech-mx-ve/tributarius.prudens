@@ -1,0 +1,491 @@
+{
+  "schema_version": "1.0",
+  "purpose": "B.5 deduplica y relaciona las 38 relaciones conceptuales extraídas de PRODECON y UNAM, preservando procedencia y sin convertirlas todavía en reglas determinativas.",
+  "source_relation_count": 38,
+  "deduplicated_relation_count": 18,
+  "relations": [
+    {
+      "canonical_id": "B5-REL-001",
+      "label": "Potestad tributaria y principios constitucionales",
+      "description": "Relación consolidada B.5: Potestad tributaria y principios constitucionales. Agrupa relaciones primarias semánticamente equivalentes o complementarias y conserva sus fuentes para validación posterior.",
+      "source_relation_ids": [
+        "P-REL-003",
+        "U-REL-001"
+      ],
+      "primary_entry_ids": [
+        "PRODECON-02",
+        "UNAM-I"
+      ],
+      "rbs_families": [
+        "R-TRI",
+        "R-INT",
+        "R-DER"
+      ],
+      "candidate_normative_sources": [
+        "cpeum",
+        "cff"
+      ],
+      "legal_relation_ids": [],
+      "requires_normative_validation": true,
+      "can_control_legal_decision": false
+    },
+    {
+      "canonical_id": "B5-REL-002",
+      "label": "Derechos y garantías del contribuyente",
+      "description": "Relación consolidada B.5: Derechos y garantías del contribuyente. Agrupa relaciones primarias semánticamente equivalentes o complementarias y conserva sus fuentes para validación posterior.",
+      "source_relation_ids": [
+        "P-REL-013",
+        "U-REL-002"
+      ],
+      "primary_entry_ids": [
+        "PRODECON-07",
+        "UNAM-I"
+      ],
+      "rbs_families": [
+        "R-DER"
+      ],
+      "candidate_normative_sources": [
+        "cpeum",
+        "lfdc",
+        "cff"
+      ],
+      "legal_relation_ids": [
+        "REL-DER-AUT"
+      ],
+      "requires_normative_validation": true,
+      "can_control_legal_decision": false
+    },
+    {
+      "canonical_id": "B5-REL-003",
+      "label": "Interpretación de la norma fiscal",
+      "description": "Relación consolidada B.5: Interpretación de la norma fiscal. Agrupa relaciones primarias semánticamente equivalentes o complementarias y conserva sus fuentes para validación posterior.",
+      "source_relation_ids": [
+        "P-REL-017",
+        "U-REL-003"
+      ],
+      "primary_entry_ids": [
+        "PRODECON-09",
+        "UNAM-II"
+      ],
+      "rbs_families": [
+        "R-INT"
+      ],
+      "candidate_normative_sources": [
+        "cff"
+      ],
+      "legal_relation_ids": [
+        "REL-NOR-INT"
+      ],
+      "requires_normative_validation": true,
+      "can_control_legal_decision": false
+    },
+    {
+      "canonical_id": "B5-REL-004",
+      "label": "Aplicación estricta de disposiciones fiscales",
+      "description": "Relación consolidada B.5: Aplicación estricta de disposiciones fiscales. Agrupa relaciones primarias semánticamente equivalentes o complementarias y conserva sus fuentes para validación posterior.",
+      "source_relation_ids": [
+        "P-REL-018",
+        "U-REL-004"
+      ],
+      "primary_entry_ids": [
+        "PRODECON-09",
+        "UNAM-II"
+      ],
+      "rbs_families": [
+        "R-INT"
+      ],
+      "candidate_normative_sources": [
+        "cff"
+      ],
+      "legal_relation_ids": [
+        "REL-NOR-INT"
+      ],
+      "requires_normative_validation": true,
+      "can_control_legal_decision": false
+    },
+    {
+      "canonical_id": "B5-REL-005",
+      "label": "Hecho imponible y obligación tributaria",
+      "description": "Relación consolidada B.5: Hecho imponible y obligación tributaria. Agrupa relaciones primarias semánticamente equivalentes o complementarias y conserva sus fuentes para validación posterior.",
+      "source_relation_ids": [
+        "P-REL-009",
+        "U-REL-005"
+      ],
+      "primary_entry_ids": [
+        "PRODECON-05",
+        "UNAM-III"
+      ],
+      "rbs_families": [
+        "R-TRI",
+        "R-SUJ"
+      ],
+      "candidate_normative_sources": [
+        "lisr",
+        "liva",
+        "lieps",
+        "lfisan",
+        "cff"
+      ],
+      "legal_relation_ids": [
+        "REL-HECHO-OBL"
+      ],
+      "requires_normative_validation": true,
+      "can_control_legal_decision": false
+    },
+    {
+      "canonical_id": "B5-REL-006",
+      "label": "Elementos esenciales y cuantificación del tributo",
+      "description": "Relación consolidada B.5: Elementos esenciales y cuantificación del tributo. Agrupa relaciones primarias semánticamente equivalentes o complementarias y conserva sus fuentes para validación posterior.",
+      "source_relation_ids": [
+        "P-REL-010",
+        "U-REL-006",
+        "U-REL-009"
+      ],
+      "primary_entry_ids": [
+        "PRODECON-05",
+        "UNAM-III",
+        "UNAM-V"
+      ],
+      "rbs_families": [
+        "R-TRI",
+        "R-CAL"
+      ],
+      "candidate_normative_sources": [
+        "lisr",
+        "liva",
+        "lieps",
+        "lfisan",
+        "cff",
+        "reg_lisr_060516",
+        "reg_liva_250914"
+      ],
+      "legal_relation_ids": [
+        "REL-TRI-CAL"
+      ],
+      "requires_normative_validation": true,
+      "can_control_legal_decision": false
+    },
+    {
+      "canonical_id": "B5-REL-007",
+      "label": "Sujeto pasivo frente a obligación tributaria",
+      "description": "Relación consolidada B.5: Sujeto pasivo frente a obligación tributaria. Agrupa relaciones primarias semánticamente equivalentes o complementarias y conserva sus fuentes para validación posterior.",
+      "source_relation_ids": [
+        "P-REL-007",
+        "U-REL-007"
+      ],
+      "primary_entry_ids": [
+        "PRODECON-04",
+        "UNAM-IV"
+      ],
+      "rbs_families": [
+        "R-SUJ",
+        "R-OBL"
+      ],
+      "candidate_normative_sources": [
+        "cff",
+        "lisr"
+      ],
+      "legal_relation_ids": [
+        "REL-SUJ-OBL"
+      ],
+      "requires_normative_validation": true,
+      "can_control_legal_decision": false
+    },
+    {
+      "canonical_id": "B5-REL-008",
+      "label": "Perfil y posición jurídica del contribuyente",
+      "description": "Relación consolidada B.5: Perfil y posición jurídica del contribuyente. Agrupa relaciones primarias semánticamente equivalentes o complementarias y conserva sus fuentes para validación posterior.",
+      "source_relation_ids": [
+        "P-REL-008",
+        "U-REL-008"
+      ],
+      "primary_entry_ids": [
+        "PRODECON-04",
+        "UNAM-IV"
+      ],
+      "rbs_families": [
+        "R-PER",
+        "R-SUJ"
+      ],
+      "candidate_normative_sources": [
+        "cff",
+        "lisr"
+      ],
+      "legal_relation_ids": [
+        "REL-AUT-CON",
+        "REL-SUJ-OBL"
+      ],
+      "requires_normative_validation": true,
+      "can_control_legal_decision": false
+    },
+    {
+      "canonical_id": "B5-REL-009",
+      "label": "Régimen y cálculo aplicable",
+      "description": "Relación consolidada B.5: Régimen y cálculo aplicable. Agrupa relaciones primarias semánticamente equivalentes o complementarias y conserva sus fuentes para validación posterior.",
+      "source_relation_ids": [
+        "P-REL-020",
+        "P-REL-022",
+        "U-REL-010"
+      ],
+      "primary_entry_ids": [
+        "PRODECON-10",
+        "PRODECON-11",
+        "UNAM-V"
+      ],
+      "rbs_families": [
+        "R-TRI",
+        "R-CAL",
+        "R-OBL"
+      ],
+      "candidate_normative_sources": [
+        "lisr",
+        "liva",
+        "cff",
+        "reg_lisr_060516",
+        "reg_liva_250914",
+        "rmf_2026"
+      ],
+      "legal_relation_ids": [
+        "REL-REG-REQ",
+        "REL-TRI-CAL"
+      ],
+      "requires_normative_validation": true,
+      "can_control_legal_decision": false
+    },
+    {
+      "canonical_id": "B5-REL-010",
+      "label": "Deuda tributaria y formas de extinción",
+      "description": "Relación consolidada B.5: Deuda tributaria y formas de extinción. Agrupa relaciones primarias semánticamente equivalentes o complementarias y conserva sus fuentes para validación posterior.",
+      "source_relation_ids": [
+        "P-REL-011",
+        "U-REL-011",
+        "U-REL-012"
+      ],
+      "primary_entry_ids": [
+        "PRODECON-06",
+        "UNAM-VI"
+      ],
+      "rbs_families": [
+        "R-AUT",
+        "R-DEU",
+        "R-OBL"
+      ],
+      "candidate_normative_sources": [
+        "cff"
+      ],
+      "legal_relation_ids": [
+        "REL-DEU-EXT",
+        "REL-OBL-PLA"
+      ],
+      "requires_normative_validation": true,
+      "can_control_legal_decision": false
+    },
+    {
+      "canonical_id": "B5-REL-011",
+      "label": "Incumplimiento y consecuencia jurídica",
+      "description": "Relación consolidada B.5: Incumplimiento y consecuencia jurídica. Agrupa relaciones primarias semánticamente equivalentes o complementarias y conserva sus fuentes para validación posterior.",
+      "source_relation_ids": [
+        "P-REL-012",
+        "U-REL-013"
+      ],
+      "primary_entry_ids": [
+        "PRODECON-06",
+        "UNAM-VII"
+      ],
+      "rbs_families": [
+        "R-INC",
+        "R-SAN"
+      ],
+      "candidate_normative_sources": [
+        "cff"
+      ],
+      "legal_relation_ids": [
+        "REL-INC-CONSEQ"
+      ],
+      "requires_normative_validation": true,
+      "can_control_legal_decision": false
+    },
+    {
+      "canonical_id": "B5-REL-012",
+      "label": "Acto de autoridad y vía de defensa",
+      "description": "Relación consolidada B.5: Acto de autoridad y vía de defensa. Agrupa relaciones primarias semánticamente equivalentes o complementarias y conserva sus fuentes para validación posterior.",
+      "source_relation_ids": [
+        "P-REL-015",
+        "U-REL-014"
+      ],
+      "primary_entry_ids": [
+        "PRODECON-08",
+        "UNAM-VII"
+      ],
+      "rbs_families": [
+        "R-AUT",
+        "R-DEF"
+      ],
+      "candidate_normative_sources": [
+        "cff",
+        "lfdc",
+        "lfpca",
+        "lotfja"
+      ],
+      "legal_relation_ids": [
+        "REL-AUT-DEF",
+        "REL-DER-AUT"
+      ],
+      "requires_normative_validation": true,
+      "can_control_legal_decision": false
+    },
+    {
+      "canonical_id": "B5-REL-013",
+      "label": "Ingresos del Estado y contribuciones",
+      "description": "Relación consolidada B.5: Ingresos del Estado y contribuciones. Agrupa relaciones primarias semánticamente equivalentes o complementarias y conserva sus fuentes para validación posterior.",
+      "source_relation_ids": [
+        "P-REL-001",
+        "P-REL-002"
+      ],
+      "primary_entry_ids": [
+        "PRODECON-01"
+      ],
+      "rbs_families": [
+        "R-TRI"
+      ],
+      "candidate_normative_sources": [
+        "cpeum",
+        "cff"
+      ],
+      "legal_relation_ids": [],
+      "requires_normative_validation": true,
+      "can_control_legal_decision": false
+    },
+    {
+      "canonical_id": "B5-REL-014",
+      "label": "Creación y estructura de impuestos",
+      "description": "Relación consolidada B.5: Creación y estructura de impuestos. Agrupa relaciones primarias semánticamente equivalentes o complementarias y conserva sus fuentes para validación posterior.",
+      "source_relation_ids": [
+        "P-REL-004",
+        "P-REL-005",
+        "P-REL-006"
+      ],
+      "primary_entry_ids": [
+        "PRODECON-02",
+        "PRODECON-03"
+      ],
+      "rbs_families": [
+        "R-TRI"
+      ],
+      "candidate_normative_sources": [
+        "cpeum",
+        "cff",
+        "lisr",
+        "liva",
+        "lieps",
+        "lfisan"
+      ],
+      "legal_relation_ids": [
+        "REL-HECHO-OBL"
+      ],
+      "requires_normative_validation": true,
+      "can_control_legal_decision": false
+    },
+    {
+      "canonical_id": "B5-REL-015",
+      "label": "Derechos y obligaciones fiscales del contribuyente",
+      "description": "Relación consolidada B.5: Derechos y obligaciones fiscales del contribuyente. Agrupa relaciones primarias semánticamente equivalentes o complementarias y conserva sus fuentes para validación posterior.",
+      "source_relation_ids": [
+        "P-REL-014",
+        "P-REL-016"
+      ],
+      "primary_entry_ids": [
+        "PRODECON-07",
+        "PRODECON-08"
+      ],
+      "rbs_families": [
+        "R-OBL",
+        "R-AUT",
+        "R-DEF"
+      ],
+      "candidate_normative_sources": [
+        "cff",
+        "lfdc"
+      ],
+      "legal_relation_ids": [
+        "REL-SUJ-OBL",
+        "REL-OBL-PLA",
+        "REL-DER-AUT"
+      ],
+      "requires_normative_validation": true,
+      "can_control_legal_decision": false
+    },
+    {
+      "canonical_id": "B5-REL-016",
+      "label": "ISR de asalariados",
+      "description": "Relación consolidada B.5: ISR de asalariados. Agrupa relaciones primarias semánticamente equivalentes o complementarias y conserva sus fuentes para validación posterior.",
+      "source_relation_ids": [
+        "P-REL-019"
+      ],
+      "primary_entry_ids": [
+        "PRODECON-10"
+      ],
+      "rbs_families": [
+        "R-TRI"
+      ],
+      "candidate_normative_sources": [
+        "lisr"
+      ],
+      "legal_relation_ids": [
+        "REL-TRI-CAL"
+      ],
+      "requires_normative_validation": true,
+      "can_control_legal_decision": false
+    },
+    {
+      "canonical_id": "B5-REL-017",
+      "label": "Actividad profesional y perfil fiscal",
+      "description": "Relación consolidada B.5: Actividad profesional y perfil fiscal. Agrupa relaciones primarias semánticamente equivalentes o complementarias y conserva sus fuentes para validación posterior.",
+      "source_relation_ids": [
+        "P-REL-021"
+      ],
+      "primary_entry_ids": [
+        "PRODECON-11"
+      ],
+      "rbs_families": [
+        "R-PER"
+      ],
+      "candidate_normative_sources": [
+        "lisr",
+        "cff"
+      ],
+      "legal_relation_ids": [
+        "REL-SUJ-OBL"
+      ],
+      "requires_normative_validation": true,
+      "can_control_legal_decision": false
+    },
+    {
+      "canonical_id": "B5-REL-018",
+      "label": "Temporalidad del RIF",
+      "description": "Relación consolidada B.5: Temporalidad del RIF. Agrupa relaciones primarias semánticamente equivalentes o complementarias y conserva sus fuentes para validación posterior.",
+      "source_relation_ids": [
+        "P-REL-023",
+        "P-REL-024"
+      ],
+      "primary_entry_ids": [
+        "PRODECON-12"
+      ],
+      "rbs_families": [
+        "R-TEM",
+        "R-TRI"
+      ],
+      "candidate_normative_sources": [
+        "lisr",
+        "rmf_2026"
+      ],
+      "legal_relation_ids": [
+        "REL-TEM-APL",
+        "REL-REG-REQ"
+      ],
+      "requires_normative_validation": true,
+      "can_control_legal_decision": false
+    }
+  ],
+  "preserves_source_provenance": true
+}

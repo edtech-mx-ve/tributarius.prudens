@@ -1,0 +1,320 @@
+{
+  "schema_version": "1.0",
+  "purpose": "Registro B.2 de familias generales para organizar el RBS Primario 1.0 sin crear, migrar ni modificar todavía reglas de producción.",
+  "families": [
+    {
+      "family_id": "R-PER",
+      "rule_prefix": "R-PER-",
+      "name": "Perfil fiscal",
+      "category": "subject",
+      "purpose": "Clasificar el perfil fiscal relevante del sujeto antes de evaluar obligaciones o regímenes.",
+      "legal_dimensions": [
+        "perfil_fiscal",
+        "persona_fisica",
+        "persona_moral"
+      ],
+      "primary_entry_ids": [
+        "PRODECON-04",
+        "PRODECON-11",
+        "UNAM-IV"
+      ],
+      "enabled_for_design": true,
+      "creates_rules": false
+    },
+    {
+      "family_id": "R-SUJ",
+      "rule_prefix": "R-SUJ-",
+      "name": "Sujetos tributarios",
+      "category": "subject",
+      "purpose": "Representar sujetos activos, pasivos y demás posiciones subjetivas necesarias para el razonamiento tributario.",
+      "legal_dimensions": [
+        "sujeto_activo",
+        "sujeto_pasivo",
+        "responsabilidad"
+      ],
+      "primary_entry_ids": [
+        "PRODECON-04",
+        "UNAM-III",
+        "UNAM-IV"
+      ],
+      "enabled_for_design": true,
+      "creates_rules": false
+    },
+    {
+      "family_id": "R-TRI",
+      "rule_prefix": "R-TRI-",
+      "name": "Tributos",
+      "category": "tax_structure",
+      "purpose": "Clasificar contribuciones e identificar la estructura tributaria que debe investigarse en el corpus normativo.",
+      "legal_dimensions": [
+        "tributo",
+        "impuesto",
+        "hecho_imponible",
+        "objeto"
+      ],
+      "primary_entry_ids": [
+        "PRODECON-01",
+        "PRODECON-02",
+        "PRODECON-03",
+        "PRODECON-05",
+        "PRODECON-10",
+        "PRODECON-11",
+        "PRODECON-12",
+        "UNAM-I",
+        "UNAM-III",
+        "UNAM-V"
+      ],
+      "enabled_for_design": true,
+      "creates_rules": false
+    },
+    {
+      "family_id": "R-OBL",
+      "rule_prefix": "R-OBL-",
+      "name": "Obligaciones",
+      "category": "compliance",
+      "purpose": "Organizar obligaciones tributarias sustantivas y formales que deban contrastarse con evidencia normativa aplicable.",
+      "legal_dimensions": [
+        "obligacion_tributaria",
+        "cumplimiento",
+        "obligacion_formal"
+      ],
+      "primary_entry_ids": [
+        "PRODECON-04",
+        "PRODECON-07",
+        "PRODECON-10",
+        "PRODECON-11",
+        "UNAM-IV",
+        "UNAM-VI"
+      ],
+      "enabled_for_design": true,
+      "creates_rules": false
+    },
+    {
+      "family_id": "R-DER",
+      "rule_prefix": "R-DER-",
+      "name": "Derechos",
+      "category": "compliance",
+      "purpose": "Organizar derechos y garantías del contribuyente que requieran validación contra las fuentes normativas autorizadas.",
+      "legal_dimensions": [
+        "derechos_contribuyente",
+        "garantias"
+      ],
+      "primary_entry_ids": [
+        "PRODECON-07",
+        "UNAM-I"
+      ],
+      "enabled_for_design": true,
+      "creates_rules": false
+    },
+    {
+      "family_id": "R-REQ",
+      "rule_prefix": "R-REQ-",
+      "name": "Requisitos",
+      "category": "compliance",
+      "purpose": "Representar requisitos positivos exigibles para acceder, permanecer o cumplir dentro de una figura o régimen fiscal.",
+      "legal_dimensions": [
+        "requisito",
+        "acceso",
+        "permanencia"
+      ],
+      "primary_entry_ids": [],
+      "enabled_for_design": true,
+      "creates_rules": false
+    },
+    {
+      "family_id": "R-LIM",
+      "rule_prefix": "R-LIM-",
+      "name": "Límites",
+      "category": "compliance",
+      "purpose": "Representar límites cuantitativos, cualitativos o competenciales que condicionen una institución o actuación fiscal.",
+      "legal_dimensions": [
+        "limite",
+        "umbral",
+        "competencia"
+      ],
+      "primary_entry_ids": [],
+      "enabled_for_design": true,
+      "creates_rules": false
+    },
+    {
+      "family_id": "R-EXC",
+      "rule_prefix": "R-EXC-",
+      "name": "Excepciones",
+      "category": "interpretation",
+      "purpose": "Representar excepciones normativas que alteren la aplicación ordinaria de una regla fiscal.",
+      "legal_dimensions": [
+        "excepcion",
+        "supuesto_especial"
+      ],
+      "primary_entry_ids": [
+        "PRODECON-09"
+      ],
+      "enabled_for_design": true,
+      "creates_rules": false
+    },
+    {
+      "family_id": "R-CAL",
+      "rule_prefix": "R-CAL-",
+      "name": "Cálculo",
+      "category": "tax_structure",
+      "purpose": "Organizar elementos de cálculo tributario como base, tasa, tarifa y operaciones determinísticas posteriores.",
+      "legal_dimensions": [
+        "calculo",
+        "base",
+        "tasa",
+        "tarifa"
+      ],
+      "primary_entry_ids": [
+        "PRODECON-05",
+        "PRODECON-10",
+        "PRODECON-11",
+        "PRODECON-12",
+        "UNAM-V"
+      ],
+      "enabled_for_design": true,
+      "creates_rules": false
+    },
+    {
+      "family_id": "R-DEU",
+      "rule_prefix": "R-DEU-",
+      "name": "Deuda tributaria",
+      "category": "consequence",
+      "purpose": "Representar nacimiento, exigibilidad, cumplimiento y extinción de deuda para su validación normativa.",
+      "legal_dimensions": [
+        "deuda_tributaria",
+        "exigibilidad",
+        "extincion",
+        "pago"
+      ],
+      "primary_entry_ids": [
+        "PRODECON-06",
+        "UNAM-VI"
+      ],
+      "enabled_for_design": true,
+      "creates_rules": false
+    },
+    {
+      "family_id": "R-AUT",
+      "rule_prefix": "R-AUT-",
+      "name": "Autoridad fiscal",
+      "category": "authority",
+      "purpose": "Organizar facultades y actuaciones de autoridad relevantes para el problema fiscal analizado.",
+      "legal_dimensions": [
+        "facultades_autoridad",
+        "acto_autoridad",
+        "cobro"
+      ],
+      "primary_entry_ids": [
+        "PRODECON-06",
+        "PRODECON-08",
+        "UNAM-VII"
+      ],
+      "enabled_for_design": true,
+      "creates_rules": false
+    },
+    {
+      "family_id": "R-COM",
+      "rule_prefix": "R-COM-",
+      "name": "Comprobación",
+      "category": "authority",
+      "purpose": "Representar actuaciones de comprobación y sus condiciones jurídicas sin anticipar una conclusión determinativa.",
+      "legal_dimensions": [
+        "comprobacion",
+        "fiscalizacion",
+        "procedimiento_revision"
+      ],
+      "primary_entry_ids": [],
+      "enabled_for_design": true,
+      "creates_rules": false
+    },
+    {
+      "family_id": "R-INC",
+      "rule_prefix": "R-INC-",
+      "name": "Incumplimiento",
+      "category": "consequence",
+      "purpose": "Clasificar supuestos de incumplimiento y conectar sus posibles consecuencias con evidencia normativa vigente.",
+      "legal_dimensions": [
+        "incumplimiento",
+        "consecuencia"
+      ],
+      "primary_entry_ids": [
+        "PRODECON-06",
+        "UNAM-VII"
+      ],
+      "enabled_for_design": true,
+      "creates_rules": false
+    },
+    {
+      "family_id": "R-SAN",
+      "rule_prefix": "R-SAN-",
+      "name": "Sanciones",
+      "category": "consequence",
+      "purpose": "Organizar consecuencias sancionadoras potenciales que solo podrán determinarse con fundamento normativo autorizado.",
+      "legal_dimensions": [
+        "sancion",
+        "infraccion"
+      ],
+      "primary_entry_ids": [
+        "UNAM-VII"
+      ],
+      "enabled_for_design": true,
+      "creates_rules": false
+    },
+    {
+      "family_id": "R-DEF",
+      "rule_prefix": "R-DEF-",
+      "name": "Defensa",
+      "category": "procedure",
+      "purpose": "Organizar rutas, actos y etapas de defensa del contribuyente para investigación normativa posterior.",
+      "legal_dimensions": [
+        "defensa",
+        "medio_impugnacion",
+        "procedimiento"
+      ],
+      "primary_entry_ids": [
+        "PRODECON-08",
+        "UNAM-VII"
+      ],
+      "enabled_for_design": true,
+      "creates_rules": false
+    },
+    {
+      "family_id": "R-INT",
+      "rule_prefix": "R-INT-",
+      "name": "Interpretación",
+      "category": "interpretation",
+      "purpose": "Organizar problemas de interpretación y aplicación de normas fiscales sin sustituir la fuente normativa aplicable.",
+      "legal_dimensions": [
+        "interpretacion",
+        "aplicacion_estricta",
+        "metodo_interpretativo"
+      ],
+      "primary_entry_ids": [
+        "PRODECON-02",
+        "PRODECON-09",
+        "UNAM-II"
+      ],
+      "enabled_for_design": true,
+      "creates_rules": false
+    },
+    {
+      "family_id": "R-TEM",
+      "rule_prefix": "R-TEM-",
+      "name": "Temporalidad",
+      "category": "temporality",
+      "purpose": "Controlar la dimensión temporal, vigencia y carácter histórico de reglas o regímenes antes de su aplicación.",
+      "legal_dimensions": [
+        "vigencia",
+        "temporalidad",
+        "contenido_historico"
+      ],
+      "primary_entry_ids": [
+        "PRODECON-12"
+      ],
+      "enabled_for_design": true,
+      "creates_rules": false
+    }
+  ],
+  "total_families": 17,
+  "modifies_current_rules": false
+}

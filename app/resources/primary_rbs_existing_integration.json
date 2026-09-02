@@ -1,0 +1,288 @@
+{
+  "schema_version": "1.0",
+  "baseline_commit": "23eec1bbc48c95bb0dde383530e06884348e6905",
+  "purpose": "B.9 integra las 14 reglas RBS productivas inventariadas en B.1 con las relaciones primarias B.5 y la validación B.8. Reutiliza sin cambios el RuleSet, rule_loader, rule_engine y rbr_reasoning existentes; no duplica reglas ni crea un motor paralelo.",
+  "production_rule_files": [
+    "mvp_income_classification.json",
+    "mvp_isr_professional.json",
+    "mvp_obligations_rights.json",
+    "mvp_taxpayer_profile.json"
+  ],
+  "integrations": [
+    {
+      "integration_id": "B9-RULE-001",
+      "rule_id": "PROFILE_INDIVIDUAL_001",
+      "version": "1.0.0",
+      "source_file": "mvp_taxpayer_profile.json",
+      "primary_relation_ids": [
+        "B5-REL-008"
+      ],
+      "rbs_family_ids": [
+        "R-PER"
+      ],
+      "normative_refs": [
+        "cff:articulo_1"
+      ],
+      "execution_mode": "existing_rule_engine",
+      "preserves_rule_definition": true,
+      "inherits_temporal_fail_closed": true,
+      "creates_duplicate_rule": false
+    },
+    {
+      "integration_id": "B9-RULE-002",
+      "rule_id": "PROFILE_LEGAL_ENTITY_002",
+      "version": "1.0.0",
+      "source_file": "mvp_taxpayer_profile.json",
+      "primary_relation_ids": [
+        "B5-REL-008"
+      ],
+      "rbs_family_ids": [
+        "R-PER"
+      ],
+      "normative_refs": [
+        "cff:articulo_1"
+      ],
+      "execution_mode": "existing_rule_engine",
+      "preserves_rule_definition": true,
+      "inherits_temporal_fail_closed": true,
+      "creates_duplicate_rule": false
+    },
+    {
+      "integration_id": "B9-RULE-003",
+      "rule_id": "PROFILE_CONTRIBUTION_SITUATION_003",
+      "version": "1.0.0",
+      "source_file": "mvp_taxpayer_profile.json",
+      "primary_relation_ids": [
+        "B5-REL-005"
+      ],
+      "rbs_family_ids": [
+        "R-TRI"
+      ],
+      "normative_refs": [
+        "cff:articulo_2"
+      ],
+      "execution_mode": "existing_rule_engine",
+      "preserves_rule_definition": true,
+      "inherits_temporal_fail_closed": true,
+      "creates_duplicate_rule": false
+    },
+    {
+      "integration_id": "B9-RULE-004",
+      "rule_id": "INCOME_SALARY_CLASSIFY_001",
+      "version": "1.0.0",
+      "source_file": "mvp_income_classification.json",
+      "primary_relation_ids": [
+        "B5-REL-016"
+      ],
+      "rbs_family_ids": [
+        "R-TRI"
+      ],
+      "normative_refs": [
+        "lisr:articulo_94"
+      ],
+      "execution_mode": "existing_rule_engine",
+      "preserves_rule_definition": true,
+      "inherits_temporal_fail_closed": true,
+      "creates_duplicate_rule": false
+    },
+    {
+      "integration_id": "B9-RULE-005",
+      "rule_id": "INCOME_BUSINESS_CLASSIFY_002",
+      "version": "1.0.0",
+      "source_file": "mvp_income_classification.json",
+      "primary_relation_ids": [
+        "B5-REL-005"
+      ],
+      "rbs_family_ids": [
+        "R-TRI"
+      ],
+      "normative_refs": [
+        "lisr:articulo_100"
+      ],
+      "execution_mode": "existing_rule_engine",
+      "preserves_rule_definition": true,
+      "inherits_temporal_fail_closed": true,
+      "creates_duplicate_rule": false
+    },
+    {
+      "integration_id": "B9-RULE-006",
+      "rule_id": "INCOME_RENTAL_CLASSIFY_003",
+      "version": "1.0.0",
+      "source_file": "mvp_income_classification.json",
+      "primary_relation_ids": [
+        "B5-REL-005"
+      ],
+      "rbs_family_ids": [
+        "R-TRI"
+      ],
+      "normative_refs": [
+        "lisr:articulo_114"
+      ],
+      "execution_mode": "existing_rule_engine",
+      "preserves_rule_definition": true,
+      "inherits_temporal_fail_closed": true,
+      "creates_duplicate_rule": false
+    },
+    {
+      "integration_id": "B9-RULE-007",
+      "rule_id": "ISR_PROFESSIONAL_CLASSIFY_001",
+      "version": "1.0.0",
+      "source_file": "mvp_isr_professional.json",
+      "primary_relation_ids": [
+        "B5-REL-017"
+      ],
+      "rbs_family_ids": [
+        "R-PER"
+      ],
+      "normative_refs": [
+        "lisr:articulo_100"
+      ],
+      "execution_mode": "existing_rule_engine",
+      "preserves_rule_definition": true,
+      "inherits_temporal_fail_closed": true,
+      "creates_duplicate_rule": false
+    },
+    {
+      "integration_id": "B9-RULE-008",
+      "rule_id": "ISR_PROFESSIONAL_PAYMENT_002",
+      "version": "1.0.0",
+      "source_file": "mvp_isr_professional.json",
+      "primary_relation_ids": [
+        "B5-REL-009"
+      ],
+      "rbs_family_ids": [
+        "R-OBL"
+      ],
+      "normative_refs": [
+        "lisr:articulo_100"
+      ],
+      "execution_mode": "existing_rule_engine",
+      "preserves_rule_definition": true,
+      "inherits_temporal_fail_closed": true,
+      "creates_duplicate_rule": false
+    },
+    {
+      "integration_id": "B9-RULE-009",
+      "rule_id": "OBL_PROFESSIONAL_RFC_001",
+      "version": "1.0.0",
+      "source_file": "mvp_obligations_rights.json",
+      "primary_relation_ids": [
+        "B5-REL-009",
+        "B5-REL-015"
+      ],
+      "rbs_family_ids": [
+        "R-OBL"
+      ],
+      "normative_refs": [
+        "lisr:articulo_110"
+      ],
+      "execution_mode": "existing_rule_engine",
+      "preserves_rule_definition": true,
+      "inherits_temporal_fail_closed": true,
+      "creates_duplicate_rule": false
+    },
+    {
+      "integration_id": "B9-RULE-010",
+      "rule_id": "OBL_PROFESSIONAL_ACCOUNTING_002",
+      "version": "1.0.0",
+      "source_file": "mvp_obligations_rights.json",
+      "primary_relation_ids": [
+        "B5-REL-009",
+        "B5-REL-015"
+      ],
+      "rbs_family_ids": [
+        "R-OBL"
+      ],
+      "normative_refs": [
+        "lisr:articulo_110"
+      ],
+      "execution_mode": "existing_rule_engine",
+      "preserves_rule_definition": true,
+      "inherits_temporal_fail_closed": true,
+      "creates_duplicate_rule": false
+    },
+    {
+      "integration_id": "B9-RULE-011",
+      "rule_id": "OBL_PROFESSIONAL_CFDI_003",
+      "version": "1.0.0",
+      "source_file": "mvp_obligations_rights.json",
+      "primary_relation_ids": [
+        "B5-REL-009",
+        "B5-REL-015"
+      ],
+      "rbs_family_ids": [
+        "R-OBL"
+      ],
+      "normative_refs": [
+        "lisr:articulo_110"
+      ],
+      "execution_mode": "existing_rule_engine",
+      "preserves_rule_definition": true,
+      "inherits_temporal_fail_closed": true,
+      "creates_duplicate_rule": false
+    },
+    {
+      "integration_id": "B9-RULE-012",
+      "rule_id": "RIGHT_INFORMATION_ASSISTANCE_004",
+      "version": "1.0.0",
+      "source_file": "mvp_obligations_rights.json",
+      "primary_relation_ids": [
+        "B5-REL-002"
+      ],
+      "rbs_family_ids": [
+        "R-DER"
+      ],
+      "normative_refs": [
+        "lfdc:articulo_2"
+      ],
+      "execution_mode": "existing_rule_engine",
+      "preserves_rule_definition": true,
+      "inherits_temporal_fail_closed": true,
+      "creates_duplicate_rule": false
+    },
+    {
+      "integration_id": "B9-RULE-013",
+      "rule_id": "RIGHT_TAX_DATA_CONFIDENTIALITY_005",
+      "version": "1.0.0",
+      "source_file": "mvp_obligations_rights.json",
+      "primary_relation_ids": [
+        "B5-REL-002"
+      ],
+      "rbs_family_ids": [
+        "R-DER"
+      ],
+      "normative_refs": [
+        "lfdc:articulo_2"
+      ],
+      "execution_mode": "existing_rule_engine",
+      "preserves_rule_definition": true,
+      "inherits_temporal_fail_closed": true,
+      "creates_duplicate_rule": false
+    },
+    {
+      "integration_id": "B9-RULE-014",
+      "rule_id": "RIGHT_RESPECTFUL_TREATMENT_006",
+      "version": "1.0.0",
+      "source_file": "mvp_obligations_rights.json",
+      "primary_relation_ids": [
+        "B5-REL-002"
+      ],
+      "rbs_family_ids": [
+        "R-DER"
+      ],
+      "normative_refs": [
+        "lfdc:articulo_2"
+      ],
+      "execution_mode": "existing_rule_engine",
+      "preserves_rule_definition": true,
+      "inherits_temporal_fail_closed": true,
+      "creates_duplicate_rule": false
+    }
+  ],
+  "total_rules": 14,
+  "execution_service": "app.services.rbr_reasoning.infer_rule_facts",
+  "requires_applicable_normative_refs": true,
+  "temporal_policy_fail_closed": true,
+  "modifies_production_rules": false,
+  "creates_parallel_rule_engine": false
+}

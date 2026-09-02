@@ -1,0 +1,506 @@
+{
+  "schema_version": "1.0",
+  "source": "prodecon",
+  "purpose": "B.3 extrae relaciones conceptuales de las 12 secciones PRODECON ya estructuradas en el Bloque A. Son insumos heurísticos previos a deduplicación y siempre requieren validación normativa.",
+  "relations": [
+    {
+      "relation_id": "P-REL-001",
+      "source": "prodecon",
+      "source_entry_id": "PRODECON-01",
+      "subject_concept": "ingresos del Estado",
+      "predicate": "se integran mediante",
+      "object_concept": "contribuciones",
+      "rbs_families": [
+        "R-TRI"
+      ],
+      "candidate_normative_sources": [
+        "cpeum",
+        "cff"
+      ],
+      "canonical_relation_ids": [],
+      "requires_normative_validation": true,
+      "can_control_legal_decision": false
+    },
+    {
+      "relation_id": "P-REL-002",
+      "source": "prodecon",
+      "source_entry_id": "PRODECON-01",
+      "subject_concept": "contribuciones",
+      "predicate": "se ubican dentro de",
+      "object_concept": "sistema fiscal",
+      "rbs_families": [
+        "R-TRI"
+      ],
+      "candidate_normative_sources": [
+        "cff"
+      ],
+      "canonical_relation_ids": [],
+      "requires_normative_validation": true,
+      "can_control_legal_decision": false
+    },
+    {
+      "relation_id": "P-REL-003",
+      "source": "prodecon",
+      "source_entry_id": "PRODECON-02",
+      "subject_concept": "potestad tributaria",
+      "predicate": "se sujeta a",
+      "object_concept": "principios constitucionales",
+      "rbs_families": [
+        "R-TRI",
+        "R-INT"
+      ],
+      "candidate_normative_sources": [
+        "cpeum",
+        "cff"
+      ],
+      "canonical_relation_ids": [],
+      "requires_normative_validation": true,
+      "can_control_legal_decision": false
+    },
+    {
+      "relation_id": "P-REL-004",
+      "source": "prodecon",
+      "source_entry_id": "PRODECON-02",
+      "subject_concept": "creación de impuestos",
+      "predicate": "requiere identificar",
+      "object_concept": "elementos esenciales",
+      "rbs_families": [
+        "R-TRI"
+      ],
+      "candidate_normative_sources": [
+        "cpeum",
+        "cff"
+      ],
+      "canonical_relation_ids": [],
+      "requires_normative_validation": true,
+      "can_control_legal_decision": false
+    },
+    {
+      "relation_id": "P-REL-005",
+      "source": "prodecon",
+      "source_entry_id": "PRODECON-03",
+      "subject_concept": "impuestos federales",
+      "predicate": "se organizan mediante",
+      "object_concept": "clasificación tributaria",
+      "rbs_families": [
+        "R-TRI"
+      ],
+      "candidate_normative_sources": [
+        "cff"
+      ],
+      "canonical_relation_ids": [
+        "REL-HECHO-OBL"
+      ],
+      "requires_normative_validation": true,
+      "can_control_legal_decision": false
+    },
+    {
+      "relation_id": "P-REL-006",
+      "source": "prodecon",
+      "source_entry_id": "PRODECON-03",
+      "subject_concept": "clasificación tributaria",
+      "predicate": "orienta la identificación de",
+      "object_concept": "tributo aplicable",
+      "rbs_families": [
+        "R-TRI"
+      ],
+      "candidate_normative_sources": [
+        "cff",
+        "lisr",
+        "liva",
+        "lieps",
+        "lfisan"
+      ],
+      "canonical_relation_ids": [
+        "REL-HECHO-OBL"
+      ],
+      "requires_normative_validation": true,
+      "can_control_legal_decision": false
+    },
+    {
+      "relation_id": "P-REL-007",
+      "source": "prodecon",
+      "source_entry_id": "PRODECON-04",
+      "subject_concept": "sujeto pasivo",
+      "predicate": "se vincula con",
+      "object_concept": "obligación tributaria",
+      "rbs_families": [
+        "R-SUJ",
+        "R-OBL"
+      ],
+      "candidate_normative_sources": [
+        "cff",
+        "lisr"
+      ],
+      "canonical_relation_ids": [
+        "REL-SUJ-OBL"
+      ],
+      "requires_normative_validation": true,
+      "can_control_legal_decision": false
+    },
+    {
+      "relation_id": "P-REL-008",
+      "source": "prodecon",
+      "source_entry_id": "PRODECON-04",
+      "subject_concept": "Estado",
+      "predicate": "se relaciona jurídicamente con",
+      "object_concept": "contribuyente",
+      "rbs_families": [
+        "R-PER",
+        "R-SUJ"
+      ],
+      "candidate_normative_sources": [
+        "cff"
+      ],
+      "canonical_relation_ids": [
+        "REL-AUT-CON"
+      ],
+      "requires_normative_validation": true,
+      "can_control_legal_decision": false
+    },
+    {
+      "relation_id": "P-REL-009",
+      "source": "prodecon",
+      "source_entry_id": "PRODECON-05",
+      "subject_concept": "hecho imponible",
+      "predicate": "activa el análisis de",
+      "object_concept": "impuesto federal",
+      "rbs_families": [
+        "R-TRI"
+      ],
+      "candidate_normative_sources": [
+        "lisr",
+        "liva",
+        "lieps",
+        "lfisan"
+      ],
+      "canonical_relation_ids": [
+        "REL-HECHO-OBL"
+      ],
+      "requires_normative_validation": true,
+      "can_control_legal_decision": false
+    },
+    {
+      "relation_id": "P-REL-010",
+      "source": "prodecon",
+      "source_entry_id": "PRODECON-05",
+      "subject_concept": "tributo",
+      "predicate": "se cuantifica mediante",
+      "object_concept": "base, tasa o tarifa",
+      "rbs_families": [
+        "R-TRI",
+        "R-CAL"
+      ],
+      "candidate_normative_sources": [
+        "lisr",
+        "liva",
+        "lieps",
+        "lfisan"
+      ],
+      "canonical_relation_ids": [
+        "REL-TRI-CAL",
+        "REL-REG-REQ"
+      ],
+      "requires_normative_validation": true,
+      "can_control_legal_decision": false
+    },
+    {
+      "relation_id": "P-REL-011",
+      "source": "prodecon",
+      "source_entry_id": "PRODECON-06",
+      "subject_concept": "facultad de cobro",
+      "predicate": "se ejerce frente a",
+      "object_concept": "deuda tributaria exigible",
+      "rbs_families": [
+        "R-AUT",
+        "R-DEU"
+      ],
+      "candidate_normative_sources": [
+        "cff"
+      ],
+      "canonical_relation_ids": [
+        "REL-AUT-CON",
+        "REL-DEU-EXT"
+      ],
+      "requires_normative_validation": true,
+      "can_control_legal_decision": false
+    },
+    {
+      "relation_id": "P-REL-012",
+      "source": "prodecon",
+      "source_entry_id": "PRODECON-06",
+      "subject_concept": "incumplimiento",
+      "predicate": "puede producir",
+      "object_concept": "consecuencia jurídica fiscal",
+      "rbs_families": [
+        "R-INC"
+      ],
+      "candidate_normative_sources": [
+        "cff"
+      ],
+      "canonical_relation_ids": [
+        "REL-INC-CONSEQ",
+        "REL-OBL-PLA"
+      ],
+      "requires_normative_validation": true,
+      "can_control_legal_decision": false
+    },
+    {
+      "relation_id": "P-REL-013",
+      "source": "prodecon",
+      "source_entry_id": "PRODECON-07",
+      "subject_concept": "contribuyente",
+      "predicate": "es titular de",
+      "object_concept": "derechos fiscales",
+      "rbs_families": [
+        "R-DER"
+      ],
+      "candidate_normative_sources": [
+        "lfdc",
+        "cff",
+        "cpeum"
+      ],
+      "canonical_relation_ids": [
+        "REL-DER-AUT"
+      ],
+      "requires_normative_validation": true,
+      "can_control_legal_decision": false
+    },
+    {
+      "relation_id": "P-REL-014",
+      "source": "prodecon",
+      "source_entry_id": "PRODECON-07",
+      "subject_concept": "contribuyente",
+      "predicate": "está sujeto a",
+      "object_concept": "obligaciones fiscales",
+      "rbs_families": [
+        "R-OBL"
+      ],
+      "candidate_normative_sources": [
+        "cff"
+      ],
+      "canonical_relation_ids": [
+        "REL-SUJ-OBL",
+        "REL-OBL-PLA"
+      ],
+      "requires_normative_validation": true,
+      "can_control_legal_decision": false
+    },
+    {
+      "relation_id": "P-REL-015",
+      "source": "prodecon",
+      "source_entry_id": "PRODECON-08",
+      "subject_concept": "acto de autoridad",
+      "predicate": "puede vincularse con",
+      "object_concept": "vía de defensa",
+      "rbs_families": [
+        "R-DEF",
+        "R-AUT"
+      ],
+      "candidate_normative_sources": [
+        "cff",
+        "lfpca",
+        "lotfja",
+        "lfdc"
+      ],
+      "canonical_relation_ids": [
+        "REL-AUT-DEF"
+      ],
+      "requires_normative_validation": true,
+      "can_control_legal_decision": false
+    },
+    {
+      "relation_id": "P-REL-016",
+      "source": "prodecon",
+      "source_entry_id": "PRODECON-08",
+      "subject_concept": "derecho del contribuyente",
+      "predicate": "condiciona el análisis de",
+      "object_concept": "actuación de autoridad",
+      "rbs_families": [
+        "R-DEF",
+        "R-AUT"
+      ],
+      "candidate_normative_sources": [
+        "cff",
+        "lfdc"
+      ],
+      "canonical_relation_ids": [
+        "REL-DER-AUT"
+      ],
+      "requires_normative_validation": true,
+      "can_control_legal_decision": false
+    },
+    {
+      "relation_id": "P-REL-017",
+      "source": "prodecon",
+      "source_entry_id": "PRODECON-09",
+      "subject_concept": "norma fiscal",
+      "predicate": "requiere",
+      "object_concept": "interpretación",
+      "rbs_families": [
+        "R-INT"
+      ],
+      "candidate_normative_sources": [
+        "cff"
+      ],
+      "canonical_relation_ids": [
+        "REL-NOR-INT"
+      ],
+      "requires_normative_validation": true,
+      "can_control_legal_decision": false
+    },
+    {
+      "relation_id": "P-REL-018",
+      "source": "prodecon",
+      "source_entry_id": "PRODECON-09",
+      "subject_concept": "disposición que establece cargas",
+      "predicate": "se analiza bajo",
+      "object_concept": "aplicación estricta",
+      "rbs_families": [
+        "R-INT"
+      ],
+      "candidate_normative_sources": [
+        "cff"
+      ],
+      "canonical_relation_ids": [
+        "REL-NOR-INT"
+      ],
+      "requires_normative_validation": true,
+      "can_control_legal_decision": false
+    },
+    {
+      "relation_id": "P-REL-019",
+      "source": "prodecon",
+      "source_entry_id": "PRODECON-10",
+      "subject_concept": "salario",
+      "predicate": "se vincula con",
+      "object_concept": "ISR de persona física",
+      "rbs_families": [
+        "R-TRI"
+      ],
+      "candidate_normative_sources": [
+        "lisr"
+      ],
+      "canonical_relation_ids": [
+        "REL-TRI-CAL"
+      ],
+      "requires_normative_validation": true,
+      "can_control_legal_decision": false
+    },
+    {
+      "relation_id": "P-REL-020",
+      "source": "prodecon",
+      "source_entry_id": "PRODECON-10",
+      "subject_concept": "ISR de asalariados",
+      "predicate": "requiere analizar",
+      "object_concept": "cálculo y obligaciones",
+      "rbs_families": [
+        "R-TRI",
+        "R-CAL",
+        "R-OBL"
+      ],
+      "candidate_normative_sources": [
+        "lisr",
+        "reg_lisr_060516",
+        "rmf_2026"
+      ],
+      "canonical_relation_ids": [
+        "REL-TRI-CAL",
+        "REL-REG-REQ"
+      ],
+      "requires_normative_validation": true,
+      "can_control_legal_decision": false
+    },
+    {
+      "relation_id": "P-REL-021",
+      "source": "prodecon",
+      "source_entry_id": "PRODECON-11",
+      "subject_concept": "actividad profesional",
+      "predicate": "se vincula con",
+      "object_concept": "perfil fiscal de persona física",
+      "rbs_families": [
+        "R-PER"
+      ],
+      "candidate_normative_sources": [
+        "lisr",
+        "cff"
+      ],
+      "canonical_relation_ids": [
+        "REL-SUJ-OBL"
+      ],
+      "requires_normative_validation": true,
+      "can_control_legal_decision": false
+    },
+    {
+      "relation_id": "P-REL-022",
+      "source": "prodecon",
+      "source_entry_id": "PRODECON-11",
+      "subject_concept": "servicio profesional",
+      "predicate": "requiere analizar",
+      "object_concept": "ISR, IVA, cálculo y obligaciones",
+      "rbs_families": [
+        "R-TRI",
+        "R-CAL",
+        "R-OBL"
+      ],
+      "candidate_normative_sources": [
+        "lisr",
+        "liva",
+        "cff",
+        "reg_lisr_060516",
+        "reg_liva_250914",
+        "rmf_2026"
+      ],
+      "canonical_relation_ids": [
+        "REL-TRI-CAL",
+        "REL-REG-REQ"
+      ],
+      "requires_normative_validation": true,
+      "can_control_legal_decision": false
+    },
+    {
+      "relation_id": "P-REL-023",
+      "source": "prodecon",
+      "source_entry_id": "PRODECON-12",
+      "subject_concept": "RIF",
+      "predicate": "depende de",
+      "object_concept": "vigencia temporal del régimen",
+      "rbs_families": [
+        "R-TEM",
+        "R-TRI"
+      ],
+      "candidate_normative_sources": [
+        "lisr",
+        "rmf_2026"
+      ],
+      "canonical_relation_ids": [
+        "REL-TEM-APL",
+        "REL-REG-REQ"
+      ],
+      "requires_normative_validation": true,
+      "can_control_legal_decision": false
+    },
+    {
+      "relation_id": "P-REL-024",
+      "source": "prodecon",
+      "source_entry_id": "PRODECON-12",
+      "subject_concept": "contenido histórico RIF",
+      "predicate": "requiere validar",
+      "object_concept": "fecha fiscal aplicable",
+      "rbs_families": [
+        "R-TEM"
+      ],
+      "candidate_normative_sources": [
+        "lisr",
+        "rmf_2026"
+      ],
+      "canonical_relation_ids": [
+        "REL-TEM-APL"
+      ],
+      "requires_normative_validation": true,
+      "can_control_legal_decision": false
+    }
+  ],
+  "source_entry_count": 12,
+  "deduplicated": false
+}

@@ -1,0 +1,197 @@
+{
+  "schema_version": "1.0",
+  "baseline_commit": "23eec1bbc48c95bb0dde383530e06884348e6905",
+  "purpose": "Inventario B.1 de las reglas RBS de producción existentes antes del diseño de familias generales y de su integración con la base primaria.",
+  "production_rule_files": [
+    "mvp_income_classification.json",
+    "mvp_isr_professional.json",
+    "mvp_obligations_rights.json",
+    "mvp_taxpayer_profile.json"
+  ],
+  "rules": [
+    {
+      "rule_id": "PROFILE_INDIVIDUAL_001",
+      "version": "1.0.0",
+      "source_file": "mvp_taxpayer_profile.json",
+      "kind": "profile",
+      "conclusion_code": "individual_taxpayer_profile",
+      "normative_refs": [
+        "cff:articulo_1"
+      ],
+      "enabled": true,
+      "requires_human_review": false,
+      "integration_status": "existing_production_rule"
+    },
+    {
+      "rule_id": "PROFILE_LEGAL_ENTITY_002",
+      "version": "1.0.0",
+      "source_file": "mvp_taxpayer_profile.json",
+      "kind": "profile",
+      "conclusion_code": "legal_entity_taxpayer_profile",
+      "normative_refs": [
+        "cff:articulo_1"
+      ],
+      "enabled": true,
+      "requires_human_review": false,
+      "integration_status": "existing_production_rule"
+    },
+    {
+      "rule_id": "PROFILE_CONTRIBUTION_SITUATION_003",
+      "version": "1.0.0",
+      "source_file": "mvp_taxpayer_profile.json",
+      "kind": "profile",
+      "conclusion_code": "specific_tax_law_required",
+      "normative_refs": [
+        "cff:articulo_2"
+      ],
+      "enabled": true,
+      "requires_human_review": false,
+      "integration_status": "existing_production_rule"
+    },
+    {
+      "rule_id": "INCOME_SALARY_CLASSIFY_001",
+      "version": "1.0.0",
+      "source_file": "mvp_income_classification.json",
+      "kind": "income_classification",
+      "conclusion_code": "salary_income",
+      "normative_refs": [
+        "lisr:articulo_94"
+      ],
+      "enabled": true,
+      "requires_human_review": false,
+      "integration_status": "existing_production_rule"
+    },
+    {
+      "rule_id": "INCOME_BUSINESS_CLASSIFY_002",
+      "version": "1.0.0",
+      "source_file": "mvp_income_classification.json",
+      "kind": "income_classification",
+      "conclusion_code": "business_activity_income",
+      "normative_refs": [
+        "lisr:articulo_100"
+      ],
+      "enabled": true,
+      "requires_human_review": false,
+      "integration_status": "existing_production_rule"
+    },
+    {
+      "rule_id": "INCOME_RENTAL_CLASSIFY_003",
+      "version": "1.0.0",
+      "source_file": "mvp_income_classification.json",
+      "kind": "income_classification",
+      "conclusion_code": "real_estate_rental_income",
+      "normative_refs": [
+        "lisr:articulo_114"
+      ],
+      "enabled": true,
+      "requires_human_review": false,
+      "integration_status": "existing_production_rule"
+    },
+    {
+      "rule_id": "ISR_PROFESSIONAL_CLASSIFY_001",
+      "version": "1.0.0",
+      "source_file": "mvp_isr_professional.json",
+      "kind": "isr_professional",
+      "conclusion_code": "professional_service_income",
+      "normative_refs": [
+        "lisr:articulo_100"
+      ],
+      "enabled": true,
+      "requires_human_review": false,
+      "integration_status": "existing_production_rule"
+    },
+    {
+      "rule_id": "ISR_PROFESSIONAL_PAYMENT_002",
+      "version": "1.0.0",
+      "source_file": "mvp_isr_professional.json",
+      "kind": "isr_professional",
+      "conclusion_code": "isr_professional_payment_obligation",
+      "normative_refs": [
+        "lisr:articulo_100"
+      ],
+      "enabled": true,
+      "requires_human_review": false,
+      "integration_status": "existing_production_rule"
+    },
+    {
+      "rule_id": "OBL_PROFESSIONAL_RFC_001",
+      "version": "1.0.0",
+      "source_file": "mvp_obligations_rights.json",
+      "kind": "obligation",
+      "conclusion_code": "rfc_registration_obligation",
+      "normative_refs": [
+        "lisr:articulo_110"
+      ],
+      "enabled": true,
+      "requires_human_review": false,
+      "integration_status": "existing_production_rule"
+    },
+    {
+      "rule_id": "OBL_PROFESSIONAL_ACCOUNTING_002",
+      "version": "1.0.0",
+      "source_file": "mvp_obligations_rights.json",
+      "kind": "obligation",
+      "conclusion_code": "accounting_obligation",
+      "normative_refs": [
+        "lisr:articulo_110"
+      ],
+      "enabled": true,
+      "requires_human_review": false,
+      "integration_status": "existing_production_rule"
+    },
+    {
+      "rule_id": "OBL_PROFESSIONAL_CFDI_003",
+      "version": "1.0.0",
+      "source_file": "mvp_obligations_rights.json",
+      "kind": "obligation",
+      "conclusion_code": "income_cfdi_obligation",
+      "normative_refs": [
+        "lisr:articulo_110"
+      ],
+      "enabled": true,
+      "requires_human_review": false,
+      "integration_status": "existing_production_rule"
+    },
+    {
+      "rule_id": "RIGHT_INFORMATION_ASSISTANCE_004",
+      "version": "1.0.0",
+      "source_file": "mvp_obligations_rights.json",
+      "kind": "right",
+      "conclusion_code": "right_information_and_assistance",
+      "normative_refs": [
+        "lfdc:articulo_2"
+      ],
+      "enabled": true,
+      "requires_human_review": false,
+      "integration_status": "existing_production_rule"
+    },
+    {
+      "rule_id": "RIGHT_TAX_DATA_CONFIDENTIALITY_005",
+      "version": "1.0.0",
+      "source_file": "mvp_obligations_rights.json",
+      "kind": "right",
+      "conclusion_code": "right_tax_data_confidentiality",
+      "normative_refs": [
+        "lfdc:articulo_2"
+      ],
+      "enabled": true,
+      "requires_human_review": false,
+      "integration_status": "existing_production_rule"
+    },
+    {
+      "rule_id": "RIGHT_RESPECTFUL_TREATMENT_006",
+      "version": "1.0.0",
+      "source_file": "mvp_obligations_rights.json",
+      "kind": "right",
+      "conclusion_code": "right_respectful_treatment",
+      "normative_refs": [
+        "lfdc:articulo_2"
+      ],
+      "enabled": true,
+      "requires_human_review": false,
+      "integration_status": "existing_production_rule"
+    }
+  ],
+  "total_rules": 14,
+  "can_modify_production_rules": false
+}

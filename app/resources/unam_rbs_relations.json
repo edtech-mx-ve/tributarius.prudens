@@ -1,0 +1,309 @@
+{
+  "schema_version": "1.0",
+  "source": "unam",
+  "purpose": "B.4 extrae relaciones conceptuales de los 7 capítulos UNAM ya estructurados en el Bloque A. Son insumos heurísticos previos a deduplicación y siempre requieren validación normativa.",
+  "relations": [
+    {
+      "relation_id": "U-REL-001",
+      "source": "unam",
+      "source_entry_id": "UNAM-I",
+      "subject_concept": "potestad tributaria",
+      "predicate": "se limita por",
+      "object_concept": "principios constitucionales",
+      "rbs_families": [
+        "R-TRI",
+        "R-DER"
+      ],
+      "candidate_normative_sources": [
+        "cpeum",
+        "cff"
+      ],
+      "canonical_relation_ids": [],
+      "requires_normative_validation": true,
+      "can_control_legal_decision": false
+    },
+    {
+      "relation_id": "U-REL-002",
+      "source": "unam",
+      "source_entry_id": "UNAM-I",
+      "subject_concept": "derechos del contribuyente",
+      "predicate": "se conectan con",
+      "object_concept": "garantías constitucionales",
+      "rbs_families": [
+        "R-DER"
+      ],
+      "candidate_normative_sources": [
+        "cpeum",
+        "lfdc"
+      ],
+      "canonical_relation_ids": [
+        "REL-DER-AUT"
+      ],
+      "requires_normative_validation": true,
+      "can_control_legal_decision": false
+    },
+    {
+      "relation_id": "U-REL-003",
+      "source": "unam",
+      "source_entry_id": "UNAM-II",
+      "subject_concept": "norma fiscal",
+      "predicate": "requiere",
+      "object_concept": "interpretación jurídica",
+      "rbs_families": [
+        "R-INT"
+      ],
+      "candidate_normative_sources": [
+        "cff"
+      ],
+      "canonical_relation_ids": [
+        "REL-NOR-INT"
+      ],
+      "requires_normative_validation": true,
+      "can_control_legal_decision": false
+    },
+    {
+      "relation_id": "U-REL-004",
+      "source": "unam",
+      "source_entry_id": "UNAM-II",
+      "subject_concept": "aplicación estricta",
+      "predicate": "condiciona el análisis de",
+      "object_concept": "disposiciones fiscales específicas",
+      "rbs_families": [
+        "R-INT"
+      ],
+      "candidate_normative_sources": [
+        "cff"
+      ],
+      "canonical_relation_ids": [
+        "REL-NOR-INT"
+      ],
+      "requires_normative_validation": true,
+      "can_control_legal_decision": false
+    },
+    {
+      "relation_id": "U-REL-005",
+      "source": "unam",
+      "source_entry_id": "UNAM-III",
+      "subject_concept": "hecho imponible",
+      "predicate": "se vincula con",
+      "object_concept": "nacimiento de obligación tributaria",
+      "rbs_families": [
+        "R-TRI",
+        "R-SUJ"
+      ],
+      "candidate_normative_sources": [
+        "cff",
+        "lisr",
+        "liva",
+        "lieps",
+        "lfisan"
+      ],
+      "canonical_relation_ids": [
+        "REL-HECHO-OBL"
+      ],
+      "requires_normative_validation": true,
+      "can_control_legal_decision": false
+    },
+    {
+      "relation_id": "U-REL-006",
+      "source": "unam",
+      "source_entry_id": "UNAM-III",
+      "subject_concept": "tributo",
+      "predicate": "se estructura mediante",
+      "object_concept": "sujeto, objeto, base, tasa o tarifa",
+      "rbs_families": [
+        "R-TRI"
+      ],
+      "candidate_normative_sources": [
+        "cff",
+        "lisr",
+        "liva",
+        "lieps",
+        "lfisan"
+      ],
+      "canonical_relation_ids": [
+        "REL-TRI-CAL"
+      ],
+      "requires_normative_validation": true,
+      "can_control_legal_decision": false
+    },
+    {
+      "relation_id": "U-REL-007",
+      "source": "unam",
+      "source_entry_id": "UNAM-IV",
+      "subject_concept": "sujeto pasivo",
+      "predicate": "se vincula con",
+      "object_concept": "obligación tributaria",
+      "rbs_families": [
+        "R-SUJ",
+        "R-OBL"
+      ],
+      "candidate_normative_sources": [
+        "cff",
+        "lisr"
+      ],
+      "canonical_relation_ids": [
+        "REL-SUJ-OBL"
+      ],
+      "requires_normative_validation": true,
+      "can_control_legal_decision": false
+    },
+    {
+      "relation_id": "U-REL-008",
+      "source": "unam",
+      "source_entry_id": "UNAM-IV",
+      "subject_concept": "responsabilidad fiscal",
+      "predicate": "depende de",
+      "object_concept": "posición jurídica del sujeto",
+      "rbs_families": [
+        "R-PER",
+        "R-SUJ"
+      ],
+      "candidate_normative_sources": [
+        "cff",
+        "lisr"
+      ],
+      "canonical_relation_ids": [
+        "REL-SUJ-OBL"
+      ],
+      "requires_normative_validation": true,
+      "can_control_legal_decision": false
+    },
+    {
+      "relation_id": "U-REL-009",
+      "source": "unam",
+      "source_entry_id": "UNAM-V",
+      "subject_concept": "contribución",
+      "predicate": "se cuantifica mediante",
+      "object_concept": "base, tasa, tarifa y procedimiento de cálculo",
+      "rbs_families": [
+        "R-CAL",
+        "R-TRI"
+      ],
+      "candidate_normative_sources": [
+        "lisr",
+        "liva",
+        "cff",
+        "reg_lisr_060516",
+        "reg_liva_250914"
+      ],
+      "canonical_relation_ids": [
+        "REL-TRI-CAL"
+      ],
+      "requires_normative_validation": true,
+      "can_control_legal_decision": false
+    },
+    {
+      "relation_id": "U-REL-010",
+      "source": "unam",
+      "source_entry_id": "UNAM-V",
+      "subject_concept": "autodeterminación tributaria",
+      "predicate": "requiere analizar",
+      "object_concept": "régimen y elementos de cálculo aplicables",
+      "rbs_families": [
+        "R-CAL",
+        "R-TRI"
+      ],
+      "candidate_normative_sources": [
+        "lisr",
+        "liva",
+        "cff",
+        "reg_lisr_060516",
+        "reg_liva_250914"
+      ],
+      "canonical_relation_ids": [
+        "REL-REG-REQ",
+        "REL-TRI-CAL"
+      ],
+      "requires_normative_validation": true,
+      "can_control_legal_decision": false
+    },
+    {
+      "relation_id": "U-REL-011",
+      "source": "unam",
+      "source_entry_id": "UNAM-VI",
+      "subject_concept": "deuda tributaria",
+      "predicate": "puede extinguirse mediante",
+      "object_concept": "formas de cumplimiento reconocidas",
+      "rbs_families": [
+        "R-DEU",
+        "R-OBL"
+      ],
+      "candidate_normative_sources": [
+        "cff"
+      ],
+      "canonical_relation_ids": [
+        "REL-DEU-EXT"
+      ],
+      "requires_normative_validation": true,
+      "can_control_legal_decision": false
+    },
+    {
+      "relation_id": "U-REL-012",
+      "source": "unam",
+      "source_entry_id": "UNAM-VI",
+      "subject_concept": "exigibilidad",
+      "predicate": "se vincula con",
+      "object_concept": "cumplimiento o extinción de la deuda",
+      "rbs_families": [
+        "R-DEU",
+        "R-OBL"
+      ],
+      "candidate_normative_sources": [
+        "cff"
+      ],
+      "canonical_relation_ids": [
+        "REL-DEU-EXT",
+        "REL-OBL-PLA"
+      ],
+      "requires_normative_validation": true,
+      "can_control_legal_decision": false
+    },
+    {
+      "relation_id": "U-REL-013",
+      "source": "unam",
+      "source_entry_id": "UNAM-VII",
+      "subject_concept": "incumplimiento",
+      "predicate": "puede producir",
+      "object_concept": "consecuencia o sanción fiscal",
+      "rbs_families": [
+        "R-INC",
+        "R-SAN"
+      ],
+      "candidate_normative_sources": [
+        "cff"
+      ],
+      "canonical_relation_ids": [
+        "REL-INC-CONSEQ"
+      ],
+      "requires_normative_validation": true,
+      "can_control_legal_decision": false
+    },
+    {
+      "relation_id": "U-REL-014",
+      "source": "unam",
+      "source_entry_id": "UNAM-VII",
+      "subject_concept": "acto de autoridad derivado del incumplimiento",
+      "predicate": "puede vincularse con",
+      "object_concept": "defensa del contribuyente",
+      "rbs_families": [
+        "R-AUT",
+        "R-DEF"
+      ],
+      "candidate_normative_sources": [
+        "cff",
+        "lfdc",
+        "lfpca",
+        "lotfja"
+      ],
+      "canonical_relation_ids": [
+        "REL-AUT-DEF",
+        "REL-DER-AUT"
+      ],
+      "requires_normative_validation": true,
+      "can_control_legal_decision": false
+    }
+  ],
+  "source_entry_count": 7,
+  "deduplicated": false
+}

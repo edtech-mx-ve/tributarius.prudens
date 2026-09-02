@@ -1,0 +1,302 @@
+{
+  "schema_version": "1.0",
+  "benchmark_version": "1.0.0",
+  "baseline_commit": "23eec1bbc48c95bb0dde383530e06884348e6905",
+  "purpose": "Benchmark reproducible B.10 del RBS Primario 1.0. Verifica el gate de evidencia normativa, clasificación, encadenamiento, trazabilidad, ausencia de evidencia jurídica no autorizada y cobertura de las 14 reglas productivas integradas en B.9.",
+  "scope_statement": "Un resultado satisfactorio demuestra únicamente que el dataset explícito B.10 satisface los contratos reproducibles actuales del RBS integrado. No demuestra cobertura completa del Derecho fiscal mexicano ni vigencia material de cada norma para cualquier fecha o caso.",
+  "cases": [
+    {
+      "case_id": "B10-CASE-001",
+      "title": "Bloqueo fail-closed sin evidencia normativa",
+      "facts": {
+        "taxpayer_type": "individual"
+      },
+      "applicable_normative_refs": null,
+      "expected_matched_rule_ids": [],
+      "expected_absent_rule_ids": [
+        "PROFILE_INDIVIDUAL_001",
+        "PROFILE_LEGAL_ENTITY_002",
+        "PROFILE_CONTRIBUTION_SITUATION_003",
+        "INCOME_SALARY_CLASSIFY_001",
+        "INCOME_BUSINESS_CLASSIFY_002",
+        "INCOME_RENTAL_CLASSIFY_003",
+        "ISR_PROFESSIONAL_CLASSIFY_001",
+        "ISR_PROFESSIONAL_PAYMENT_002",
+        "OBL_PROFESSIONAL_RFC_001",
+        "OBL_PROFESSIONAL_ACCOUNTING_002",
+        "OBL_PROFESSIONAL_CFDI_003",
+        "RIGHT_INFORMATION_ASSISTANCE_004",
+        "RIGHT_TAX_DATA_CONFIDENTIALITY_005",
+        "RIGHT_RESPECTFUL_TREATMENT_006"
+      ],
+      "required_derivation_edges": [],
+      "expected_requires_human_review": false
+    },
+    {
+      "case_id": "B10-CASE-002",
+      "title": "Perfil de persona física con CFF artículo 1",
+      "facts": {
+        "taxpayer_type": "individual"
+      },
+      "applicable_normative_refs": [
+        "cff:articulo_1"
+      ],
+      "expected_matched_rule_ids": [
+        "PROFILE_INDIVIDUAL_001"
+      ],
+      "expected_absent_rule_ids": [
+        "PROFILE_LEGAL_ENTITY_002"
+      ],
+      "required_derivation_edges": [],
+      "expected_requires_human_review": false
+    },
+    {
+      "case_id": "B10-CASE-003",
+      "title": "Perfil de persona moral con CFF artículo 1",
+      "facts": {
+        "taxpayer_type": "legal_entity"
+      },
+      "applicable_normative_refs": [
+        "cff:articulo_1"
+      ],
+      "expected_matched_rule_ids": [
+        "PROFILE_LEGAL_ENTITY_002"
+      ],
+      "expected_absent_rule_ids": [
+        "PROFILE_INDIVIDUAL_001"
+      ],
+      "required_derivation_edges": [],
+      "expected_requires_human_review": false
+    },
+    {
+      "case_id": "B10-CASE-004",
+      "title": "Encadenamiento de perfil a situación contributiva",
+      "facts": {
+        "taxpayer_type": "individual",
+        "taxable_legal_or_factual_situation": true
+      },
+      "applicable_normative_refs": [
+        "cff:articulo_1",
+        "cff:articulo_2"
+      ],
+      "expected_matched_rule_ids": [
+        "PROFILE_INDIVIDUAL_001",
+        "PROFILE_CONTRIBUTION_SITUATION_003"
+      ],
+      "expected_absent_rule_ids": [],
+      "required_derivation_edges": [
+        {
+          "producer_rule_id": "PROFILE_INDIVIDUAL_001",
+          "consumer_rule_id": "PROFILE_CONTRIBUTION_SITUATION_003",
+          "fact": "individual_taxpayer_profile"
+        }
+      ],
+      "expected_requires_human_review": false
+    },
+    {
+      "case_id": "B10-CASE-005",
+      "title": "Clasificación de ingreso salarial",
+      "facts": {
+        "taxpayer_type": "individual",
+        "income_type": "subordinate_personal_service"
+      },
+      "applicable_normative_refs": [
+        "cff:articulo_1",
+        "lisr:articulo_94"
+      ],
+      "expected_matched_rule_ids": [
+        "PROFILE_INDIVIDUAL_001",
+        "INCOME_SALARY_CLASSIFY_001"
+      ],
+      "expected_absent_rule_ids": [
+        "INCOME_BUSINESS_CLASSIFY_002",
+        "INCOME_RENTAL_CLASSIFY_003",
+        "ISR_PROFESSIONAL_CLASSIFY_001"
+      ],
+      "required_derivation_edges": [],
+      "expected_requires_human_review": false
+    },
+    {
+      "case_id": "B10-CASE-006",
+      "title": "Clasificación de ingreso por actividad empresarial",
+      "facts": {
+        "taxpayer_type": "individual",
+        "income_type": "business_activity"
+      },
+      "applicable_normative_refs": [
+        "cff:articulo_1",
+        "lisr:articulo_100"
+      ],
+      "expected_matched_rule_ids": [
+        "PROFILE_INDIVIDUAL_001",
+        "INCOME_BUSINESS_CLASSIFY_002"
+      ],
+      "expected_absent_rule_ids": [
+        "INCOME_SALARY_CLASSIFY_001",
+        "INCOME_RENTAL_CLASSIFY_003",
+        "ISR_PROFESSIONAL_CLASSIFY_001"
+      ],
+      "required_derivation_edges": [],
+      "expected_requires_human_review": false
+    },
+    {
+      "case_id": "B10-CASE-007",
+      "title": "Clasificación de ingreso por arrendamiento",
+      "facts": {
+        "taxpayer_type": "individual",
+        "income_type": "real_estate_rental"
+      },
+      "applicable_normative_refs": [
+        "cff:articulo_1",
+        "lisr:articulo_114"
+      ],
+      "expected_matched_rule_ids": [
+        "PROFILE_INDIVIDUAL_001",
+        "INCOME_RENTAL_CLASSIFY_003"
+      ],
+      "expected_absent_rule_ids": [
+        "INCOME_SALARY_CLASSIFY_001",
+        "INCOME_BUSINESS_CLASSIFY_002",
+        "ISR_PROFESSIONAL_CLASSIFY_001"
+      ],
+      "required_derivation_edges": [],
+      "expected_requires_human_review": false
+    },
+    {
+      "case_id": "B10-CASE-008",
+      "title": "Cadena profesional completa con obligaciones",
+      "facts": {
+        "taxpayer_type": "individual",
+        "income_type": "independent_professional_service"
+      },
+      "applicable_normative_refs": [
+        "cff:articulo_1",
+        "lisr:articulo_100",
+        "lisr:articulo_110"
+      ],
+      "expected_matched_rule_ids": [
+        "PROFILE_INDIVIDUAL_001",
+        "ISR_PROFESSIONAL_CLASSIFY_001",
+        "OBL_PROFESSIONAL_RFC_001",
+        "OBL_PROFESSIONAL_ACCOUNTING_002",
+        "OBL_PROFESSIONAL_CFDI_003",
+        "ISR_PROFESSIONAL_PAYMENT_002"
+      ],
+      "expected_absent_rule_ids": [
+        "RIGHT_INFORMATION_ASSISTANCE_004",
+        "RIGHT_TAX_DATA_CONFIDENTIALITY_005",
+        "RIGHT_RESPECTFUL_TREATMENT_006"
+      ],
+      "required_derivation_edges": [
+        {
+          "producer_rule_id": "ISR_PROFESSIONAL_CLASSIFY_001",
+          "consumer_rule_id": "ISR_PROFESSIONAL_PAYMENT_002",
+          "fact": "professional_service_income"
+        },
+        {
+          "producer_rule_id": "ISR_PROFESSIONAL_CLASSIFY_001",
+          "consumer_rule_id": "OBL_PROFESSIONAL_RFC_001",
+          "fact": "professional_service_income"
+        },
+        {
+          "producer_rule_id": "ISR_PROFESSIONAL_CLASSIFY_001",
+          "consumer_rule_id": "OBL_PROFESSIONAL_ACCOUNTING_002",
+          "fact": "professional_service_income"
+        },
+        {
+          "producer_rule_id": "ISR_PROFESSIONAL_CLASSIFY_001",
+          "consumer_rule_id": "OBL_PROFESSIONAL_CFDI_003",
+          "fact": "professional_service_income"
+        }
+      ],
+      "expected_requires_human_review": false
+    },
+    {
+      "case_id": "B10-CASE-009",
+      "title": "Encadenamiento de perfil hacia derechos del contribuyente",
+      "facts": {
+        "taxpayer_type": "individual"
+      },
+      "applicable_normative_refs": [
+        "cff:articulo_1",
+        "lfdc:articulo_2"
+      ],
+      "expected_matched_rule_ids": [
+        "PROFILE_INDIVIDUAL_001",
+        "RIGHT_INFORMATION_ASSISTANCE_004",
+        "RIGHT_TAX_DATA_CONFIDENTIALITY_005",
+        "RIGHT_RESPECTFUL_TREATMENT_006"
+      ],
+      "expected_absent_rule_ids": [],
+      "required_derivation_edges": [
+        {
+          "producer_rule_id": "PROFILE_INDIVIDUAL_001",
+          "consumer_rule_id": "RIGHT_INFORMATION_ASSISTANCE_004",
+          "fact": "individual_taxpayer_profile"
+        },
+        {
+          "producer_rule_id": "PROFILE_INDIVIDUAL_001",
+          "consumer_rule_id": "RIGHT_TAX_DATA_CONFIDENTIALITY_005",
+          "fact": "individual_taxpayer_profile"
+        },
+        {
+          "producer_rule_id": "PROFILE_INDIVIDUAL_001",
+          "consumer_rule_id": "RIGHT_RESPECTFUL_TREATMENT_006",
+          "fact": "individual_taxpayer_profile"
+        }
+      ],
+      "expected_requires_human_review": false
+    },
+    {
+      "case_id": "B10-CASE-010",
+      "title": "Evidencia parcial bloquea obligaciones no autorizadas",
+      "facts": {
+        "taxpayer_type": "individual",
+        "income_type": "independent_professional_service"
+      },
+      "applicable_normative_refs": [
+        "lisr:articulo_100"
+      ],
+      "expected_matched_rule_ids": [
+        "ISR_PROFESSIONAL_CLASSIFY_001",
+        "ISR_PROFESSIONAL_PAYMENT_002"
+      ],
+      "expected_absent_rule_ids": [
+        "PROFILE_INDIVIDUAL_001",
+        "OBL_PROFESSIONAL_RFC_001",
+        "OBL_PROFESSIONAL_ACCOUNTING_002",
+        "OBL_PROFESSIONAL_CFDI_003"
+      ],
+      "required_derivation_edges": [
+        {
+          "producer_rule_id": "ISR_PROFESSIONAL_CLASSIFY_001",
+          "consumer_rule_id": "ISR_PROFESSIONAL_PAYMENT_002",
+          "fact": "professional_service_income"
+        }
+      ],
+      "expected_requires_human_review": false
+    }
+  ],
+  "required_rule_coverage": [
+    "PROFILE_INDIVIDUAL_001",
+    "PROFILE_LEGAL_ENTITY_002",
+    "PROFILE_CONTRIBUTION_SITUATION_003",
+    "INCOME_SALARY_CLASSIFY_001",
+    "INCOME_BUSINESS_CLASSIFY_002",
+    "INCOME_RENTAL_CLASSIFY_003",
+    "ISR_PROFESSIONAL_CLASSIFY_001",
+    "ISR_PROFESSIONAL_PAYMENT_002",
+    "OBL_PROFESSIONAL_RFC_001",
+    "OBL_PROFESSIONAL_ACCOUNTING_002",
+    "OBL_PROFESSIONAL_CFDI_003",
+    "RIGHT_INFORMATION_ASSISTANCE_004",
+    "RIGHT_TAX_DATA_CONFIDENTIALITY_005",
+    "RIGHT_RESPECTFUL_TREATMENT_006"
+  ],
+  "expected_case_count": 10,
+  "pass_threshold": 1.0,
+  "validates_current_dataset_only": true,
+  "claims_full_mexican_tax_law_coverage": false,
+  "uses_existing_rule_engine_only": true,
+  "allows_external_legal_evidence": false
+}

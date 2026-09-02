@@ -1,0 +1,383 @@
+{
+  "schema_version": "1.0",
+  "purpose": "B.7 separa formalmente la orientación heurística de PRODECON/UNAM de la determinación jurídica. Una relación sólo puede ser candidata a determinación cuando B.6 ya contiene referencia normativa exacta; aun así permanece no ejecutable hasta validación normativa posterior.",
+  "boundaries": [
+    {
+      "boundary_id": "B7-BOUND-001",
+      "relation_id": "B5-REL-001",
+      "binding_id": "B6-BIND-001",
+      "role": "orientation",
+      "orientation_sources": [
+        "PRODECON-02",
+        "UNAM-I"
+      ],
+      "normative_source_ids": [
+        "cpeum",
+        "cff"
+      ],
+      "exact_normative_refs": [],
+      "requires_normative_validation": true,
+      "requires_rule_conditions": true,
+      "executable_determination_enabled": false,
+      "primary_sources_can_control_outcome": false
+    },
+    {
+      "boundary_id": "B7-BOUND-002",
+      "relation_id": "B5-REL-002",
+      "binding_id": "B6-BIND-002",
+      "role": "determination_candidate",
+      "orientation_sources": [
+        "PRODECON-07",
+        "UNAM-I"
+      ],
+      "normative_source_ids": [
+        "lfdc",
+        "cff",
+        "cpeum"
+      ],
+      "exact_normative_refs": [
+        "lfdc:articulo_2"
+      ],
+      "requires_normative_validation": true,
+      "requires_rule_conditions": true,
+      "executable_determination_enabled": false,
+      "primary_sources_can_control_outcome": false
+    },
+    {
+      "boundary_id": "B7-BOUND-003",
+      "relation_id": "B5-REL-003",
+      "binding_id": "B6-BIND-003",
+      "role": "orientation",
+      "orientation_sources": [
+        "PRODECON-09",
+        "UNAM-II"
+      ],
+      "normative_source_ids": [
+        "cff"
+      ],
+      "exact_normative_refs": [],
+      "requires_normative_validation": true,
+      "requires_rule_conditions": true,
+      "executable_determination_enabled": false,
+      "primary_sources_can_control_outcome": false
+    },
+    {
+      "boundary_id": "B7-BOUND-004",
+      "relation_id": "B5-REL-004",
+      "binding_id": "B6-BIND-004",
+      "role": "orientation",
+      "orientation_sources": [
+        "PRODECON-09",
+        "UNAM-II"
+      ],
+      "normative_source_ids": [
+        "cff"
+      ],
+      "exact_normative_refs": [],
+      "requires_normative_validation": true,
+      "requires_rule_conditions": true,
+      "executable_determination_enabled": false,
+      "primary_sources_can_control_outcome": false
+    },
+    {
+      "boundary_id": "B7-BOUND-005",
+      "relation_id": "B5-REL-005",
+      "binding_id": "B6-BIND-005",
+      "role": "orientation",
+      "orientation_sources": [
+        "PRODECON-05",
+        "UNAM-III"
+      ],
+      "normative_source_ids": [
+        "cff",
+        "lisr",
+        "liva",
+        "lieps",
+        "lfisan"
+      ],
+      "exact_normative_refs": [],
+      "requires_normative_validation": true,
+      "requires_rule_conditions": true,
+      "executable_determination_enabled": false,
+      "primary_sources_can_control_outcome": false
+    },
+    {
+      "boundary_id": "B7-BOUND-006",
+      "relation_id": "B5-REL-006",
+      "binding_id": "B6-BIND-006",
+      "role": "determination_candidate",
+      "orientation_sources": [
+        "PRODECON-05",
+        "UNAM-III",
+        "UNAM-V"
+      ],
+      "normative_source_ids": [
+        "cff",
+        "lisr",
+        "liva",
+        "lieps",
+        "lfisan"
+      ],
+      "exact_normative_refs": [
+        "cff:articulo_2"
+      ],
+      "requires_normative_validation": true,
+      "requires_rule_conditions": true,
+      "executable_determination_enabled": false,
+      "primary_sources_can_control_outcome": false
+    },
+    {
+      "boundary_id": "B7-BOUND-007",
+      "relation_id": "B5-REL-007",
+      "binding_id": "B6-BIND-007",
+      "role": "determination_candidate",
+      "orientation_sources": [
+        "PRODECON-04",
+        "UNAM-IV"
+      ],
+      "normative_source_ids": [
+        "cff",
+        "lisr"
+      ],
+      "exact_normative_refs": [
+        "cff:articulo_1"
+      ],
+      "requires_normative_validation": true,
+      "requires_rule_conditions": true,
+      "executable_determination_enabled": false,
+      "primary_sources_can_control_outcome": false
+    },
+    {
+      "boundary_id": "B7-BOUND-008",
+      "relation_id": "B5-REL-008",
+      "binding_id": "B6-BIND-008",
+      "role": "determination_candidate",
+      "orientation_sources": [
+        "PRODECON-04",
+        "UNAM-IV"
+      ],
+      "normative_source_ids": [
+        "cff",
+        "lisr"
+      ],
+      "exact_normative_refs": [
+        "cff:articulo_1"
+      ],
+      "requires_normative_validation": true,
+      "requires_rule_conditions": true,
+      "executable_determination_enabled": false,
+      "primary_sources_can_control_outcome": false
+    },
+    {
+      "boundary_id": "B7-BOUND-009",
+      "relation_id": "B5-REL-009",
+      "binding_id": "B6-BIND-009",
+      "role": "determination_candidate",
+      "orientation_sources": [
+        "PRODECON-10",
+        "PRODECON-11",
+        "UNAM-V"
+      ],
+      "normative_source_ids": [
+        "lisr",
+        "liva",
+        "cff",
+        "reg_lisr_060516",
+        "reg_liva_250914",
+        "rmf_2026"
+      ],
+      "exact_normative_refs": [
+        "lisr:articulo_100",
+        "lisr:articulo_110"
+      ],
+      "requires_normative_validation": true,
+      "requires_rule_conditions": true,
+      "executable_determination_enabled": false,
+      "primary_sources_can_control_outcome": false
+    },
+    {
+      "boundary_id": "B7-BOUND-010",
+      "relation_id": "B5-REL-010",
+      "binding_id": "B6-BIND-010",
+      "role": "orientation",
+      "orientation_sources": [
+        "PRODECON-06",
+        "UNAM-VI"
+      ],
+      "normative_source_ids": [
+        "cff"
+      ],
+      "exact_normative_refs": [],
+      "requires_normative_validation": true,
+      "requires_rule_conditions": true,
+      "executable_determination_enabled": false,
+      "primary_sources_can_control_outcome": false
+    },
+    {
+      "boundary_id": "B7-BOUND-011",
+      "relation_id": "B5-REL-011",
+      "binding_id": "B6-BIND-011",
+      "role": "orientation",
+      "orientation_sources": [
+        "PRODECON-06",
+        "UNAM-VII"
+      ],
+      "normative_source_ids": [
+        "cff"
+      ],
+      "exact_normative_refs": [],
+      "requires_normative_validation": true,
+      "requires_rule_conditions": true,
+      "executable_determination_enabled": false,
+      "primary_sources_can_control_outcome": false
+    },
+    {
+      "boundary_id": "B7-BOUND-012",
+      "relation_id": "B5-REL-012",
+      "binding_id": "B6-BIND-012",
+      "role": "determination_candidate",
+      "orientation_sources": [
+        "PRODECON-08",
+        "UNAM-VII"
+      ],
+      "normative_source_ids": [
+        "cff",
+        "lfdc",
+        "lfpca",
+        "lotfja"
+      ],
+      "exact_normative_refs": [
+        "lfdc:articulo_2"
+      ],
+      "requires_normative_validation": true,
+      "requires_rule_conditions": true,
+      "executable_determination_enabled": false,
+      "primary_sources_can_control_outcome": false
+    },
+    {
+      "boundary_id": "B7-BOUND-013",
+      "relation_id": "B5-REL-013",
+      "binding_id": "B6-BIND-013",
+      "role": "orientation",
+      "orientation_sources": [
+        "PRODECON-01"
+      ],
+      "normative_source_ids": [
+        "cpeum",
+        "cff"
+      ],
+      "exact_normative_refs": [],
+      "requires_normative_validation": true,
+      "requires_rule_conditions": true,
+      "executable_determination_enabled": false,
+      "primary_sources_can_control_outcome": false
+    },
+    {
+      "boundary_id": "B7-BOUND-014",
+      "relation_id": "B5-REL-014",
+      "binding_id": "B6-BIND-014",
+      "role": "determination_candidate",
+      "orientation_sources": [
+        "PRODECON-02",
+        "PRODECON-03"
+      ],
+      "normative_source_ids": [
+        "cpeum",
+        "cff",
+        "lisr",
+        "liva",
+        "lieps",
+        "lfisan"
+      ],
+      "exact_normative_refs": [
+        "cff:articulo_2"
+      ],
+      "requires_normative_validation": true,
+      "requires_rule_conditions": true,
+      "executable_determination_enabled": false,
+      "primary_sources_can_control_outcome": false
+    },
+    {
+      "boundary_id": "B7-BOUND-015",
+      "relation_id": "B5-REL-015",
+      "binding_id": "B6-BIND-015",
+      "role": "determination_candidate",
+      "orientation_sources": [
+        "PRODECON-07",
+        "PRODECON-08"
+      ],
+      "normative_source_ids": [
+        "cff",
+        "lfdc"
+      ],
+      "exact_normative_refs": [
+        "lfdc:articulo_2"
+      ],
+      "requires_normative_validation": true,
+      "requires_rule_conditions": true,
+      "executable_determination_enabled": false,
+      "primary_sources_can_control_outcome": false
+    },
+    {
+      "boundary_id": "B7-BOUND-016",
+      "relation_id": "B5-REL-016",
+      "binding_id": "B6-BIND-016",
+      "role": "determination_candidate",
+      "orientation_sources": [
+        "PRODECON-10"
+      ],
+      "normative_source_ids": [
+        "lisr"
+      ],
+      "exact_normative_refs": [
+        "lisr:articulo_94"
+      ],
+      "requires_normative_validation": true,
+      "requires_rule_conditions": true,
+      "executable_determination_enabled": false,
+      "primary_sources_can_control_outcome": false
+    },
+    {
+      "boundary_id": "B7-BOUND-017",
+      "relation_id": "B5-REL-017",
+      "binding_id": "B6-BIND-017",
+      "role": "determination_candidate",
+      "orientation_sources": [
+        "PRODECON-11"
+      ],
+      "normative_source_ids": [
+        "lisr",
+        "cff"
+      ],
+      "exact_normative_refs": [
+        "lisr:articulo_100"
+      ],
+      "requires_normative_validation": true,
+      "requires_rule_conditions": true,
+      "executable_determination_enabled": false,
+      "primary_sources_can_control_outcome": false
+    },
+    {
+      "boundary_id": "B7-BOUND-018",
+      "relation_id": "B5-REL-018",
+      "binding_id": "B6-BIND-018",
+      "role": "orientation",
+      "orientation_sources": [
+        "PRODECON-12"
+      ],
+      "normative_source_ids": [
+        "lisr",
+        "rmf_2026"
+      ],
+      "exact_normative_refs": [],
+      "requires_normative_validation": true,
+      "requires_rule_conditions": true,
+      "executable_determination_enabled": false,
+      "primary_sources_can_control_outcome": false
+    }
+  ],
+  "total_boundaries": 18,
+  "orientation_is_non_controlling": true,
+  "determination_requires_internal_normative_evidence": true,
+  "modifies_production_rules": false
+}

@@ -1,0 +1,539 @@
+{
+  "schema_version": "1.0",
+  "validation_date": "2026-09-02",
+  "baseline_commit": "23eec1bbc48c95bb0dde383530e06884348e6905",
+  "purpose": "B.8 valida las relaciones RBS primarias y las 14 reglas productivas inventariadas contra el corpus interno de A.8 y el registro temporal existente. La validación confirma pertenencia y referencias conocidas, pero mantiene fail-closed la aplicabilidad temporal y no declara ninguna determinación jurídicamente lista.",
+  "normative_corpus_ids": [
+    "cff",
+    "cpeum",
+    "lfdc",
+    "lfisan",
+    "lfpca",
+    "lieps",
+    "lisr",
+    "liva",
+    "lotfja",
+    "reg_lisr_060516",
+    "reg_liva_250914",
+    "rmf_2026"
+  ],
+  "temporal_registry_source_sprint": "19I.13",
+  "document_wide_temporal_blocks": [
+    "cpeum",
+    "liva"
+  ],
+  "relation_validations": [
+    {
+      "validation_id": "B8-REL-001",
+      "relation_id": "B5-REL-001",
+      "boundary_id": "B7-BOUND-001",
+      "normative_source_ids": [
+        "cpeum",
+        "cff"
+      ],
+      "exact_normative_refs": [],
+      "exact_reference_status": "not_applicable",
+      "blocked_normative_sources": [
+        "cpeum"
+      ],
+      "status": "structurally_validated_with_temporal_block",
+      "corpus_membership_validated": true,
+      "temporal_applicability_confirmed": false,
+      "requires_case_date_validation": true,
+      "determination_ready": false
+    },
+    {
+      "validation_id": "B8-REL-002",
+      "relation_id": "B5-REL-002",
+      "boundary_id": "B7-BOUND-002",
+      "normative_source_ids": [
+        "lfdc",
+        "cff",
+        "cpeum"
+      ],
+      "exact_normative_refs": [
+        "lfdc:articulo_2"
+      ],
+      "exact_reference_status": "known_existing_rule_reference",
+      "blocked_normative_sources": [
+        "cpeum"
+      ],
+      "status": "structurally_validated_with_temporal_block",
+      "corpus_membership_validated": true,
+      "temporal_applicability_confirmed": false,
+      "requires_case_date_validation": true,
+      "determination_ready": false
+    },
+    {
+      "validation_id": "B8-REL-003",
+      "relation_id": "B5-REL-003",
+      "boundary_id": "B7-BOUND-003",
+      "normative_source_ids": [
+        "cff"
+      ],
+      "exact_normative_refs": [],
+      "exact_reference_status": "not_applicable",
+      "blocked_normative_sources": [],
+      "status": "structurally_validated",
+      "corpus_membership_validated": true,
+      "temporal_applicability_confirmed": false,
+      "requires_case_date_validation": true,
+      "determination_ready": false
+    },
+    {
+      "validation_id": "B8-REL-004",
+      "relation_id": "B5-REL-004",
+      "boundary_id": "B7-BOUND-004",
+      "normative_source_ids": [
+        "cff"
+      ],
+      "exact_normative_refs": [],
+      "exact_reference_status": "not_applicable",
+      "blocked_normative_sources": [],
+      "status": "structurally_validated",
+      "corpus_membership_validated": true,
+      "temporal_applicability_confirmed": false,
+      "requires_case_date_validation": true,
+      "determination_ready": false
+    },
+    {
+      "validation_id": "B8-REL-005",
+      "relation_id": "B5-REL-005",
+      "boundary_id": "B7-BOUND-005",
+      "normative_source_ids": [
+        "cff",
+        "lisr",
+        "liva",
+        "lieps",
+        "lfisan"
+      ],
+      "exact_normative_refs": [],
+      "exact_reference_status": "not_applicable",
+      "blocked_normative_sources": [
+        "liva"
+      ],
+      "status": "structurally_validated_with_temporal_block",
+      "corpus_membership_validated": true,
+      "temporal_applicability_confirmed": false,
+      "requires_case_date_validation": true,
+      "determination_ready": false
+    },
+    {
+      "validation_id": "B8-REL-006",
+      "relation_id": "B5-REL-006",
+      "boundary_id": "B7-BOUND-006",
+      "normative_source_ids": [
+        "cff",
+        "lisr",
+        "liva",
+        "lieps",
+        "lfisan"
+      ],
+      "exact_normative_refs": [
+        "cff:articulo_2"
+      ],
+      "exact_reference_status": "known_existing_rule_reference",
+      "blocked_normative_sources": [
+        "liva"
+      ],
+      "status": "structurally_validated_with_temporal_block",
+      "corpus_membership_validated": true,
+      "temporal_applicability_confirmed": false,
+      "requires_case_date_validation": true,
+      "determination_ready": false
+    },
+    {
+      "validation_id": "B8-REL-007",
+      "relation_id": "B5-REL-007",
+      "boundary_id": "B7-BOUND-007",
+      "normative_source_ids": [
+        "cff",
+        "lisr"
+      ],
+      "exact_normative_refs": [
+        "cff:articulo_1"
+      ],
+      "exact_reference_status": "known_existing_rule_reference",
+      "blocked_normative_sources": [],
+      "status": "structurally_validated",
+      "corpus_membership_validated": true,
+      "temporal_applicability_confirmed": false,
+      "requires_case_date_validation": true,
+      "determination_ready": false
+    },
+    {
+      "validation_id": "B8-REL-008",
+      "relation_id": "B5-REL-008",
+      "boundary_id": "B7-BOUND-008",
+      "normative_source_ids": [
+        "cff",
+        "lisr"
+      ],
+      "exact_normative_refs": [
+        "cff:articulo_1"
+      ],
+      "exact_reference_status": "known_existing_rule_reference",
+      "blocked_normative_sources": [],
+      "status": "structurally_validated",
+      "corpus_membership_validated": true,
+      "temporal_applicability_confirmed": false,
+      "requires_case_date_validation": true,
+      "determination_ready": false
+    },
+    {
+      "validation_id": "B8-REL-009",
+      "relation_id": "B5-REL-009",
+      "boundary_id": "B7-BOUND-009",
+      "normative_source_ids": [
+        "lisr",
+        "liva",
+        "cff",
+        "reg_lisr_060516",
+        "reg_liva_250914",
+        "rmf_2026"
+      ],
+      "exact_normative_refs": [
+        "lisr:articulo_100",
+        "lisr:articulo_110"
+      ],
+      "exact_reference_status": "known_existing_rule_reference",
+      "blocked_normative_sources": [
+        "liva"
+      ],
+      "status": "structurally_validated_with_temporal_block",
+      "corpus_membership_validated": true,
+      "temporal_applicability_confirmed": false,
+      "requires_case_date_validation": true,
+      "determination_ready": false
+    },
+    {
+      "validation_id": "B8-REL-010",
+      "relation_id": "B5-REL-010",
+      "boundary_id": "B7-BOUND-010",
+      "normative_source_ids": [
+        "cff"
+      ],
+      "exact_normative_refs": [],
+      "exact_reference_status": "not_applicable",
+      "blocked_normative_sources": [],
+      "status": "structurally_validated",
+      "corpus_membership_validated": true,
+      "temporal_applicability_confirmed": false,
+      "requires_case_date_validation": true,
+      "determination_ready": false
+    },
+    {
+      "validation_id": "B8-REL-011",
+      "relation_id": "B5-REL-011",
+      "boundary_id": "B7-BOUND-011",
+      "normative_source_ids": [
+        "cff"
+      ],
+      "exact_normative_refs": [],
+      "exact_reference_status": "not_applicable",
+      "blocked_normative_sources": [],
+      "status": "structurally_validated",
+      "corpus_membership_validated": true,
+      "temporal_applicability_confirmed": false,
+      "requires_case_date_validation": true,
+      "determination_ready": false
+    },
+    {
+      "validation_id": "B8-REL-012",
+      "relation_id": "B5-REL-012",
+      "boundary_id": "B7-BOUND-012",
+      "normative_source_ids": [
+        "cff",
+        "lfdc",
+        "lfpca",
+        "lotfja"
+      ],
+      "exact_normative_refs": [
+        "lfdc:articulo_2"
+      ],
+      "exact_reference_status": "known_existing_rule_reference",
+      "blocked_normative_sources": [],
+      "status": "structurally_validated",
+      "corpus_membership_validated": true,
+      "temporal_applicability_confirmed": false,
+      "requires_case_date_validation": true,
+      "determination_ready": false
+    },
+    {
+      "validation_id": "B8-REL-013",
+      "relation_id": "B5-REL-013",
+      "boundary_id": "B7-BOUND-013",
+      "normative_source_ids": [
+        "cpeum",
+        "cff"
+      ],
+      "exact_normative_refs": [],
+      "exact_reference_status": "not_applicable",
+      "blocked_normative_sources": [
+        "cpeum"
+      ],
+      "status": "structurally_validated_with_temporal_block",
+      "corpus_membership_validated": true,
+      "temporal_applicability_confirmed": false,
+      "requires_case_date_validation": true,
+      "determination_ready": false
+    },
+    {
+      "validation_id": "B8-REL-014",
+      "relation_id": "B5-REL-014",
+      "boundary_id": "B7-BOUND-014",
+      "normative_source_ids": [
+        "cpeum",
+        "cff",
+        "lisr",
+        "liva",
+        "lieps",
+        "lfisan"
+      ],
+      "exact_normative_refs": [
+        "cff:articulo_2"
+      ],
+      "exact_reference_status": "known_existing_rule_reference",
+      "blocked_normative_sources": [
+        "cpeum",
+        "liva"
+      ],
+      "status": "structurally_validated_with_temporal_block",
+      "corpus_membership_validated": true,
+      "temporal_applicability_confirmed": false,
+      "requires_case_date_validation": true,
+      "determination_ready": false
+    },
+    {
+      "validation_id": "B8-REL-015",
+      "relation_id": "B5-REL-015",
+      "boundary_id": "B7-BOUND-015",
+      "normative_source_ids": [
+        "cff",
+        "lfdc"
+      ],
+      "exact_normative_refs": [
+        "lfdc:articulo_2"
+      ],
+      "exact_reference_status": "known_existing_rule_reference",
+      "blocked_normative_sources": [],
+      "status": "structurally_validated",
+      "corpus_membership_validated": true,
+      "temporal_applicability_confirmed": false,
+      "requires_case_date_validation": true,
+      "determination_ready": false
+    },
+    {
+      "validation_id": "B8-REL-016",
+      "relation_id": "B5-REL-016",
+      "boundary_id": "B7-BOUND-016",
+      "normative_source_ids": [
+        "lisr"
+      ],
+      "exact_normative_refs": [
+        "lisr:articulo_94"
+      ],
+      "exact_reference_status": "known_existing_rule_reference",
+      "blocked_normative_sources": [],
+      "status": "structurally_validated",
+      "corpus_membership_validated": true,
+      "temporal_applicability_confirmed": false,
+      "requires_case_date_validation": true,
+      "determination_ready": false
+    },
+    {
+      "validation_id": "B8-REL-017",
+      "relation_id": "B5-REL-017",
+      "boundary_id": "B7-BOUND-017",
+      "normative_source_ids": [
+        "lisr",
+        "cff"
+      ],
+      "exact_normative_refs": [
+        "lisr:articulo_100"
+      ],
+      "exact_reference_status": "known_existing_rule_reference",
+      "blocked_normative_sources": [],
+      "status": "structurally_validated",
+      "corpus_membership_validated": true,
+      "temporal_applicability_confirmed": false,
+      "requires_case_date_validation": true,
+      "determination_ready": false
+    },
+    {
+      "validation_id": "B8-REL-018",
+      "relation_id": "B5-REL-018",
+      "boundary_id": "B7-BOUND-018",
+      "normative_source_ids": [
+        "lisr",
+        "rmf_2026"
+      ],
+      "exact_normative_refs": [],
+      "exact_reference_status": "not_applicable",
+      "blocked_normative_sources": [],
+      "status": "structurally_validated",
+      "corpus_membership_validated": true,
+      "temporal_applicability_confirmed": false,
+      "requires_case_date_validation": true,
+      "determination_ready": false
+    }
+  ],
+  "existing_rule_validations": [
+    {
+      "rule_id": "PROFILE_INDIVIDUAL_001",
+      "version": "1.0.0",
+      "normative_refs": [
+        "cff:articulo_1"
+      ],
+      "corpus_reference_validated": true,
+      "temporal_validity_confirmed": false,
+      "requires_case_date_validation": true,
+      "execution_contract_unchanged": true
+    },
+    {
+      "rule_id": "PROFILE_LEGAL_ENTITY_002",
+      "version": "1.0.0",
+      "normative_refs": [
+        "cff:articulo_1"
+      ],
+      "corpus_reference_validated": true,
+      "temporal_validity_confirmed": false,
+      "requires_case_date_validation": true,
+      "execution_contract_unchanged": true
+    },
+    {
+      "rule_id": "PROFILE_CONTRIBUTION_SITUATION_003",
+      "version": "1.0.0",
+      "normative_refs": [
+        "cff:articulo_2"
+      ],
+      "corpus_reference_validated": true,
+      "temporal_validity_confirmed": false,
+      "requires_case_date_validation": true,
+      "execution_contract_unchanged": true
+    },
+    {
+      "rule_id": "INCOME_SALARY_CLASSIFY_001",
+      "version": "1.0.0",
+      "normative_refs": [
+        "lisr:articulo_94"
+      ],
+      "corpus_reference_validated": true,
+      "temporal_validity_confirmed": false,
+      "requires_case_date_validation": true,
+      "execution_contract_unchanged": true
+    },
+    {
+      "rule_id": "INCOME_BUSINESS_CLASSIFY_002",
+      "version": "1.0.0",
+      "normative_refs": [
+        "lisr:articulo_100"
+      ],
+      "corpus_reference_validated": true,
+      "temporal_validity_confirmed": false,
+      "requires_case_date_validation": true,
+      "execution_contract_unchanged": true
+    },
+    {
+      "rule_id": "INCOME_RENTAL_CLASSIFY_003",
+      "version": "1.0.0",
+      "normative_refs": [
+        "lisr:articulo_114"
+      ],
+      "corpus_reference_validated": true,
+      "temporal_validity_confirmed": false,
+      "requires_case_date_validation": true,
+      "execution_contract_unchanged": true
+    },
+    {
+      "rule_id": "ISR_PROFESSIONAL_CLASSIFY_001",
+      "version": "1.0.0",
+      "normative_refs": [
+        "lisr:articulo_100"
+      ],
+      "corpus_reference_validated": true,
+      "temporal_validity_confirmed": false,
+      "requires_case_date_validation": true,
+      "execution_contract_unchanged": true
+    },
+    {
+      "rule_id": "ISR_PROFESSIONAL_PAYMENT_002",
+      "version": "1.0.0",
+      "normative_refs": [
+        "lisr:articulo_100"
+      ],
+      "corpus_reference_validated": true,
+      "temporal_validity_confirmed": false,
+      "requires_case_date_validation": true,
+      "execution_contract_unchanged": true
+    },
+    {
+      "rule_id": "OBL_PROFESSIONAL_RFC_001",
+      "version": "1.0.0",
+      "normative_refs": [
+        "lisr:articulo_110"
+      ],
+      "corpus_reference_validated": true,
+      "temporal_validity_confirmed": false,
+      "requires_case_date_validation": true,
+      "execution_contract_unchanged": true
+    },
+    {
+      "rule_id": "OBL_PROFESSIONAL_ACCOUNTING_002",
+      "version": "1.0.0",
+      "normative_refs": [
+        "lisr:articulo_110"
+      ],
+      "corpus_reference_validated": true,
+      "temporal_validity_confirmed": false,
+      "requires_case_date_validation": true,
+      "execution_contract_unchanged": true
+    },
+    {
+      "rule_id": "OBL_PROFESSIONAL_CFDI_003",
+      "version": "1.0.0",
+      "normative_refs": [
+        "lisr:articulo_110"
+      ],
+      "corpus_reference_validated": true,
+      "temporal_validity_confirmed": false,
+      "requires_case_date_validation": true,
+      "execution_contract_unchanged": true
+    },
+    {
+      "rule_id": "RIGHT_INFORMATION_ASSISTANCE_004",
+      "version": "1.0.0",
+      "normative_refs": [
+        "lfdc:articulo_2"
+      ],
+      "corpus_reference_validated": true,
+      "temporal_validity_confirmed": false,
+      "requires_case_date_validation": true,
+      "execution_contract_unchanged": true
+    },
+    {
+      "rule_id": "RIGHT_TAX_DATA_CONFIDENTIALITY_005",
+      "version": "1.0.0",
+      "normative_refs": [
+        "lfdc:articulo_2"
+      ],
+      "corpus_reference_validated": true,
+      "temporal_validity_confirmed": false,
+      "requires_case_date_validation": true,
+      "execution_contract_unchanged": true
+    },
+    {
+      "rule_id": "RIGHT_RESPECTFUL_TREATMENT_006",
+      "version": "1.0.0",
+      "normative_refs": [
+        "lfdc:articulo_2"
+      ],
+      "corpus_reference_validated": true,
+      "temporal_validity_confirmed": false,
+      "requires_case_date_validation": true,
+      "execution_contract_unchanged": true
+    }
+  ],
+  "temporal_policy_fail_closed": true,
+  "modifies_production_rules": false
+}
