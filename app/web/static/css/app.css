@@ -421,3 +421,207 @@ footer {
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
 }
+
+/* Bloque 14.6: exposición visual de Analyzer 1.0 */
+.analyzer-block {
+  border-top: 0;
+  border: 1px solid var(--line);
+  border-radius: .9rem;
+  padding: 1rem;
+  background: #fbfcfa;
+}
+
+.analyzer-eyebrow {
+  margin-top: 0;
+}
+
+.analyzer-status,
+.presence-badge {
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  border-radius: 999px;
+  padding: .3rem .65rem;
+  font-size: .76rem;
+  font-weight: 800;
+}
+
+.analyzer-status.ready,
+.presence-badge.present {
+  background: var(--soft);
+  color: var(--accent-strong);
+}
+
+.analyzer-status.needs_clarification,
+.analyzer-status.review_required {
+  background: #f6ead8;
+  color: var(--warning);
+}
+
+.analyzer-status.insufficient_evidence,
+.presence-badge.absent {
+  background: #f8eeee;
+  color: var(--danger);
+}
+
+.analyzer-summary {
+  display: grid;
+  gap: .6rem;
+  margin: 1rem 0 0;
+}
+
+.analyzer-summary div {
+  display: grid;
+  grid-template-columns: minmax(9rem, .65fr) minmax(0, 1fr);
+  gap: .6rem;
+  padding-bottom: .45rem;
+  border-bottom: 1px solid var(--line);
+}
+
+.analyzer-summary dt {
+  color: var(--muted);
+  font-weight: 700;
+}
+
+.analyzer-summary dd {
+  margin: 0;
+  overflow-wrap: anywhere;
+  font-weight: 700;
+}
+
+.analyzer-subsection {
+  margin-top: 1.15rem;
+  border-top: 1px solid var(--line);
+  padding-top: .9rem;
+}
+
+.analyzer-subsection h4 {
+  margin: 0 0 .7rem;
+}
+
+.canonical-conclusion {
+  margin: 0;
+  border-left: .25rem solid var(--accent);
+  padding: .8rem 1rem;
+  background: var(--soft);
+  font-weight: 650;
+}
+
+.subsection-heading,
+.analyzer-evidence-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: .75rem;
+}
+
+.fact-grid,
+.readiness-grid,
+.analyzer-evidence-grid {
+  display: grid;
+  gap: .65rem;
+}
+
+.fact-card,
+.analyzer-card,
+.analyzer-evidence-card {
+  border: 1px solid var(--line);
+  border-radius: .75rem;
+  padding: .75rem;
+  background: var(--surface);
+}
+
+.fact-card p {
+  margin: .3rem 0;
+}
+
+.fact-card small {
+  color: var(--muted);
+}
+
+.analyzer-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: .7rem;
+}
+
+.analyzer-card span {
+  color: var(--muted);
+  font-size: .85rem;
+  font-weight: 750;
+}
+
+.analyzer-card.complete {
+  border-left: .25rem solid var(--accent);
+}
+
+.analyzer-card.partial {
+  border-left: .25rem solid var(--warning);
+}
+
+.analyzer-card.missing {
+  border-left: .25rem solid var(--danger);
+}
+
+.analyzer-card.not_applicable {
+  opacity: .78;
+}
+
+.analyzer-evidence-card.present {
+  border-left: .25rem solid var(--accent);
+}
+
+.analyzer-evidence-card.absent {
+  border-left: .25rem solid var(--line);
+}
+
+.analyzer-evidence-card ul {
+  margin-bottom: 0;
+  overflow-wrap: anywhere;
+}
+
+.analyzer-evidence-card > small {
+  display: block;
+  margin-top: .55rem;
+  color: var(--muted);
+}
+
+.analyzer-review-note {
+  color: var(--warning) !important;
+  font-weight: 700;
+}
+
+.priority-list {
+  display: grid;
+  gap: .35rem;
+}
+
+.analyzer-integrity dd {
+  font-family: ui-monospace, SFMono-Regular, Consolas, "Liberation Mono", monospace;
+  font-size: .82rem;
+}
+
+@media (min-width: 36rem) {
+  .readiness-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .analyzer-evidence-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 42rem) {
+  .analyzer-summary div {
+    grid-template-columns: 1fr;
+    gap: .1rem;
+  }
+
+  .subsection-heading,
+  .analyzer-evidence-heading,
+  .analyzer-card {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}

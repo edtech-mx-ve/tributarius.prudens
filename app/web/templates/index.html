@@ -64,8 +64,8 @@
           <form id="consultation-form" novalidate>
             <label for="mode">Modo de explicación de Llama</label>
             <select id="mode" name="mode" aria-describedby="mode-help">
-              <option value="professional">Profesional</option>
               <option value="student">Estudiante</option>
+              <option value="professional">Profesional</option>
             </select>
             <small id="mode-help">
               El modo cambia la forma de explicar, no la evidencia ni la conclusión jurídica.
@@ -117,6 +117,90 @@
           </div>
 
           <div id="result-content" hidden>
+            <section class="result-block analyzer-block" id="analyzer-block" hidden>
+              <div class="block-heading">
+                <div>
+                  <p class="eyebrow analyzer-eyebrow">Analyzer 1.0</p>
+                  <h3>Análisis jurídico integral</h3>
+                  <p class="section-help">
+                    Consolida cuestión jurídica, suficiencia, evidencia y conclusión
+                    sin crear una segunda determinación.
+                  </p>
+                </div>
+                <span id="analyzer-status-badge" class="analyzer-status"></span>
+              </div>
+
+              <dl class="analyzer-summary">
+                <div>
+                  <dt>Cuestión principal</dt>
+                  <dd id="analyzer-primary-intent"></dd>
+                </div>
+                <div>
+                  <dt>Fuente controladora</dt>
+                  <dd id="analyzer-controlling-source"></dd>
+                </div>
+                <div>
+                  <dt>Suficiencia probatoria</dt>
+                  <dd id="analyzer-sufficiency"></dd>
+                </div>
+                <div>
+                  <dt>Cierre automático</dt>
+                  <dd id="analyzer-auto-close"></dd>
+                </div>
+                <div>
+                  <dt>Modo de explicación</dt>
+                  <dd id="analyzer-audience"></dd>
+                </div>
+              </dl>
+
+              <section id="analyzer-conclusion-block" class="analyzer-subsection" hidden>
+                <h4>Conclusión jurídica canónica</h4>
+                <p id="analyzer-conclusion" class="canonical-conclusion"></p>
+              </section>
+
+              <section id="analyzer-facts-block" class="analyzer-subsection" hidden>
+                <div class="subsection-heading">
+                  <h4>Hechos identificados</h4>
+                  <span id="analyzer-facts-count" class="count-badge"></span>
+                </div>
+                <div id="analyzer-facts" class="fact-grid"></div>
+              </section>
+
+              <section class="analyzer-subsection">
+                <h4>Completitud jurídica</h4>
+                <div id="analyzer-readiness" class="readiness-grid"></div>
+              </section>
+
+              <section class="analyzer-subsection">
+                <h4>Mapa de evidencia integrada</h4>
+                <div id="analyzer-evidence-map" class="analyzer-evidence-grid"></div>
+              </section>
+
+              <section id="analyzer-priority-block" class="analyzer-subsection" hidden>
+                <h4>Prioridades de análisis</h4>
+                <ol id="analyzer-priorities" class="priority-list"></ol>
+              </section>
+
+              <section id="analyzer-pending-block" class="analyzer-subsection" hidden>
+                <h4>Pendientes, ambigüedades y revisión</h4>
+                <ul id="analyzer-pending"></ul>
+              </section>
+
+              <details class="trace-details analyzer-integrity">
+                <summary>Integridad del Analyzer 1.0</summary>
+                <dl class="technical-trace">
+                  <div>
+                    <dt>Versión</dt>
+                    <dd id="analyzer-schema-version"></dd>
+                  </div>
+                  <div>
+                    <dt>Huella Analyzer</dt>
+                    <dd id="analyzer-integrity-hash"></dd>
+                  </div>
+                </dl>
+              </details>
+            </section>
+
             <section class="result-block" id="summary-block" hidden>
               <h3>Orientación</h3>
               <p id="result-explanation"></p>

@@ -291,6 +291,270 @@ function renderTraceability(result) {
   traceBlock.hidden = false;
 }
 
+const analyzerStatusLabels = {
+  ready: "Listo",
+  needs_clarification: "Requiere aclaración",
+  review_required: "Revisión requerida",
+  insufficient_evidence: "Evidencia insuficiente",
+};
+
+const analyzerDimensionLabels = {
+  facts: "Hechos",
+  normative_basis: "Fundamento normativo",
+  rule_reasoning: "Razonamiento por reglas",
+  calculation: "Cálculo",
+};
+
+const analyzerStateLabels = {
+  complete: "Completo",
+  partial: "Parcial",
+  missing: "Faltante",
+  not_applicable: "No aplica",
+};
+
+const analyzerChannelLabels = {
+  normative: "Normativa",
+  rbs: "RBS",
+  cbr: "CBR",
+  jurisprudence: "Jurisprudencia",
+  calculation: "Cálculo",
+};
+
+const analyzerIntentLabels = {
+  understand_tax_system: "Comprender el sistema fiscal",
+  identify_obligations: "Identificar obligaciones",
+  know_rights: "Conocer derechos",
+  calculate_isr: "Calcular ISR",
+  calculate_iva: "Calcular IVA",
+  analyze_authority_act: "Analizar acto de autoridad",
+  review_debt_noncompliance: "Revisar adeudo o incumplimiento",
+  defense_options: "Opciones de defensa",
+  interpret_provision: "Interpretar disposición",
+  related_jurisprudence: "Jurisprudencia relacionada",
+  similar_cases: "Casos semejantes",
+  learn_tax_law: "Aprender derecho fiscal",
+  unknown: "Por determinar",
+};
+
+function labelFromMap(value, labels) {
+  if (value === null || value === undefined || value === "") {
+    return "No disponible";
+  }
+  return labels[value] || String(value).replaceAll("_", " ");
+}
+
+function clearNode(selector) {
+  const node = document.querySelector(selector);
+  node.replaceChildren();
+  return node;
+}
+
+function createAnalyzerCard(title, value, state = "") {
+  const article = document.createElement("article");
+  article.className = `analyzer-card ${state}`.trim();
+
+  const heading = document.createElement("strong");
+  heading.textContent = title;
+  const detail = document.createElement("span");
+  detail.textContent = value;
+
+  article.append(heading, detail);
+  return article;
+}
+
+function renderAnalyzerFacts(analysis) {
+  const block = document.querySelector("#analyzer-facts-block");
+  const container = clearNode("#analyzer-facts");
+  const facts = Array.isArray(analysis.facts) ? analysis.facts : [];
+
+  facts.forEach((fact) => {
+    const article = document.createElement("article");
+    article.className = "fact-card";
+
+    const name = document.createElement("strong");
+    name.textContent = displayValue(fact.name, "Hecho");
+    const value = document.createElement("p");
+    value.textContent = displayValue(fact.value);
+    const origin = document.createElement("small");
+    origin.textContent = fact.origin === "inferred" ? "Inferido" : "Expreso";
+
+    article.append(name, value, origin);
+    container.append(article);
+  });
+
+  document.querySelector("#analyzer-facts-count").textContent = String(facts.length);
+  block.hidden = facts.length === 0;
+}
+
+function renderAnalyzerReadiness(analysis) {
+  const container = clearNode("#analyzer-readiness");
+  const readiness = analysis.readiness || {};
+  const items = Array.isArray(readiness.completeness)
+    ? readiness.completeness
+    : [];
+
+  items.forEach((item) => {
+    const dimension = labelFromMap(item.dimension, analyzerDimensionLabels);
+    const state = labelFromMap(item.state, analyzerStateLabels);
+    const card = createAnalyzerCard(dimension, state, item.state || "");
+    if (item.reason) {
+      card.title = item.reason;
+    }
+    container.append(card);
+  });
+
+  document.querySelector("#analyzer-sufficiency").textContent = labelFromMap(
+    readiness.evidentiary_sufficiency,
+    {
+      sufficient: "Suficiente",
+      limited: "Limitada",
+      insufficient: "Insuficiente",
+    }
+  );
+  document.querySelector("#analyzer-auto-close").textContent = (
+    readiness.can_close_automatically ? "Sí" : "No"
+  );
+}
+
+function renderAnalyzerEvidenceMap(analysis) {
+  const container = clearNode("#analyzer-evidence-map");
+  const evidenceMap = analysis.evidence_map || {};
+  const items = Array.isArray(evidenceMap.items) ? evidenceMap.items : [];
+
+  items.forEach((item) => {
+    const article = document.createElement("article");
+    article.className = `analyzer-evidence-card ${item.present ? "present" : "absent"}`;
+
+    const top = document.createElement("div");
+    top.className = "analyzer-evidence-heading";
+    const title = document.createElement("strong");
+    title.textContent = labelFromMap(item.channel, analyzerChannelLabels);
+    const badge = document.createElement("span");
+    badge.className = `presence-badge ${item.present ? "present" : "absent"}`;
+    badge.textContent = item.present ? "Presente" : "No aportada";
+    top.append(title, badge);
+    article.append(top);
+
+    const refs = Array.isArray(item.references) ? item.references : [];
+    if (refs.length > 0) {
+      const list = document.createElement("ul");
+      refs.forEach((ref) => appendTextItem(list, ref));
+      article.append(list);
+    } else {
+      const empty = document.createElement("small");
+      empty.textContent = "Sin referencias para esta consulta.";
+      article.append(empty);
+    }
+
+    if (item.requires_human_review) {
+      const review = document.createElement("small");
+      review.className = "analyzer-review-note";
+      review.textContent = "Requiere revisión humana.";
+      article.append(review);
+    }
+
+    container.append(article);
+  });
+}
+
+function renderAnalyzerPriorities(analysis) {
+  const block = document.querySelector("#analyzer-priority-block");
+  const list = clearNode("#analyzer-priorities");
+  const priorities = Array.isArray(analysis.analysis_priority)
+    ? analysis.analysis_priority
+    : [];
+
+  priorities.forEach((priority) => appendTextItem(list, priority));
+  block.hidden = priorities.length === 0;
+}
+
+function renderAnalyzerPending(analysis) {
+  const block = document.querySelector("#analyzer-pending-block");
+  const list = clearNode("#analyzer-pending");
+  const pending = [];
+
+  const missingFields = Array.isArray(analysis.missing_fields)
+    ? analysis.missing_fields
+    : [];
+  missingFields.forEach((item) => {
+    pending.push(`${displayValue(item.name, "Dato faltante")}: ${displayValue(item.reason)}`);
+  });
+
+  const ambiguities = Array.isArray(analysis.ambiguities) ? analysis.ambiguities : [];
+  ambiguities.forEach((item) => pending.push(`Ambigüedad: ${item}`));
+
+  const readiness = analysis.readiness || {};
+  const missingRequirements = Array.isArray(readiness.missing_requirements)
+    ? readiness.missing_requirements
+    : [];
+  missingRequirements.forEach((item) => {
+    if (!pending.includes(item)) {
+      pending.push(item);
+    }
+  });
+
+  if (analysis.requires_human_review) {
+    pending.push("El Analyzer 1.0 requiere revisión humana.");
+  }
+
+  pending.forEach((item) => appendTextItem(list, item));
+  block.hidden = pending.length === 0;
+}
+
+function renderLegalAnalysis(result) {
+  const block = document.querySelector("#analyzer-block");
+  const analysis = result.legal_analysis;
+
+  if (!analysis || typeof analysis !== "object") {
+    block.hidden = true;
+    return;
+  }
+
+  const status = analysis.status || "unknown";
+  const statusBadge = document.querySelector("#analyzer-status-badge");
+  statusBadge.className = `analyzer-status ${status}`;
+  statusBadge.textContent = labelFromMap(status, analyzerStatusLabels);
+
+  const issue = analysis.issue || {};
+  document.querySelector("#analyzer-primary-intent").textContent = labelFromMap(
+    issue.primary_intent,
+    analyzerIntentLabels
+  );
+  document.querySelector("#analyzer-controlling-source").textContent = displayValue(
+    analysis.controlling_source,
+    "Sin fuente controladora"
+  ).toUpperCase();
+
+  const profile = result.explanation_profile || {};
+  document.querySelector("#analyzer-audience").textContent = displayValue(
+    profile.audience_label,
+    displayValue(result.mode, "No especificado")
+  );
+
+  const conclusionBlock = document.querySelector("#analyzer-conclusion-block");
+  const conclusion = analysis.canonical_conclusion;
+  document.querySelector("#analyzer-conclusion").textContent = displayValue(
+    conclusion,
+    ""
+  );
+  conclusionBlock.hidden = !conclusion;
+
+  renderAnalyzerFacts(analysis);
+  renderAnalyzerReadiness(analysis);
+  renderAnalyzerEvidenceMap(analysis);
+  renderAnalyzerPriorities(analysis);
+  renderAnalyzerPending(analysis);
+
+  document.querySelector("#analyzer-schema-version").textContent = displayValue(
+    analysis.schema_version
+  );
+  document.querySelector("#analyzer-integrity-hash").textContent = displayValue(
+    analysis.integrity_sha256
+  );
+
+  block.hidden = false;
+}
+
 function renderResult(payload) {
   const result = payload.result;
   if (!result) {
@@ -308,6 +572,8 @@ function renderResult(payload) {
 
   norms.replaceChildren();
   uncertainties.replaceChildren();
+
+  renderLegalAnalysis(result);
 
   explanation.textContent = result.explanation || "Sin explicación disponible.";
   explanationBlock.hidden = !result.explanation;
