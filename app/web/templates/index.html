@@ -202,6 +202,54 @@
               </details>
             </section>
 
+            <section class="result-block" id="legal-decision-block" hidden>
+              <div class="block-heading">
+                <div>
+                  <h3>Determinación jurídica estructurada</h3>
+                  <p class="section-help">
+                    Legal Decision 1.0 formaliza la conclusión, los hechos valorados,
+                    la cadena de razonamiento y las consecuencias ya respaldadas.
+                  </p>
+                </div>
+                <span id="legal-decision-status" class="count-badge"></span>
+              </div>
+
+              <dl class="trace-summary">
+                <div><dt>Fuente controladora</dt><dd id="legal-decision-controller"></dd></div>
+                <div><dt>Hechos valorados</dt><dd id="legal-decision-fact-count"></dd></div>
+                <div><dt>Pasos de razonamiento</dt><dd id="legal-decision-step-count"></dd></div>
+                <div><dt>Consecuencias derivadas</dt><dd id="legal-decision-consequence-count"></dd></div>
+              </dl>
+
+              <section id="legal-decision-conclusion-block" class="analyzer-subsection" hidden>
+                <h4>Determinación</h4>
+                <p id="legal-decision-conclusion" class="canonical-conclusion"></p>
+              </section>
+
+              <section class="analyzer-subsection">
+                <h4>Valoración de hechos</h4>
+                <div id="legal-decision-facts" class="fact-grid"></div>
+              </section>
+
+              <section class="analyzer-subsection">
+                <h4>Cadena de razonamiento jurídico</h4>
+                <ol id="legal-decision-reasoning" class="priority-list"></ol>
+              </section>
+
+              <section class="analyzer-subsection">
+                <h4>Obligaciones, derechos, acciones, riesgos y plazos</h4>
+                <ul id="legal-decision-consequences"></ul>
+              </section>
+
+              <details class="trace-details analyzer-integrity">
+                <summary>Integridad de Legal Decision 1.0</summary>
+                <dl class="technical-trace">
+                  <div><dt>Versión</dt><dd id="legal-decision-schema-version"></dd></div>
+                  <div><dt>Huella Legal Decision</dt><dd id="legal-decision-integrity-hash"></dd></div>
+                </dl>
+              </details>
+            </section>
+
             <section class="result-block" id="summary-block" hidden>
               <h3>Orientación</h3>
               <p id="result-explanation"></p>

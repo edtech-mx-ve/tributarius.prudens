@@ -10,11 +10,13 @@ from app.services.hybrid_jurisprudence_integration import (
 )
 from app.services.hybrid_orchestrator import HybridOrchestrator
 from app.services.integral_legal_analyzer import build_integral_legal_analysis
+from app.services.legal_decision import build_legal_decision
 from app.services.traceability import build_canonical_result
 from app.web.jurisprudence_session import load_web_jurisprudence_session
 from app.web.presenter import (
     present_canonical_result,
     present_integral_legal_analysis,
+    present_legal_decision,
 )
 from app.web.schemas import WebConsultationRequest
 from llm.models import ExplanationMode
@@ -99,6 +101,8 @@ class WebHybridRunner:
         presented["legal_analysis"] = present_integral_legal_analysis(
             integral_analysis
         )
+        legal_decision = build_legal_decision(integral_analysis)
+        presented["legal_decision"] = present_legal_decision(legal_decision)
 
         if result.session_jurisprudence_result is not None:
             existing = presented.get("evidence")

@@ -555,6 +555,124 @@ function renderLegalAnalysis(result) {
   block.hidden = false;
 }
 
+const legalDecisionStatusLabels = {
+  determined: "Determinada",
+  conditionally_determined: "Determinación condicionada",
+  insufficient_evidence: "Evidencia insuficiente",
+  human_review_required: "Revisión humana requerida",
+};
+
+const legalFactStatusLabels = {
+  supplied: "Aportado",
+  inferred: "Inferido",
+  accredited: "Acreditado",
+  contested: "Controvertido",
+  missing: "Faltante",
+};
+
+const legalConsequenceKindLabels = {
+  obligation: "Obligación",
+  right: "Derecho",
+  action: "Acción",
+  risk: "Riesgo",
+  deadline: "Plazo",
+};
+
+function renderLegalDecision(result) {
+  const block = document.querySelector("#legal-decision-block");
+  const decision = result.legal_decision;
+
+  if (!decision || typeof decision !== "object") {
+    block.hidden = true;
+    return;
+  }
+
+  document.querySelector("#legal-decision-status").textContent = labelFromMap(
+    decision.status,
+    legalDecisionStatusLabels
+  );
+  document.querySelector("#legal-decision-controller").textContent = displayValue(
+    decision.controlling_source,
+    "Sin fuente controladora"
+  ).toUpperCase();
+
+  const conclusion = decision.conclusion;
+  document.querySelector("#legal-decision-conclusion").textContent = displayValue(
+    conclusion,
+    ""
+  );
+  document.querySelector("#legal-decision-conclusion-block").hidden = !conclusion;
+
+  const factAssessments = Array.isArray(decision.fact_assessments)
+    ? decision.fact_assessments
+    : [];
+  const facts = clearNode("#legal-decision-facts");
+  factAssessments.forEach((fact) => {
+    const article = document.createElement("article");
+    article.className = "fact-card";
+    const name = document.createElement("strong");
+    name.textContent = displayValue(fact.name, "Hecho");
+    const value = document.createElement("p");
+    value.textContent = displayValue(fact.value, "Dato pendiente");
+    const status = document.createElement("small");
+    status.textContent = `${labelFromMap(fact.status, legalFactStatusLabels)} · ${
+      displayValue(fact.materiality, "relevancia no determinada")
+    }`;
+    article.append(name, value, status);
+    facts.append(article);
+  });
+
+  const reasoningSteps = decision.reasoning_chain
+    && Array.isArray(decision.reasoning_chain.steps)
+      ? decision.reasoning_chain.steps
+      : [];
+  const reasoning = clearNode("#legal-decision-reasoning");
+  reasoningSteps.forEach((step) => {
+    const rule = step.rule_ref ? ` [${step.rule_ref}]` : "";
+    const conclusionText = displayValue(step.conclusion, "Sin conclusión");
+    appendTextItem(
+      reasoning,
+      `${step.sequence}. ${String(step.kind).replaceAll("_", " ")}${rule}: ${conclusionText}`
+    );
+  });
+
+  const consequences = decision.consequences
+    && Array.isArray(decision.consequences.items)
+      ? decision.consequences.items
+      : [];
+  const consequenceList = clearNode("#legal-decision-consequences");
+  consequences.forEach((item) => {
+    appendTextItem(
+      consequenceList,
+      `${labelFromMap(item.kind, legalConsequenceKindLabels)}: ${item.description}`
+    );
+  });
+  if (consequences.length === 0) {
+    appendTextItem(
+      consequenceList,
+      "No existen consecuencias jurídicas tipificadas explícitamente para esta consulta."
+    );
+  }
+
+  document.querySelector("#legal-decision-fact-count").textContent = String(
+    factAssessments.length
+  );
+  document.querySelector("#legal-decision-step-count").textContent = String(
+    reasoningSteps.length
+  );
+  document.querySelector("#legal-decision-consequence-count").textContent = String(
+    consequences.length
+  );
+  document.querySelector("#legal-decision-schema-version").textContent = displayValue(
+    decision.schema_version
+  );
+  document.querySelector("#legal-decision-integrity-hash").textContent = displayValue(
+    decision.integrity_sha256
+  );
+
+  block.hidden = false;
+}
+
 function renderResult(payload) {
   const result = payload.result;
   if (!result) {
@@ -574,6 +692,7 @@ function renderResult(payload) {
   uncertainties.replaceChildren();
 
   renderLegalAnalysis(result);
+  renderLegalDecision(result);
 
   explanation.textContent = result.explanation || "Sin explicación disponible.";
   explanationBlock.hidden = !result.explanation;
