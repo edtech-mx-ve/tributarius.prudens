@@ -1,6 +1,9 @@
 from __future__ import annotations
 
 from app.domain.documents import SourceType
+from app.services.legal_explanation_profile import (
+    build_mature_legal_explanation_context,
+)
 from llm.models import (
     DeterministicEvidence,
     EvidenceItem,
@@ -81,29 +84,18 @@ def build_controlled_legal_context(
             item.chunk_id for item in jurisprudence_evidence
         ]
 
-    if explanation_mode == ExplanationMode.TAXPAYER:
-        presentation_instructions = [
-            "Usar lenguaje claro, directo y accesible para el contribuyente.",
-            "Explicar primero la consecuencia práctica y después su fundamento.",
-            "Evitar tecnicismos innecesarios sin alterar la conclusión jurídica.",
-        ]
-    elif explanation_mode == ExplanationMode.STUDENT:
-        presentation_instructions = [
-            "Explicar conceptos jurídicos con lenguaje pedagógico.",
-            "Desarrollar el razonamiento paso a paso.",
-            "Relacionar hechos, normas y conclusión de forma explícita.",
-        ]
-    else:
-        presentation_instructions = [
-            "Usar lenguaje jurídico técnico y conciso.",
-            "Priorizar fundamento, aplicabilidad, excepciones y riesgos.",
-            "Exponer argumentos, contraargumentos y consecuencias prácticas.",
-        ]
+    mature_context = build_mature_legal_explanation_context(
+        deterministic,
+        explanation_mode,
+    )
 
     return LLMGenerationContext(
         question=retrieval.query,
         evidence=combined_evidence,
         deterministic_evidence=deterministic,
         explanation_mode=explanation_mode,
-        presentation_instructions=presentation_instructions,
+        audience_label=mature_context.profile.audience_label,
+        communication_goal=mature_context.profile.communication_goal,
+        presentation_sections=list(mature_context.profile.section_order),
+        presentation_instructions=list(mature_context.profile.style_instructions),
     )

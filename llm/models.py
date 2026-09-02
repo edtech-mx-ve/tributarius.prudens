@@ -1,16 +1,9 @@
 from __future__ import annotations
 
-from enum import StrEnum
-
 from pydantic import BaseModel, Field
 
 from app.domain.documents import SourceType
-
-
-class ExplanationMode(StrEnum):
-    TAXPAYER = "taxpayer"
-    STUDENT = "student"
-    PROFESSIONAL = "professional"
+from app.domain.explanation_mode import ExplanationMode as ExplanationMode
 
 
 class EvidenceItem(BaseModel):
@@ -49,6 +42,9 @@ class LLMGenerationContext(BaseModel):
     evidence: list[EvidenceItem] = Field(min_length=1, max_length=20)
     deterministic_evidence: DeterministicEvidence | None = None
     explanation_mode: ExplanationMode = ExplanationMode.PROFESSIONAL
+    audience_label: str | None = Field(default=None, max_length=100)
+    communication_goal: str | None = Field(default=None, max_length=500)
+    presentation_sections: list[str] = Field(default_factory=list, max_length=10)
     presentation_instructions: list[str] = Field(default_factory=list, max_length=10)
 
 

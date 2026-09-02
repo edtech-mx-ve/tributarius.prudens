@@ -2,7 +2,9 @@ from __future__ import annotations
 
 from typing import Any
 
+from app.domain.explanation_mode import ExplanationMode
 from app.domain.traceability import CanonicalExecutionResult, EvidenceReference
+from app.services.legal_explanation_profile import get_legal_explanation_profile
 from app.web.schemas import WebConsultationRequest
 
 _SNIPPET_LIMIT = 360
@@ -30,6 +32,19 @@ def _safe_explanation(result: CanonicalExecutionResult) -> str | None:
         if isinstance(value, str) and value.strip():
             return str(_repair_mojibake(value))
     return None
+
+
+def _present_explanation_profile(mode: str) -> dict[str, object]:
+    """Expone solo metadatos de presentación; nunca contenido jurídico."""
+
+    profile = get_legal_explanation_profile(ExplanationMode(mode))
+    return {
+        "mode": profile.mode.value,
+        "audience_label": profile.audience_label,
+        "communication_goal": profile.communication_goal,
+        "sections": list(profile.section_order),
+        "style_instructions": list(profile.style_instructions),
+    }
 
 
 def _source_label(source_type: str | None) -> str:
@@ -185,6 +200,7 @@ def present_canonical_result(
     return {
         "folio": result.folio,
         "mode": request.mode,
+        "explanation_profile": _present_explanation_profile(request.mode),
         "requires_human_review": result.traceability.requires_human_review,
         "explanation": _safe_explanation(result),
         "applicable_normative_refs": result.normative.get(
