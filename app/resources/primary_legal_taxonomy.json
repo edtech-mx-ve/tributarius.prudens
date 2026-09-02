@@ -1,0 +1,654 @@
+{
+  "schema_version": "1.0",
+  "purpose": "Taxonomía computable A.4-A.5 de problemas, instituciones y relaciones jurídico-fiscales. Conecta PRODECON/UNAM con familias RBS/CBR y prioridades normativas sin producir una determinación jurídica.",
+  "concepts": [
+    {
+      "concept_id": "determinacion_contribucion",
+      "kind": "problem",
+      "label": "Determinación de contribuciones",
+      "aliases": [
+        "calculo fiscal",
+        "determinación fiscal"
+      ],
+      "primary_entries": [
+        "PRODECON-01",
+        "PRODECON-03",
+        "PRODECON-05",
+        "PRODECON-10",
+        "PRODECON-11",
+        "PRODECON-12",
+        "UNAM-V"
+      ],
+      "rbs_families": [
+        "R-TRI",
+        "R-CAL",
+        "R-OBL",
+        "R-PER",
+        "R-TEM"
+      ],
+      "cbr_families": [
+        "CBR-TRIBUTO",
+        "CBR-CALCULO",
+        "CBR-PERFIL",
+        "CBR-OBLIGACION",
+        "CBR-TEMPORALIDAD"
+      ],
+      "candidate_normative_sources": [
+        "cpeum",
+        "cff",
+        "lisr",
+        "liva",
+        "lieps",
+        "lfisan",
+        "reg_lisr_060516",
+        "rmf_2026",
+        "reg_liva_250914"
+      ]
+    },
+    {
+      "concept_id": "cumplimiento_fiscal",
+      "kind": "problem",
+      "label": "Cumplimiento de obligaciones fiscales",
+      "aliases": [
+        "obligaciones fiscales",
+        "declaraciones"
+      ],
+      "primary_entries": [
+        "PRODECON-04",
+        "PRODECON-06",
+        "PRODECON-07",
+        "PRODECON-11",
+        "UNAM-IV",
+        "UNAM-VI",
+        "UNAM-VII"
+      ],
+      "rbs_families": [
+        "R-PER",
+        "R-SUJ",
+        "R-OBL",
+        "R-AUT",
+        "R-DEU",
+        "R-INC",
+        "R-DER",
+        "R-TRI",
+        "R-CAL",
+        "R-SAN",
+        "R-DEF"
+      ],
+      "cbr_families": [
+        "CBR-PERFIL",
+        "CBR-SUJETO",
+        "CBR-OBLIGACION",
+        "CBR-AUTORIDAD",
+        "CBR-DEUDA",
+        "CBR-INCUMPLIMIENTO",
+        "CBR-DERECHOS",
+        "CBR-TRIBUTO",
+        "CBR-CALCULO",
+        "CBR-DEFENSA"
+      ],
+      "candidate_normative_sources": [
+        "cff",
+        "lisr",
+        "lfdc",
+        "cpeum",
+        "liva",
+        "reg_lisr_060516",
+        "reg_liva_250914",
+        "rmf_2026",
+        "lfpca",
+        "lotfja"
+      ]
+    },
+    {
+      "concept_id": "actuacion_autoridad",
+      "kind": "problem",
+      "label": "Actuación de la autoridad fiscal",
+      "aliases": [
+        "facultades de autoridad",
+        "acto de autoridad"
+      ],
+      "primary_entries": [
+        "PRODECON-06",
+        "PRODECON-08"
+      ],
+      "rbs_families": [
+        "R-AUT",
+        "R-DEU",
+        "R-INC",
+        "R-DEF"
+      ],
+      "cbr_families": [
+        "CBR-AUTORIDAD",
+        "CBR-DEUDA",
+        "CBR-INCUMPLIMIENTO",
+        "CBR-DEFENSA"
+      ],
+      "candidate_normative_sources": [
+        "cff",
+        "lfpca",
+        "lotfja",
+        "lfdc"
+      ]
+    },
+    {
+      "concept_id": "incumplimiento_fiscal",
+      "kind": "problem",
+      "label": "Incumplimiento y consecuencias fiscales",
+      "aliases": [
+        "infracción fiscal",
+        "sanción"
+      ],
+      "primary_entries": [
+        "PRODECON-06",
+        "PRODECON-07",
+        "PRODECON-09",
+        "UNAM-VI",
+        "UNAM-VII"
+      ],
+      "rbs_families": [
+        "R-AUT",
+        "R-DEU",
+        "R-INC",
+        "R-DER",
+        "R-OBL",
+        "R-INT",
+        "R-SAN",
+        "R-DEF"
+      ],
+      "cbr_families": [
+        "CBR-AUTORIDAD",
+        "CBR-DEUDA",
+        "CBR-INCUMPLIMIENTO",
+        "CBR-DERECHOS",
+        "CBR-OBLIGACION",
+        "CBR-INTERPRETACION",
+        "CBR-DEFENSA"
+      ],
+      "candidate_normative_sources": [
+        "cff",
+        "lfdc",
+        "cpeum",
+        "lfpca",
+        "lotfja"
+      ]
+    },
+    {
+      "concept_id": "defensa_contribuyente",
+      "kind": "problem",
+      "label": "Defensa del contribuyente",
+      "aliases": [
+        "medio de defensa",
+        "impugnación"
+      ],
+      "primary_entries": [
+        "PRODECON-08",
+        "UNAM-VII"
+      ],
+      "rbs_families": [
+        "R-DEF",
+        "R-AUT",
+        "R-INC",
+        "R-SAN"
+      ],
+      "cbr_families": [
+        "CBR-DEFENSA",
+        "CBR-AUTORIDAD",
+        "CBR-INCUMPLIMIENTO"
+      ],
+      "candidate_normative_sources": [
+        "cff",
+        "lfpca",
+        "lotfja",
+        "lfdc"
+      ]
+    },
+    {
+      "concept_id": "interpretacion_fiscal",
+      "kind": "problem",
+      "label": "Interpretación de disposiciones fiscales",
+      "aliases": [
+        "aplicación estricta",
+        "interpretación tributaria"
+      ],
+      "primary_entries": [
+        "PRODECON-09",
+        "UNAM-II"
+      ],
+      "rbs_families": [
+        "R-INT"
+      ],
+      "cbr_families": [
+        "CBR-INTERPRETACION"
+      ],
+      "candidate_normative_sources": [
+        "cff"
+      ]
+    },
+    {
+      "concept_id": "relacion_tributaria",
+      "kind": "institution",
+      "label": "Relación jurídico-tributaria",
+      "aliases": [
+        "relación Estado contribuyente"
+      ],
+      "primary_entries": [
+        "PRODECON-04",
+        "UNAM-III",
+        "UNAM-IV"
+      ],
+      "rbs_families": [
+        "R-PER",
+        "R-SUJ",
+        "R-OBL",
+        "R-TRI"
+      ],
+      "cbr_families": [
+        "CBR-PERFIL",
+        "CBR-SUJETO",
+        "CBR-OBLIGACION",
+        "CBR-TRIBUTO"
+      ],
+      "candidate_normative_sources": [
+        "cff",
+        "lisr",
+        "liva",
+        "lieps",
+        "lfisan"
+      ]
+    },
+    {
+      "concept_id": "tributo",
+      "kind": "institution",
+      "label": "Tributo y elementos esenciales",
+      "aliases": [
+        "contribución",
+        "impuesto"
+      ],
+      "primary_entries": [
+        "PRODECON-02",
+        "PRODECON-03",
+        "PRODECON-05",
+        "PRODECON-12",
+        "UNAM-III",
+        "UNAM-V"
+      ],
+      "rbs_families": [
+        "R-TRI",
+        "R-INT",
+        "R-CAL",
+        "R-TEM",
+        "R-SUJ"
+      ],
+      "cbr_families": [
+        "CBR-TRIBUTO",
+        "CBR-INTERPRETACION",
+        "CBR-CALCULO",
+        "CBR-TEMPORALIDAD",
+        "CBR-SUJETO"
+      ],
+      "candidate_normative_sources": [
+        "cpeum",
+        "cff",
+        "lisr",
+        "liva",
+        "lieps",
+        "lfisan",
+        "rmf_2026",
+        "reg_lisr_060516",
+        "reg_liva_250914"
+      ]
+    },
+    {
+      "concept_id": "obligacion_tributaria",
+      "kind": "institution",
+      "label": "Obligación tributaria",
+      "aliases": [
+        "obligación fiscal"
+      ],
+      "primary_entries": [
+        "PRODECON-04",
+        "PRODECON-06",
+        "PRODECON-07",
+        "PRODECON-11",
+        "UNAM-IV",
+        "UNAM-VI",
+        "UNAM-VII"
+      ],
+      "rbs_families": [
+        "R-PER",
+        "R-SUJ",
+        "R-OBL",
+        "R-AUT",
+        "R-DEU",
+        "R-INC",
+        "R-DER",
+        "R-TRI",
+        "R-CAL",
+        "R-SAN",
+        "R-DEF"
+      ],
+      "cbr_families": [
+        "CBR-PERFIL",
+        "CBR-SUJETO",
+        "CBR-OBLIGACION",
+        "CBR-AUTORIDAD",
+        "CBR-DEUDA",
+        "CBR-INCUMPLIMIENTO",
+        "CBR-DERECHOS",
+        "CBR-TRIBUTO",
+        "CBR-CALCULO",
+        "CBR-DEFENSA"
+      ],
+      "candidate_normative_sources": [
+        "cff",
+        "lisr",
+        "lfdc",
+        "cpeum",
+        "liva",
+        "reg_lisr_060516",
+        "reg_liva_250914",
+        "rmf_2026",
+        "lfpca",
+        "lotfja"
+      ]
+    },
+    {
+      "concept_id": "derechos_contribuyente",
+      "kind": "institution",
+      "label": "Derechos y garantías del contribuyente",
+      "aliases": [
+        "derechos fiscales",
+        "garantías"
+      ],
+      "primary_entries": [
+        "PRODECON-02",
+        "PRODECON-07",
+        "UNAM-I"
+      ],
+      "rbs_families": [
+        "R-TRI",
+        "R-INT",
+        "R-DER",
+        "R-OBL"
+      ],
+      "cbr_families": [
+        "CBR-TRIBUTO",
+        "CBR-INTERPRETACION",
+        "CBR-DERECHOS",
+        "CBR-OBLIGACION"
+      ],
+      "candidate_normative_sources": [
+        "cpeum",
+        "cff",
+        "lfdc"
+      ]
+    },
+    {
+      "concept_id": "deuda_tributaria",
+      "kind": "institution",
+      "label": "Deuda tributaria y extinción",
+      "aliases": [
+        "crédito fiscal",
+        "extinción de deuda"
+      ],
+      "primary_entries": [
+        "PRODECON-06",
+        "UNAM-VI"
+      ],
+      "rbs_families": [
+        "R-AUT",
+        "R-DEU",
+        "R-INC",
+        "R-OBL"
+      ],
+      "cbr_families": [
+        "CBR-AUTORIDAD",
+        "CBR-DEUDA",
+        "CBR-INCUMPLIMIENTO",
+        "CBR-OBLIGACION"
+      ],
+      "candidate_normative_sources": [
+        "cff"
+      ]
+    },
+    {
+      "concept_id": "regimen_isr",
+      "kind": "institution",
+      "label": "Régimen de impuesto sobre la renta",
+      "aliases": [
+        "ISR",
+        "régimen fiscal"
+      ],
+      "primary_entries": [
+        "PRODECON-05",
+        "PRODECON-10",
+        "PRODECON-11",
+        "PRODECON-12",
+        "UNAM-III",
+        "UNAM-V"
+      ],
+      "rbs_families": [
+        "R-TRI",
+        "R-CAL",
+        "R-OBL",
+        "R-PER",
+        "R-TEM",
+        "R-SUJ"
+      ],
+      "cbr_families": [
+        "CBR-TRIBUTO",
+        "CBR-CALCULO",
+        "CBR-PERFIL",
+        "CBR-OBLIGACION",
+        "CBR-TEMPORALIDAD",
+        "CBR-SUJETO"
+      ],
+      "candidate_normative_sources": [
+        "lisr",
+        "liva",
+        "lieps",
+        "lfisan",
+        "reg_lisr_060516",
+        "rmf_2026",
+        "cff",
+        "reg_liva_250914"
+      ]
+    },
+    {
+      "concept_id": "sujeto_obligacion",
+      "kind": "relation",
+      "label": "Sujeto frente a obligación tributaria",
+      "aliases": [
+        "sujeto pasivo",
+        "responsabilidad fiscal"
+      ],
+      "primary_entries": [
+        "PRODECON-04",
+        "UNAM-III",
+        "UNAM-IV"
+      ],
+      "rbs_families": [
+        "R-PER",
+        "R-SUJ",
+        "R-OBL",
+        "R-TRI"
+      ],
+      "cbr_families": [
+        "CBR-PERFIL",
+        "CBR-SUJETO",
+        "CBR-OBLIGACION",
+        "CBR-TRIBUTO"
+      ],
+      "candidate_normative_sources": [
+        "cff",
+        "lisr",
+        "liva",
+        "lieps",
+        "lfisan"
+      ]
+    },
+    {
+      "concept_id": "hecho_obligacion",
+      "kind": "relation",
+      "label": "Hecho imponible frente a obligación",
+      "aliases": [
+        "hecho generador"
+      ],
+      "primary_entries": [
+        "PRODECON-04",
+        "PRODECON-05",
+        "UNAM-III",
+        "UNAM-IV"
+      ],
+      "rbs_families": [
+        "R-PER",
+        "R-SUJ",
+        "R-OBL",
+        "R-TRI",
+        "R-CAL"
+      ],
+      "cbr_families": [
+        "CBR-PERFIL",
+        "CBR-SUJETO",
+        "CBR-OBLIGACION",
+        "CBR-TRIBUTO",
+        "CBR-CALCULO"
+      ],
+      "candidate_normative_sources": [
+        "cff",
+        "lisr",
+        "liva",
+        "lieps",
+        "lfisan"
+      ]
+    },
+    {
+      "concept_id": "autoridad_contribuyente",
+      "kind": "relation",
+      "label": "Autoridad fiscal frente al contribuyente",
+      "aliases": [
+        "facultad y derecho"
+      ],
+      "primary_entries": [
+        "PRODECON-06",
+        "PRODECON-07",
+        "PRODECON-08",
+        "UNAM-I"
+      ],
+      "rbs_families": [
+        "R-AUT",
+        "R-DEU",
+        "R-INC",
+        "R-DER",
+        "R-OBL",
+        "R-DEF",
+        "R-TRI"
+      ],
+      "cbr_families": [
+        "CBR-AUTORIDAD",
+        "CBR-DEUDA",
+        "CBR-INCUMPLIMIENTO",
+        "CBR-DERECHOS",
+        "CBR-OBLIGACION",
+        "CBR-DEFENSA",
+        "CBR-TRIBUTO"
+      ],
+      "candidate_normative_sources": [
+        "cff",
+        "lfdc",
+        "cpeum",
+        "lfpca",
+        "lotfja"
+      ]
+    },
+    {
+      "concept_id": "incumplimiento_consecuencia",
+      "kind": "relation",
+      "label": "Incumplimiento frente a consecuencia jurídica",
+      "aliases": [
+        "infracción y sanción"
+      ],
+      "primary_entries": [
+        "PRODECON-06",
+        "PRODECON-07",
+        "PRODECON-09",
+        "UNAM-VI",
+        "UNAM-VII"
+      ],
+      "rbs_families": [
+        "R-AUT",
+        "R-DEU",
+        "R-INC",
+        "R-DER",
+        "R-OBL",
+        "R-INT",
+        "R-SAN",
+        "R-DEF"
+      ],
+      "cbr_families": [
+        "CBR-AUTORIDAD",
+        "CBR-DEUDA",
+        "CBR-INCUMPLIMIENTO",
+        "CBR-DERECHOS",
+        "CBR-OBLIGACION",
+        "CBR-INTERPRETACION",
+        "CBR-DEFENSA"
+      ],
+      "candidate_normative_sources": [
+        "cff",
+        "lfdc",
+        "cpeum",
+        "lfpca",
+        "lotfja"
+      ]
+    },
+    {
+      "concept_id": "norma_interpretacion",
+      "kind": "relation",
+      "label": "Norma fiscal frente a método de interpretación",
+      "aliases": [
+        "aplicación de norma fiscal"
+      ],
+      "primary_entries": [
+        "PRODECON-09",
+        "UNAM-II"
+      ],
+      "rbs_families": [
+        "R-INT"
+      ],
+      "cbr_families": [
+        "CBR-INTERPRETACION"
+      ],
+      "candidate_normative_sources": [
+        "cff"
+      ]
+    },
+    {
+      "concept_id": "temporalidad_aplicacion",
+      "kind": "relation",
+      "label": "Vigencia frente a aplicación normativa",
+      "aliases": [
+        "vigencia",
+        "contenido histórico"
+      ],
+      "primary_entries": [
+        "PRODECON-12"
+      ],
+      "rbs_families": [
+        "R-TEM",
+        "R-TRI",
+        "R-CAL"
+      ],
+      "cbr_families": [
+        "CBR-TEMPORALIDAD",
+        "CBR-TRIBUTO",
+        "CBR-CALCULO"
+      ],
+      "candidate_normative_sources": [
+        "lisr",
+        "rmf_2026"
+      ]
+    }
+  ]
+}

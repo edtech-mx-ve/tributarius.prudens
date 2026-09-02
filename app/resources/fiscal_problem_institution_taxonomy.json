@@ -1,0 +1,611 @@
+{
+  "schema_version": "1.0",
+  "purpose": "A.6 Taxonomía computable y separada de problemas e instituciones jurídico-fiscales, derivada de PRODECON/UNAM y limitada a orientación con validación normativa obligatoria.",
+  "concepts": [
+    {
+      "concept_id": "determinacion_contribucion",
+      "kind": "problem",
+      "label": "Determinación de contribuciones",
+      "description": "Taxón jurídico-fiscal para orientar la investigación de determinación de contribuciones mediante conocimiento primario, RBS y CBR, siempre sujeto a validación normativa.",
+      "aliases": [
+        "calculo fiscal",
+        "determinación fiscal"
+      ],
+      "primary_entries": [
+        "PRODECON-01",
+        "PRODECON-03",
+        "PRODECON-05",
+        "PRODECON-10",
+        "PRODECON-11",
+        "PRODECON-12",
+        "UNAM-V"
+      ],
+      "related_concepts": [
+        "cumplimiento_fiscal",
+        "tributo",
+        "obligacion_tributaria",
+        "regimen_isr"
+      ],
+      "relation_ids": [
+        "REL-HECHO-OBL",
+        "REL-TEM-APL",
+        "REL-REG-REQ",
+        "REL-TRI-CAL"
+      ],
+      "rbs_families": [
+        "R-TRI",
+        "R-CAL",
+        "R-OBL",
+        "R-PER",
+        "R-TEM"
+      ],
+      "cbr_families": [
+        "CBR-TRIBUTO",
+        "CBR-CALCULO",
+        "CBR-PERFIL",
+        "CBR-OBLIGACION",
+        "CBR-TEMPORALIDAD"
+      ],
+      "candidate_normative_sources": [
+        "cpeum",
+        "cff",
+        "lisr",
+        "liva",
+        "lieps",
+        "lfisan",
+        "reg_lisr_060516",
+        "rmf_2026",
+        "reg_liva_250914"
+      ]
+    },
+    {
+      "concept_id": "cumplimiento_fiscal",
+      "kind": "problem",
+      "label": "Cumplimiento de obligaciones fiscales",
+      "description": "Taxón jurídico-fiscal para orientar la investigación de cumplimiento de obligaciones fiscales mediante conocimiento primario, RBS y CBR, siempre sujeto a validación normativa.",
+      "aliases": [
+        "obligaciones fiscales",
+        "declaraciones"
+      ],
+      "primary_entries": [
+        "PRODECON-04",
+        "PRODECON-06",
+        "PRODECON-07",
+        "PRODECON-11",
+        "UNAM-IV",
+        "UNAM-VI",
+        "UNAM-VII"
+      ],
+      "related_concepts": [
+        "determinacion_contribucion",
+        "actuacion_autoridad",
+        "incumplimiento_fiscal",
+        "defensa_contribuyente",
+        "relacion_tributaria",
+        "obligacion_tributaria",
+        "derechos_contribuyente",
+        "deuda_tributaria"
+      ],
+      "relation_ids": [
+        "REL-SUJ-OBL",
+        "REL-DEU-EXT",
+        "REL-OBL-PLA"
+      ],
+      "rbs_families": [
+        "R-PER",
+        "R-SUJ",
+        "R-OBL",
+        "R-AUT",
+        "R-DEU",
+        "R-INC",
+        "R-DER",
+        "R-TRI",
+        "R-CAL",
+        "R-SAN",
+        "R-DEF"
+      ],
+      "cbr_families": [
+        "CBR-PERFIL",
+        "CBR-SUJETO",
+        "CBR-OBLIGACION",
+        "CBR-AUTORIDAD",
+        "CBR-DEUDA",
+        "CBR-INCUMPLIMIENTO",
+        "CBR-DERECHOS",
+        "CBR-TRIBUTO",
+        "CBR-CALCULO",
+        "CBR-DEFENSA"
+      ],
+      "candidate_normative_sources": [
+        "cff",
+        "lisr",
+        "lfdc",
+        "cpeum",
+        "liva",
+        "reg_lisr_060516",
+        "reg_liva_250914",
+        "rmf_2026",
+        "lfpca",
+        "lotfja"
+      ]
+    },
+    {
+      "concept_id": "actuacion_autoridad",
+      "kind": "problem",
+      "label": "Actuación de la autoridad fiscal",
+      "description": "Taxón jurídico-fiscal para orientar la investigación de actuación de la autoridad fiscal mediante conocimiento primario, RBS y CBR, siempre sujeto a validación normativa.",
+      "aliases": [
+        "facultades de autoridad",
+        "acto de autoridad"
+      ],
+      "primary_entries": [
+        "PRODECON-06",
+        "PRODECON-08"
+      ],
+      "related_concepts": [
+        "cumplimiento_fiscal",
+        "incumplimiento_fiscal",
+        "defensa_contribuyente",
+        "obligacion_tributaria",
+        "deuda_tributaria"
+      ],
+      "relation_ids": [
+        "REL-AUT-CON"
+      ],
+      "rbs_families": [
+        "R-AUT",
+        "R-DEU",
+        "R-INC",
+        "R-DEF"
+      ],
+      "cbr_families": [
+        "CBR-AUTORIDAD",
+        "CBR-DEUDA",
+        "CBR-INCUMPLIMIENTO",
+        "CBR-DEFENSA"
+      ],
+      "candidate_normative_sources": [
+        "cff",
+        "lfpca",
+        "lotfja",
+        "lfdc"
+      ]
+    },
+    {
+      "concept_id": "incumplimiento_fiscal",
+      "kind": "problem",
+      "label": "Incumplimiento y consecuencias fiscales",
+      "description": "Taxón jurídico-fiscal para orientar la investigación de incumplimiento y consecuencias fiscales mediante conocimiento primario, RBS y CBR, siempre sujeto a validación normativa.",
+      "aliases": [
+        "infracción fiscal",
+        "sanción"
+      ],
+      "primary_entries": [
+        "PRODECON-06",
+        "PRODECON-07",
+        "PRODECON-09",
+        "UNAM-VI",
+        "UNAM-VII"
+      ],
+      "related_concepts": [
+        "cumplimiento_fiscal",
+        "actuacion_autoridad",
+        "defensa_contribuyente",
+        "interpretacion_fiscal",
+        "obligacion_tributaria",
+        "derechos_contribuyente",
+        "deuda_tributaria"
+      ],
+      "relation_ids": [
+        "REL-INC-CONSEQ"
+      ],
+      "rbs_families": [
+        "R-AUT",
+        "R-DEU",
+        "R-INC",
+        "R-DER",
+        "R-OBL",
+        "R-INT",
+        "R-SAN",
+        "R-DEF"
+      ],
+      "cbr_families": [
+        "CBR-AUTORIDAD",
+        "CBR-DEUDA",
+        "CBR-INCUMPLIMIENTO",
+        "CBR-DERECHOS",
+        "CBR-OBLIGACION",
+        "CBR-INTERPRETACION",
+        "CBR-DEFENSA"
+      ],
+      "candidate_normative_sources": [
+        "cff",
+        "lfdc",
+        "cpeum",
+        "lfpca",
+        "lotfja"
+      ]
+    },
+    {
+      "concept_id": "defensa_contribuyente",
+      "kind": "problem",
+      "label": "Defensa del contribuyente",
+      "description": "Taxón jurídico-fiscal para orientar la investigación de defensa del contribuyente mediante conocimiento primario, RBS y CBR, siempre sujeto a validación normativa.",
+      "aliases": [
+        "medio de defensa",
+        "impugnación"
+      ],
+      "primary_entries": [
+        "PRODECON-08",
+        "UNAM-VII"
+      ],
+      "related_concepts": [
+        "cumplimiento_fiscal",
+        "actuacion_autoridad",
+        "incumplimiento_fiscal",
+        "obligacion_tributaria"
+      ],
+      "relation_ids": [
+        "REL-DER-AUT",
+        "REL-AUT-DEF"
+      ],
+      "rbs_families": [
+        "R-DEF",
+        "R-AUT",
+        "R-INC",
+        "R-SAN"
+      ],
+      "cbr_families": [
+        "CBR-DEFENSA",
+        "CBR-AUTORIDAD",
+        "CBR-INCUMPLIMIENTO"
+      ],
+      "candidate_normative_sources": [
+        "cff",
+        "lfpca",
+        "lotfja",
+        "lfdc"
+      ]
+    },
+    {
+      "concept_id": "interpretacion_fiscal",
+      "kind": "problem",
+      "label": "Interpretación de disposiciones fiscales",
+      "description": "Taxón jurídico-fiscal para orientar la investigación de interpretación de disposiciones fiscales mediante conocimiento primario, RBS y CBR, siempre sujeto a validación normativa.",
+      "aliases": [
+        "aplicación estricta",
+        "interpretación tributaria"
+      ],
+      "primary_entries": [
+        "PRODECON-09",
+        "UNAM-II"
+      ],
+      "related_concepts": [
+        "incumplimiento_fiscal"
+      ],
+      "relation_ids": [
+        "REL-NOR-INT"
+      ],
+      "rbs_families": [
+        "R-INT"
+      ],
+      "cbr_families": [
+        "CBR-INTERPRETACION"
+      ],
+      "candidate_normative_sources": [
+        "cff"
+      ]
+    },
+    {
+      "concept_id": "relacion_tributaria",
+      "kind": "institution",
+      "label": "Relación jurídico-tributaria",
+      "description": "Taxón jurídico-fiscal para orientar la investigación de relación jurídico-tributaria mediante conocimiento primario, RBS y CBR, siempre sujeto a validación normativa.",
+      "aliases": [
+        "relación Estado contribuyente"
+      ],
+      "primary_entries": [
+        "PRODECON-04",
+        "UNAM-III",
+        "UNAM-IV"
+      ],
+      "related_concepts": [
+        "cumplimiento_fiscal",
+        "tributo",
+        "obligacion_tributaria",
+        "regimen_isr"
+      ],
+      "relation_ids": [
+        "REL-SUJ-OBL",
+        "REL-AUT-CON",
+        "REL-DER-AUT",
+        "REL-AUT-DEF"
+      ],
+      "rbs_families": [
+        "R-PER",
+        "R-SUJ",
+        "R-OBL",
+        "R-TRI"
+      ],
+      "cbr_families": [
+        "CBR-PERFIL",
+        "CBR-SUJETO",
+        "CBR-OBLIGACION",
+        "CBR-TRIBUTO"
+      ],
+      "candidate_normative_sources": [
+        "cff",
+        "lisr",
+        "liva",
+        "lieps",
+        "lfisan"
+      ]
+    },
+    {
+      "concept_id": "tributo",
+      "kind": "institution",
+      "label": "Tributo y elementos esenciales",
+      "description": "Taxón jurídico-fiscal para orientar la investigación de tributo y elementos esenciales mediante conocimiento primario, RBS y CBR, siempre sujeto a validación normativa.",
+      "aliases": [
+        "contribución",
+        "impuesto"
+      ],
+      "primary_entries": [
+        "PRODECON-02",
+        "PRODECON-03",
+        "PRODECON-05",
+        "PRODECON-12",
+        "UNAM-III",
+        "UNAM-V"
+      ],
+      "related_concepts": [
+        "determinacion_contribucion",
+        "relacion_tributaria",
+        "derechos_contribuyente",
+        "regimen_isr"
+      ],
+      "relation_ids": [
+        "REL-HECHO-OBL",
+        "REL-NOR-INT",
+        "REL-TEM-APL",
+        "REL-REG-REQ",
+        "REL-TRI-CAL"
+      ],
+      "rbs_families": [
+        "R-TRI",
+        "R-INT",
+        "R-CAL",
+        "R-TEM",
+        "R-SUJ"
+      ],
+      "cbr_families": [
+        "CBR-TRIBUTO",
+        "CBR-INTERPRETACION",
+        "CBR-CALCULO",
+        "CBR-TEMPORALIDAD",
+        "CBR-SUJETO"
+      ],
+      "candidate_normative_sources": [
+        "cpeum",
+        "cff",
+        "lisr",
+        "liva",
+        "lieps",
+        "lfisan",
+        "rmf_2026",
+        "reg_lisr_060516",
+        "reg_liva_250914"
+      ]
+    },
+    {
+      "concept_id": "obligacion_tributaria",
+      "kind": "institution",
+      "label": "Obligación tributaria",
+      "description": "Taxón jurídico-fiscal para orientar la investigación de obligación tributaria mediante conocimiento primario, RBS y CBR, siempre sujeto a validación normativa.",
+      "aliases": [
+        "obligación fiscal"
+      ],
+      "primary_entries": [
+        "PRODECON-04",
+        "PRODECON-06",
+        "PRODECON-07",
+        "PRODECON-11",
+        "UNAM-IV",
+        "UNAM-VI",
+        "UNAM-VII"
+      ],
+      "related_concepts": [
+        "determinacion_contribucion",
+        "cumplimiento_fiscal",
+        "actuacion_autoridad",
+        "incumplimiento_fiscal",
+        "defensa_contribuyente",
+        "relacion_tributaria",
+        "derechos_contribuyente",
+        "deuda_tributaria"
+      ],
+      "relation_ids": [
+        "REL-SUJ-OBL",
+        "REL-HECHO-OBL",
+        "REL-INC-CONSEQ",
+        "REL-DEU-EXT",
+        "REL-OBL-PLA"
+      ],
+      "rbs_families": [
+        "R-PER",
+        "R-SUJ",
+        "R-OBL",
+        "R-AUT",
+        "R-DEU",
+        "R-INC",
+        "R-DER",
+        "R-TRI",
+        "R-CAL",
+        "R-SAN",
+        "R-DEF"
+      ],
+      "cbr_families": [
+        "CBR-PERFIL",
+        "CBR-SUJETO",
+        "CBR-OBLIGACION",
+        "CBR-AUTORIDAD",
+        "CBR-DEUDA",
+        "CBR-INCUMPLIMIENTO",
+        "CBR-DERECHOS",
+        "CBR-TRIBUTO",
+        "CBR-CALCULO",
+        "CBR-DEFENSA"
+      ],
+      "candidate_normative_sources": [
+        "cff",
+        "lisr",
+        "lfdc",
+        "cpeum",
+        "liva",
+        "reg_lisr_060516",
+        "reg_liva_250914",
+        "rmf_2026",
+        "lfpca",
+        "lotfja"
+      ]
+    },
+    {
+      "concept_id": "derechos_contribuyente",
+      "kind": "institution",
+      "label": "Derechos y garantías del contribuyente",
+      "description": "Taxón jurídico-fiscal para orientar la investigación de derechos y garantías del contribuyente mediante conocimiento primario, RBS y CBR, siempre sujeto a validación normativa.",
+      "aliases": [
+        "derechos fiscales",
+        "garantías"
+      ],
+      "primary_entries": [
+        "PRODECON-02",
+        "PRODECON-07",
+        "UNAM-I"
+      ],
+      "related_concepts": [
+        "cumplimiento_fiscal",
+        "incumplimiento_fiscal",
+        "tributo",
+        "obligacion_tributaria"
+      ],
+      "relation_ids": [
+        "REL-AUT-CON",
+        "REL-DER-AUT",
+        "REL-AUT-DEF"
+      ],
+      "rbs_families": [
+        "R-TRI",
+        "R-INT",
+        "R-DER",
+        "R-OBL"
+      ],
+      "cbr_families": [
+        "CBR-TRIBUTO",
+        "CBR-INTERPRETACION",
+        "CBR-DERECHOS",
+        "CBR-OBLIGACION"
+      ],
+      "candidate_normative_sources": [
+        "cpeum",
+        "cff",
+        "lfdc"
+      ]
+    },
+    {
+      "concept_id": "deuda_tributaria",
+      "kind": "institution",
+      "label": "Deuda tributaria y extinción",
+      "description": "Taxón jurídico-fiscal para orientar la investigación de deuda tributaria y extinción mediante conocimiento primario, RBS y CBR, siempre sujeto a validación normativa.",
+      "aliases": [
+        "crédito fiscal",
+        "extinción de deuda"
+      ],
+      "primary_entries": [
+        "PRODECON-06",
+        "UNAM-VI"
+      ],
+      "related_concepts": [
+        "cumplimiento_fiscal",
+        "actuacion_autoridad",
+        "incumplimiento_fiscal",
+        "obligacion_tributaria"
+      ],
+      "relation_ids": [
+        "REL-INC-CONSEQ",
+        "REL-DEU-EXT"
+      ],
+      "rbs_families": [
+        "R-AUT",
+        "R-DEU",
+        "R-INC",
+        "R-OBL"
+      ],
+      "cbr_families": [
+        "CBR-AUTORIDAD",
+        "CBR-DEUDA",
+        "CBR-INCUMPLIMIENTO",
+        "CBR-OBLIGACION"
+      ],
+      "candidate_normative_sources": [
+        "cff"
+      ]
+    },
+    {
+      "concept_id": "regimen_isr",
+      "kind": "institution",
+      "label": "Régimen de impuesto sobre la renta",
+      "description": "Taxón jurídico-fiscal para orientar la investigación de régimen de impuesto sobre la renta mediante conocimiento primario, RBS y CBR, siempre sujeto a validación normativa.",
+      "aliases": [
+        "ISR",
+        "régimen fiscal"
+      ],
+      "primary_entries": [
+        "PRODECON-05",
+        "PRODECON-10",
+        "PRODECON-11",
+        "PRODECON-12",
+        "UNAM-III",
+        "UNAM-V"
+      ],
+      "related_concepts": [
+        "determinacion_contribucion",
+        "cumplimiento_fiscal",
+        "relacion_tributaria",
+        "tributo",
+        "obligacion_tributaria"
+      ],
+      "relation_ids": [
+        "REL-TEM-APL",
+        "REL-REG-REQ",
+        "REL-TRI-CAL"
+      ],
+      "rbs_families": [
+        "R-TRI",
+        "R-CAL",
+        "R-OBL",
+        "R-PER",
+        "R-TEM",
+        "R-SUJ"
+      ],
+      "cbr_families": [
+        "CBR-TRIBUTO",
+        "CBR-CALCULO",
+        "CBR-PERFIL",
+        "CBR-OBLIGACION",
+        "CBR-TEMPORALIDAD",
+        "CBR-SUJETO"
+      ],
+      "candidate_normative_sources": [
+        "lisr",
+        "liva",
+        "lieps",
+        "lfisan",
+        "reg_lisr_060516",
+        "rmf_2026",
+        "cff",
+        "reg_liva_250914"
+      ]
+    }
+  ]
+}

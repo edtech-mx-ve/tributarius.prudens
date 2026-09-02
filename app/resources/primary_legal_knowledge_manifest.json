@@ -1,0 +1,31 @@
+{
+  "schema_version": "1.0",
+  "knowledge_version": "1.0.0",
+  "effective_date": "2026-09-02",
+  "purpose": "Manifiesto canónico de la base primaria estructurada A.1-A.8. Consolida PRODECON, UNAM, taxonomías y el contrato cerrado de doce corpus normativos sin otorgar autoridad jurídica a la capa heurística.",
+  "components": {
+    "knowledge_map": "primary_legal_knowledge_map.json",
+    "legal_taxonomy": "primary_legal_taxonomy.json",
+    "problem_institution_taxonomy": "fiscal_problem_institution_taxonomy.json",
+    "relation_taxonomy": "legal_relation_taxonomy.json"
+  },
+  "normative_corpus_ids": [
+    "cff",
+    "cpeum",
+    "lfdc",
+    "lfisan",
+    "lfpca",
+    "lieps",
+    "lisr",
+    "liva",
+    "lotfja",
+    "reg_lisr_060516",
+    "reg_liva_250914",
+    "rmf_2026"
+  ],
+  "permanent_source_count": 14,
+  "primary_manual_count": 2,
+  "normative_corpus_count": 12,
+  "requires_normative_validation": true,
+  "can_control_legal_decision": false
+}

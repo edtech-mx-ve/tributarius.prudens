@@ -1,0 +1,417 @@
+{
+  "schema_version": "1.0",
+  "purpose": "A.7 Taxonomía computable de relaciones jurídicas fiscales; identifica vínculos de investigación sujetos a validación normativa y sin autoridad decisoria propia.",
+  "relations": [
+    {
+      "relation_id": "REL-SUJ-OBL",
+      "label": "Sujeto frente a obligación tributaria",
+      "description": "Relación jurídico-fiscal sujeto frente a obligación tributaria que identifica un vínculo a investigar y validar contra evidencia normativa interna antes de cualquier determinación.",
+      "subject_role": "sujeto fiscal",
+      "object_role": "obligación tributaria",
+      "relation_type": "sujeción",
+      "problem_concepts": [
+        "cumplimiento_fiscal"
+      ],
+      "institution_concepts": [
+        "relacion_tributaria",
+        "obligacion_tributaria"
+      ],
+      "primary_entries": [
+        "PRODECON-04",
+        "PRODECON-07",
+        "UNAM-IV"
+      ],
+      "rbs_families": [
+        "R-SUJ",
+        "R-OBL"
+      ],
+      "cbr_families": [
+        "CBR-SUJETO",
+        "CBR-OBLIGACION"
+      ],
+      "candidate_normative_sources": [
+        "cff",
+        "lisr"
+      ],
+      "temporal_sensitive": true
+    },
+    {
+      "relation_id": "REL-HECHO-OBL",
+      "label": "Hecho imponible frente a obligación",
+      "description": "Relación jurídico-fiscal hecho imponible frente a obligación que identifica un vínculo a investigar y validar contra evidencia normativa interna antes de cualquier determinación.",
+      "subject_role": "hecho imponible",
+      "object_role": "obligación tributaria",
+      "relation_type": "causación",
+      "problem_concepts": [
+        "determinacion_contribucion"
+      ],
+      "institution_concepts": [
+        "tributo",
+        "obligacion_tributaria"
+      ],
+      "primary_entries": [
+        "PRODECON-03",
+        "PRODECON-05",
+        "UNAM-III"
+      ],
+      "rbs_families": [
+        "R-TRI",
+        "R-OBL"
+      ],
+      "cbr_families": [
+        "CBR-TRIBUTO",
+        "CBR-OBLIGACION"
+      ],
+      "candidate_normative_sources": [
+        "cff",
+        "lisr",
+        "liva",
+        "lieps",
+        "lfisan"
+      ],
+      "temporal_sensitive": true
+    },
+    {
+      "relation_id": "REL-AUT-CON",
+      "label": "Autoridad fiscal frente al contribuyente",
+      "description": "Relación jurídico-fiscal autoridad fiscal frente al contribuyente que identifica un vínculo a investigar y validar contra evidencia normativa interna antes de cualquier determinación.",
+      "subject_role": "autoridad fiscal",
+      "object_role": "contribuyente",
+      "relation_type": "potestad fiscal",
+      "problem_concepts": [
+        "actuacion_autoridad"
+      ],
+      "institution_concepts": [
+        "relacion_tributaria",
+        "derechos_contribuyente"
+      ],
+      "primary_entries": [
+        "PRODECON-04",
+        "PRODECON-06",
+        "PRODECON-08"
+      ],
+      "rbs_families": [
+        "R-AUT",
+        "R-DER"
+      ],
+      "cbr_families": [
+        "CBR-AUTORIDAD",
+        "CBR-DERECHOS"
+      ],
+      "candidate_normative_sources": [
+        "cpeum",
+        "cff",
+        "lfdc"
+      ],
+      "temporal_sensitive": true
+    },
+    {
+      "relation_id": "REL-INC-CONSEQ",
+      "label": "Incumplimiento frente a consecuencia jurídica",
+      "description": "Relación jurídico-fiscal incumplimiento frente a consecuencia jurídica que identifica un vínculo a investigar y validar contra evidencia normativa interna antes de cualquier determinación.",
+      "subject_role": "obligado fiscal",
+      "object_role": "consecuencia jurídica",
+      "relation_type": "incumplimiento",
+      "problem_concepts": [
+        "incumplimiento_fiscal"
+      ],
+      "institution_concepts": [
+        "obligacion_tributaria",
+        "deuda_tributaria"
+      ],
+      "primary_entries": [
+        "PRODECON-06",
+        "PRODECON-07",
+        "UNAM-VII"
+      ],
+      "rbs_families": [
+        "R-INC",
+        "R-SAN",
+        "R-DEU"
+      ],
+      "cbr_families": [
+        "CBR-INCUMPLIMIENTO",
+        "CBR-DEUDA"
+      ],
+      "candidate_normative_sources": [
+        "cff"
+      ],
+      "temporal_sensitive": true
+    },
+    {
+      "relation_id": "REL-NOR-INT",
+      "label": "Norma fiscal frente a interpretación",
+      "description": "Relación jurídico-fiscal norma fiscal frente a interpretación que identifica un vínculo a investigar y validar contra evidencia normativa interna antes de cualquier determinación.",
+      "subject_role": "disposición fiscal",
+      "object_role": "método interpretativo",
+      "relation_type": "interpretación",
+      "problem_concepts": [
+        "interpretacion_fiscal"
+      ],
+      "institution_concepts": [
+        "tributo"
+      ],
+      "primary_entries": [
+        "PRODECON-09",
+        "UNAM-II"
+      ],
+      "rbs_families": [
+        "R-INT"
+      ],
+      "cbr_families": [
+        "CBR-INTERPRETACION"
+      ],
+      "candidate_normative_sources": [
+        "cff"
+      ],
+      "temporal_sensitive": true
+    },
+    {
+      "relation_id": "REL-TEM-APL",
+      "label": "Vigencia frente a aplicación normativa",
+      "description": "Relación jurídico-fiscal vigencia frente a aplicación normativa que identifica un vínculo a investigar y validar contra evidencia normativa interna antes de cualquier determinación.",
+      "subject_role": "norma o régimen",
+      "object_role": "hecho fiscal fechado",
+      "relation_type": "temporalidad",
+      "problem_concepts": [
+        "determinacion_contribucion"
+      ],
+      "institution_concepts": [
+        "regimen_isr",
+        "tributo"
+      ],
+      "primary_entries": [
+        "PRODECON-12",
+        "UNAM-V"
+      ],
+      "rbs_families": [
+        "R-TEM"
+      ],
+      "cbr_families": [
+        "CBR-TEMPORALIDAD"
+      ],
+      "candidate_normative_sources": [
+        "lisr",
+        "rmf_2026",
+        "reg_lisr_060516"
+      ],
+      "temporal_sensitive": true
+    },
+    {
+      "relation_id": "REL-DER-AUT",
+      "label": "Derecho del contribuyente frente a actuación de autoridad",
+      "description": "Relación jurídico-fiscal derecho del contribuyente frente a actuación de autoridad que identifica un vínculo a investigar y validar contra evidencia normativa interna antes de cualquier determinación.",
+      "subject_role": "contribuyente",
+      "object_role": "actuación de autoridad",
+      "relation_type": "garantía",
+      "problem_concepts": [
+        "defensa_contribuyente"
+      ],
+      "institution_concepts": [
+        "derechos_contribuyente",
+        "relacion_tributaria"
+      ],
+      "primary_entries": [
+        "PRODECON-07",
+        "PRODECON-08",
+        "UNAM-I"
+      ],
+      "rbs_families": [
+        "R-DER",
+        "R-AUT",
+        "R-DEF"
+      ],
+      "cbr_families": [
+        "CBR-DERECHOS",
+        "CBR-AUTORIDAD",
+        "CBR-DEFENSA"
+      ],
+      "candidate_normative_sources": [
+        "cpeum",
+        "cff",
+        "lfdc",
+        "lfpca",
+        "lotfja"
+      ],
+      "temporal_sensitive": true
+    },
+    {
+      "relation_id": "REL-DEU-EXT",
+      "label": "Deuda tributaria frente a forma de extinción",
+      "description": "Relación jurídico-fiscal deuda tributaria frente a forma de extinción que identifica un vínculo a investigar y validar contra evidencia normativa interna antes de cualquier determinación.",
+      "subject_role": "deudor tributario",
+      "object_role": "deuda tributaria",
+      "relation_type": "extinción",
+      "problem_concepts": [
+        "cumplimiento_fiscal"
+      ],
+      "institution_concepts": [
+        "deuda_tributaria",
+        "obligacion_tributaria"
+      ],
+      "primary_entries": [
+        "PRODECON-06",
+        "UNAM-VI"
+      ],
+      "rbs_families": [
+        "R-DEU",
+        "R-OBL"
+      ],
+      "cbr_families": [
+        "CBR-DEUDA",
+        "CBR-OBLIGACION"
+      ],
+      "candidate_normative_sources": [
+        "cff"
+      ],
+      "temporal_sensitive": true
+    },
+    {
+      "relation_id": "REL-REG-REQ",
+      "label": "Régimen fiscal frente a requisitos de acceso o permanencia",
+      "description": "Relación jurídico-fiscal régimen fiscal frente a requisitos de acceso o permanencia que identifica un vínculo a investigar y validar contra evidencia normativa interna antes de cualquier determinación.",
+      "subject_role": "contribuyente",
+      "object_role": "régimen fiscal",
+      "relation_type": "elegibilidad",
+      "problem_concepts": [
+        "determinacion_contribucion"
+      ],
+      "institution_concepts": [
+        "regimen_isr",
+        "tributo"
+      ],
+      "primary_entries": [
+        "PRODECON-05",
+        "PRODECON-10",
+        "PRODECON-11",
+        "PRODECON-12",
+        "UNAM-V"
+      ],
+      "rbs_families": [
+        "R-PER",
+        "R-TEM",
+        "R-TRI"
+      ],
+      "cbr_families": [
+        "CBR-PERFIL",
+        "CBR-TRIBUTO",
+        "CBR-TEMPORALIDAD"
+      ],
+      "candidate_normative_sources": [
+        "lisr",
+        "rmf_2026",
+        "reg_lisr_060516"
+      ],
+      "temporal_sensitive": true
+    },
+    {
+      "relation_id": "REL-TRI-CAL",
+      "label": "Tributo frente a elementos de cálculo",
+      "description": "Relación jurídico-fiscal tributo frente a elementos de cálculo que identifica un vínculo a investigar y validar contra evidencia normativa interna antes de cualquier determinación.",
+      "subject_role": "contribución",
+      "object_role": "elementos cuantitativos",
+      "relation_type": "cálculo",
+      "problem_concepts": [
+        "determinacion_contribucion"
+      ],
+      "institution_concepts": [
+        "tributo",
+        "regimen_isr"
+      ],
+      "primary_entries": [
+        "PRODECON-05",
+        "PRODECON-10",
+        "PRODECON-11",
+        "UNAM-III",
+        "UNAM-V"
+      ],
+      "rbs_families": [
+        "R-TRI",
+        "R-CAL"
+      ],
+      "cbr_families": [
+        "CBR-TRIBUTO",
+        "CBR-CALCULO"
+      ],
+      "candidate_normative_sources": [
+        "lisr",
+        "liva",
+        "lieps",
+        "lfisan"
+      ],
+      "temporal_sensitive": true
+    },
+    {
+      "relation_id": "REL-AUT-DEF",
+      "label": "Acto de autoridad frente a vía de defensa",
+      "description": "Relación jurídico-fiscal acto de autoridad frente a vía de defensa que identifica un vínculo a investigar y validar contra evidencia normativa interna antes de cualquier determinación.",
+      "subject_role": "acto de autoridad",
+      "object_role": "medio de defensa",
+      "relation_type": "impugnación",
+      "problem_concepts": [
+        "defensa_contribuyente"
+      ],
+      "institution_concepts": [
+        "derechos_contribuyente",
+        "relacion_tributaria"
+      ],
+      "primary_entries": [
+        "PRODECON-08",
+        "UNAM-I",
+        "UNAM-II",
+        "UNAM-VII"
+      ],
+      "rbs_families": [
+        "R-AUT",
+        "R-DEF",
+        "R-TEM"
+      ],
+      "cbr_families": [
+        "CBR-AUTORIDAD",
+        "CBR-DEFENSA",
+        "CBR-TEMPORALIDAD"
+      ],
+      "candidate_normative_sources": [
+        "cff",
+        "lfpca",
+        "lotfja",
+        "lfdc"
+      ],
+      "temporal_sensitive": true
+    },
+    {
+      "relation_id": "REL-OBL-PLA",
+      "label": "Obligación frente a plazo de cumplimiento",
+      "description": "Relación jurídico-fiscal obligación frente a plazo de cumplimiento que identifica un vínculo a investigar y validar contra evidencia normativa interna antes de cualquier determinación.",
+      "subject_role": "obligado fiscal",
+      "object_role": "plazo de cumplimiento",
+      "relation_type": "plazo",
+      "problem_concepts": [
+        "cumplimiento_fiscal"
+      ],
+      "institution_concepts": [
+        "obligacion_tributaria"
+      ],
+      "primary_entries": [
+        "PRODECON-06",
+        "PRODECON-07",
+        "UNAM-IV",
+        "UNAM-VI"
+      ],
+      "rbs_families": [
+        "R-OBL",
+        "R-TEM"
+      ],
+      "cbr_families": [
+        "CBR-OBLIGACION",
+        "CBR-TEMPORALIDAD"
+      ],
+      "candidate_normative_sources": [
+        "cff",
+        "lisr",
+        "rmf_2026"
+      ],
+      "temporal_sensitive": true
+    }
+  ]
+}

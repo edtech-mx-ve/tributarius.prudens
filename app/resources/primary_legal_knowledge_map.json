@@ -1,0 +1,159 @@
+{
+  "schema_version": "1.0",
+  "purpose": "Guía primaria computable PRODECON + UNAM para navegación heurística, familias RBS y familias CBR. Orienta la investigación y siempre exige validación contra evidencia normativa interna vigente.",
+  "entries": [
+    {
+      "entry_id": "PRODECON-01", "manual": "prodecon", "order": 1,
+      "title": "Ingresos del Estado", "functional_module": "Comprende tus impuestos",
+      "related_entries": ["UNAM-I", "UNAM-III"],
+      "legal_dimensions": ["ingresos_publicos", "contribuciones", "sistema_fiscal"],
+      "rbs_families": ["R-TRI"], "cbr_families": ["CBR-TRIBUTO"],
+      "candidate_normative_sources": ["cpeum", "cff"]
+    },
+    {
+      "entry_id": "PRODECON-02", "manual": "prodecon", "order": 2,
+      "title": "Facultad para crear impuestos", "functional_module": "Validador constitucional básico",
+      "related_entries": ["UNAM-I", "UNAM-III"],
+      "legal_dimensions": ["potestad_tributaria", "principios_constitucionales", "elementos_esenciales"],
+      "rbs_families": ["R-TRI", "R-INT"], "cbr_families": ["CBR-TRIBUTO", "CBR-INTERPRETACION"],
+      "candidate_normative_sources": ["cpeum", "cff"]
+    },
+    {
+      "entry_id": "PRODECON-03", "manual": "prodecon", "order": 3,
+      "title": "Sistema de impuestos en México", "functional_module": "Mapa del sistema fiscal",
+      "related_entries": ["UNAM-III"],
+      "legal_dimensions": ["clasificacion_tributaria", "impuestos_federales", "elementos_esenciales"],
+      "rbs_families": ["R-TRI"], "cbr_families": ["CBR-TRIBUTO"],
+      "candidate_normative_sources": ["cff", "lisr", "liva", "lieps", "lfisan"]
+    },
+    {
+      "entry_id": "PRODECON-04", "manual": "prodecon", "order": 4,
+      "title": "Relación Estado-contribuyente", "functional_module": "Perfil y relación tributaria",
+      "related_entries": ["UNAM-III", "UNAM-IV"],
+      "legal_dimensions": ["relacion_juridico_tributaria", "sujeto_activo", "sujeto_pasivo", "obligacion_tributaria"],
+      "rbs_families": ["R-PER", "R-SUJ", "R-OBL"], "cbr_families": ["CBR-PERFIL", "CBR-SUJETO", "CBR-OBLIGACION"],
+      "candidate_normative_sources": ["cff", "lisr"]
+    },
+    {
+      "entry_id": "PRODECON-05", "manual": "prodecon", "order": 5,
+      "title": "Impuestos federales", "functional_module": "Identificador de impuesto",
+      "related_entries": ["UNAM-III", "UNAM-V"],
+      "legal_dimensions": ["impuesto", "hecho_imponible", "base", "tasa", "tarifa", "calculo"],
+      "rbs_families": ["R-TRI", "R-CAL"], "cbr_families": ["CBR-TRIBUTO", "CBR-CALCULO"],
+      "candidate_normative_sources": ["lisr", "liva", "lieps", "lfisan"]
+    },
+    {
+      "entry_id": "PRODECON-06", "manual": "prodecon", "order": 6,
+      "title": "Facultad para cobrar contribuciones", "functional_module": "Actuación fiscal, deuda y cumplimiento",
+      "related_entries": ["UNAM-VI", "UNAM-VII"],
+      "legal_dimensions": ["facultades_autoridad", "deuda_tributaria", "exigibilidad", "cobro", "incumplimiento"],
+      "rbs_families": ["R-AUT", "R-DEU", "R-INC"], "cbr_families": ["CBR-AUTORIDAD", "CBR-DEUDA", "CBR-INCUMPLIMIENTO"],
+      "candidate_normative_sources": ["cff"]
+    },
+    {
+      "entry_id": "PRODECON-07", "manual": "prodecon", "order": 7,
+      "title": "Derechos y obligaciones", "functional_module": "Motor de derechos y obligaciones",
+      "related_entries": ["UNAM-I", "UNAM-IV", "UNAM-VII"],
+      "legal_dimensions": ["derechos_contribuyente", "obligaciones", "garantias", "cumplimiento"],
+      "rbs_families": ["R-DER", "R-OBL"], "cbr_families": ["CBR-DERECHOS", "CBR-OBLIGACION"],
+      "candidate_normative_sources": ["lfdc", "cff", "cpeum"]
+    },
+    {
+      "entry_id": "PRODECON-08", "manual": "prodecon", "order": 8,
+      "title": "Defensa del contribuyente", "functional_module": "Orientador de rutas de defensa",
+      "related_entries": ["UNAM-I", "UNAM-II", "UNAM-VII"],
+      "legal_dimensions": ["defensa", "acto_autoridad", "procedimiento", "medio_impugnacion"],
+      "rbs_families": ["R-DEF", "R-AUT"], "cbr_families": ["CBR-DEFENSA", "CBR-AUTORIDAD"],
+      "candidate_normative_sources": ["cff", "lfpca", "lotfja", "lfdc"]
+    },
+    {
+      "entry_id": "PRODECON-09", "manual": "prodecon", "order": 9,
+      "title": "Interpretación de leyes fiscales", "functional_module": "Motor de interpretación",
+      "related_entries": ["UNAM-II"],
+      "legal_dimensions": ["interpretacion", "aplicacion_estricta", "carga_fiscal", "excepcion", "sancion"],
+      "rbs_families": ["R-INT"], "cbr_families": ["CBR-INTERPRETACION"],
+      "candidate_normative_sources": ["cff"]
+    },
+    {
+      "entry_id": "PRODECON-10", "manual": "prodecon", "order": 10,
+      "title": "ISR de asalariados", "functional_module": "Simulador ISR asalariados",
+      "related_entries": ["UNAM-V"],
+      "legal_dimensions": ["isr", "persona_fisica", "salarios", "calculo"],
+      "rbs_families": ["R-TRI", "R-CAL", "R-OBL"], "cbr_families": ["CBR-TRIBUTO", "CBR-CALCULO"],
+      "candidate_normative_sources": ["lisr", "reg_lisr_060516", "rmf_2026"]
+    },
+    {
+      "entry_id": "PRODECON-11", "manual": "prodecon", "order": 11,
+      "title": "ISR de actividades profesionales", "functional_module": "Simulador de profesionistas",
+      "related_entries": ["UNAM-IV", "UNAM-V"],
+      "legal_dimensions": ["isr", "actividad_profesional", "persona_fisica", "iva", "calculo", "obligaciones"],
+      "rbs_families": ["R-PER", "R-TRI", "R-CAL", "R-OBL"], "cbr_families": ["CBR-PERFIL", "CBR-TRIBUTO", "CBR-CALCULO", "CBR-OBLIGACION"],
+      "candidate_normative_sources": ["lisr", "liva", "cff", "reg_lisr_060516", "reg_liva_250914", "rmf_2026"]
+    },
+    {
+      "entry_id": "PRODECON-12", "manual": "prodecon", "order": 12,
+      "title": "ISR en RIF", "functional_module": "Contenido histórico/versionado",
+      "related_entries": ["UNAM-V"],
+      "legal_dimensions": ["isr", "rif", "contenido_historico", "vigencia", "calculo"],
+      "rbs_families": ["R-TEM", "R-TRI", "R-CAL"], "cbr_families": ["CBR-TEMPORALIDAD", "CBR-TRIBUTO", "CBR-CALCULO"],
+      "candidate_normative_sources": ["lisr", "rmf_2026"],
+      "historical_content": true
+    },
+    {
+      "entry_id": "UNAM-I", "manual": "unam", "order": 1,
+      "title": "Principios constitucionales", "functional_module": "Principios, derechos y control conceptual",
+      "related_entries": ["PRODECON-02", "PRODECON-07"],
+      "legal_dimensions": ["principios_constitucionales", "derechos", "garantias", "potestad_tributaria"],
+      "rbs_families": ["R-DER", "R-TRI"], "cbr_families": ["CBR-DERECHOS", "CBR-TRIBUTO"],
+      "candidate_normative_sources": ["cpeum", "lfdc", "cff"]
+    },
+    {
+      "entry_id": "UNAM-II", "manual": "unam", "order": 2,
+      "title": "Interpretación", "functional_module": "Interpretación fiscal asistida",
+      "related_entries": ["PRODECON-09"],
+      "legal_dimensions": ["interpretacion", "aplicacion_estricta", "metodos_interpretativos"],
+      "rbs_families": ["R-INT"], "cbr_families": ["CBR-INTERPRETACION"],
+      "candidate_normative_sources": ["cff"]
+    },
+    {
+      "entry_id": "UNAM-III", "manual": "unam", "order": 3,
+      "title": "Tributos y elementos esenciales", "functional_module": "Clasificador tributario",
+      "related_entries": ["PRODECON-01", "PRODECON-02", "PRODECON-03", "PRODECON-04", "PRODECON-05"],
+      "legal_dimensions": ["tributo", "hecho_imponible", "sujeto", "objeto", "base", "tasa", "tarifa"],
+      "rbs_families": ["R-TRI", "R-SUJ"], "cbr_families": ["CBR-TRIBUTO", "CBR-SUJETO"],
+      "candidate_normative_sources": ["cff", "lisr", "liva", "lieps", "lfisan"]
+    },
+    {
+      "entry_id": "UNAM-IV", "manual": "unam", "order": 4,
+      "title": "Sujetos de la obligación", "functional_module": "Perfil fiscal y responsabilidades",
+      "related_entries": ["PRODECON-04", "PRODECON-07", "PRODECON-11"],
+      "legal_dimensions": ["sujeto_activo", "sujeto_pasivo", "responsabilidad", "obligacion_tributaria"],
+      "rbs_families": ["R-PER", "R-SUJ", "R-OBL"], "cbr_families": ["CBR-PERFIL", "CBR-SUJETO", "CBR-OBLIGACION"],
+      "candidate_normative_sources": ["cff", "lisr"]
+    },
+    {
+      "entry_id": "UNAM-V", "manual": "unam", "order": 5,
+      "title": "Cálculo de contribuciones", "functional_module": "ISR e IVA explicables",
+      "related_entries": ["PRODECON-05", "PRODECON-10", "PRODECON-11", "PRODECON-12"],
+      "legal_dimensions": ["calculo", "isr", "iva", "base", "tasa", "tarifa", "autodeterminacion"],
+      "rbs_families": ["R-CAL", "R-TRI"], "cbr_families": ["CBR-CALCULO", "CBR-TRIBUTO"],
+      "candidate_normative_sources": ["lisr", "liva", "cff", "reg_lisr_060516", "reg_liva_250914"]
+    },
+    {
+      "entry_id": "UNAM-VI", "manual": "unam", "order": 6,
+      "title": "Extinción de la deuda", "functional_module": "Gestión conceptual de deuda y cumplimiento",
+      "related_entries": ["PRODECON-06"],
+      "legal_dimensions": ["deuda_tributaria", "extincion", "pago", "exigibilidad", "cumplimiento"],
+      "rbs_families": ["R-DEU", "R-OBL"], "cbr_families": ["CBR-DEUDA", "CBR-OBLIGACION"],
+      "candidate_normative_sources": ["cff"]
+    },
+    {
+      "entry_id": "UNAM-VII", "manual": "unam", "order": 7,
+      "title": "Incumplimiento", "functional_module": "Consecuencias, derechos y conexión con defensa",
+      "related_entries": ["PRODECON-06", "PRODECON-07", "PRODECON-08"],
+      "legal_dimensions": ["incumplimiento", "consecuencia", "sancion", "facultad_autoridad", "defensa"],
+      "rbs_families": ["R-INC", "R-SAN", "R-AUT", "R-DEF"], "cbr_families": ["CBR-INCUMPLIMIENTO", "CBR-AUTORIDAD", "CBR-DEFENSA"],
+      "candidate_normative_sources": ["cff", "lfdc", "lfpca", "lotfja"]
+    }
+  ]
+}
