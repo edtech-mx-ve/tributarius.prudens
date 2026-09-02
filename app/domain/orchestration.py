@@ -16,6 +16,10 @@ from app.domain.jurisprudence_document import JurisprudenceDocumentRepresentatio
 from app.domain.jurisprudence_extraction import JurisprudenceExtractedMetadata
 from app.domain.jurisprudence_hybrid import SessionJurisprudenceHybridResult
 from app.domain.legal_heuristics import LegalHeuristicEvaluation
+from app.domain.legal_hypothesis import ControlledLegalHypothesisResult
+from app.domain.legal_hypothesis_verification import (
+    LegalHypothesisVerificationResult,
+)
 from app.domain.llm_trace import LLMTrace
 from app.domain.normative import (
     NormativeApplicabilityResult,
@@ -32,6 +36,7 @@ from rag.retrieval.models import RetrievalResult
 class OrchestrationStage(StrEnum):
     QUERY_ANALYSIS = "query_analysis"
     RETRIEVAL = "retrieval"
+    LEGAL_HYPOTHESIS = "legal_hypothesis"
     NORMATIVE = "normative"
     JURISPRUDENCE = "jurisprudence"
     RULES = "rules"
@@ -39,6 +44,7 @@ class OrchestrationStage(StrEnum):
     CBR = "cbr"
     HYBRID_COORDINATION = "hybrid_coordination"
     LEGAL_HEURISTICS = "legal_heuristics"
+    LEGAL_HYPOTHESIS_VERIFICATION = "legal_hypothesis_verification"
     EXPLANATION = "explanation"
 
 
@@ -153,6 +159,10 @@ def build_evidence_layers(
 class HybridOrchestrationResult(BaseModel):
     analysis: QueryAnalysis
     retrieval: RetrievalResult
+    initial_legal_hypothesis: ControlledLegalHypothesisResult | None = None
+    initial_legal_hypothesis_verification: (
+        LegalHypothesisVerificationResult | None
+    ) = None
     prodecon_evidence_refs: list[str] = Field(default_factory=list)
     unam_evidence_refs: list[str] = Field(default_factory=list)
     evidence_layers: list[EvidenceLayer] = Field(default_factory=list)

@@ -42,6 +42,13 @@ from app.services.legal_heuristic_explanation import (
     build_heuristic_explanation_evidence,
 )
 from app.services.legal_heuristics_stage import run_legal_heuristics_stage
+from app.services.legal_hypothesis_stage import (
+    LegalHypothesisGeneratorLike,
+    run_legal_hypothesis_stage,
+)
+from app.services.legal_hypothesis_verification_stage import (
+    run_legal_hypothesis_verification_stage,
+)
 from app.services.llm_traceability import build_llm_trace
 from app.services.normative_engine import evaluate_normative_applicability
 from app.services.normative_rag_bridge import (
@@ -366,6 +373,7 @@ class HybridOrchestrator:
         retriever: RetrieverLike,
         llm_service: LlamaRAGService,
         rule_set: RuleSet,
+        legal_hypothesis_service: LegalHypothesisGeneratorLike | None = None,
         isr_tariff: ISRTariff | None = None,
         isr_tariff_registry: ISRTariffRegistry | None = None,
         cbr_cases: list[CBRCase] | None = None,
@@ -376,6 +384,7 @@ class HybridOrchestrator:
         self._retriever = retriever
         self._llm_service = llm_service
         self._rule_set = rule_set
+        self._legal_hypothesis_service = legal_hypothesis_service
         self._isr_tariff = isr_tariff
         self._isr_tariff_registry = isr_tariff_registry
         self._cbr_cases = list(cbr_cases or [])
@@ -407,6 +416,12 @@ class HybridOrchestrator:
                 detail=f"Chunks recuperados: {retrieval.returned_count}.",
             )
         )
+
+        initial_legal_hypothesis, hypothesis_trace = run_legal_hypothesis_stage(
+            self._legal_hypothesis_service,
+            retrieval,
+        )
+        traces.append(hypothesis_trace)
 
         rag_normative_candidates = build_normative_candidates(
             retrieval,
@@ -647,6 +662,16 @@ class HybridOrchestrator:
         )
         traces.append(heuristic_trace)
 
+        (
+            initial_legal_hypothesis_verification,
+            hypothesis_verification_trace,
+        ) = run_legal_hypothesis_verification_stage(
+            initial_legal_hypothesis,
+            rule_result=rule_result,
+            hybrid_coordination=hybrid_coordination,
+        )
+        traces.append(hypothesis_verification_trace)
+
         deterministic = _deterministic_evidence(
             applicable_refs,
             rule_result,
@@ -703,6 +728,10 @@ class HybridOrchestrator:
         return HybridOrchestrationResult(
             analysis=analysis,
             retrieval=retrieval,
+            initial_legal_hypothesis=initial_legal_hypothesis,
+            initial_legal_hypothesis_verification=(
+                initial_legal_hypothesis_verification
+            ),
             normative_candidates=effective_request.normative_candidates,
             normative_results=normative_results,
             normative_evidence_refs=normative_evidence_refs,

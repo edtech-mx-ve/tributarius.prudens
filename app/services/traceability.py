@@ -92,6 +92,9 @@ def _stage_review(
             if result.heuristic_evaluation is not None
             else False
         )
+    if stage in {"legal_hypothesis", "legal_hypothesis_verification"}:
+        # Etapas experimentales: nunca escalan por sí mismas la decisión jurídica.
+        return False
     if stage == "explanation":
         return (
             result.explanation.answer.requires_human_review
@@ -149,6 +152,12 @@ def _stage_evidence_refs(
                 for ref in signal.evidence_refs
             )
         )
+    if stage in {"legal_hypothesis", "legal_hypothesis_verification"}:
+        hypothesis = result.initial_legal_hypothesis
+        if hypothesis is None:
+            return []
+        # Solo enlaza la evidencia ya autorizada. No crea autoridad LLM nueva.
+        return list(hypothesis.authorized_evidence_ids)
     if stage == "explanation" and result.explanation is not None:
         return list(result.explanation.answer.evidence_ids)
     return []
