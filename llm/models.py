@@ -8,6 +8,7 @@ from app.domain.documents import SourceType
 
 
 class ExplanationMode(StrEnum):
+    TAXPAYER = "taxpayer"
     STUDENT = "student"
     PROFESSIONAL = "professional"
 
@@ -33,6 +34,10 @@ class DeterministicEvidence(BaseModel):
     calculations: list[str] = Field(default_factory=list, max_length=50)
     similar_cases: list[str] = Field(default_factory=list, max_length=20)
     jurisprudential_criteria: list[str] = Field(default_factory=list, max_length=20)
+    hybrid_relation: str | None = Field(default=None, max_length=100)
+    hybrid_conclusion: str | None = Field(default=None, max_length=4000)
+    hybrid_controlling_source: str | None = Field(default=None, max_length=100)
+    hybrid_reasons: list[str] = Field(default_factory=list, max_length=20)
     requires_human_review: bool = False
 
 

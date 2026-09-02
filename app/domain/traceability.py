@@ -22,6 +22,7 @@ class EvidenceKind(StrEnum):
     CBR_CASE = "cbr_case"
     JURISPRUDENCE = "jurisprudence"
     LLM_EXPLANATION = "llm_explanation"
+    HYBRID_COORDINATION = "hybrid_coordination"
 
 
 class TraceEvent(BaseModel):
@@ -50,6 +51,20 @@ class UncertaintyItem(BaseModel):
     requires_human_review: bool = False
 
 
+class HybridDecisionTrace(BaseModel):
+    """Traza estructurada de la decisión híbrida RBS-CBR."""
+
+    relation: str = Field(min_length=1, max_length=100)
+    conclusion: str | None = Field(default=None, max_length=4000)
+    controlling_source: str | None = Field(default=None, max_length=100)
+    shared_legal_basis: list[str] = Field(default_factory=list, max_length=200)
+    reasons: list[str] = Field(default_factory=list, max_length=100)
+    factors: dict[str, Any] = Field(default_factory=dict)
+    rbs_trace: list[str] = Field(default_factory=list, max_length=200)
+    cbr_trace: list[str] = Field(default_factory=list, max_length=200)
+    requires_human_review: bool = False
+
+
 class TraceabilityRecord(BaseModel):
     schema_version: str = "1.0"
     execution_id: str = Field(pattern=r"^TP-[A-F0-9]{32}$")
@@ -62,6 +77,7 @@ class TraceabilityRecord(BaseModel):
     evidence: list[EvidenceReference] = Field(default_factory=list)
     jurisprudential_sources: list[EvidenceReference] = Field(default_factory=list)
     uncertainties: list[UncertaintyItem] = Field(default_factory=list)
+    hybrid_decision: HybridDecisionTrace | None = None
     requires_human_review: bool
     canonical_result_sha256: str | None = Field(
         default=None,
@@ -82,6 +98,7 @@ class CanonicalExecutionResult(BaseModel):
     session_jurisprudence: dict[str, Any] | None = None
     calculations: dict[str, Any]
     cbr: dict[str, Any]
+    hybrid_coordination: dict[str, Any] | None = None
     explanation: dict[str, Any] | None
     llm_trace: dict[str, Any] | None = None
     uncertainty: dict[str, Any]

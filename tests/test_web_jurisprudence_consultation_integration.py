@@ -29,7 +29,7 @@ def test_web_rejects_invalid_jurisprudence_session_id() -> None:
 def test_llama_mode_is_forwarded_from_web_contract() -> None:
     assert _explanation_mode("student") is ExplanationMode.STUDENT
     assert _explanation_mode("professional") is ExplanationMode.PROFESSIONAL
-    assert _explanation_mode("taxpayer") is ExplanationMode.PROFESSIONAL
+    assert _explanation_mode("taxpayer") is ExplanationMode.TAXPAYER
 
 
 def test_browser_sends_uploaded_session_with_consultation() -> None:

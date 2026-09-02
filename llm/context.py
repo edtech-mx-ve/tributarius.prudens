@@ -81,19 +81,24 @@ def build_controlled_legal_context(
             item.chunk_id for item in jurisprudence_evidence
         ]
 
-    presentation_instructions = (
-        [
+    if explanation_mode == ExplanationMode.TAXPAYER:
+        presentation_instructions = [
+            "Usar lenguaje claro, directo y accesible para el contribuyente.",
+            "Explicar primero la consecuencia práctica y después su fundamento.",
+            "Evitar tecnicismos innecesarios sin alterar la conclusión jurídica.",
+        ]
+    elif explanation_mode == ExplanationMode.STUDENT:
+        presentation_instructions = [
             "Explicar conceptos jurídicos con lenguaje pedagógico.",
             "Desarrollar el razonamiento paso a paso.",
             "Relacionar hechos, normas y conclusión de forma explícita.",
         ]
-        if explanation_mode == ExplanationMode.STUDENT
-        else [
+    else:
+        presentation_instructions = [
             "Usar lenguaje jurídico técnico y conciso.",
             "Priorizar fundamento, aplicabilidad, excepciones y riesgos.",
             "Exponer argumentos, contraargumentos y consecuencias prácticas.",
         ]
-    )
 
     return LLMGenerationContext(
         question=retrieval.query,

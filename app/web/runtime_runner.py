@@ -17,6 +17,8 @@ from llm.models import ExplanationMode
 
 
 def _explanation_mode(mode: str) -> ExplanationMode:
+    if mode == "taxpayer":
+        return ExplanationMode.TAXPAYER
     if mode == "student":
         return ExplanationMode.STUDENT
     return ExplanationMode.PROFESSIONAL

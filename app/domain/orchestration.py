@@ -7,6 +7,8 @@ from pydantic import BaseModel, Field, model_validator
 
 from app.domain.cbr import CBRQuery, CBRRetrievalResult, CBRReuseAssessment
 from app.domain.documents import SourceType
+from app.domain.hybrid_coordination import HybridCoordinationResult
+from app.domain.hybrid_reasoning import NormalizedReasoningResult
 from app.domain.isr import ISRCalculationInput, ISRCalculationResult
 from app.domain.isr_trace import ISRCalculationTrace, ISRTraceVerification
 from app.domain.jurisprudence import JurisprudenceRetrievalResult
@@ -34,6 +36,7 @@ class OrchestrationStage(StrEnum):
     RULES = "rules"
     ISR = "isr"
     CBR = "cbr"
+    HYBRID_COORDINATION = "hybrid_coordination"
     EXPLANATION = "explanation"
 
 
@@ -163,6 +166,9 @@ class HybridOrchestrationResult(BaseModel):
     isr_trace_verification: ISRTraceVerification | None = None
     cbr_result: CBRRetrievalResult | None = None
     cbr_reuse_assessments: list[CBRReuseAssessment] = Field(default_factory=list)
+    rbs_reasoning: NormalizedReasoningResult | None = None
+    cbr_reasoning: NormalizedReasoningResult | None = None
+    hybrid_coordination: HybridCoordinationResult | None = None
     explanation: RAGExplanation | None = None
     llm_trace: LLMTrace | None = None
     traces: list[StageTrace]

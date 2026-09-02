@@ -11,6 +11,7 @@ from app.domain.traceability import (
     CanonicalExecutionResult,
     EvidenceKind,
     EvidenceReference,
+    HybridDecisionTrace,
     TraceabilityRecord,
     TraceEvent,
     TraceEventStatus,
@@ -79,6 +80,12 @@ def _stage_review(
             item.requires_human_review
             for item in result.cbr_reuse_assessments
         )
+    if stage == "hybrid_coordination":
+        return (
+            result.hybrid_coordination.requires_review
+            if result.hybrid_coordination is not None
+            else False
+        )
     if stage == "explanation":
         return (
             result.explanation.answer.requires_human_review
@@ -122,6 +129,12 @@ def _stage_evidence_refs(
         return [f"ISR@{result.isr_result.tariff_version}"]
     if stage == "cbr" and result.cbr_result is not None:
         return [item.case_id for item in result.cbr_result.matches]
+    if stage == "hybrid_coordination" and result.hybrid_coordination is not None:
+        coordination = result.hybrid_coordination
+        refs = list(coordination.shared_legal_basis)
+        if result.cbr_result is not None:
+            refs.extend(item.case_id for item in result.cbr_result.matches)
+        return list(dict.fromkeys(refs))
     if stage == "explanation" and result.explanation is not None:
         return list(result.explanation.answer.evidence_ids)
     return []
@@ -281,6 +294,25 @@ def _llm_evidence(result: HybridOrchestrationResult) -> list[EvidenceReference]:
     ]
 
 
+def _hybrid_decision_trace(
+    result: HybridOrchestrationResult,
+) -> HybridDecisionTrace | None:
+    coordination = result.hybrid_coordination
+    if coordination is None:
+        return None
+    return HybridDecisionTrace(
+        relation=coordination.relation.value,
+        conclusion=coordination.conclusion,
+        controlling_source=coordination.controlling_source,
+        shared_legal_basis=list(coordination.shared_legal_basis),
+        reasons=list(coordination.reasons),
+        factors=coordination.factors.model_dump(mode="json"),
+        rbs_trace=list(coordination.rbs_result.trace),
+        cbr_trace=list(coordination.cbr_result.trace),
+        requires_human_review=coordination.requires_review,
+    )
+
+
 def _uncertainties(
     result: HybridOrchestrationResult,
 ) -> list[UncertaintyItem]:
@@ -365,6 +397,18 @@ def _uncertainties(
                     requires_human_review=True,
                 )
             )
+    if result.hybrid_coordination is not None and result.hybrid_coordination.requires_review:
+        items.append(
+            UncertaintyItem(
+                code="HYBRID_COORDINATION_REVIEW",
+                message=(
+                    f"Relación RBS-CBR: {result.hybrid_coordination.relation.value}; "
+                    + "; ".join(result.hybrid_coordination.reasons)
+                ),
+                stage="hybrid_coordination",
+                requires_human_review=True,
+            )
+        )
     if result.explanation is None:
         items.append(
             UncertaintyItem(
@@ -404,6 +448,7 @@ def build_traceability_record(
         evidence=evidence,
         jurisprudential_sources=_jurisprudence_evidence(result),
         uncertainties=_uncertainties(result),
+        hybrid_decision=_hybrid_decision_trace(result),
         requires_human_review=result.requires_human_review,
     )
 
@@ -464,6 +509,10 @@ def build_canonical_result(
             ],
         },
     }
+    if result.hybrid_coordination is not None:
+        payload["hybrid_coordination"] = result.hybrid_coordination.model_dump(
+            mode="json"
+        )
     if result.jurisprudence_result is not None:
         payload["jurisprudence"] = result.jurisprudence_result.model_dump(mode="json")
     if result.session_jurisprudence_result is not None:
@@ -486,6 +535,7 @@ def build_canonical_result(
         rules=payload["rules"],
         calculations=payload["calculations"],
         cbr=payload["cbr"],
+        hybrid_coordination=payload.get("hybrid_coordination"),
         explanation=payload["explanation"],
         llm_trace=payload.get("llm_trace"),
         uncertainty=payload["uncertainty"],
@@ -504,6 +554,8 @@ def verify_canonical_integrity(result: CanonicalExecutionResult) -> bool:
         "explanation": result.explanation,
         "uncertainty": result.uncertainty,
     }
+    if result.hybrid_coordination is not None:
+        payload["hybrid_coordination"] = result.hybrid_coordination
     if result.jurisprudence is not None:
         payload["jurisprudence"] = result.jurisprudence
     if result.session_jurisprudence is not None:

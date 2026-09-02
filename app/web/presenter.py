@@ -133,6 +133,23 @@ def _present_evidence(
     return items
 
 
+def _present_hybrid_decision(result: CanonicalExecutionResult) -> dict[str, object] | None:
+    decision = result.traceability.hybrid_decision
+    if decision is None:
+        return None
+    return {
+        "relation": decision.relation,
+        "conclusion": decision.conclusion,
+        "controlling_source": decision.controlling_source,
+        "shared_legal_basis": list(decision.shared_legal_basis),
+        "reasons": list(decision.reasons),
+        "factors": dict(decision.factors),
+        "rbs_trace": list(decision.rbs_trace),
+        "cbr_trace": list(decision.cbr_trace),
+        "requires_human_review": decision.requires_human_review,
+    }
+
+
 def _present_trace(result: CanonicalExecutionResult) -> dict[str, object]:
     trace = result.traceability
     return {
@@ -178,5 +195,6 @@ def present_canonical_result(
         "cbr": result.cbr,
         "evidence": evidence,
         "uncertainties": uncertainties,
+        "hybrid_decision": _present_hybrid_decision(result),
         "traceability": _present_trace(result),
     }

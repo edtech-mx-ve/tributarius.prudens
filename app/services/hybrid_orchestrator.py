@@ -27,6 +27,11 @@ from app.domain.query import (
 from app.domain.rules import RuleEvaluationResult, RuleSet
 from app.services.cbr_reasoning import assess_case_reuse
 from app.services.hybrid_isr_stage import run_isr_stage
+from app.services.hybrid_reasoning_coordinator import coordinate_rbs_cbr
+from app.services.hybrid_reasoning_normalization import (
+    normalize_cbr_result,
+    normalize_rbs_result,
+)
 from app.services.isr_traceability import (
     ISRTraceabilityError,
     build_isr_calculation_trace,
@@ -275,6 +280,7 @@ def _deterministic_evidence(
     isr_result: object | None,
     cbr_result: CBRRetrievalResult | None,
     jurisprudence_result: JurisprudenceRetrievalResult | None,
+    hybrid_coordination: object | None = None,
 ) -> DeterministicEvidence:
     calculations: list[str] = []
     if isr_result is not None:
@@ -311,6 +317,14 @@ def _deterministic_evidence(
         calculations=calculations,
         similar_cases=similar_cases,
         jurisprudential_criteria=jurisprudential_criteria,
+        hybrid_relation=(
+            getattr(getattr(hybrid_coordination, "relation", None), "value", None)
+        ),
+        hybrid_conclusion=getattr(hybrid_coordination, "conclusion", None),
+        hybrid_controlling_source=getattr(
+            hybrid_coordination, "controlling_source", None
+        ),
+        hybrid_reasons=list(getattr(hybrid_coordination, "reasons", [])),
         requires_human_review=(
             rule_result.requires_human_review
             or (
@@ -323,6 +337,7 @@ def _deterministic_evidence(
                 if jurisprudence_result is not None
                 else False
             )
+            or bool(getattr(hybrid_coordination, "requires_review", False))
         ),
     )
 
@@ -580,12 +595,46 @@ class HybridOrchestrator:
                 )
             )
 
+        rbs_reasoning = normalize_rbs_result(rule_result)
+        cbr_reasoning = None
+        hybrid_coordination = None
+        coordination_review = False
+        if request.cbr_query is None:
+            traces.append(
+                StageTrace(
+                    stage=OrchestrationStage.HYBRID_COORDINATION,
+                    status=StageStatus.SKIPPED,
+                    detail="Coordinación RBS-CBR omitida porque no se solicitó CBR.",
+                )
+            )
+        else:
+            cbr_reasoning = normalize_cbr_result(cbr_result, cbr_assessments)
+            hybrid_coordination = coordinate_rbs_cbr(rbs_reasoning, cbr_reasoning)
+            coordination_review = hybrid_coordination.requires_review
+            traces.append(
+                StageTrace(
+                    stage=OrchestrationStage.HYBRID_COORDINATION,
+                    status=(
+                        StageStatus.DEGRADED
+                        if coordination_review
+                        else StageStatus.COMPLETED
+                    ),
+                    detail=(
+                        "Coordinación RBS-CBR: "
+                        f"{hybrid_coordination.relation.value}; "
+                        "fuente controladora="
+                        f"{hybrid_coordination.controlling_source or 'ninguna'}."
+                    ),
+                )
+            )
+
         deterministic = _deterministic_evidence(
             applicable_refs,
             rule_result,
             isr_result,
             cbr_result,
             jurisprudence_result,
+            hybrid_coordination,
         )
         explanation = None
         llm_trace = None
@@ -645,6 +694,9 @@ class HybridOrchestrator:
             isr_trace_verification=isr_trace_verification,
             cbr_result=cbr_result,
             cbr_reuse_assessments=cbr_assessments,
+            rbs_reasoning=rbs_reasoning,
+            cbr_reasoning=cbr_reasoning,
+            hybrid_coordination=hybrid_coordination,
             explanation=explanation,
             llm_trace=llm_trace,
             traces=traces,
@@ -655,6 +707,7 @@ class HybridOrchestrator:
                     rule_result.requires_human_review,
                     isr_review,
                     cbr_review,
+                    coordination_review,
                     jurisprudence_review,
                     llm_review,
                     explanation_review,
