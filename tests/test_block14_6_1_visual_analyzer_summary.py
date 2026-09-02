@@ -27,8 +27,8 @@ def test_frontend_consumes_legal_analysis_without_recalculating_it() -> None:
     assert "build_integral_legal_analysis" not in javascript
 
 
-def test_visual_analyzer_preserves_existing_web_explanation_modes() -> None:
+def test_visual_analyzer_exposes_all_three_application_modes() -> None:
     html = INDEX.read_text(encoding="utf-8")
+    assert '<option value="taxpayer">Contribuyente</option>' in html
     assert '<option value="student">Estudiante</option>' in html
     assert '<option value="professional">Profesional</option>' in html
-    assert '<option value="taxpayer">' not in html

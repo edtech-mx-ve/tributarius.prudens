@@ -105,9 +105,9 @@ def test_e2e_home_exposes_llama_mode_and_jurisprudence_upload() -> None:
 
     assert response.status_code == 200
     assert 'id="jurisprudence-pdf"' in response.text
+    assert '<option value="taxpayer">Contribuyente</option>' in response.text
     assert '<option value="student">Estudiante</option>' in response.text
     assert '<option value="professional">Profesional</option>' in response.text
-    assert '<option value="taxpayer">' not in response.text
 
 
 def test_e2e_upload_pdf_returns_temporal_session(
