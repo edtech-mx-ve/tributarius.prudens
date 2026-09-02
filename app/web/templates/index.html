@@ -62,12 +62,27 @@
           </p>
 
           <form id="consultation-form" novalidate>
-            <label for="mode">Modo de explicación</label>
-            <select id="mode" name="mode">
-              <option value="taxpayer">Contribuyente</option>
-              <option value="student">Estudiante</option>
+            <label for="mode">Modo de explicación de Llama</label>
+            <select id="mode" name="mode" aria-describedby="mode-help">
               <option value="professional">Profesional</option>
+              <option value="student">Estudiante</option>
             </select>
+            <small id="mode-help">
+              El modo cambia la forma de explicar, no la evidencia ni la conclusión jurídica.
+            </small>
+
+            <label for="jurisprudence-pdf">
+              Jurisprudencia en PDF <span>(opcional)</span>
+            </label>
+            <input id="jurisprudence-pdf" name="jurisprudence_pdf" type="file"
+                   accept="application/pdf,.pdf"
+                   aria-describedby="jurisprudence-help jurisprudence-status">
+            <small id="jurisprudence-help">
+              El PDF se procesa como evidencia jurisprudencial temporal y no se incorpora
+              automáticamente al corpus normativo.
+            </small>
+            <p id="jurisprudence-status" class="field-meta" role="status"
+               aria-live="polite"></p>
 
             <label for="fiscal-year">Ejercicio fiscal <span>(opcional)</span></label>
             <input id="fiscal-year" name="fiscal_year" type="number"

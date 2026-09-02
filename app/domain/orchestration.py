@@ -10,6 +10,9 @@ from app.domain.documents import SourceType
 from app.domain.isr import ISRCalculationInput, ISRCalculationResult
 from app.domain.isr_trace import ISRCalculationTrace, ISRTraceVerification
 from app.domain.jurisprudence import JurisprudenceRetrievalResult
+from app.domain.jurisprudence_document import JurisprudenceDocumentRepresentation
+from app.domain.jurisprudence_extraction import JurisprudenceExtractedMetadata
+from app.domain.jurisprudence_hybrid import SessionJurisprudenceHybridResult
 from app.domain.llm_trace import LLMTrace
 from app.domain.normative import (
     NormativeApplicabilityResult,
@@ -94,6 +97,13 @@ class HybridOrchestrationRequest(BaseModel):
     isr_input: ISRCalculationInput | None = None
     cbr_query: CBRQuery | None = None
     explanation_mode: ExplanationMode = ExplanationMode.PROFESSIONAL
+    session_jurisprudence_documents: list[JurisprudenceDocumentRepresentation] = Field(
+        default_factory=list,
+        max_length=20,
+    )
+    session_jurisprudence_metadata: dict[str, JurisprudenceExtractedMetadata] = Field(
+        default_factory=dict,
+    )
 
 
 def classify_retrieval_evidence(
@@ -146,6 +156,7 @@ class HybridOrchestrationResult(BaseModel):
     normative_evidence_refs: list[str] = Field(default_factory=list)
     applicable_normative_refs: list[str]
     jurisprudence_result: JurisprudenceRetrievalResult | None = None
+    session_jurisprudence_result: SessionJurisprudenceHybridResult | None = None
     rule_result: RuleEvaluationResult
     isr_result: ISRCalculationResult | None = None
     isr_trace: ISRCalculationTrace | None = None

@@ -79,8 +79,10 @@ class CanonicalExecutionResult(BaseModel):
     normative: dict[str, Any]
     rules: dict[str, Any]
     jurisprudence: dict[str, Any] | None = None
+    session_jurisprudence: dict[str, Any] | None = None
     calculations: dict[str, Any]
     cbr: dict[str, Any]
     explanation: dict[str, Any] | None
+    llm_trace: dict[str, Any] | None = None
     uncertainty: dict[str, Any]
     traceability: TraceabilityRecord

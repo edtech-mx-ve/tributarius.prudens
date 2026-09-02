@@ -4,11 +4,15 @@ const form = document.querySelector("#consultation-form");
 const query = document.querySelector("#query");
 const fiscalYear = document.querySelector("#fiscal-year");
 const mode = document.querySelector("#mode");
+const jurisprudencePdf = document.querySelector("#jurisprudence-pdf");
+const jurisprudenceStatus = document.querySelector("#jurisprudence-status");
 const submitButton = document.querySelector("#submit-button");
 const statusMessage = document.querySelector("#status-message");
 const resultContent = document.querySelector("#result-content");
 const queryError = document.querySelector("#query-error");
 const characterCount = document.querySelector("#character-count");
+
+let jurisprudenceSession = null;
 
 const roleTargets = {
   normative: {
@@ -45,6 +49,49 @@ function validateQuery() {
   queryError.textContent = "";
   query.removeAttribute("aria-invalid");
   return true;
+}
+
+async function uploadJurisprudencePdf() {
+  jurisprudenceSession = null;
+  const file = jurisprudencePdf.files[0];
+  if (!file) {
+    jurisprudenceStatus.textContent = "";
+    return;
+  }
+  if (!file.name.toLowerCase().endsWith(".pdf")) {
+    jurisprudenceStatus.textContent = "Selecciona un archivo PDF.";
+    jurisprudencePdf.value = "";
+    return;
+  }
+
+  jurisprudencePdf.disabled = true;
+  jurisprudenceStatus.textContent = "Procesando PDF jurisprudencial…";
+  try {
+    const response = await fetch("/api/v1/jurisprudence/session", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/pdf",
+        "X-Filename": file.name,
+      },
+      body: await file.arrayBuffer(),
+    });
+    const data = await response.json();
+    if (!response.ok || data.status !== "ready") {
+      jurisprudenceStatus.textContent = data.message || "No fue posible procesar el PDF.";
+      return;
+    }
+    jurisprudenceSession = {
+      sessionId: data.session_id,
+      documentId: data.document_id,
+    };
+    jurisprudenceStatus.textContent = (
+      `${data.filename}: ${data.page_count} página(s) procesada(s).`
+    );
+  } catch {
+    jurisprudenceStatus.textContent = "No fue posible cargar el PDF jurisprudencial.";
+  } finally {
+    jurisprudencePdf.disabled = false;
+  }
 }
 
 function appendTextItem(list, text) {
@@ -116,7 +163,7 @@ function renderEvidenceCard(item) {
   appendMeta(meta, "Versión", item.version);
   appendMeta(meta, "Ejercicio", item.fiscal_year);
   appendMeta(meta, "Páginas", formatPages(item));
-  appendMeta(meta, "Score", formatScore(item.score));
+  appendMeta(meta, "Score", formatScore(item));
 
   article.append(header);
   if (meta.childElementCount > 0) {
@@ -307,6 +354,9 @@ async function submitConsultation(event) {
     query: query.value.trim(),
     mode: mode.value,
     fiscal_year: yearValue ? Number(yearValue) : null,
+    jurisprudence_session_id: jurisprudenceSession
+      ? jurisprudenceSession.sessionId
+      : null,
   };
 
   submitButton.disabled = true;
@@ -346,5 +396,6 @@ async function submitConsultation(event) {
 }
 
 query.addEventListener("input", validateQuery);
+jurisprudencePdf.addEventListener("change", uploadJurisprudencePdf);
 form.addEventListener("submit", submitConsultation);
 characterCount.textContent = `${query.value.length} / 4000`;

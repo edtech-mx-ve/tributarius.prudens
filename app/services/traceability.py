@@ -61,11 +61,17 @@ def _stage_review(
     if stage == "normative":
         return any(item.requires_human_review for item in result.normative_results)
     if stage == "jurisprudence":
-        return (
+        registered_review = (
             result.jurisprudence_result.requires_human_review
             if result.jurisprudence_result is not None
             else False
         )
+        session_review = (
+            result.session_jurisprudence_result.requires_human_review
+            if result.session_jurisprudence_result is not None
+            else False
+        )
+        return registered_review or session_review
     if stage == "rules":
         return result.rule_result.requires_human_review
     if stage == "cbr":
@@ -82,6 +88,17 @@ def _stage_review(
     return False
 
 
+def _session_jurisprudence_event_refs(
+    result: HybridOrchestrationResult,
+) -> list[str]:
+    if result.session_jurisprudence_result is None:
+        return []
+    return [
+        f"session-jurisprudence:{hit.document_id}:page:{hit.page_number}"
+        for hit in result.session_jurisprudence_result.retrieval.hits
+    ]
+
+
 def _stage_evidence_refs(
     stage: str,
     result: HybridOrchestrationResult,
@@ -90,8 +107,12 @@ def _stage_evidence_refs(
         return [item.chunk_id for item in result.retrieval.hits]
     if stage == "normative":
         return list(result.applicable_normative_refs)
-    if stage == "jurisprudence" and result.jurisprudence_result is not None:
-        return [item.chunk_id for item in result.jurisprudence_result.hits]
+    if stage == "jurisprudence":
+        refs: list[str] = []
+        if result.jurisprudence_result is not None:
+            refs.extend(item.chunk_id for item in result.jurisprudence_result.hits)
+        refs.extend(_session_jurisprudence_event_refs(result))
+        return refs
     if stage == "rules":
         return [
             f"{item.rule_id}@{item.version}"
@@ -121,6 +142,7 @@ def _build_events(result: HybridOrchestrationResult) -> list[TraceEvent]:
             )
         )
     return events
+
 
 def _retrieval_evidence(
     result: HybridOrchestrationResult,
@@ -210,19 +232,37 @@ def _cbr_evidence(result: HybridOrchestrationResult) -> list[EvidenceReference]:
 def _jurisprudence_evidence(
     result: HybridOrchestrationResult,
 ) -> list[EvidenceReference]:
-    if result.jurisprudence_result is None:
-        return []
-    return [
-        EvidenceReference(
-            ref_id=hit.chunk_id,
-            kind=EvidenceKind.JURISPRUDENCE,
-            source_type="jurisprudencia",
-            source_reference=hit.metadata.source_reference,
-            version=hit.metadata.status.value,
-            score=hit.score,
+    refs: list[EvidenceReference] = []
+
+    if result.jurisprudence_result is not None:
+        refs.extend(
+            EvidenceReference(
+                ref_id=hit.chunk_id,
+                kind=EvidenceKind.JURISPRUDENCE,
+                source_type="jurisprudencia",
+                source_reference=hit.metadata.source_reference,
+                version=hit.metadata.status.value,
+                score=hit.score,
+            )
+            for hit in result.jurisprudence_result.hits
         )
-        for hit in result.jurisprudence_result.hits
-    ]
+
+    if result.session_jurisprudence_result is not None:
+        refs.extend(
+            EvidenceReference(
+                ref_id=(
+                    f"session-jurisprudence:{hit.document_id}:page:{hit.page_number}"
+                ),
+                kind=EvidenceKind.JURISPRUDENCE,
+                source_type="jurisprudencia",
+                source_reference=hit.original_filename,
+                version="session",
+                score=hit.score,
+            )
+            for hit in result.session_jurisprudence_result.retrieval.hits
+        )
+
+    return refs
 
 
 def _llm_evidence(result: HybridOrchestrationResult) -> list[EvidenceReference]:
@@ -287,12 +327,40 @@ def _uncertainties(
                         requires_human_review=True,
                     )
                 )
-    for assessment in result.cbr_reuse_assessments:
-        if assessment.requires_human_review:
+    if result.session_jurisprudence_result is not None:
+        for jurisprudence_assessment in (
+            result.session_jurisprudence_result.applicability
+        ):
+            if jurisprudence_assessment.requires_human_review:
+                items.append(
+                    UncertaintyItem(
+                        code="SESSION_JURISPRUDENCE_REVIEW",
+                        message=(
+                            f"{jurisprudence_assessment.document_id}: "
+                            f"{', '.join(jurisprudence_assessment.reasons)}"
+                        ),
+                        stage="jurisprudence",
+                        requires_human_review=True,
+                    )
+                )
+        if result.session_jurisprudence_result.relations.has_conflict:
+            items.append(
+                UncertaintyItem(
+                    code="SESSION_JURISPRUDENCE_CONFLICT",
+                    message=(
+                        "La evidencia jurisprudencial temporal contiene una "
+                        "contradicción que requiere revisión."
+                    ),
+                    stage="jurisprudence",
+                    requires_human_review=True,
+                )
+            )
+    for cbr_assessment in result.cbr_reuse_assessments:
+        if cbr_assessment.requires_human_review:
             items.append(
                 UncertaintyItem(
                     code="CBR_REUSE_REVIEW",
-                    message=f"{assessment.case_id}: {assessment.reason}",
+                    message=f"{cbr_assessment.case_id}: {cbr_assessment.reason}",
                     stage="cbr",
                     requires_human_review=True,
                 )
@@ -398,6 +466,13 @@ def build_canonical_result(
     }
     if result.jurisprudence_result is not None:
         payload["jurisprudence"] = result.jurisprudence_result.model_dump(mode="json")
+    if result.session_jurisprudence_result is not None:
+        payload["session_jurisprudence"] = (
+            result.session_jurisprudence_result.model_dump(mode="json")
+        )
+    if result.llm_trace is not None:
+        payload["llm_trace"] = result.llm_trace.model_dump(mode="json")
+
     trace.canonical_result_sha256 = canonical_sha256(payload)
     return CanonicalExecutionResult(
         execution_id=execution_id,
@@ -407,10 +482,12 @@ def build_canonical_result(
         retrieval=payload["retrieval"],
         normative=payload["normative"],
         jurisprudence=payload.get("jurisprudence"),
+        session_jurisprudence=payload.get("session_jurisprudence"),
         rules=payload["rules"],
         calculations=payload["calculations"],
         cbr=payload["cbr"],
         explanation=payload["explanation"],
+        llm_trace=payload.get("llm_trace"),
         uncertainty=payload["uncertainty"],
         traceability=trace,
     )
@@ -429,6 +506,11 @@ def verify_canonical_integrity(result: CanonicalExecutionResult) -> bool:
     }
     if result.jurisprudence is not None:
         payload["jurisprudence"] = result.jurisprudence
+    if result.session_jurisprudence is not None:
+        payload["session_jurisprudence"] = result.session_jurisprudence
+    if result.llm_trace is not None:
+        payload["llm_trace"] = result.llm_trace
+
     expected = result.traceability.canonical_result_sha256
     return expected is not None and canonical_sha256(payload) == expected
 
