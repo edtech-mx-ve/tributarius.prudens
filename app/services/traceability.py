@@ -86,6 +86,12 @@ def _stage_review(
             if result.hybrid_coordination is not None
             else False
         )
+    if stage == "legal_heuristics":
+        return (
+            result.heuristic_evaluation.requires_review
+            if result.heuristic_evaluation is not None
+            else False
+        )
     if stage == "explanation":
         return (
             result.explanation.answer.requires_human_review
@@ -135,6 +141,14 @@ def _stage_evidence_refs(
         if result.cbr_result is not None:
             refs.extend(item.case_id for item in result.cbr_result.matches)
         return list(dict.fromkeys(refs))
+    if stage == "legal_heuristics" and result.heuristic_evaluation is not None:
+        return list(
+            dict.fromkeys(
+                ref
+                for signal in result.heuristic_evaluation.signals
+                for ref in signal.evidence_refs
+            )
+        )
     if stage == "explanation" and result.explanation is not None:
         return list(result.explanation.answer.evidence_ids)
     return []
@@ -409,6 +423,17 @@ def _uncertainties(
                 requires_human_review=True,
             )
         )
+    if result.heuristic_evaluation is not None:
+        for signal in result.heuristic_evaluation.signals:
+            if signal.requires_review:
+                items.append(
+                    UncertaintyItem(
+                        code=signal.code,
+                        message=signal.message,
+                        stage="legal_heuristics",
+                        requires_human_review=True,
+                    )
+                )
     if result.explanation is None:
         items.append(
             UncertaintyItem(
@@ -511,6 +536,10 @@ def build_canonical_result(
     }
     if result.hybrid_coordination is not None:
         payload["hybrid_coordination"] = result.hybrid_coordination.model_dump(
+            mode="json"
+        )
+    if result.heuristic_evaluation is not None:
+        payload["legal_heuristics"] = result.heuristic_evaluation.model_dump(
             mode="json"
         )
     if result.jurisprudence_result is not None:

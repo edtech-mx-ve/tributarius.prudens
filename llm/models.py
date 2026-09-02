@@ -38,6 +38,9 @@ class DeterministicEvidence(BaseModel):
     hybrid_conclusion: str | None = Field(default=None, max_length=4000)
     hybrid_controlling_source: str | None = Field(default=None, max_length=100)
     hybrid_reasons: list[str] = Field(default_factory=list, max_length=20)
+    heuristic_signals: list[str] = Field(default_factory=list, max_length=100)
+    heuristic_priorities: list[str] = Field(default_factory=list, max_length=100)
+    heuristic_requires_review: bool = False
     requires_human_review: bool = False
 
 

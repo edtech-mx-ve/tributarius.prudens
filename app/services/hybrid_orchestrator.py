@@ -6,6 +6,7 @@ from app.domain.cbr import CBRCase, CBRRetrievalResult, CBRReuseAssessment
 from app.domain.documents import SourceType
 from app.domain.isr import ISRTariff
 from app.domain.jurisprudence import JurisprudenceRetrievalResult
+from app.domain.legal_heuristics import LegalHeuristicEvaluation
 from app.domain.normative import (
     NormativeApplicabilityRequest,
     NormativeApplicabilityResult,
@@ -37,6 +38,10 @@ from app.services.isr_traceability import (
     build_isr_calculation_trace,
     verify_isr_calculation_trace,
 )
+from app.services.legal_heuristic_explanation import (
+    build_heuristic_explanation_evidence,
+)
+from app.services.legal_heuristics_stage import run_legal_heuristics_stage
 from app.services.llm_traceability import build_llm_trace
 from app.services.normative_engine import evaluate_normative_applicability
 from app.services.normative_rag_bridge import (
@@ -281,6 +286,7 @@ def _deterministic_evidence(
     cbr_result: CBRRetrievalResult | None,
     jurisprudence_result: JurisprudenceRetrievalResult | None,
     hybrid_coordination: object | None = None,
+    heuristic_evaluation: LegalHeuristicEvaluation | None = None,
 ) -> DeterministicEvidence:
     calculations: list[str] = []
     if isr_result is not None:
@@ -308,6 +314,10 @@ def _deterministic_evidence(
             for hit in jurisprudence_result.hits
         ]
 
+    heuristic_signals, heuristic_priorities, heuristic_requires_review = (
+        build_heuristic_explanation_evidence(heuristic_evaluation)
+    )
+
     return DeterministicEvidence(
         applicable_normative_refs=normative_refs,
         rule_conclusions=[
@@ -325,6 +335,9 @@ def _deterministic_evidence(
             hybrid_coordination, "controlling_source", None
         ),
         hybrid_reasons=list(getattr(hybrid_coordination, "reasons", [])),
+        heuristic_signals=heuristic_signals,
+        heuristic_priorities=heuristic_priorities,
+        heuristic_requires_review=heuristic_requires_review,
         requires_human_review=(
             rule_result.requires_human_review
             or (
@@ -338,6 +351,7 @@ def _deterministic_evidence(
                 else False
             )
             or bool(getattr(hybrid_coordination, "requires_review", False))
+            or heuristic_requires_review
         ),
     )
 
@@ -628,6 +642,11 @@ class HybridOrchestrator:
                 )
             )
 
+        heuristic_evaluation, heuristic_trace, heuristic_review = (
+            run_legal_heuristics_stage(hybrid_coordination)
+        )
+        traces.append(heuristic_trace)
+
         deterministic = _deterministic_evidence(
             applicable_refs,
             rule_result,
@@ -635,6 +654,7 @@ class HybridOrchestrator:
             cbr_result,
             jurisprudence_result,
             hybrid_coordination,
+            heuristic_evaluation,
         )
         explanation = None
         llm_trace = None
@@ -697,6 +717,7 @@ class HybridOrchestrator:
             rbs_reasoning=rbs_reasoning,
             cbr_reasoning=cbr_reasoning,
             hybrid_coordination=hybrid_coordination,
+            heuristic_evaluation=heuristic_evaluation,
             explanation=explanation,
             llm_trace=llm_trace,
             traces=traces,
@@ -708,6 +729,7 @@ class HybridOrchestrator:
                     isr_review,
                     cbr_review,
                     coordination_review,
+                    heuristic_review,
                     jurisprudence_review,
                     llm_review,
                     explanation_review,

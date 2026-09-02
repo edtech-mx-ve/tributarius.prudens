@@ -15,6 +15,7 @@ from app.domain.jurisprudence import JurisprudenceRetrievalResult
 from app.domain.jurisprudence_document import JurisprudenceDocumentRepresentation
 from app.domain.jurisprudence_extraction import JurisprudenceExtractedMetadata
 from app.domain.jurisprudence_hybrid import SessionJurisprudenceHybridResult
+from app.domain.legal_heuristics import LegalHeuristicEvaluation
 from app.domain.llm_trace import LLMTrace
 from app.domain.normative import (
     NormativeApplicabilityResult,
@@ -37,6 +38,7 @@ class OrchestrationStage(StrEnum):
     ISR = "isr"
     CBR = "cbr"
     HYBRID_COORDINATION = "hybrid_coordination"
+    LEGAL_HEURISTICS = "legal_heuristics"
     EXPLANATION = "explanation"
 
 
@@ -169,6 +171,7 @@ class HybridOrchestrationResult(BaseModel):
     rbs_reasoning: NormalizedReasoningResult | None = None
     cbr_reasoning: NormalizedReasoningResult | None = None
     hybrid_coordination: HybridCoordinationResult | None = None
+    heuristic_evaluation: LegalHeuristicEvaluation | None = None
     explanation: RAGExplanation | None = None
     llm_trace: LLMTrace | None = None
     traces: list[StageTrace]
