@@ -3,7 +3,11 @@ from __future__ import annotations
 from typing import Any
 
 from app.domain.explanation_mode import ExplanationMode
+from app.domain.integral_legal_analysis import IntegralLegalAnalysis
 from app.domain.traceability import CanonicalExecutionResult, EvidenceReference
+from app.services.integral_legal_traceability import (
+    integral_legal_analysis_sha256,
+)
 from app.services.legal_explanation_profile import get_legal_explanation_profile
 from app.web.schemas import WebConsultationRequest
 
@@ -185,6 +189,16 @@ def _present_trace(result: CanonicalExecutionResult) -> dict[str, object]:
             for event in trace.events
         ],
     }
+
+
+def present_integral_legal_analysis(
+    analysis: IntegralLegalAnalysis,
+) -> dict[str, object]:
+    """Expone Analyzer 1.0 sin recalcular ni reinterpretar su contenido."""
+
+    payload: dict[str, object] = analysis.model_dump(mode="json")
+    payload["integrity_sha256"] = integral_legal_analysis_sha256(analysis)
+    return payload
 
 
 def present_canonical_result(
