@@ -1,0 +1,28 @@
+{
+  "schema_version": "1.0",
+  "baseline_commit": "d0158cdcf79506ba63763a585b4887ae8e5ebf97",
+  "purpose": "Política determinista D.7 para ejecutar recuperación RAG únicamente sobre el foco normativo producido por D.6, priorizando artículos exactos y búsquedas semánticas dirigidas, sin usar PRODECON o UNAM como fundamento normativo, sin excluir los 12 corpus del espacio jurídico total, sin afirmar vigencia ni controlar una determinación jurídica.",
+  "focus_only": true,
+  "normative_only": true,
+  "exact_article_seed_enabled": true,
+  "focused_semantic_enabled": true,
+  "exact_seed_top_k": 2,
+  "per_source_top_k": 3,
+  "semantic_score_weight": 0.8,
+  "source_priority_weight": 0.2,
+  "allowed_chunk_types": [
+    "article",
+    "section",
+    "fraction",
+    "subsection",
+    "paragraph"
+  ],
+  "full_normative_corpus_preserved": true,
+  "source_exclusion_enabled": false,
+  "expansion_to_full_corpus_enabled": false,
+  "expansion_reserved_for_d8": true,
+  "requires_normative_validation": true,
+  "requires_temporal_validation": true,
+  "temporal_validation_completed": false,
+  "can_control_legal_decision": false
+}

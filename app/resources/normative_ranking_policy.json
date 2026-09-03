@@ -1,0 +1,45 @@
+{
+  "schema_version": "1.0",
+  "baseline_commit": "d0158cdcf79506ba63763a585b4887ae8e5ebf97",
+  "purpose": "Política determinista D.5 para ordenar por relevancia heurística los doce corpus normativos A.8 usando señales D.2, D.3 y D.4, preservando siempre el corpus completo y sin afirmar jerarquía, vigencia, validez material, recuperación RAG ni una determinación jurídica.",
+  "component_weights": {
+    "primary_activation": 0.45,
+    "rbs_orientation": 0.35,
+    "cbr_orientation": 0.2
+  },
+  "focus_top_k": 5,
+  "minimum_focus_score": 0.15,
+  "full_normative_corpus_preserved": true,
+  "source_exclusion_enabled": false,
+  "ranking_is_relevance_not_validity": true,
+  "legal_hierarchy_interpreted": false,
+  "requires_normative_validation": true,
+  "requires_temporal_validation": true,
+  "rag_retrieval_enabled": false,
+  "can_control_legal_decision": false,
+  "tax_source_map": {
+    "ISR": [
+      "lisr",
+      "reg_lisr_060516"
+    ],
+    "IVA": [
+      "liva",
+      "reg_liva_250914"
+    ],
+    "IEPS": [
+      "lieps"
+    ],
+    "ISAN": [
+      "lfisan"
+    ]
+  },
+  "tax_specific_source_ids": [
+    "lisr",
+    "reg_lisr_060516",
+    "liva",
+    "reg_liva_250914",
+    "lieps",
+    "lfisan"
+  ],
+  "explicit_tax_mismatch_multiplier": 0.1
+}

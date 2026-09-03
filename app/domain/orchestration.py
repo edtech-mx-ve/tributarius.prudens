@@ -27,7 +27,12 @@ from app.domain.normative import (
     NormativeValidityScope,
     NormativeValidityStatus,
 )
-from app.domain.query import QueryAnalysis
+from app.domain.query import (
+    FocusedRAGExecution,
+    FullCorpusExpansionExecution,
+    QueryAnalysis,
+    TemporalControlExecution,
+)
 from app.domain.rules import RuleEvaluationResult
 from llm.models import ExplanationMode, RAGExplanation
 from rag.retrieval.models import RetrievalResult
@@ -38,6 +43,7 @@ class OrchestrationStage(StrEnum):
     RETRIEVAL = "retrieval"
     LEGAL_HYPOTHESIS = "legal_hypothesis"
     NORMATIVE = "normative"
+    TEMPORAL = "temporal"
     JURISPRUDENCE = "jurisprudence"
     RULES = "rules"
     ISR = "isr"
@@ -159,6 +165,9 @@ def build_evidence_layers(
 class HybridOrchestrationResult(BaseModel):
     analysis: QueryAnalysis
     retrieval: RetrievalResult
+    focused_rag_execution: FocusedRAGExecution | None = None
+    full_corpus_expansion_execution: FullCorpusExpansionExecution | None = None
+    temporal_control_execution: TemporalControlExecution | None = None
     initial_legal_hypothesis: ControlledLegalHypothesisResult | None = None
     initial_legal_hypothesis_verification: (
         LegalHypothesisVerificationResult | None

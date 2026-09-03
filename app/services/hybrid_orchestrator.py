@@ -27,6 +27,8 @@ from app.domain.query import (
 )
 from app.domain.rules import RuleEvaluationResult, RuleSet
 from app.services.cbr_reasoning import assess_case_reuse
+from app.services.focused_normative_rag import execute_focused_rag
+from app.services.full_corpus_expansion import execute_full_corpus_expansion
 from app.services.hybrid_isr_stage import run_isr_stage
 from app.services.hybrid_reasoning_coordinator import coordinate_rbs_cbr
 from app.services.hybrid_reasoning_normalization import (
@@ -58,6 +60,10 @@ from app.services.normative_rag_bridge import (
 from app.services.normative_temporal_runtime_guard import TemporalRuntimeGuard
 from app.services.query_fact_compat_19s_r15 import query_fact_value
 from app.services.rule_engine import evaluate_rules
+from app.services.temporal_control import (
+    execute_temporal_control,
+    resolve_temporal_query_context,
+)
 from calculators.isr_tariff_registry import ISRTariffRegistry
 from cbr.engine import retrieve_similar_cases
 from jurisprudence.activation import decide_jurisprudence_activation
@@ -404,16 +410,68 @@ class HybridOrchestrator:
             )
         )
 
-        retrieval = self._retriever.search(
-            analysis.normalized_query,
-            top_k=request.top_k,
-            filters=_retrieval_filters(analysis),
-        )
+        focused_rag_execution = None
+        focused_retrieval = None
+        if (
+            analysis.focused_rag_plan is not None
+            and analysis.focused_rag_plan.plan_applied
+        ):
+            focused_run = execute_focused_rag(
+                analysis.normalized_query,
+                plan=analysis.focused_rag_plan,
+                retriever=self._retriever,
+                top_k=request.top_k,
+            )
+            focused_retrieval = focused_run.retrieval
+            focused_rag_execution = focused_run.execution
+
+        full_corpus_expansion_execution = None
+        if analysis.full_corpus_expansion_plan is not None:
+            expansion_run = execute_full_corpus_expansion(
+                analysis.normalized_query,
+                plan=analysis.full_corpus_expansion_plan,
+                retriever=self._retriever,
+                top_k=request.top_k,
+                focused_retrieval=focused_retrieval,
+                focused_execution=focused_rag_execution,
+            )
+            retrieval = expansion_run.retrieval
+            full_corpus_expansion_execution = expansion_run.execution
+            if full_corpus_expansion_execution.expansion_applied:
+                reasons = ",".join(
+                    item.value
+                    for item in full_corpus_expansion_execution.trigger_reasons
+                )
+                retrieval_detail = (
+                    "RAG focal D.7 + expansión D.8: "
+                    f"chunks={retrieval.returned_count}; "
+                    f"fuentes={len(full_corpus_expansion_execution.hit_source_ids)}; "
+                    f"razones={reasons}."
+                )
+            else:
+                exact_count = (
+                    len(focused_rag_execution.exact_seed_hit_ids)
+                    if focused_rag_execution is not None
+                    else 0
+                )
+                retrieval_detail = (
+                    "RAG focal D.7; expansión D.8 no requerida: "
+                    f"chunks={retrieval.returned_count}; "
+                    f"fuentes={len(full_corpus_expansion_execution.hit_source_ids)}; "
+                    f"exactos={exact_count}."
+                )
+        else:
+            retrieval = self._retriever.search(
+                analysis.normalized_query,
+                top_k=request.top_k,
+                filters=_retrieval_filters(analysis),
+            )
+            retrieval_detail = f"Chunks recuperados: {retrieval.returned_count}."
         traces.append(
             StageTrace(
                 stage=OrchestrationStage.RETRIEVAL,
                 status=StageStatus.COMPLETED,
-                detail=f"Chunks recuperados: {retrieval.returned_count}.",
+                detail=retrieval_detail,
             )
         )
 
@@ -432,12 +490,47 @@ class HybridOrchestrator:
             retrieval,
             rag_normative_candidates,
         )
+        temporal_resolution = None
+        resolved_fiscal_year = request.query_fiscal_year
+        if analysis.temporal_control_plan is not None:
+            temporal_resolution = resolve_temporal_query_context(
+                analysis.temporal_control_plan,
+                request.query_fiscal_year,
+            )
+            resolved_fiscal_year = temporal_resolution.resolved_fiscal_year
+            if (
+                resolved_fiscal_year is not None
+                and not temporal_resolution.conflict
+                and not any(
+                    item.name.strip().casefold() == "fiscal_year"
+                    for item in analysis.facts
+                )
+            ):
+                analysis = analysis.model_copy(
+                    update={
+                        "facts": [
+                            *analysis.facts,
+                            ExtractedFact(
+                                name="fiscal_year",
+                                value=str(resolved_fiscal_year),
+                                origin=FactOrigin.EXPLICIT,
+                            ),
+                        ],
+                        "missing_fields": [
+                            item
+                            for item in analysis.missing_fields
+                            if item.name.strip().casefold() != "fiscal_year"
+                        ],
+                    }
+                )
+
         effective_request = request.model_copy(
             update={
+                "query_fiscal_year": resolved_fiscal_year,
                 "normative_candidates": [
                     *request.normative_candidates,
                     *rag_normative_candidates,
-                ]
+                ],
             }
         )
         (
@@ -452,10 +545,48 @@ class HybridOrchestrator:
                 detail=(
                     "Evidencia normativa conservada: "
                     f"{len(normative_evidence_refs)}; "
-                    f"temporalmente aplicable: {len(applicable_refs)}."
+                    f"aplicable por motor normativo: {len(applicable_refs)}."
                 ),
             )
         )
+
+        temporal_control_execution = None
+        if analysis.temporal_control_plan is not None and temporal_resolution is not None:
+            temporal_control_execution = execute_temporal_control(
+                plan=analysis.temporal_control_plan,
+                query_date=request.query_date,
+                resolution=temporal_resolution,
+                retrieval=retrieval,
+                candidates=effective_request.normative_candidates,
+                normative_results=normative_results,
+                evidence_refs=normative_evidence_refs,
+                applicable_refs=applicable_refs,
+                temporal_guard=self._temporal_guard,
+            )
+            applicable_refs = list(
+                temporal_control_execution.promoted_normative_refs
+            )
+            temporal_status = (
+                StageStatus.DEGRADED
+                if temporal_control_execution.requires_human_review
+                else StageStatus.COMPLETED
+            )
+            traces.append(
+                StageTrace(
+                    stage=OrchestrationStage.TEMPORAL,
+                    status=temporal_status,
+                    detail=(
+                        "Control temporal D.9: "
+                        f"ejercicio={temporal_control_execution.resolved_query_fiscal_year}; "
+                        f"promovidas={temporal_control_execution.promoted_count}; "
+                        f"vigencia_desconocida="
+                        f"{len(temporal_control_execution.unknown_validity_refs)}; "
+                        f"conflicto={temporal_control_execution.query_temporal_conflict}; "
+                        f"ambigüedad="
+                        f"{temporal_control_execution.query_temporal_ambiguity}."
+                    ),
+                )
+            )
 
         jurisprudence_activation = decide_jurisprudence_activation(
             analysis,
@@ -716,6 +847,10 @@ class HybridOrchestrator:
             )
 
         normative_review = any(result.requires_human_review for result in normative_results)
+        if temporal_control_execution is not None:
+            normative_review = (
+                normative_review or temporal_control_execution.requires_human_review
+            )
         has_material_normative_evidence = any(
             _materially_relevant_hit(analysis, hit) for hit in retrieval.hits
         )
@@ -728,6 +863,9 @@ class HybridOrchestrator:
         return HybridOrchestrationResult(
             analysis=analysis,
             retrieval=retrieval,
+            focused_rag_execution=focused_rag_execution,
+            full_corpus_expansion_execution=full_corpus_expansion_execution,
+            temporal_control_execution=temporal_control_execution,
             initial_legal_hypothesis=initial_legal_hypothesis,
             initial_legal_hypothesis_verification=(
                 initial_legal_hypothesis_verification

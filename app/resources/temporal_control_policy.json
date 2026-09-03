@@ -1,0 +1,16 @@
+{
+  "schema_version": "1.0",
+  "source_block": "D.9",
+  "infer_single_explicit_year_as_fiscal_year": true,
+  "request_fiscal_year_has_precedence": true,
+  "conflict_when_request_year_not_in_query_years": true,
+  "ambiguous_when_multiple_query_years_without_request_year": true,
+  "fail_closed_on_query_temporal_conflict": true,
+  "fail_closed_on_query_temporal_ambiguity": true,
+  "fail_closed_unknown_validity": true,
+  "preserve_retrieved_normative_evidence": true,
+  "rule_promotion_requires_temporal_applicability": true,
+  "allow_temporally_non_applicable_as_evidence": true,
+  "temporal_guard_is_advisory_for_retrieval": true,
+  "temporal_guard_does_not_create_validity": true
+}

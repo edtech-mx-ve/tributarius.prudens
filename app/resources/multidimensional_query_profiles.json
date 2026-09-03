@@ -1,0 +1,85 @@
+{
+  "schema_version": "1.0",
+  "baseline_commit": "d0158cdcf79506ba63763a585b4887ae8e5ebf97",
+  "purpose": "Perfiles deterministas D.1 para extraer dimensiones explícitas y enlazar la consulta con la taxonomía A.6 sin activar conocimiento, reglas, casos, RAG ni producir una conclusión jurídica.",
+  "dimension_terms": {
+    "taxpayer_type": {
+      "individual": ["persona física", "persona fisica", "persona natural"],
+      "legal_entity": ["persona moral", "sociedad mercantil", "sociedad anónima", "sociedad anonima"]
+    },
+    "tax": {
+      "ISR": ["isr", "impuesto sobre la renta"],
+      "IVA": ["iva", "impuesto al valor agregado"],
+      "IEPS": ["ieps", "impuesto especial sobre producción y servicios", "impuesto especial sobre produccion y servicios"],
+      "ISAN": ["isan", "impuesto sobre automóviles nuevos", "impuesto sobre automoviles nuevos"]
+    },
+    "fiscal_regime": {
+      "RESICO": ["resico", "régimen simplificado de confianza", "regimen simplificado de confianza"],
+      "RIF": ["rif", "régimen de incorporación fiscal", "regimen de incorporacion fiscal"]
+    },
+    "activity": {
+      "servicios profesionales independientes": ["servicios profesionales", "honorarios", "profesionista independiente", "profesional independiente"],
+      "trabajo subordinado": ["asalariado", "asalariada", "salarios", "sueldo", "trabajo subordinado"],
+      "arrendamiento de inmuebles": ["arrendamiento", "renta de inmueble", "rento un inmueble", "renta de casa", "renta de local"],
+      "actividad empresarial": ["actividad empresarial", "negocio propio", "comercio", "comerciante"]
+    },
+    "authority_act": {
+      "visita domiciliaria": ["visita domiciliaria"],
+      "revision de gabinete": ["revisión de gabinete", "revision de gabinete"],
+      "revision electronica": ["revisión electrónica", "revision electronica"],
+      "requerimiento": ["requerimiento", "requerimiento del sat"],
+      "credito fiscal": ["crédito fiscal", "credito fiscal"],
+      "procedimiento administrativo de ejecucion": ["procedimiento administrativo de ejecución", "procedimiento administrativo de ejecucion", "pae", "embargo"]
+    },
+    "procedural_stage": {
+      "cumplimiento": ["presentar declaración", "presentar declaracion", "cumplir obligaciones", "pago provisional"],
+      "comprobacion": ["facultades de comprobación", "facultades de comprobacion", "auditoría", "auditoria", "visita domiciliaria", "revisión de gabinete", "revision de gabinete", "revisión electrónica", "revision electronica"],
+      "determinacion": ["determinación del crédito", "determinacion del credito", "liquidación", "liquidacion", "crédito fiscal", "credito fiscal"],
+      "cobro coactivo": ["cobro coactivo", "procedimiento administrativo de ejecución", "procedimiento administrativo de ejecucion", "pae", "embargo"],
+      "defensa": ["impugnar", "recurso de revocación", "recurso de revocacion", "juicio contencioso", "defensa"],
+      "interpretacion": ["interpretación", "interpretacion", "aplicación estricta", "aplicacion estricta"]
+    }
+  },
+  "intent_problem_map": {
+    "identify_obligations": ["cumplimiento_fiscal"],
+    "calculate_isr": ["determinacion_contribucion"],
+    "calculate_iva": ["determinacion_contribucion"],
+    "analyze_authority_act": ["actuacion_autoridad"],
+    "review_debt_noncompliance": ["incumplimiento_fiscal"],
+    "defense_options": ["defensa_contribuyente"],
+    "interpret_provision": ["interpretacion_fiscal"]
+  },
+  "intent_institution_map": {
+    "identify_obligations": ["obligacion_tributaria"],
+    "know_rights": ["derechos_contribuyente"],
+    "calculate_isr": ["regimen_isr", "tributo"],
+    "calculate_iva": ["tributo"],
+    "analyze_authority_act": ["relacion_tributaria", "derechos_contribuyente"],
+    "review_debt_noncompliance": ["deuda_tributaria", "obligacion_tributaria"],
+    "defense_options": ["derechos_contribuyente", "relacion_tributaria"],
+    "interpret_provision": ["tributo"]
+  },
+  "dimension_institution_map": {
+    "tax:ISR": ["regimen_isr", "tributo"],
+    "tax:IVA": ["tributo"],
+    "tax:IEPS": ["tributo"],
+    "tax:ISAN": ["tributo"],
+    "fiscal_regime:RESICO": ["regimen_isr"],
+    "fiscal_regime:RIF": ["regimen_isr"]
+  },
+  "required_dimensions_by_intent": {
+    "calculate_isr": ["taxpayer_type", "tax", "fiscal_year"],
+    "calculate_iva": ["taxpayer_type", "tax", "fiscal_year"],
+    "identify_obligations": ["taxpayer_type", "activity", "fiscal_year"],
+    "analyze_authority_act": ["authority_act", "procedural_stage", "fiscal_year"],
+    "review_debt_noncompliance": ["authority_act", "procedural_stage", "fiscal_year"],
+    "defense_options": ["authority_act", "procedural_stage", "fiscal_year"],
+    "interpret_provision": ["fiscal_year"]
+  },
+  "current_context_terms": ["actual", "actualmente", "vigente hoy", "hoy", "este año", "este ano"],
+  "historical_context_terms": ["histórico", "historico", "antes de", "en ese año", "en ese ano", "derogado", "rif"],
+  "vigency_request_terms": ["vigencia", "vigente", "derogado", "aplica en", "aplicable en"],
+  "requires_normative_validation": true,
+  "downstream_activation_enabled": false,
+  "can_control_legal_decision": false
+}

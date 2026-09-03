@@ -1,0 +1,22 @@
+{
+  "schema_version": "1.0",
+  "baseline_commit": "d0158cdcf79506ba63763a585b4887ae8e5ebf97",
+  "purpose": "Política determinista D.3 para integrar el RBS primario B.5-B.9 como orientador de investigación a partir de D.1-D.2, reutilizando el motor RBS existente sin ejecutar reglas productivas ni adelantar ranking normativo, CBR, RAG o decisión jurídica.",
+  "minimum_orientation_score": 0.3,
+  "weights": {
+    "primary_entry_coverage": 0.7,
+    "rbs_family_overlap": 0.3
+  },
+  "requires_primary_entry_overlap": true,
+  "expected_primary_relation_count": 18,
+  "expected_existing_rule_count": 14,
+  "requires_normative_validation": true,
+  "requires_case_date_validation": true,
+  "full_normative_corpus_preserved": true,
+  "reuse_existing_rule_engine": true,
+  "production_rule_execution_enabled": false,
+  "normative_ranking_enabled": false,
+  "cbr_activation_enabled": false,
+  "rag_retrieval_enabled": false,
+  "can_control_legal_decision": false
+}

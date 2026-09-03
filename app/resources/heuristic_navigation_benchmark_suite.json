@@ -1,0 +1,653 @@
+{
+  "schema_version": "1.0",
+  "benchmark_version": "1.0.0",
+  "baseline_commit": "d0158cdcf79506ba63763a585b4887ae8e5ebf97",
+  "purpose": "Benchmark reproducible D.10 del Motor Heurístico y navegación. Verifica de extremo a extremo los contratos D.1-D.9 sobre consultas RESICO y casos fiscales adicionales: análisis multidimensional, activación PRODECON/UNAM, RBS y CBR orientadores, ranking, navegación estructural, RAG focal, expansión a los 12 corpus y control temporal fail-closed.",
+  "scope_statement": "Un resultado satisfactorio demuestra únicamente que estas diez consultas explícitas satisfacen los contratos reproducibles actuales del motor heurístico D.1-D.9 sobre el corpus interno configurado. No demuestra cobertura completa del Derecho fiscal mexicano, vigencia material universal, exactitud de una determinación jurídica ni autorización para usar PRODECON, UNAM, CBR o el ranking como fuente normativa.",
+  "cases": [
+    {
+      "case_id": "D10-CASE-001",
+      "title": "RESICO 2026 orienta obligaciones sin reactivar RIF histórico",
+      "query": "Soy persona física en RESICO y quiero conocer mis obligaciones fiscales para 2026.",
+      "dimensions": [
+        "query_analysis",
+        "primary_activation",
+        "rbs_orientation",
+        "cbr_orientation",
+        "normative_ranking",
+        "structural_navigation",
+        "focused_rag",
+        "full_corpus_expansion",
+        "temporal_control"
+      ],
+      "resico_case": true,
+      "expected_primary_intent": "identify_obligations",
+      "expected_dimension_values": {
+        "taxpayer_type": [
+          "individual"
+        ],
+        "fiscal_regime": [
+          "RESICO"
+        ],
+        "fiscal_year": [
+          "2026"
+        ]
+      },
+      "expected_problem_id": "cumplimiento_fiscal",
+      "expected_institution_id": "obligacion_tributaria",
+      "required_primary_entry_ids": [
+        "PRODECON-04",
+        "PRODECON-07"
+      ],
+      "forbidden_primary_entry_ids": [
+        "PRODECON-12"
+      ],
+      "required_rbs_relation_ids": [
+        "B5-REL-007",
+        "B5-REL-008"
+      ],
+      "expected_cbr_primary_family_id": "CBR-OBLIGACION",
+      "minimum_cbr_match_count": 1,
+      "forbidden_cbr_situation_ids": [
+        "P-CBR-SIT-023",
+        "P-CBR-SIT-024",
+        "U-CBR-SIT-008"
+      ],
+      "expected_focus_source_ids": [
+        "cff",
+        "lfdc",
+        "lisr",
+        "cpeum",
+        "lfpca"
+      ],
+      "required_exact_normative_refs": [
+        "cff:articulo_1",
+        "lfdc:articulo_2",
+        "lisr:articulo_100"
+      ],
+      "expected_rag_plan_applied": true,
+      "expected_expansion_source_count": 7,
+      "expected_explicit_query_years": [
+        2026
+      ],
+      "required_temporal_blocked_source_ids": [
+        "liva"
+      ],
+      "expected_year_resolution": "query_explicit_year",
+      "expected_resolved_fiscal_year": 2026
+    },
+    {
+      "case_id": "D10-CASE-002",
+      "title": "RESICO ISR 2026 conserva foco ISR y suprime familias históricas incompatibles",
+      "query": "Soy persona física en RESICO y quiero saber mis obligaciones de ISR para 2026.",
+      "dimensions": [
+        "query_analysis",
+        "primary_activation",
+        "rbs_orientation",
+        "cbr_orientation",
+        "normative_ranking",
+        "structural_navigation",
+        "focused_rag",
+        "full_corpus_expansion",
+        "temporal_control"
+      ],
+      "resico_case": true,
+      "expected_primary_intent": "identify_obligations",
+      "expected_dimension_values": {
+        "tax": [
+          "ISR"
+        ],
+        "taxpayer_type": [
+          "individual"
+        ],
+        "fiscal_regime": [
+          "RESICO"
+        ],
+        "fiscal_year": [
+          "2026"
+        ]
+      },
+      "expected_problem_id": "cumplimiento_fiscal",
+      "expected_institution_id": "regimen_isr",
+      "required_primary_entry_ids": [
+        "PRODECON-05",
+        "PRODECON-07"
+      ],
+      "forbidden_primary_entry_ids": [
+        "PRODECON-10",
+        "PRODECON-11",
+        "PRODECON-12"
+      ],
+      "required_rbs_relation_ids": [
+        "B5-REL-006",
+        "B5-REL-007"
+      ],
+      "expected_cbr_primary_family_id": "CBR-OBLIGACION",
+      "minimum_cbr_match_count": 1,
+      "forbidden_cbr_situation_ids": [
+        "P-CBR-SIT-023",
+        "P-CBR-SIT-024",
+        "U-CBR-SIT-008"
+      ],
+      "expected_focus_source_ids": [
+        "cff",
+        "lisr",
+        "lfdc",
+        "reg_lisr_060516",
+        "cpeum"
+      ],
+      "required_exact_normative_refs": [
+        "cff:articulo_2",
+        "lisr:articulo_100",
+        "lfdc:articulo_2"
+      ],
+      "expected_rag_plan_applied": true,
+      "expected_expansion_source_count": 7,
+      "expected_explicit_query_years": [
+        2026
+      ],
+      "required_temporal_blocked_source_ids": [
+        "liva"
+      ],
+      "expected_year_resolution": "query_explicit_year",
+      "expected_resolved_fiscal_year": 2026
+    },
+    {
+      "case_id": "D10-CASE-003",
+      "title": "Servicios profesionales ISR 2025 preserva prioridad LISR y analogía validada",
+      "query": "Soy persona física y presto servicios profesionales; quiero calcular ISR del ejercicio 2025.",
+      "dimensions": [
+        "query_analysis",
+        "primary_activation",
+        "rbs_orientation",
+        "cbr_orientation",
+        "normative_ranking",
+        "structural_navigation",
+        "focused_rag",
+        "full_corpus_expansion",
+        "temporal_control"
+      ],
+      "resico_case": false,
+      "expected_primary_intent": "calculate_isr",
+      "expected_dimension_values": {
+        "tax": [
+          "ISR"
+        ],
+        "taxpayer_type": [
+          "individual"
+        ],
+        "activity": [
+          "servicios profesionales independientes"
+        ],
+        "fiscal_year": [
+          "2025"
+        ]
+      },
+      "expected_problem_id": "determinacion_contribucion",
+      "expected_institution_id": "regimen_isr",
+      "required_primary_entry_ids": [
+        "PRODECON-05",
+        "PRODECON-11",
+        "UNAM-V"
+      ],
+      "forbidden_primary_entry_ids": [
+        "PRODECON-10",
+        "PRODECON-12"
+      ],
+      "required_rbs_relation_ids": [
+        "B5-REL-017"
+      ],
+      "expected_cbr_primary_family_id": "CBR-CALCULO",
+      "minimum_cbr_match_count": 2,
+      "required_cbr_situation_ids": [
+        "U-CBR-SIT-009",
+        "P-CBR-SIT-009"
+      ],
+      "expected_focus_source_ids": [
+        "lisr",
+        "cff",
+        "reg_lisr_060516",
+        "rmf_2026",
+        "cpeum"
+      ],
+      "required_exact_normative_refs": [
+        "lisr:articulo_100",
+        "lisr:articulo_106",
+        "cff:articulo_2"
+      ],
+      "expected_rag_plan_applied": true,
+      "expected_expansion_source_count": 7,
+      "expected_explicit_query_years": [
+        2025
+      ],
+      "required_temporal_blocked_source_ids": [
+        "liva"
+      ],
+      "expected_year_resolution": "query_explicit_year",
+      "expected_resolved_fiscal_year": 2025
+    },
+    {
+      "case_id": "D10-CASE-004",
+      "title": "Defensa contra crédito fiscal prioriza fuentes procedimentales sin forzar CBR",
+      "query": "El SAT me notificó un crédito fiscal y quiero impugnarlo mediante una defensa en 2026.",
+      "dimensions": [
+        "query_analysis",
+        "primary_activation",
+        "rbs_orientation",
+        "cbr_orientation",
+        "normative_ranking",
+        "structural_navigation",
+        "focused_rag",
+        "full_corpus_expansion",
+        "temporal_control"
+      ],
+      "resico_case": false,
+      "expected_primary_intent": "defense_options",
+      "expected_dimension_values": {
+        "authority_act": [
+          "credito fiscal"
+        ],
+        "procedural_stage": [
+          "determinacion",
+          "defensa"
+        ],
+        "fiscal_year": [
+          "2026"
+        ]
+      },
+      "expected_problem_id": "defensa_contribuyente",
+      "expected_institution_id": "deuda_tributaria",
+      "required_primary_entry_ids": [
+        "PRODECON-06",
+        "PRODECON-08"
+      ],
+      "required_rbs_relation_ids": [
+        "B5-REL-012"
+      ],
+      "expected_cbr_primary_family_id": "CBR-DEFENSA",
+      "minimum_cbr_match_count": 0,
+      "expected_focus_source_ids": [
+        "cff",
+        "lfdc",
+        "lfpca",
+        "lotfja"
+      ],
+      "required_exact_normative_refs": [
+        "lfdc:articulo_2"
+      ],
+      "expected_rag_plan_applied": true,
+      "expected_expansion_source_count": 8,
+      "expected_explicit_query_years": [
+        2026
+      ],
+      "expected_year_resolution": "query_explicit_year",
+      "expected_resolved_fiscal_year": 2026
+    },
+    {
+      "case_id": "D10-CASE-005",
+      "title": "RIF 2020 conserva barrera histórica y analogías sólo dentro del contexto histórico",
+      "query": "¿Cómo calculaba ISR una persona física en RIF durante 2020?",
+      "dimensions": [
+        "query_analysis",
+        "primary_activation",
+        "rbs_orientation",
+        "cbr_orientation",
+        "normative_ranking",
+        "structural_navigation",
+        "focused_rag",
+        "full_corpus_expansion",
+        "temporal_control"
+      ],
+      "resico_case": false,
+      "expected_primary_intent": "understand_tax_system",
+      "expected_dimension_values": {
+        "tax": [
+          "ISR"
+        ],
+        "taxpayer_type": [
+          "individual"
+        ],
+        "fiscal_regime": [
+          "RIF"
+        ],
+        "fiscal_year": [
+          "2020"
+        ]
+      },
+      "expect_problem_absent": true,
+      "expected_institution_id": "regimen_isr",
+      "required_primary_entry_ids": [
+        "PRODECON-12"
+      ],
+      "forbidden_primary_entry_ids": [
+        "PRODECON-10",
+        "PRODECON-11"
+      ],
+      "required_rbs_relation_ids": [
+        "B5-REL-018"
+      ],
+      "expected_cbr_primary_family_id": "CBR-CALCULO",
+      "minimum_cbr_match_count": 3,
+      "required_cbr_situation_ids": [
+        "P-CBR-SIT-023",
+        "P-CBR-SIT-024",
+        "U-CBR-SIT-008"
+      ],
+      "expected_focus_source_ids": [
+        "lisr",
+        "rmf_2026",
+        "cff",
+        "reg_lisr_060516"
+      ],
+      "required_exact_normative_refs": [
+        "lisr:articulo_100",
+        "cff:articulo_2"
+      ],
+      "expected_rag_plan_applied": true,
+      "expected_expansion_source_count": 8,
+      "expected_explicit_query_years": [
+        2020
+      ],
+      "expected_historical_context": true,
+      "required_temporal_blocked_source_ids": [
+        "liva"
+      ],
+      "expected_year_resolution": "query_explicit_year",
+      "expected_resolved_fiscal_year": 2020
+    },
+    {
+      "case_id": "D10-CASE-006",
+      "title": "Obligaciones y derechos simultáneos conservan problema múltiple y prioridad LFDC",
+      "query": "Como persona física quiero conocer mis obligaciones fiscales y mis derechos fiscales en 2026.",
+      "dimensions": [
+        "query_analysis",
+        "primary_activation",
+        "rbs_orientation",
+        "cbr_orientation",
+        "normative_ranking",
+        "structural_navigation",
+        "focused_rag",
+        "full_corpus_expansion",
+        "temporal_control"
+      ],
+      "resico_case": false,
+      "expected_primary_intent": "identify_obligations",
+      "expected_dimension_values": {
+        "taxpayer_type": [
+          "individual"
+        ],
+        "fiscal_year": [
+          "2026"
+        ]
+      },
+      "expected_problem_id": "cumplimiento_fiscal",
+      "expected_institution_id": "derechos_contribuyente",
+      "required_primary_entry_ids": [
+        "PRODECON-07",
+        "UNAM-I"
+      ],
+      "required_rbs_relation_ids": [
+        "B5-REL-007",
+        "B5-REL-001"
+      ],
+      "expected_cbr_primary_family_id": "CBR-OBLIGACION",
+      "minimum_cbr_match_count": 1,
+      "expected_focus_source_ids": [
+        "lfdc",
+        "cff",
+        "cpeum",
+        "lisr",
+        "lfpca"
+      ],
+      "required_exact_normative_refs": [
+        "lfdc:articulo_2",
+        "cff:articulo_1"
+      ],
+      "expected_rag_plan_applied": true,
+      "expected_expansion_source_count": 7,
+      "expected_explicit_query_years": [
+        2026
+      ],
+      "required_temporal_blocked_source_ids": [
+        "liva"
+      ],
+      "expected_year_resolution": "query_explicit_year",
+      "expected_resolved_fiscal_year": 2026
+    },
+    {
+      "case_id": "D10-CASE-007",
+      "title": "IVA 2025 prioriza LIVA sin excluir CFF ni corpus complementarios",
+      "query": "Quiero saber la tasa de IVA aplicable a una operación en 2025.",
+      "dimensions": [
+        "query_analysis",
+        "primary_activation",
+        "rbs_orientation",
+        "cbr_orientation",
+        "normative_ranking",
+        "structural_navigation",
+        "focused_rag",
+        "full_corpus_expansion",
+        "temporal_control"
+      ],
+      "resico_case": false,
+      "expected_primary_intent": "calculate_iva",
+      "expected_dimension_values": {
+        "tax": [
+          "IVA"
+        ],
+        "fiscal_year": [
+          "2025"
+        ]
+      },
+      "expected_problem_id": "determinacion_contribucion",
+      "expected_institution_id": "tributo",
+      "required_primary_entry_ids": [
+        "PRODECON-05",
+        "UNAM-V"
+      ],
+      "forbidden_primary_entry_ids": [
+        "PRODECON-12"
+      ],
+      "required_rbs_relation_ids": [
+        "B5-REL-006"
+      ],
+      "expected_cbr_primary_family_id": "CBR-CALCULO",
+      "minimum_cbr_match_count": 1,
+      "expected_focus_source_ids": [
+        "cff",
+        "liva",
+        "cpeum",
+        "reg_liva_250914",
+        "rmf_2026"
+      ],
+      "required_exact_normative_refs": [
+        "liva:articulo_1_a",
+        "cff:articulo_2"
+      ],
+      "expected_rag_plan_applied": true,
+      "expected_expansion_source_count": 7,
+      "expected_explicit_query_years": [
+        2025
+      ],
+      "required_temporal_blocked_source_ids": [
+        "liva"
+      ],
+      "expected_year_resolution": "query_explicit_year",
+      "expected_resolved_fiscal_year": 2025
+    },
+    {
+      "case_id": "D10-CASE-008",
+      "title": "Visita domiciliaria 2026 activa orientación de autoridad y defensa sin analogía forzada",
+      "query": "El SAT inició una visita domiciliaria en 2026 y quiero analizar el acto de autoridad.",
+      "dimensions": [
+        "query_analysis",
+        "primary_activation",
+        "rbs_orientation",
+        "cbr_orientation",
+        "normative_ranking",
+        "structural_navigation",
+        "focused_rag",
+        "full_corpus_expansion",
+        "temporal_control"
+      ],
+      "resico_case": false,
+      "expected_primary_intent": "analyze_authority_act",
+      "expected_dimension_values": {
+        "authority_act": [
+          "visita domiciliaria"
+        ],
+        "procedural_stage": [
+          "comprobacion"
+        ],
+        "fiscal_year": [
+          "2026"
+        ]
+      },
+      "expected_problem_id": "actuacion_autoridad",
+      "expected_institution_id": "relacion_tributaria",
+      "required_primary_entry_ids": [
+        "PRODECON-06",
+        "PRODECON-08"
+      ],
+      "required_rbs_relation_ids": [
+        "B5-REL-011",
+        "B5-REL-012"
+      ],
+      "expected_cbr_primary_family_id": "CBR-AUTORIDAD",
+      "minimum_cbr_match_count": 0,
+      "expected_focus_source_ids": [
+        "cff",
+        "lfdc",
+        "lfpca",
+        "lotfja",
+        "lisr"
+      ],
+      "required_exact_normative_refs": [
+        "cff:articulo_1",
+        "lfdc:articulo_2"
+      ],
+      "expected_rag_plan_applied": true,
+      "expected_expansion_source_count": 7,
+      "expected_explicit_query_years": [
+        2026
+      ],
+      "required_temporal_blocked_source_ids": [
+        "liva"
+      ],
+      "expected_year_resolution": "query_explicit_year",
+      "expected_resolved_fiscal_year": 2026
+    },
+    {
+      "case_id": "D10-CASE-009",
+      "title": "Deuda e incumplimiento 2026 priorizan CFF y preservan caso CBR compatible",
+      "query": "Quiero revisar una deuda por crédito fiscal y su incumplimiento en 2026.",
+      "dimensions": [
+        "query_analysis",
+        "primary_activation",
+        "rbs_orientation",
+        "cbr_orientation",
+        "normative_ranking",
+        "structural_navigation",
+        "focused_rag",
+        "full_corpus_expansion",
+        "temporal_control"
+      ],
+      "resico_case": false,
+      "expected_primary_intent": "review_debt_noncompliance",
+      "expected_dimension_values": {
+        "authority_act": [
+          "credito fiscal"
+        ],
+        "procedural_stage": [
+          "determinacion"
+        ],
+        "fiscal_year": [
+          "2026"
+        ]
+      },
+      "expected_problem_id": "incumplimiento_fiscal",
+      "expected_institution_id": "deuda_tributaria",
+      "required_primary_entry_ids": [
+        "PRODECON-06"
+      ],
+      "required_rbs_relation_ids": [
+        "B5-REL-010",
+        "B5-REL-011"
+      ],
+      "expected_cbr_primary_family_id": "CBR-INCUMPLIMIENTO",
+      "minimum_cbr_match_count": 1,
+      "required_cbr_situation_ids": [
+        "P-CBR-SIT-012"
+      ],
+      "expected_focus_source_ids": [
+        "cff",
+        "lfdc",
+        "lfpca",
+        "lotfja",
+        "cpeum"
+      ],
+      "required_exact_normative_refs": [
+        "cff:articulo_151",
+        "lfdc:articulo_2"
+      ],
+      "expected_rag_plan_applied": true,
+      "expected_expansion_source_count": 7,
+      "expected_explicit_query_years": [
+        2026
+      ],
+      "expected_year_resolution": "query_explicit_year",
+      "expected_resolved_fiscal_year": 2026
+    },
+    {
+      "case_id": "D10-CASE-010",
+      "title": "Consulta indeterminada falla cerrada pero conserva expansión a los doce corpus",
+      "query": "Necesito orientación sobre un asunto que no he descrito todavía.",
+      "dimensions": [
+        "query_analysis",
+        "primary_activation",
+        "rbs_orientation",
+        "cbr_orientation",
+        "normative_ranking",
+        "structural_navigation",
+        "focused_rag",
+        "full_corpus_expansion",
+        "temporal_control"
+      ],
+      "resico_case": false,
+      "expected_primary_intent": "unknown",
+      "expected_dimension_values": {},
+      "expect_problem_absent": true,
+      "expect_institution_absent": true,
+      "expect_cbr_family_absent": true,
+      "minimum_cbr_match_count": 0,
+      "expected_focus_source_ids": [],
+      "required_exact_normative_refs": [],
+      "expected_rag_plan_applied": false,
+      "expected_expansion_source_count": 12,
+      "expected_explicit_query_years": [],
+      "expected_year_resolution": "query_date_only",
+      "expected_resolved_fiscal_year": null
+    }
+  ],
+  "required_dimensions": [
+    "query_analysis",
+    "primary_activation",
+    "rbs_orientation",
+    "cbr_orientation",
+    "normative_ranking",
+    "structural_navigation",
+    "focused_rag",
+    "full_corpus_expansion",
+    "temporal_control"
+  ],
+  "expected_case_count": 10,
+  "expected_resico_case_count": 2,
+  "expected_normative_corpus_count": 12,
+  "pass_threshold": 1.0,
+  "validates_current_dataset_only": true,
+  "claims_full_mexican_tax_law_coverage": false,
+  "uses_runtime_query_analyzer": true,
+  "preserves_full_normative_corpus": true,
+  "allows_external_legal_evidence": false,
+  "can_control_legal_decision": false
+}

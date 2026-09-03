@@ -1,0 +1,21 @@
+{
+  "schema_version": "1.0",
+  "baseline_commit": "d0158cdcf79506ba63763a585b4887ae8e5ebf97",
+  "purpose": "Política determinista D.6 para transformar el foco normativo D.5 en rutas de navegación título/capítulo/sección/artículo, reutilizando la jerarquía legal ya presente en los chunks, priorizando referencias exactas cuando existen y sin recuperar todavía texto normativo, excluir fuentes, afirmar vigencia o controlar una determinación jurídica.",
+  "hierarchy_levels": [
+    "title",
+    "chapter",
+    "section",
+    "article"
+  ],
+  "focus_only": true,
+  "exact_article_seed_enabled": true,
+  "hierarchy_descent_fallback": true,
+  "full_normative_corpus_preserved": true,
+  "source_exclusion_enabled": false,
+  "uses_existing_chunk_hierarchy": true,
+  "requires_normative_validation": true,
+  "requires_temporal_validation": true,
+  "rag_retrieval_enabled": false,
+  "can_control_legal_decision": false
+}

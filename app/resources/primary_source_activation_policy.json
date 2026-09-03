@@ -1,0 +1,124 @@
+{
+  "schema_version": "1.0",
+  "baseline_commit": "d0158cdcf79506ba63763a585b4887ae8e5ebf97",
+  "purpose": "Política determinista D.2 para activar entradas PRODECON/UNAM a partir de la salida multidimensional D.1, preservando el corpus normativo completo y sin adelantar RBS, CBR, ranking normativo, RAG ni una determinación jurídica.",
+  "minimum_activation_score": 0.3,
+  "weights": {
+    "primary_problem": 0.55,
+    "secondary_problem": 0.3,
+    "primary_institution": 0.4,
+    "secondary_institution": 0.2,
+    "dimension": 0.45
+  },
+  "direct_dimension_entries": {
+    "activity:servicios profesionales independientes": [
+      "PRODECON-11",
+      "UNAM-V"
+    ],
+    "activity:trabajo subordinado": [
+      "PRODECON-10",
+      "UNAM-V"
+    ],
+    "activity:arrendamiento de inmuebles": [
+      "PRODECON-05",
+      "UNAM-V"
+    ],
+    "activity:actividad empresarial": [
+      "PRODECON-05",
+      "UNAM-V"
+    ],
+    "tax:ISR": [
+      "PRODECON-05",
+      "UNAM-V"
+    ],
+    "tax:IVA": [
+      "PRODECON-05",
+      "UNAM-V"
+    ],
+    "tax:IEPS": [
+      "PRODECON-05",
+      "UNAM-III"
+    ],
+    "tax:ISAN": [
+      "PRODECON-05",
+      "UNAM-III"
+    ],
+    "fiscal_regime:RESICO": [
+      "PRODECON-05",
+      "UNAM-V"
+    ],
+    "fiscal_regime:RIF": [
+      "PRODECON-12",
+      "UNAM-V"
+    ],
+    "authority_act:visita domiciliaria": [
+      "PRODECON-06",
+      "UNAM-VII"
+    ],
+    "authority_act:revision de gabinete": [
+      "PRODECON-06",
+      "UNAM-VII"
+    ],
+    "authority_act:revision electronica": [
+      "PRODECON-06",
+      "UNAM-VII"
+    ],
+    "authority_act:requerimiento": [
+      "PRODECON-06",
+      "UNAM-VII"
+    ],
+    "authority_act:credito fiscal": [
+      "PRODECON-06",
+      "UNAM-VI"
+    ],
+    "authority_act:procedimiento administrativo de ejecucion": [
+      "PRODECON-06",
+      "UNAM-VI",
+      "UNAM-VII"
+    ],
+    "procedural_stage:cumplimiento": [
+      "PRODECON-07",
+      "UNAM-IV",
+      "UNAM-VI"
+    ],
+    "procedural_stage:comprobacion": [
+      "PRODECON-06",
+      "UNAM-VII"
+    ],
+    "procedural_stage:determinacion": [
+      "PRODECON-06",
+      "UNAM-VII"
+    ],
+    "procedural_stage:cobro coactivo": [
+      "PRODECON-06",
+      "UNAM-VI",
+      "UNAM-VII"
+    ],
+    "procedural_stage:defensa": [
+      "PRODECON-08",
+      "UNAM-VII"
+    ],
+    "procedural_stage:interpretacion": [
+      "PRODECON-09",
+      "UNAM-II"
+    ]
+  },
+  "requires_normative_validation": true,
+  "full_normative_corpus_preserved": true,
+  "normative_ranking_enabled": false,
+  "rbs_activation_enabled": false,
+  "cbr_activation_enabled": false,
+  "rag_retrieval_enabled": false,
+  "can_control_legal_decision": false,
+  "entry_activation_requirements": {
+    "PRODECON-10": [
+      "activity:trabajo subordinado"
+    ],
+    "PRODECON-11": [
+      "activity:servicios profesionales independientes"
+    ],
+    "PRODECON-12": [
+      "fiscal_regime:RIF"
+    ]
+  }
+}

@@ -9,6 +9,15 @@ from app.domain.query import (
     QueryAnalysisDraft,
     QueryIntent,
 )
+from app.services.cbr_orientation import integrate_cbr_orientation
+from app.services.focused_normative_rag import build_focused_rag_plan
+from app.services.full_corpus_expansion import build_full_corpus_expansion_plan
+from app.services.multidimensional_query_analysis import analyze_query_multidimensional
+from app.services.normative_ranking import rank_normative_sources
+from app.services.primary_source_activation import activate_primary_sources
+from app.services.rbs_orientation import integrate_rbs_orientation
+from app.services.structural_navigation import build_structural_navigation
+from app.services.temporal_control import build_temporal_control_plan
 from llm.errors import LLMGenerationError, LLMResponseValidationError
 from llm.query_prompting import build_query_analysis_messages, normalize_query_text
 from llm.structured_provider import StructuredMessageProvider
@@ -86,6 +95,40 @@ class QueryAnalyzer:
             ) from exc
 
         draft = self._enforce_deterministic_requirements(draft)
+        multidimensional = analyze_query_multidimensional(
+            normalized_query=normalized,
+            primary_intent=draft.primary_intent,
+            secondary_intents=draft.secondary_intents,
+            facts=draft.facts,
+        )
+        primary_source_activation = activate_primary_sources(multidimensional)
+        rbs_orientation = integrate_rbs_orientation(
+            multidimensional, primary_source_activation
+        )
+        cbr_orientation = integrate_cbr_orientation(
+            multidimensional,
+            primary_source_activation,
+            rbs_orientation,
+        )
+        normative_ranking = rank_normative_sources(
+            multidimensional,
+            primary_source_activation,
+            rbs_orientation,
+            cbr_orientation,
+        )
+        structural_navigation = build_structural_navigation(normative_ranking)
+        focused_rag_plan = build_focused_rag_plan(structural_navigation)
+        full_corpus_expansion_plan = build_full_corpus_expansion_plan(
+            multidimensional,
+            normative_ranking,
+            focused_rag_plan,
+        )
+        temporal_control_plan = build_temporal_control_plan(
+            multidimensional,
+            normative_ranking,
+            focused_rag_plan,
+            full_corpus_expansion_plan,
+        )
         return QueryAnalysis(
             original_query=query,
             normalized_query=normalized,
@@ -98,4 +141,13 @@ class QueryAnalyzer:
             jurisprudence_requested=draft.jurisprudence_requested,
             requires_clarification=draft.requires_clarification,
             requires_human_review=draft.requires_human_review,
+            multidimensional=multidimensional,
+            primary_source_activation=primary_source_activation,
+            rbs_orientation=rbs_orientation,
+            cbr_orientation=cbr_orientation,
+            normative_ranking=normative_ranking,
+            structural_navigation=structural_navigation,
+            focused_rag_plan=focused_rag_plan,
+            full_corpus_expansion_plan=full_corpus_expansion_plan,
+            temporal_control_plan=temporal_control_plan,
         )
