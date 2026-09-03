@@ -1,0 +1,1482 @@
+{
+  "schema_version": "1.0",
+  "baseline_commit": "b65dc014e57042ef4826354fa5ccb9b0610c0c4f",
+  "purpose": "Formalizar C.10 como una promoción fail-closed primary -> validated -> operational. Las 37 situaciones permanecen conocimiento primario; sólo las compatibles con C.7 alcanzan validado y ninguna se materializa como CBRCase operativo mientras sigan pendientes la vigencia por caso, el resultado/resolución y la revisión de anonimización.",
+  "existing_cbr_case_model": "app.domain.cbr.CBRCase",
+  "existing_cbr_loader": "app.services.cbr_loader.load_cbr_cases_jsonl",
+  "existing_cbr_anonymizer": "app.services.cbr_anonymizer.anonymize_text",
+  "source_situation_count": 37,
+  "primary_membership_count": 37,
+  "validated_membership_count": 20,
+  "operational_membership_count": 0,
+  "highest_level_counts": {
+    "primary": 17,
+    "validated": 20,
+    "operational": 0
+  },
+  "operational_shape_complete_count": 7,
+  "validated_shape_complete_count": 6,
+  "operational_blocker_counts": {
+    "corpus_not_validated": 17,
+    "required_case_fields_missing": 30,
+    "temporal_validation_pending": 37,
+    "resolution_outcome_not_verified": 37,
+    "anonymization_review_pending": 37
+  },
+  "assessments": [
+    {
+      "situation_id": "P-CBR-SIT-001",
+      "source": "prodecon",
+      "source_entry_id": "PRODECON-01",
+      "historical_regime_context": false,
+      "highest_level": "validated",
+      "primary_level_eligible": true,
+      "validated_level_eligible": true,
+      "operational_level_eligible": false,
+      "corpus_validation_outcome": "consistent",
+      "corpus_validated": true,
+      "validated_normative_refs": [
+        "cpeum:articulo_31"
+      ],
+      "required_case_fields": [
+        "taxpayer_type",
+        "activity",
+        "tax",
+        "problem_type",
+        "fiscal_year"
+      ],
+      "unresolved_required_case_fields": [
+        "taxpayer_type",
+        "activity",
+        "tax",
+        "fiscal_year"
+      ],
+      "temporal_validation_pending": true,
+      "resolution_outcome_verified": false,
+      "anonymization_review_completed": false,
+      "legal_similarity_enabled": true,
+      "operational_blockers": [
+        "required_case_fields_missing",
+        "temporal_validation_pending",
+        "resolution_outcome_not_verified",
+        "anonymization_review_pending"
+      ],
+      "operational_case_id": null,
+      "operational_case_created": false,
+      "can_control_legal_decision": false
+    },
+    {
+      "situation_id": "P-CBR-SIT-002",
+      "source": "prodecon",
+      "source_entry_id": "PRODECON-01",
+      "historical_regime_context": false,
+      "highest_level": "primary",
+      "primary_level_eligible": true,
+      "validated_level_eligible": false,
+      "operational_level_eligible": false,
+      "corpus_validation_outcome": "no_explicit_citation",
+      "corpus_validated": false,
+      "validated_normative_refs": [],
+      "required_case_fields": [
+        "taxpayer_type",
+        "activity",
+        "tax",
+        "problem_type",
+        "fiscal_year"
+      ],
+      "unresolved_required_case_fields": [
+        "taxpayer_type",
+        "activity",
+        "tax",
+        "fiscal_year"
+      ],
+      "temporal_validation_pending": true,
+      "resolution_outcome_verified": false,
+      "anonymization_review_completed": false,
+      "legal_similarity_enabled": true,
+      "operational_blockers": [
+        "corpus_not_validated",
+        "required_case_fields_missing",
+        "temporal_validation_pending",
+        "resolution_outcome_not_verified",
+        "anonymization_review_pending"
+      ],
+      "operational_case_id": null,
+      "operational_case_created": false,
+      "can_control_legal_decision": false
+    },
+    {
+      "situation_id": "P-CBR-SIT-003",
+      "source": "prodecon",
+      "source_entry_id": "PRODECON-02",
+      "historical_regime_context": false,
+      "highest_level": "primary",
+      "primary_level_eligible": true,
+      "validated_level_eligible": false,
+      "operational_level_eligible": false,
+      "corpus_validation_outcome": "no_explicit_citation",
+      "corpus_validated": false,
+      "validated_normative_refs": [],
+      "required_case_fields": [
+        "taxpayer_type",
+        "activity",
+        "tax",
+        "problem_type",
+        "fiscal_year"
+      ],
+      "unresolved_required_case_fields": [
+        "taxpayer_type",
+        "activity",
+        "tax",
+        "problem_type",
+        "fiscal_year"
+      ],
+      "temporal_validation_pending": true,
+      "resolution_outcome_verified": false,
+      "anonymization_review_completed": false,
+      "legal_similarity_enabled": true,
+      "operational_blockers": [
+        "corpus_not_validated",
+        "required_case_fields_missing",
+        "temporal_validation_pending",
+        "resolution_outcome_not_verified",
+        "anonymization_review_pending"
+      ],
+      "operational_case_id": null,
+      "operational_case_created": false,
+      "can_control_legal_decision": false
+    },
+    {
+      "situation_id": "P-CBR-SIT-004",
+      "source": "prodecon",
+      "source_entry_id": "PRODECON-02",
+      "historical_regime_context": false,
+      "highest_level": "validated",
+      "primary_level_eligible": true,
+      "validated_level_eligible": true,
+      "operational_level_eligible": false,
+      "corpus_validation_outcome": "consistent",
+      "corpus_validated": true,
+      "validated_normative_refs": [
+        "cpeum:articulo_31"
+      ],
+      "required_case_fields": [
+        "taxpayer_type",
+        "activity",
+        "tax",
+        "problem_type",
+        "fiscal_year"
+      ],
+      "unresolved_required_case_fields": [
+        "taxpayer_type",
+        "activity",
+        "tax",
+        "problem_type",
+        "fiscal_year"
+      ],
+      "temporal_validation_pending": true,
+      "resolution_outcome_verified": false,
+      "anonymization_review_completed": false,
+      "legal_similarity_enabled": true,
+      "operational_blockers": [
+        "required_case_fields_missing",
+        "temporal_validation_pending",
+        "resolution_outcome_not_verified",
+        "anonymization_review_pending"
+      ],
+      "operational_case_id": null,
+      "operational_case_created": false,
+      "can_control_legal_decision": false
+    },
+    {
+      "situation_id": "P-CBR-SIT-005",
+      "source": "prodecon",
+      "source_entry_id": "PRODECON-03",
+      "historical_regime_context": false,
+      "highest_level": "validated",
+      "primary_level_eligible": true,
+      "validated_level_eligible": true,
+      "operational_level_eligible": false,
+      "corpus_validation_outcome": "consistent",
+      "corpus_validated": true,
+      "validated_normative_refs": [
+        "cff:articulo_2"
+      ],
+      "required_case_fields": [
+        "taxpayer_type",
+        "activity",
+        "tax",
+        "problem_type",
+        "fiscal_year"
+      ],
+      "unresolved_required_case_fields": [
+        "taxpayer_type",
+        "activity",
+        "tax",
+        "fiscal_year"
+      ],
+      "temporal_validation_pending": true,
+      "resolution_outcome_verified": false,
+      "anonymization_review_completed": false,
+      "legal_similarity_enabled": true,
+      "operational_blockers": [
+        "required_case_fields_missing",
+        "temporal_validation_pending",
+        "resolution_outcome_not_verified",
+        "anonymization_review_pending"
+      ],
+      "operational_case_id": null,
+      "operational_case_created": false,
+      "can_control_legal_decision": false
+    },
+    {
+      "situation_id": "P-CBR-SIT-006",
+      "source": "prodecon",
+      "source_entry_id": "PRODECON-03",
+      "historical_regime_context": false,
+      "highest_level": "validated",
+      "primary_level_eligible": true,
+      "validated_level_eligible": true,
+      "operational_level_eligible": false,
+      "corpus_validation_outcome": "consistent",
+      "corpus_validated": true,
+      "validated_normative_refs": [
+        "cpeum:articulo_31",
+        "cpeum:articulo_124",
+        "cpeum:articulo_117",
+        "cpeum:articulo_115"
+      ],
+      "required_case_fields": [
+        "taxpayer_type",
+        "activity",
+        "tax",
+        "problem_type",
+        "fiscal_year"
+      ],
+      "unresolved_required_case_fields": [
+        "taxpayer_type",
+        "activity",
+        "tax",
+        "fiscal_year"
+      ],
+      "temporal_validation_pending": true,
+      "resolution_outcome_verified": false,
+      "anonymization_review_completed": false,
+      "legal_similarity_enabled": true,
+      "operational_blockers": [
+        "required_case_fields_missing",
+        "temporal_validation_pending",
+        "resolution_outcome_not_verified",
+        "anonymization_review_pending"
+      ],
+      "operational_case_id": null,
+      "operational_case_created": false,
+      "can_control_legal_decision": false
+    },
+    {
+      "situation_id": "P-CBR-SIT-007",
+      "source": "prodecon",
+      "source_entry_id": "PRODECON-04",
+      "historical_regime_context": false,
+      "highest_level": "primary",
+      "primary_level_eligible": true,
+      "validated_level_eligible": false,
+      "operational_level_eligible": false,
+      "corpus_validation_outcome": "no_explicit_citation",
+      "corpus_validated": false,
+      "validated_normative_refs": [],
+      "required_case_fields": [
+        "taxpayer_type",
+        "activity",
+        "tax",
+        "problem_type",
+        "fiscal_year"
+      ],
+      "unresolved_required_case_fields": [
+        "taxpayer_type",
+        "activity",
+        "tax",
+        "fiscal_year"
+      ],
+      "temporal_validation_pending": true,
+      "resolution_outcome_verified": false,
+      "anonymization_review_completed": false,
+      "legal_similarity_enabled": true,
+      "operational_blockers": [
+        "corpus_not_validated",
+        "required_case_fields_missing",
+        "temporal_validation_pending",
+        "resolution_outcome_not_verified",
+        "anonymization_review_pending"
+      ],
+      "operational_case_id": null,
+      "operational_case_created": false,
+      "can_control_legal_decision": false
+    },
+    {
+      "situation_id": "P-CBR-SIT-008",
+      "source": "prodecon",
+      "source_entry_id": "PRODECON-04",
+      "historical_regime_context": false,
+      "highest_level": "primary",
+      "primary_level_eligible": true,
+      "validated_level_eligible": false,
+      "operational_level_eligible": false,
+      "corpus_validation_outcome": "no_explicit_citation",
+      "corpus_validated": false,
+      "validated_normative_refs": [],
+      "required_case_fields": [
+        "taxpayer_type",
+        "activity",
+        "tax",
+        "problem_type",
+        "fiscal_year"
+      ],
+      "unresolved_required_case_fields": [
+        "fiscal_year"
+      ],
+      "temporal_validation_pending": true,
+      "resolution_outcome_verified": false,
+      "anonymization_review_completed": false,
+      "legal_similarity_enabled": true,
+      "operational_blockers": [
+        "corpus_not_validated",
+        "required_case_fields_missing",
+        "temporal_validation_pending",
+        "resolution_outcome_not_verified",
+        "anonymization_review_pending"
+      ],
+      "operational_case_id": null,
+      "operational_case_created": false,
+      "can_control_legal_decision": false
+    },
+    {
+      "situation_id": "P-CBR-SIT-009",
+      "source": "prodecon",
+      "source_entry_id": "PRODECON-05",
+      "historical_regime_context": false,
+      "highest_level": "primary",
+      "primary_level_eligible": true,
+      "validated_level_eligible": false,
+      "operational_level_eligible": false,
+      "corpus_validation_outcome": "no_explicit_citation",
+      "corpus_validated": false,
+      "validated_normative_refs": [],
+      "required_case_fields": [
+        "taxpayer_type",
+        "activity",
+        "tax",
+        "problem_type",
+        "fiscal_year"
+      ],
+      "unresolved_required_case_fields": [
+        "activity",
+        "fiscal_year"
+      ],
+      "temporal_validation_pending": true,
+      "resolution_outcome_verified": false,
+      "anonymization_review_completed": false,
+      "legal_similarity_enabled": true,
+      "operational_blockers": [
+        "corpus_not_validated",
+        "required_case_fields_missing",
+        "temporal_validation_pending",
+        "resolution_outcome_not_verified",
+        "anonymization_review_pending"
+      ],
+      "operational_case_id": null,
+      "operational_case_created": false,
+      "can_control_legal_decision": false
+    },
+    {
+      "situation_id": "P-CBR-SIT-010",
+      "source": "prodecon",
+      "source_entry_id": "PRODECON-05",
+      "historical_regime_context": false,
+      "highest_level": "primary",
+      "primary_level_eligible": true,
+      "validated_level_eligible": false,
+      "operational_level_eligible": false,
+      "corpus_validation_outcome": "blocked_derogated",
+      "corpus_validated": false,
+      "validated_normative_refs": [],
+      "required_case_fields": [
+        "taxpayer_type",
+        "activity",
+        "tax",
+        "problem_type",
+        "fiscal_year"
+      ],
+      "unresolved_required_case_fields": [
+        "taxpayer_type",
+        "activity",
+        "fiscal_year"
+      ],
+      "temporal_validation_pending": true,
+      "resolution_outcome_verified": false,
+      "anonymization_review_completed": false,
+      "legal_similarity_enabled": true,
+      "operational_blockers": [
+        "corpus_not_validated",
+        "required_case_fields_missing",
+        "temporal_validation_pending",
+        "resolution_outcome_not_verified",
+        "anonymization_review_pending"
+      ],
+      "operational_case_id": null,
+      "operational_case_created": false,
+      "can_control_legal_decision": false
+    },
+    {
+      "situation_id": "P-CBR-SIT-011",
+      "source": "prodecon",
+      "source_entry_id": "PRODECON-06",
+      "historical_regime_context": false,
+      "highest_level": "validated",
+      "primary_level_eligible": true,
+      "validated_level_eligible": true,
+      "operational_level_eligible": false,
+      "corpus_validation_outcome": "consistent",
+      "corpus_validated": true,
+      "validated_normative_refs": [
+        "cff:articulo_6"
+      ],
+      "required_case_fields": [
+        "taxpayer_type",
+        "activity",
+        "tax",
+        "problem_type",
+        "fiscal_year"
+      ],
+      "unresolved_required_case_fields": [
+        "taxpayer_type",
+        "activity",
+        "tax",
+        "fiscal_year"
+      ],
+      "temporal_validation_pending": true,
+      "resolution_outcome_verified": false,
+      "anonymization_review_completed": false,
+      "legal_similarity_enabled": true,
+      "operational_blockers": [
+        "required_case_fields_missing",
+        "temporal_validation_pending",
+        "resolution_outcome_not_verified",
+        "anonymization_review_pending"
+      ],
+      "operational_case_id": null,
+      "operational_case_created": false,
+      "can_control_legal_decision": false
+    },
+    {
+      "situation_id": "P-CBR-SIT-012",
+      "source": "prodecon",
+      "source_entry_id": "PRODECON-06",
+      "historical_regime_context": false,
+      "highest_level": "validated",
+      "primary_level_eligible": true,
+      "validated_level_eligible": true,
+      "operational_level_eligible": false,
+      "corpus_validation_outcome": "consistent",
+      "corpus_validated": true,
+      "validated_normative_refs": [
+        "cff:articulo_151"
+      ],
+      "required_case_fields": [
+        "taxpayer_type",
+        "activity",
+        "tax",
+        "problem_type",
+        "fiscal_year"
+      ],
+      "unresolved_required_case_fields": [
+        "taxpayer_type",
+        "activity",
+        "tax",
+        "fiscal_year"
+      ],
+      "temporal_validation_pending": true,
+      "resolution_outcome_verified": false,
+      "anonymization_review_completed": false,
+      "legal_similarity_enabled": true,
+      "operational_blockers": [
+        "required_case_fields_missing",
+        "temporal_validation_pending",
+        "resolution_outcome_not_verified",
+        "anonymization_review_pending"
+      ],
+      "operational_case_id": null,
+      "operational_case_created": false,
+      "can_control_legal_decision": false
+    },
+    {
+      "situation_id": "P-CBR-SIT-013",
+      "source": "prodecon",
+      "source_entry_id": "PRODECON-07",
+      "historical_regime_context": false,
+      "highest_level": "validated",
+      "primary_level_eligible": true,
+      "validated_level_eligible": true,
+      "operational_level_eligible": false,
+      "corpus_validation_outcome": "consistent",
+      "corpus_validated": true,
+      "validated_normative_refs": [
+        "lfdc:articulo_2",
+        "lfdc:articulo_3",
+        "lfdc:articulo_5",
+        "lfdc:articulo_7",
+        "lfdc:articulo_12",
+        "lfdc:articulo_13"
+      ],
+      "required_case_fields": [
+        "taxpayer_type",
+        "activity",
+        "tax",
+        "problem_type",
+        "fiscal_year"
+      ],
+      "unresolved_required_case_fields": [
+        "taxpayer_type",
+        "activity",
+        "tax",
+        "fiscal_year"
+      ],
+      "temporal_validation_pending": true,
+      "resolution_outcome_verified": false,
+      "anonymization_review_completed": false,
+      "legal_similarity_enabled": true,
+      "operational_blockers": [
+        "required_case_fields_missing",
+        "temporal_validation_pending",
+        "resolution_outcome_not_verified",
+        "anonymization_review_pending"
+      ],
+      "operational_case_id": null,
+      "operational_case_created": false,
+      "can_control_legal_decision": false
+    },
+    {
+      "situation_id": "P-CBR-SIT-014",
+      "source": "prodecon",
+      "source_entry_id": "PRODECON-07",
+      "historical_regime_context": false,
+      "highest_level": "validated",
+      "primary_level_eligible": true,
+      "validated_level_eligible": true,
+      "operational_level_eligible": false,
+      "corpus_validation_outcome": "consistent",
+      "corpus_validated": true,
+      "validated_normative_refs": [
+        "cff:articulo_27",
+        "cff:articulo_30",
+        "cff:articulo_31",
+        "cff:articulo_32",
+        "cff:articulo_45"
+      ],
+      "required_case_fields": [
+        "taxpayer_type",
+        "activity",
+        "tax",
+        "problem_type",
+        "fiscal_year"
+      ],
+      "unresolved_required_case_fields": [
+        "taxpayer_type",
+        "activity",
+        "tax",
+        "fiscal_year"
+      ],
+      "temporal_validation_pending": true,
+      "resolution_outcome_verified": false,
+      "anonymization_review_completed": false,
+      "legal_similarity_enabled": true,
+      "operational_blockers": [
+        "required_case_fields_missing",
+        "temporal_validation_pending",
+        "resolution_outcome_not_verified",
+        "anonymization_review_pending"
+      ],
+      "operational_case_id": null,
+      "operational_case_created": false,
+      "can_control_legal_decision": false
+    },
+    {
+      "situation_id": "P-CBR-SIT-015",
+      "source": "prodecon",
+      "source_entry_id": "PRODECON-08",
+      "historical_regime_context": false,
+      "highest_level": "validated",
+      "primary_level_eligible": true,
+      "validated_level_eligible": true,
+      "operational_level_eligible": false,
+      "corpus_validation_outcome": "consistent",
+      "corpus_validated": true,
+      "validated_normative_refs": [
+        "cff:articulo_33_a",
+        "cff:articulo_36",
+        "cff:articulo_74"
+      ],
+      "required_case_fields": [
+        "taxpayer_type",
+        "activity",
+        "tax",
+        "problem_type",
+        "fiscal_year"
+      ],
+      "unresolved_required_case_fields": [
+        "taxpayer_type",
+        "activity",
+        "tax",
+        "fiscal_year"
+      ],
+      "temporal_validation_pending": true,
+      "resolution_outcome_verified": false,
+      "anonymization_review_completed": false,
+      "legal_similarity_enabled": true,
+      "operational_blockers": [
+        "required_case_fields_missing",
+        "temporal_validation_pending",
+        "resolution_outcome_not_verified",
+        "anonymization_review_pending"
+      ],
+      "operational_case_id": null,
+      "operational_case_created": false,
+      "can_control_legal_decision": false
+    },
+    {
+      "situation_id": "P-CBR-SIT-016",
+      "source": "prodecon",
+      "source_entry_id": "PRODECON-08",
+      "historical_regime_context": false,
+      "highest_level": "primary",
+      "primary_level_eligible": true,
+      "validated_level_eligible": false,
+      "operational_level_eligible": false,
+      "corpus_validation_outcome": "no_explicit_citation",
+      "corpus_validated": false,
+      "validated_normative_refs": [],
+      "required_case_fields": [
+        "taxpayer_type",
+        "activity",
+        "tax",
+        "problem_type",
+        "fiscal_year"
+      ],
+      "unresolved_required_case_fields": [
+        "taxpayer_type",
+        "activity",
+        "tax",
+        "fiscal_year"
+      ],
+      "temporal_validation_pending": true,
+      "resolution_outcome_verified": false,
+      "anonymization_review_completed": false,
+      "legal_similarity_enabled": true,
+      "operational_blockers": [
+        "corpus_not_validated",
+        "required_case_fields_missing",
+        "temporal_validation_pending",
+        "resolution_outcome_not_verified",
+        "anonymization_review_pending"
+      ],
+      "operational_case_id": null,
+      "operational_case_created": false,
+      "can_control_legal_decision": false
+    },
+    {
+      "situation_id": "P-CBR-SIT-017",
+      "source": "prodecon",
+      "source_entry_id": "PRODECON-09",
+      "historical_regime_context": false,
+      "highest_level": "primary",
+      "primary_level_eligible": true,
+      "validated_level_eligible": false,
+      "operational_level_eligible": false,
+      "corpus_validation_outcome": "no_explicit_citation",
+      "corpus_validated": false,
+      "validated_normative_refs": [],
+      "required_case_fields": [
+        "taxpayer_type",
+        "activity",
+        "tax",
+        "problem_type",
+        "fiscal_year"
+      ],
+      "unresolved_required_case_fields": [
+        "taxpayer_type",
+        "activity",
+        "tax",
+        "fiscal_year"
+      ],
+      "temporal_validation_pending": true,
+      "resolution_outcome_verified": false,
+      "anonymization_review_completed": false,
+      "legal_similarity_enabled": true,
+      "operational_blockers": [
+        "corpus_not_validated",
+        "required_case_fields_missing",
+        "temporal_validation_pending",
+        "resolution_outcome_not_verified",
+        "anonymization_review_pending"
+      ],
+      "operational_case_id": null,
+      "operational_case_created": false,
+      "can_control_legal_decision": false
+    },
+    {
+      "situation_id": "P-CBR-SIT-018",
+      "source": "prodecon",
+      "source_entry_id": "PRODECON-09",
+      "historical_regime_context": false,
+      "highest_level": "validated",
+      "primary_level_eligible": true,
+      "validated_level_eligible": true,
+      "operational_level_eligible": false,
+      "corpus_validation_outcome": "consistent",
+      "corpus_validated": true,
+      "validated_normative_refs": [
+        "cff:articulo_5"
+      ],
+      "required_case_fields": [
+        "taxpayer_type",
+        "activity",
+        "tax",
+        "problem_type",
+        "fiscal_year"
+      ],
+      "unresolved_required_case_fields": [
+        "taxpayer_type",
+        "activity",
+        "tax",
+        "fiscal_year"
+      ],
+      "temporal_validation_pending": true,
+      "resolution_outcome_verified": false,
+      "anonymization_review_completed": false,
+      "legal_similarity_enabled": true,
+      "operational_blockers": [
+        "required_case_fields_missing",
+        "temporal_validation_pending",
+        "resolution_outcome_not_verified",
+        "anonymization_review_pending"
+      ],
+      "operational_case_id": null,
+      "operational_case_created": false,
+      "can_control_legal_decision": false
+    },
+    {
+      "situation_id": "P-CBR-SIT-019",
+      "source": "prodecon",
+      "source_entry_id": "PRODECON-10",
+      "historical_regime_context": false,
+      "highest_level": "primary",
+      "primary_level_eligible": true,
+      "validated_level_eligible": false,
+      "operational_level_eligible": false,
+      "corpus_validation_outcome": "blocked_content_mismatch",
+      "corpus_validated": false,
+      "validated_normative_refs": [],
+      "required_case_fields": [
+        "taxpayer_type",
+        "activity",
+        "tax",
+        "problem_type",
+        "fiscal_year"
+      ],
+      "unresolved_required_case_fields": [
+        "fiscal_year"
+      ],
+      "temporal_validation_pending": true,
+      "resolution_outcome_verified": false,
+      "anonymization_review_completed": false,
+      "legal_similarity_enabled": true,
+      "operational_blockers": [
+        "corpus_not_validated",
+        "required_case_fields_missing",
+        "temporal_validation_pending",
+        "resolution_outcome_not_verified",
+        "anonymization_review_pending"
+      ],
+      "operational_case_id": null,
+      "operational_case_created": false,
+      "can_control_legal_decision": false
+    },
+    {
+      "situation_id": "P-CBR-SIT-020",
+      "source": "prodecon",
+      "source_entry_id": "PRODECON-10",
+      "historical_regime_context": false,
+      "highest_level": "primary",
+      "primary_level_eligible": true,
+      "validated_level_eligible": false,
+      "operational_level_eligible": false,
+      "corpus_validation_outcome": "no_explicit_citation",
+      "corpus_validated": false,
+      "validated_normative_refs": [],
+      "required_case_fields": [
+        "taxpayer_type",
+        "activity",
+        "tax",
+        "problem_type",
+        "fiscal_year"
+      ],
+      "unresolved_required_case_fields": [
+        "fiscal_year"
+      ],
+      "temporal_validation_pending": true,
+      "resolution_outcome_verified": false,
+      "anonymization_review_completed": false,
+      "legal_similarity_enabled": true,
+      "operational_blockers": [
+        "corpus_not_validated",
+        "required_case_fields_missing",
+        "temporal_validation_pending",
+        "resolution_outcome_not_verified",
+        "anonymization_review_pending"
+      ],
+      "operational_case_id": null,
+      "operational_case_created": false,
+      "can_control_legal_decision": false
+    },
+    {
+      "situation_id": "P-CBR-SIT-021",
+      "source": "prodecon",
+      "source_entry_id": "PRODECON-11",
+      "historical_regime_context": false,
+      "highest_level": "validated",
+      "primary_level_eligible": true,
+      "validated_level_eligible": true,
+      "operational_level_eligible": false,
+      "corpus_validation_outcome": "consistent",
+      "corpus_validated": true,
+      "validated_normative_refs": [
+        "lisr:articulo_100",
+        "lisr:articulo_101"
+      ],
+      "required_case_fields": [
+        "taxpayer_type",
+        "activity",
+        "tax",
+        "problem_type",
+        "fiscal_year"
+      ],
+      "unresolved_required_case_fields": [
+        "fiscal_year"
+      ],
+      "temporal_validation_pending": true,
+      "resolution_outcome_verified": false,
+      "anonymization_review_completed": false,
+      "legal_similarity_enabled": true,
+      "operational_blockers": [
+        "required_case_fields_missing",
+        "temporal_validation_pending",
+        "resolution_outcome_not_verified",
+        "anonymization_review_pending"
+      ],
+      "operational_case_id": null,
+      "operational_case_created": false,
+      "can_control_legal_decision": false
+    },
+    {
+      "situation_id": "P-CBR-SIT-022",
+      "source": "prodecon",
+      "source_entry_id": "PRODECON-11",
+      "historical_regime_context": false,
+      "highest_level": "primary",
+      "primary_level_eligible": true,
+      "validated_level_eligible": false,
+      "operational_level_eligible": false,
+      "corpus_validation_outcome": "no_explicit_citation",
+      "corpus_validated": false,
+      "validated_normative_refs": [],
+      "required_case_fields": [
+        "taxpayer_type",
+        "activity",
+        "tax",
+        "problem_type",
+        "fiscal_year"
+      ],
+      "unresolved_required_case_fields": [
+        "fiscal_year"
+      ],
+      "temporal_validation_pending": true,
+      "resolution_outcome_verified": false,
+      "anonymization_review_completed": false,
+      "legal_similarity_enabled": true,
+      "operational_blockers": [
+        "corpus_not_validated",
+        "required_case_fields_missing",
+        "temporal_validation_pending",
+        "resolution_outcome_not_verified",
+        "anonymization_review_pending"
+      ],
+      "operational_case_id": null,
+      "operational_case_created": false,
+      "can_control_legal_decision": false
+    },
+    {
+      "situation_id": "P-CBR-SIT-023",
+      "source": "prodecon",
+      "source_entry_id": "PRODECON-12",
+      "historical_regime_context": true,
+      "highest_level": "primary",
+      "primary_level_eligible": true,
+      "validated_level_eligible": false,
+      "operational_level_eligible": false,
+      "corpus_validation_outcome": "blocked_derogated",
+      "corpus_validated": false,
+      "validated_normative_refs": [],
+      "required_case_fields": [
+        "taxpayer_type",
+        "activity",
+        "tax",
+        "problem_type",
+        "fiscal_year"
+      ],
+      "unresolved_required_case_fields": [
+        "fiscal_year"
+      ],
+      "temporal_validation_pending": true,
+      "resolution_outcome_verified": false,
+      "anonymization_review_completed": false,
+      "legal_similarity_enabled": true,
+      "operational_blockers": [
+        "corpus_not_validated",
+        "required_case_fields_missing",
+        "temporal_validation_pending",
+        "resolution_outcome_not_verified",
+        "anonymization_review_pending"
+      ],
+      "operational_case_id": null,
+      "operational_case_created": false,
+      "can_control_legal_decision": false
+    },
+    {
+      "situation_id": "P-CBR-SIT-024",
+      "source": "prodecon",
+      "source_entry_id": "PRODECON-12",
+      "historical_regime_context": true,
+      "highest_level": "primary",
+      "primary_level_eligible": true,
+      "validated_level_eligible": false,
+      "operational_level_eligible": false,
+      "corpus_validation_outcome": "no_explicit_citation",
+      "corpus_validated": false,
+      "validated_normative_refs": [],
+      "required_case_fields": [
+        "taxpayer_type",
+        "activity",
+        "tax",
+        "problem_type",
+        "fiscal_year"
+      ],
+      "unresolved_required_case_fields": [
+        "fiscal_year"
+      ],
+      "temporal_validation_pending": true,
+      "resolution_outcome_verified": false,
+      "anonymization_review_completed": false,
+      "legal_similarity_enabled": true,
+      "operational_blockers": [
+        "corpus_not_validated",
+        "required_case_fields_missing",
+        "temporal_validation_pending",
+        "resolution_outcome_not_verified",
+        "anonymization_review_pending"
+      ],
+      "operational_case_id": null,
+      "operational_case_created": false,
+      "can_control_legal_decision": false
+    },
+    {
+      "situation_id": "U-CBR-SIT-001",
+      "source": "unam",
+      "source_entry_id": "UNAM-V",
+      "historical_regime_context": false,
+      "highest_level": "validated",
+      "primary_level_eligible": true,
+      "validated_level_eligible": true,
+      "operational_level_eligible": false,
+      "corpus_validation_outcome": "consistent",
+      "corpus_validated": true,
+      "validated_normative_refs": [
+        "lisr:articulo_57",
+        "lisr:articulo_9",
+        "lisr:articulo_16"
+      ],
+      "required_case_fields": [
+        "taxpayer_type",
+        "activity",
+        "tax",
+        "problem_type",
+        "fiscal_year"
+      ],
+      "unresolved_required_case_fields": [],
+      "temporal_validation_pending": true,
+      "resolution_outcome_verified": false,
+      "anonymization_review_completed": false,
+      "legal_similarity_enabled": true,
+      "operational_blockers": [
+        "temporal_validation_pending",
+        "resolution_outcome_not_verified",
+        "anonymization_review_pending"
+      ],
+      "operational_case_id": null,
+      "operational_case_created": false,
+      "can_control_legal_decision": false
+    },
+    {
+      "situation_id": "U-CBR-SIT-002",
+      "source": "unam",
+      "source_entry_id": "UNAM-V",
+      "historical_regime_context": false,
+      "highest_level": "validated",
+      "primary_level_eligible": true,
+      "validated_level_eligible": true,
+      "operational_level_eligible": false,
+      "corpus_validation_outcome": "consistent",
+      "corpus_validated": true,
+      "validated_normative_refs": [
+        "lisr:articulo_25",
+        "lisr:articulo_14",
+        "cff:articulo_17_a"
+      ],
+      "required_case_fields": [
+        "taxpayer_type",
+        "activity",
+        "tax",
+        "problem_type",
+        "fiscal_year"
+      ],
+      "unresolved_required_case_fields": [],
+      "temporal_validation_pending": true,
+      "resolution_outcome_verified": false,
+      "anonymization_review_completed": false,
+      "legal_similarity_enabled": true,
+      "operational_blockers": [
+        "temporal_validation_pending",
+        "resolution_outcome_not_verified",
+        "anonymization_review_pending"
+      ],
+      "operational_case_id": null,
+      "operational_case_created": false,
+      "can_control_legal_decision": false
+    },
+    {
+      "situation_id": "U-CBR-SIT-003",
+      "source": "unam",
+      "source_entry_id": "UNAM-V",
+      "historical_regime_context": false,
+      "highest_level": "validated",
+      "primary_level_eligible": true,
+      "validated_level_eligible": true,
+      "operational_level_eligible": false,
+      "corpus_validation_outcome": "consistent",
+      "corpus_validated": true,
+      "validated_normative_refs": [
+        "lisr:articulo_9"
+      ],
+      "required_case_fields": [
+        "taxpayer_type",
+        "activity",
+        "tax",
+        "problem_type",
+        "fiscal_year"
+      ],
+      "unresolved_required_case_fields": [],
+      "temporal_validation_pending": true,
+      "resolution_outcome_verified": false,
+      "anonymization_review_completed": false,
+      "legal_similarity_enabled": true,
+      "operational_blockers": [
+        "temporal_validation_pending",
+        "resolution_outcome_not_verified",
+        "anonymization_review_pending"
+      ],
+      "operational_case_id": null,
+      "operational_case_created": false,
+      "can_control_legal_decision": false
+    },
+    {
+      "situation_id": "U-CBR-SIT-004",
+      "source": "unam",
+      "source_entry_id": "UNAM-V",
+      "historical_regime_context": false,
+      "highest_level": "primary",
+      "primary_level_eligible": true,
+      "validated_level_eligible": false,
+      "operational_level_eligible": false,
+      "corpus_validation_outcome": "no_explicit_citation",
+      "corpus_validated": false,
+      "validated_normative_refs": [],
+      "required_case_fields": [
+        "taxpayer_type",
+        "activity",
+        "tax",
+        "problem_type",
+        "fiscal_year"
+      ],
+      "unresolved_required_case_fields": [],
+      "temporal_validation_pending": true,
+      "resolution_outcome_verified": false,
+      "anonymization_review_completed": false,
+      "legal_similarity_enabled": true,
+      "operational_blockers": [
+        "corpus_not_validated",
+        "temporal_validation_pending",
+        "resolution_outcome_not_verified",
+        "anonymization_review_pending"
+      ],
+      "operational_case_id": null,
+      "operational_case_created": false,
+      "can_control_legal_decision": false
+    },
+    {
+      "situation_id": "U-CBR-SIT-005",
+      "source": "unam",
+      "source_entry_id": "UNAM-V",
+      "historical_regime_context": false,
+      "highest_level": "validated",
+      "primary_level_eligible": true,
+      "validated_level_eligible": true,
+      "operational_level_eligible": false,
+      "corpus_validation_outcome": "consistent",
+      "corpus_validated": true,
+      "validated_normative_refs": [
+        "lisr:articulo_34",
+        "lisr:articulo_36",
+        "cff:articulo_17_a"
+      ],
+      "required_case_fields": [
+        "taxpayer_type",
+        "activity",
+        "tax",
+        "problem_type",
+        "fiscal_year"
+      ],
+      "unresolved_required_case_fields": [],
+      "temporal_validation_pending": true,
+      "resolution_outcome_verified": false,
+      "anonymization_review_completed": false,
+      "legal_similarity_enabled": true,
+      "operational_blockers": [
+        "temporal_validation_pending",
+        "resolution_outcome_not_verified",
+        "anonymization_review_pending"
+      ],
+      "operational_case_id": null,
+      "operational_case_created": false,
+      "can_control_legal_decision": false
+    },
+    {
+      "situation_id": "U-CBR-SIT-006",
+      "source": "unam",
+      "source_entry_id": "UNAM-V",
+      "historical_regime_context": false,
+      "highest_level": "validated",
+      "primary_level_eligible": true,
+      "validated_level_eligible": true,
+      "operational_level_eligible": false,
+      "corpus_validation_outcome": "consistent",
+      "corpus_validated": true,
+      "validated_normative_refs": [
+        "lisr:articulo_96"
+      ],
+      "required_case_fields": [
+        "taxpayer_type",
+        "activity",
+        "tax",
+        "problem_type",
+        "fiscal_year"
+      ],
+      "unresolved_required_case_fields": [
+        "fiscal_year"
+      ],
+      "temporal_validation_pending": true,
+      "resolution_outcome_verified": false,
+      "anonymization_review_completed": false,
+      "legal_similarity_enabled": true,
+      "operational_blockers": [
+        "required_case_fields_missing",
+        "temporal_validation_pending",
+        "resolution_outcome_not_verified",
+        "anonymization_review_pending"
+      ],
+      "operational_case_id": null,
+      "operational_case_created": false,
+      "can_control_legal_decision": false
+    },
+    {
+      "situation_id": "U-CBR-SIT-007",
+      "source": "unam",
+      "source_entry_id": "UNAM-V",
+      "historical_regime_context": false,
+      "highest_level": "validated",
+      "primary_level_eligible": true,
+      "validated_level_eligible": true,
+      "operational_level_eligible": false,
+      "corpus_validation_outcome": "consistent",
+      "corpus_validated": true,
+      "validated_normative_refs": [
+        "lisr:articulo_102",
+        "lisr:articulo_103",
+        "lisr:articulo_105"
+      ],
+      "required_case_fields": [
+        "taxpayer_type",
+        "activity",
+        "tax",
+        "problem_type",
+        "fiscal_year"
+      ],
+      "unresolved_required_case_fields": [],
+      "temporal_validation_pending": true,
+      "resolution_outcome_verified": false,
+      "anonymization_review_completed": false,
+      "legal_similarity_enabled": true,
+      "operational_blockers": [
+        "temporal_validation_pending",
+        "resolution_outcome_not_verified",
+        "anonymization_review_pending"
+      ],
+      "operational_case_id": null,
+      "operational_case_created": false,
+      "can_control_legal_decision": false
+    },
+    {
+      "situation_id": "U-CBR-SIT-008",
+      "source": "unam",
+      "source_entry_id": "UNAM-V",
+      "historical_regime_context": true,
+      "highest_level": "primary",
+      "primary_level_eligible": true,
+      "validated_level_eligible": false,
+      "operational_level_eligible": false,
+      "corpus_validation_outcome": "blocked_derogated",
+      "corpus_validated": false,
+      "validated_normative_refs": [],
+      "required_case_fields": [
+        "taxpayer_type",
+        "activity",
+        "tax",
+        "problem_type",
+        "fiscal_year"
+      ],
+      "unresolved_required_case_fields": [
+        "fiscal_year"
+      ],
+      "temporal_validation_pending": true,
+      "resolution_outcome_verified": false,
+      "anonymization_review_completed": false,
+      "legal_similarity_enabled": true,
+      "operational_blockers": [
+        "corpus_not_validated",
+        "required_case_fields_missing",
+        "temporal_validation_pending",
+        "resolution_outcome_not_verified",
+        "anonymization_review_pending"
+      ],
+      "operational_case_id": null,
+      "operational_case_created": false,
+      "can_control_legal_decision": false
+    },
+    {
+      "situation_id": "U-CBR-SIT-009",
+      "source": "unam",
+      "source_entry_id": "UNAM-V",
+      "historical_regime_context": false,
+      "highest_level": "validated",
+      "primary_level_eligible": true,
+      "validated_level_eligible": true,
+      "operational_level_eligible": false,
+      "corpus_validation_outcome": "consistent",
+      "corpus_validated": true,
+      "validated_normative_refs": [
+        "lisr:articulo_106"
+      ],
+      "required_case_fields": [
+        "taxpayer_type",
+        "activity",
+        "tax",
+        "problem_type",
+        "fiscal_year"
+      ],
+      "unresolved_required_case_fields": [
+        "fiscal_year"
+      ],
+      "temporal_validation_pending": true,
+      "resolution_outcome_verified": false,
+      "anonymization_review_completed": false,
+      "legal_similarity_enabled": true,
+      "operational_blockers": [
+        "required_case_fields_missing",
+        "temporal_validation_pending",
+        "resolution_outcome_not_verified",
+        "anonymization_review_pending"
+      ],
+      "operational_case_id": null,
+      "operational_case_created": false,
+      "can_control_legal_decision": false
+    },
+    {
+      "situation_id": "U-CBR-SIT-010",
+      "source": "unam",
+      "source_entry_id": "UNAM-V",
+      "historical_regime_context": false,
+      "highest_level": "primary",
+      "primary_level_eligible": true,
+      "validated_level_eligible": false,
+      "operational_level_eligible": false,
+      "corpus_validation_outcome": "blocked_content_mismatch",
+      "corpus_validated": false,
+      "validated_normative_refs": [
+        "lisr:articulo_116"
+      ],
+      "required_case_fields": [
+        "taxpayer_type",
+        "activity",
+        "tax",
+        "problem_type",
+        "fiscal_year"
+      ],
+      "unresolved_required_case_fields": [
+        "fiscal_year"
+      ],
+      "temporal_validation_pending": true,
+      "resolution_outcome_verified": false,
+      "anonymization_review_completed": false,
+      "legal_similarity_enabled": true,
+      "operational_blockers": [
+        "corpus_not_validated",
+        "required_case_fields_missing",
+        "temporal_validation_pending",
+        "resolution_outcome_not_verified",
+        "anonymization_review_pending"
+      ],
+      "operational_case_id": null,
+      "operational_case_created": false,
+      "can_control_legal_decision": false
+    },
+    {
+      "situation_id": "U-CBR-SIT-011",
+      "source": "unam",
+      "source_entry_id": "UNAM-V",
+      "historical_regime_context": false,
+      "highest_level": "validated",
+      "primary_level_eligible": true,
+      "validated_level_eligible": true,
+      "operational_level_eligible": false,
+      "corpus_validation_outcome": "consistent",
+      "corpus_validated": true,
+      "validated_normative_refs": [
+        "lisr:articulo_150",
+        "lisr:articulo_151",
+        "lisr:articulo_152"
+      ],
+      "required_case_fields": [
+        "taxpayer_type",
+        "activity",
+        "tax",
+        "problem_type",
+        "fiscal_year"
+      ],
+      "unresolved_required_case_fields": [],
+      "temporal_validation_pending": true,
+      "resolution_outcome_verified": false,
+      "anonymization_review_completed": false,
+      "legal_similarity_enabled": true,
+      "operational_blockers": [
+        "temporal_validation_pending",
+        "resolution_outcome_not_verified",
+        "anonymization_review_pending"
+      ],
+      "operational_case_id": null,
+      "operational_case_created": false,
+      "can_control_legal_decision": false
+    },
+    {
+      "situation_id": "U-CBR-SIT-012",
+      "source": "unam",
+      "source_entry_id": "UNAM-V",
+      "historical_regime_context": false,
+      "highest_level": "primary",
+      "primary_level_eligible": true,
+      "validated_level_eligible": false,
+      "operational_level_eligible": false,
+      "corpus_validation_outcome": "no_explicit_citation",
+      "corpus_validated": false,
+      "validated_normative_refs": [],
+      "required_case_fields": [
+        "taxpayer_type",
+        "activity",
+        "tax",
+        "problem_type",
+        "fiscal_year"
+      ],
+      "unresolved_required_case_fields": [
+        "fiscal_year"
+      ],
+      "temporal_validation_pending": true,
+      "resolution_outcome_verified": false,
+      "anonymization_review_completed": false,
+      "legal_similarity_enabled": true,
+      "operational_blockers": [
+        "corpus_not_validated",
+        "required_case_fields_missing",
+        "temporal_validation_pending",
+        "resolution_outcome_not_verified",
+        "anonymization_review_pending"
+      ],
+      "operational_case_id": null,
+      "operational_case_created": false,
+      "can_control_legal_decision": false
+    },
+    {
+      "situation_id": "U-CBR-SIT-013",
+      "source": "unam",
+      "source_entry_id": "UNAM-V",
+      "historical_regime_context": false,
+      "highest_level": "validated",
+      "primary_level_eligible": true,
+      "validated_level_eligible": true,
+      "operational_level_eligible": false,
+      "corpus_validation_outcome": "consistent",
+      "corpus_validated": true,
+      "validated_normative_refs": [
+        "liva:articulo_1_a"
+      ],
+      "required_case_fields": [
+        "taxpayer_type",
+        "activity",
+        "tax",
+        "problem_type",
+        "fiscal_year"
+      ],
+      "unresolved_required_case_fields": [
+        "fiscal_year"
+      ],
+      "temporal_validation_pending": true,
+      "resolution_outcome_verified": false,
+      "anonymization_review_completed": false,
+      "legal_similarity_enabled": true,
+      "operational_blockers": [
+        "required_case_fields_missing",
+        "temporal_validation_pending",
+        "resolution_outcome_not_verified",
+        "anonymization_review_pending"
+      ],
+      "operational_case_id": null,
+      "operational_case_created": false,
+      "can_control_legal_decision": false
+    }
+  ],
+  "operational_cases": [],
+  "preserves_c7_blocks": true,
+  "reuses_existing_cbr_case_contract": true,
+  "requires_temporal_validation_for_operational": true,
+  "requires_verified_resolution_for_operational": true,
+  "requires_human_anonymization_review_for_operational": true,
+  "persists_operational_cases": false,
+  "modifies_existing_cbr_engine": false,
+  "can_control_legal_decision": false
+}

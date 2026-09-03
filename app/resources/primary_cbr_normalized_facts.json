@@ -1,0 +1,4671 @@
+{
+  "schema_version": "1.0",
+  "baseline_commit": "b65dc014e57042ef4826354fa5ccb9b0610c0c4f",
+  "purpose": "C.4 normaliza de forma determinista y trazable los hechos contenidos en las 24 situaciones PRODECON y los 13 casos prácticos UNAM. Convierte afirmaciones fuente en hechos atómicos y prepara únicamente los campos de similitud que ya están explícitos, sin clasificar todavía problema o institución, sin enlazar normas, sin validar vigencia y sin crear casos CBR operativos.",
+  "prodecon_situation_count": 24,
+  "unam_situation_count": 13,
+  "source_situation_count": 37,
+  "source_raw_fact_statement_count": 74,
+  "normalized_situation_count": 37,
+  "normalized_fact_count": 241,
+  "similarity_fields_from_c1": [
+    "taxpayer_type",
+    "activity",
+    "tax",
+    "problem_type",
+    "authority_act",
+    "procedural_stage",
+    "fiscal_year"
+  ],
+  "required_case_fields": [
+    "taxpayer_type",
+    "activity",
+    "tax",
+    "problem_type",
+    "fiscal_year"
+  ],
+  "problem_type_deferred_to_c5": true,
+  "situations": [
+    {
+      "situation_id": "P-CBR-SIT-001",
+      "source": "prodecon",
+      "source_entry_id": "PRODECON-01",
+      "historical_regime_context": false,
+      "raw_fact_count": 2,
+      "normalized_fact_count": 7,
+      "facts": [
+        {
+          "fact_id": "C4-P-FCT-001-01",
+          "raw_fact_index": 1,
+          "source_text": "La sociedad aporta recursos al Estado mediante contribuciones destinadas a sufragar el gasto público.",
+          "kind": "actor",
+          "key": "actor_type",
+          "value": "society",
+          "value_type": "text",
+          "unit": null,
+          "method": "controlled_vocabulary",
+          "source_asserted": true,
+          "legal_inference_added": false
+        },
+        {
+          "fact_id": "C4-P-FCT-001-02",
+          "raw_fact_index": 1,
+          "source_text": "La sociedad aporta recursos al Estado mediante contribuciones destinadas a sufragar el gasto público.",
+          "kind": "event",
+          "key": "action",
+          "value": "contribute_resources",
+          "value_type": "text",
+          "unit": null,
+          "method": "controlled_vocabulary",
+          "source_asserted": true,
+          "legal_inference_added": false
+        },
+        {
+          "fact_id": "C4-P-FCT-001-03",
+          "raw_fact_index": 1,
+          "source_text": "La sociedad aporta recursos al Estado mediante contribuciones destinadas a sufragar el gasto público.",
+          "kind": "attribute",
+          "key": "resource_type",
+          "value": "contribution",
+          "value_type": "text",
+          "unit": null,
+          "method": "controlled_vocabulary",
+          "source_asserted": true,
+          "legal_inference_added": false
+        },
+        {
+          "fact_id": "C4-P-FCT-001-04",
+          "raw_fact_index": 1,
+          "source_text": "La sociedad aporta recursos al Estado mediante contribuciones destinadas a sufragar el gasto público.",
+          "kind": "attribute",
+          "key": "destination",
+          "value": "public_spending",
+          "value_type": "text",
+          "unit": null,
+          "method": "controlled_vocabulary",
+          "source_asserted": true,
+          "legal_inference_added": false
+        },
+        {
+          "fact_id": "C4-P-FCT-001-05",
+          "raw_fact_index": 2,
+          "source_text": "El Estado también obtiene ingresos no tributarios de su propia actividad y del aprovechamiento de recursos naturales.",
+          "kind": "actor",
+          "key": "actor_type",
+          "value": "state",
+          "value_type": "text",
+          "unit": null,
+          "method": "controlled_vocabulary",
+          "source_asserted": true,
+          "legal_inference_added": false
+        },
+        {
+          "fact_id": "C4-P-FCT-001-06",
+          "raw_fact_index": 2,
+          "source_text": "El Estado también obtiene ingresos no tributarios de su propia actividad y del aprovechamiento de recursos naturales.",
+          "kind": "attribute",
+          "key": "resource_type",
+          "value": "non_tax_revenue",
+          "value_type": "text",
+          "unit": null,
+          "method": "controlled_vocabulary",
+          "source_asserted": true,
+          "legal_inference_added": false
+        },
+        {
+          "fact_id": "C4-P-FCT-001-07",
+          "raw_fact_index": 2,
+          "source_text": "El Estado también obtiene ingresos no tributarios de su propia actividad y del aprovechamiento de recursos naturales.",
+          "kind": "attribute",
+          "key": "revenue_source",
+          "value": "state_activity_and_natural_resources",
+          "value_type": "text",
+          "unit": null,
+          "method": "controlled_vocabulary",
+          "source_asserted": true,
+          "legal_inference_added": false
+        }
+      ],
+      "similarity_seed": {
+        "taxpayer_type": null,
+        "activity": null,
+        "tax": null,
+        "problem_type": null,
+        "authority_act": null,
+        "procedural_stage": null,
+        "fiscal_year": null,
+        "evidence_fact_ids": {}
+      },
+      "unresolved_required_case_fields": [
+        "taxpayer_type",
+        "activity",
+        "tax",
+        "problem_type",
+        "fiscal_year"
+      ],
+      "raw_facts_fully_covered": true,
+      "facts_normalized": true,
+      "problem_institution_classified": false,
+      "normative_articles_linked": false,
+      "corpus_validated": false,
+      "cbr_family_assigned": false,
+      "operational_case_created": false,
+      "can_control_legal_decision": false
+    },
+    {
+      "situation_id": "P-CBR-SIT-002",
+      "source": "prodecon",
+      "source_entry_id": "PRODECON-01",
+      "historical_regime_context": false,
+      "raw_fact_count": 2,
+      "normalized_fact_count": 4,
+      "facts": [
+        {
+          "fact_id": "C4-P-FCT-002-01",
+          "raw_fact_index": 1,
+          "source_text": "La fuente describe empréstitos, emisión de moneda y productos como ejemplos de ingresos financieros o no tributarios.",
+          "kind": "attribute",
+          "key": "revenue_examples",
+          "value": "borrowings_money_issuance_products",
+          "value_type": "text",
+          "unit": null,
+          "method": "controlled_vocabulary",
+          "source_asserted": true,
+          "legal_inference_added": false
+        },
+        {
+          "fact_id": "C4-P-FCT-002-02",
+          "raw_fact_index": 1,
+          "source_text": "La fuente describe empréstitos, emisión de moneda y productos como ejemplos de ingresos financieros o no tributarios.",
+          "kind": "attribute",
+          "key": "resource_type",
+          "value": "financial_or_non_tax_revenue",
+          "value_type": "text",
+          "unit": null,
+          "method": "controlled_vocabulary",
+          "source_asserted": true,
+          "legal_inference_added": false
+        },
+        {
+          "fact_id": "C4-P-FCT-002-03",
+          "raw_fact_index": 2,
+          "source_text": "La actividad financiera estatal comprende obtener, administrar y aplicar recursos para satisfacer necesidades colectivas.",
+          "kind": "event",
+          "key": "financial_cycle",
+          "value": "obtain_administer_apply_resources",
+          "value_type": "text",
+          "unit": null,
+          "method": "controlled_vocabulary",
+          "source_asserted": true,
+          "legal_inference_added": false
+        },
+        {
+          "fact_id": "C4-P-FCT-002-04",
+          "raw_fact_index": 2,
+          "source_text": "La actividad financiera estatal comprende obtener, administrar y aplicar recursos para satisfacer necesidades colectivas.",
+          "kind": "attribute",
+          "key": "destination",
+          "value": "collective_needs",
+          "value_type": "text",
+          "unit": null,
+          "method": "controlled_vocabulary",
+          "source_asserted": true,
+          "legal_inference_added": false
+        }
+      ],
+      "similarity_seed": {
+        "taxpayer_type": null,
+        "activity": null,
+        "tax": null,
+        "problem_type": null,
+        "authority_act": null,
+        "procedural_stage": null,
+        "fiscal_year": null,
+        "evidence_fact_ids": {}
+      },
+      "unresolved_required_case_fields": [
+        "taxpayer_type",
+        "activity",
+        "tax",
+        "problem_type",
+        "fiscal_year"
+      ],
+      "raw_facts_fully_covered": true,
+      "facts_normalized": true,
+      "problem_institution_classified": false,
+      "normative_articles_linked": false,
+      "corpus_validated": false,
+      "cbr_family_assigned": false,
+      "operational_case_created": false,
+      "can_control_legal_decision": false
+    },
+    {
+      "situation_id": "P-CBR-SIT-003",
+      "source": "prodecon",
+      "source_entry_id": "PRODECON-02",
+      "historical_regime_context": false,
+      "raw_fact_count": 2,
+      "normalized_fact_count": 6,
+      "facts": [
+        {
+          "fact_id": "C4-P-FCT-003-01",
+          "raw_fact_index": 1,
+          "source_text": "La fuente presenta como elementos esenciales del impuesto el objeto, sujeto, base, tasa y época de pago.",
+          "kind": "attribute",
+          "key": "tax_element",
+          "value": "object",
+          "value_type": "text",
+          "unit": null,
+          "method": "controlled_vocabulary",
+          "source_asserted": true,
+          "legal_inference_added": false
+        },
+        {
+          "fact_id": "C4-P-FCT-003-02",
+          "raw_fact_index": 1,
+          "source_text": "La fuente presenta como elementos esenciales del impuesto el objeto, sujeto, base, tasa y época de pago.",
+          "kind": "attribute",
+          "key": "tax_element",
+          "value": "subject",
+          "value_type": "text",
+          "unit": null,
+          "method": "controlled_vocabulary",
+          "source_asserted": true,
+          "legal_inference_added": false
+        },
+        {
+          "fact_id": "C4-P-FCT-003-03",
+          "raw_fact_index": 1,
+          "source_text": "La fuente presenta como elementos esenciales del impuesto el objeto, sujeto, base, tasa y época de pago.",
+          "kind": "attribute",
+          "key": "tax_element",
+          "value": "base",
+          "value_type": "text",
+          "unit": null,
+          "method": "controlled_vocabulary",
+          "source_asserted": true,
+          "legal_inference_added": false
+        },
+        {
+          "fact_id": "C4-P-FCT-003-04",
+          "raw_fact_index": 1,
+          "source_text": "La fuente presenta como elementos esenciales del impuesto el objeto, sujeto, base, tasa y época de pago.",
+          "kind": "attribute",
+          "key": "tax_element",
+          "value": "rate",
+          "value_type": "text",
+          "unit": null,
+          "method": "controlled_vocabulary",
+          "source_asserted": true,
+          "legal_inference_added": false
+        },
+        {
+          "fact_id": "C4-P-FCT-003-05",
+          "raw_fact_index": 1,
+          "source_text": "La fuente presenta como elementos esenciales del impuesto el objeto, sujeto, base, tasa y época de pago.",
+          "kind": "attribute",
+          "key": "tax_element",
+          "value": "payment_period",
+          "value_type": "text",
+          "unit": null,
+          "method": "controlled_vocabulary",
+          "source_asserted": true,
+          "legal_inference_added": false
+        },
+        {
+          "fact_id": "C4-P-FCT-003-06",
+          "raw_fact_index": 2,
+          "source_text": "Una situación de creación de un impuesto requiere ubicar en la ley quién paga, qué se grava, sobre qué se calcula, qué tasa aplica y cuándo se paga.",
+          "kind": "event",
+          "key": "legislative_task",
+          "value": "identify_tax_elements_in_law",
+          "value_type": "text",
+          "unit": null,
+          "method": "controlled_vocabulary",
+          "source_asserted": true,
+          "legal_inference_added": false
+        }
+      ],
+      "similarity_seed": {
+        "taxpayer_type": null,
+        "activity": null,
+        "tax": null,
+        "problem_type": null,
+        "authority_act": null,
+        "procedural_stage": null,
+        "fiscal_year": null,
+        "evidence_fact_ids": {}
+      },
+      "unresolved_required_case_fields": [
+        "taxpayer_type",
+        "activity",
+        "tax",
+        "problem_type",
+        "fiscal_year"
+      ],
+      "raw_facts_fully_covered": true,
+      "facts_normalized": true,
+      "problem_institution_classified": false,
+      "normative_articles_linked": false,
+      "corpus_validated": false,
+      "cbr_family_assigned": false,
+      "operational_case_created": false,
+      "can_control_legal_decision": false
+    },
+    {
+      "situation_id": "P-CBR-SIT-004",
+      "source": "prodecon",
+      "source_entry_id": "PRODECON-02",
+      "historical_regime_context": false,
+      "raw_fact_count": 2,
+      "normalized_fact_count": 5,
+      "facts": [
+        {
+          "fact_id": "C4-P-FCT-004-01",
+          "raw_fact_index": 1,
+          "source_text": "La potestad tributaria no se describe como absoluta y debe ejercerse dentro de límites constitucionales.",
+          "kind": "event",
+          "key": "taxing_power",
+          "value": "constitutionally_limited",
+          "value_type": "text",
+          "unit": null,
+          "method": "controlled_vocabulary",
+          "source_asserted": true,
+          "legal_inference_added": false
+        },
+        {
+          "fact_id": "C4-P-FCT-004-02",
+          "raw_fact_index": 2,
+          "source_text": "La fuente identifica reserva de ley, capacidad contributiva, igualdad tributaria y destino al gasto público como límites relevantes.",
+          "kind": "attribute",
+          "key": "constitutional_limit",
+          "value": "reserve_of_law",
+          "value_type": "text",
+          "unit": null,
+          "method": "controlled_vocabulary",
+          "source_asserted": true,
+          "legal_inference_added": false
+        },
+        {
+          "fact_id": "C4-P-FCT-004-03",
+          "raw_fact_index": 2,
+          "source_text": "La fuente identifica reserva de ley, capacidad contributiva, igualdad tributaria y destino al gasto público como límites relevantes.",
+          "kind": "attribute",
+          "key": "constitutional_limit",
+          "value": "contributive_capacity",
+          "value_type": "text",
+          "unit": null,
+          "method": "controlled_vocabulary",
+          "source_asserted": true,
+          "legal_inference_added": false
+        },
+        {
+          "fact_id": "C4-P-FCT-004-04",
+          "raw_fact_index": 2,
+          "source_text": "La fuente identifica reserva de ley, capacidad contributiva, igualdad tributaria y destino al gasto público como límites relevantes.",
+          "kind": "attribute",
+          "key": "constitutional_limit",
+          "value": "tax_equality",
+          "value_type": "text",
+          "unit": null,
+          "method": "controlled_vocabulary",
+          "source_asserted": true,
+          "legal_inference_added": false
+        },
+        {
+          "fact_id": "C4-P-FCT-004-05",
+          "raw_fact_index": 2,
+          "source_text": "La fuente identifica reserva de ley, capacidad contributiva, igualdad tributaria y destino al gasto público como límites relevantes.",
+          "kind": "attribute",
+          "key": "constitutional_limit",
+          "value": "public_spending_destination",
+          "value_type": "text",
+          "unit": null,
+          "method": "controlled_vocabulary",
+          "source_asserted": true,
+          "legal_inference_added": false
+        }
+      ],
+      "similarity_seed": {
+        "taxpayer_type": null,
+        "activity": null,
+        "tax": null,
+        "problem_type": null,
+        "authority_act": null,
+        "procedural_stage": null,
+        "fiscal_year": null,
+        "evidence_fact_ids": {}
+      },
+      "unresolved_required_case_fields": [
+        "taxpayer_type",
+        "activity",
+        "tax",
+        "problem_type",
+        "fiscal_year"
+      ],
+      "raw_facts_fully_covered": true,
+      "facts_normalized": true,
+      "problem_institution_classified": false,
+      "normative_articles_linked": false,
+      "corpus_validated": false,
+      "cbr_family_assigned": false,
+      "operational_case_created": false,
+      "can_control_legal_decision": false
+    },
+    {
+      "situation_id": "P-CBR-SIT-005",
+      "source": "prodecon",
+      "source_entry_id": "PRODECON-03",
+      "historical_regime_context": false,
+      "raw_fact_count": 2,
+      "normalized_fact_count": 5,
+      "facts": [
+        {
+          "fact_id": "C4-P-FCT-005-01",
+          "raw_fact_index": 1,
+          "source_text": "El sistema de recaudación tributaria incluye distintas clases de contribuciones y no sólo impuestos.",
+          "kind": "attribute",
+          "key": "contribution_class",
+          "value": "tax",
+          "value_type": "text",
+          "unit": null,
+          "method": "controlled_vocabulary",
+          "source_asserted": true,
+          "legal_inference_added": false
+        },
+        {
+          "fact_id": "C4-P-FCT-005-02",
+          "raw_fact_index": 1,
+          "source_text": "El sistema de recaudación tributaria incluye distintas clases de contribuciones y no sólo impuestos.",
+          "kind": "attribute",
+          "key": "contribution_class",
+          "value": "fee",
+          "value_type": "text",
+          "unit": null,
+          "method": "controlled_vocabulary",
+          "source_asserted": true,
+          "legal_inference_added": false
+        },
+        {
+          "fact_id": "C4-P-FCT-005-03",
+          "raw_fact_index": 1,
+          "source_text": "El sistema de recaudación tributaria incluye distintas clases de contribuciones y no sólo impuestos.",
+          "kind": "attribute",
+          "key": "contribution_class",
+          "value": "social_security_contribution",
+          "value_type": "text",
+          "unit": null,
+          "method": "controlled_vocabulary",
+          "source_asserted": true,
+          "legal_inference_added": false
+        },
+        {
+          "fact_id": "C4-P-FCT-005-04",
+          "raw_fact_index": 1,
+          "source_text": "El sistema de recaudación tributaria incluye distintas clases de contribuciones y no sólo impuestos.",
+          "kind": "attribute",
+          "key": "contribution_class",
+          "value": "improvement_contribution",
+          "value_type": "text",
+          "unit": null,
+          "method": "controlled_vocabulary",
+          "source_asserted": true,
+          "legal_inference_added": false
+        },
+        {
+          "fact_id": "C4-P-FCT-005-05",
+          "raw_fact_index": 2,
+          "source_text": "La naturaleza de la prestación y el hecho previsto en ley permiten ubicar la clase de contribución descrita por la fuente.",
+          "kind": "event",
+          "key": "classification_basis",
+          "value": "legal_event_and_nature_of_payment",
+          "value_type": "text",
+          "unit": null,
+          "method": "controlled_vocabulary",
+          "source_asserted": true,
+          "legal_inference_added": false
+        }
+      ],
+      "similarity_seed": {
+        "taxpayer_type": null,
+        "activity": null,
+        "tax": null,
+        "problem_type": null,
+        "authority_act": null,
+        "procedural_stage": null,
+        "fiscal_year": null,
+        "evidence_fact_ids": {}
+      },
+      "unresolved_required_case_fields": [
+        "taxpayer_type",
+        "activity",
+        "tax",
+        "problem_type",
+        "fiscal_year"
+      ],
+      "raw_facts_fully_covered": true,
+      "facts_normalized": true,
+      "problem_institution_classified": false,
+      "normative_articles_linked": false,
+      "corpus_validated": false,
+      "cbr_family_assigned": false,
+      "operational_case_created": false,
+      "can_control_legal_decision": false
+    },
+    {
+      "situation_id": "P-CBR-SIT-006",
+      "source": "prodecon",
+      "source_entry_id": "PRODECON-03",
+      "historical_regime_context": false,
+      "raw_fact_count": 2,
+      "normalized_fact_count": 5,
+      "facts": [
+        {
+          "fact_id": "C4-P-FCT-006-01",
+          "raw_fact_index": 1,
+          "source_text": "La fuente distingue impuestos federales, estatales y municipales según la autoridad y el ámbito de la contribución.",
+          "kind": "attribute",
+          "key": "government_level",
+          "value": "federal",
+          "value_type": "text",
+          "unit": null,
+          "method": "controlled_vocabulary",
+          "source_asserted": true,
+          "legal_inference_added": false
+        },
+        {
+          "fact_id": "C4-P-FCT-006-02",
+          "raw_fact_index": 1,
+          "source_text": "La fuente distingue impuestos federales, estatales y municipales según la autoridad y el ámbito de la contribución.",
+          "kind": "attribute",
+          "key": "government_level",
+          "value": "state",
+          "value_type": "text",
+          "unit": null,
+          "method": "controlled_vocabulary",
+          "source_asserted": true,
+          "legal_inference_added": false
+        },
+        {
+          "fact_id": "C4-P-FCT-006-03",
+          "raw_fact_index": 1,
+          "source_text": "La fuente distingue impuestos federales, estatales y municipales según la autoridad y el ámbito de la contribución.",
+          "kind": "attribute",
+          "key": "government_level",
+          "value": "municipal",
+          "value_type": "text",
+          "unit": null,
+          "method": "controlled_vocabulary",
+          "source_asserted": true,
+          "legal_inference_added": false
+        },
+        {
+          "fact_id": "C4-P-FCT-006-04",
+          "raw_fact_index": 2,
+          "source_text": "El Sistema Nacional de Coordinación Fiscal articula cooperación entre Federación y entidades federativas.",
+          "kind": "relationship",
+          "key": "coordination",
+          "value": "federation_and_states",
+          "value_type": "text",
+          "unit": null,
+          "method": "controlled_vocabulary",
+          "source_asserted": true,
+          "legal_inference_added": false
+        },
+        {
+          "fact_id": "C4-P-FCT-006-05",
+          "raw_fact_index": 2,
+          "source_text": "El Sistema Nacional de Coordinación Fiscal articula cooperación entre Federación y entidades federativas.",
+          "kind": "attribute",
+          "key": "coordination_system",
+          "value": "national_fiscal_coordination_system",
+          "value_type": "text",
+          "unit": null,
+          "method": "controlled_vocabulary",
+          "source_asserted": true,
+          "legal_inference_added": false
+        }
+      ],
+      "similarity_seed": {
+        "taxpayer_type": null,
+        "activity": null,
+        "tax": null,
+        "problem_type": null,
+        "authority_act": null,
+        "procedural_stage": null,
+        "fiscal_year": null,
+        "evidence_fact_ids": {}
+      },
+      "unresolved_required_case_fields": [
+        "taxpayer_type",
+        "activity",
+        "tax",
+        "problem_type",
+        "fiscal_year"
+      ],
+      "raw_facts_fully_covered": true,
+      "facts_normalized": true,
+      "problem_institution_classified": false,
+      "normative_articles_linked": false,
+      "corpus_validated": false,
+      "cbr_family_assigned": false,
+      "operational_case_created": false,
+      "can_control_legal_decision": false
+    },
+    {
+      "situation_id": "P-CBR-SIT-007",
+      "source": "prodecon",
+      "source_entry_id": "PRODECON-04",
+      "historical_regime_context": false,
+      "raw_fact_count": 2,
+      "normalized_fact_count": 5,
+      "facts": [
+        {
+          "fact_id": "C4-P-FCT-007-01",
+          "raw_fact_index": 1,
+          "source_text": "La fuente ejemplifica la realización de un supuesto fiscal mediante la obtención de ingresos por salarios o por actividades empresariales.",
+          "kind": "activity",
+          "key": "activity",
+          "value": "salaried_work",
+          "value_type": "text",
+          "unit": null,
+          "method": "controlled_vocabulary",
+          "source_asserted": true,
+          "legal_inference_added": false
+        },
+        {
+          "fact_id": "C4-P-FCT-007-02",
+          "raw_fact_index": 1,
+          "source_text": "La fuente ejemplifica la realización de un supuesto fiscal mediante la obtención de ingresos por salarios o por actividades empresariales.",
+          "kind": "activity",
+          "key": "activity",
+          "value": "business_activity",
+          "value_type": "text",
+          "unit": null,
+          "method": "controlled_vocabulary",
+          "source_asserted": true,
+          "legal_inference_added": false
+        },
+        {
+          "fact_id": "C4-P-FCT-007-03",
+          "raw_fact_index": 1,
+          "source_text": "La fuente ejemplifica la realización de un supuesto fiscal mediante la obtención de ingresos por salarios o por actividades empresariales.",
+          "kind": "event",
+          "key": "taxable_event",
+          "value": "income_obtained",
+          "value_type": "text",
+          "unit": null,
+          "method": "controlled_vocabulary",
+          "source_asserted": true,
+          "legal_inference_added": false
+        },
+        {
+          "fact_id": "C4-P-FCT-007-04",
+          "raw_fact_index": 2,
+          "source_text": "Cuando ocurre el hecho imponible previsto en ley surgen derechos y obligaciones entre contribuyente y Estado.",
+          "kind": "event",
+          "key": "taxable_event_status",
+          "value": "occurred",
+          "value_type": "text",
+          "unit": null,
+          "method": "controlled_vocabulary",
+          "source_asserted": true,
+          "legal_inference_added": false
+        },
+        {
+          "fact_id": "C4-P-FCT-007-05",
+          "raw_fact_index": 2,
+          "source_text": "Cuando ocurre el hecho imponible previsto en ley surgen derechos y obligaciones entre contribuyente y Estado.",
+          "kind": "relationship",
+          "key": "legal_effect",
+          "value": "rights_and_obligations_arise",
+          "value_type": "text",
+          "unit": null,
+          "method": "controlled_vocabulary",
+          "source_asserted": true,
+          "legal_inference_added": false
+        }
+      ],
+      "similarity_seed": {
+        "taxpayer_type": null,
+        "activity": null,
+        "tax": null,
+        "problem_type": null,
+        "authority_act": null,
+        "procedural_stage": null,
+        "fiscal_year": null,
+        "evidence_fact_ids": {}
+      },
+      "unresolved_required_case_fields": [
+        "taxpayer_type",
+        "activity",
+        "tax",
+        "problem_type",
+        "fiscal_year"
+      ],
+      "raw_facts_fully_covered": true,
+      "facts_normalized": true,
+      "problem_institution_classified": false,
+      "normative_articles_linked": false,
+      "corpus_validated": false,
+      "cbr_family_assigned": false,
+      "operational_case_created": false,
+      "can_control_legal_decision": false
+    },
+    {
+      "situation_id": "P-CBR-SIT-008",
+      "source": "prodecon",
+      "source_entry_id": "PRODECON-04",
+      "historical_regime_context": false,
+      "raw_fact_count": 2,
+      "normalized_fact_count": 9,
+      "facts": [
+        {
+          "fact_id": "C4-P-FCT-008-01",
+          "raw_fact_index": 1,
+          "source_text": "La fuente distingue sujeto activo y sujetos pasivos directo, sustituto y solidario.",
+          "kind": "role",
+          "key": "passive_subject_role",
+          "value": "direct",
+          "value_type": "text",
+          "unit": null,
+          "method": "controlled_vocabulary",
+          "source_asserted": true,
+          "legal_inference_added": false
+        },
+        {
+          "fact_id": "C4-P-FCT-008-02",
+          "raw_fact_index": 1,
+          "source_text": "La fuente distingue sujeto activo y sujetos pasivos directo, sustituto y solidario.",
+          "kind": "role",
+          "key": "passive_subject_role",
+          "value": "substitute",
+          "value_type": "text",
+          "unit": null,
+          "method": "controlled_vocabulary",
+          "source_asserted": true,
+          "legal_inference_added": false
+        },
+        {
+          "fact_id": "C4-P-FCT-008-03",
+          "raw_fact_index": 1,
+          "source_text": "La fuente distingue sujeto activo y sujetos pasivos directo, sustituto y solidario.",
+          "kind": "role",
+          "key": "passive_subject_role",
+          "value": "solidary",
+          "value_type": "text",
+          "unit": null,
+          "method": "controlled_vocabulary",
+          "source_asserted": true,
+          "legal_inference_added": false
+        },
+        {
+          "fact_id": "C4-P-FCT-008-04",
+          "raw_fact_index": 2,
+          "source_text": "El patrón aparece como ejemplo de sujeto sustituto que retiene el ISR del trabajador y lo entrega al acreedor fiscal.",
+          "kind": "actor",
+          "key": "actor_type",
+          "value": "employer",
+          "value_type": "text",
+          "unit": null,
+          "method": "controlled_vocabulary",
+          "source_asserted": true,
+          "legal_inference_added": false
+        },
+        {
+          "fact_id": "C4-P-FCT-008-05",
+          "raw_fact_index": 2,
+          "source_text": "El patrón aparece como ejemplo de sujeto sustituto que retiene el ISR del trabajador y lo entrega al acreedor fiscal.",
+          "kind": "actor",
+          "key": "taxpayer_type",
+          "value": "individual",
+          "value_type": "text",
+          "unit": null,
+          "method": "controlled_vocabulary",
+          "source_asserted": true,
+          "legal_inference_added": false
+        },
+        {
+          "fact_id": "C4-P-FCT-008-06",
+          "raw_fact_index": 2,
+          "source_text": "El patrón aparece como ejemplo de sujeto sustituto que retiene el ISR del trabajador y lo entrega al acreedor fiscal.",
+          "kind": "activity",
+          "key": "activity",
+          "value": "salaried_work",
+          "value_type": "text",
+          "unit": null,
+          "method": "controlled_vocabulary",
+          "source_asserted": true,
+          "legal_inference_added": false
+        },
+        {
+          "fact_id": "C4-P-FCT-008-07",
+          "raw_fact_index": 2,
+          "source_text": "El patrón aparece como ejemplo de sujeto sustituto que retiene el ISR del trabajador y lo entrega al acreedor fiscal.",
+          "kind": "role",
+          "key": "actor_role",
+          "value": "withholding_substitute",
+          "value_type": "text",
+          "unit": null,
+          "method": "controlled_vocabulary",
+          "source_asserted": true,
+          "legal_inference_added": false
+        },
+        {
+          "fact_id": "C4-P-FCT-008-08",
+          "raw_fact_index": 2,
+          "source_text": "El patrón aparece como ejemplo de sujeto sustituto que retiene el ISR del trabajador y lo entrega al acreedor fiscal.",
+          "kind": "tax",
+          "key": "tax",
+          "value": "ISR",
+          "value_type": "text",
+          "unit": null,
+          "method": "controlled_vocabulary",
+          "source_asserted": true,
+          "legal_inference_added": false
+        },
+        {
+          "fact_id": "C4-P-FCT-008-09",
+          "raw_fact_index": 2,
+          "source_text": "El patrón aparece como ejemplo de sujeto sustituto que retiene el ISR del trabajador y lo entrega al acreedor fiscal.",
+          "kind": "obligation",
+          "key": "obligation",
+          "value": "withhold_and_remit_tax",
+          "value_type": "text",
+          "unit": null,
+          "method": "controlled_vocabulary",
+          "source_asserted": true,
+          "legal_inference_added": false
+        }
+      ],
+      "similarity_seed": {
+        "taxpayer_type": "individual",
+        "activity": "trabajo subordinado",
+        "tax": "ISR",
+        "problem_type": null,
+        "authority_act": null,
+        "procedural_stage": null,
+        "fiscal_year": null,
+        "evidence_fact_ids": {
+          "taxpayer_type": [
+            "C4-P-FCT-008-05"
+          ],
+          "activity": [
+            "C4-P-FCT-008-06"
+          ],
+          "tax": [
+            "C4-P-FCT-008-08"
+          ]
+        }
+      },
+      "unresolved_required_case_fields": [
+        "problem_type",
+        "fiscal_year"
+      ],
+      "raw_facts_fully_covered": true,
+      "facts_normalized": true,
+      "problem_institution_classified": false,
+      "normative_articles_linked": false,
+      "corpus_validated": false,
+      "cbr_family_assigned": false,
+      "operational_case_created": false,
+      "can_control_legal_decision": false
+    },
+    {
+      "situation_id": "P-CBR-SIT-009",
+      "source": "prodecon",
+      "source_entry_id": "PRODECON-05",
+      "historical_regime_context": false,
+      "raw_fact_count": 2,
+      "normalized_fact_count": 5,
+      "facts": [
+        {
+          "fact_id": "C4-P-FCT-009-01",
+          "raw_fact_index": 1,
+          "source_text": "La fuente identifica como objeto del ISR diversos ingresos de personas físicas, entre ellos salarios, actividades profesionales y arrendamiento.",
+          "kind": "actor",
+          "key": "taxpayer_type",
+          "value": "individual",
+          "value_type": "text",
+          "unit": null,
+          "method": "controlled_vocabulary",
+          "source_asserted": true,
+          "legal_inference_added": false
+        },
+        {
+          "fact_id": "C4-P-FCT-009-02",
+          "raw_fact_index": 1,
+          "source_text": "La fuente identifica como objeto del ISR diversos ingresos de personas físicas, entre ellos salarios, actividades profesionales y arrendamiento.",
+          "kind": "tax",
+          "key": "tax",
+          "value": "ISR",
+          "value_type": "text",
+          "unit": null,
+          "method": "controlled_vocabulary",
+          "source_asserted": true,
+          "legal_inference_added": false
+        },
+        {
+          "fact_id": "C4-P-FCT-009-03",
+          "raw_fact_index": 1,
+          "source_text": "La fuente identifica como objeto del ISR diversos ingresos de personas físicas, entre ellos salarios, actividades profesionales y arrendamiento.",
+          "kind": "activity",
+          "key": "income_activity",
+          "value": "salaries_professional_services_rental",
+          "value_type": "text",
+          "unit": null,
+          "method": "controlled_vocabulary",
+          "source_asserted": true,
+          "legal_inference_added": false
+        },
+        {
+          "fact_id": "C4-P-FCT-009-04",
+          "raw_fact_index": 2,
+          "source_text": "La base se describe como ingresos objeto del impuesto menos deducciones u otras figuras sustractivas, que dependen del régimen aplicable.",
+          "kind": "calculation_component",
+          "key": "tax_base",
+          "value": "taxable_income_less_allowed_subtractions",
+          "value_type": "text",
+          "unit": null,
+          "method": "controlled_vocabulary",
+          "source_asserted": true,
+          "legal_inference_added": false
+        },
+        {
+          "fact_id": "C4-P-FCT-009-05",
+          "raw_fact_index": 2,
+          "source_text": "La base se describe como ingresos objeto del impuesto menos deducciones u otras figuras sustractivas, que dependen del régimen aplicable.",
+          "kind": "attribute",
+          "key": "deduction_dependency",
+          "value": "applicable_tax_regime",
+          "value_type": "text",
+          "unit": null,
+          "method": "controlled_vocabulary",
+          "source_asserted": true,
+          "legal_inference_added": false
+        }
+      ],
+      "similarity_seed": {
+        "taxpayer_type": "individual",
+        "activity": null,
+        "tax": "ISR",
+        "problem_type": null,
+        "authority_act": null,
+        "procedural_stage": null,
+        "fiscal_year": null,
+        "evidence_fact_ids": {
+          "taxpayer_type": [
+            "C4-P-FCT-009-01"
+          ],
+          "tax": [
+            "C4-P-FCT-009-02"
+          ]
+        }
+      },
+      "unresolved_required_case_fields": [
+        "activity",
+        "problem_type",
+        "fiscal_year"
+      ],
+      "raw_facts_fully_covered": true,
+      "facts_normalized": true,
+      "problem_institution_classified": false,
+      "normative_articles_linked": false,
+      "corpus_validated": false,
+      "cbr_family_assigned": false,
+      "operational_case_created": false,
+      "can_control_legal_decision": false
+    },
+    {
+      "situation_id": "P-CBR-SIT-010",
+      "source": "prodecon",
+      "source_entry_id": "PRODECON-05",
+      "historical_regime_context": false,
+      "raw_fact_count": 2,
+      "normalized_fact_count": 7,
+      "facts": [
+        {
+          "fact_id": "C4-P-FCT-010-01",
+          "raw_fact_index": 1,
+          "source_text": "La fuente enumera enajenación de bienes, servicios independientes, arrendamiento e importación como actos o actividades relevantes para IVA.",
+          "kind": "tax",
+          "key": "tax",
+          "value": "IVA",
+          "value_type": "text",
+          "unit": null,
+          "method": "controlled_vocabulary",
+          "source_asserted": true,
+          "legal_inference_added": false
+        },
+        {
+          "fact_id": "C4-P-FCT-010-02",
+          "raw_fact_index": 1,
+          "source_text": "La fuente enumera enajenación de bienes, servicios independientes, arrendamiento e importación como actos o actividades relevantes para IVA.",
+          "kind": "activity",
+          "key": "taxable_activity",
+          "value": "sale_of_goods",
+          "value_type": "text",
+          "unit": null,
+          "method": "controlled_vocabulary",
+          "source_asserted": true,
+          "legal_inference_added": false
+        },
+        {
+          "fact_id": "C4-P-FCT-010-03",
+          "raw_fact_index": 1,
+          "source_text": "La fuente enumera enajenación de bienes, servicios independientes, arrendamiento e importación como actos o actividades relevantes para IVA.",
+          "kind": "activity",
+          "key": "taxable_activity",
+          "value": "independent_services",
+          "value_type": "text",
+          "unit": null,
+          "method": "controlled_vocabulary",
+          "source_asserted": true,
+          "legal_inference_added": false
+        },
+        {
+          "fact_id": "C4-P-FCT-010-04",
+          "raw_fact_index": 1,
+          "source_text": "La fuente enumera enajenación de bienes, servicios independientes, arrendamiento e importación como actos o actividades relevantes para IVA.",
+          "kind": "activity",
+          "key": "taxable_activity",
+          "value": "rental",
+          "value_type": "text",
+          "unit": null,
+          "method": "controlled_vocabulary",
+          "source_asserted": true,
+          "legal_inference_added": false
+        },
+        {
+          "fact_id": "C4-P-FCT-010-05",
+          "raw_fact_index": 1,
+          "source_text": "La fuente enumera enajenación de bienes, servicios independientes, arrendamiento e importación como actos o actividades relevantes para IVA.",
+          "kind": "activity",
+          "key": "taxable_activity",
+          "value": "importation",
+          "value_type": "text",
+          "unit": null,
+          "method": "controlled_vocabulary",
+          "source_asserted": true,
+          "legal_inference_added": false
+        },
+        {
+          "fact_id": "C4-P-FCT-010-06",
+          "raw_fact_index": 2,
+          "source_text": "La fuente relaciona el IVA con el valor de la operación, tasas y una obligación de pago periódico.",
+          "kind": "calculation_component",
+          "key": "calculation_basis",
+          "value": "operation_value_and_rate",
+          "value_type": "text",
+          "unit": null,
+          "method": "controlled_vocabulary",
+          "source_asserted": true,
+          "legal_inference_added": false
+        },
+        {
+          "fact_id": "C4-P-FCT-010-07",
+          "raw_fact_index": 2,
+          "source_text": "La fuente relaciona el IVA con el valor de la operación, tasas y una obligación de pago periódico.",
+          "kind": "temporal",
+          "key": "payment_frequency",
+          "value": "periodic",
+          "value_type": "text",
+          "unit": null,
+          "method": "controlled_vocabulary",
+          "source_asserted": true,
+          "legal_inference_added": false
+        }
+      ],
+      "similarity_seed": {
+        "taxpayer_type": null,
+        "activity": null,
+        "tax": "IVA",
+        "problem_type": null,
+        "authority_act": null,
+        "procedural_stage": null,
+        "fiscal_year": null,
+        "evidence_fact_ids": {
+          "tax": [
+            "C4-P-FCT-010-01"
+          ]
+        }
+      },
+      "unresolved_required_case_fields": [
+        "taxpayer_type",
+        "activity",
+        "problem_type",
+        "fiscal_year"
+      ],
+      "raw_facts_fully_covered": true,
+      "facts_normalized": true,
+      "problem_institution_classified": false,
+      "normative_articles_linked": false,
+      "corpus_validated": false,
+      "cbr_family_assigned": false,
+      "operational_case_created": false,
+      "can_control_legal_decision": false
+    },
+    {
+      "situation_id": "P-CBR-SIT-011",
+      "source": "prodecon",
+      "source_entry_id": "PRODECON-06",
+      "historical_regime_context": false,
+      "raw_fact_count": 2,
+      "normalized_fact_count": 7,
+      "facts": [
+        {
+          "fact_id": "C4-P-FCT-011-01",
+          "raw_fact_index": 1,
+          "source_text": "En la autodeterminación el contribuyente reconoce el hecho imponible, calcula, declara y paga su obligación.",
+          "kind": "actor",
+          "key": "actor_type",
+          "value": "taxpayer",
+          "value_type": "text",
+          "unit": null,
+          "method": "controlled_vocabulary",
+          "source_asserted": true,
+          "legal_inference_added": false
+        },
+        {
+          "fact_id": "C4-P-FCT-011-02",
+          "raw_fact_index": 1,
+          "source_text": "En la autodeterminación el contribuyente reconoce el hecho imponible, calcula, declara y paga su obligación.",
+          "kind": "event",
+          "key": "determination_mode",
+          "value": "self_assessment",
+          "value_type": "text",
+          "unit": null,
+          "method": "controlled_vocabulary",
+          "source_asserted": true,
+          "legal_inference_added": false
+        },
+        {
+          "fact_id": "C4-P-FCT-011-03",
+          "raw_fact_index": 1,
+          "source_text": "En la autodeterminación el contribuyente reconoce el hecho imponible, calcula, declara y paga su obligación.",
+          "kind": "event",
+          "key": "self_assessment_steps",
+          "value": "recognize_calculate_declare_pay",
+          "value_type": "text",
+          "unit": null,
+          "method": "controlled_vocabulary",
+          "source_asserted": true,
+          "legal_inference_added": false
+        },
+        {
+          "fact_id": "C4-P-FCT-011-04",
+          "raw_fact_index": 2,
+          "source_text": "La fuente contempla que la autoridad determine contribuciones cuando, mediante facultades fiscalizadoras, advierta una determinación incorrecta.",
+          "kind": "actor",
+          "key": "actor_type",
+          "value": "tax_authority",
+          "value_type": "text",
+          "unit": null,
+          "method": "controlled_vocabulary",
+          "source_asserted": true,
+          "legal_inference_added": false
+        },
+        {
+          "fact_id": "C4-P-FCT-011-05",
+          "raw_fact_index": 2,
+          "source_text": "La fuente contempla que la autoridad determine contribuciones cuando, mediante facultades fiscalizadoras, advierta una determinación incorrecta.",
+          "kind": "authority_act",
+          "key": "authority_act",
+          "value": "verification_powers",
+          "value_type": "text",
+          "unit": null,
+          "method": "controlled_vocabulary",
+          "source_asserted": true,
+          "legal_inference_added": false
+        },
+        {
+          "fact_id": "C4-P-FCT-011-06",
+          "raw_fact_index": 2,
+          "source_text": "La fuente contempla que la autoridad determine contribuciones cuando, mediante facultades fiscalizadoras, advierta una determinación incorrecta.",
+          "kind": "procedural_stage",
+          "key": "procedure_stage",
+          "value": "determination",
+          "value_type": "text",
+          "unit": null,
+          "method": "controlled_vocabulary",
+          "source_asserted": true,
+          "legal_inference_added": false
+        },
+        {
+          "fact_id": "C4-P-FCT-011-07",
+          "raw_fact_index": 2,
+          "source_text": "La fuente contempla que la autoridad determine contribuciones cuando, mediante facultades fiscalizadoras, advierta una determinación incorrecta.",
+          "kind": "event",
+          "key": "authority_determination_trigger",
+          "value": "incorrect_taxpayer_determination",
+          "value_type": "text",
+          "unit": null,
+          "method": "controlled_vocabulary",
+          "source_asserted": true,
+          "legal_inference_added": false
+        }
+      ],
+      "similarity_seed": {
+        "taxpayer_type": null,
+        "activity": null,
+        "tax": null,
+        "problem_type": null,
+        "authority_act": "facultades de comprobacion",
+        "procedural_stage": "determinacion",
+        "fiscal_year": null,
+        "evidence_fact_ids": {
+          "authority_act": [
+            "C4-P-FCT-011-05"
+          ],
+          "procedural_stage": [
+            "C4-P-FCT-011-06"
+          ]
+        }
+      },
+      "unresolved_required_case_fields": [
+        "taxpayer_type",
+        "activity",
+        "tax",
+        "problem_type",
+        "fiscal_year"
+      ],
+      "raw_facts_fully_covered": true,
+      "facts_normalized": true,
+      "problem_institution_classified": false,
+      "normative_articles_linked": false,
+      "corpus_validated": false,
+      "cbr_family_assigned": false,
+      "operational_case_created": false,
+      "can_control_legal_decision": false
+    },
+    {
+      "situation_id": "P-CBR-SIT-012",
+      "source": "prodecon",
+      "source_entry_id": "PRODECON-06",
+      "historical_regime_context": false,
+      "raw_fact_count": 2,
+      "normalized_fact_count": 6,
+      "facts": [
+        {
+          "fact_id": "C4-P-FCT-012-01",
+          "raw_fact_index": 1,
+          "source_text": "La fuente presenta el PAE como mecanismo administrativo para recaudar un crédito fiscal no satisfecho voluntaria y oportunamente.",
+          "kind": "procedure",
+          "key": "procedure",
+          "value": "administrative_enforcement_procedure",
+          "value_type": "text",
+          "unit": null,
+          "method": "controlled_vocabulary",
+          "source_asserted": true,
+          "legal_inference_added": false
+        },
+        {
+          "fact_id": "C4-P-FCT-012-02",
+          "raw_fact_index": 1,
+          "source_text": "La fuente presenta el PAE como mecanismo administrativo para recaudar un crédito fiscal no satisfecho voluntaria y oportunamente.",
+          "kind": "authority_act",
+          "key": "authority_act",
+          "value": "administrative_enforcement_procedure",
+          "value_type": "text",
+          "unit": null,
+          "method": "controlled_vocabulary",
+          "source_asserted": true,
+          "legal_inference_added": false
+        },
+        {
+          "fact_id": "C4-P-FCT-012-03",
+          "raw_fact_index": 1,
+          "source_text": "La fuente presenta el PAE como mecanismo administrativo para recaudar un crédito fiscal no satisfecho voluntaria y oportunamente.",
+          "kind": "event",
+          "key": "debt_status",
+          "value": "enforceable_unpaid_tax_credit",
+          "value_type": "text",
+          "unit": null,
+          "method": "controlled_vocabulary",
+          "source_asserted": true,
+          "legal_inference_added": false
+        },
+        {
+          "fact_id": "C4-P-FCT-012-04",
+          "raw_fact_index": 2,
+          "source_text": "Entre las etapas descritas aparecen requerimiento de pago, embargo y remate de bienes.",
+          "kind": "procedural_stage",
+          "key": "procedure_stage",
+          "value": "payment_demand",
+          "value_type": "text",
+          "unit": null,
+          "method": "controlled_vocabulary",
+          "source_asserted": true,
+          "legal_inference_added": false
+        },
+        {
+          "fact_id": "C4-P-FCT-012-05",
+          "raw_fact_index": 2,
+          "source_text": "Entre las etapas descritas aparecen requerimiento de pago, embargo y remate de bienes.",
+          "kind": "procedural_stage",
+          "key": "procedure_stage",
+          "value": "seizure",
+          "value_type": "text",
+          "unit": null,
+          "method": "controlled_vocabulary",
+          "source_asserted": true,
+          "legal_inference_added": false
+        },
+        {
+          "fact_id": "C4-P-FCT-012-06",
+          "raw_fact_index": 2,
+          "source_text": "Entre las etapas descritas aparecen requerimiento de pago, embargo y remate de bienes.",
+          "kind": "procedural_stage",
+          "key": "procedure_stage",
+          "value": "auction",
+          "value_type": "text",
+          "unit": null,
+          "method": "controlled_vocabulary",
+          "source_asserted": true,
+          "legal_inference_added": false
+        }
+      ],
+      "similarity_seed": {
+        "taxpayer_type": null,
+        "activity": null,
+        "tax": null,
+        "problem_type": null,
+        "authority_act": "procedimiento administrativo de ejecucion",
+        "procedural_stage": "cobro coactivo",
+        "fiscal_year": null,
+        "evidence_fact_ids": {
+          "authority_act": [
+            "C4-P-FCT-012-02"
+          ],
+          "procedural_stage": [
+            "C4-P-FCT-012-04"
+          ]
+        }
+      },
+      "unresolved_required_case_fields": [
+        "taxpayer_type",
+        "activity",
+        "tax",
+        "problem_type",
+        "fiscal_year"
+      ],
+      "raw_facts_fully_covered": true,
+      "facts_normalized": true,
+      "problem_institution_classified": false,
+      "normative_articles_linked": false,
+      "corpus_validated": false,
+      "cbr_family_assigned": false,
+      "operational_case_created": false,
+      "can_control_legal_decision": false
+    },
+    {
+      "situation_id": "P-CBR-SIT-013",
+      "source": "prodecon",
+      "source_entry_id": "PRODECON-07",
+      "historical_regime_context": false,
+      "raw_fact_count": 2,
+      "normalized_fact_count": 3,
+      "facts": [
+        {
+          "fact_id": "C4-P-FCT-013-01",
+          "raw_fact_index": 1,
+          "source_text": "La fuente reconoce el derecho a recibir información y asistencia sobre la situación fiscal del contribuyente.",
+          "kind": "obligation",
+          "key": "taxpayer_right",
+          "value": "information_and_assistance",
+          "value_type": "text",
+          "unit": null,
+          "method": "controlled_vocabulary",
+          "source_asserted": true,
+          "legal_inference_added": false
+        },
+        {
+          "fact_id": "C4-P-FCT-013-02",
+          "raw_fact_index": 2,
+          "source_text": "Ese derecho se proyecta expresamente al inicio de facultades de comprobación y otras actuaciones de la autoridad tributaria.",
+          "kind": "authority_act",
+          "key": "authority_act",
+          "value": "verification_powers",
+          "value_type": "text",
+          "unit": null,
+          "method": "controlled_vocabulary",
+          "source_asserted": true,
+          "legal_inference_added": false
+        },
+        {
+          "fact_id": "C4-P-FCT-013-03",
+          "raw_fact_index": 2,
+          "source_text": "Ese derecho se proyecta expresamente al inicio de facultades de comprobación y otras actuaciones de la autoridad tributaria.",
+          "kind": "procedural_stage",
+          "key": "procedure_stage",
+          "value": "start_of_verification",
+          "value_type": "text",
+          "unit": null,
+          "method": "controlled_vocabulary",
+          "source_asserted": true,
+          "legal_inference_added": false
+        }
+      ],
+      "similarity_seed": {
+        "taxpayer_type": null,
+        "activity": null,
+        "tax": null,
+        "problem_type": null,
+        "authority_act": "facultades de comprobacion",
+        "procedural_stage": "comprobacion",
+        "fiscal_year": null,
+        "evidence_fact_ids": {
+          "authority_act": [
+            "C4-P-FCT-013-02"
+          ],
+          "procedural_stage": [
+            "C4-P-FCT-013-03"
+          ]
+        }
+      },
+      "unresolved_required_case_fields": [
+        "taxpayer_type",
+        "activity",
+        "tax",
+        "problem_type",
+        "fiscal_year"
+      ],
+      "raw_facts_fully_covered": true,
+      "facts_normalized": true,
+      "problem_institution_classified": false,
+      "normative_articles_linked": false,
+      "corpus_validated": false,
+      "cbr_family_assigned": false,
+      "operational_case_created": false,
+      "can_control_legal_decision": false
+    },
+    {
+      "situation_id": "P-CBR-SIT-014",
+      "source": "prodecon",
+      "source_entry_id": "PRODECON-07",
+      "historical_regime_context": false,
+      "raw_fact_count": 2,
+      "normalized_fact_count": 5,
+      "facts": [
+        {
+          "fact_id": "C4-P-FCT-014-01",
+          "raw_fact_index": 1,
+          "source_text": "La fuente describe la presentación de declaraciones como una obligación formal sujeta a los plazos establecidos en ley.",
+          "kind": "obligation",
+          "key": "obligation",
+          "value": "file_tax_returns",
+          "value_type": "text",
+          "unit": null,
+          "method": "controlled_vocabulary",
+          "source_asserted": true,
+          "legal_inference_added": false
+        },
+        {
+          "fact_id": "C4-P-FCT-014-02",
+          "raw_fact_index": 1,
+          "source_text": "La fuente describe la presentación de declaraciones como una obligación formal sujeta a los plazos establecidos en ley.",
+          "kind": "temporal",
+          "key": "deadline_basis",
+          "value": "statutory_deadline",
+          "value_type": "text",
+          "unit": null,
+          "method": "controlled_vocabulary",
+          "source_asserted": true,
+          "legal_inference_added": false
+        },
+        {
+          "fact_id": "C4-P-FCT-014-03",
+          "raw_fact_index": 2,
+          "source_text": "También describe la obligación de tolerar actos de comprobación y mantener a disposición la contabilidad y documentación pertinente.",
+          "kind": "procedural_stage",
+          "key": "procedure_stage",
+          "value": "compliance_and_verification",
+          "value_type": "text",
+          "unit": null,
+          "method": "controlled_vocabulary",
+          "source_asserted": true,
+          "legal_inference_added": false
+        },
+        {
+          "fact_id": "C4-P-FCT-014-04",
+          "raw_fact_index": 2,
+          "source_text": "También describe la obligación de tolerar actos de comprobación y mantener a disposición la contabilidad y documentación pertinente.",
+          "kind": "obligation",
+          "key": "obligation",
+          "value": "tolerate_verification",
+          "value_type": "text",
+          "unit": null,
+          "method": "controlled_vocabulary",
+          "source_asserted": true,
+          "legal_inference_added": false
+        },
+        {
+          "fact_id": "C4-P-FCT-014-05",
+          "raw_fact_index": 2,
+          "source_text": "También describe la obligación de tolerar actos de comprobación y mantener a disposición la contabilidad y documentación pertinente.",
+          "kind": "obligation",
+          "key": "documentation",
+          "value": "accounting_and_supporting_documents_available",
+          "value_type": "text",
+          "unit": null,
+          "method": "controlled_vocabulary",
+          "source_asserted": true,
+          "legal_inference_added": false
+        }
+      ],
+      "similarity_seed": {
+        "taxpayer_type": null,
+        "activity": null,
+        "tax": null,
+        "problem_type": null,
+        "authority_act": null,
+        "procedural_stage": "cumplimiento y comprobacion",
+        "fiscal_year": null,
+        "evidence_fact_ids": {
+          "procedural_stage": [
+            "C4-P-FCT-014-03"
+          ]
+        }
+      },
+      "unresolved_required_case_fields": [
+        "taxpayer_type",
+        "activity",
+        "tax",
+        "problem_type",
+        "fiscal_year"
+      ],
+      "raw_facts_fully_covered": true,
+      "facts_normalized": true,
+      "problem_institution_classified": false,
+      "normative_articles_linked": false,
+      "corpus_validated": false,
+      "cbr_family_assigned": false,
+      "operational_case_created": false,
+      "can_control_legal_decision": false
+    },
+    {
+      "situation_id": "P-CBR-SIT-015",
+      "source": "prodecon",
+      "source_entry_id": "PRODECON-08",
+      "historical_regime_context": false,
+      "raw_fact_count": 2,
+      "normalized_fact_count": 4,
+      "facts": [
+        {
+          "fact_id": "C4-P-FCT-015-01",
+          "raw_fact_index": 1,
+          "source_text": "La fuente presenta el recurso de revocación como medio de control interno de legalidad frente a actos o resoluciones fiscales.",
+          "kind": "procedure",
+          "key": "defense_route",
+          "value": "administrative_revocation_appeal",
+          "value_type": "text",
+          "unit": null,
+          "method": "controlled_vocabulary",
+          "source_asserted": true,
+          "legal_inference_added": false
+        },
+        {
+          "fact_id": "C4-P-FCT-015-02",
+          "raw_fact_index": 1,
+          "source_text": "La fuente presenta el recurso de revocación como medio de control interno de legalidad frente a actos o resoluciones fiscales.",
+          "kind": "authority_act",
+          "key": "challenged_act",
+          "value": "tax_act_or_resolution",
+          "value_type": "text",
+          "unit": null,
+          "method": "controlled_vocabulary",
+          "source_asserted": true,
+          "legal_inference_added": false
+        },
+        {
+          "fact_id": "C4-P-FCT-015-03",
+          "raw_fact_index": 2,
+          "source_text": "También presenta el juicio contencioso administrativo para impugnar determinadas resoluciones definitivas y actos de autoridad.",
+          "kind": "procedure",
+          "key": "defense_route",
+          "value": "federal_administrative_litigation",
+          "value_type": "text",
+          "unit": null,
+          "method": "controlled_vocabulary",
+          "source_asserted": true,
+          "legal_inference_added": false
+        },
+        {
+          "fact_id": "C4-P-FCT-015-04",
+          "raw_fact_index": 2,
+          "source_text": "También presenta el juicio contencioso administrativo para impugnar determinadas resoluciones definitivas y actos de autoridad.",
+          "kind": "procedural_stage",
+          "key": "procedure_stage",
+          "value": "judicial_review",
+          "value_type": "text",
+          "unit": null,
+          "method": "controlled_vocabulary",
+          "source_asserted": true,
+          "legal_inference_added": false
+        }
+      ],
+      "similarity_seed": {
+        "taxpayer_type": null,
+        "activity": null,
+        "tax": null,
+        "problem_type": null,
+        "authority_act": "acto o resolucion fiscal",
+        "procedural_stage": "defensa",
+        "fiscal_year": null,
+        "evidence_fact_ids": {
+          "authority_act": [
+            "C4-P-FCT-015-02"
+          ],
+          "procedural_stage": [
+            "C4-P-FCT-015-04"
+          ]
+        }
+      },
+      "unresolved_required_case_fields": [
+        "taxpayer_type",
+        "activity",
+        "tax",
+        "problem_type",
+        "fiscal_year"
+      ],
+      "raw_facts_fully_covered": true,
+      "facts_normalized": true,
+      "problem_institution_classified": false,
+      "normative_articles_linked": false,
+      "corpus_validated": false,
+      "cbr_family_assigned": false,
+      "operational_case_created": false,
+      "can_control_legal_decision": false
+    },
+    {
+      "situation_id": "P-CBR-SIT-016",
+      "source": "prodecon",
+      "source_entry_id": "PRODECON-08",
+      "historical_regime_context": false,
+      "raw_fact_count": 2,
+      "normalized_fact_count": 6,
+      "facts": [
+        {
+          "fact_id": "C4-P-FCT-016-01",
+          "raw_fact_index": 1,
+          "source_text": "PRODECON conoce e investiga quejas contra actos de autoridades fiscales federales que el contribuyente estima violatorios de sus derechos.",
+          "kind": "actor",
+          "key": "authority_type",
+          "value": "federal_tax_authority",
+          "value_type": "text",
+          "unit": null,
+          "method": "controlled_vocabulary",
+          "source_asserted": true,
+          "legal_inference_added": false
+        },
+        {
+          "fact_id": "C4-P-FCT-016-02",
+          "raw_fact_index": 1,
+          "source_text": "PRODECON conoce e investiga quejas contra actos de autoridades fiscales federales que el contribuyente estima violatorios de sus derechos.",
+          "kind": "authority_act",
+          "key": "authority_act",
+          "value": "federal_tax_authority_act",
+          "value_type": "text",
+          "unit": null,
+          "method": "controlled_vocabulary",
+          "source_asserted": true,
+          "legal_inference_added": false
+        },
+        {
+          "fact_id": "C4-P-FCT-016-03",
+          "raw_fact_index": 1,
+          "source_text": "PRODECON conoce e investiga quejas contra actos de autoridades fiscales federales que el contribuyente estima violatorios de sus derechos.",
+          "kind": "procedure",
+          "key": "defense_route",
+          "value": "prodecon_complaint",
+          "value_type": "text",
+          "unit": null,
+          "method": "controlled_vocabulary",
+          "source_asserted": true,
+          "legal_inference_added": false
+        },
+        {
+          "fact_id": "C4-P-FCT-016-04",
+          "raw_fact_index": 1,
+          "source_text": "PRODECON conoce e investiga quejas contra actos de autoridades fiscales federales que el contribuyente estima violatorios de sus derechos.",
+          "kind": "event",
+          "key": "alleged_effect",
+          "value": "taxpayer_rights_violation",
+          "value_type": "text",
+          "unit": null,
+          "method": "controlled_vocabulary",
+          "source_asserted": true,
+          "legal_inference_added": false
+        },
+        {
+          "fact_id": "C4-P-FCT-016-05",
+          "raw_fact_index": 2,
+          "source_text": "La fuente también describe la asesoría como primer nivel de atención ante una problemática derivada de un acto de autoridad fiscal.",
+          "kind": "procedure",
+          "key": "defense_route",
+          "value": "prodecon_advice",
+          "value_type": "text",
+          "unit": null,
+          "method": "controlled_vocabulary",
+          "source_asserted": true,
+          "legal_inference_added": false
+        },
+        {
+          "fact_id": "C4-P-FCT-016-06",
+          "raw_fact_index": 2,
+          "source_text": "La fuente también describe la asesoría como primer nivel de atención ante una problemática derivada de un acto de autoridad fiscal.",
+          "kind": "procedural_stage",
+          "key": "procedure_stage",
+          "value": "non_jurisdictional_defense",
+          "value_type": "text",
+          "unit": null,
+          "method": "controlled_vocabulary",
+          "source_asserted": true,
+          "legal_inference_added": false
+        }
+      ],
+      "similarity_seed": {
+        "taxpayer_type": null,
+        "activity": null,
+        "tax": null,
+        "problem_type": null,
+        "authority_act": "acto de autoridad fiscal federal",
+        "procedural_stage": "defensa no jurisdiccional",
+        "fiscal_year": null,
+        "evidence_fact_ids": {
+          "authority_act": [
+            "C4-P-FCT-016-02"
+          ],
+          "procedural_stage": [
+            "C4-P-FCT-016-06"
+          ]
+        }
+      },
+      "unresolved_required_case_fields": [
+        "taxpayer_type",
+        "activity",
+        "tax",
+        "problem_type",
+        "fiscal_year"
+      ],
+      "raw_facts_fully_covered": true,
+      "facts_normalized": true,
+      "problem_institution_classified": false,
+      "normative_articles_linked": false,
+      "corpus_validated": false,
+      "cbr_family_assigned": false,
+      "operational_case_created": false,
+      "can_control_legal_decision": false
+    },
+    {
+      "situation_id": "P-CBR-SIT-017",
+      "source": "prodecon",
+      "source_entry_id": "PRODECON-09",
+      "historical_regime_context": false,
+      "raw_fact_count": 2,
+      "normalized_fact_count": 6,
+      "facts": [
+        {
+          "fact_id": "C4-P-FCT-017-01",
+          "raw_fact_index": 1,
+          "source_text": "La fuente considera necesaria la interpretación cuando una norma no es clara, tiene diferentes significados, contradicciones o vacíos.",
+          "kind": "event",
+          "key": "interpretation_trigger",
+          "value": "ambiguity_multiple_meanings_contradiction_or_gap",
+          "value_type": "text",
+          "unit": null,
+          "method": "controlled_vocabulary",
+          "source_asserted": true,
+          "legal_inference_added": false
+        },
+        {
+          "fact_id": "C4-P-FCT-017-02",
+          "raw_fact_index": 1,
+          "source_text": "La fuente considera necesaria la interpretación cuando una norma no es clara, tiene diferentes significados, contradicciones o vacíos.",
+          "kind": "procedural_stage",
+          "key": "procedure_stage",
+          "value": "interpretation",
+          "value_type": "text",
+          "unit": null,
+          "method": "controlled_vocabulary",
+          "source_asserted": true,
+          "legal_inference_added": false
+        },
+        {
+          "fact_id": "C4-P-FCT-017-03",
+          "raw_fact_index": 2,
+          "source_text": "Se describen métodos gramatical o literal, lógico, histórico y sistemático para reconstruir el sentido normativo.",
+          "kind": "attribute",
+          "key": "interpretation_method",
+          "value": "grammatical",
+          "value_type": "text",
+          "unit": null,
+          "method": "controlled_vocabulary",
+          "source_asserted": true,
+          "legal_inference_added": false
+        },
+        {
+          "fact_id": "C4-P-FCT-017-04",
+          "raw_fact_index": 2,
+          "source_text": "Se describen métodos gramatical o literal, lógico, histórico y sistemático para reconstruir el sentido normativo.",
+          "kind": "attribute",
+          "key": "interpretation_method",
+          "value": "logical",
+          "value_type": "text",
+          "unit": null,
+          "method": "controlled_vocabulary",
+          "source_asserted": true,
+          "legal_inference_added": false
+        },
+        {
+          "fact_id": "C4-P-FCT-017-05",
+          "raw_fact_index": 2,
+          "source_text": "Se describen métodos gramatical o literal, lógico, histórico y sistemático para reconstruir el sentido normativo.",
+          "kind": "attribute",
+          "key": "interpretation_method",
+          "value": "historical",
+          "value_type": "text",
+          "unit": null,
+          "method": "controlled_vocabulary",
+          "source_asserted": true,
+          "legal_inference_added": false
+        },
+        {
+          "fact_id": "C4-P-FCT-017-06",
+          "raw_fact_index": 2,
+          "source_text": "Se describen métodos gramatical o literal, lógico, histórico y sistemático para reconstruir el sentido normativo.",
+          "kind": "attribute",
+          "key": "interpretation_method",
+          "value": "systematic",
+          "value_type": "text",
+          "unit": null,
+          "method": "controlled_vocabulary",
+          "source_asserted": true,
+          "legal_inference_added": false
+        }
+      ],
+      "similarity_seed": {
+        "taxpayer_type": null,
+        "activity": null,
+        "tax": null,
+        "problem_type": null,
+        "authority_act": null,
+        "procedural_stage": "interpretacion",
+        "fiscal_year": null,
+        "evidence_fact_ids": {
+          "procedural_stage": [
+            "C4-P-FCT-017-02"
+          ]
+        }
+      },
+      "unresolved_required_case_fields": [
+        "taxpayer_type",
+        "activity",
+        "tax",
+        "problem_type",
+        "fiscal_year"
+      ],
+      "raw_facts_fully_covered": true,
+      "facts_normalized": true,
+      "problem_institution_classified": false,
+      "normative_articles_linked": false,
+      "corpus_validated": false,
+      "cbr_family_assigned": false,
+      "operational_case_created": false,
+      "can_control_legal_decision": false
+    },
+    {
+      "situation_id": "P-CBR-SIT-018",
+      "source": "prodecon",
+      "source_entry_id": "PRODECON-09",
+      "historical_regime_context": false,
+      "raw_fact_count": 2,
+      "normalized_fact_count": 5,
+      "facts": [
+        {
+          "fact_id": "C4-P-FCT-018-01",
+          "raw_fact_index": 1,
+          "source_text": "La fuente distingue interpretación de la norma y aplicación estricta de determinadas disposiciones fiscales.",
+          "kind": "event",
+          "key": "legal_operation",
+          "value": "interpretation_and_strict_application_distinguished",
+          "value_type": "text",
+          "unit": null,
+          "method": "controlled_vocabulary",
+          "source_asserted": true,
+          "legal_inference_added": false
+        },
+        {
+          "fact_id": "C4-P-FCT-018-02",
+          "raw_fact_index": 1,
+          "source_text": "La fuente distingue interpretación de la norma y aplicación estricta de determinadas disposiciones fiscales.",
+          "kind": "procedural_stage",
+          "key": "procedure_stage",
+          "value": "interpretation_and_application",
+          "value_type": "text",
+          "unit": null,
+          "method": "controlled_vocabulary",
+          "source_asserted": true,
+          "legal_inference_added": false
+        },
+        {
+          "fact_id": "C4-P-FCT-018-03",
+          "raw_fact_index": 2,
+          "source_text": "Para cargas, excepciones, infracciones y sanciones, la aplicación descrita se limita a situaciones de hecho que coincidan con la hipótesis normativa, sin extensión por analogía a casos similares.",
+          "kind": "attribute",
+          "key": "covered_norm_type",
+          "value": "burden_exception_infringement_or_sanction",
+          "value_type": "text",
+          "unit": null,
+          "method": "controlled_vocabulary",
+          "source_asserted": true,
+          "legal_inference_added": false
+        },
+        {
+          "fact_id": "C4-P-FCT-018-04",
+          "raw_fact_index": 2,
+          "source_text": "Para cargas, excepciones, infracciones y sanciones, la aplicación descrita se limita a situaciones de hecho que coincidan con la hipótesis normativa, sin extensión por analogía a casos similares.",
+          "kind": "event",
+          "key": "application_constraint",
+          "value": "facts_must_match_normative_hypothesis",
+          "value_type": "text",
+          "unit": null,
+          "method": "controlled_vocabulary",
+          "source_asserted": true,
+          "legal_inference_added": false
+        },
+        {
+          "fact_id": "C4-P-FCT-018-05",
+          "raw_fact_index": 2,
+          "source_text": "Para cargas, excepciones, infracciones y sanciones, la aplicación descrita se limita a situaciones de hecho que coincidan con la hipótesis normativa, sin extensión por analogía a casos similares.",
+          "kind": "event",
+          "key": "analogy_extension",
+          "value": "not_allowed_for_strict_application",
+          "value_type": "text",
+          "unit": null,
+          "method": "controlled_vocabulary",
+          "source_asserted": true,
+          "legal_inference_added": false
+        }
+      ],
+      "similarity_seed": {
+        "taxpayer_type": null,
+        "activity": null,
+        "tax": null,
+        "problem_type": null,
+        "authority_act": null,
+        "procedural_stage": "interpretacion y aplicacion",
+        "fiscal_year": null,
+        "evidence_fact_ids": {
+          "procedural_stage": [
+            "C4-P-FCT-018-02"
+          ]
+        }
+      },
+      "unresolved_required_case_fields": [
+        "taxpayer_type",
+        "activity",
+        "tax",
+        "problem_type",
+        "fiscal_year"
+      ],
+      "raw_facts_fully_covered": true,
+      "facts_normalized": true,
+      "problem_institution_classified": false,
+      "normative_articles_linked": false,
+      "corpus_validated": false,
+      "cbr_family_assigned": false,
+      "operational_case_created": false,
+      "can_control_legal_decision": false
+    },
+    {
+      "situation_id": "P-CBR-SIT-019",
+      "source": "prodecon",
+      "source_entry_id": "PRODECON-10",
+      "historical_regime_context": false,
+      "raw_fact_count": 2,
+      "normalized_fact_count": 6,
+      "facts": [
+        {
+          "fact_id": "C4-P-FCT-019-01",
+          "raw_fact_index": 1,
+          "source_text": "La fuente describe al patrón como encargado de calcular y retener pagos de ISR derivados de salarios.",
+          "kind": "actor",
+          "key": "taxpayer_type",
+          "value": "individual",
+          "value_type": "text",
+          "unit": null,
+          "method": "controlled_vocabulary",
+          "source_asserted": true,
+          "legal_inference_added": false
+        },
+        {
+          "fact_id": "C4-P-FCT-019-02",
+          "raw_fact_index": 1,
+          "source_text": "La fuente describe al patrón como encargado de calcular y retener pagos de ISR derivados de salarios.",
+          "kind": "actor",
+          "key": "actor_type",
+          "value": "employer",
+          "value_type": "text",
+          "unit": null,
+          "method": "controlled_vocabulary",
+          "source_asserted": true,
+          "legal_inference_added": false
+        },
+        {
+          "fact_id": "C4-P-FCT-019-03",
+          "raw_fact_index": 1,
+          "source_text": "La fuente describe al patrón como encargado de calcular y retener pagos de ISR derivados de salarios.",
+          "kind": "activity",
+          "key": "activity",
+          "value": "salaried_work",
+          "value_type": "text",
+          "unit": null,
+          "method": "controlled_vocabulary",
+          "source_asserted": true,
+          "legal_inference_added": false
+        },
+        {
+          "fact_id": "C4-P-FCT-019-04",
+          "raw_fact_index": 1,
+          "source_text": "La fuente describe al patrón como encargado de calcular y retener pagos de ISR derivados de salarios.",
+          "kind": "tax",
+          "key": "tax",
+          "value": "ISR",
+          "value_type": "text",
+          "unit": null,
+          "method": "controlled_vocabulary",
+          "source_asserted": true,
+          "legal_inference_added": false
+        },
+        {
+          "fact_id": "C4-P-FCT-019-05",
+          "raw_fact_index": 1,
+          "source_text": "La fuente describe al patrón como encargado de calcular y retener pagos de ISR derivados de salarios.",
+          "kind": "obligation",
+          "key": "employer_action",
+          "value": "calculate_and_withhold_isr",
+          "value_type": "text",
+          "unit": null,
+          "method": "controlled_vocabulary",
+          "source_asserted": true,
+          "legal_inference_added": false
+        },
+        {
+          "fact_id": "C4-P-FCT-019-06",
+          "raw_fact_index": 2,
+          "source_text": "La edición fuente también contempla supuestos en los que el propio trabajador determina su ISR anual.",
+          "kind": "event",
+          "key": "annual_determination_actor",
+          "value": "worker_in_specific_cases",
+          "value_type": "text",
+          "unit": null,
+          "method": "controlled_vocabulary",
+          "source_asserted": true,
+          "legal_inference_added": false
+        }
+      ],
+      "similarity_seed": {
+        "taxpayer_type": "individual",
+        "activity": "trabajo subordinado",
+        "tax": "ISR",
+        "problem_type": null,
+        "authority_act": null,
+        "procedural_stage": null,
+        "fiscal_year": null,
+        "evidence_fact_ids": {
+          "taxpayer_type": [
+            "C4-P-FCT-019-01"
+          ],
+          "activity": [
+            "C4-P-FCT-019-03"
+          ],
+          "tax": [
+            "C4-P-FCT-019-04"
+          ]
+        }
+      },
+      "unresolved_required_case_fields": [
+        "problem_type",
+        "fiscal_year"
+      ],
+      "raw_facts_fully_covered": true,
+      "facts_normalized": true,
+      "problem_institution_classified": false,
+      "normative_articles_linked": false,
+      "corpus_validated": false,
+      "cbr_family_assigned": false,
+      "operational_case_created": false,
+      "can_control_legal_decision": false
+    },
+    {
+      "situation_id": "P-CBR-SIT-020",
+      "source": "prodecon",
+      "source_entry_id": "PRODECON-10",
+      "historical_regime_context": false,
+      "raw_fact_count": 2,
+      "normalized_fact_count": 7,
+      "facts": [
+        {
+          "fact_id": "C4-P-FCT-020-01",
+          "raw_fact_index": 1,
+          "source_text": "La edición fuente menciona, entre otros supuestos, la prestación de servicios a dos o más patrones durante un mismo ejercicio para la determinación anual por el trabajador.",
+          "kind": "actor",
+          "key": "taxpayer_type",
+          "value": "individual",
+          "value_type": "text",
+          "unit": null,
+          "method": "controlled_vocabulary",
+          "source_asserted": true,
+          "legal_inference_added": false
+        },
+        {
+          "fact_id": "C4-P-FCT-020-02",
+          "raw_fact_index": 1,
+          "source_text": "La edición fuente menciona, entre otros supuestos, la prestación de servicios a dos o más patrones durante un mismo ejercicio para la determinación anual por el trabajador.",
+          "kind": "activity",
+          "key": "activity",
+          "value": "salaried_work",
+          "value_type": "text",
+          "unit": null,
+          "method": "controlled_vocabulary",
+          "source_asserted": true,
+          "legal_inference_added": false
+        },
+        {
+          "fact_id": "C4-P-FCT-020-03",
+          "raw_fact_index": 1,
+          "source_text": "La edición fuente menciona, entre otros supuestos, la prestación de servicios a dos o más patrones durante un mismo ejercicio para la determinación anual por el trabajador.",
+          "kind": "tax",
+          "key": "tax",
+          "value": "ISR",
+          "value_type": "text",
+          "unit": null,
+          "method": "controlled_vocabulary",
+          "source_asserted": true,
+          "legal_inference_added": false
+        },
+        {
+          "fact_id": "C4-P-FCT-020-04",
+          "raw_fact_index": 1,
+          "source_text": "La edición fuente menciona, entre otros supuestos, la prestación de servicios a dos o más patrones durante un mismo ejercicio para la determinación anual por el trabajador.",
+          "kind": "event",
+          "key": "annual_return_trigger",
+          "value": "two_or_more_employers",
+          "value_type": "text",
+          "unit": null,
+          "method": "controlled_vocabulary",
+          "source_asserted": true,
+          "legal_inference_added": false
+        },
+        {
+          "fact_id": "C4-P-FCT-020-05",
+          "raw_fact_index": 2,
+          "source_text": "Al determinar el impuesto anual, la fuente contempla deducciones personales y la comparación con retenciones previas para identificar pago pendiente o cantidad pagada en exceso.",
+          "kind": "calculation_component",
+          "key": "annual_component",
+          "value": "personal_deductions",
+          "value_type": "text",
+          "unit": null,
+          "method": "controlled_vocabulary",
+          "source_asserted": true,
+          "legal_inference_added": false
+        },
+        {
+          "fact_id": "C4-P-FCT-020-06",
+          "raw_fact_index": 2,
+          "source_text": "Al determinar el impuesto anual, la fuente contempla deducciones personales y la comparación con retenciones previas para identificar pago pendiente o cantidad pagada en exceso.",
+          "kind": "calculation_component",
+          "key": "annual_component",
+          "value": "prior_withholdings",
+          "value_type": "text",
+          "unit": null,
+          "method": "controlled_vocabulary",
+          "source_asserted": true,
+          "legal_inference_added": false
+        },
+        {
+          "fact_id": "C4-P-FCT-020-07",
+          "raw_fact_index": 2,
+          "source_text": "Al determinar el impuesto anual, la fuente contempla deducciones personales y la comparación con retenciones previas para identificar pago pendiente o cantidad pagada en exceso.",
+          "kind": "event",
+          "key": "annual_result",
+          "value": "tax_due_or_overpayment",
+          "value_type": "text",
+          "unit": null,
+          "method": "controlled_vocabulary",
+          "source_asserted": true,
+          "legal_inference_added": false
+        }
+      ],
+      "similarity_seed": {
+        "taxpayer_type": "individual",
+        "activity": "trabajo subordinado",
+        "tax": "ISR",
+        "problem_type": null,
+        "authority_act": null,
+        "procedural_stage": null,
+        "fiscal_year": null,
+        "evidence_fact_ids": {
+          "taxpayer_type": [
+            "C4-P-FCT-020-01"
+          ],
+          "activity": [
+            "C4-P-FCT-020-02"
+          ],
+          "tax": [
+            "C4-P-FCT-020-03"
+          ]
+        }
+      },
+      "unresolved_required_case_fields": [
+        "problem_type",
+        "fiscal_year"
+      ],
+      "raw_facts_fully_covered": true,
+      "facts_normalized": true,
+      "problem_institution_classified": false,
+      "normative_articles_linked": false,
+      "corpus_validated": false,
+      "cbr_family_assigned": false,
+      "operational_case_created": false,
+      "can_control_legal_decision": false
+    },
+    {
+      "situation_id": "P-CBR-SIT-021",
+      "source": "prodecon",
+      "source_entry_id": "PRODECON-11",
+      "historical_regime_context": false,
+      "raw_fact_count": 2,
+      "normalized_fact_count": 5,
+      "facts": [
+        {
+          "fact_id": "C4-P-FCT-021-01",
+          "raw_fact_index": 1,
+          "source_text": "La fuente define los ingresos por actividades profesionales como remuneraciones derivadas de un servicio personal independiente que no sea subordinado.",
+          "kind": "actor",
+          "key": "taxpayer_type",
+          "value": "individual",
+          "value_type": "text",
+          "unit": null,
+          "method": "controlled_vocabulary",
+          "source_asserted": true,
+          "legal_inference_added": false
+        },
+        {
+          "fact_id": "C4-P-FCT-021-02",
+          "raw_fact_index": 1,
+          "source_text": "La fuente define los ingresos por actividades profesionales como remuneraciones derivadas de un servicio personal independiente que no sea subordinado.",
+          "kind": "activity",
+          "key": "activity",
+          "value": "independent_professional_services",
+          "value_type": "text",
+          "unit": null,
+          "method": "controlled_vocabulary",
+          "source_asserted": true,
+          "legal_inference_added": false
+        },
+        {
+          "fact_id": "C4-P-FCT-021-03",
+          "raw_fact_index": 1,
+          "source_text": "La fuente define los ingresos por actividades profesionales como remuneraciones derivadas de un servicio personal independiente que no sea subordinado.",
+          "kind": "event",
+          "key": "subordination_status",
+          "value": "not_subordinate",
+          "value_type": "text",
+          "unit": null,
+          "method": "controlled_vocabulary",
+          "source_asserted": true,
+          "legal_inference_added": false
+        },
+        {
+          "fact_id": "C4-P-FCT-021-04",
+          "raw_fact_index": 1,
+          "source_text": "La fuente define los ingresos por actividades profesionales como remuneraciones derivadas de un servicio personal independiente que no sea subordinado.",
+          "kind": "tax",
+          "key": "tax",
+          "value": "ISR",
+          "value_type": "text",
+          "unit": null,
+          "method": "controlled_vocabulary",
+          "source_asserted": true,
+          "legal_inference_added": false
+        },
+        {
+          "fact_id": "C4-P-FCT-021-05",
+          "raw_fact_index": 2,
+          "source_text": "Contadores, médicos, abogados, arquitectos e ingenieros aparecen como ejemplos de prestadores independientes.",
+          "kind": "attribute",
+          "key": "profession_examples",
+          "value": "accountant_doctor_lawyer_architect_engineer",
+          "value_type": "text",
+          "unit": null,
+          "method": "controlled_vocabulary",
+          "source_asserted": true,
+          "legal_inference_added": false
+        }
+      ],
+      "similarity_seed": {
+        "taxpayer_type": "individual",
+        "activity": "servicios profesionales independientes",
+        "tax": "ISR",
+        "problem_type": null,
+        "authority_act": null,
+        "procedural_stage": null,
+        "fiscal_year": null,
+        "evidence_fact_ids": {
+          "taxpayer_type": [
+            "C4-P-FCT-021-01"
+          ],
+          "activity": [
+            "C4-P-FCT-021-02"
+          ],
+          "tax": [
+            "C4-P-FCT-021-04"
+          ]
+        }
+      },
+      "unresolved_required_case_fields": [
+        "problem_type",
+        "fiscal_year"
+      ],
+      "raw_facts_fully_covered": true,
+      "facts_normalized": true,
+      "problem_institution_classified": false,
+      "normative_articles_linked": false,
+      "corpus_validated": false,
+      "cbr_family_assigned": false,
+      "operational_case_created": false,
+      "can_control_legal_decision": false
+    },
+    {
+      "situation_id": "P-CBR-SIT-022",
+      "source": "prodecon",
+      "source_entry_id": "PRODECON-11",
+      "historical_regime_context": false,
+      "raw_fact_count": 2,
+      "normalized_fact_count": 6,
+      "facts": [
+        {
+          "fact_id": "C4-P-FCT-022-01",
+          "raw_fact_index": 1,
+          "source_text": "La fuente atribuye al profesional independiente la presentación directa de declaraciones mensuales y anual de ISR.",
+          "kind": "actor",
+          "key": "taxpayer_type",
+          "value": "individual",
+          "value_type": "text",
+          "unit": null,
+          "method": "controlled_vocabulary",
+          "source_asserted": true,
+          "legal_inference_added": false
+        },
+        {
+          "fact_id": "C4-P-FCT-022-02",
+          "raw_fact_index": 1,
+          "source_text": "La fuente atribuye al profesional independiente la presentación directa de declaraciones mensuales y anual de ISR.",
+          "kind": "activity",
+          "key": "activity",
+          "value": "independent_professional_services",
+          "value_type": "text",
+          "unit": null,
+          "method": "controlled_vocabulary",
+          "source_asserted": true,
+          "legal_inference_added": false
+        },
+        {
+          "fact_id": "C4-P-FCT-022-03",
+          "raw_fact_index": 1,
+          "source_text": "La fuente atribuye al profesional independiente la presentación directa de declaraciones mensuales y anual de ISR.",
+          "kind": "tax",
+          "key": "tax",
+          "value": "ISR",
+          "value_type": "text",
+          "unit": null,
+          "method": "controlled_vocabulary",
+          "source_asserted": true,
+          "legal_inference_added": false
+        },
+        {
+          "fact_id": "C4-P-FCT-022-04",
+          "raw_fact_index": 1,
+          "source_text": "La fuente atribuye al profesional independiente la presentación directa de declaraciones mensuales y anual de ISR.",
+          "kind": "obligation",
+          "key": "filing_frequency",
+          "value": "monthly_and_annual",
+          "value_type": "text",
+          "unit": null,
+          "method": "controlled_vocabulary",
+          "source_asserted": true,
+          "legal_inference_added": false
+        },
+        {
+          "fact_id": "C4-P-FCT-022-05",
+          "raw_fact_index": 2,
+          "source_text": "Para actividades profesionales distingue deducciones estructurales vinculadas a generar ingresos y deducciones personales de la persona física.",
+          "kind": "calculation_component",
+          "key": "deduction_type",
+          "value": "structural",
+          "value_type": "text",
+          "unit": null,
+          "method": "controlled_vocabulary",
+          "source_asserted": true,
+          "legal_inference_added": false
+        },
+        {
+          "fact_id": "C4-P-FCT-022-06",
+          "raw_fact_index": 2,
+          "source_text": "Para actividades profesionales distingue deducciones estructurales vinculadas a generar ingresos y deducciones personales de la persona física.",
+          "kind": "calculation_component",
+          "key": "deduction_type",
+          "value": "personal",
+          "value_type": "text",
+          "unit": null,
+          "method": "controlled_vocabulary",
+          "source_asserted": true,
+          "legal_inference_added": false
+        }
+      ],
+      "similarity_seed": {
+        "taxpayer_type": "individual",
+        "activity": "servicios profesionales independientes",
+        "tax": "ISR",
+        "problem_type": null,
+        "authority_act": null,
+        "procedural_stage": null,
+        "fiscal_year": null,
+        "evidence_fact_ids": {
+          "taxpayer_type": [
+            "C4-P-FCT-022-01"
+          ],
+          "activity": [
+            "C4-P-FCT-022-02"
+          ],
+          "tax": [
+            "C4-P-FCT-022-03"
+          ]
+        }
+      },
+      "unresolved_required_case_fields": [
+        "problem_type",
+        "fiscal_year"
+      ],
+      "raw_facts_fully_covered": true,
+      "facts_normalized": true,
+      "problem_institution_classified": false,
+      "normative_articles_linked": false,
+      "corpus_validated": false,
+      "cbr_family_assigned": false,
+      "operational_case_created": false,
+      "can_control_legal_decision": false
+    },
+    {
+      "situation_id": "P-CBR-SIT-023",
+      "source": "prodecon",
+      "source_entry_id": "PRODECON-12",
+      "historical_regime_context": true,
+      "raw_fact_count": 2,
+      "normalized_fact_count": 5,
+      "facts": [
+        {
+          "fact_id": "C4-P-FCT-023-01",
+          "raw_fact_index": 1,
+          "source_text": "La edición fuente describe el RIF para ciertas personas físicas con actividades empresariales, enajenación de bienes o servicios no profesionales.",
+          "kind": "actor",
+          "key": "taxpayer_type",
+          "value": "individual",
+          "value_type": "text",
+          "unit": null,
+          "method": "controlled_vocabulary",
+          "source_asserted": true,
+          "legal_inference_added": false
+        },
+        {
+          "fact_id": "C4-P-FCT-023-02",
+          "raw_fact_index": 1,
+          "source_text": "La edición fuente describe el RIF para ciertas personas físicas con actividades empresariales, enajenación de bienes o servicios no profesionales.",
+          "kind": "tax",
+          "key": "tax",
+          "value": "ISR",
+          "value_type": "text",
+          "unit": null,
+          "method": "controlled_vocabulary",
+          "source_asserted": true,
+          "legal_inference_added": false
+        },
+        {
+          "fact_id": "C4-P-FCT-023-03",
+          "raw_fact_index": 1,
+          "source_text": "La edición fuente describe el RIF para ciertas personas físicas con actividades empresariales, enajenación de bienes o servicios no profesionales.",
+          "kind": "activity",
+          "key": "historical_regime_activity",
+          "value": "business_sale_or_nonprofessional_services",
+          "value_type": "text",
+          "unit": null,
+          "method": "controlled_vocabulary",
+          "source_asserted": true,
+          "legal_inference_added": false
+        },
+        {
+          "fact_id": "C4-P-FCT-023-04",
+          "raw_fact_index": 1,
+          "source_text": "La edición fuente describe el RIF para ciertas personas físicas con actividades empresariales, enajenación de bienes o servicios no profesionales.",
+          "kind": "temporal",
+          "key": "regime_status",
+          "value": "historical",
+          "value_type": "text",
+          "unit": null,
+          "method": "controlled_vocabulary",
+          "source_asserted": true,
+          "legal_inference_added": false
+        },
+        {
+          "fact_id": "C4-P-FCT-023-05",
+          "raw_fact_index": 2,
+          "source_text": "La edición fuente utiliza un límite de ingresos y excepciones propias del contexto normativo de ese régimen histórico.",
+          "kind": "attribute",
+          "key": "historical_condition",
+          "value": "income_limit_and_regime_exceptions",
+          "value_type": "text",
+          "unit": null,
+          "method": "controlled_vocabulary",
+          "source_asserted": true,
+          "legal_inference_added": false
+        }
+      ],
+      "similarity_seed": {
+        "taxpayer_type": "individual",
+        "activity": "RIF actividades empresariales y servicios no profesionales",
+        "tax": "ISR",
+        "problem_type": null,
+        "authority_act": null,
+        "procedural_stage": null,
+        "fiscal_year": null,
+        "evidence_fact_ids": {
+          "taxpayer_type": [
+            "C4-P-FCT-023-01"
+          ],
+          "activity": [
+            "C4-P-FCT-023-03"
+          ],
+          "tax": [
+            "C4-P-FCT-023-02"
+          ]
+        }
+      },
+      "unresolved_required_case_fields": [
+        "problem_type",
+        "fiscal_year"
+      ],
+      "raw_facts_fully_covered": true,
+      "facts_normalized": true,
+      "problem_institution_classified": false,
+      "normative_articles_linked": false,
+      "corpus_validated": false,
+      "cbr_family_assigned": false,
+      "operational_case_created": false,
+      "can_control_legal_decision": false
+    },
+    {
+      "situation_id": "P-CBR-SIT-024",
+      "source": "prodecon",
+      "source_entry_id": "PRODECON-12",
+      "historical_regime_context": true,
+      "raw_fact_count": 2,
+      "normalized_fact_count": 7,
+      "facts": [
+        {
+          "fact_id": "C4-P-FCT-024-01",
+          "raw_fact_index": 1,
+          "source_text": "La edición fuente describe pagos de ISR del RIF en forma bimestral y con carácter definitivo.",
+          "kind": "actor",
+          "key": "taxpayer_type",
+          "value": "individual",
+          "value_type": "text",
+          "unit": null,
+          "method": "controlled_vocabulary",
+          "source_asserted": true,
+          "legal_inference_added": false
+        },
+        {
+          "fact_id": "C4-P-FCT-024-02",
+          "raw_fact_index": 1,
+          "source_text": "La edición fuente describe pagos de ISR del RIF en forma bimestral y con carácter definitivo.",
+          "kind": "activity",
+          "key": "historical_regime_activity",
+          "value": "business_sale_or_nonprofessional_services",
+          "value_type": "text",
+          "unit": null,
+          "method": "controlled_vocabulary",
+          "source_asserted": true,
+          "legal_inference_added": false
+        },
+        {
+          "fact_id": "C4-P-FCT-024-03",
+          "raw_fact_index": 1,
+          "source_text": "La edición fuente describe pagos de ISR del RIF en forma bimestral y con carácter definitivo.",
+          "kind": "tax",
+          "key": "tax",
+          "value": "ISR",
+          "value_type": "text",
+          "unit": null,
+          "method": "controlled_vocabulary",
+          "source_asserted": true,
+          "legal_inference_added": false
+        },
+        {
+          "fact_id": "C4-P-FCT-024-04",
+          "raw_fact_index": 1,
+          "source_text": "La edición fuente describe pagos de ISR del RIF en forma bimestral y con carácter definitivo.",
+          "kind": "temporal",
+          "key": "payment_frequency",
+          "value": "bimonthly",
+          "value_type": "text",
+          "unit": null,
+          "method": "controlled_vocabulary",
+          "source_asserted": true,
+          "legal_inference_added": false
+        },
+        {
+          "fact_id": "C4-P-FCT-024-05",
+          "raw_fact_index": 1,
+          "source_text": "La edición fuente describe pagos de ISR del RIF en forma bimestral y con carácter definitivo.",
+          "kind": "attribute",
+          "key": "payment_character",
+          "value": "final",
+          "value_type": "text",
+          "unit": null,
+          "method": "controlled_vocabulary",
+          "source_asserted": true,
+          "legal_inference_added": false
+        },
+        {
+          "fact_id": "C4-P-FCT-024-06",
+          "raw_fact_index": 1,
+          "source_text": "La edición fuente describe pagos de ISR del RIF en forma bimestral y con carácter definitivo.",
+          "kind": "temporal",
+          "key": "regime_status",
+          "value": "historical",
+          "value_type": "text",
+          "unit": null,
+          "method": "controlled_vocabulary",
+          "source_asserted": true,
+          "legal_inference_added": false
+        },
+        {
+          "fact_id": "C4-P-FCT-024-07",
+          "raw_fact_index": 2,
+          "source_text": "La edición fuente enumera obligaciones operativas del RIF, entre ellas registro, comprobantes y registro de operaciones, propias de ese contexto temporal.",
+          "kind": "obligation",
+          "key": "historical_obligations",
+          "value": "registration_invoices_operation_records",
+          "value_type": "text",
+          "unit": null,
+          "method": "controlled_vocabulary",
+          "source_asserted": true,
+          "legal_inference_added": false
+        }
+      ],
+      "similarity_seed": {
+        "taxpayer_type": "individual",
+        "activity": "RIF actividades empresariales y servicios no profesionales",
+        "tax": "ISR",
+        "problem_type": null,
+        "authority_act": null,
+        "procedural_stage": null,
+        "fiscal_year": null,
+        "evidence_fact_ids": {
+          "taxpayer_type": [
+            "C4-P-FCT-024-01"
+          ],
+          "activity": [
+            "C4-P-FCT-024-02"
+          ],
+          "tax": [
+            "C4-P-FCT-024-03"
+          ]
+        }
+      },
+      "unresolved_required_case_fields": [
+        "problem_type",
+        "fiscal_year"
+      ],
+      "raw_facts_fully_covered": true,
+      "facts_normalized": true,
+      "problem_institution_classified": false,
+      "normative_articles_linked": false,
+      "corpus_validated": false,
+      "cbr_family_assigned": false,
+      "operational_case_created": false,
+      "can_control_legal_decision": false
+    },
+    {
+      "situation_id": "U-CBR-SIT-001",
+      "source": "unam",
+      "source_entry_id": "UNAM-V",
+      "historical_regime_context": false,
+      "raw_fact_count": 2,
+      "normalized_fact_count": 10,
+      "facts": [
+        {
+          "fact_id": "C4-U-FCT-001-01",
+          "raw_fact_index": 1,
+          "source_text": "La persona moral calcula su ISR del ejercicio 2017 con ingresos cobrados por 23,900,000 y facturas por cobrar por 2,100,000.",
+          "kind": "actor",
+          "key": "taxpayer_type",
+          "value": "legal_entity",
+          "value_type": "text",
+          "unit": null,
+          "method": "controlled_vocabulary",
+          "source_asserted": true,
+          "legal_inference_added": false
+        },
+        {
+          "fact_id": "C4-U-FCT-001-02",
+          "raw_fact_index": 1,
+          "source_text": "La persona moral calcula su ISR del ejercicio 2017 con ingresos cobrados por 23,900,000 y facturas por cobrar por 2,100,000.",
+          "kind": "activity",
+          "key": "activity",
+          "value": "general_legal_entity_regime",
+          "value_type": "text",
+          "unit": null,
+          "method": "controlled_vocabulary",
+          "source_asserted": true,
+          "legal_inference_added": false
+        },
+        {
+          "fact_id": "C4-U-FCT-001-03",
+          "raw_fact_index": 1,
+          "source_text": "La persona moral calcula su ISR del ejercicio 2017 con ingresos cobrados por 23,900,000 y facturas por cobrar por 2,100,000.",
+          "kind": "tax",
+          "key": "tax",
+          "value": "ISR",
+          "value_type": "text",
+          "unit": null,
+          "method": "controlled_vocabulary",
+          "source_asserted": true,
+          "legal_inference_added": false
+        },
+        {
+          "fact_id": "C4-U-FCT-001-04",
+          "raw_fact_index": 1,
+          "source_text": "La persona moral calcula su ISR del ejercicio 2017 con ingresos cobrados por 23,900,000 y facturas por cobrar por 2,100,000.",
+          "kind": "temporal",
+          "key": "fiscal_year",
+          "value": "2017",
+          "value_type": "year",
+          "unit": null,
+          "method": "canonical_temporal",
+          "source_asserted": true,
+          "legal_inference_added": false
+        },
+        {
+          "fact_id": "C4-U-FCT-001-05",
+          "raw_fact_index": 1,
+          "source_text": "La persona moral calcula su ISR del ejercicio 2017 con ingresos cobrados por 23,900,000 y facturas por cobrar por 2,100,000.",
+          "kind": "amount",
+          "key": "income_collected",
+          "value": "23900000.00",
+          "value_type": "decimal",
+          "unit": "MXN",
+          "method": "canonical_numeric",
+          "source_asserted": true,
+          "legal_inference_added": false
+        },
+        {
+          "fact_id": "C4-U-FCT-001-06",
+          "raw_fact_index": 1,
+          "source_text": "La persona moral calcula su ISR del ejercicio 2017 con ingresos cobrados por 23,900,000 y facturas por cobrar por 2,100,000.",
+          "kind": "amount",
+          "key": "accounts_receivable",
+          "value": "2100000.00",
+          "value_type": "decimal",
+          "unit": "MXN",
+          "method": "canonical_numeric",
+          "source_asserted": true,
+          "legal_inference_added": false
+        },
+        {
+          "fact_id": "C4-U-FCT-001-07",
+          "raw_fact_index": 2,
+          "source_text": "La fuente incorpora costo de ventas por 11,000,000, gastos de operación por 3,650,000, PTU por 5,000,000 y pérdidas fiscales pendientes por 4,600,000.",
+          "kind": "amount",
+          "key": "cost_of_sales",
+          "value": "11000000.00",
+          "value_type": "decimal",
+          "unit": "MXN",
+          "method": "canonical_numeric",
+          "source_asserted": true,
+          "legal_inference_added": false
+        },
+        {
+          "fact_id": "C4-U-FCT-001-08",
+          "raw_fact_index": 2,
+          "source_text": "La fuente incorpora costo de ventas por 11,000,000, gastos de operación por 3,650,000, PTU por 5,000,000 y pérdidas fiscales pendientes por 4,600,000.",
+          "kind": "amount",
+          "key": "operating_expenses",
+          "value": "3650000.00",
+          "value_type": "decimal",
+          "unit": "MXN",
+          "method": "canonical_numeric",
+          "source_asserted": true,
+          "legal_inference_added": false
+        },
+        {
+          "fact_id": "C4-U-FCT-001-09",
+          "raw_fact_index": 2,
+          "source_text": "La fuente incorpora costo de ventas por 11,000,000, gastos de operación por 3,650,000, PTU por 5,000,000 y pérdidas fiscales pendientes por 4,600,000.",
+          "kind": "amount",
+          "key": "ptu_paid",
+          "value": "5000000.00",
+          "value_type": "decimal",
+          "unit": "MXN",
+          "method": "canonical_numeric",
+          "source_asserted": true,
+          "legal_inference_added": false
+        },
+        {
+          "fact_id": "C4-U-FCT-001-10",
+          "raw_fact_index": 2,
+          "source_text": "La fuente incorpora costo de ventas por 11,000,000, gastos de operación por 3,650,000, PTU por 5,000,000 y pérdidas fiscales pendientes por 4,600,000.",
+          "kind": "amount",
+          "key": "tax_losses_pending",
+          "value": "4600000.00",
+          "value_type": "decimal",
+          "unit": "MXN",
+          "method": "canonical_numeric",
+          "source_asserted": true,
+          "legal_inference_added": false
+        }
+      ],
+      "similarity_seed": {
+        "taxpayer_type": "legal_entity",
+        "activity": "regimen general de personas morales",
+        "tax": "ISR",
+        "problem_type": null,
+        "authority_act": null,
+        "procedural_stage": null,
+        "fiscal_year": 2017,
+        "evidence_fact_ids": {
+          "taxpayer_type": [
+            "C4-U-FCT-001-01"
+          ],
+          "activity": [
+            "C4-U-FCT-001-02"
+          ],
+          "tax": [
+            "C4-U-FCT-001-03"
+          ],
+          "fiscal_year": [
+            "C4-U-FCT-001-04"
+          ]
+        }
+      },
+      "unresolved_required_case_fields": [
+        "problem_type"
+      ],
+      "raw_facts_fully_covered": true,
+      "facts_normalized": true,
+      "problem_institution_classified": false,
+      "normative_articles_linked": false,
+      "corpus_validated": false,
+      "cbr_family_assigned": false,
+      "operational_case_created": false,
+      "can_control_legal_decision": false
+    },
+    {
+      "situation_id": "U-CBR-SIT-002",
+      "source": "unam",
+      "source_entry_id": "UNAM-V",
+      "historical_regime_context": false,
+      "raw_fact_count": 2,
+      "normalized_fact_count": 8,
+      "facts": [
+        {
+          "fact_id": "C4-U-FCT-002-01",
+          "raw_fact_index": 1,
+          "source_text": "La persona moral obtuvo utilidad fiscal de 30,800 en 2016 e ingresos acumulables por 238,800.",
+          "kind": "actor",
+          "key": "taxpayer_type",
+          "value": "legal_entity",
+          "value_type": "text",
+          "unit": null,
+          "method": "controlled_vocabulary",
+          "source_asserted": true,
+          "legal_inference_added": false
+        },
+        {
+          "fact_id": "C4-U-FCT-002-02",
+          "raw_fact_index": 1,
+          "source_text": "La persona moral obtuvo utilidad fiscal de 30,800 en 2016 e ingresos acumulables por 238,800.",
+          "kind": "activity",
+          "key": "activity",
+          "value": "general_legal_entity_regime",
+          "value_type": "text",
+          "unit": null,
+          "method": "controlled_vocabulary",
+          "source_asserted": true,
+          "legal_inference_added": false
+        },
+        {
+          "fact_id": "C4-U-FCT-002-03",
+          "raw_fact_index": 1,
+          "source_text": "La persona moral obtuvo utilidad fiscal de 30,800 en 2016 e ingresos acumulables por 238,800.",
+          "kind": "tax",
+          "key": "tax",
+          "value": "ISR",
+          "value_type": "text",
+          "unit": null,
+          "method": "controlled_vocabulary",
+          "source_asserted": true,
+          "legal_inference_added": false
+        },
+        {
+          "fact_id": "C4-U-FCT-002-04",
+          "raw_fact_index": 1,
+          "source_text": "La persona moral obtuvo utilidad fiscal de 30,800 en 2016 e ingresos acumulables por 238,800.",
+          "kind": "temporal",
+          "key": "fiscal_year",
+          "value": "2016",
+          "value_type": "year",
+          "unit": null,
+          "method": "canonical_temporal",
+          "source_asserted": true,
+          "legal_inference_added": false
+        },
+        {
+          "fact_id": "C4-U-FCT-002-05",
+          "raw_fact_index": 1,
+          "source_text": "La persona moral obtuvo utilidad fiscal de 30,800 en 2016 e ingresos acumulables por 238,800.",
+          "kind": "amount",
+          "key": "tax_profit",
+          "value": "30800.00",
+          "value_type": "decimal",
+          "unit": "MXN",
+          "method": "canonical_numeric",
+          "source_asserted": true,
+          "legal_inference_added": false
+        },
+        {
+          "fact_id": "C4-U-FCT-002-06",
+          "raw_fact_index": 1,
+          "source_text": "La persona moral obtuvo utilidad fiscal de 30,800 en 2016 e ingresos acumulables por 238,800.",
+          "kind": "amount",
+          "key": "taxable_income",
+          "value": "238800.00",
+          "value_type": "decimal",
+          "unit": "MXN",
+          "method": "canonical_numeric",
+          "source_asserted": true,
+          "legal_inference_added": false
+        },
+        {
+          "fact_id": "C4-U-FCT-002-07",
+          "raw_fact_index": 2,
+          "source_text": "Los ingresos acumulables incluyen un ajuste anual por inflación acumulable de 2,300 que se resta para obtener ingresos nominales.",
+          "kind": "amount",
+          "key": "annual_inflation_adjustment_taxable",
+          "value": "2300.00",
+          "value_type": "decimal",
+          "unit": "MXN",
+          "method": "canonical_numeric",
+          "source_asserted": true,
+          "legal_inference_added": false
+        },
+        {
+          "fact_id": "C4-U-FCT-002-08",
+          "raw_fact_index": 2,
+          "source_text": "Los ingresos acumulables incluyen un ajuste anual por inflación acumulable de 2,300 que se resta para obtener ingresos nominales.",
+          "kind": "calculation_component",
+          "key": "calculation_step",
+          "value": "subtract_inflation_adjustment_for_nominal_income",
+          "value_type": "text",
+          "unit": null,
+          "method": "controlled_vocabulary",
+          "source_asserted": true,
+          "legal_inference_added": false
+        }
+      ],
+      "similarity_seed": {
+        "taxpayer_type": "legal_entity",
+        "activity": "regimen general de personas morales",
+        "tax": "ISR",
+        "problem_type": null,
+        "authority_act": null,
+        "procedural_stage": null,
+        "fiscal_year": 2016,
+        "evidence_fact_ids": {
+          "taxpayer_type": [
+            "C4-U-FCT-002-01"
+          ],
+          "activity": [
+            "C4-U-FCT-002-02"
+          ],
+          "tax": [
+            "C4-U-FCT-002-03"
+          ],
+          "fiscal_year": [
+            "C4-U-FCT-002-04"
+          ]
+        }
+      },
+      "unresolved_required_case_fields": [
+        "problem_type"
+      ],
+      "raw_facts_fully_covered": true,
+      "facts_normalized": true,
+      "problem_institution_classified": false,
+      "normative_articles_linked": false,
+      "corpus_validated": false,
+      "cbr_family_assigned": false,
+      "operational_case_created": false,
+      "can_control_legal_decision": false
+    },
+    {
+      "situation_id": "U-CBR-SIT-003",
+      "source": "unam",
+      "source_entry_id": "UNAM-V",
+      "historical_regime_context": false,
+      "raw_fact_count": 2,
+      "normalized_fact_count": 9,
+      "facts": [
+        {
+          "fact_id": "C4-U-FCT-003-01",
+          "raw_fact_index": 1,
+          "source_text": "El caso acumula ingresos de enero, febrero y marzo de 2017 e incluye rendimientos bancarios.",
+          "kind": "actor",
+          "key": "taxpayer_type",
+          "value": "legal_entity",
+          "value_type": "text",
+          "unit": null,
+          "method": "controlled_vocabulary",
+          "source_asserted": true,
+          "legal_inference_added": false
+        },
+        {
+          "fact_id": "C4-U-FCT-003-02",
+          "raw_fact_index": 1,
+          "source_text": "El caso acumula ingresos de enero, febrero y marzo de 2017 e incluye rendimientos bancarios.",
+          "kind": "activity",
+          "key": "activity",
+          "value": "general_legal_entity_regime",
+          "value_type": "text",
+          "unit": null,
+          "method": "controlled_vocabulary",
+          "source_asserted": true,
+          "legal_inference_added": false
+        },
+        {
+          "fact_id": "C4-U-FCT-003-03",
+          "raw_fact_index": 1,
+          "source_text": "El caso acumula ingresos de enero, febrero y marzo de 2017 e incluye rendimientos bancarios.",
+          "kind": "tax",
+          "key": "tax",
+          "value": "ISR",
+          "value_type": "text",
+          "unit": null,
+          "method": "controlled_vocabulary",
+          "source_asserted": true,
+          "legal_inference_added": false
+        },
+        {
+          "fact_id": "C4-U-FCT-003-04",
+          "raw_fact_index": 1,
+          "source_text": "El caso acumula ingresos de enero, febrero y marzo de 2017 e incluye rendimientos bancarios.",
+          "kind": "temporal",
+          "key": "fiscal_year",
+          "value": "2017",
+          "value_type": "year",
+          "unit": null,
+          "method": "canonical_temporal",
+          "source_asserted": true,
+          "legal_inference_added": false
+        },
+        {
+          "fact_id": "C4-U-FCT-003-05",
+          "raw_fact_index": 1,
+          "source_text": "El caso acumula ingresos de enero, febrero y marzo de 2017 e incluye rendimientos bancarios.",
+          "kind": "temporal",
+          "key": "calculation_period",
+          "value": "january_to_march",
+          "value_type": "text",
+          "unit": null,
+          "method": "controlled_vocabulary",
+          "source_asserted": true,
+          "legal_inference_added": false
+        },
+        {
+          "fact_id": "C4-U-FCT-003-06",
+          "raw_fact_index": 1,
+          "source_text": "El caso acumula ingresos de enero, febrero y marzo de 2017 e incluye rendimientos bancarios.",
+          "kind": "calculation_component",
+          "key": "income_component",
+          "value": "bank_returns",
+          "value_type": "text",
+          "unit": null,
+          "method": "controlled_vocabulary",
+          "source_asserted": true,
+          "legal_inference_added": false
+        },
+        {
+          "fact_id": "C4-U-FCT-003-07",
+          "raw_fact_index": 2,
+          "source_text": "El cálculo utiliza coeficiente de utilidad 2015 de 0.1263, coeficiente 2016 de 0.1401 y pérdidas fiscales previamente aplicadas por 9,000.",
+          "kind": "calculation_component",
+          "key": "utility_coefficient_2015",
+          "value": "0.1263",
+          "value_type": "ratio",
+          "unit": null,
+          "method": "canonical_numeric",
+          "source_asserted": true,
+          "legal_inference_added": false
+        },
+        {
+          "fact_id": "C4-U-FCT-003-08",
+          "raw_fact_index": 2,
+          "source_text": "El cálculo utiliza coeficiente de utilidad 2015 de 0.1263, coeficiente 2016 de 0.1401 y pérdidas fiscales previamente aplicadas por 9,000.",
+          "kind": "calculation_component",
+          "key": "utility_coefficient_2016",
+          "value": "0.1401",
+          "value_type": "ratio",
+          "unit": null,
+          "method": "canonical_numeric",
+          "source_asserted": true,
+          "legal_inference_added": false
+        },
+        {
+          "fact_id": "C4-U-FCT-003-09",
+          "raw_fact_index": 2,
+          "source_text": "El cálculo utiliza coeficiente de utilidad 2015 de 0.1263, coeficiente 2016 de 0.1401 y pérdidas fiscales previamente aplicadas por 9,000.",
+          "kind": "amount",
+          "key": "previous_tax_losses",
+          "value": "9000.00",
+          "value_type": "decimal",
+          "unit": "MXN",
+          "method": "canonical_numeric",
+          "source_asserted": true,
+          "legal_inference_added": false
+        }
+      ],
+      "similarity_seed": {
+        "taxpayer_type": "legal_entity",
+        "activity": "regimen general de personas morales",
+        "tax": "ISR",
+        "problem_type": null,
+        "authority_act": null,
+        "procedural_stage": null,
+        "fiscal_year": 2017,
+        "evidence_fact_ids": {
+          "taxpayer_type": [
+            "C4-U-FCT-003-01"
+          ],
+          "activity": [
+            "C4-U-FCT-003-02"
+          ],
+          "tax": [
+            "C4-U-FCT-003-03"
+          ],
+          "fiscal_year": [
+            "C4-U-FCT-003-04"
+          ]
+        }
+      },
+      "unresolved_required_case_fields": [
+        "problem_type"
+      ],
+      "raw_facts_fully_covered": true,
+      "facts_normalized": true,
+      "problem_institution_classified": false,
+      "normative_articles_linked": false,
+      "corpus_validated": false,
+      "cbr_family_assigned": false,
+      "operational_case_created": false,
+      "can_control_legal_decision": false
+    },
+    {
+      "situation_id": "U-CBR-SIT-004",
+      "source": "unam",
+      "source_entry_id": "UNAM-V",
+      "historical_regime_context": false,
+      "raw_fact_count": 2,
+      "normalized_fact_count": 8,
+      "facts": [
+        {
+          "fact_id": "C4-U-FCT-004-01",
+          "raw_fact_index": 1,
+          "source_text": "El caso proporciona saldos mensuales de créditos y deudas durante 2016 para obtener sus promedios.",
+          "kind": "actor",
+          "key": "taxpayer_type",
+          "value": "legal_entity",
+          "value_type": "text",
+          "unit": null,
+          "method": "controlled_vocabulary",
+          "source_asserted": true,
+          "legal_inference_added": false
+        },
+        {
+          "fact_id": "C4-U-FCT-004-02",
+          "raw_fact_index": 1,
+          "source_text": "El caso proporciona saldos mensuales de créditos y deudas durante 2016 para obtener sus promedios.",
+          "kind": "activity",
+          "key": "activity",
+          "value": "general_legal_entity_regime",
+          "value_type": "text",
+          "unit": null,
+          "method": "controlled_vocabulary",
+          "source_asserted": true,
+          "legal_inference_added": false
+        },
+        {
+          "fact_id": "C4-U-FCT-004-03",
+          "raw_fact_index": 1,
+          "source_text": "El caso proporciona saldos mensuales de créditos y deudas durante 2016 para obtener sus promedios.",
+          "kind": "tax",
+          "key": "tax",
+          "value": "ISR",
+          "value_type": "text",
+          "unit": null,
+          "method": "controlled_vocabulary",
+          "source_asserted": true,
+          "legal_inference_added": false
+        },
+        {
+          "fact_id": "C4-U-FCT-004-04",
+          "raw_fact_index": 1,
+          "source_text": "El caso proporciona saldos mensuales de créditos y deudas durante 2016 para obtener sus promedios.",
+          "kind": "temporal",
+          "key": "fiscal_year",
+          "value": "2016",
+          "value_type": "year",
+          "unit": null,
+          "method": "canonical_temporal",
+          "source_asserted": true,
+          "legal_inference_added": false
+        },
+        {
+          "fact_id": "C4-U-FCT-004-05",
+          "raw_fact_index": 1,
+          "source_text": "El caso proporciona saldos mensuales de créditos y deudas durante 2016 para obtener sus promedios.",
+          "kind": "calculation_component",
+          "key": "balance_series",
+          "value": "monthly_credits_and_debts",
+          "value_type": "text",
+          "unit": null,
+          "method": "controlled_vocabulary",
+          "source_asserted": true,
+          "legal_inference_added": false
+        },
+        {
+          "fact_id": "C4-U-FCT-004-06",
+          "raw_fact_index": 2,
+          "source_text": "Se proporcionan índices de diciembre de 2015 y diciembre de 2016 para calcular el factor de ajuste por inflación.",
+          "kind": "temporal",
+          "key": "reference_year",
+          "value": "2015",
+          "value_type": "year",
+          "unit": null,
+          "method": "canonical_temporal",
+          "source_asserted": true,
+          "legal_inference_added": false
+        },
+        {
+          "fact_id": "C4-U-FCT-004-07",
+          "raw_fact_index": 2,
+          "source_text": "Se proporcionan índices de diciembre de 2015 y diciembre de 2016 para calcular el factor de ajuste por inflación.",
+          "kind": "temporal",
+          "key": "reference_year",
+          "value": "2016",
+          "value_type": "year",
+          "unit": null,
+          "method": "canonical_temporal",
+          "source_asserted": true,
+          "legal_inference_added": false
+        },
+        {
+          "fact_id": "C4-U-FCT-004-08",
+          "raw_fact_index": 2,
+          "source_text": "Se proporcionan índices de diciembre de 2015 y diciembre de 2016 para calcular el factor de ajuste por inflación.",
+          "kind": "calculation_component",
+          "key": "index_use",
+          "value": "inflation_adjustment_factor",
+          "value_type": "text",
+          "unit": null,
+          "method": "controlled_vocabulary",
+          "source_asserted": true,
+          "legal_inference_added": false
+        }
+      ],
+      "similarity_seed": {
+        "taxpayer_type": "legal_entity",
+        "activity": "regimen general de personas morales",
+        "tax": "ISR",
+        "problem_type": null,
+        "authority_act": null,
+        "procedural_stage": null,
+        "fiscal_year": 2016,
+        "evidence_fact_ids": {
+          "taxpayer_type": [
+            "C4-U-FCT-004-01"
+          ],
+          "activity": [
+            "C4-U-FCT-004-02"
+          ],
+          "tax": [
+            "C4-U-FCT-004-03"
+          ],
+          "fiscal_year": [
+            "C4-U-FCT-004-04"
+          ]
+        }
+      },
+      "unresolved_required_case_fields": [
+        "problem_type"
+      ],
+      "raw_facts_fully_covered": true,
+      "facts_normalized": true,
+      "problem_institution_classified": false,
+      "normative_articles_linked": false,
+      "corpus_validated": false,
+      "cbr_family_assigned": false,
+      "operational_case_created": false,
+      "can_control_legal_decision": false
+    },
+    {
+      "situation_id": "U-CBR-SIT-005",
+      "source": "unam",
+      "source_entry_id": "UNAM-V",
+      "historical_regime_context": false,
+      "raw_fact_count": 2,
+      "normalized_fact_count": 7,
+      "facts": [
+        {
+          "fact_id": "C4-U-FCT-005-01",
+          "raw_fact_index": 1,
+          "source_text": "El caso incluye edificio, equipo de cómputo, automóvil y equipo de oficina adquiridos en fechas distintas.",
+          "kind": "actor",
+          "key": "taxpayer_type",
+          "value": "legal_entity",
+          "value_type": "text",
+          "unit": null,
+          "method": "controlled_vocabulary",
+          "source_asserted": true,
+          "legal_inference_added": false
+        },
+        {
+          "fact_id": "C4-U-FCT-005-02",
+          "raw_fact_index": 1,
+          "source_text": "El caso incluye edificio, equipo de cómputo, automóvil y equipo de oficina adquiridos en fechas distintas.",
+          "kind": "activity",
+          "key": "activity",
+          "value": "general_legal_entity_regime",
+          "value_type": "text",
+          "unit": null,
+          "method": "controlled_vocabulary",
+          "source_asserted": true,
+          "legal_inference_added": false
+        },
+        {
+          "fact_id": "C4-U-FCT-005-03",
+          "raw_fact_index": 1,
+          "source_text": "El caso incluye edificio, equipo de cómputo, automóvil y equipo de oficina adquiridos en fechas distintas.",
+          "kind": "tax",
+          "key": "tax",
+          "value": "ISR",
+          "value_type": "text",
+          "unit": null,
+          "method": "controlled_vocabulary",
+          "source_asserted": true,
+          "legal_inference_added": false
+        },
+        {
+          "fact_id": "C4-U-FCT-005-04",
+          "raw_fact_index": 1,
+          "source_text": "El caso incluye edificio, equipo de cómputo, automóvil y equipo de oficina adquiridos en fechas distintas.",
+          "kind": "temporal",
+          "key": "fiscal_year",
+          "value": "2016",
+          "value_type": "year",
+          "unit": null,
+          "method": "canonical_temporal",
+          "source_asserted": true,
+          "legal_inference_added": false
+        },
+        {
+          "fact_id": "C4-U-FCT-005-05",
+          "raw_fact_index": 1,
+          "source_text": "El caso incluye edificio, equipo de cómputo, automóvil y equipo de oficina adquiridos en fechas distintas.",
+          "kind": "calculation_component",
+          "key": "asset_types",
+          "value": "building_computer_vehicle_office_equipment",
+          "value_type": "text",
+          "unit": null,
+          "method": "controlled_vocabulary",
+          "source_asserted": true,
+          "legal_inference_added": false
+        },
+        {
+          "fact_id": "C4-U-FCT-005-06",
+          "raw_fact_index": 2,
+          "source_text": "Para el automóvil la fuente aplica un límite de monto deducible y para todos los activos considera meses de uso y porcentajes de deducción.",
+          "kind": "calculation_component",
+          "key": "vehicle_deduction_limit",
+          "value": "source_specific_limit",
+          "value_type": "text",
+          "unit": null,
+          "method": "controlled_vocabulary",
+          "source_asserted": true,
+          "legal_inference_added": false
+        },
+        {
+          "fact_id": "C4-U-FCT-005-07",
+          "raw_fact_index": 2,
+          "source_text": "Para el automóvil la fuente aplica un límite de monto deducible y para todos los activos considera meses de uso y porcentajes de deducción.",
+          "kind": "calculation_component",
+          "key": "depreciation_inputs",
+          "value": "months_of_use_and_deduction_percentages",
+          "value_type": "text",
+          "unit": null,
+          "method": "controlled_vocabulary",
+          "source_asserted": true,
+          "legal_inference_added": false
+        }
+      ],
+      "similarity_seed": {
+        "taxpayer_type": "legal_entity",
+        "activity": "regimen general de personas morales",
+        "tax": "ISR",
+        "problem_type": null,
+        "authority_act": null,
+        "procedural_stage": null,
+        "fiscal_year": 2016,
+        "evidence_fact_ids": {
+          "taxpayer_type": [
+            "C4-U-FCT-005-01"
+          ],
+          "activity": [
+            "C4-U-FCT-005-02"
+          ],
+          "tax": [
+            "C4-U-FCT-005-03"
+          ],
+          "fiscal_year": [
+            "C4-U-FCT-005-04"
+          ]
+        }
+      },
+      "unresolved_required_case_fields": [
+        "problem_type"
+      ],
+      "raw_facts_fully_covered": true,
+      "facts_normalized": true,
+      "problem_institution_classified": false,
+      "normative_articles_linked": false,
+      "corpus_validated": false,
+      "cbr_family_assigned": false,
+      "operational_case_created": false,
+      "can_control_legal_decision": false
+    },
+    {
+      "situation_id": "U-CBR-SIT-006",
+      "source": "unam",
+      "source_entry_id": "UNAM-V",
+      "historical_regime_context": false,
+      "raw_fact_count": 2,
+      "normalized_fact_count": 8,
+      "facts": [
+        {
+          "fact_id": "C4-U-FCT-006-01",
+          "raw_fact_index": 1,
+          "source_text": "María percibe un salario diario de 183.25 y registra una inasistencia no justificada en el mes.",
+          "kind": "actor",
+          "key": "taxpayer_type",
+          "value": "individual",
+          "value_type": "text",
+          "unit": null,
+          "method": "controlled_vocabulary",
+          "source_asserted": true,
+          "legal_inference_added": false
+        },
+        {
+          "fact_id": "C4-U-FCT-006-02",
+          "raw_fact_index": 1,
+          "source_text": "María percibe un salario diario de 183.25 y registra una inasistencia no justificada en el mes.",
+          "kind": "activity",
+          "key": "activity",
+          "value": "salaried_work",
+          "value_type": "text",
+          "unit": null,
+          "method": "controlled_vocabulary",
+          "source_asserted": true,
+          "legal_inference_added": false
+        },
+        {
+          "fact_id": "C4-U-FCT-006-03",
+          "raw_fact_index": 1,
+          "source_text": "María percibe un salario diario de 183.25 y registra una inasistencia no justificada en el mes.",
+          "kind": "tax",
+          "key": "tax",
+          "value": "ISR",
+          "value_type": "text",
+          "unit": null,
+          "method": "controlled_vocabulary",
+          "source_asserted": true,
+          "legal_inference_added": false
+        },
+        {
+          "fact_id": "C4-U-FCT-006-04",
+          "raw_fact_index": 1,
+          "source_text": "María percibe un salario diario de 183.25 y registra una inasistencia no justificada en el mes.",
+          "kind": "amount",
+          "key": "daily_salary",
+          "value": "183.25",
+          "value_type": "decimal",
+          "unit": "MXN_per_day",
+          "method": "canonical_numeric",
+          "source_asserted": true,
+          "legal_inference_added": false
+        },
+        {
+          "fact_id": "C4-U-FCT-006-05",
+          "raw_fact_index": 1,
+          "source_text": "María percibe un salario diario de 183.25 y registra una inasistencia no justificada en el mes.",
+          "kind": "attribute",
+          "key": "unjustified_absences",
+          "value": "1",
+          "value_type": "integer",
+          "unit": null,
+          "method": "canonical_numeric",
+          "source_asserted": true,
+          "legal_inference_added": false
+        },
+        {
+          "fact_id": "C4-U-FCT-006-06",
+          "raw_fact_index": 2,
+          "source_text": "El patrón debe determinar la retención de ISR sobre el salario mensual y aplicar el subsidio que corresponda según el caso fuente.",
+          "kind": "actor",
+          "key": "actor_type",
+          "value": "employer",
+          "value_type": "text",
+          "unit": null,
+          "method": "controlled_vocabulary",
+          "source_asserted": true,
+          "legal_inference_added": false
+        },
+        {
+          "fact_id": "C4-U-FCT-006-07",
+          "raw_fact_index": 2,
+          "source_text": "El patrón debe determinar la retención de ISR sobre el salario mensual y aplicar el subsidio que corresponda según el caso fuente.",
+          "kind": "obligation",
+          "key": "employer_action",
+          "value": "calculate_isr_withholding",
+          "value_type": "text",
+          "unit": null,
+          "method": "controlled_vocabulary",
+          "source_asserted": true,
+          "legal_inference_added": false
+        },
+        {
+          "fact_id": "C4-U-FCT-006-08",
+          "raw_fact_index": 2,
+          "source_text": "El patrón debe determinar la retención de ISR sobre el salario mensual y aplicar el subsidio que corresponda según el caso fuente.",
+          "kind": "calculation_component",
+          "key": "calculation_component",
+          "value": "employment_subsidy_if_applicable",
+          "value_type": "text",
+          "unit": null,
+          "method": "controlled_vocabulary",
+          "source_asserted": true,
+          "legal_inference_added": false
+        }
+      ],
+      "similarity_seed": {
+        "taxpayer_type": "individual",
+        "activity": "trabajo subordinado",
+        "tax": "ISR",
+        "problem_type": null,
+        "authority_act": null,
+        "procedural_stage": null,
+        "fiscal_year": null,
+        "evidence_fact_ids": {
+          "taxpayer_type": [
+            "C4-U-FCT-006-01"
+          ],
+          "activity": [
+            "C4-U-FCT-006-02"
+          ],
+          "tax": [
+            "C4-U-FCT-006-03"
+          ]
+        }
+      },
+      "unresolved_required_case_fields": [
+        "problem_type",
+        "fiscal_year"
+      ],
+      "raw_facts_fully_covered": true,
+      "facts_normalized": true,
+      "problem_institution_classified": false,
+      "normative_articles_linked": false,
+      "corpus_validated": false,
+      "cbr_family_assigned": false,
+      "operational_case_created": false,
+      "can_control_legal_decision": false
+    },
+    {
+      "situation_id": "U-CBR-SIT-007",
+      "source": "unam",
+      "source_entry_id": "UNAM-V",
+      "historical_regime_context": false,
+      "raw_fact_count": 2,
+      "normalized_fact_count": 7,
+      "facts": [
+        {
+          "fact_id": "C4-U-FCT-007-01",
+          "raw_fact_index": 1,
+          "source_text": "Fernando opera una papelería y debe presentar el pago provisional correspondiente a agosto de 2017.",
+          "kind": "actor",
+          "key": "taxpayer_type",
+          "value": "individual",
+          "value_type": "text",
+          "unit": null,
+          "method": "controlled_vocabulary",
+          "source_asserted": true,
+          "legal_inference_added": false
+        },
+        {
+          "fact_id": "C4-U-FCT-007-02",
+          "raw_fact_index": 1,
+          "source_text": "Fernando opera una papelería y debe presentar el pago provisional correspondiente a agosto de 2017.",
+          "kind": "activity",
+          "key": "activity",
+          "value": "business_activity",
+          "value_type": "text",
+          "unit": null,
+          "method": "controlled_vocabulary",
+          "source_asserted": true,
+          "legal_inference_added": false
+        },
+        {
+          "fact_id": "C4-U-FCT-007-03",
+          "raw_fact_index": 1,
+          "source_text": "Fernando opera una papelería y debe presentar el pago provisional correspondiente a agosto de 2017.",
+          "kind": "tax",
+          "key": "tax",
+          "value": "ISR",
+          "value_type": "text",
+          "unit": null,
+          "method": "controlled_vocabulary",
+          "source_asserted": true,
+          "legal_inference_added": false
+        },
+        {
+          "fact_id": "C4-U-FCT-007-04",
+          "raw_fact_index": 1,
+          "source_text": "Fernando opera una papelería y debe presentar el pago provisional correspondiente a agosto de 2017.",
+          "kind": "temporal",
+          "key": "fiscal_year",
+          "value": "2017",
+          "value_type": "year",
+          "unit": null,
+          "method": "canonical_temporal",
+          "source_asserted": true,
+          "legal_inference_added": false
+        },
+        {
+          "fact_id": "C4-U-FCT-007-05",
+          "raw_fact_index": 1,
+          "source_text": "Fernando opera una papelería y debe presentar el pago provisional correspondiente a agosto de 2017.",
+          "kind": "temporal",
+          "key": "filing_month",
+          "value": "august",
+          "value_type": "text",
+          "unit": null,
+          "method": "controlled_vocabulary",
+          "source_asserted": true,
+          "legal_inference_added": false
+        },
+        {
+          "fact_id": "C4-U-FCT-007-06",
+          "raw_fact_index": 2,
+          "source_text": "La fuente distingue ingresos facturados de ingresos cobrados y separa gastos deducibles de un gasto no deducible.",
+          "kind": "calculation_component",
+          "key": "income_distinction",
+          "value": "invoiced_vs_collected",
+          "value_type": "text",
+          "unit": null,
+          "method": "controlled_vocabulary",
+          "source_asserted": true,
+          "legal_inference_added": false
+        },
+        {
+          "fact_id": "C4-U-FCT-007-07",
+          "raw_fact_index": 2,
+          "source_text": "La fuente distingue ingresos facturados de ingresos cobrados y separa gastos deducibles de un gasto no deducible.",
+          "kind": "calculation_component",
+          "key": "expense_distinction",
+          "value": "deductible_vs_non_deductible",
+          "value_type": "text",
+          "unit": null,
+          "method": "controlled_vocabulary",
+          "source_asserted": true,
+          "legal_inference_added": false
+        }
+      ],
+      "similarity_seed": {
+        "taxpayer_type": "individual",
+        "activity": "actividad empresarial papeleria",
+        "tax": "ISR",
+        "problem_type": null,
+        "authority_act": null,
+        "procedural_stage": null,
+        "fiscal_year": 2017,
+        "evidence_fact_ids": {
+          "taxpayer_type": [
+            "C4-U-FCT-007-01"
+          ],
+          "activity": [
+            "C4-U-FCT-007-02"
+          ],
+          "tax": [
+            "C4-U-FCT-007-03"
+          ],
+          "fiscal_year": [
+            "C4-U-FCT-007-04"
+          ]
+        }
+      },
+      "unresolved_required_case_fields": [
+        "problem_type"
+      ],
+      "raw_facts_fully_covered": true,
+      "facts_normalized": true,
+      "problem_institution_classified": false,
+      "normative_articles_linked": false,
+      "corpus_validated": false,
+      "cbr_family_assigned": false,
+      "operational_case_created": false,
+      "can_control_legal_decision": false
+    },
+    {
+      "situation_id": "U-CBR-SIT-008",
+      "source": "unam",
+      "source_entry_id": "UNAM-V",
+      "historical_regime_context": true,
+      "raw_fact_count": 2,
+      "normalized_fact_count": 9,
+      "facts": [
+        {
+          "fact_id": "C4-U-FCT-008-01",
+          "raw_fact_index": 1,
+          "source_text": "La persona física inicia actividades en septiembre con una fonda de cocina mexicana y presenta por primera vez el bimestre septiembre-octubre.",
+          "kind": "actor",
+          "key": "taxpayer_type",
+          "value": "individual",
+          "value_type": "text",
+          "unit": null,
+          "method": "controlled_vocabulary",
+          "source_asserted": true,
+          "legal_inference_added": false
+        },
+        {
+          "fact_id": "C4-U-FCT-008-02",
+          "raw_fact_index": 1,
+          "source_text": "La persona física inicia actividades en septiembre con una fonda de cocina mexicana y presenta por primera vez el bimestre septiembre-octubre.",
+          "kind": "activity",
+          "key": "activity",
+          "value": "restaurant_business",
+          "value_type": "text",
+          "unit": null,
+          "method": "controlled_vocabulary",
+          "source_asserted": true,
+          "legal_inference_added": false
+        },
+        {
+          "fact_id": "C4-U-FCT-008-03",
+          "raw_fact_index": 1,
+          "source_text": "La persona física inicia actividades en septiembre con una fonda de cocina mexicana y presenta por primera vez el bimestre septiembre-octubre.",
+          "kind": "tax",
+          "key": "tax",
+          "value": "ISR",
+          "value_type": "text",
+          "unit": null,
+          "method": "controlled_vocabulary",
+          "source_asserted": true,
+          "legal_inference_added": false
+        },
+        {
+          "fact_id": "C4-U-FCT-008-04",
+          "raw_fact_index": 1,
+          "source_text": "La persona física inicia actividades en septiembre con una fonda de cocina mexicana y presenta por primera vez el bimestre septiembre-octubre.",
+          "kind": "temporal",
+          "key": "regime_status",
+          "value": "historical",
+          "value_type": "text",
+          "unit": null,
+          "method": "controlled_vocabulary",
+          "source_asserted": true,
+          "legal_inference_added": false
+        },
+        {
+          "fact_id": "C4-U-FCT-008-05",
+          "raw_fact_index": 1,
+          "source_text": "La persona física inicia actividades en septiembre con una fonda de cocina mexicana y presenta por primera vez el bimestre septiembre-octubre.",
+          "kind": "temporal",
+          "key": "filing_period",
+          "value": "september_october_bimonthly",
+          "value_type": "text",
+          "unit": null,
+          "method": "controlled_vocabulary",
+          "source_asserted": true,
+          "legal_inference_added": false
+        },
+        {
+          "fact_id": "C4-U-FCT-008-06",
+          "raw_fact_index": 2,
+          "source_text": "El caso fuente registra ventas por 6,000 y 8,600 y gastos por 3,000 y 4,500 para los dos meses del bimestre.",
+          "kind": "amount",
+          "key": "september_sales",
+          "value": "6000.00",
+          "value_type": "decimal",
+          "unit": "MXN",
+          "method": "canonical_numeric",
+          "source_asserted": true,
+          "legal_inference_added": false
+        },
+        {
+          "fact_id": "C4-U-FCT-008-07",
+          "raw_fact_index": 2,
+          "source_text": "El caso fuente registra ventas por 6,000 y 8,600 y gastos por 3,000 y 4,500 para los dos meses del bimestre.",
+          "kind": "amount",
+          "key": "october_sales",
+          "value": "8600.00",
+          "value_type": "decimal",
+          "unit": "MXN",
+          "method": "canonical_numeric",
+          "source_asserted": true,
+          "legal_inference_added": false
+        },
+        {
+          "fact_id": "C4-U-FCT-008-08",
+          "raw_fact_index": 2,
+          "source_text": "El caso fuente registra ventas por 6,000 y 8,600 y gastos por 3,000 y 4,500 para los dos meses del bimestre.",
+          "kind": "amount",
+          "key": "september_expenses",
+          "value": "3000.00",
+          "value_type": "decimal",
+          "unit": "MXN",
+          "method": "canonical_numeric",
+          "source_asserted": true,
+          "legal_inference_added": false
+        },
+        {
+          "fact_id": "C4-U-FCT-008-09",
+          "raw_fact_index": 2,
+          "source_text": "El caso fuente registra ventas por 6,000 y 8,600 y gastos por 3,000 y 4,500 para los dos meses del bimestre.",
+          "kind": "amount",
+          "key": "october_expenses",
+          "value": "4500.00",
+          "value_type": "decimal",
+          "unit": "MXN",
+          "method": "canonical_numeric",
+          "source_asserted": true,
+          "legal_inference_added": false
+        }
+      ],
+      "similarity_seed": {
+        "taxpayer_type": "individual",
+        "activity": "RIF fonda de cocina mexicana",
+        "tax": "ISR",
+        "problem_type": null,
+        "authority_act": null,
+        "procedural_stage": null,
+        "fiscal_year": null,
+        "evidence_fact_ids": {
+          "taxpayer_type": [
+            "C4-U-FCT-008-01"
+          ],
+          "activity": [
+            "C4-U-FCT-008-02"
+          ],
+          "tax": [
+            "C4-U-FCT-008-03"
+          ]
+        }
+      },
+      "unresolved_required_case_fields": [
+        "problem_type",
+        "fiscal_year"
+      ],
+      "raw_facts_fully_covered": true,
+      "facts_normalized": true,
+      "problem_institution_classified": false,
+      "normative_articles_linked": false,
+      "corpus_validated": false,
+      "cbr_family_assigned": false,
+      "operational_case_created": false,
+      "can_control_legal_decision": false
+    },
+    {
+      "situation_id": "U-CBR-SIT-009",
+      "source": "unam",
+      "source_entry_id": "UNAM-V",
+      "historical_regime_context": false,
+      "raw_fact_count": 2,
+      "normalized_fact_count": 7,
+      "facts": [
+        {
+          "fact_id": "C4-U-FCT-009-01",
+          "raw_fact_index": 1,
+          "source_text": "Sandra obtiene ingresos por servicios profesionales y el caso proporciona ingresos acumulados y del mes de abril.",
+          "kind": "actor",
+          "key": "taxpayer_type",
+          "value": "individual",
+          "value_type": "text",
+          "unit": null,
+          "method": "controlled_vocabulary",
+          "source_asserted": true,
+          "legal_inference_added": false
+        },
+        {
+          "fact_id": "C4-U-FCT-009-02",
+          "raw_fact_index": 1,
+          "source_text": "Sandra obtiene ingresos por servicios profesionales y el caso proporciona ingresos acumulados y del mes de abril.",
+          "kind": "activity",
+          "key": "activity",
+          "value": "independent_professional_services",
+          "value_type": "text",
+          "unit": null,
+          "method": "controlled_vocabulary",
+          "source_asserted": true,
+          "legal_inference_added": false
+        },
+        {
+          "fact_id": "C4-U-FCT-009-03",
+          "raw_fact_index": 1,
+          "source_text": "Sandra obtiene ingresos por servicios profesionales y el caso proporciona ingresos acumulados y del mes de abril.",
+          "kind": "tax",
+          "key": "tax",
+          "value": "ISR",
+          "value_type": "text",
+          "unit": null,
+          "method": "controlled_vocabulary",
+          "source_asserted": true,
+          "legal_inference_added": false
+        },
+        {
+          "fact_id": "C4-U-FCT-009-04",
+          "raw_fact_index": 1,
+          "source_text": "Sandra obtiene ingresos por servicios profesionales y el caso proporciona ingresos acumulados y del mes de abril.",
+          "kind": "calculation_component",
+          "key": "income_scope",
+          "value": "accumulated_plus_april",
+          "value_type": "text",
+          "unit": null,
+          "method": "controlled_vocabulary",
+          "source_asserted": true,
+          "legal_inference_added": false
+        },
+        {
+          "fact_id": "C4-U-FCT-009-05",
+          "raw_fact_index": 2,
+          "source_text": "También se proporcionan deducciones y retenciones de ISR para determinar el importe del impuesto correspondiente a abril.",
+          "kind": "calculation_component",
+          "key": "deduction_scope",
+          "value": "accumulated_plus_april",
+          "value_type": "text",
+          "unit": null,
+          "method": "controlled_vocabulary",
+          "source_asserted": true,
+          "legal_inference_added": false
+        },
+        {
+          "fact_id": "C4-U-FCT-009-06",
+          "raw_fact_index": 2,
+          "source_text": "También se proporcionan deducciones y retenciones de ISR para determinar el importe del impuesto correspondiente a abril.",
+          "kind": "calculation_component",
+          "key": "withholding_scope",
+          "value": "accumulated_plus_april",
+          "value_type": "text",
+          "unit": null,
+          "method": "controlled_vocabulary",
+          "source_asserted": true,
+          "legal_inference_added": false
+        },
+        {
+          "fact_id": "C4-U-FCT-009-07",
+          "raw_fact_index": 2,
+          "source_text": "También se proporcionan deducciones y retenciones de ISR para determinar el importe del impuesto correspondiente a abril.",
+          "kind": "temporal",
+          "key": "filing_month",
+          "value": "april",
+          "value_type": "text",
+          "unit": null,
+          "method": "controlled_vocabulary",
+          "source_asserted": true,
+          "legal_inference_added": false
+        }
+      ],
+      "similarity_seed": {
+        "taxpayer_type": "individual",
+        "activity": "servicios profesionales independientes",
+        "tax": "ISR",
+        "problem_type": null,
+        "authority_act": null,
+        "procedural_stage": null,
+        "fiscal_year": null,
+        "evidence_fact_ids": {
+          "taxpayer_type": [
+            "C4-U-FCT-009-01"
+          ],
+          "activity": [
+            "C4-U-FCT-009-02"
+          ],
+          "tax": [
+            "C4-U-FCT-009-03"
+          ]
+        }
+      },
+      "unresolved_required_case_fields": [
+        "problem_type",
+        "fiscal_year"
+      ],
+      "raw_facts_fully_covered": true,
+      "facts_normalized": true,
+      "problem_institution_classified": false,
+      "normative_articles_linked": false,
+      "corpus_validated": false,
+      "cbr_family_assigned": false,
+      "operational_case_created": false,
+      "can_control_legal_decision": false
+    },
+    {
+      "situation_id": "U-CBR-SIT-010",
+      "source": "unam",
+      "source_entry_id": "UNAM-V",
+      "historical_regime_context": false,
+      "raw_fact_count": 2,
+      "normalized_fact_count": 8,
+      "facts": [
+        {
+          "fact_id": "C4-U-FCT-010-01",
+          "raw_fact_index": 1,
+          "source_text": "Gabriel obtiene 89,000 de ingresos por locales arrendados a personas morales durante septiembre.",
+          "kind": "actor",
+          "key": "taxpayer_type",
+          "value": "individual",
+          "value_type": "text",
+          "unit": null,
+          "method": "controlled_vocabulary",
+          "source_asserted": true,
+          "legal_inference_added": false
+        },
+        {
+          "fact_id": "C4-U-FCT-010-02",
+          "raw_fact_index": 1,
+          "source_text": "Gabriel obtiene 89,000 de ingresos por locales arrendados a personas morales durante septiembre.",
+          "kind": "activity",
+          "key": "activity",
+          "value": "real_estate_rental",
+          "value_type": "text",
+          "unit": null,
+          "method": "controlled_vocabulary",
+          "source_asserted": true,
+          "legal_inference_added": false
+        },
+        {
+          "fact_id": "C4-U-FCT-010-03",
+          "raw_fact_index": 1,
+          "source_text": "Gabriel obtiene 89,000 de ingresos por locales arrendados a personas morales durante septiembre.",
+          "kind": "tax",
+          "key": "tax",
+          "value": "ISR",
+          "value_type": "text",
+          "unit": null,
+          "method": "controlled_vocabulary",
+          "source_asserted": true,
+          "legal_inference_added": false
+        },
+        {
+          "fact_id": "C4-U-FCT-010-04",
+          "raw_fact_index": 1,
+          "source_text": "Gabriel obtiene 89,000 de ingresos por locales arrendados a personas morales durante septiembre.",
+          "kind": "amount",
+          "key": "monthly_rental_income",
+          "value": "89000.00",
+          "value_type": "decimal",
+          "unit": "MXN",
+          "method": "canonical_numeric",
+          "source_asserted": true,
+          "legal_inference_added": false
+        },
+        {
+          "fact_id": "C4-U-FCT-010-05",
+          "raw_fact_index": 1,
+          "source_text": "Gabriel obtiene 89,000 de ingresos por locales arrendados a personas morales durante septiembre.",
+          "kind": "temporal",
+          "key": "filing_month",
+          "value": "september",
+          "value_type": "text",
+          "unit": null,
+          "method": "controlled_vocabulary",
+          "source_asserted": true,
+          "legal_inference_added": false
+        },
+        {
+          "fact_id": "C4-U-FCT-010-06",
+          "raw_fact_index": 2,
+          "source_text": "El caso aplica la deducción opcional del 35%, considera 4,500 de predial pagado y 8,900 de ISR retenido.",
+          "kind": "calculation_component",
+          "key": "optional_deduction_rate",
+          "value": "35",
+          "value_type": "percentage",
+          "unit": "percent",
+          "method": "canonical_numeric",
+          "source_asserted": true,
+          "legal_inference_added": false
+        },
+        {
+          "fact_id": "C4-U-FCT-010-07",
+          "raw_fact_index": 2,
+          "source_text": "El caso aplica la deducción opcional del 35%, considera 4,500 de predial pagado y 8,900 de ISR retenido.",
+          "kind": "amount",
+          "key": "property_tax_paid",
+          "value": "4500.00",
+          "value_type": "decimal",
+          "unit": "MXN",
+          "method": "canonical_numeric",
+          "source_asserted": true,
+          "legal_inference_added": false
+        },
+        {
+          "fact_id": "C4-U-FCT-010-08",
+          "raw_fact_index": 2,
+          "source_text": "El caso aplica la deducción opcional del 35%, considera 4,500 de predial pagado y 8,900 de ISR retenido.",
+          "kind": "amount",
+          "key": "isr_withheld",
+          "value": "8900.00",
+          "value_type": "decimal",
+          "unit": "MXN",
+          "method": "canonical_numeric",
+          "source_asserted": true,
+          "legal_inference_added": false
+        }
+      ],
+      "similarity_seed": {
+        "taxpayer_type": "individual",
+        "activity": "arrendamiento de inmuebles",
+        "tax": "ISR",
+        "problem_type": null,
+        "authority_act": null,
+        "procedural_stage": null,
+        "fiscal_year": null,
+        "evidence_fact_ids": {
+          "taxpayer_type": [
+            "C4-U-FCT-010-01"
+          ],
+          "activity": [
+            "C4-U-FCT-010-02"
+          ],
+          "tax": [
+            "C4-U-FCT-010-03"
+          ]
+        }
+      },
+      "unresolved_required_case_fields": [
+        "problem_type",
+        "fiscal_year"
+      ],
+      "raw_facts_fully_covered": true,
+      "facts_normalized": true,
+      "problem_institution_classified": false,
+      "normative_articles_linked": false,
+      "corpus_validated": false,
+      "cbr_family_assigned": false,
+      "operational_case_created": false,
+      "can_control_legal_decision": false
+    },
+    {
+      "situation_id": "U-CBR-SIT-011",
+      "source": "unam",
+      "source_entry_id": "UNAM-V",
+      "historical_regime_context": false,
+      "raw_fact_count": 2,
+      "normalized_fact_count": 8,
+      "facts": [
+        {
+          "fact_id": "C4-U-FCT-011-01",
+          "raw_fact_index": 1,
+          "source_text": "La persona física recibió 890,450 de ingresos en 2016 y su patrón retuvo 220,000 de ISR durante el ejercicio.",
+          "kind": "actor",
+          "key": "taxpayer_type",
+          "value": "individual",
+          "value_type": "text",
+          "unit": null,
+          "method": "controlled_vocabulary",
+          "source_asserted": true,
+          "legal_inference_added": false
+        },
+        {
+          "fact_id": "C4-U-FCT-011-02",
+          "raw_fact_index": 1,
+          "source_text": "La persona física recibió 890,450 de ingresos en 2016 y su patrón retuvo 220,000 de ISR durante el ejercicio.",
+          "kind": "activity",
+          "key": "activity",
+          "value": "salaried_work",
+          "value_type": "text",
+          "unit": null,
+          "method": "controlled_vocabulary",
+          "source_asserted": true,
+          "legal_inference_added": false
+        },
+        {
+          "fact_id": "C4-U-FCT-011-03",
+          "raw_fact_index": 1,
+          "source_text": "La persona física recibió 890,450 de ingresos en 2016 y su patrón retuvo 220,000 de ISR durante el ejercicio.",
+          "kind": "tax",
+          "key": "tax",
+          "value": "ISR",
+          "value_type": "text",
+          "unit": null,
+          "method": "controlled_vocabulary",
+          "source_asserted": true,
+          "legal_inference_added": false
+        },
+        {
+          "fact_id": "C4-U-FCT-011-04",
+          "raw_fact_index": 1,
+          "source_text": "La persona física recibió 890,450 de ingresos en 2016 y su patrón retuvo 220,000 de ISR durante el ejercicio.",
+          "kind": "temporal",
+          "key": "fiscal_year",
+          "value": "2016",
+          "value_type": "year",
+          "unit": null,
+          "method": "canonical_temporal",
+          "source_asserted": true,
+          "legal_inference_added": false
+        },
+        {
+          "fact_id": "C4-U-FCT-011-05",
+          "raw_fact_index": 1,
+          "source_text": "La persona física recibió 890,450 de ingresos en 2016 y su patrón retuvo 220,000 de ISR durante el ejercicio.",
+          "kind": "amount",
+          "key": "annual_income",
+          "value": "890450.00",
+          "value_type": "decimal",
+          "unit": "MXN",
+          "method": "canonical_numeric",
+          "source_asserted": true,
+          "legal_inference_added": false
+        },
+        {
+          "fact_id": "C4-U-FCT-011-06",
+          "raw_fact_index": 1,
+          "source_text": "La persona física recibió 890,450 de ingresos en 2016 y su patrón retuvo 220,000 de ISR durante el ejercicio.",
+          "kind": "amount",
+          "key": "annual_isr_withheld",
+          "value": "220000.00",
+          "value_type": "decimal",
+          "unit": "MXN",
+          "method": "canonical_numeric",
+          "source_asserted": true,
+          "legal_inference_added": false
+        },
+        {
+          "fact_id": "C4-U-FCT-011-07",
+          "raw_fact_index": 2,
+          "source_text": "La fuente incorpora deducciones personales por servicios odontológicos, gastos funerarios e intereses reales hipotecarios, por un total de 55,000.",
+          "kind": "calculation_component",
+          "key": "personal_deductions",
+          "value": "dental_funeral_real_mortgage_interest",
+          "value_type": "text",
+          "unit": null,
+          "method": "controlled_vocabulary",
+          "source_asserted": true,
+          "legal_inference_added": false
+        },
+        {
+          "fact_id": "C4-U-FCT-011-08",
+          "raw_fact_index": 2,
+          "source_text": "La fuente incorpora deducciones personales por servicios odontológicos, gastos funerarios e intereses reales hipotecarios, por un total de 55,000.",
+          "kind": "amount",
+          "key": "personal_deductions_total",
+          "value": "55000.00",
+          "value_type": "decimal",
+          "unit": "MXN",
+          "method": "canonical_numeric",
+          "source_asserted": true,
+          "legal_inference_added": false
+        }
+      ],
+      "similarity_seed": {
+        "taxpayer_type": "individual",
+        "activity": "trabajo subordinado",
+        "tax": "ISR",
+        "problem_type": null,
+        "authority_act": null,
+        "procedural_stage": null,
+        "fiscal_year": 2016,
+        "evidence_fact_ids": {
+          "taxpayer_type": [
+            "C4-U-FCT-011-01"
+          ],
+          "activity": [
+            "C4-U-FCT-011-02"
+          ],
+          "tax": [
+            "C4-U-FCT-011-03"
+          ],
+          "fiscal_year": [
+            "C4-U-FCT-011-04"
+          ]
+        }
+      },
+      "unresolved_required_case_fields": [
+        "problem_type"
+      ],
+      "raw_facts_fully_covered": true,
+      "facts_normalized": true,
+      "problem_institution_classified": false,
+      "normative_articles_linked": false,
+      "corpus_validated": false,
+      "cbr_family_assigned": false,
+      "operational_case_created": false,
+      "can_control_legal_decision": false
+    },
+    {
+      "situation_id": "U-CBR-SIT-012",
+      "source": "unam",
+      "source_entry_id": "UNAM-V",
+      "historical_regime_context": false,
+      "raw_fact_count": 2,
+      "normalized_fact_count": 8,
+      "facts": [
+        {
+          "fact_id": "C4-U-FCT-012-01",
+          "raw_fact_index": 1,
+          "source_text": "La compañía El Alemán obtuvo 895,421 de ingresos cobrados más IVA y facturó 120,000 a crédito todavía no cobrados.",
+          "kind": "actor",
+          "key": "taxpayer_type",
+          "value": "legal_entity",
+          "value_type": "text",
+          "unit": null,
+          "method": "controlled_vocabulary",
+          "source_asserted": true,
+          "legal_inference_added": false
+        },
+        {
+          "fact_id": "C4-U-FCT-012-02",
+          "raw_fact_index": 1,
+          "source_text": "La compañía El Alemán obtuvo 895,421 de ingresos cobrados más IVA y facturó 120,000 a crédito todavía no cobrados.",
+          "kind": "activity",
+          "key": "activity",
+          "value": "commercial_activity",
+          "value_type": "text",
+          "unit": null,
+          "method": "controlled_vocabulary",
+          "source_asserted": true,
+          "legal_inference_added": false
+        },
+        {
+          "fact_id": "C4-U-FCT-012-03",
+          "raw_fact_index": 1,
+          "source_text": "La compañía El Alemán obtuvo 895,421 de ingresos cobrados más IVA y facturó 120,000 a crédito todavía no cobrados.",
+          "kind": "tax",
+          "key": "tax",
+          "value": "IVA",
+          "value_type": "text",
+          "unit": null,
+          "method": "controlled_vocabulary",
+          "source_asserted": true,
+          "legal_inference_added": false
+        },
+        {
+          "fact_id": "C4-U-FCT-012-04",
+          "raw_fact_index": 1,
+          "source_text": "La compañía El Alemán obtuvo 895,421 de ingresos cobrados más IVA y facturó 120,000 a crédito todavía no cobrados.",
+          "kind": "amount",
+          "key": "collected_income_base",
+          "value": "895421.00",
+          "value_type": "decimal",
+          "unit": "MXN",
+          "method": "canonical_numeric",
+          "source_asserted": true,
+          "legal_inference_added": false
+        },
+        {
+          "fact_id": "C4-U-FCT-012-05",
+          "raw_fact_index": 1,
+          "source_text": "La compañía El Alemán obtuvo 895,421 de ingresos cobrados más IVA y facturó 120,000 a crédito todavía no cobrados.",
+          "kind": "amount",
+          "key": "credit_invoices_uncollected_base",
+          "value": "120000.00",
+          "value_type": "decimal",
+          "unit": "MXN",
+          "method": "canonical_numeric",
+          "source_asserted": true,
+          "legal_inference_added": false
+        },
+        {
+          "fact_id": "C4-U-FCT-012-06",
+          "raw_fact_index": 2,
+          "source_text": "El caso incluye pagos y compras con IVA, operaciones a crédito, sueldos y un saldo a favor de agosto por 13,000 para determinar el IVA de septiembre.",
+          "kind": "calculation_component",
+          "key": "expense_scope",
+          "value": "paid_and_credit_operations_plus_payroll",
+          "value_type": "text",
+          "unit": null,
+          "method": "controlled_vocabulary",
+          "source_asserted": true,
+          "legal_inference_added": false
+        },
+        {
+          "fact_id": "C4-U-FCT-012-07",
+          "raw_fact_index": 2,
+          "source_text": "El caso incluye pagos y compras con IVA, operaciones a crédito, sueldos y un saldo a favor de agosto por 13,000 para determinar el IVA de septiembre.",
+          "kind": "amount",
+          "key": "prior_vat_credit_balance",
+          "value": "13000.00",
+          "value_type": "decimal",
+          "unit": "MXN",
+          "method": "canonical_numeric",
+          "source_asserted": true,
+          "legal_inference_added": false
+        },
+        {
+          "fact_id": "C4-U-FCT-012-08",
+          "raw_fact_index": 2,
+          "source_text": "El caso incluye pagos y compras con IVA, operaciones a crédito, sueldos y un saldo a favor de agosto por 13,000 para determinar el IVA de septiembre.",
+          "kind": "temporal",
+          "key": "filing_month",
+          "value": "september",
+          "value_type": "text",
+          "unit": null,
+          "method": "controlled_vocabulary",
+          "source_asserted": true,
+          "legal_inference_added": false
+        }
+      ],
+      "similarity_seed": {
+        "taxpayer_type": "legal_entity",
+        "activity": "compraventa comercial",
+        "tax": "IVA",
+        "problem_type": null,
+        "authority_act": null,
+        "procedural_stage": null,
+        "fiscal_year": null,
+        "evidence_fact_ids": {
+          "taxpayer_type": [
+            "C4-U-FCT-012-01"
+          ],
+          "activity": [
+            "C4-U-FCT-012-02"
+          ],
+          "tax": [
+            "C4-U-FCT-012-03"
+          ]
+        }
+      },
+      "unresolved_required_case_fields": [
+        "problem_type",
+        "fiscal_year"
+      ],
+      "raw_facts_fully_covered": true,
+      "facts_normalized": true,
+      "problem_institution_classified": false,
+      "normative_articles_linked": false,
+      "corpus_validated": false,
+      "cbr_family_assigned": false,
+      "operational_case_created": false,
+      "can_control_legal_decision": false
+    },
+    {
+      "situation_id": "U-CBR-SIT-013",
+      "source": "unam",
+      "source_entry_id": "UNAM-V",
+      "historical_regime_context": false,
+      "raw_fact_count": 2,
+      "normalized_fact_count": 8,
+      "facts": [
+        {
+          "fact_id": "C4-U-FCT-013-01",
+          "raw_fact_index": 1,
+          "source_text": "Un contador presta servicios de auditoría y, de las facturas descritas, sólo una aparece cobrada durante septiembre.",
+          "kind": "actor",
+          "key": "taxpayer_type",
+          "value": "individual",
+          "value_type": "text",
+          "unit": null,
+          "method": "controlled_vocabulary",
+          "source_asserted": true,
+          "legal_inference_added": false
+        },
+        {
+          "fact_id": "C4-U-FCT-013-02",
+          "raw_fact_index": 1,
+          "source_text": "Un contador presta servicios de auditoría y, de las facturas descritas, sólo una aparece cobrada durante septiembre.",
+          "kind": "activity",
+          "key": "activity",
+          "value": "audit_professional_services",
+          "value_type": "text",
+          "unit": null,
+          "method": "controlled_vocabulary",
+          "source_asserted": true,
+          "legal_inference_added": false
+        },
+        {
+          "fact_id": "C4-U-FCT-013-03",
+          "raw_fact_index": 1,
+          "source_text": "Un contador presta servicios de auditoría y, de las facturas descritas, sólo una aparece cobrada durante septiembre.",
+          "kind": "tax",
+          "key": "tax",
+          "value": "IVA",
+          "value_type": "text",
+          "unit": null,
+          "method": "controlled_vocabulary",
+          "source_asserted": true,
+          "legal_inference_added": false
+        },
+        {
+          "fact_id": "C4-U-FCT-013-04",
+          "raw_fact_index": 1,
+          "source_text": "Un contador presta servicios de auditoría y, de las facturas descritas, sólo una aparece cobrada durante septiembre.",
+          "kind": "event",
+          "key": "collection_status",
+          "value": "one_invoice_collected_in_september",
+          "value_type": "text",
+          "unit": null,
+          "method": "controlled_vocabulary",
+          "source_asserted": true,
+          "legal_inference_added": false
+        },
+        {
+          "fact_id": "C4-U-FCT-013-05",
+          "raw_fact_index": 2,
+          "source_text": "Los clientes son personas morales y el caso considera retención de IVA, además de gastos pagados de teléfono, internet y electricidad para el IVA acreditable.",
+          "kind": "actor",
+          "key": "client_type",
+          "value": "legal_entity",
+          "value_type": "text",
+          "unit": null,
+          "method": "controlled_vocabulary",
+          "source_asserted": true,
+          "legal_inference_added": false
+        },
+        {
+          "fact_id": "C4-U-FCT-013-06",
+          "raw_fact_index": 2,
+          "source_text": "Los clientes son personas morales y el caso considera retención de IVA, además de gastos pagados de teléfono, internet y electricidad para el IVA acreditable.",
+          "kind": "calculation_component",
+          "key": "vat_component",
+          "value": "vat_withheld",
+          "value_type": "text",
+          "unit": null,
+          "method": "controlled_vocabulary",
+          "source_asserted": true,
+          "legal_inference_added": false
+        },
+        {
+          "fact_id": "C4-U-FCT-013-07",
+          "raw_fact_index": 2,
+          "source_text": "Los clientes son personas morales y el caso considera retención de IVA, además de gastos pagados de teléfono, internet y electricidad para el IVA acreditable.",
+          "kind": "calculation_component",
+          "key": "vat_component",
+          "value": "input_vat_on_paid_services",
+          "value_type": "text",
+          "unit": null,
+          "method": "controlled_vocabulary",
+          "source_asserted": true,
+          "legal_inference_added": false
+        },
+        {
+          "fact_id": "C4-U-FCT-013-08",
+          "raw_fact_index": 2,
+          "source_text": "Los clientes son personas morales y el caso considera retención de IVA, además de gastos pagados de teléfono, internet y electricidad para el IVA acreditable.",
+          "kind": "activity",
+          "key": "expense_services",
+          "value": "telephone_internet_electricity",
+          "value_type": "text",
+          "unit": null,
+          "method": "controlled_vocabulary",
+          "source_asserted": true,
+          "legal_inference_added": false
+        }
+      ],
+      "similarity_seed": {
+        "taxpayer_type": "individual",
+        "activity": "servicios profesionales de auditoria",
+        "tax": "IVA",
+        "problem_type": null,
+        "authority_act": null,
+        "procedural_stage": null,
+        "fiscal_year": null,
+        "evidence_fact_ids": {
+          "taxpayer_type": [
+            "C4-U-FCT-013-01"
+          ],
+          "activity": [
+            "C4-U-FCT-013-02"
+          ],
+          "tax": [
+            "C4-U-FCT-013-03"
+          ]
+        }
+      },
+      "unresolved_required_case_fields": [
+        "problem_type",
+        "fiscal_year"
+      ],
+      "raw_facts_fully_covered": true,
+      "facts_normalized": true,
+      "problem_institution_classified": false,
+      "normative_articles_linked": false,
+      "corpus_validated": false,
+      "cbr_family_assigned": false,
+      "operational_case_created": false,
+      "can_control_legal_decision": false
+    }
+  ],
+  "creates_operational_cases": false,
+  "modifies_existing_cbr_engine": false,
+  "source_is_normative_authority": false,
+  "can_control_legal_decision": false
+}

@@ -1,0 +1,367 @@
+{
+  "schema_version": "1.0",
+  "baseline_commit": "b65dc014e57042ef4826354fa5ccb9b0610c0c4f",
+  "source": "unam",
+  "source_title": "Manual de Derecho Fiscal de la UNAM",
+  "purpose": "Extraer de forma trazable los 13 casos prácticos explícitos del capítulo V del Manual de Derecho Fiscal de la UNAM como situaciones fuente CBR previas a normalización, clasificación, vinculación normativa y validación contra corpus.",
+  "source_entry_count": 1,
+  "expected_situations_per_entry": 13,
+  "situation_count": 13,
+  "situations": [
+    {
+      "situation_id": "U-CBR-SIT-001",
+      "source_pages": [
+        136,
+        137
+      ],
+      "source_locator": "V. ISR personas morales / Caso práctico 1 / ISR del ejercicio",
+      "kind": "taxpayer_situation",
+      "source_summary": "Calcular el ISR anual de una persona moral con ingresos cobrados y a crédito, costo de ventas, gastos, PTU y pérdidas fiscales pendientes.",
+      "raw_fact_statements": [
+        "La persona moral calcula su ISR del ejercicio 2017 con ingresos cobrados por 23,900,000 y facturas por cobrar por 2,100,000.",
+        "La fuente incorpora costo de ventas por 11,000,000, gastos de operación por 3,650,000, PTU por 5,000,000 y pérdidas fiscales pendientes por 4,600,000."
+      ],
+      "historical_regime_context": false,
+      "source": "unam",
+      "source_entry_id": "UNAM-V",
+      "source_section_order": 5,
+      "source_section_title": "Cálculo de contribuciones",
+      "temporal_review_required": true,
+      "requires_fact_normalization": true,
+      "requires_problem_institution_classification": true,
+      "requires_normative_article_linkage": true,
+      "requires_corpus_validation": true,
+      "eligible_for_operational_cbr": false,
+      "can_control_legal_decision": false
+    },
+    {
+      "situation_id": "U-CBR-SIT-002",
+      "source_pages": [
+        138,
+        139
+      ],
+      "source_locator": "V. ISR personas morales / Caso práctico 2 / coeficiente de utilidad",
+      "kind": "taxpayer_situation",
+      "source_summary": "Determinar el coeficiente de utilidad de una persona moral a partir de la utilidad fiscal, ingresos acumulables y ajuste anual por inflación acumulable.",
+      "raw_fact_statements": [
+        "La persona moral obtuvo utilidad fiscal de 30,800 en 2016 e ingresos acumulables por 238,800.",
+        "Los ingresos acumulables incluyen un ajuste anual por inflación acumulable de 2,300 que se resta para obtener ingresos nominales."
+      ],
+      "historical_regime_context": false,
+      "source": "unam",
+      "source_entry_id": "UNAM-V",
+      "source_section_order": 5,
+      "source_section_title": "Cálculo de contribuciones",
+      "temporal_review_required": true,
+      "requires_fact_normalization": true,
+      "requires_problem_institution_classification": true,
+      "requires_normative_article_linkage": true,
+      "requires_corpus_validation": true,
+      "eligible_for_operational_cbr": false,
+      "can_control_legal_decision": false
+    },
+    {
+      "situation_id": "U-CBR-SIT-003",
+      "source_pages": [
+        141,
+        142
+      ],
+      "source_locator": "V. ISR personas morales / Caso práctico 3 / pago provisional marzo 2017",
+      "kind": "taxpayer_situation",
+      "source_summary": "Calcular un pago provisional de ISR de marzo de una persona moral con ingresos mensuales, rendimientos bancarios, coeficientes de utilidad y pérdidas fiscales.",
+      "raw_fact_statements": [
+        "El caso acumula ingresos de enero, febrero y marzo de 2017 e incluye rendimientos bancarios.",
+        "El cálculo utiliza coeficiente de utilidad 2015 de 0.1263, coeficiente 2016 de 0.1401 y pérdidas fiscales previamente aplicadas por 9,000."
+      ],
+      "historical_regime_context": false,
+      "source": "unam",
+      "source_entry_id": "UNAM-V",
+      "source_section_order": 5,
+      "source_section_title": "Cálculo de contribuciones",
+      "temporal_review_required": true,
+      "requires_fact_normalization": true,
+      "requires_problem_institution_classification": true,
+      "requires_normative_article_linkage": true,
+      "requires_corpus_validation": true,
+      "eligible_for_operational_cbr": false,
+      "can_control_legal_decision": false
+    },
+    {
+      "situation_id": "U-CBR-SIT-004",
+      "source_pages": [
+        144,
+        145,
+        146
+      ],
+      "source_locator": "V. ISR personas morales / Caso práctico 4 / ajuste anual por inflación",
+      "kind": "taxpayer_situation",
+      "source_summary": "Determinar si el ajuste anual por inflación es acumulable o deducible utilizando saldos mensuales de créditos y deudas e índices de precios.",
+      "raw_fact_statements": [
+        "El caso proporciona saldos mensuales de créditos y deudas durante 2016 para obtener sus promedios.",
+        "Se proporcionan índices de diciembre de 2015 y diciembre de 2016 para calcular el factor de ajuste por inflación."
+      ],
+      "historical_regime_context": false,
+      "source": "unam",
+      "source_entry_id": "UNAM-V",
+      "source_section_order": 5,
+      "source_section_title": "Cálculo de contribuciones",
+      "temporal_review_required": true,
+      "requires_fact_normalization": true,
+      "requires_problem_institution_classification": true,
+      "requires_normative_article_linkage": true,
+      "requires_corpus_validation": true,
+      "eligible_for_operational_cbr": false,
+      "can_control_legal_decision": false
+    },
+    {
+      "situation_id": "U-CBR-SIT-005",
+      "source_pages": [
+        148,
+        149,
+        150
+      ],
+      "source_locator": "V. ISR personas morales / Caso práctico 5 / depreciación fiscal",
+      "kind": "taxpayer_situation",
+      "source_summary": "Calcular la deducción por depreciación fiscal de distintos activos considerando monto, fecha de adquisición, porcentaje máximo y actualización.",
+      "raw_fact_statements": [
+        "El caso incluye edificio, equipo de cómputo, automóvil y equipo de oficina adquiridos en fechas distintas.",
+        "Para el automóvil la fuente aplica un límite de monto deducible y para todos los activos considera meses de uso y porcentajes de deducción."
+      ],
+      "historical_regime_context": false,
+      "source": "unam",
+      "source_entry_id": "UNAM-V",
+      "source_section_order": 5,
+      "source_section_title": "Cálculo de contribuciones",
+      "temporal_review_required": true,
+      "requires_fact_normalization": true,
+      "requires_problem_institution_classification": true,
+      "requires_normative_article_linkage": true,
+      "requires_corpus_validation": true,
+      "eligible_for_operational_cbr": false,
+      "can_control_legal_decision": false
+    },
+    {
+      "situation_id": "U-CBR-SIT-006",
+      "source_pages": [
+        152,
+        153,
+        154
+      ],
+      "source_locator": "V. ISR personas físicas / Caso práctico 1 / sueldos y salarios",
+      "kind": "taxpayer_situation",
+      "source_summary": "Calcular la retención mensual de ISR y el sueldo neto de una trabajadora considerando salario diario, días laborados e inasistencia.",
+      "raw_fact_statements": [
+        "María percibe un salario diario de 183.25 y registra una inasistencia no justificada en el mes.",
+        "El patrón debe determinar la retención de ISR sobre el salario mensual y aplicar el subsidio que corresponda según el caso fuente."
+      ],
+      "historical_regime_context": false,
+      "source": "unam",
+      "source_entry_id": "UNAM-V",
+      "source_section_order": 5,
+      "source_section_title": "Cálculo de contribuciones",
+      "temporal_review_required": true,
+      "requires_fact_normalization": true,
+      "requires_problem_institution_classification": true,
+      "requires_normative_article_linkage": true,
+      "requires_corpus_validation": true,
+      "eligible_for_operational_cbr": false,
+      "can_control_legal_decision": false
+    },
+    {
+      "situation_id": "U-CBR-SIT-007",
+      "source_pages": [
+        154,
+        155,
+        156
+      ],
+      "source_locator": "V. ISR personas físicas / Caso práctico 2 / actividad empresarial",
+      "kind": "taxpayer_situation",
+      "source_summary": "Calcular el pago provisional de una persona física con actividad empresarial usando ingresos efectivamente cobrados y deducciones pagadas acumuladas.",
+      "raw_fact_statements": [
+        "Fernando opera una papelería y debe presentar el pago provisional correspondiente a agosto de 2017.",
+        "La fuente distingue ingresos facturados de ingresos cobrados y separa gastos deducibles de un gasto no deducible."
+      ],
+      "historical_regime_context": false,
+      "source": "unam",
+      "source_entry_id": "UNAM-V",
+      "source_section_order": 5,
+      "source_section_title": "Cálculo de contribuciones",
+      "temporal_review_required": true,
+      "requires_fact_normalization": true,
+      "requires_problem_institution_classification": true,
+      "requires_normative_article_linkage": true,
+      "requires_corpus_validation": true,
+      "eligible_for_operational_cbr": false,
+      "can_control_legal_decision": false
+    },
+    {
+      "situation_id": "U-CBR-SIT-008",
+      "source_pages": [
+        157,
+        158
+      ],
+      "source_locator": "V. ISR personas físicas / Caso práctico 3 / Régimen de Incorporación Fiscal",
+      "kind": "historical_regime_situation",
+      "source_summary": "Resolver un cálculo bimestral histórico del Régimen de Incorporación Fiscal para una persona física que inicia una fonda.",
+      "raw_fact_statements": [
+        "La persona física inicia actividades en septiembre con una fonda de cocina mexicana y presenta por primera vez el bimestre septiembre-octubre.",
+        "El caso fuente registra ventas por 6,000 y 8,600 y gastos por 3,000 y 4,500 para los dos meses del bimestre."
+      ],
+      "historical_regime_context": true,
+      "source": "unam",
+      "source_entry_id": "UNAM-V",
+      "source_section_order": 5,
+      "source_section_title": "Cálculo de contribuciones",
+      "temporal_review_required": true,
+      "requires_fact_normalization": true,
+      "requires_problem_institution_classification": true,
+      "requires_normative_article_linkage": true,
+      "requires_corpus_validation": true,
+      "eligible_for_operational_cbr": false,
+      "can_control_legal_decision": false
+    },
+    {
+      "situation_id": "U-CBR-SIT-009",
+      "source_pages": [
+        158,
+        159,
+        160
+      ],
+      "source_locator": "V. ISR personas físicas / Caso práctico 4 / servicios profesionales",
+      "kind": "taxpayer_situation",
+      "source_summary": "Calcular el pago provisional de ISR por servicios profesionales independientes considerando ingresos, deducciones y retenciones acumuladas.",
+      "raw_fact_statements": [
+        "Sandra obtiene ingresos por servicios profesionales y el caso proporciona ingresos acumulados y del mes de abril.",
+        "También se proporcionan deducciones y retenciones de ISR para determinar el importe del impuesto correspondiente a abril."
+      ],
+      "historical_regime_context": false,
+      "source": "unam",
+      "source_entry_id": "UNAM-V",
+      "source_section_order": 5,
+      "source_section_title": "Cálculo de contribuciones",
+      "temporal_review_required": true,
+      "requires_fact_normalization": true,
+      "requires_problem_institution_classification": true,
+      "requires_normative_article_linkage": true,
+      "requires_corpus_validation": true,
+      "eligible_for_operational_cbr": false,
+      "can_control_legal_decision": false
+    },
+    {
+      "situation_id": "U-CBR-SIT-010",
+      "source_pages": [
+        161,
+        162
+      ],
+      "source_locator": "V. ISR personas físicas / Caso práctico 5 / arrendamiento",
+      "kind": "taxpayer_situation",
+      "source_summary": "Calcular el ISR mensual de una persona física arrendadora que optó por la deducción opcional y recibe rentas de personas morales.",
+      "raw_fact_statements": [
+        "Gabriel obtiene 89,000 de ingresos por locales arrendados a personas morales durante septiembre.",
+        "El caso aplica la deducción opcional del 35%, considera 4,500 de predial pagado y 8,900 de ISR retenido."
+      ],
+      "historical_regime_context": false,
+      "source": "unam",
+      "source_entry_id": "UNAM-V",
+      "source_section_order": 5,
+      "source_section_title": "Cálculo de contribuciones",
+      "temporal_review_required": true,
+      "requires_fact_normalization": true,
+      "requires_problem_institution_classification": true,
+      "requires_normative_article_linkage": true,
+      "requires_corpus_validation": true,
+      "eligible_for_operational_cbr": false,
+      "can_control_legal_decision": false
+    },
+    {
+      "situation_id": "U-CBR-SIT-011",
+      "source_pages": [
+        163,
+        164,
+        165
+      ],
+      "source_locator": "V. ISR personas físicas / caso anual de sueldos y salarios / fuente rotulada nuevamente Caso práctico 5",
+      "kind": "taxpayer_situation",
+      "source_summary": "Calcular el ISR anual de una persona asalariada con retenciones previas y deducciones personales para determinar impuesto a cargo o saldo a favor.",
+      "raw_fact_statements": [
+        "La persona física recibió 890,450 de ingresos en 2016 y su patrón retuvo 220,000 de ISR durante el ejercicio.",
+        "La fuente incorpora deducciones personales por servicios odontológicos, gastos funerarios e intereses reales hipotecarios, por un total de 55,000."
+      ],
+      "historical_regime_context": false,
+      "source": "unam",
+      "source_entry_id": "UNAM-V",
+      "source_section_order": 5,
+      "source_section_title": "Cálculo de contribuciones",
+      "temporal_review_required": true,
+      "requires_fact_normalization": true,
+      "requires_problem_institution_classification": true,
+      "requires_normative_article_linkage": true,
+      "requires_corpus_validation": true,
+      "eligible_for_operational_cbr": false,
+      "can_control_legal_decision": false
+    },
+    {
+      "situation_id": "U-CBR-SIT-012",
+      "source_pages": [
+        166,
+        167,
+        168,
+        169
+      ],
+      "source_locator": "V. IVA / Caso práctico de personas morales 1 / El Alemán",
+      "kind": "taxpayer_situation",
+      "source_summary": "Calcular el IVA mensual de una persona moral comercial considerando operaciones cobradas, operaciones a crédito, IVA acreditable y saldo a favor anterior.",
+      "raw_fact_statements": [
+        "La compañía El Alemán obtuvo 895,421 de ingresos cobrados más IVA y facturó 120,000 a crédito todavía no cobrados.",
+        "El caso incluye pagos y compras con IVA, operaciones a crédito, sueldos y un saldo a favor de agosto por 13,000 para determinar el IVA de septiembre."
+      ],
+      "historical_regime_context": false,
+      "source": "unam",
+      "source_entry_id": "UNAM-V",
+      "source_section_order": 5,
+      "source_section_title": "Cálculo de contribuciones",
+      "temporal_review_required": true,
+      "requires_fact_normalization": true,
+      "requires_problem_institution_classification": true,
+      "requires_normative_article_linkage": true,
+      "requires_corpus_validation": true,
+      "eligible_for_operational_cbr": false,
+      "can_control_legal_decision": false
+    },
+    {
+      "situation_id": "U-CBR-SIT-013",
+      "source_pages": [
+        169,
+        170,
+        171
+      ],
+      "source_locator": "V. IVA / Caso práctico de personas físicas 2 / servicios de auditoría",
+      "kind": "taxpayer_situation",
+      "source_summary": "Calcular el IVA mensual de una persona física que presta servicios de auditoría a personas morales, con IVA trasladado, acreditable y retenido.",
+      "raw_fact_statements": [
+        "Un contador presta servicios de auditoría y, de las facturas descritas, sólo una aparece cobrada durante septiembre.",
+        "Los clientes son personas morales y el caso considera retención de IVA, además de gastos pagados de teléfono, internet y electricidad para el IVA acreditable."
+      ],
+      "historical_regime_context": false,
+      "source": "unam",
+      "source_entry_id": "UNAM-V",
+      "source_section_order": 5,
+      "source_section_title": "Cálculo de contribuciones",
+      "temporal_review_required": true,
+      "requires_fact_normalization": true,
+      "requires_problem_institution_classification": true,
+      "requires_normative_article_linkage": true,
+      "requires_corpus_validation": true,
+      "eligible_for_operational_cbr": false,
+      "can_control_legal_decision": false
+    }
+  ],
+  "facts_normalized": false,
+  "problems_institutions_classified": false,
+  "normative_articles_linked": false,
+  "corpus_validated": false,
+  "cbr_families_assigned": false,
+  "operational_cases_created": false,
+  "source_is_normative_authority": false,
+  "source_can_control_legal_decision": false
+}

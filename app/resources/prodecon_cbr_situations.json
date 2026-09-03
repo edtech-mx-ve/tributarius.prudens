@@ -1,0 +1,665 @@
+{
+  "schema_version": "1.0",
+  "baseline_commit": "b65dc014e57042ef4826354fa5ccb9b0610c0c4f",
+  "source": "prodecon",
+  "source_title": "Serie Lo que todo contribuyente debe saber",
+  "purpose": "Extracción C.2 de situaciones y ejemplos jurídicos-fiscales contenidos en los doce apartados PRODECON para formar candidatos de experiencia CBR. Conserva procedencia y páginas, pero no normaliza hechos, no clasifica problemas o instituciones, no enlaza artículos, no valida vigencia, no asigna familias CBR y no crea casos operativos.",
+  "source_entry_count": 12,
+  "expected_situations_per_entry": 2,
+  "situation_count": 24,
+  "situations": [
+    {
+      "situation_id": "P-CBR-SIT-001",
+      "source": "prodecon",
+      "source_entry_id": "PRODECON-01",
+      "source_section_order": 1,
+      "source_section_title": "Ingresos del Estado",
+      "source_pages": [
+        14,
+        15
+      ],
+      "source_locator": "III. ¿De dónde vienen los ingresos del Estado? / Ingresos tributarios e ingresos por la propia actividad del Estado",
+      "kind": "conceptual_situation",
+      "source_summary": "Distinguir una aportación tributaria de un ingreso no tributario obtenido por la actividad o los recursos propios del Estado.",
+      "raw_fact_statements": [
+        "La sociedad aporta recursos al Estado mediante contribuciones destinadas a sufragar el gasto público.",
+        "El Estado también obtiene ingresos no tributarios de su propia actividad y del aprovechamiento de recursos naturales."
+      ],
+      "historical_regime_context": false,
+      "temporal_review_required": true,
+      "requires_fact_normalization": true,
+      "requires_problem_institution_classification": true,
+      "requires_normative_article_linkage": true,
+      "requires_corpus_validation": true,
+      "eligible_for_operational_cbr": false,
+      "can_control_legal_decision": false
+    },
+    {
+      "situation_id": "P-CBR-SIT-002",
+      "source": "prodecon",
+      "source_entry_id": "PRODECON-01",
+      "source_section_order": 1,
+      "source_section_title": "Ingresos del Estado",
+      "source_pages": [
+        16,
+        18,
+        19
+      ],
+      "source_locator": "III. Ingresos financieros / IV. Obtención, administración y aplicación de los ingresos",
+      "kind": "conceptual_situation",
+      "source_summary": "Examinar recursos financieros del Estado y su tránsito desde la obtención y administración hasta su aplicación a necesidades públicas.",
+      "raw_fact_statements": [
+        "La fuente describe empréstitos, emisión de moneda y productos como ejemplos de ingresos financieros o no tributarios.",
+        "La actividad financiera estatal comprende obtener, administrar y aplicar recursos para satisfacer necesidades colectivas."
+      ],
+      "historical_regime_context": false,
+      "temporal_review_required": true,
+      "requires_fact_normalization": true,
+      "requires_problem_institution_classification": true,
+      "requires_normative_article_linkage": true,
+      "requires_corpus_validation": true,
+      "eligible_for_operational_cbr": false,
+      "can_control_legal_decision": false
+    },
+    {
+      "situation_id": "P-CBR-SIT-003",
+      "source": "prodecon",
+      "source_entry_id": "PRODECON-02",
+      "source_section_order": 2,
+      "source_section_title": "Facultad para crear impuestos",
+      "source_pages": [
+        27
+      ],
+      "source_locator": "III. Procedimiento para crear impuestos / elementos esenciales",
+      "kind": "conceptual_situation",
+      "source_summary": "Revisar un impuesto creado por ley para determinar si su diseño identifica los elementos esenciales que la fuente exige explicitar.",
+      "raw_fact_statements": [
+        "La fuente presenta como elementos esenciales del impuesto el objeto, sujeto, base, tasa y época de pago.",
+        "Una situación de creación de un impuesto requiere ubicar en la ley quién paga, qué se grava, sobre qué se calcula, qué tasa aplica y cuándo se paga."
+      ],
+      "historical_regime_context": false,
+      "temporal_review_required": true,
+      "requires_fact_normalization": true,
+      "requires_problem_institution_classification": true,
+      "requires_normative_article_linkage": true,
+      "requires_corpus_validation": true,
+      "eligible_for_operational_cbr": false,
+      "can_control_legal_decision": false
+    },
+    {
+      "situation_id": "P-CBR-SIT-004",
+      "source": "prodecon",
+      "source_entry_id": "PRODECON-02",
+      "source_section_order": 2,
+      "source_section_title": "Facultad para crear impuestos",
+      "source_pages": [
+        28,
+        29
+      ],
+      "source_locator": "IV. Límites a la facultad para crear impuestos",
+      "kind": "conceptual_situation",
+      "source_summary": "Examinar una carga tributaria legislativa frente a los límites constitucionales descritos por PRODECON.",
+      "raw_fact_statements": [
+        "La potestad tributaria no se describe como absoluta y debe ejercerse dentro de límites constitucionales.",
+        "La fuente identifica reserva de ley, capacidad contributiva, igualdad tributaria y destino al gasto público como límites relevantes."
+      ],
+      "historical_regime_context": false,
+      "temporal_review_required": true,
+      "requires_fact_normalization": true,
+      "requires_problem_institution_classification": true,
+      "requires_normative_article_linkage": true,
+      "requires_corpus_validation": true,
+      "eligible_for_operational_cbr": false,
+      "can_control_legal_decision": false
+    },
+    {
+      "situation_id": "P-CBR-SIT-005",
+      "source": "prodecon",
+      "source_entry_id": "PRODECON-03",
+      "source_section_order": 3,
+      "source_section_title": "Sistema de impuestos en México",
+      "source_pages": [
+        39
+      ],
+      "source_locator": "II. El sistema de impuestos / clases de contribuciones",
+      "kind": "conceptual_situation",
+      "source_summary": "Distinguir si una obligación recaudatoria corresponde a impuesto, derecho, aportación de seguridad social o contribución de mejoras.",
+      "raw_fact_statements": [
+        "El sistema de recaudación tributaria incluye distintas clases de contribuciones y no sólo impuestos.",
+        "La naturaleza de la prestación y el hecho previsto en ley permiten ubicar la clase de contribución descrita por la fuente."
+      ],
+      "historical_regime_context": false,
+      "temporal_review_required": true,
+      "requires_fact_normalization": true,
+      "requires_problem_institution_classification": true,
+      "requires_normative_article_linkage": true,
+      "requires_corpus_validation": true,
+      "eligible_for_operational_cbr": false,
+      "can_control_legal_decision": false
+    },
+    {
+      "situation_id": "P-CBR-SIT-006",
+      "source": "prodecon",
+      "source_entry_id": "PRODECON-03",
+      "source_section_order": 3,
+      "source_section_title": "Sistema de impuestos en México",
+      "source_pages": [
+        46,
+        47,
+        48
+      ],
+      "source_locator": "IV. Estructura del sistema de impuestos en México y coordinación fiscal",
+      "kind": "conceptual_situation",
+      "source_summary": "Identificar el nivel de gobierno y el marco de coordinación involucrados cuando una obligación tributaria se presenta como federal, estatal o municipal.",
+      "raw_fact_statements": [
+        "La fuente distingue impuestos federales, estatales y municipales según la autoridad y el ámbito de la contribución.",
+        "El Sistema Nacional de Coordinación Fiscal articula cooperación entre Federación y entidades federativas."
+      ],
+      "historical_regime_context": false,
+      "temporal_review_required": true,
+      "requires_fact_normalization": true,
+      "requires_problem_institution_classification": true,
+      "requires_normative_article_linkage": true,
+      "requires_corpus_validation": true,
+      "eligible_for_operational_cbr": false,
+      "can_control_legal_decision": false
+    },
+    {
+      "situation_id": "P-CBR-SIT-007",
+      "source": "prodecon",
+      "source_entry_id": "PRODECON-04",
+      "source_section_order": 4,
+      "source_section_title": "Relación Estado-contribuyente",
+      "source_pages": [
+        55
+      ],
+      "source_locator": "II. Relación entre el Estado y el contribuyente / hecho imponible",
+      "kind": "taxpayer_situation",
+      "source_summary": "Representar la situación de una persona cuya obtención de ingresos coincide con un supuesto fiscal y puede hacer surgir una relación jurídico-tributaria.",
+      "raw_fact_statements": [
+        "La fuente ejemplifica la realización de un supuesto fiscal mediante la obtención de ingresos por salarios o por actividades empresariales.",
+        "Cuando ocurre el hecho imponible previsto en ley surgen derechos y obligaciones entre contribuyente y Estado."
+      ],
+      "historical_regime_context": false,
+      "temporal_review_required": true,
+      "requires_fact_normalization": true,
+      "requires_problem_institution_classification": true,
+      "requires_normative_article_linkage": true,
+      "requires_corpus_validation": true,
+      "eligible_for_operational_cbr": false,
+      "can_control_legal_decision": false
+    },
+    {
+      "situation_id": "P-CBR-SIT-008",
+      "source": "prodecon",
+      "source_entry_id": "PRODECON-04",
+      "source_section_order": 4,
+      "source_section_title": "Relación Estado-contribuyente",
+      "source_pages": [
+        60,
+        61
+      ],
+      "source_locator": "IV. Sujetos de la relación jurídico-tributaria / sujeto sustituto",
+      "kind": "taxpayer_situation",
+      "source_summary": "Distinguir la posición del contribuyente directo y de un tercero obligado a retener y enterar un impuesto en una relación tributaria.",
+      "raw_fact_statements": [
+        "La fuente distingue sujeto activo y sujetos pasivos directo, sustituto y solidario.",
+        "El patrón aparece como ejemplo de sujeto sustituto que retiene el ISR del trabajador y lo entrega al acreedor fiscal."
+      ],
+      "historical_regime_context": false,
+      "temporal_review_required": true,
+      "requires_fact_normalization": true,
+      "requires_problem_institution_classification": true,
+      "requires_normative_article_linkage": true,
+      "requires_corpus_validation": true,
+      "eligible_for_operational_cbr": false,
+      "can_control_legal_decision": false
+    },
+    {
+      "situation_id": "P-CBR-SIT-009",
+      "source": "prodecon",
+      "source_entry_id": "PRODECON-05",
+      "source_section_order": 5,
+      "source_section_title": "Impuestos federales",
+      "source_pages": [
+        69,
+        70,
+        71
+      ],
+      "source_locator": "III. Impuesto sobre la Renta / sujetos, objeto y base",
+      "kind": "taxpayer_situation",
+      "source_summary": "Ubicar el tratamiento inicial de ISR de una persona a partir de la clase de ingreso y del régimen fiscal descrito por la fuente.",
+      "raw_fact_statements": [
+        "La fuente identifica como objeto del ISR diversos ingresos de personas físicas, entre ellos salarios, actividades profesionales y arrendamiento.",
+        "La base se describe como ingresos objeto del impuesto menos deducciones u otras figuras sustractivas, que dependen del régimen aplicable."
+      ],
+      "historical_regime_context": false,
+      "temporal_review_required": true,
+      "requires_fact_normalization": true,
+      "requires_problem_institution_classification": true,
+      "requires_normative_article_linkage": true,
+      "requires_corpus_validation": true,
+      "eligible_for_operational_cbr": false,
+      "can_control_legal_decision": false
+    },
+    {
+      "situation_id": "P-CBR-SIT-010",
+      "source": "prodecon",
+      "source_entry_id": "PRODECON-05",
+      "source_section_order": 5,
+      "source_section_title": "Impuestos federales",
+      "source_pages": [
+        73,
+        74,
+        75
+      ],
+      "source_locator": "IV. Impuesto al Valor Agregado / sujetos, objeto, base y época de pago",
+      "kind": "taxpayer_situation",
+      "source_summary": "Reconocer una situación potencial de IVA cuando una persona enajena bienes, presta servicios independientes, arrienda bienes o importa bienes o servicios.",
+      "raw_fact_statements": [
+        "La fuente enumera enajenación de bienes, servicios independientes, arrendamiento e importación como actos o actividades relevantes para IVA.",
+        "La fuente relaciona el IVA con el valor de la operación, tasas y una obligación de pago periódico."
+      ],
+      "historical_regime_context": false,
+      "temporal_review_required": true,
+      "requires_fact_normalization": true,
+      "requires_problem_institution_classification": true,
+      "requires_normative_article_linkage": true,
+      "requires_corpus_validation": true,
+      "eligible_for_operational_cbr": false,
+      "can_control_legal_decision": false
+    },
+    {
+      "situation_id": "P-CBR-SIT-011",
+      "source": "prodecon",
+      "source_entry_id": "PRODECON-06",
+      "source_section_order": 6,
+      "source_section_title": "Facultad para cobrar contribuciones",
+      "source_pages": [
+        93,
+        94,
+        101
+      ],
+      "source_locator": "III. La determinación de los impuestos / autodeterminación y determinación por autoridad",
+      "kind": "authority_situation",
+      "source_summary": "Distinguir entre la autodeterminación del contribuyente y una eventual determinación de la obligación por la autoridad fiscal.",
+      "raw_fact_statements": [
+        "En la autodeterminación el contribuyente reconoce el hecho imponible, calcula, declara y paga su obligación.",
+        "La fuente contempla que la autoridad determine contribuciones cuando, mediante facultades fiscalizadoras, advierta una determinación incorrecta."
+      ],
+      "historical_regime_context": false,
+      "temporal_review_required": true,
+      "requires_fact_normalization": true,
+      "requires_problem_institution_classification": true,
+      "requires_normative_article_linkage": true,
+      "requires_corpus_validation": true,
+      "eligible_for_operational_cbr": false,
+      "can_control_legal_decision": false
+    },
+    {
+      "situation_id": "P-CBR-SIT-012",
+      "source": "prodecon",
+      "source_entry_id": "PRODECON-06",
+      "source_section_order": 6,
+      "source_section_title": "Facultad para cobrar contribuciones",
+      "source_pages": [
+        96,
+        97,
+        98,
+        99
+      ],
+      "source_locator": "IV. Incumplimiento de la obligación fiscal / Procedimiento Administrativo de Ejecución",
+      "kind": "authority_situation",
+      "source_summary": "Representar la situación de un crédito fiscal exigible no pagado voluntariamente que avanza hacia cobro coactivo.",
+      "raw_fact_statements": [
+        "La fuente presenta el PAE como mecanismo administrativo para recaudar un crédito fiscal no satisfecho voluntaria y oportunamente.",
+        "Entre las etapas descritas aparecen requerimiento de pago, embargo y remate de bienes."
+      ],
+      "historical_regime_context": false,
+      "temporal_review_required": true,
+      "requires_fact_normalization": true,
+      "requires_problem_institution_classification": true,
+      "requires_normative_article_linkage": true,
+      "requires_corpus_validation": true,
+      "eligible_for_operational_cbr": false,
+      "can_control_legal_decision": false
+    },
+    {
+      "situation_id": "P-CBR-SIT-013",
+      "source": "prodecon",
+      "source_entry_id": "PRODECON-07",
+      "source_section_order": 7,
+      "source_section_title": "Derechos y obligaciones",
+      "source_pages": [
+        108,
+        109
+      ],
+      "source_locator": "III. Derechos de los contribuyentes / derecho a ser informado y asistido",
+      "kind": "taxpayer_situation",
+      "source_summary": "Representar a un contribuyente que enfrenta una actuación o facultad de comprobación y requiere información y asistencia sobre sus derechos y obligaciones.",
+      "raw_fact_statements": [
+        "La fuente reconoce el derecho a recibir información y asistencia sobre la situación fiscal del contribuyente.",
+        "Ese derecho se proyecta expresamente al inicio de facultades de comprobación y otras actuaciones de la autoridad tributaria."
+      ],
+      "historical_regime_context": false,
+      "temporal_review_required": true,
+      "requires_fact_normalization": true,
+      "requires_problem_institution_classification": true,
+      "requires_normative_article_linkage": true,
+      "requires_corpus_validation": true,
+      "eligible_for_operational_cbr": false,
+      "can_control_legal_decision": false
+    },
+    {
+      "situation_id": "P-CBR-SIT-014",
+      "source": "prodecon",
+      "source_entry_id": "PRODECON-07",
+      "source_section_order": 7,
+      "source_section_title": "Derechos y obligaciones",
+      "source_pages": [
+        119,
+        120
+      ],
+      "source_locator": "IV. Obligaciones del contribuyente / declaraciones y facultades de comprobación",
+      "kind": "taxpayer_situation",
+      "source_summary": "Representar el cumplimiento formal de un contribuyente que debe presentar declaraciones y permitir la verificación fiscal con la documentación correspondiente.",
+      "raw_fact_statements": [
+        "La fuente describe la presentación de declaraciones como una obligación formal sujeta a los plazos establecidos en ley.",
+        "También describe la obligación de tolerar actos de comprobación y mantener a disposición la contabilidad y documentación pertinente."
+      ],
+      "historical_regime_context": false,
+      "temporal_review_required": true,
+      "requires_fact_normalization": true,
+      "requires_problem_institution_classification": true,
+      "requires_normative_article_linkage": true,
+      "requires_corpus_validation": true,
+      "eligible_for_operational_cbr": false,
+      "can_control_legal_decision": false
+    },
+    {
+      "situation_id": "P-CBR-SIT-015",
+      "source": "prodecon",
+      "source_entry_id": "PRODECON-08",
+      "source_section_order": 8,
+      "source_section_title": "Defensa del contribuyente",
+      "source_pages": [
+        127,
+        132,
+        133
+      ],
+      "source_locator": "II. Defensa administrativa / III. Defensa jurisdiccional",
+      "kind": "defense_situation",
+      "source_summary": "Representar al contribuyente afectado por un acto o resolución fiscal que necesita identificar una vía de impugnación administrativa o jurisdiccional.",
+      "raw_fact_statements": [
+        "La fuente presenta el recurso de revocación como medio de control interno de legalidad frente a actos o resoluciones fiscales.",
+        "También presenta el juicio contencioso administrativo para impugnar determinadas resoluciones definitivas y actos de autoridad."
+      ],
+      "historical_regime_context": false,
+      "temporal_review_required": true,
+      "requires_fact_normalization": true,
+      "requires_problem_institution_classification": true,
+      "requires_normative_article_linkage": true,
+      "requires_corpus_validation": true,
+      "eligible_for_operational_cbr": false,
+      "can_control_legal_decision": false
+    },
+    {
+      "situation_id": "P-CBR-SIT-016",
+      "source": "prodecon",
+      "source_entry_id": "PRODECON-08",
+      "source_section_order": 8,
+      "source_section_title": "Defensa del contribuyente",
+      "source_pages": [
+        137,
+        138,
+        139
+      ],
+      "source_locator": "IV. Defensa no jurisdiccional / Quejas y Reclamaciones y Asesoría PRODECON",
+      "kind": "defense_situation",
+      "source_summary": "Representar a una persona que estima vulnerados sus derechos por una autoridad fiscal federal y busca defensa no jurisdiccional ante PRODECON.",
+      "raw_fact_statements": [
+        "PRODECON conoce e investiga quejas contra actos de autoridades fiscales federales que el contribuyente estima violatorios de sus derechos.",
+        "La fuente también describe la asesoría como primer nivel de atención ante una problemática derivada de un acto de autoridad fiscal."
+      ],
+      "historical_regime_context": false,
+      "temporal_review_required": true,
+      "requires_fact_normalization": true,
+      "requires_problem_institution_classification": true,
+      "requires_normative_article_linkage": true,
+      "requires_corpus_validation": true,
+      "eligible_for_operational_cbr": false,
+      "can_control_legal_decision": false
+    },
+    {
+      "situation_id": "P-CBR-SIT-017",
+      "source": "prodecon",
+      "source_entry_id": "PRODECON-09",
+      "source_section_order": 9,
+      "source_section_title": "Interpretación de leyes fiscales",
+      "source_pages": [
+        146,
+        147,
+        148,
+        149,
+        150
+      ],
+      "source_locator": "II. Interpretación de normas jurídicas / III. Métodos de interpretación",
+      "kind": "interpretation_situation",
+      "source_summary": "Representar una consulta en la que una norma fiscal es ambigua, contradictoria o presenta un vacío y requiere esclarecer su sentido o alcance.",
+      "raw_fact_statements": [
+        "La fuente considera necesaria la interpretación cuando una norma no es clara, tiene diferentes significados, contradicciones o vacíos.",
+        "Se describen métodos gramatical o literal, lógico, histórico y sistemático para reconstruir el sentido normativo."
+      ],
+      "historical_regime_context": false,
+      "temporal_review_required": true,
+      "requires_fact_normalization": true,
+      "requires_problem_institution_classification": true,
+      "requires_normative_article_linkage": true,
+      "requires_corpus_validation": true,
+      "eligible_for_operational_cbr": false,
+      "can_control_legal_decision": false
+    },
+    {
+      "situation_id": "P-CBR-SIT-018",
+      "source": "prodecon",
+      "source_entry_id": "PRODECON-09",
+      "source_section_order": 9,
+      "source_section_title": "Interpretación de leyes fiscales",
+      "source_pages": [
+        151,
+        152,
+        153,
+        154,
+        155
+      ],
+      "source_locator": "IV. Interpretación de normas fiscales / aplicación estricta",
+      "kind": "interpretation_situation",
+      "source_summary": "Representar una duda sobre la aplicación de una carga, excepción, infracción o sanción fiscal a hechos similares pero no coincidentes con la hipótesis normativa.",
+      "raw_fact_statements": [
+        "La fuente distingue interpretación de la norma y aplicación estricta de determinadas disposiciones fiscales.",
+        "Para cargas, excepciones, infracciones y sanciones, la aplicación descrita se limita a situaciones de hecho que coincidan con la hipótesis normativa, sin extensión por analogía a casos similares."
+      ],
+      "historical_regime_context": false,
+      "temporal_review_required": true,
+      "requires_fact_normalization": true,
+      "requires_problem_institution_classification": true,
+      "requires_normative_article_linkage": true,
+      "requires_corpus_validation": true,
+      "eligible_for_operational_cbr": false,
+      "can_control_legal_decision": false
+    },
+    {
+      "situation_id": "P-CBR-SIT-019",
+      "source": "prodecon",
+      "source_entry_id": "PRODECON-10",
+      "source_section_order": 10,
+      "source_section_title": "ISR de asalariados",
+      "source_pages": [
+        162,
+        163,
+        164,
+        165
+      ],
+      "source_locator": "III. El patrón en el pago de ISR de asalariados / IV. Determinación por el trabajador",
+      "kind": "taxpayer_situation",
+      "source_summary": "Representar la situación ordinaria de un asalariado cuyo patrón calcula y retiene ISR, distinguiendo la responsabilidad anual que la edición fuente atribuye al patrón o al trabajador según el supuesto.",
+      "raw_fact_statements": [
+        "La fuente describe al patrón como encargado de calcular y retener pagos de ISR derivados de salarios.",
+        "La edición fuente también contempla supuestos en los que el propio trabajador determina su ISR anual."
+      ],
+      "historical_regime_context": false,
+      "temporal_review_required": true,
+      "requires_fact_normalization": true,
+      "requires_problem_institution_classification": true,
+      "requires_normative_article_linkage": true,
+      "requires_corpus_validation": true,
+      "eligible_for_operational_cbr": false,
+      "can_control_legal_decision": false
+    },
+    {
+      "situation_id": "P-CBR-SIT-020",
+      "source": "prodecon",
+      "source_entry_id": "PRODECON-10",
+      "source_section_order": 10,
+      "source_section_title": "ISR de asalariados",
+      "source_pages": [
+        165,
+        166,
+        167,
+        168
+      ],
+      "source_locator": "IV. Determinación de ISR por el trabajador y deducciones personales",
+      "kind": "taxpayer_situation",
+      "source_summary": "Representar a un asalariado que, por una circunstancia descrita en la edición fuente, presenta su propia declaración anual y considera deducciones, retenciones y un eventual saldo.",
+      "raw_fact_statements": [
+        "La edición fuente menciona, entre otros supuestos, la prestación de servicios a dos o más patrones durante un mismo ejercicio para la determinación anual por el trabajador.",
+        "Al determinar el impuesto anual, la fuente contempla deducciones personales y la comparación con retenciones previas para identificar pago pendiente o cantidad pagada en exceso."
+      ],
+      "historical_regime_context": false,
+      "temporal_review_required": true,
+      "requires_fact_normalization": true,
+      "requires_problem_institution_classification": true,
+      "requires_normative_article_linkage": true,
+      "requires_corpus_validation": true,
+      "eligible_for_operational_cbr": false,
+      "can_control_legal_decision": false
+    },
+    {
+      "situation_id": "P-CBR-SIT-021",
+      "source": "prodecon",
+      "source_entry_id": "PRODECON-11",
+      "source_section_order": 11,
+      "source_section_title": "ISR de actividades profesionales",
+      "source_pages": [
+        172,
+        173
+      ],
+      "source_locator": "II. Ingresos por actividades profesionales",
+      "kind": "taxpayer_situation",
+      "source_summary": "Representar a una persona física que obtiene remuneraciones por prestar servicios profesionales independientes y requiere ubicar el régimen descrito por la fuente.",
+      "raw_fact_statements": [
+        "La fuente define los ingresos por actividades profesionales como remuneraciones derivadas de un servicio personal independiente que no sea subordinado.",
+        "Contadores, médicos, abogados, arquitectos e ingenieros aparecen como ejemplos de prestadores independientes."
+      ],
+      "historical_regime_context": false,
+      "temporal_review_required": true,
+      "requires_fact_normalization": true,
+      "requires_problem_institution_classification": true,
+      "requires_normative_article_linkage": true,
+      "requires_corpus_validation": true,
+      "eligible_for_operational_cbr": false,
+      "can_control_legal_decision": false
+    },
+    {
+      "situation_id": "P-CBR-SIT-022",
+      "source": "prodecon",
+      "source_entry_id": "PRODECON-11",
+      "source_section_order": 11,
+      "source_section_title": "ISR de actividades profesionales",
+      "source_pages": [
+        174,
+        175,
+        176,
+        177
+      ],
+      "source_locator": "III. Obligaciones / IV. Deducciones autorizadas",
+      "kind": "taxpayer_situation",
+      "source_summary": "Representar a un profesional independiente que debe gestionar directamente sus declaraciones y distinguir los tipos de deducciones descritos en la edición fuente.",
+      "raw_fact_statements": [
+        "La fuente atribuye al profesional independiente la presentación directa de declaraciones mensuales y anual de ISR.",
+        "Para actividades profesionales distingue deducciones estructurales vinculadas a generar ingresos y deducciones personales de la persona física."
+      ],
+      "historical_regime_context": false,
+      "temporal_review_required": true,
+      "requires_fact_normalization": true,
+      "requires_problem_institution_classification": true,
+      "requires_normative_article_linkage": true,
+      "requires_corpus_validation": true,
+      "eligible_for_operational_cbr": false,
+      "can_control_legal_decision": false
+    },
+    {
+      "situation_id": "P-CBR-SIT-023",
+      "source": "prodecon",
+      "source_entry_id": "PRODECON-12",
+      "source_section_order": 12,
+      "source_section_title": "ISR en RIF",
+      "source_pages": [
+        184,
+        185
+      ],
+      "source_locator": "II. ¿Quiénes pueden tributar en el RIF?",
+      "kind": "historical_regime_situation",
+      "source_summary": "Conservar como situación histórica los criterios de elegibilidad del RIF descritos en la edición fuente, sujetos siempre a revisión temporal antes de cualquier reutilización.",
+      "raw_fact_statements": [
+        "La edición fuente describe el RIF para ciertas personas físicas con actividades empresariales, enajenación de bienes o servicios no profesionales.",
+        "La edición fuente utiliza un límite de ingresos y excepciones propias del contexto normativo de ese régimen histórico."
+      ],
+      "historical_regime_context": true,
+      "temporal_review_required": true,
+      "requires_fact_normalization": true,
+      "requires_problem_institution_classification": true,
+      "requires_normative_article_linkage": true,
+      "requires_corpus_validation": true,
+      "eligible_for_operational_cbr": false,
+      "can_control_legal_decision": false
+    },
+    {
+      "situation_id": "P-CBR-SIT-024",
+      "source": "prodecon",
+      "source_entry_id": "PRODECON-12",
+      "source_section_order": 12,
+      "source_section_title": "ISR en RIF",
+      "source_pages": [
+        187,
+        188,
+        190,
+        191,
+        192
+      ],
+      "source_locator": "III. Declaraciones / IV. Cálculo / V. Obligaciones / VI. Conclusiones del RIF",
+      "kind": "historical_regime_situation",
+      "source_summary": "Conservar como situación histórica el esquema bimestral de declaración, cálculo y obligaciones del RIF descrito por la fuente, sin asumir su vigencia actual.",
+      "raw_fact_statements": [
+        "La edición fuente describe pagos de ISR del RIF en forma bimestral y con carácter definitivo.",
+        "La edición fuente enumera obligaciones operativas del RIF, entre ellas registro, comprobantes y registro de operaciones, propias de ese contexto temporal."
+      ],
+      "historical_regime_context": true,
+      "temporal_review_required": true,
+      "requires_fact_normalization": true,
+      "requires_problem_institution_classification": true,
+      "requires_normative_article_linkage": true,
+      "requires_corpus_validation": true,
+      "eligible_for_operational_cbr": false,
+      "can_control_legal_decision": false
+    }
+  ],
+  "facts_normalized": false,
+  "problems_institutions_classified": false,
+  "normative_articles_linked": false,
+  "corpus_validated": false,
+  "cbr_families_assigned": false,
+  "operational_cases_created": false,
+  "source_is_normative_authority": false,
+  "source_can_control_legal_decision": false
+}

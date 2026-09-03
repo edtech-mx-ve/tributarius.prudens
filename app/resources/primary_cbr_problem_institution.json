@@ -1,0 +1,3183 @@
+{
+  "schema_version": "1.0",
+  "baseline_commit": "b65dc014e57042ef4826354fa5ccb9b0610c0c4f",
+  "purpose": "Clasificar los 37 candidatos CBR normalizados en C.4 contra la taxonomía fiscal A.6 existente, fijando problem_type sólo cuando existe correspondencia exacta por apartado y hechos fuente, sin inventar categorías ni adelantar validación normativa.",
+  "taxonomy_resource": "app/resources/fiscal_problem_institution_taxonomy.json",
+  "taxonomy_schema_version": "1.0",
+  "taxonomy_concept_count": 12,
+  "taxonomy_problem_count": 6,
+  "taxonomy_institution_count": 6,
+  "source_situation_count": 37,
+  "classified_situation_count": 37,
+  "primary_problem_match_count": 35,
+  "primary_problem_no_exact_match_count": 2,
+  "primary_institution_match_count": 31,
+  "primary_institution_no_exact_match_count": 6,
+  "problem_type_seed_count": 35,
+  "problem_type_semantics": "El campo problem_type usa exclusivamente el concept_id del problema primario de la taxonomía A.6; no es una conclusión jurídica ni una familia CBR.",
+  "classifications": [
+    {
+      "situation_id": "P-CBR-SIT-001",
+      "source": "prodecon",
+      "source_entry_id": "PRODECON-01",
+      "historical_regime_context": false,
+      "primary_problem_id": "determinacion_contribucion",
+      "problem_matches": [
+        {
+          "concept_id": "determinacion_contribucion",
+          "label": "Determinación de contribuciones",
+          "kind": "problem",
+          "primary": true,
+          "evidence_fact_ids": [
+            "C4-P-FCT-001-01",
+            "C4-P-FCT-001-02",
+            "C4-P-FCT-001-03"
+          ],
+          "basis": "a6_primary_entry_and_c4_facts",
+          "taxonomic_only": true,
+          "requires_normative_validation": true,
+          "can_control_legal_decision": false
+        }
+      ],
+      "problem_no_exact_match_reason": null,
+      "primary_institution_id": null,
+      "institution_matches": [],
+      "institution_no_exact_match_reason": "A.6 registra PRODECON-01 bajo determinación de contribuciones, pero no asigna una institución fiscal a ese apartado.",
+      "similarity_seed": {
+        "taxpayer_type": null,
+        "activity": null,
+        "tax": null,
+        "problem_type": "determinacion_contribucion",
+        "authority_act": null,
+        "procedural_stage": null,
+        "fiscal_year": null,
+        "evidence_fact_ids": {
+          "problem_type": [
+            "C4-P-FCT-001-01",
+            "C4-P-FCT-001-02",
+            "C4-P-FCT-001-03"
+          ]
+        }
+      },
+      "unresolved_required_case_fields": [
+        "taxpayer_type",
+        "activity",
+        "tax",
+        "fiscal_year"
+      ],
+      "facts_normalized": true,
+      "problem_institution_classified": true,
+      "normative_articles_linked": false,
+      "corpus_validated": false,
+      "cbr_family_assigned": false,
+      "operational_case_created": false,
+      "can_control_legal_decision": false
+    },
+    {
+      "situation_id": "P-CBR-SIT-002",
+      "source": "prodecon",
+      "source_entry_id": "PRODECON-01",
+      "historical_regime_context": false,
+      "primary_problem_id": "determinacion_contribucion",
+      "problem_matches": [
+        {
+          "concept_id": "determinacion_contribucion",
+          "label": "Determinación de contribuciones",
+          "kind": "problem",
+          "primary": true,
+          "evidence_fact_ids": [
+            "C4-P-FCT-002-01",
+            "C4-P-FCT-002-02",
+            "C4-P-FCT-002-03"
+          ],
+          "basis": "a6_primary_entry_and_c4_facts",
+          "taxonomic_only": true,
+          "requires_normative_validation": true,
+          "can_control_legal_decision": false
+        }
+      ],
+      "problem_no_exact_match_reason": null,
+      "primary_institution_id": null,
+      "institution_matches": [],
+      "institution_no_exact_match_reason": "A.6 registra PRODECON-01 bajo determinación de contribuciones, pero no asigna una institución fiscal a ese apartado.",
+      "similarity_seed": {
+        "taxpayer_type": null,
+        "activity": null,
+        "tax": null,
+        "problem_type": "determinacion_contribucion",
+        "authority_act": null,
+        "procedural_stage": null,
+        "fiscal_year": null,
+        "evidence_fact_ids": {
+          "problem_type": [
+            "C4-P-FCT-002-01",
+            "C4-P-FCT-002-02",
+            "C4-P-FCT-002-03"
+          ]
+        }
+      },
+      "unresolved_required_case_fields": [
+        "taxpayer_type",
+        "activity",
+        "tax",
+        "fiscal_year"
+      ],
+      "facts_normalized": true,
+      "problem_institution_classified": true,
+      "normative_articles_linked": false,
+      "corpus_validated": false,
+      "cbr_family_assigned": false,
+      "operational_case_created": false,
+      "can_control_legal_decision": false
+    },
+    {
+      "situation_id": "P-CBR-SIT-003",
+      "source": "prodecon",
+      "source_entry_id": "PRODECON-02",
+      "historical_regime_context": false,
+      "primary_problem_id": null,
+      "problem_matches": [],
+      "problem_no_exact_match_reason": "A.6 vincula PRODECON-02 con instituciones tributarias, pero no registra un problema fiscal primario para ese apartado; C.5 conserva el vacío sin crear una categoría nueva.",
+      "primary_institution_id": "tributo",
+      "institution_matches": [
+        {
+          "concept_id": "tributo",
+          "label": "Tributo y elementos esenciales",
+          "kind": "institution",
+          "primary": true,
+          "evidence_fact_ids": [
+            "C4-P-FCT-003-01",
+            "C4-P-FCT-003-02",
+            "C4-P-FCT-003-03"
+          ],
+          "basis": "a6_primary_entry_and_c4_facts",
+          "taxonomic_only": true,
+          "requires_normative_validation": true,
+          "can_control_legal_decision": false
+        }
+      ],
+      "institution_no_exact_match_reason": null,
+      "similarity_seed": {
+        "taxpayer_type": null,
+        "activity": null,
+        "tax": null,
+        "problem_type": null,
+        "authority_act": null,
+        "procedural_stage": null,
+        "fiscal_year": null,
+        "evidence_fact_ids": {}
+      },
+      "unresolved_required_case_fields": [
+        "taxpayer_type",
+        "activity",
+        "tax",
+        "problem_type",
+        "fiscal_year"
+      ],
+      "facts_normalized": true,
+      "problem_institution_classified": true,
+      "normative_articles_linked": false,
+      "corpus_validated": false,
+      "cbr_family_assigned": false,
+      "operational_case_created": false,
+      "can_control_legal_decision": false
+    },
+    {
+      "situation_id": "P-CBR-SIT-004",
+      "source": "prodecon",
+      "source_entry_id": "PRODECON-02",
+      "historical_regime_context": false,
+      "primary_problem_id": null,
+      "problem_matches": [],
+      "problem_no_exact_match_reason": "A.6 vincula PRODECON-02 con instituciones tributarias y derechos, pero no registra un problema fiscal primario para ese apartado; C.5 no amplía la taxonomía.",
+      "primary_institution_id": "derechos_contribuyente",
+      "institution_matches": [
+        {
+          "concept_id": "derechos_contribuyente",
+          "label": "Derechos y garantías del contribuyente",
+          "kind": "institution",
+          "primary": true,
+          "evidence_fact_ids": [
+            "C4-P-FCT-004-01",
+            "C4-P-FCT-004-02",
+            "C4-P-FCT-004-03"
+          ],
+          "basis": "a6_primary_entry_and_c4_facts",
+          "taxonomic_only": true,
+          "requires_normative_validation": true,
+          "can_control_legal_decision": false
+        },
+        {
+          "concept_id": "tributo",
+          "label": "Tributo y elementos esenciales",
+          "kind": "institution",
+          "primary": false,
+          "evidence_fact_ids": [
+            "C4-P-FCT-004-01",
+            "C4-P-FCT-004-02",
+            "C4-P-FCT-004-03"
+          ],
+          "basis": "a6_primary_entry_and_c4_facts",
+          "taxonomic_only": true,
+          "requires_normative_validation": true,
+          "can_control_legal_decision": false
+        }
+      ],
+      "institution_no_exact_match_reason": null,
+      "similarity_seed": {
+        "taxpayer_type": null,
+        "activity": null,
+        "tax": null,
+        "problem_type": null,
+        "authority_act": null,
+        "procedural_stage": null,
+        "fiscal_year": null,
+        "evidence_fact_ids": {}
+      },
+      "unresolved_required_case_fields": [
+        "taxpayer_type",
+        "activity",
+        "tax",
+        "problem_type",
+        "fiscal_year"
+      ],
+      "facts_normalized": true,
+      "problem_institution_classified": true,
+      "normative_articles_linked": false,
+      "corpus_validated": false,
+      "cbr_family_assigned": false,
+      "operational_case_created": false,
+      "can_control_legal_decision": false
+    },
+    {
+      "situation_id": "P-CBR-SIT-005",
+      "source": "prodecon",
+      "source_entry_id": "PRODECON-03",
+      "historical_regime_context": false,
+      "primary_problem_id": "determinacion_contribucion",
+      "problem_matches": [
+        {
+          "concept_id": "determinacion_contribucion",
+          "label": "Determinación de contribuciones",
+          "kind": "problem",
+          "primary": true,
+          "evidence_fact_ids": [
+            "C4-P-FCT-005-01",
+            "C4-P-FCT-005-02",
+            "C4-P-FCT-005-03"
+          ],
+          "basis": "a6_primary_entry_and_c4_facts",
+          "taxonomic_only": true,
+          "requires_normative_validation": true,
+          "can_control_legal_decision": false
+        }
+      ],
+      "problem_no_exact_match_reason": null,
+      "primary_institution_id": "tributo",
+      "institution_matches": [
+        {
+          "concept_id": "tributo",
+          "label": "Tributo y elementos esenciales",
+          "kind": "institution",
+          "primary": true,
+          "evidence_fact_ids": [
+            "C4-P-FCT-005-01",
+            "C4-P-FCT-005-02",
+            "C4-P-FCT-005-03"
+          ],
+          "basis": "a6_primary_entry_and_c4_facts",
+          "taxonomic_only": true,
+          "requires_normative_validation": true,
+          "can_control_legal_decision": false
+        }
+      ],
+      "institution_no_exact_match_reason": null,
+      "similarity_seed": {
+        "taxpayer_type": null,
+        "activity": null,
+        "tax": null,
+        "problem_type": "determinacion_contribucion",
+        "authority_act": null,
+        "procedural_stage": null,
+        "fiscal_year": null,
+        "evidence_fact_ids": {
+          "problem_type": [
+            "C4-P-FCT-005-01",
+            "C4-P-FCT-005-02",
+            "C4-P-FCT-005-03"
+          ]
+        }
+      },
+      "unresolved_required_case_fields": [
+        "taxpayer_type",
+        "activity",
+        "tax",
+        "fiscal_year"
+      ],
+      "facts_normalized": true,
+      "problem_institution_classified": true,
+      "normative_articles_linked": false,
+      "corpus_validated": false,
+      "cbr_family_assigned": false,
+      "operational_case_created": false,
+      "can_control_legal_decision": false
+    },
+    {
+      "situation_id": "P-CBR-SIT-006",
+      "source": "prodecon",
+      "source_entry_id": "PRODECON-03",
+      "historical_regime_context": false,
+      "primary_problem_id": "determinacion_contribucion",
+      "problem_matches": [
+        {
+          "concept_id": "determinacion_contribucion",
+          "label": "Determinación de contribuciones",
+          "kind": "problem",
+          "primary": true,
+          "evidence_fact_ids": [
+            "C4-P-FCT-006-01",
+            "C4-P-FCT-006-02",
+            "C4-P-FCT-006-03"
+          ],
+          "basis": "a6_primary_entry_and_c4_facts",
+          "taxonomic_only": true,
+          "requires_normative_validation": true,
+          "can_control_legal_decision": false
+        }
+      ],
+      "problem_no_exact_match_reason": null,
+      "primary_institution_id": "tributo",
+      "institution_matches": [
+        {
+          "concept_id": "tributo",
+          "label": "Tributo y elementos esenciales",
+          "kind": "institution",
+          "primary": true,
+          "evidence_fact_ids": [
+            "C4-P-FCT-006-01",
+            "C4-P-FCT-006-02",
+            "C4-P-FCT-006-03"
+          ],
+          "basis": "a6_primary_entry_and_c4_facts",
+          "taxonomic_only": true,
+          "requires_normative_validation": true,
+          "can_control_legal_decision": false
+        }
+      ],
+      "institution_no_exact_match_reason": null,
+      "similarity_seed": {
+        "taxpayer_type": null,
+        "activity": null,
+        "tax": null,
+        "problem_type": "determinacion_contribucion",
+        "authority_act": null,
+        "procedural_stage": null,
+        "fiscal_year": null,
+        "evidence_fact_ids": {
+          "problem_type": [
+            "C4-P-FCT-006-01",
+            "C4-P-FCT-006-02",
+            "C4-P-FCT-006-03"
+          ]
+        }
+      },
+      "unresolved_required_case_fields": [
+        "taxpayer_type",
+        "activity",
+        "tax",
+        "fiscal_year"
+      ],
+      "facts_normalized": true,
+      "problem_institution_classified": true,
+      "normative_articles_linked": false,
+      "corpus_validated": false,
+      "cbr_family_assigned": false,
+      "operational_case_created": false,
+      "can_control_legal_decision": false
+    },
+    {
+      "situation_id": "P-CBR-SIT-007",
+      "source": "prodecon",
+      "source_entry_id": "PRODECON-04",
+      "historical_regime_context": false,
+      "primary_problem_id": "cumplimiento_fiscal",
+      "problem_matches": [
+        {
+          "concept_id": "cumplimiento_fiscal",
+          "label": "Cumplimiento de obligaciones fiscales",
+          "kind": "problem",
+          "primary": true,
+          "evidence_fact_ids": [
+            "C4-P-FCT-007-01",
+            "C4-P-FCT-007-02",
+            "C4-P-FCT-007-03"
+          ],
+          "basis": "a6_primary_entry_and_c4_facts",
+          "taxonomic_only": true,
+          "requires_normative_validation": true,
+          "can_control_legal_decision": false
+        }
+      ],
+      "problem_no_exact_match_reason": null,
+      "primary_institution_id": "relacion_tributaria",
+      "institution_matches": [
+        {
+          "concept_id": "relacion_tributaria",
+          "label": "Relación jurídico-tributaria",
+          "kind": "institution",
+          "primary": true,
+          "evidence_fact_ids": [
+            "C4-P-FCT-007-01",
+            "C4-P-FCT-007-02",
+            "C4-P-FCT-007-03"
+          ],
+          "basis": "a6_primary_entry_and_c4_facts",
+          "taxonomic_only": true,
+          "requires_normative_validation": true,
+          "can_control_legal_decision": false
+        },
+        {
+          "concept_id": "obligacion_tributaria",
+          "label": "Obligación tributaria",
+          "kind": "institution",
+          "primary": false,
+          "evidence_fact_ids": [
+            "C4-P-FCT-007-01",
+            "C4-P-FCT-007-02",
+            "C4-P-FCT-007-03"
+          ],
+          "basis": "a6_primary_entry_and_c4_facts",
+          "taxonomic_only": true,
+          "requires_normative_validation": true,
+          "can_control_legal_decision": false
+        }
+      ],
+      "institution_no_exact_match_reason": null,
+      "similarity_seed": {
+        "taxpayer_type": null,
+        "activity": null,
+        "tax": null,
+        "problem_type": "cumplimiento_fiscal",
+        "authority_act": null,
+        "procedural_stage": null,
+        "fiscal_year": null,
+        "evidence_fact_ids": {
+          "problem_type": [
+            "C4-P-FCT-007-01",
+            "C4-P-FCT-007-02",
+            "C4-P-FCT-007-03"
+          ]
+        }
+      },
+      "unresolved_required_case_fields": [
+        "taxpayer_type",
+        "activity",
+        "tax",
+        "fiscal_year"
+      ],
+      "facts_normalized": true,
+      "problem_institution_classified": true,
+      "normative_articles_linked": false,
+      "corpus_validated": false,
+      "cbr_family_assigned": false,
+      "operational_case_created": false,
+      "can_control_legal_decision": false
+    },
+    {
+      "situation_id": "P-CBR-SIT-008",
+      "source": "prodecon",
+      "source_entry_id": "PRODECON-04",
+      "historical_regime_context": false,
+      "primary_problem_id": "cumplimiento_fiscal",
+      "problem_matches": [
+        {
+          "concept_id": "cumplimiento_fiscal",
+          "label": "Cumplimiento de obligaciones fiscales",
+          "kind": "problem",
+          "primary": true,
+          "evidence_fact_ids": [
+            "C4-P-FCT-008-01",
+            "C4-P-FCT-008-02",
+            "C4-P-FCT-008-03"
+          ],
+          "basis": "a6_primary_entry_and_c4_facts",
+          "taxonomic_only": true,
+          "requires_normative_validation": true,
+          "can_control_legal_decision": false
+        }
+      ],
+      "problem_no_exact_match_reason": null,
+      "primary_institution_id": "relacion_tributaria",
+      "institution_matches": [
+        {
+          "concept_id": "relacion_tributaria",
+          "label": "Relación jurídico-tributaria",
+          "kind": "institution",
+          "primary": true,
+          "evidence_fact_ids": [
+            "C4-P-FCT-008-01",
+            "C4-P-FCT-008-02",
+            "C4-P-FCT-008-03"
+          ],
+          "basis": "a6_primary_entry_and_c4_facts",
+          "taxonomic_only": true,
+          "requires_normative_validation": true,
+          "can_control_legal_decision": false
+        },
+        {
+          "concept_id": "obligacion_tributaria",
+          "label": "Obligación tributaria",
+          "kind": "institution",
+          "primary": false,
+          "evidence_fact_ids": [
+            "C4-P-FCT-008-01",
+            "C4-P-FCT-008-02",
+            "C4-P-FCT-008-03"
+          ],
+          "basis": "a6_primary_entry_and_c4_facts",
+          "taxonomic_only": true,
+          "requires_normative_validation": true,
+          "can_control_legal_decision": false
+        }
+      ],
+      "institution_no_exact_match_reason": null,
+      "similarity_seed": {
+        "taxpayer_type": "individual",
+        "activity": "trabajo subordinado",
+        "tax": "ISR",
+        "problem_type": "cumplimiento_fiscal",
+        "authority_act": null,
+        "procedural_stage": null,
+        "fiscal_year": null,
+        "evidence_fact_ids": {
+          "taxpayer_type": [
+            "C4-P-FCT-008-05"
+          ],
+          "activity": [
+            "C4-P-FCT-008-06"
+          ],
+          "tax": [
+            "C4-P-FCT-008-08"
+          ],
+          "problem_type": [
+            "C4-P-FCT-008-01",
+            "C4-P-FCT-008-02",
+            "C4-P-FCT-008-03"
+          ]
+        }
+      },
+      "unresolved_required_case_fields": [
+        "fiscal_year"
+      ],
+      "facts_normalized": true,
+      "problem_institution_classified": true,
+      "normative_articles_linked": false,
+      "corpus_validated": false,
+      "cbr_family_assigned": false,
+      "operational_case_created": false,
+      "can_control_legal_decision": false
+    },
+    {
+      "situation_id": "P-CBR-SIT-009",
+      "source": "prodecon",
+      "source_entry_id": "PRODECON-05",
+      "historical_regime_context": false,
+      "primary_problem_id": "determinacion_contribucion",
+      "problem_matches": [
+        {
+          "concept_id": "determinacion_contribucion",
+          "label": "Determinación de contribuciones",
+          "kind": "problem",
+          "primary": true,
+          "evidence_fact_ids": [
+            "C4-P-FCT-009-01",
+            "C4-P-FCT-009-02",
+            "C4-P-FCT-009-03"
+          ],
+          "basis": "a6_primary_entry_and_c4_facts",
+          "taxonomic_only": true,
+          "requires_normative_validation": true,
+          "can_control_legal_decision": false
+        }
+      ],
+      "problem_no_exact_match_reason": null,
+      "primary_institution_id": "regimen_isr",
+      "institution_matches": [
+        {
+          "concept_id": "regimen_isr",
+          "label": "Régimen de impuesto sobre la renta",
+          "kind": "institution",
+          "primary": true,
+          "evidence_fact_ids": [
+            "C4-P-FCT-009-01",
+            "C4-P-FCT-009-02",
+            "C4-P-FCT-009-03"
+          ],
+          "basis": "a6_primary_entry_and_c4_facts",
+          "taxonomic_only": true,
+          "requires_normative_validation": true,
+          "can_control_legal_decision": false
+        },
+        {
+          "concept_id": "tributo",
+          "label": "Tributo y elementos esenciales",
+          "kind": "institution",
+          "primary": false,
+          "evidence_fact_ids": [
+            "C4-P-FCT-009-01",
+            "C4-P-FCT-009-02",
+            "C4-P-FCT-009-03"
+          ],
+          "basis": "a6_primary_entry_and_c4_facts",
+          "taxonomic_only": true,
+          "requires_normative_validation": true,
+          "can_control_legal_decision": false
+        }
+      ],
+      "institution_no_exact_match_reason": null,
+      "similarity_seed": {
+        "taxpayer_type": "individual",
+        "activity": null,
+        "tax": "ISR",
+        "problem_type": "determinacion_contribucion",
+        "authority_act": null,
+        "procedural_stage": null,
+        "fiscal_year": null,
+        "evidence_fact_ids": {
+          "taxpayer_type": [
+            "C4-P-FCT-009-01"
+          ],
+          "tax": [
+            "C4-P-FCT-009-02"
+          ],
+          "problem_type": [
+            "C4-P-FCT-009-01",
+            "C4-P-FCT-009-02",
+            "C4-P-FCT-009-03"
+          ]
+        }
+      },
+      "unresolved_required_case_fields": [
+        "activity",
+        "fiscal_year"
+      ],
+      "facts_normalized": true,
+      "problem_institution_classified": true,
+      "normative_articles_linked": false,
+      "corpus_validated": false,
+      "cbr_family_assigned": false,
+      "operational_case_created": false,
+      "can_control_legal_decision": false
+    },
+    {
+      "situation_id": "P-CBR-SIT-010",
+      "source": "prodecon",
+      "source_entry_id": "PRODECON-05",
+      "historical_regime_context": false,
+      "primary_problem_id": "determinacion_contribucion",
+      "problem_matches": [
+        {
+          "concept_id": "determinacion_contribucion",
+          "label": "Determinación de contribuciones",
+          "kind": "problem",
+          "primary": true,
+          "evidence_fact_ids": [
+            "C4-P-FCT-010-01",
+            "C4-P-FCT-010-02",
+            "C4-P-FCT-010-03"
+          ],
+          "basis": "a6_primary_entry_and_c4_facts",
+          "taxonomic_only": true,
+          "requires_normative_validation": true,
+          "can_control_legal_decision": false
+        }
+      ],
+      "problem_no_exact_match_reason": null,
+      "primary_institution_id": "tributo",
+      "institution_matches": [
+        {
+          "concept_id": "tributo",
+          "label": "Tributo y elementos esenciales",
+          "kind": "institution",
+          "primary": true,
+          "evidence_fact_ids": [
+            "C4-P-FCT-010-01",
+            "C4-P-FCT-010-02",
+            "C4-P-FCT-010-03"
+          ],
+          "basis": "a6_primary_entry_and_c4_facts",
+          "taxonomic_only": true,
+          "requires_normative_validation": true,
+          "can_control_legal_decision": false
+        }
+      ],
+      "institution_no_exact_match_reason": null,
+      "similarity_seed": {
+        "taxpayer_type": null,
+        "activity": null,
+        "tax": "IVA",
+        "problem_type": "determinacion_contribucion",
+        "authority_act": null,
+        "procedural_stage": null,
+        "fiscal_year": null,
+        "evidence_fact_ids": {
+          "tax": [
+            "C4-P-FCT-010-01"
+          ],
+          "problem_type": [
+            "C4-P-FCT-010-01",
+            "C4-P-FCT-010-02",
+            "C4-P-FCT-010-03"
+          ]
+        }
+      },
+      "unresolved_required_case_fields": [
+        "taxpayer_type",
+        "activity",
+        "fiscal_year"
+      ],
+      "facts_normalized": true,
+      "problem_institution_classified": true,
+      "normative_articles_linked": false,
+      "corpus_validated": false,
+      "cbr_family_assigned": false,
+      "operational_case_created": false,
+      "can_control_legal_decision": false
+    },
+    {
+      "situation_id": "P-CBR-SIT-011",
+      "source": "prodecon",
+      "source_entry_id": "PRODECON-06",
+      "historical_regime_context": false,
+      "primary_problem_id": "actuacion_autoridad",
+      "problem_matches": [
+        {
+          "concept_id": "actuacion_autoridad",
+          "label": "Actuación de la autoridad fiscal",
+          "kind": "problem",
+          "primary": true,
+          "evidence_fact_ids": [
+            "C4-P-FCT-011-01",
+            "C4-P-FCT-011-02",
+            "C4-P-FCT-011-03"
+          ],
+          "basis": "a6_primary_entry_and_c4_facts",
+          "taxonomic_only": true,
+          "requires_normative_validation": true,
+          "can_control_legal_decision": false
+        },
+        {
+          "concept_id": "cumplimiento_fiscal",
+          "label": "Cumplimiento de obligaciones fiscales",
+          "kind": "problem",
+          "primary": false,
+          "evidence_fact_ids": [
+            "C4-P-FCT-011-01",
+            "C4-P-FCT-011-02",
+            "C4-P-FCT-011-03"
+          ],
+          "basis": "a6_primary_entry_and_c4_facts",
+          "taxonomic_only": true,
+          "requires_normative_validation": true,
+          "can_control_legal_decision": false
+        }
+      ],
+      "problem_no_exact_match_reason": null,
+      "primary_institution_id": "obligacion_tributaria",
+      "institution_matches": [
+        {
+          "concept_id": "obligacion_tributaria",
+          "label": "Obligación tributaria",
+          "kind": "institution",
+          "primary": true,
+          "evidence_fact_ids": [
+            "C4-P-FCT-011-01",
+            "C4-P-FCT-011-02",
+            "C4-P-FCT-011-03"
+          ],
+          "basis": "a6_primary_entry_and_c4_facts",
+          "taxonomic_only": true,
+          "requires_normative_validation": true,
+          "can_control_legal_decision": false
+        }
+      ],
+      "institution_no_exact_match_reason": null,
+      "similarity_seed": {
+        "taxpayer_type": null,
+        "activity": null,
+        "tax": null,
+        "problem_type": "actuacion_autoridad",
+        "authority_act": "facultades de comprobacion",
+        "procedural_stage": "determinacion",
+        "fiscal_year": null,
+        "evidence_fact_ids": {
+          "authority_act": [
+            "C4-P-FCT-011-05"
+          ],
+          "procedural_stage": [
+            "C4-P-FCT-011-06"
+          ],
+          "problem_type": [
+            "C4-P-FCT-011-01",
+            "C4-P-FCT-011-02",
+            "C4-P-FCT-011-03"
+          ]
+        }
+      },
+      "unresolved_required_case_fields": [
+        "taxpayer_type",
+        "activity",
+        "tax",
+        "fiscal_year"
+      ],
+      "facts_normalized": true,
+      "problem_institution_classified": true,
+      "normative_articles_linked": false,
+      "corpus_validated": false,
+      "cbr_family_assigned": false,
+      "operational_case_created": false,
+      "can_control_legal_decision": false
+    },
+    {
+      "situation_id": "P-CBR-SIT-012",
+      "source": "prodecon",
+      "source_entry_id": "PRODECON-06",
+      "historical_regime_context": false,
+      "primary_problem_id": "incumplimiento_fiscal",
+      "problem_matches": [
+        {
+          "concept_id": "incumplimiento_fiscal",
+          "label": "Incumplimiento y consecuencias fiscales",
+          "kind": "problem",
+          "primary": true,
+          "evidence_fact_ids": [
+            "C4-P-FCT-012-01",
+            "C4-P-FCT-012-02",
+            "C4-P-FCT-012-03"
+          ],
+          "basis": "a6_primary_entry_and_c4_facts",
+          "taxonomic_only": true,
+          "requires_normative_validation": true,
+          "can_control_legal_decision": false
+        },
+        {
+          "concept_id": "actuacion_autoridad",
+          "label": "Actuación de la autoridad fiscal",
+          "kind": "problem",
+          "primary": false,
+          "evidence_fact_ids": [
+            "C4-P-FCT-012-01",
+            "C4-P-FCT-012-02",
+            "C4-P-FCT-012-03"
+          ],
+          "basis": "a6_primary_entry_and_c4_facts",
+          "taxonomic_only": true,
+          "requires_normative_validation": true,
+          "can_control_legal_decision": false
+        }
+      ],
+      "problem_no_exact_match_reason": null,
+      "primary_institution_id": "deuda_tributaria",
+      "institution_matches": [
+        {
+          "concept_id": "deuda_tributaria",
+          "label": "Deuda tributaria y extinción",
+          "kind": "institution",
+          "primary": true,
+          "evidence_fact_ids": [
+            "C4-P-FCT-012-01",
+            "C4-P-FCT-012-02",
+            "C4-P-FCT-012-03"
+          ],
+          "basis": "a6_primary_entry_and_c4_facts",
+          "taxonomic_only": true,
+          "requires_normative_validation": true,
+          "can_control_legal_decision": false
+        },
+        {
+          "concept_id": "obligacion_tributaria",
+          "label": "Obligación tributaria",
+          "kind": "institution",
+          "primary": false,
+          "evidence_fact_ids": [
+            "C4-P-FCT-012-01",
+            "C4-P-FCT-012-02",
+            "C4-P-FCT-012-03"
+          ],
+          "basis": "a6_primary_entry_and_c4_facts",
+          "taxonomic_only": true,
+          "requires_normative_validation": true,
+          "can_control_legal_decision": false
+        }
+      ],
+      "institution_no_exact_match_reason": null,
+      "similarity_seed": {
+        "taxpayer_type": null,
+        "activity": null,
+        "tax": null,
+        "problem_type": "incumplimiento_fiscal",
+        "authority_act": "procedimiento administrativo de ejecucion",
+        "procedural_stage": "cobro coactivo",
+        "fiscal_year": null,
+        "evidence_fact_ids": {
+          "authority_act": [
+            "C4-P-FCT-012-02"
+          ],
+          "procedural_stage": [
+            "C4-P-FCT-012-04"
+          ],
+          "problem_type": [
+            "C4-P-FCT-012-01",
+            "C4-P-FCT-012-02",
+            "C4-P-FCT-012-03"
+          ]
+        }
+      },
+      "unresolved_required_case_fields": [
+        "taxpayer_type",
+        "activity",
+        "tax",
+        "fiscal_year"
+      ],
+      "facts_normalized": true,
+      "problem_institution_classified": true,
+      "normative_articles_linked": false,
+      "corpus_validated": false,
+      "cbr_family_assigned": false,
+      "operational_case_created": false,
+      "can_control_legal_decision": false
+    },
+    {
+      "situation_id": "P-CBR-SIT-013",
+      "source": "prodecon",
+      "source_entry_id": "PRODECON-07",
+      "historical_regime_context": false,
+      "primary_problem_id": "cumplimiento_fiscal",
+      "problem_matches": [
+        {
+          "concept_id": "cumplimiento_fiscal",
+          "label": "Cumplimiento de obligaciones fiscales",
+          "kind": "problem",
+          "primary": true,
+          "evidence_fact_ids": [
+            "C4-P-FCT-013-01",
+            "C4-P-FCT-013-02",
+            "C4-P-FCT-013-03"
+          ],
+          "basis": "a6_primary_entry_and_c4_facts",
+          "taxonomic_only": true,
+          "requires_normative_validation": true,
+          "can_control_legal_decision": false
+        }
+      ],
+      "problem_no_exact_match_reason": null,
+      "primary_institution_id": "derechos_contribuyente",
+      "institution_matches": [
+        {
+          "concept_id": "derechos_contribuyente",
+          "label": "Derechos y garantías del contribuyente",
+          "kind": "institution",
+          "primary": true,
+          "evidence_fact_ids": [
+            "C4-P-FCT-013-01",
+            "C4-P-FCT-013-02",
+            "C4-P-FCT-013-03"
+          ],
+          "basis": "a6_primary_entry_and_c4_facts",
+          "taxonomic_only": true,
+          "requires_normative_validation": true,
+          "can_control_legal_decision": false
+        },
+        {
+          "concept_id": "obligacion_tributaria",
+          "label": "Obligación tributaria",
+          "kind": "institution",
+          "primary": false,
+          "evidence_fact_ids": [
+            "C4-P-FCT-013-01",
+            "C4-P-FCT-013-02",
+            "C4-P-FCT-013-03"
+          ],
+          "basis": "a6_primary_entry_and_c4_facts",
+          "taxonomic_only": true,
+          "requires_normative_validation": true,
+          "can_control_legal_decision": false
+        }
+      ],
+      "institution_no_exact_match_reason": null,
+      "similarity_seed": {
+        "taxpayer_type": null,
+        "activity": null,
+        "tax": null,
+        "problem_type": "cumplimiento_fiscal",
+        "authority_act": "facultades de comprobacion",
+        "procedural_stage": "comprobacion",
+        "fiscal_year": null,
+        "evidence_fact_ids": {
+          "authority_act": [
+            "C4-P-FCT-013-02"
+          ],
+          "procedural_stage": [
+            "C4-P-FCT-013-03"
+          ],
+          "problem_type": [
+            "C4-P-FCT-013-01",
+            "C4-P-FCT-013-02",
+            "C4-P-FCT-013-03"
+          ]
+        }
+      },
+      "unresolved_required_case_fields": [
+        "taxpayer_type",
+        "activity",
+        "tax",
+        "fiscal_year"
+      ],
+      "facts_normalized": true,
+      "problem_institution_classified": true,
+      "normative_articles_linked": false,
+      "corpus_validated": false,
+      "cbr_family_assigned": false,
+      "operational_case_created": false,
+      "can_control_legal_decision": false
+    },
+    {
+      "situation_id": "P-CBR-SIT-014",
+      "source": "prodecon",
+      "source_entry_id": "PRODECON-07",
+      "historical_regime_context": false,
+      "primary_problem_id": "cumplimiento_fiscal",
+      "problem_matches": [
+        {
+          "concept_id": "cumplimiento_fiscal",
+          "label": "Cumplimiento de obligaciones fiscales",
+          "kind": "problem",
+          "primary": true,
+          "evidence_fact_ids": [
+            "C4-P-FCT-014-01",
+            "C4-P-FCT-014-02",
+            "C4-P-FCT-014-03"
+          ],
+          "basis": "a6_primary_entry_and_c4_facts",
+          "taxonomic_only": true,
+          "requires_normative_validation": true,
+          "can_control_legal_decision": false
+        }
+      ],
+      "problem_no_exact_match_reason": null,
+      "primary_institution_id": "obligacion_tributaria",
+      "institution_matches": [
+        {
+          "concept_id": "obligacion_tributaria",
+          "label": "Obligación tributaria",
+          "kind": "institution",
+          "primary": true,
+          "evidence_fact_ids": [
+            "C4-P-FCT-014-01",
+            "C4-P-FCT-014-02",
+            "C4-P-FCT-014-03"
+          ],
+          "basis": "a6_primary_entry_and_c4_facts",
+          "taxonomic_only": true,
+          "requires_normative_validation": true,
+          "can_control_legal_decision": false
+        }
+      ],
+      "institution_no_exact_match_reason": null,
+      "similarity_seed": {
+        "taxpayer_type": null,
+        "activity": null,
+        "tax": null,
+        "problem_type": "cumplimiento_fiscal",
+        "authority_act": null,
+        "procedural_stage": "cumplimiento y comprobacion",
+        "fiscal_year": null,
+        "evidence_fact_ids": {
+          "procedural_stage": [
+            "C4-P-FCT-014-03"
+          ],
+          "problem_type": [
+            "C4-P-FCT-014-01",
+            "C4-P-FCT-014-02",
+            "C4-P-FCT-014-03"
+          ]
+        }
+      },
+      "unresolved_required_case_fields": [
+        "taxpayer_type",
+        "activity",
+        "tax",
+        "fiscal_year"
+      ],
+      "facts_normalized": true,
+      "problem_institution_classified": true,
+      "normative_articles_linked": false,
+      "corpus_validated": false,
+      "cbr_family_assigned": false,
+      "operational_case_created": false,
+      "can_control_legal_decision": false
+    },
+    {
+      "situation_id": "P-CBR-SIT-015",
+      "source": "prodecon",
+      "source_entry_id": "PRODECON-08",
+      "historical_regime_context": false,
+      "primary_problem_id": "defensa_contribuyente",
+      "problem_matches": [
+        {
+          "concept_id": "defensa_contribuyente",
+          "label": "Defensa del contribuyente",
+          "kind": "problem",
+          "primary": true,
+          "evidence_fact_ids": [
+            "C4-P-FCT-015-01",
+            "C4-P-FCT-015-02",
+            "C4-P-FCT-015-03"
+          ],
+          "basis": "a6_primary_entry_and_c4_facts",
+          "taxonomic_only": true,
+          "requires_normative_validation": true,
+          "can_control_legal_decision": false
+        },
+        {
+          "concept_id": "actuacion_autoridad",
+          "label": "Actuación de la autoridad fiscal",
+          "kind": "problem",
+          "primary": false,
+          "evidence_fact_ids": [
+            "C4-P-FCT-015-01",
+            "C4-P-FCT-015-02",
+            "C4-P-FCT-015-03"
+          ],
+          "basis": "a6_primary_entry_and_c4_facts",
+          "taxonomic_only": true,
+          "requires_normative_validation": true,
+          "can_control_legal_decision": false
+        }
+      ],
+      "problem_no_exact_match_reason": null,
+      "primary_institution_id": null,
+      "institution_matches": [],
+      "institution_no_exact_match_reason": "A.6 trata PRODECON-08 mediante problemas de defensa y actuación de autoridad, sin institución fiscal primaria asociada al apartado.",
+      "similarity_seed": {
+        "taxpayer_type": null,
+        "activity": null,
+        "tax": null,
+        "problem_type": "defensa_contribuyente",
+        "authority_act": "acto o resolucion fiscal",
+        "procedural_stage": "defensa",
+        "fiscal_year": null,
+        "evidence_fact_ids": {
+          "authority_act": [
+            "C4-P-FCT-015-02"
+          ],
+          "procedural_stage": [
+            "C4-P-FCT-015-04"
+          ],
+          "problem_type": [
+            "C4-P-FCT-015-01",
+            "C4-P-FCT-015-02",
+            "C4-P-FCT-015-03"
+          ]
+        }
+      },
+      "unresolved_required_case_fields": [
+        "taxpayer_type",
+        "activity",
+        "tax",
+        "fiscal_year"
+      ],
+      "facts_normalized": true,
+      "problem_institution_classified": true,
+      "normative_articles_linked": false,
+      "corpus_validated": false,
+      "cbr_family_assigned": false,
+      "operational_case_created": false,
+      "can_control_legal_decision": false
+    },
+    {
+      "situation_id": "P-CBR-SIT-016",
+      "source": "prodecon",
+      "source_entry_id": "PRODECON-08",
+      "historical_regime_context": false,
+      "primary_problem_id": "defensa_contribuyente",
+      "problem_matches": [
+        {
+          "concept_id": "defensa_contribuyente",
+          "label": "Defensa del contribuyente",
+          "kind": "problem",
+          "primary": true,
+          "evidence_fact_ids": [
+            "C4-P-FCT-016-01",
+            "C4-P-FCT-016-02",
+            "C4-P-FCT-016-03"
+          ],
+          "basis": "a6_primary_entry_and_c4_facts",
+          "taxonomic_only": true,
+          "requires_normative_validation": true,
+          "can_control_legal_decision": false
+        },
+        {
+          "concept_id": "actuacion_autoridad",
+          "label": "Actuación de la autoridad fiscal",
+          "kind": "problem",
+          "primary": false,
+          "evidence_fact_ids": [
+            "C4-P-FCT-016-01",
+            "C4-P-FCT-016-02",
+            "C4-P-FCT-016-03"
+          ],
+          "basis": "a6_primary_entry_and_c4_facts",
+          "taxonomic_only": true,
+          "requires_normative_validation": true,
+          "can_control_legal_decision": false
+        }
+      ],
+      "problem_no_exact_match_reason": null,
+      "primary_institution_id": null,
+      "institution_matches": [],
+      "institution_no_exact_match_reason": "A.6 trata PRODECON-08 mediante problemas de defensa y actuación de autoridad, sin institución fiscal primaria asociada al apartado.",
+      "similarity_seed": {
+        "taxpayer_type": null,
+        "activity": null,
+        "tax": null,
+        "problem_type": "defensa_contribuyente",
+        "authority_act": "acto de autoridad fiscal federal",
+        "procedural_stage": "defensa no jurisdiccional",
+        "fiscal_year": null,
+        "evidence_fact_ids": {
+          "authority_act": [
+            "C4-P-FCT-016-02"
+          ],
+          "procedural_stage": [
+            "C4-P-FCT-016-06"
+          ],
+          "problem_type": [
+            "C4-P-FCT-016-01",
+            "C4-P-FCT-016-02",
+            "C4-P-FCT-016-03"
+          ]
+        }
+      },
+      "unresolved_required_case_fields": [
+        "taxpayer_type",
+        "activity",
+        "tax",
+        "fiscal_year"
+      ],
+      "facts_normalized": true,
+      "problem_institution_classified": true,
+      "normative_articles_linked": false,
+      "corpus_validated": false,
+      "cbr_family_assigned": false,
+      "operational_case_created": false,
+      "can_control_legal_decision": false
+    },
+    {
+      "situation_id": "P-CBR-SIT-017",
+      "source": "prodecon",
+      "source_entry_id": "PRODECON-09",
+      "historical_regime_context": false,
+      "primary_problem_id": "interpretacion_fiscal",
+      "problem_matches": [
+        {
+          "concept_id": "interpretacion_fiscal",
+          "label": "Interpretación de disposiciones fiscales",
+          "kind": "problem",
+          "primary": true,
+          "evidence_fact_ids": [
+            "C4-P-FCT-017-01",
+            "C4-P-FCT-017-02",
+            "C4-P-FCT-017-03"
+          ],
+          "basis": "a6_primary_entry_and_c4_facts",
+          "taxonomic_only": true,
+          "requires_normative_validation": true,
+          "can_control_legal_decision": false
+        }
+      ],
+      "problem_no_exact_match_reason": null,
+      "primary_institution_id": null,
+      "institution_matches": [],
+      "institution_no_exact_match_reason": "A.6 clasifica PRODECON-09 como problema de interpretación fiscal, sin institución fiscal primaria asociada al apartado.",
+      "similarity_seed": {
+        "taxpayer_type": null,
+        "activity": null,
+        "tax": null,
+        "problem_type": "interpretacion_fiscal",
+        "authority_act": null,
+        "procedural_stage": "interpretacion",
+        "fiscal_year": null,
+        "evidence_fact_ids": {
+          "procedural_stage": [
+            "C4-P-FCT-017-02"
+          ],
+          "problem_type": [
+            "C4-P-FCT-017-01",
+            "C4-P-FCT-017-02",
+            "C4-P-FCT-017-03"
+          ]
+        }
+      },
+      "unresolved_required_case_fields": [
+        "taxpayer_type",
+        "activity",
+        "tax",
+        "fiscal_year"
+      ],
+      "facts_normalized": true,
+      "problem_institution_classified": true,
+      "normative_articles_linked": false,
+      "corpus_validated": false,
+      "cbr_family_assigned": false,
+      "operational_case_created": false,
+      "can_control_legal_decision": false
+    },
+    {
+      "situation_id": "P-CBR-SIT-018",
+      "source": "prodecon",
+      "source_entry_id": "PRODECON-09",
+      "historical_regime_context": false,
+      "primary_problem_id": "interpretacion_fiscal",
+      "problem_matches": [
+        {
+          "concept_id": "interpretacion_fiscal",
+          "label": "Interpretación de disposiciones fiscales",
+          "kind": "problem",
+          "primary": true,
+          "evidence_fact_ids": [
+            "C4-P-FCT-018-01",
+            "C4-P-FCT-018-02",
+            "C4-P-FCT-018-03"
+          ],
+          "basis": "a6_primary_entry_and_c4_facts",
+          "taxonomic_only": true,
+          "requires_normative_validation": true,
+          "can_control_legal_decision": false
+        },
+        {
+          "concept_id": "incumplimiento_fiscal",
+          "label": "Incumplimiento y consecuencias fiscales",
+          "kind": "problem",
+          "primary": false,
+          "evidence_fact_ids": [
+            "C4-P-FCT-018-01",
+            "C4-P-FCT-018-02",
+            "C4-P-FCT-018-03"
+          ],
+          "basis": "a6_primary_entry_and_c4_facts",
+          "taxonomic_only": true,
+          "requires_normative_validation": true,
+          "can_control_legal_decision": false
+        }
+      ],
+      "problem_no_exact_match_reason": null,
+      "primary_institution_id": null,
+      "institution_matches": [],
+      "institution_no_exact_match_reason": "A.6 clasifica PRODECON-09 mediante interpretación e incumplimiento, sin institución fiscal primaria asociada al apartado.",
+      "similarity_seed": {
+        "taxpayer_type": null,
+        "activity": null,
+        "tax": null,
+        "problem_type": "interpretacion_fiscal",
+        "authority_act": null,
+        "procedural_stage": "interpretacion y aplicacion",
+        "fiscal_year": null,
+        "evidence_fact_ids": {
+          "procedural_stage": [
+            "C4-P-FCT-018-02"
+          ],
+          "problem_type": [
+            "C4-P-FCT-018-01",
+            "C4-P-FCT-018-02",
+            "C4-P-FCT-018-03"
+          ]
+        }
+      },
+      "unresolved_required_case_fields": [
+        "taxpayer_type",
+        "activity",
+        "tax",
+        "fiscal_year"
+      ],
+      "facts_normalized": true,
+      "problem_institution_classified": true,
+      "normative_articles_linked": false,
+      "corpus_validated": false,
+      "cbr_family_assigned": false,
+      "operational_case_created": false,
+      "can_control_legal_decision": false
+    },
+    {
+      "situation_id": "P-CBR-SIT-019",
+      "source": "prodecon",
+      "source_entry_id": "PRODECON-10",
+      "historical_regime_context": false,
+      "primary_problem_id": "determinacion_contribucion",
+      "problem_matches": [
+        {
+          "concept_id": "determinacion_contribucion",
+          "label": "Determinación de contribuciones",
+          "kind": "problem",
+          "primary": true,
+          "evidence_fact_ids": [
+            "C4-P-FCT-019-01",
+            "C4-P-FCT-019-02",
+            "C4-P-FCT-019-03"
+          ],
+          "basis": "a6_primary_entry_and_c4_facts",
+          "taxonomic_only": true,
+          "requires_normative_validation": true,
+          "can_control_legal_decision": false
+        }
+      ],
+      "problem_no_exact_match_reason": null,
+      "primary_institution_id": "regimen_isr",
+      "institution_matches": [
+        {
+          "concept_id": "regimen_isr",
+          "label": "Régimen de impuesto sobre la renta",
+          "kind": "institution",
+          "primary": true,
+          "evidence_fact_ids": [
+            "C4-P-FCT-019-01",
+            "C4-P-FCT-019-02",
+            "C4-P-FCT-019-03"
+          ],
+          "basis": "a6_primary_entry_and_c4_facts",
+          "taxonomic_only": true,
+          "requires_normative_validation": true,
+          "can_control_legal_decision": false
+        }
+      ],
+      "institution_no_exact_match_reason": null,
+      "similarity_seed": {
+        "taxpayer_type": "individual",
+        "activity": "trabajo subordinado",
+        "tax": "ISR",
+        "problem_type": "determinacion_contribucion",
+        "authority_act": null,
+        "procedural_stage": null,
+        "fiscal_year": null,
+        "evidence_fact_ids": {
+          "taxpayer_type": [
+            "C4-P-FCT-019-01"
+          ],
+          "activity": [
+            "C4-P-FCT-019-03"
+          ],
+          "tax": [
+            "C4-P-FCT-019-04"
+          ],
+          "problem_type": [
+            "C4-P-FCT-019-01",
+            "C4-P-FCT-019-02",
+            "C4-P-FCT-019-03"
+          ]
+        }
+      },
+      "unresolved_required_case_fields": [
+        "fiscal_year"
+      ],
+      "facts_normalized": true,
+      "problem_institution_classified": true,
+      "normative_articles_linked": false,
+      "corpus_validated": false,
+      "cbr_family_assigned": false,
+      "operational_case_created": false,
+      "can_control_legal_decision": false
+    },
+    {
+      "situation_id": "P-CBR-SIT-020",
+      "source": "prodecon",
+      "source_entry_id": "PRODECON-10",
+      "historical_regime_context": false,
+      "primary_problem_id": "determinacion_contribucion",
+      "problem_matches": [
+        {
+          "concept_id": "determinacion_contribucion",
+          "label": "Determinación de contribuciones",
+          "kind": "problem",
+          "primary": true,
+          "evidence_fact_ids": [
+            "C4-P-FCT-020-01",
+            "C4-P-FCT-020-02",
+            "C4-P-FCT-020-03"
+          ],
+          "basis": "a6_primary_entry_and_c4_facts",
+          "taxonomic_only": true,
+          "requires_normative_validation": true,
+          "can_control_legal_decision": false
+        }
+      ],
+      "problem_no_exact_match_reason": null,
+      "primary_institution_id": "regimen_isr",
+      "institution_matches": [
+        {
+          "concept_id": "regimen_isr",
+          "label": "Régimen de impuesto sobre la renta",
+          "kind": "institution",
+          "primary": true,
+          "evidence_fact_ids": [
+            "C4-P-FCT-020-01",
+            "C4-P-FCT-020-02",
+            "C4-P-FCT-020-03"
+          ],
+          "basis": "a6_primary_entry_and_c4_facts",
+          "taxonomic_only": true,
+          "requires_normative_validation": true,
+          "can_control_legal_decision": false
+        }
+      ],
+      "institution_no_exact_match_reason": null,
+      "similarity_seed": {
+        "taxpayer_type": "individual",
+        "activity": "trabajo subordinado",
+        "tax": "ISR",
+        "problem_type": "determinacion_contribucion",
+        "authority_act": null,
+        "procedural_stage": null,
+        "fiscal_year": null,
+        "evidence_fact_ids": {
+          "taxpayer_type": [
+            "C4-P-FCT-020-01"
+          ],
+          "activity": [
+            "C4-P-FCT-020-02"
+          ],
+          "tax": [
+            "C4-P-FCT-020-03"
+          ],
+          "problem_type": [
+            "C4-P-FCT-020-01",
+            "C4-P-FCT-020-02",
+            "C4-P-FCT-020-03"
+          ]
+        }
+      },
+      "unresolved_required_case_fields": [
+        "fiscal_year"
+      ],
+      "facts_normalized": true,
+      "problem_institution_classified": true,
+      "normative_articles_linked": false,
+      "corpus_validated": false,
+      "cbr_family_assigned": false,
+      "operational_case_created": false,
+      "can_control_legal_decision": false
+    },
+    {
+      "situation_id": "P-CBR-SIT-021",
+      "source": "prodecon",
+      "source_entry_id": "PRODECON-11",
+      "historical_regime_context": false,
+      "primary_problem_id": "determinacion_contribucion",
+      "problem_matches": [
+        {
+          "concept_id": "determinacion_contribucion",
+          "label": "Determinación de contribuciones",
+          "kind": "problem",
+          "primary": true,
+          "evidence_fact_ids": [
+            "C4-P-FCT-021-01",
+            "C4-P-FCT-021-02",
+            "C4-P-FCT-021-03"
+          ],
+          "basis": "a6_primary_entry_and_c4_facts",
+          "taxonomic_only": true,
+          "requires_normative_validation": true,
+          "can_control_legal_decision": false
+        },
+        {
+          "concept_id": "cumplimiento_fiscal",
+          "label": "Cumplimiento de obligaciones fiscales",
+          "kind": "problem",
+          "primary": false,
+          "evidence_fact_ids": [
+            "C4-P-FCT-021-01",
+            "C4-P-FCT-021-02",
+            "C4-P-FCT-021-03"
+          ],
+          "basis": "a6_primary_entry_and_c4_facts",
+          "taxonomic_only": true,
+          "requires_normative_validation": true,
+          "can_control_legal_decision": false
+        }
+      ],
+      "problem_no_exact_match_reason": null,
+      "primary_institution_id": "regimen_isr",
+      "institution_matches": [
+        {
+          "concept_id": "regimen_isr",
+          "label": "Régimen de impuesto sobre la renta",
+          "kind": "institution",
+          "primary": true,
+          "evidence_fact_ids": [
+            "C4-P-FCT-021-01",
+            "C4-P-FCT-021-02",
+            "C4-P-FCT-021-03"
+          ],
+          "basis": "a6_primary_entry_and_c4_facts",
+          "taxonomic_only": true,
+          "requires_normative_validation": true,
+          "can_control_legal_decision": false
+        },
+        {
+          "concept_id": "obligacion_tributaria",
+          "label": "Obligación tributaria",
+          "kind": "institution",
+          "primary": false,
+          "evidence_fact_ids": [
+            "C4-P-FCT-021-01",
+            "C4-P-FCT-021-02",
+            "C4-P-FCT-021-03"
+          ],
+          "basis": "a6_primary_entry_and_c4_facts",
+          "taxonomic_only": true,
+          "requires_normative_validation": true,
+          "can_control_legal_decision": false
+        }
+      ],
+      "institution_no_exact_match_reason": null,
+      "similarity_seed": {
+        "taxpayer_type": "individual",
+        "activity": "servicios profesionales independientes",
+        "tax": "ISR",
+        "problem_type": "determinacion_contribucion",
+        "authority_act": null,
+        "procedural_stage": null,
+        "fiscal_year": null,
+        "evidence_fact_ids": {
+          "taxpayer_type": [
+            "C4-P-FCT-021-01"
+          ],
+          "activity": [
+            "C4-P-FCT-021-02"
+          ],
+          "tax": [
+            "C4-P-FCT-021-04"
+          ],
+          "problem_type": [
+            "C4-P-FCT-021-01",
+            "C4-P-FCT-021-02",
+            "C4-P-FCT-021-03"
+          ]
+        }
+      },
+      "unresolved_required_case_fields": [
+        "fiscal_year"
+      ],
+      "facts_normalized": true,
+      "problem_institution_classified": true,
+      "normative_articles_linked": false,
+      "corpus_validated": false,
+      "cbr_family_assigned": false,
+      "operational_case_created": false,
+      "can_control_legal_decision": false
+    },
+    {
+      "situation_id": "P-CBR-SIT-022",
+      "source": "prodecon",
+      "source_entry_id": "PRODECON-11",
+      "historical_regime_context": false,
+      "primary_problem_id": "cumplimiento_fiscal",
+      "problem_matches": [
+        {
+          "concept_id": "cumplimiento_fiscal",
+          "label": "Cumplimiento de obligaciones fiscales",
+          "kind": "problem",
+          "primary": true,
+          "evidence_fact_ids": [
+            "C4-P-FCT-022-01",
+            "C4-P-FCT-022-02",
+            "C4-P-FCT-022-03"
+          ],
+          "basis": "a6_primary_entry_and_c4_facts",
+          "taxonomic_only": true,
+          "requires_normative_validation": true,
+          "can_control_legal_decision": false
+        },
+        {
+          "concept_id": "determinacion_contribucion",
+          "label": "Determinación de contribuciones",
+          "kind": "problem",
+          "primary": false,
+          "evidence_fact_ids": [
+            "C4-P-FCT-022-01",
+            "C4-P-FCT-022-02",
+            "C4-P-FCT-022-03"
+          ],
+          "basis": "a6_primary_entry_and_c4_facts",
+          "taxonomic_only": true,
+          "requires_normative_validation": true,
+          "can_control_legal_decision": false
+        }
+      ],
+      "problem_no_exact_match_reason": null,
+      "primary_institution_id": "obligacion_tributaria",
+      "institution_matches": [
+        {
+          "concept_id": "obligacion_tributaria",
+          "label": "Obligación tributaria",
+          "kind": "institution",
+          "primary": true,
+          "evidence_fact_ids": [
+            "C4-P-FCT-022-01",
+            "C4-P-FCT-022-02",
+            "C4-P-FCT-022-03"
+          ],
+          "basis": "a6_primary_entry_and_c4_facts",
+          "taxonomic_only": true,
+          "requires_normative_validation": true,
+          "can_control_legal_decision": false
+        },
+        {
+          "concept_id": "regimen_isr",
+          "label": "Régimen de impuesto sobre la renta",
+          "kind": "institution",
+          "primary": false,
+          "evidence_fact_ids": [
+            "C4-P-FCT-022-01",
+            "C4-P-FCT-022-02",
+            "C4-P-FCT-022-03"
+          ],
+          "basis": "a6_primary_entry_and_c4_facts",
+          "taxonomic_only": true,
+          "requires_normative_validation": true,
+          "can_control_legal_decision": false
+        }
+      ],
+      "institution_no_exact_match_reason": null,
+      "similarity_seed": {
+        "taxpayer_type": "individual",
+        "activity": "servicios profesionales independientes",
+        "tax": "ISR",
+        "problem_type": "cumplimiento_fiscal",
+        "authority_act": null,
+        "procedural_stage": null,
+        "fiscal_year": null,
+        "evidence_fact_ids": {
+          "taxpayer_type": [
+            "C4-P-FCT-022-01"
+          ],
+          "activity": [
+            "C4-P-FCT-022-02"
+          ],
+          "tax": [
+            "C4-P-FCT-022-03"
+          ],
+          "problem_type": [
+            "C4-P-FCT-022-01",
+            "C4-P-FCT-022-02",
+            "C4-P-FCT-022-03"
+          ]
+        }
+      },
+      "unresolved_required_case_fields": [
+        "fiscal_year"
+      ],
+      "facts_normalized": true,
+      "problem_institution_classified": true,
+      "normative_articles_linked": false,
+      "corpus_validated": false,
+      "cbr_family_assigned": false,
+      "operational_case_created": false,
+      "can_control_legal_decision": false
+    },
+    {
+      "situation_id": "P-CBR-SIT-023",
+      "source": "prodecon",
+      "source_entry_id": "PRODECON-12",
+      "historical_regime_context": true,
+      "primary_problem_id": "determinacion_contribucion",
+      "problem_matches": [
+        {
+          "concept_id": "determinacion_contribucion",
+          "label": "Determinación de contribuciones",
+          "kind": "problem",
+          "primary": true,
+          "evidence_fact_ids": [
+            "C4-P-FCT-023-01",
+            "C4-P-FCT-023-02",
+            "C4-P-FCT-023-03"
+          ],
+          "basis": "a6_primary_entry_and_c4_facts",
+          "taxonomic_only": true,
+          "requires_normative_validation": true,
+          "can_control_legal_decision": false
+        }
+      ],
+      "problem_no_exact_match_reason": null,
+      "primary_institution_id": "regimen_isr",
+      "institution_matches": [
+        {
+          "concept_id": "regimen_isr",
+          "label": "Régimen de impuesto sobre la renta",
+          "kind": "institution",
+          "primary": true,
+          "evidence_fact_ids": [
+            "C4-P-FCT-023-01",
+            "C4-P-FCT-023-02",
+            "C4-P-FCT-023-03"
+          ],
+          "basis": "a6_primary_entry_and_c4_facts",
+          "taxonomic_only": true,
+          "requires_normative_validation": true,
+          "can_control_legal_decision": false
+        },
+        {
+          "concept_id": "tributo",
+          "label": "Tributo y elementos esenciales",
+          "kind": "institution",
+          "primary": false,
+          "evidence_fact_ids": [
+            "C4-P-FCT-023-01",
+            "C4-P-FCT-023-02",
+            "C4-P-FCT-023-03"
+          ],
+          "basis": "a6_primary_entry_and_c4_facts",
+          "taxonomic_only": true,
+          "requires_normative_validation": true,
+          "can_control_legal_decision": false
+        }
+      ],
+      "institution_no_exact_match_reason": null,
+      "similarity_seed": {
+        "taxpayer_type": "individual",
+        "activity": "RIF actividades empresariales y servicios no profesionales",
+        "tax": "ISR",
+        "problem_type": "determinacion_contribucion",
+        "authority_act": null,
+        "procedural_stage": null,
+        "fiscal_year": null,
+        "evidence_fact_ids": {
+          "taxpayer_type": [
+            "C4-P-FCT-023-01"
+          ],
+          "activity": [
+            "C4-P-FCT-023-03"
+          ],
+          "tax": [
+            "C4-P-FCT-023-02"
+          ],
+          "problem_type": [
+            "C4-P-FCT-023-01",
+            "C4-P-FCT-023-02",
+            "C4-P-FCT-023-03"
+          ]
+        }
+      },
+      "unresolved_required_case_fields": [
+        "fiscal_year"
+      ],
+      "facts_normalized": true,
+      "problem_institution_classified": true,
+      "normative_articles_linked": false,
+      "corpus_validated": false,
+      "cbr_family_assigned": false,
+      "operational_case_created": false,
+      "can_control_legal_decision": false
+    },
+    {
+      "situation_id": "P-CBR-SIT-024",
+      "source": "prodecon",
+      "source_entry_id": "PRODECON-12",
+      "historical_regime_context": true,
+      "primary_problem_id": "determinacion_contribucion",
+      "problem_matches": [
+        {
+          "concept_id": "determinacion_contribucion",
+          "label": "Determinación de contribuciones",
+          "kind": "problem",
+          "primary": true,
+          "evidence_fact_ids": [
+            "C4-P-FCT-024-01",
+            "C4-P-FCT-024-02",
+            "C4-P-FCT-024-03"
+          ],
+          "basis": "a6_primary_entry_and_c4_facts",
+          "taxonomic_only": true,
+          "requires_normative_validation": true,
+          "can_control_legal_decision": false
+        }
+      ],
+      "problem_no_exact_match_reason": null,
+      "primary_institution_id": "regimen_isr",
+      "institution_matches": [
+        {
+          "concept_id": "regimen_isr",
+          "label": "Régimen de impuesto sobre la renta",
+          "kind": "institution",
+          "primary": true,
+          "evidence_fact_ids": [
+            "C4-P-FCT-024-01",
+            "C4-P-FCT-024-02",
+            "C4-P-FCT-024-03"
+          ],
+          "basis": "a6_primary_entry_and_c4_facts",
+          "taxonomic_only": true,
+          "requires_normative_validation": true,
+          "can_control_legal_decision": false
+        },
+        {
+          "concept_id": "tributo",
+          "label": "Tributo y elementos esenciales",
+          "kind": "institution",
+          "primary": false,
+          "evidence_fact_ids": [
+            "C4-P-FCT-024-01",
+            "C4-P-FCT-024-02",
+            "C4-P-FCT-024-03"
+          ],
+          "basis": "a6_primary_entry_and_c4_facts",
+          "taxonomic_only": true,
+          "requires_normative_validation": true,
+          "can_control_legal_decision": false
+        }
+      ],
+      "institution_no_exact_match_reason": null,
+      "similarity_seed": {
+        "taxpayer_type": "individual",
+        "activity": "RIF actividades empresariales y servicios no profesionales",
+        "tax": "ISR",
+        "problem_type": "determinacion_contribucion",
+        "authority_act": null,
+        "procedural_stage": null,
+        "fiscal_year": null,
+        "evidence_fact_ids": {
+          "taxpayer_type": [
+            "C4-P-FCT-024-01"
+          ],
+          "activity": [
+            "C4-P-FCT-024-02"
+          ],
+          "tax": [
+            "C4-P-FCT-024-03"
+          ],
+          "problem_type": [
+            "C4-P-FCT-024-01",
+            "C4-P-FCT-024-02",
+            "C4-P-FCT-024-03"
+          ]
+        }
+      },
+      "unresolved_required_case_fields": [
+        "fiscal_year"
+      ],
+      "facts_normalized": true,
+      "problem_institution_classified": true,
+      "normative_articles_linked": false,
+      "corpus_validated": false,
+      "cbr_family_assigned": false,
+      "operational_case_created": false,
+      "can_control_legal_decision": false
+    },
+    {
+      "situation_id": "U-CBR-SIT-001",
+      "source": "unam",
+      "source_entry_id": "UNAM-V",
+      "historical_regime_context": false,
+      "primary_problem_id": "determinacion_contribucion",
+      "problem_matches": [
+        {
+          "concept_id": "determinacion_contribucion",
+          "label": "Determinación de contribuciones",
+          "kind": "problem",
+          "primary": true,
+          "evidence_fact_ids": [
+            "C4-U-FCT-001-01",
+            "C4-U-FCT-001-02",
+            "C4-U-FCT-001-03"
+          ],
+          "basis": "a6_primary_entry_and_c4_facts",
+          "taxonomic_only": true,
+          "requires_normative_validation": true,
+          "can_control_legal_decision": false
+        }
+      ],
+      "problem_no_exact_match_reason": null,
+      "primary_institution_id": "regimen_isr",
+      "institution_matches": [
+        {
+          "concept_id": "regimen_isr",
+          "label": "Régimen de impuesto sobre la renta",
+          "kind": "institution",
+          "primary": true,
+          "evidence_fact_ids": [
+            "C4-U-FCT-001-01",
+            "C4-U-FCT-001-02",
+            "C4-U-FCT-001-03"
+          ],
+          "basis": "a6_primary_entry_and_c4_facts",
+          "taxonomic_only": true,
+          "requires_normative_validation": true,
+          "can_control_legal_decision": false
+        },
+        {
+          "concept_id": "tributo",
+          "label": "Tributo y elementos esenciales",
+          "kind": "institution",
+          "primary": false,
+          "evidence_fact_ids": [
+            "C4-U-FCT-001-01",
+            "C4-U-FCT-001-02",
+            "C4-U-FCT-001-03"
+          ],
+          "basis": "a6_primary_entry_and_c4_facts",
+          "taxonomic_only": true,
+          "requires_normative_validation": true,
+          "can_control_legal_decision": false
+        }
+      ],
+      "institution_no_exact_match_reason": null,
+      "similarity_seed": {
+        "taxpayer_type": "legal_entity",
+        "activity": "regimen general de personas morales",
+        "tax": "ISR",
+        "problem_type": "determinacion_contribucion",
+        "authority_act": null,
+        "procedural_stage": null,
+        "fiscal_year": 2017,
+        "evidence_fact_ids": {
+          "taxpayer_type": [
+            "C4-U-FCT-001-01"
+          ],
+          "activity": [
+            "C4-U-FCT-001-02"
+          ],
+          "tax": [
+            "C4-U-FCT-001-03"
+          ],
+          "fiscal_year": [
+            "C4-U-FCT-001-04"
+          ],
+          "problem_type": [
+            "C4-U-FCT-001-01",
+            "C4-U-FCT-001-02",
+            "C4-U-FCT-001-03"
+          ]
+        }
+      },
+      "unresolved_required_case_fields": [],
+      "facts_normalized": true,
+      "problem_institution_classified": true,
+      "normative_articles_linked": false,
+      "corpus_validated": false,
+      "cbr_family_assigned": false,
+      "operational_case_created": false,
+      "can_control_legal_decision": false
+    },
+    {
+      "situation_id": "U-CBR-SIT-002",
+      "source": "unam",
+      "source_entry_id": "UNAM-V",
+      "historical_regime_context": false,
+      "primary_problem_id": "determinacion_contribucion",
+      "problem_matches": [
+        {
+          "concept_id": "determinacion_contribucion",
+          "label": "Determinación de contribuciones",
+          "kind": "problem",
+          "primary": true,
+          "evidence_fact_ids": [
+            "C4-U-FCT-002-01",
+            "C4-U-FCT-002-02",
+            "C4-U-FCT-002-03"
+          ],
+          "basis": "a6_primary_entry_and_c4_facts",
+          "taxonomic_only": true,
+          "requires_normative_validation": true,
+          "can_control_legal_decision": false
+        }
+      ],
+      "problem_no_exact_match_reason": null,
+      "primary_institution_id": "regimen_isr",
+      "institution_matches": [
+        {
+          "concept_id": "regimen_isr",
+          "label": "Régimen de impuesto sobre la renta",
+          "kind": "institution",
+          "primary": true,
+          "evidence_fact_ids": [
+            "C4-U-FCT-002-01",
+            "C4-U-FCT-002-02",
+            "C4-U-FCT-002-03"
+          ],
+          "basis": "a6_primary_entry_and_c4_facts",
+          "taxonomic_only": true,
+          "requires_normative_validation": true,
+          "can_control_legal_decision": false
+        },
+        {
+          "concept_id": "tributo",
+          "label": "Tributo y elementos esenciales",
+          "kind": "institution",
+          "primary": false,
+          "evidence_fact_ids": [
+            "C4-U-FCT-002-01",
+            "C4-U-FCT-002-02",
+            "C4-U-FCT-002-03"
+          ],
+          "basis": "a6_primary_entry_and_c4_facts",
+          "taxonomic_only": true,
+          "requires_normative_validation": true,
+          "can_control_legal_decision": false
+        }
+      ],
+      "institution_no_exact_match_reason": null,
+      "similarity_seed": {
+        "taxpayer_type": "legal_entity",
+        "activity": "regimen general de personas morales",
+        "tax": "ISR",
+        "problem_type": "determinacion_contribucion",
+        "authority_act": null,
+        "procedural_stage": null,
+        "fiscal_year": 2016,
+        "evidence_fact_ids": {
+          "taxpayer_type": [
+            "C4-U-FCT-002-01"
+          ],
+          "activity": [
+            "C4-U-FCT-002-02"
+          ],
+          "tax": [
+            "C4-U-FCT-002-03"
+          ],
+          "fiscal_year": [
+            "C4-U-FCT-002-04"
+          ],
+          "problem_type": [
+            "C4-U-FCT-002-01",
+            "C4-U-FCT-002-02",
+            "C4-U-FCT-002-03"
+          ]
+        }
+      },
+      "unresolved_required_case_fields": [],
+      "facts_normalized": true,
+      "problem_institution_classified": true,
+      "normative_articles_linked": false,
+      "corpus_validated": false,
+      "cbr_family_assigned": false,
+      "operational_case_created": false,
+      "can_control_legal_decision": false
+    },
+    {
+      "situation_id": "U-CBR-SIT-003",
+      "source": "unam",
+      "source_entry_id": "UNAM-V",
+      "historical_regime_context": false,
+      "primary_problem_id": "determinacion_contribucion",
+      "problem_matches": [
+        {
+          "concept_id": "determinacion_contribucion",
+          "label": "Determinación de contribuciones",
+          "kind": "problem",
+          "primary": true,
+          "evidence_fact_ids": [
+            "C4-U-FCT-003-01",
+            "C4-U-FCT-003-02",
+            "C4-U-FCT-003-03"
+          ],
+          "basis": "a6_primary_entry_and_c4_facts",
+          "taxonomic_only": true,
+          "requires_normative_validation": true,
+          "can_control_legal_decision": false
+        }
+      ],
+      "problem_no_exact_match_reason": null,
+      "primary_institution_id": "regimen_isr",
+      "institution_matches": [
+        {
+          "concept_id": "regimen_isr",
+          "label": "Régimen de impuesto sobre la renta",
+          "kind": "institution",
+          "primary": true,
+          "evidence_fact_ids": [
+            "C4-U-FCT-003-01",
+            "C4-U-FCT-003-02",
+            "C4-U-FCT-003-03"
+          ],
+          "basis": "a6_primary_entry_and_c4_facts",
+          "taxonomic_only": true,
+          "requires_normative_validation": true,
+          "can_control_legal_decision": false
+        },
+        {
+          "concept_id": "tributo",
+          "label": "Tributo y elementos esenciales",
+          "kind": "institution",
+          "primary": false,
+          "evidence_fact_ids": [
+            "C4-U-FCT-003-01",
+            "C4-U-FCT-003-02",
+            "C4-U-FCT-003-03"
+          ],
+          "basis": "a6_primary_entry_and_c4_facts",
+          "taxonomic_only": true,
+          "requires_normative_validation": true,
+          "can_control_legal_decision": false
+        }
+      ],
+      "institution_no_exact_match_reason": null,
+      "similarity_seed": {
+        "taxpayer_type": "legal_entity",
+        "activity": "regimen general de personas morales",
+        "tax": "ISR",
+        "problem_type": "determinacion_contribucion",
+        "authority_act": null,
+        "procedural_stage": null,
+        "fiscal_year": 2017,
+        "evidence_fact_ids": {
+          "taxpayer_type": [
+            "C4-U-FCT-003-01"
+          ],
+          "activity": [
+            "C4-U-FCT-003-02"
+          ],
+          "tax": [
+            "C4-U-FCT-003-03"
+          ],
+          "fiscal_year": [
+            "C4-U-FCT-003-04"
+          ],
+          "problem_type": [
+            "C4-U-FCT-003-01",
+            "C4-U-FCT-003-02",
+            "C4-U-FCT-003-03"
+          ]
+        }
+      },
+      "unresolved_required_case_fields": [],
+      "facts_normalized": true,
+      "problem_institution_classified": true,
+      "normative_articles_linked": false,
+      "corpus_validated": false,
+      "cbr_family_assigned": false,
+      "operational_case_created": false,
+      "can_control_legal_decision": false
+    },
+    {
+      "situation_id": "U-CBR-SIT-004",
+      "source": "unam",
+      "source_entry_id": "UNAM-V",
+      "historical_regime_context": false,
+      "primary_problem_id": "determinacion_contribucion",
+      "problem_matches": [
+        {
+          "concept_id": "determinacion_contribucion",
+          "label": "Determinación de contribuciones",
+          "kind": "problem",
+          "primary": true,
+          "evidence_fact_ids": [
+            "C4-U-FCT-004-01",
+            "C4-U-FCT-004-02",
+            "C4-U-FCT-004-03"
+          ],
+          "basis": "a6_primary_entry_and_c4_facts",
+          "taxonomic_only": true,
+          "requires_normative_validation": true,
+          "can_control_legal_decision": false
+        }
+      ],
+      "problem_no_exact_match_reason": null,
+      "primary_institution_id": "regimen_isr",
+      "institution_matches": [
+        {
+          "concept_id": "regimen_isr",
+          "label": "Régimen de impuesto sobre la renta",
+          "kind": "institution",
+          "primary": true,
+          "evidence_fact_ids": [
+            "C4-U-FCT-004-01",
+            "C4-U-FCT-004-02",
+            "C4-U-FCT-004-03"
+          ],
+          "basis": "a6_primary_entry_and_c4_facts",
+          "taxonomic_only": true,
+          "requires_normative_validation": true,
+          "can_control_legal_decision": false
+        },
+        {
+          "concept_id": "tributo",
+          "label": "Tributo y elementos esenciales",
+          "kind": "institution",
+          "primary": false,
+          "evidence_fact_ids": [
+            "C4-U-FCT-004-01",
+            "C4-U-FCT-004-02",
+            "C4-U-FCT-004-03"
+          ],
+          "basis": "a6_primary_entry_and_c4_facts",
+          "taxonomic_only": true,
+          "requires_normative_validation": true,
+          "can_control_legal_decision": false
+        }
+      ],
+      "institution_no_exact_match_reason": null,
+      "similarity_seed": {
+        "taxpayer_type": "legal_entity",
+        "activity": "regimen general de personas morales",
+        "tax": "ISR",
+        "problem_type": "determinacion_contribucion",
+        "authority_act": null,
+        "procedural_stage": null,
+        "fiscal_year": 2016,
+        "evidence_fact_ids": {
+          "taxpayer_type": [
+            "C4-U-FCT-004-01"
+          ],
+          "activity": [
+            "C4-U-FCT-004-02"
+          ],
+          "tax": [
+            "C4-U-FCT-004-03"
+          ],
+          "fiscal_year": [
+            "C4-U-FCT-004-04"
+          ],
+          "problem_type": [
+            "C4-U-FCT-004-01",
+            "C4-U-FCT-004-02",
+            "C4-U-FCT-004-03"
+          ]
+        }
+      },
+      "unresolved_required_case_fields": [],
+      "facts_normalized": true,
+      "problem_institution_classified": true,
+      "normative_articles_linked": false,
+      "corpus_validated": false,
+      "cbr_family_assigned": false,
+      "operational_case_created": false,
+      "can_control_legal_decision": false
+    },
+    {
+      "situation_id": "U-CBR-SIT-005",
+      "source": "unam",
+      "source_entry_id": "UNAM-V",
+      "historical_regime_context": false,
+      "primary_problem_id": "determinacion_contribucion",
+      "problem_matches": [
+        {
+          "concept_id": "determinacion_contribucion",
+          "label": "Determinación de contribuciones",
+          "kind": "problem",
+          "primary": true,
+          "evidence_fact_ids": [
+            "C4-U-FCT-005-01",
+            "C4-U-FCT-005-02",
+            "C4-U-FCT-005-03"
+          ],
+          "basis": "a6_primary_entry_and_c4_facts",
+          "taxonomic_only": true,
+          "requires_normative_validation": true,
+          "can_control_legal_decision": false
+        }
+      ],
+      "problem_no_exact_match_reason": null,
+      "primary_institution_id": "regimen_isr",
+      "institution_matches": [
+        {
+          "concept_id": "regimen_isr",
+          "label": "Régimen de impuesto sobre la renta",
+          "kind": "institution",
+          "primary": true,
+          "evidence_fact_ids": [
+            "C4-U-FCT-005-01",
+            "C4-U-FCT-005-02",
+            "C4-U-FCT-005-03"
+          ],
+          "basis": "a6_primary_entry_and_c4_facts",
+          "taxonomic_only": true,
+          "requires_normative_validation": true,
+          "can_control_legal_decision": false
+        },
+        {
+          "concept_id": "tributo",
+          "label": "Tributo y elementos esenciales",
+          "kind": "institution",
+          "primary": false,
+          "evidence_fact_ids": [
+            "C4-U-FCT-005-01",
+            "C4-U-FCT-005-02",
+            "C4-U-FCT-005-03"
+          ],
+          "basis": "a6_primary_entry_and_c4_facts",
+          "taxonomic_only": true,
+          "requires_normative_validation": true,
+          "can_control_legal_decision": false
+        }
+      ],
+      "institution_no_exact_match_reason": null,
+      "similarity_seed": {
+        "taxpayer_type": "legal_entity",
+        "activity": "regimen general de personas morales",
+        "tax": "ISR",
+        "problem_type": "determinacion_contribucion",
+        "authority_act": null,
+        "procedural_stage": null,
+        "fiscal_year": 2016,
+        "evidence_fact_ids": {
+          "taxpayer_type": [
+            "C4-U-FCT-005-01"
+          ],
+          "activity": [
+            "C4-U-FCT-005-02"
+          ],
+          "tax": [
+            "C4-U-FCT-005-03"
+          ],
+          "fiscal_year": [
+            "C4-U-FCT-005-04"
+          ],
+          "problem_type": [
+            "C4-U-FCT-005-01",
+            "C4-U-FCT-005-02",
+            "C4-U-FCT-005-03"
+          ]
+        }
+      },
+      "unresolved_required_case_fields": [],
+      "facts_normalized": true,
+      "problem_institution_classified": true,
+      "normative_articles_linked": false,
+      "corpus_validated": false,
+      "cbr_family_assigned": false,
+      "operational_case_created": false,
+      "can_control_legal_decision": false
+    },
+    {
+      "situation_id": "U-CBR-SIT-006",
+      "source": "unam",
+      "source_entry_id": "UNAM-V",
+      "historical_regime_context": false,
+      "primary_problem_id": "determinacion_contribucion",
+      "problem_matches": [
+        {
+          "concept_id": "determinacion_contribucion",
+          "label": "Determinación de contribuciones",
+          "kind": "problem",
+          "primary": true,
+          "evidence_fact_ids": [
+            "C4-U-FCT-006-01",
+            "C4-U-FCT-006-02",
+            "C4-U-FCT-006-03"
+          ],
+          "basis": "a6_primary_entry_and_c4_facts",
+          "taxonomic_only": true,
+          "requires_normative_validation": true,
+          "can_control_legal_decision": false
+        }
+      ],
+      "problem_no_exact_match_reason": null,
+      "primary_institution_id": "regimen_isr",
+      "institution_matches": [
+        {
+          "concept_id": "regimen_isr",
+          "label": "Régimen de impuesto sobre la renta",
+          "kind": "institution",
+          "primary": true,
+          "evidence_fact_ids": [
+            "C4-U-FCT-006-01",
+            "C4-U-FCT-006-02",
+            "C4-U-FCT-006-03"
+          ],
+          "basis": "a6_primary_entry_and_c4_facts",
+          "taxonomic_only": true,
+          "requires_normative_validation": true,
+          "can_control_legal_decision": false
+        },
+        {
+          "concept_id": "tributo",
+          "label": "Tributo y elementos esenciales",
+          "kind": "institution",
+          "primary": false,
+          "evidence_fact_ids": [
+            "C4-U-FCT-006-01",
+            "C4-U-FCT-006-02",
+            "C4-U-FCT-006-03"
+          ],
+          "basis": "a6_primary_entry_and_c4_facts",
+          "taxonomic_only": true,
+          "requires_normative_validation": true,
+          "can_control_legal_decision": false
+        }
+      ],
+      "institution_no_exact_match_reason": null,
+      "similarity_seed": {
+        "taxpayer_type": "individual",
+        "activity": "trabajo subordinado",
+        "tax": "ISR",
+        "problem_type": "determinacion_contribucion",
+        "authority_act": null,
+        "procedural_stage": null,
+        "fiscal_year": null,
+        "evidence_fact_ids": {
+          "taxpayer_type": [
+            "C4-U-FCT-006-01"
+          ],
+          "activity": [
+            "C4-U-FCT-006-02"
+          ],
+          "tax": [
+            "C4-U-FCT-006-03"
+          ],
+          "problem_type": [
+            "C4-U-FCT-006-01",
+            "C4-U-FCT-006-02",
+            "C4-U-FCT-006-03"
+          ]
+        }
+      },
+      "unresolved_required_case_fields": [
+        "fiscal_year"
+      ],
+      "facts_normalized": true,
+      "problem_institution_classified": true,
+      "normative_articles_linked": false,
+      "corpus_validated": false,
+      "cbr_family_assigned": false,
+      "operational_case_created": false,
+      "can_control_legal_decision": false
+    },
+    {
+      "situation_id": "U-CBR-SIT-007",
+      "source": "unam",
+      "source_entry_id": "UNAM-V",
+      "historical_regime_context": false,
+      "primary_problem_id": "determinacion_contribucion",
+      "problem_matches": [
+        {
+          "concept_id": "determinacion_contribucion",
+          "label": "Determinación de contribuciones",
+          "kind": "problem",
+          "primary": true,
+          "evidence_fact_ids": [
+            "C4-U-FCT-007-01",
+            "C4-U-FCT-007-02",
+            "C4-U-FCT-007-03"
+          ],
+          "basis": "a6_primary_entry_and_c4_facts",
+          "taxonomic_only": true,
+          "requires_normative_validation": true,
+          "can_control_legal_decision": false
+        }
+      ],
+      "problem_no_exact_match_reason": null,
+      "primary_institution_id": "regimen_isr",
+      "institution_matches": [
+        {
+          "concept_id": "regimen_isr",
+          "label": "Régimen de impuesto sobre la renta",
+          "kind": "institution",
+          "primary": true,
+          "evidence_fact_ids": [
+            "C4-U-FCT-007-01",
+            "C4-U-FCT-007-02",
+            "C4-U-FCT-007-03"
+          ],
+          "basis": "a6_primary_entry_and_c4_facts",
+          "taxonomic_only": true,
+          "requires_normative_validation": true,
+          "can_control_legal_decision": false
+        },
+        {
+          "concept_id": "tributo",
+          "label": "Tributo y elementos esenciales",
+          "kind": "institution",
+          "primary": false,
+          "evidence_fact_ids": [
+            "C4-U-FCT-007-01",
+            "C4-U-FCT-007-02",
+            "C4-U-FCT-007-03"
+          ],
+          "basis": "a6_primary_entry_and_c4_facts",
+          "taxonomic_only": true,
+          "requires_normative_validation": true,
+          "can_control_legal_decision": false
+        }
+      ],
+      "institution_no_exact_match_reason": null,
+      "similarity_seed": {
+        "taxpayer_type": "individual",
+        "activity": "actividad empresarial papeleria",
+        "tax": "ISR",
+        "problem_type": "determinacion_contribucion",
+        "authority_act": null,
+        "procedural_stage": null,
+        "fiscal_year": 2017,
+        "evidence_fact_ids": {
+          "taxpayer_type": [
+            "C4-U-FCT-007-01"
+          ],
+          "activity": [
+            "C4-U-FCT-007-02"
+          ],
+          "tax": [
+            "C4-U-FCT-007-03"
+          ],
+          "fiscal_year": [
+            "C4-U-FCT-007-04"
+          ],
+          "problem_type": [
+            "C4-U-FCT-007-01",
+            "C4-U-FCT-007-02",
+            "C4-U-FCT-007-03"
+          ]
+        }
+      },
+      "unresolved_required_case_fields": [],
+      "facts_normalized": true,
+      "problem_institution_classified": true,
+      "normative_articles_linked": false,
+      "corpus_validated": false,
+      "cbr_family_assigned": false,
+      "operational_case_created": false,
+      "can_control_legal_decision": false
+    },
+    {
+      "situation_id": "U-CBR-SIT-008",
+      "source": "unam",
+      "source_entry_id": "UNAM-V",
+      "historical_regime_context": true,
+      "primary_problem_id": "determinacion_contribucion",
+      "problem_matches": [
+        {
+          "concept_id": "determinacion_contribucion",
+          "label": "Determinación de contribuciones",
+          "kind": "problem",
+          "primary": true,
+          "evidence_fact_ids": [
+            "C4-U-FCT-008-01",
+            "C4-U-FCT-008-02",
+            "C4-U-FCT-008-03"
+          ],
+          "basis": "a6_primary_entry_and_c4_facts",
+          "taxonomic_only": true,
+          "requires_normative_validation": true,
+          "can_control_legal_decision": false
+        }
+      ],
+      "problem_no_exact_match_reason": null,
+      "primary_institution_id": "regimen_isr",
+      "institution_matches": [
+        {
+          "concept_id": "regimen_isr",
+          "label": "Régimen de impuesto sobre la renta",
+          "kind": "institution",
+          "primary": true,
+          "evidence_fact_ids": [
+            "C4-U-FCT-008-01",
+            "C4-U-FCT-008-02",
+            "C4-U-FCT-008-03"
+          ],
+          "basis": "a6_primary_entry_and_c4_facts",
+          "taxonomic_only": true,
+          "requires_normative_validation": true,
+          "can_control_legal_decision": false
+        },
+        {
+          "concept_id": "tributo",
+          "label": "Tributo y elementos esenciales",
+          "kind": "institution",
+          "primary": false,
+          "evidence_fact_ids": [
+            "C4-U-FCT-008-01",
+            "C4-U-FCT-008-02",
+            "C4-U-FCT-008-03"
+          ],
+          "basis": "a6_primary_entry_and_c4_facts",
+          "taxonomic_only": true,
+          "requires_normative_validation": true,
+          "can_control_legal_decision": false
+        }
+      ],
+      "institution_no_exact_match_reason": null,
+      "similarity_seed": {
+        "taxpayer_type": "individual",
+        "activity": "RIF fonda de cocina mexicana",
+        "tax": "ISR",
+        "problem_type": "determinacion_contribucion",
+        "authority_act": null,
+        "procedural_stage": null,
+        "fiscal_year": null,
+        "evidence_fact_ids": {
+          "taxpayer_type": [
+            "C4-U-FCT-008-01"
+          ],
+          "activity": [
+            "C4-U-FCT-008-02"
+          ],
+          "tax": [
+            "C4-U-FCT-008-03"
+          ],
+          "problem_type": [
+            "C4-U-FCT-008-01",
+            "C4-U-FCT-008-02",
+            "C4-U-FCT-008-03"
+          ]
+        }
+      },
+      "unresolved_required_case_fields": [
+        "fiscal_year"
+      ],
+      "facts_normalized": true,
+      "problem_institution_classified": true,
+      "normative_articles_linked": false,
+      "corpus_validated": false,
+      "cbr_family_assigned": false,
+      "operational_case_created": false,
+      "can_control_legal_decision": false
+    },
+    {
+      "situation_id": "U-CBR-SIT-009",
+      "source": "unam",
+      "source_entry_id": "UNAM-V",
+      "historical_regime_context": false,
+      "primary_problem_id": "determinacion_contribucion",
+      "problem_matches": [
+        {
+          "concept_id": "determinacion_contribucion",
+          "label": "Determinación de contribuciones",
+          "kind": "problem",
+          "primary": true,
+          "evidence_fact_ids": [
+            "C4-U-FCT-009-01",
+            "C4-U-FCT-009-02",
+            "C4-U-FCT-009-03"
+          ],
+          "basis": "a6_primary_entry_and_c4_facts",
+          "taxonomic_only": true,
+          "requires_normative_validation": true,
+          "can_control_legal_decision": false
+        }
+      ],
+      "problem_no_exact_match_reason": null,
+      "primary_institution_id": "regimen_isr",
+      "institution_matches": [
+        {
+          "concept_id": "regimen_isr",
+          "label": "Régimen de impuesto sobre la renta",
+          "kind": "institution",
+          "primary": true,
+          "evidence_fact_ids": [
+            "C4-U-FCT-009-01",
+            "C4-U-FCT-009-02",
+            "C4-U-FCT-009-03"
+          ],
+          "basis": "a6_primary_entry_and_c4_facts",
+          "taxonomic_only": true,
+          "requires_normative_validation": true,
+          "can_control_legal_decision": false
+        },
+        {
+          "concept_id": "tributo",
+          "label": "Tributo y elementos esenciales",
+          "kind": "institution",
+          "primary": false,
+          "evidence_fact_ids": [
+            "C4-U-FCT-009-01",
+            "C4-U-FCT-009-02",
+            "C4-U-FCT-009-03"
+          ],
+          "basis": "a6_primary_entry_and_c4_facts",
+          "taxonomic_only": true,
+          "requires_normative_validation": true,
+          "can_control_legal_decision": false
+        }
+      ],
+      "institution_no_exact_match_reason": null,
+      "similarity_seed": {
+        "taxpayer_type": "individual",
+        "activity": "servicios profesionales independientes",
+        "tax": "ISR",
+        "problem_type": "determinacion_contribucion",
+        "authority_act": null,
+        "procedural_stage": null,
+        "fiscal_year": null,
+        "evidence_fact_ids": {
+          "taxpayer_type": [
+            "C4-U-FCT-009-01"
+          ],
+          "activity": [
+            "C4-U-FCT-009-02"
+          ],
+          "tax": [
+            "C4-U-FCT-009-03"
+          ],
+          "problem_type": [
+            "C4-U-FCT-009-01",
+            "C4-U-FCT-009-02",
+            "C4-U-FCT-009-03"
+          ]
+        }
+      },
+      "unresolved_required_case_fields": [
+        "fiscal_year"
+      ],
+      "facts_normalized": true,
+      "problem_institution_classified": true,
+      "normative_articles_linked": false,
+      "corpus_validated": false,
+      "cbr_family_assigned": false,
+      "operational_case_created": false,
+      "can_control_legal_decision": false
+    },
+    {
+      "situation_id": "U-CBR-SIT-010",
+      "source": "unam",
+      "source_entry_id": "UNAM-V",
+      "historical_regime_context": false,
+      "primary_problem_id": "determinacion_contribucion",
+      "problem_matches": [
+        {
+          "concept_id": "determinacion_contribucion",
+          "label": "Determinación de contribuciones",
+          "kind": "problem",
+          "primary": true,
+          "evidence_fact_ids": [
+            "C4-U-FCT-010-01",
+            "C4-U-FCT-010-02",
+            "C4-U-FCT-010-03"
+          ],
+          "basis": "a6_primary_entry_and_c4_facts",
+          "taxonomic_only": true,
+          "requires_normative_validation": true,
+          "can_control_legal_decision": false
+        }
+      ],
+      "problem_no_exact_match_reason": null,
+      "primary_institution_id": "regimen_isr",
+      "institution_matches": [
+        {
+          "concept_id": "regimen_isr",
+          "label": "Régimen de impuesto sobre la renta",
+          "kind": "institution",
+          "primary": true,
+          "evidence_fact_ids": [
+            "C4-U-FCT-010-01",
+            "C4-U-FCT-010-02",
+            "C4-U-FCT-010-03"
+          ],
+          "basis": "a6_primary_entry_and_c4_facts",
+          "taxonomic_only": true,
+          "requires_normative_validation": true,
+          "can_control_legal_decision": false
+        },
+        {
+          "concept_id": "tributo",
+          "label": "Tributo y elementos esenciales",
+          "kind": "institution",
+          "primary": false,
+          "evidence_fact_ids": [
+            "C4-U-FCT-010-01",
+            "C4-U-FCT-010-02",
+            "C4-U-FCT-010-03"
+          ],
+          "basis": "a6_primary_entry_and_c4_facts",
+          "taxonomic_only": true,
+          "requires_normative_validation": true,
+          "can_control_legal_decision": false
+        }
+      ],
+      "institution_no_exact_match_reason": null,
+      "similarity_seed": {
+        "taxpayer_type": "individual",
+        "activity": "arrendamiento de inmuebles",
+        "tax": "ISR",
+        "problem_type": "determinacion_contribucion",
+        "authority_act": null,
+        "procedural_stage": null,
+        "fiscal_year": null,
+        "evidence_fact_ids": {
+          "taxpayer_type": [
+            "C4-U-FCT-010-01"
+          ],
+          "activity": [
+            "C4-U-FCT-010-02"
+          ],
+          "tax": [
+            "C4-U-FCT-010-03"
+          ],
+          "problem_type": [
+            "C4-U-FCT-010-01",
+            "C4-U-FCT-010-02",
+            "C4-U-FCT-010-03"
+          ]
+        }
+      },
+      "unresolved_required_case_fields": [
+        "fiscal_year"
+      ],
+      "facts_normalized": true,
+      "problem_institution_classified": true,
+      "normative_articles_linked": false,
+      "corpus_validated": false,
+      "cbr_family_assigned": false,
+      "operational_case_created": false,
+      "can_control_legal_decision": false
+    },
+    {
+      "situation_id": "U-CBR-SIT-011",
+      "source": "unam",
+      "source_entry_id": "UNAM-V",
+      "historical_regime_context": false,
+      "primary_problem_id": "determinacion_contribucion",
+      "problem_matches": [
+        {
+          "concept_id": "determinacion_contribucion",
+          "label": "Determinación de contribuciones",
+          "kind": "problem",
+          "primary": true,
+          "evidence_fact_ids": [
+            "C4-U-FCT-011-01",
+            "C4-U-FCT-011-02",
+            "C4-U-FCT-011-03"
+          ],
+          "basis": "a6_primary_entry_and_c4_facts",
+          "taxonomic_only": true,
+          "requires_normative_validation": true,
+          "can_control_legal_decision": false
+        }
+      ],
+      "problem_no_exact_match_reason": null,
+      "primary_institution_id": "regimen_isr",
+      "institution_matches": [
+        {
+          "concept_id": "regimen_isr",
+          "label": "Régimen de impuesto sobre la renta",
+          "kind": "institution",
+          "primary": true,
+          "evidence_fact_ids": [
+            "C4-U-FCT-011-01",
+            "C4-U-FCT-011-02",
+            "C4-U-FCT-011-03"
+          ],
+          "basis": "a6_primary_entry_and_c4_facts",
+          "taxonomic_only": true,
+          "requires_normative_validation": true,
+          "can_control_legal_decision": false
+        },
+        {
+          "concept_id": "tributo",
+          "label": "Tributo y elementos esenciales",
+          "kind": "institution",
+          "primary": false,
+          "evidence_fact_ids": [
+            "C4-U-FCT-011-01",
+            "C4-U-FCT-011-02",
+            "C4-U-FCT-011-03"
+          ],
+          "basis": "a6_primary_entry_and_c4_facts",
+          "taxonomic_only": true,
+          "requires_normative_validation": true,
+          "can_control_legal_decision": false
+        }
+      ],
+      "institution_no_exact_match_reason": null,
+      "similarity_seed": {
+        "taxpayer_type": "individual",
+        "activity": "trabajo subordinado",
+        "tax": "ISR",
+        "problem_type": "determinacion_contribucion",
+        "authority_act": null,
+        "procedural_stage": null,
+        "fiscal_year": 2016,
+        "evidence_fact_ids": {
+          "taxpayer_type": [
+            "C4-U-FCT-011-01"
+          ],
+          "activity": [
+            "C4-U-FCT-011-02"
+          ],
+          "tax": [
+            "C4-U-FCT-011-03"
+          ],
+          "fiscal_year": [
+            "C4-U-FCT-011-04"
+          ],
+          "problem_type": [
+            "C4-U-FCT-011-01",
+            "C4-U-FCT-011-02",
+            "C4-U-FCT-011-03"
+          ]
+        }
+      },
+      "unresolved_required_case_fields": [],
+      "facts_normalized": true,
+      "problem_institution_classified": true,
+      "normative_articles_linked": false,
+      "corpus_validated": false,
+      "cbr_family_assigned": false,
+      "operational_case_created": false,
+      "can_control_legal_decision": false
+    },
+    {
+      "situation_id": "U-CBR-SIT-012",
+      "source": "unam",
+      "source_entry_id": "UNAM-V",
+      "historical_regime_context": false,
+      "primary_problem_id": "determinacion_contribucion",
+      "problem_matches": [
+        {
+          "concept_id": "determinacion_contribucion",
+          "label": "Determinación de contribuciones",
+          "kind": "problem",
+          "primary": true,
+          "evidence_fact_ids": [
+            "C4-U-FCT-012-01",
+            "C4-U-FCT-012-02",
+            "C4-U-FCT-012-03"
+          ],
+          "basis": "a6_primary_entry_and_c4_facts",
+          "taxonomic_only": true,
+          "requires_normative_validation": true,
+          "can_control_legal_decision": false
+        }
+      ],
+      "problem_no_exact_match_reason": null,
+      "primary_institution_id": "tributo",
+      "institution_matches": [
+        {
+          "concept_id": "tributo",
+          "label": "Tributo y elementos esenciales",
+          "kind": "institution",
+          "primary": true,
+          "evidence_fact_ids": [
+            "C4-U-FCT-012-01",
+            "C4-U-FCT-012-02",
+            "C4-U-FCT-012-03"
+          ],
+          "basis": "a6_primary_entry_and_c4_facts",
+          "taxonomic_only": true,
+          "requires_normative_validation": true,
+          "can_control_legal_decision": false
+        }
+      ],
+      "institution_no_exact_match_reason": null,
+      "similarity_seed": {
+        "taxpayer_type": "legal_entity",
+        "activity": "compraventa comercial",
+        "tax": "IVA",
+        "problem_type": "determinacion_contribucion",
+        "authority_act": null,
+        "procedural_stage": null,
+        "fiscal_year": null,
+        "evidence_fact_ids": {
+          "taxpayer_type": [
+            "C4-U-FCT-012-01"
+          ],
+          "activity": [
+            "C4-U-FCT-012-02"
+          ],
+          "tax": [
+            "C4-U-FCT-012-03"
+          ],
+          "problem_type": [
+            "C4-U-FCT-012-01",
+            "C4-U-FCT-012-02",
+            "C4-U-FCT-012-03"
+          ]
+        }
+      },
+      "unresolved_required_case_fields": [
+        "fiscal_year"
+      ],
+      "facts_normalized": true,
+      "problem_institution_classified": true,
+      "normative_articles_linked": false,
+      "corpus_validated": false,
+      "cbr_family_assigned": false,
+      "operational_case_created": false,
+      "can_control_legal_decision": false
+    },
+    {
+      "situation_id": "U-CBR-SIT-013",
+      "source": "unam",
+      "source_entry_id": "UNAM-V",
+      "historical_regime_context": false,
+      "primary_problem_id": "determinacion_contribucion",
+      "problem_matches": [
+        {
+          "concept_id": "determinacion_contribucion",
+          "label": "Determinación de contribuciones",
+          "kind": "problem",
+          "primary": true,
+          "evidence_fact_ids": [
+            "C4-U-FCT-013-01",
+            "C4-U-FCT-013-02",
+            "C4-U-FCT-013-03"
+          ],
+          "basis": "a6_primary_entry_and_c4_facts",
+          "taxonomic_only": true,
+          "requires_normative_validation": true,
+          "can_control_legal_decision": false
+        }
+      ],
+      "problem_no_exact_match_reason": null,
+      "primary_institution_id": "tributo",
+      "institution_matches": [
+        {
+          "concept_id": "tributo",
+          "label": "Tributo y elementos esenciales",
+          "kind": "institution",
+          "primary": true,
+          "evidence_fact_ids": [
+            "C4-U-FCT-013-01",
+            "C4-U-FCT-013-02",
+            "C4-U-FCT-013-03"
+          ],
+          "basis": "a6_primary_entry_and_c4_facts",
+          "taxonomic_only": true,
+          "requires_normative_validation": true,
+          "can_control_legal_decision": false
+        }
+      ],
+      "institution_no_exact_match_reason": null,
+      "similarity_seed": {
+        "taxpayer_type": "individual",
+        "activity": "servicios profesionales de auditoria",
+        "tax": "IVA",
+        "problem_type": "determinacion_contribucion",
+        "authority_act": null,
+        "procedural_stage": null,
+        "fiscal_year": null,
+        "evidence_fact_ids": {
+          "taxpayer_type": [
+            "C4-U-FCT-013-01"
+          ],
+          "activity": [
+            "C4-U-FCT-013-02"
+          ],
+          "tax": [
+            "C4-U-FCT-013-03"
+          ],
+          "problem_type": [
+            "C4-U-FCT-013-01",
+            "C4-U-FCT-013-02",
+            "C4-U-FCT-013-03"
+          ]
+        }
+      },
+      "unresolved_required_case_fields": [
+        "fiscal_year"
+      ],
+      "facts_normalized": true,
+      "problem_institution_classified": true,
+      "normative_articles_linked": false,
+      "corpus_validated": false,
+      "cbr_family_assigned": false,
+      "operational_case_created": false,
+      "can_control_legal_decision": false
+    }
+  ],
+  "creates_new_taxonomy_concepts": false,
+  "links_normative_articles": false,
+  "validates_current_law": false,
+  "assigns_cbr_families": false,
+  "creates_operational_cases": false,
+  "modifies_existing_cbr_engine": false,
+  "source_is_normative_authority": false,
+  "can_control_legal_decision": false
+}

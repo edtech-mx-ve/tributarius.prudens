@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import re
 import unicodedata
-from collections.abc import Iterable
+from collections.abc import Iterable, Mapping
 
 from app.domain.cbr import CaseField, CBRCase, CBRQuery, FieldSimilarity
 
@@ -174,3 +174,80 @@ def explain_similarity(field_scores: Iterable[FieldSimilarity]) -> str:
     if mismatches:
         explanation += " Diferencias: " + ", ".join(sorted(mismatches)) + "."
     return explanation
+
+
+def set_jaccard_similarity(left: Iterable[str], right: Iterable[str]) -> float:
+    """Jaccard determinista para facetas jurídicas ya normalizadas."""
+    left_values = {normalize_text(value) for value in left if normalize_text(value)}
+    right_values = {normalize_text(value) for value in right if normalize_text(value)}
+    if not left_values and not right_values:
+        return 1.0
+    if not left_values or not right_values:
+        return 0.0
+    return len(left_values & right_values) / len(left_values | right_values)
+
+
+def partial_case_similarity(
+    left: Mapping[CaseField, str | int | None],
+    right: Mapping[CaseField, str | int | None],
+) -> tuple[float, list[FieldSimilarity]]:
+    """Extiende la similitud CBR existente a perfiles con campos aún incompletos.
+
+    C.9 reutiliza exactamente ``FIELD_WEIGHTS`` y las mismas funciones de
+    comparación del motor CBR. Si cualquiera de los dos perfiles carece de un
+    campo, ese campo queda fuera del denominador en lugar de tratarse como una
+    diferencia inventada.
+    """
+    field_scores: list[FieldSimilarity] = []
+    for field in FIELD_WEIGHTS:
+        left_value = left.get(field)
+        right_value = right.get(field)
+        if left_value is None or right_value is None:
+            field_scores.append(
+                FieldSimilarity(
+                    field=field,
+                    score=0.0,
+                    weight=0.0,
+                    query_value="" if left_value is None else str(left_value),
+                    case_value="" if right_value is None else str(right_value),
+                )
+            )
+            continue
+
+        left_text = str(left_value)
+        right_text = str(right_value)
+        if field in EXACT_FIELDS or field in OPTIONAL_EXACT_FIELDS:
+            score = exact_similarity(left_text, right_text)
+        elif field in SEMANTIC_TOKEN_FIELDS:
+            score = jaccard_similarity(left_text, right_text)
+        else:
+            score = fiscal_year_similarity(int(left_value), int(right_value))
+        field_scores.append(
+            FieldSimilarity(
+                field=field,
+                score=score,
+                weight=FIELD_WEIGHTS[field],
+                query_value=left_text,
+                case_value=right_text,
+            )
+        )
+
+    active_scores = [item for item in field_scores if item.weight > 0]
+    if not active_scores:
+        return 0.0, field_scores
+    weighted = sum(item.score * item.weight for item in active_scores)
+    total_weight = sum(item.weight for item in active_scores)
+    return weighted / total_weight, field_scores
+
+
+def critical_field_conflicts(
+    field_scores: Iterable[FieldSimilarity],
+    critical_fields: Iterable[CaseField],
+) -> list[CaseField]:
+    """Devuelve conflictos observables; los campos desconocidos no se inventan."""
+    critical = set(critical_fields)
+    return [
+        item.field
+        for item in field_scores
+        if item.field in critical and item.weight > 0 and item.score != 1.0
+    ]

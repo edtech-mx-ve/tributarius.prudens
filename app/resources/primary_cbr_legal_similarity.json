@@ -1,0 +1,4961 @@
+{
+  "schema_version": "1.0",
+  "baseline_commit": "b65dc014e57042ef4826354fa5ccb9b0610c0c4f",
+  "purpose": "Extender la similitud CBR existente con partición por familia C.8 y solapamiento taxonómico, preservando FIELD_WEIGHTS, umbral 0.60, trazabilidad C.7 y sin crear casos operativos ni reutilización jurídica automática.",
+  "existing_similarity_module": "cbr.similarity",
+  "field_weight_source": "cbr.similarity.FIELD_WEIGHTS",
+  "minimum_similarity": 0.6,
+  "top_k": 5,
+  "profile_count": 37,
+  "total_pair_count": 666,
+  "same_primary_family_pair_count": 288,
+  "blocked_primary_family_pair_count": 378,
+  "blocked_critical_conflict_pair_count": 88,
+  "blocked_historical_context_pair_count": 63,
+  "below_threshold_pair_count": 1,
+  "eligible_pair_count": 136,
+  "stored_neighbor_link_count": 133,
+  "component_weights": {
+    "existing_cbr_fields": 0.6,
+    "family_overlap": 0.25,
+    "taxonomy_overlap": 0.15
+  },
+  "critical_existing_fields": [
+    "taxpayer_type",
+    "tax",
+    "problem_type"
+  ],
+  "profiles": [
+    {
+      "situation_id": "P-CBR-SIT-001",
+      "source": "prodecon",
+      "source_entry_id": "PRODECON-01",
+      "historical_regime_context": false,
+      "similarity_seed": {
+        "taxpayer_type": null,
+        "activity": null,
+        "tax": null,
+        "problem_type": "determinacion_contribucion",
+        "authority_act": null,
+        "procedural_stage": null,
+        "fiscal_year": null,
+        "evidence_fact_ids": {
+          "problem_type": [
+            "C4-P-FCT-001-01",
+            "C4-P-FCT-001-02",
+            "C4-P-FCT-001-03"
+          ]
+        }
+      },
+      "primary_family_id": "CBR-CALCULO",
+      "family_ids": [
+        "CBR-CALCULO",
+        "CBR-TRIBUTO",
+        "CBR-PERFIL",
+        "CBR-OBLIGACION",
+        "CBR-TEMPORALIDAD"
+      ],
+      "concept_ids": [
+        "determinacion_contribucion"
+      ],
+      "corpus_validation_outcome": "consistent",
+      "corpus_validated": true,
+      "temporal_validation_pending": true,
+      "legal_similarity_enabled": true,
+      "operational_case_created": false,
+      "can_control_legal_decision": false
+    },
+    {
+      "situation_id": "P-CBR-SIT-002",
+      "source": "prodecon",
+      "source_entry_id": "PRODECON-01",
+      "historical_regime_context": false,
+      "similarity_seed": {
+        "taxpayer_type": null,
+        "activity": null,
+        "tax": null,
+        "problem_type": "determinacion_contribucion",
+        "authority_act": null,
+        "procedural_stage": null,
+        "fiscal_year": null,
+        "evidence_fact_ids": {
+          "problem_type": [
+            "C4-P-FCT-002-01",
+            "C4-P-FCT-002-02",
+            "C4-P-FCT-002-03"
+          ]
+        }
+      },
+      "primary_family_id": "CBR-CALCULO",
+      "family_ids": [
+        "CBR-CALCULO",
+        "CBR-TRIBUTO",
+        "CBR-PERFIL",
+        "CBR-OBLIGACION",
+        "CBR-TEMPORALIDAD"
+      ],
+      "concept_ids": [
+        "determinacion_contribucion"
+      ],
+      "corpus_validation_outcome": "no_explicit_citation",
+      "corpus_validated": false,
+      "temporal_validation_pending": true,
+      "legal_similarity_enabled": true,
+      "operational_case_created": false,
+      "can_control_legal_decision": false
+    },
+    {
+      "situation_id": "P-CBR-SIT-003",
+      "source": "prodecon",
+      "source_entry_id": "PRODECON-02",
+      "historical_regime_context": false,
+      "similarity_seed": {
+        "taxpayer_type": null,
+        "activity": null,
+        "tax": null,
+        "problem_type": null,
+        "authority_act": null,
+        "procedural_stage": null,
+        "fiscal_year": null,
+        "evidence_fact_ids": {}
+      },
+      "primary_family_id": "CBR-TRIBUTO",
+      "family_ids": [
+        "CBR-TRIBUTO",
+        "CBR-INTERPRETACION",
+        "CBR-CALCULO",
+        "CBR-TEMPORALIDAD",
+        "CBR-SUJETO"
+      ],
+      "concept_ids": [
+        "tributo"
+      ],
+      "corpus_validation_outcome": "no_explicit_citation",
+      "corpus_validated": false,
+      "temporal_validation_pending": true,
+      "legal_similarity_enabled": true,
+      "operational_case_created": false,
+      "can_control_legal_decision": false
+    },
+    {
+      "situation_id": "P-CBR-SIT-004",
+      "source": "prodecon",
+      "source_entry_id": "PRODECON-02",
+      "historical_regime_context": false,
+      "similarity_seed": {
+        "taxpayer_type": null,
+        "activity": null,
+        "tax": null,
+        "problem_type": null,
+        "authority_act": null,
+        "procedural_stage": null,
+        "fiscal_year": null,
+        "evidence_fact_ids": {}
+      },
+      "primary_family_id": "CBR-DERECHOS",
+      "family_ids": [
+        "CBR-DERECHOS",
+        "CBR-TRIBUTO",
+        "CBR-INTERPRETACION",
+        "CBR-OBLIGACION",
+        "CBR-CALCULO",
+        "CBR-TEMPORALIDAD",
+        "CBR-SUJETO"
+      ],
+      "concept_ids": [
+        "derechos_contribuyente",
+        "tributo"
+      ],
+      "corpus_validation_outcome": "consistent",
+      "corpus_validated": true,
+      "temporal_validation_pending": true,
+      "legal_similarity_enabled": true,
+      "operational_case_created": false,
+      "can_control_legal_decision": false
+    },
+    {
+      "situation_id": "P-CBR-SIT-005",
+      "source": "prodecon",
+      "source_entry_id": "PRODECON-03",
+      "historical_regime_context": false,
+      "similarity_seed": {
+        "taxpayer_type": null,
+        "activity": null,
+        "tax": null,
+        "problem_type": "determinacion_contribucion",
+        "authority_act": null,
+        "procedural_stage": null,
+        "fiscal_year": null,
+        "evidence_fact_ids": {
+          "problem_type": [
+            "C4-P-FCT-005-01",
+            "C4-P-FCT-005-02",
+            "C4-P-FCT-005-03"
+          ]
+        }
+      },
+      "primary_family_id": "CBR-CALCULO",
+      "family_ids": [
+        "CBR-CALCULO",
+        "CBR-TRIBUTO",
+        "CBR-PERFIL",
+        "CBR-OBLIGACION",
+        "CBR-TEMPORALIDAD",
+        "CBR-INTERPRETACION",
+        "CBR-SUJETO"
+      ],
+      "concept_ids": [
+        "determinacion_contribucion",
+        "tributo"
+      ],
+      "corpus_validation_outcome": "consistent",
+      "corpus_validated": true,
+      "temporal_validation_pending": true,
+      "legal_similarity_enabled": true,
+      "operational_case_created": false,
+      "can_control_legal_decision": false
+    },
+    {
+      "situation_id": "P-CBR-SIT-006",
+      "source": "prodecon",
+      "source_entry_id": "PRODECON-03",
+      "historical_regime_context": false,
+      "similarity_seed": {
+        "taxpayer_type": null,
+        "activity": null,
+        "tax": null,
+        "problem_type": "determinacion_contribucion",
+        "authority_act": null,
+        "procedural_stage": null,
+        "fiscal_year": null,
+        "evidence_fact_ids": {
+          "problem_type": [
+            "C4-P-FCT-006-01",
+            "C4-P-FCT-006-02",
+            "C4-P-FCT-006-03"
+          ]
+        }
+      },
+      "primary_family_id": "CBR-CALCULO",
+      "family_ids": [
+        "CBR-CALCULO",
+        "CBR-TRIBUTO",
+        "CBR-PERFIL",
+        "CBR-OBLIGACION",
+        "CBR-TEMPORALIDAD",
+        "CBR-INTERPRETACION",
+        "CBR-SUJETO"
+      ],
+      "concept_ids": [
+        "determinacion_contribucion",
+        "tributo"
+      ],
+      "corpus_validation_outcome": "consistent",
+      "corpus_validated": true,
+      "temporal_validation_pending": true,
+      "legal_similarity_enabled": true,
+      "operational_case_created": false,
+      "can_control_legal_decision": false
+    },
+    {
+      "situation_id": "P-CBR-SIT-007",
+      "source": "prodecon",
+      "source_entry_id": "PRODECON-04",
+      "historical_regime_context": false,
+      "similarity_seed": {
+        "taxpayer_type": null,
+        "activity": null,
+        "tax": null,
+        "problem_type": "cumplimiento_fiscal",
+        "authority_act": null,
+        "procedural_stage": null,
+        "fiscal_year": null,
+        "evidence_fact_ids": {
+          "problem_type": [
+            "C4-P-FCT-007-01",
+            "C4-P-FCT-007-02",
+            "C4-P-FCT-007-03"
+          ]
+        }
+      },
+      "primary_family_id": "CBR-OBLIGACION",
+      "family_ids": [
+        "CBR-OBLIGACION",
+        "CBR-PERFIL",
+        "CBR-SUJETO",
+        "CBR-AUTORIDAD",
+        "CBR-DEUDA",
+        "CBR-INCUMPLIMIENTO",
+        "CBR-DERECHOS",
+        "CBR-TRIBUTO",
+        "CBR-CALCULO",
+        "CBR-DEFENSA"
+      ],
+      "concept_ids": [
+        "cumplimiento_fiscal",
+        "relacion_tributaria",
+        "obligacion_tributaria"
+      ],
+      "corpus_validation_outcome": "no_explicit_citation",
+      "corpus_validated": false,
+      "temporal_validation_pending": true,
+      "legal_similarity_enabled": true,
+      "operational_case_created": false,
+      "can_control_legal_decision": false
+    },
+    {
+      "situation_id": "P-CBR-SIT-008",
+      "source": "prodecon",
+      "source_entry_id": "PRODECON-04",
+      "historical_regime_context": false,
+      "similarity_seed": {
+        "taxpayer_type": "individual",
+        "activity": "trabajo subordinado",
+        "tax": "ISR",
+        "problem_type": "cumplimiento_fiscal",
+        "authority_act": null,
+        "procedural_stage": null,
+        "fiscal_year": null,
+        "evidence_fact_ids": {
+          "taxpayer_type": [
+            "C4-P-FCT-008-05"
+          ],
+          "activity": [
+            "C4-P-FCT-008-06"
+          ],
+          "tax": [
+            "C4-P-FCT-008-08"
+          ],
+          "problem_type": [
+            "C4-P-FCT-008-01",
+            "C4-P-FCT-008-02",
+            "C4-P-FCT-008-03"
+          ]
+        }
+      },
+      "primary_family_id": "CBR-OBLIGACION",
+      "family_ids": [
+        "CBR-OBLIGACION",
+        "CBR-PERFIL",
+        "CBR-SUJETO",
+        "CBR-AUTORIDAD",
+        "CBR-DEUDA",
+        "CBR-INCUMPLIMIENTO",
+        "CBR-DERECHOS",
+        "CBR-TRIBUTO",
+        "CBR-CALCULO",
+        "CBR-DEFENSA"
+      ],
+      "concept_ids": [
+        "cumplimiento_fiscal",
+        "relacion_tributaria",
+        "obligacion_tributaria"
+      ],
+      "corpus_validation_outcome": "no_explicit_citation",
+      "corpus_validated": false,
+      "temporal_validation_pending": true,
+      "legal_similarity_enabled": true,
+      "operational_case_created": false,
+      "can_control_legal_decision": false
+    },
+    {
+      "situation_id": "P-CBR-SIT-009",
+      "source": "prodecon",
+      "source_entry_id": "PRODECON-05",
+      "historical_regime_context": false,
+      "similarity_seed": {
+        "taxpayer_type": "individual",
+        "activity": null,
+        "tax": "ISR",
+        "problem_type": "determinacion_contribucion",
+        "authority_act": null,
+        "procedural_stage": null,
+        "fiscal_year": null,
+        "evidence_fact_ids": {
+          "taxpayer_type": [
+            "C4-P-FCT-009-01"
+          ],
+          "tax": [
+            "C4-P-FCT-009-02"
+          ],
+          "problem_type": [
+            "C4-P-FCT-009-01",
+            "C4-P-FCT-009-02",
+            "C4-P-FCT-009-03"
+          ]
+        }
+      },
+      "primary_family_id": "CBR-CALCULO",
+      "family_ids": [
+        "CBR-CALCULO",
+        "CBR-TRIBUTO",
+        "CBR-PERFIL",
+        "CBR-OBLIGACION",
+        "CBR-TEMPORALIDAD",
+        "CBR-SUJETO",
+        "CBR-INTERPRETACION"
+      ],
+      "concept_ids": [
+        "determinacion_contribucion",
+        "regimen_isr",
+        "tributo"
+      ],
+      "corpus_validation_outcome": "no_explicit_citation",
+      "corpus_validated": false,
+      "temporal_validation_pending": true,
+      "legal_similarity_enabled": true,
+      "operational_case_created": false,
+      "can_control_legal_decision": false
+    },
+    {
+      "situation_id": "P-CBR-SIT-010",
+      "source": "prodecon",
+      "source_entry_id": "PRODECON-05",
+      "historical_regime_context": false,
+      "similarity_seed": {
+        "taxpayer_type": null,
+        "activity": null,
+        "tax": "IVA",
+        "problem_type": "determinacion_contribucion",
+        "authority_act": null,
+        "procedural_stage": null,
+        "fiscal_year": null,
+        "evidence_fact_ids": {
+          "tax": [
+            "C4-P-FCT-010-01"
+          ],
+          "problem_type": [
+            "C4-P-FCT-010-01",
+            "C4-P-FCT-010-02",
+            "C4-P-FCT-010-03"
+          ]
+        }
+      },
+      "primary_family_id": "CBR-CALCULO",
+      "family_ids": [
+        "CBR-CALCULO",
+        "CBR-TRIBUTO",
+        "CBR-PERFIL",
+        "CBR-OBLIGACION",
+        "CBR-TEMPORALIDAD",
+        "CBR-INTERPRETACION",
+        "CBR-SUJETO"
+      ],
+      "concept_ids": [
+        "determinacion_contribucion",
+        "tributo"
+      ],
+      "corpus_validation_outcome": "blocked_derogated",
+      "corpus_validated": false,
+      "temporal_validation_pending": true,
+      "legal_similarity_enabled": true,
+      "operational_case_created": false,
+      "can_control_legal_decision": false
+    },
+    {
+      "situation_id": "P-CBR-SIT-011",
+      "source": "prodecon",
+      "source_entry_id": "PRODECON-06",
+      "historical_regime_context": false,
+      "similarity_seed": {
+        "taxpayer_type": null,
+        "activity": null,
+        "tax": null,
+        "problem_type": "actuacion_autoridad",
+        "authority_act": "facultades de comprobacion",
+        "procedural_stage": "determinacion",
+        "fiscal_year": null,
+        "evidence_fact_ids": {
+          "authority_act": [
+            "C4-P-FCT-011-05"
+          ],
+          "procedural_stage": [
+            "C4-P-FCT-011-06"
+          ],
+          "problem_type": [
+            "C4-P-FCT-011-01",
+            "C4-P-FCT-011-02",
+            "C4-P-FCT-011-03"
+          ]
+        }
+      },
+      "primary_family_id": "CBR-AUTORIDAD",
+      "family_ids": [
+        "CBR-AUTORIDAD",
+        "CBR-DEUDA",
+        "CBR-INCUMPLIMIENTO",
+        "CBR-DEFENSA",
+        "CBR-PERFIL",
+        "CBR-SUJETO",
+        "CBR-OBLIGACION",
+        "CBR-DERECHOS",
+        "CBR-TRIBUTO",
+        "CBR-CALCULO"
+      ],
+      "concept_ids": [
+        "actuacion_autoridad",
+        "cumplimiento_fiscal",
+        "obligacion_tributaria"
+      ],
+      "corpus_validation_outcome": "consistent",
+      "corpus_validated": true,
+      "temporal_validation_pending": true,
+      "legal_similarity_enabled": true,
+      "operational_case_created": false,
+      "can_control_legal_decision": false
+    },
+    {
+      "situation_id": "P-CBR-SIT-012",
+      "source": "prodecon",
+      "source_entry_id": "PRODECON-06",
+      "historical_regime_context": false,
+      "similarity_seed": {
+        "taxpayer_type": null,
+        "activity": null,
+        "tax": null,
+        "problem_type": "incumplimiento_fiscal",
+        "authority_act": "procedimiento administrativo de ejecucion",
+        "procedural_stage": "cobro coactivo",
+        "fiscal_year": null,
+        "evidence_fact_ids": {
+          "authority_act": [
+            "C4-P-FCT-012-02"
+          ],
+          "procedural_stage": [
+            "C4-P-FCT-012-04"
+          ],
+          "problem_type": [
+            "C4-P-FCT-012-01",
+            "C4-P-FCT-012-02",
+            "C4-P-FCT-012-03"
+          ]
+        }
+      },
+      "primary_family_id": "CBR-INCUMPLIMIENTO",
+      "family_ids": [
+        "CBR-INCUMPLIMIENTO",
+        "CBR-AUTORIDAD",
+        "CBR-DEUDA",
+        "CBR-DERECHOS",
+        "CBR-OBLIGACION",
+        "CBR-INTERPRETACION",
+        "CBR-DEFENSA",
+        "CBR-PERFIL",
+        "CBR-SUJETO",
+        "CBR-TRIBUTO",
+        "CBR-CALCULO"
+      ],
+      "concept_ids": [
+        "incumplimiento_fiscal",
+        "actuacion_autoridad",
+        "deuda_tributaria",
+        "obligacion_tributaria"
+      ],
+      "corpus_validation_outcome": "consistent",
+      "corpus_validated": true,
+      "temporal_validation_pending": true,
+      "legal_similarity_enabled": true,
+      "operational_case_created": false,
+      "can_control_legal_decision": false
+    },
+    {
+      "situation_id": "P-CBR-SIT-013",
+      "source": "prodecon",
+      "source_entry_id": "PRODECON-07",
+      "historical_regime_context": false,
+      "similarity_seed": {
+        "taxpayer_type": null,
+        "activity": null,
+        "tax": null,
+        "problem_type": "cumplimiento_fiscal",
+        "authority_act": "facultades de comprobacion",
+        "procedural_stage": "comprobacion",
+        "fiscal_year": null,
+        "evidence_fact_ids": {
+          "authority_act": [
+            "C4-P-FCT-013-02"
+          ],
+          "procedural_stage": [
+            "C4-P-FCT-013-03"
+          ],
+          "problem_type": [
+            "C4-P-FCT-013-01",
+            "C4-P-FCT-013-02",
+            "C4-P-FCT-013-03"
+          ]
+        }
+      },
+      "primary_family_id": "CBR-OBLIGACION",
+      "family_ids": [
+        "CBR-OBLIGACION",
+        "CBR-PERFIL",
+        "CBR-SUJETO",
+        "CBR-AUTORIDAD",
+        "CBR-DEUDA",
+        "CBR-INCUMPLIMIENTO",
+        "CBR-DERECHOS",
+        "CBR-TRIBUTO",
+        "CBR-CALCULO",
+        "CBR-DEFENSA",
+        "CBR-INTERPRETACION"
+      ],
+      "concept_ids": [
+        "cumplimiento_fiscal",
+        "derechos_contribuyente",
+        "obligacion_tributaria"
+      ],
+      "corpus_validation_outcome": "consistent",
+      "corpus_validated": true,
+      "temporal_validation_pending": true,
+      "legal_similarity_enabled": true,
+      "operational_case_created": false,
+      "can_control_legal_decision": false
+    },
+    {
+      "situation_id": "P-CBR-SIT-014",
+      "source": "prodecon",
+      "source_entry_id": "PRODECON-07",
+      "historical_regime_context": false,
+      "similarity_seed": {
+        "taxpayer_type": null,
+        "activity": null,
+        "tax": null,
+        "problem_type": "cumplimiento_fiscal",
+        "authority_act": null,
+        "procedural_stage": "cumplimiento y comprobacion",
+        "fiscal_year": null,
+        "evidence_fact_ids": {
+          "procedural_stage": [
+            "C4-P-FCT-014-03"
+          ],
+          "problem_type": [
+            "C4-P-FCT-014-01",
+            "C4-P-FCT-014-02",
+            "C4-P-FCT-014-03"
+          ]
+        }
+      },
+      "primary_family_id": "CBR-OBLIGACION",
+      "family_ids": [
+        "CBR-OBLIGACION",
+        "CBR-PERFIL",
+        "CBR-SUJETO",
+        "CBR-AUTORIDAD",
+        "CBR-DEUDA",
+        "CBR-INCUMPLIMIENTO",
+        "CBR-DERECHOS",
+        "CBR-TRIBUTO",
+        "CBR-CALCULO",
+        "CBR-DEFENSA"
+      ],
+      "concept_ids": [
+        "cumplimiento_fiscal",
+        "obligacion_tributaria"
+      ],
+      "corpus_validation_outcome": "consistent",
+      "corpus_validated": true,
+      "temporal_validation_pending": true,
+      "legal_similarity_enabled": true,
+      "operational_case_created": false,
+      "can_control_legal_decision": false
+    },
+    {
+      "situation_id": "P-CBR-SIT-015",
+      "source": "prodecon",
+      "source_entry_id": "PRODECON-08",
+      "historical_regime_context": false,
+      "similarity_seed": {
+        "taxpayer_type": null,
+        "activity": null,
+        "tax": null,
+        "problem_type": "defensa_contribuyente",
+        "authority_act": "acto o resolucion fiscal",
+        "procedural_stage": "defensa",
+        "fiscal_year": null,
+        "evidence_fact_ids": {
+          "authority_act": [
+            "C4-P-FCT-015-02"
+          ],
+          "procedural_stage": [
+            "C4-P-FCT-015-04"
+          ],
+          "problem_type": [
+            "C4-P-FCT-015-01",
+            "C4-P-FCT-015-02",
+            "C4-P-FCT-015-03"
+          ]
+        }
+      },
+      "primary_family_id": "CBR-DEFENSA",
+      "family_ids": [
+        "CBR-DEFENSA",
+        "CBR-AUTORIDAD",
+        "CBR-INCUMPLIMIENTO",
+        "CBR-DEUDA"
+      ],
+      "concept_ids": [
+        "defensa_contribuyente",
+        "actuacion_autoridad"
+      ],
+      "corpus_validation_outcome": "consistent",
+      "corpus_validated": true,
+      "temporal_validation_pending": true,
+      "legal_similarity_enabled": true,
+      "operational_case_created": false,
+      "can_control_legal_decision": false
+    },
+    {
+      "situation_id": "P-CBR-SIT-016",
+      "source": "prodecon",
+      "source_entry_id": "PRODECON-08",
+      "historical_regime_context": false,
+      "similarity_seed": {
+        "taxpayer_type": null,
+        "activity": null,
+        "tax": null,
+        "problem_type": "defensa_contribuyente",
+        "authority_act": "acto de autoridad fiscal federal",
+        "procedural_stage": "defensa no jurisdiccional",
+        "fiscal_year": null,
+        "evidence_fact_ids": {
+          "authority_act": [
+            "C4-P-FCT-016-02"
+          ],
+          "procedural_stage": [
+            "C4-P-FCT-016-06"
+          ],
+          "problem_type": [
+            "C4-P-FCT-016-01",
+            "C4-P-FCT-016-02",
+            "C4-P-FCT-016-03"
+          ]
+        }
+      },
+      "primary_family_id": "CBR-DEFENSA",
+      "family_ids": [
+        "CBR-DEFENSA",
+        "CBR-AUTORIDAD",
+        "CBR-INCUMPLIMIENTO",
+        "CBR-DEUDA"
+      ],
+      "concept_ids": [
+        "defensa_contribuyente",
+        "actuacion_autoridad"
+      ],
+      "corpus_validation_outcome": "no_explicit_citation",
+      "corpus_validated": false,
+      "temporal_validation_pending": true,
+      "legal_similarity_enabled": true,
+      "operational_case_created": false,
+      "can_control_legal_decision": false
+    },
+    {
+      "situation_id": "P-CBR-SIT-017",
+      "source": "prodecon",
+      "source_entry_id": "PRODECON-09",
+      "historical_regime_context": false,
+      "similarity_seed": {
+        "taxpayer_type": null,
+        "activity": null,
+        "tax": null,
+        "problem_type": "interpretacion_fiscal",
+        "authority_act": null,
+        "procedural_stage": "interpretacion",
+        "fiscal_year": null,
+        "evidence_fact_ids": {
+          "procedural_stage": [
+            "C4-P-FCT-017-02"
+          ],
+          "problem_type": [
+            "C4-P-FCT-017-01",
+            "C4-P-FCT-017-02",
+            "C4-P-FCT-017-03"
+          ]
+        }
+      },
+      "primary_family_id": "CBR-INTERPRETACION",
+      "family_ids": [
+        "CBR-INTERPRETACION"
+      ],
+      "concept_ids": [
+        "interpretacion_fiscal"
+      ],
+      "corpus_validation_outcome": "no_explicit_citation",
+      "corpus_validated": false,
+      "temporal_validation_pending": true,
+      "legal_similarity_enabled": true,
+      "operational_case_created": false,
+      "can_control_legal_decision": false
+    },
+    {
+      "situation_id": "P-CBR-SIT-018",
+      "source": "prodecon",
+      "source_entry_id": "PRODECON-09",
+      "historical_regime_context": false,
+      "similarity_seed": {
+        "taxpayer_type": null,
+        "activity": null,
+        "tax": null,
+        "problem_type": "interpretacion_fiscal",
+        "authority_act": null,
+        "procedural_stage": "interpretacion y aplicacion",
+        "fiscal_year": null,
+        "evidence_fact_ids": {
+          "procedural_stage": [
+            "C4-P-FCT-018-02"
+          ],
+          "problem_type": [
+            "C4-P-FCT-018-01",
+            "C4-P-FCT-018-02",
+            "C4-P-FCT-018-03"
+          ]
+        }
+      },
+      "primary_family_id": "CBR-INTERPRETACION",
+      "family_ids": [
+        "CBR-INTERPRETACION",
+        "CBR-AUTORIDAD",
+        "CBR-DEUDA",
+        "CBR-INCUMPLIMIENTO",
+        "CBR-DERECHOS",
+        "CBR-OBLIGACION",
+        "CBR-DEFENSA"
+      ],
+      "concept_ids": [
+        "interpretacion_fiscal",
+        "incumplimiento_fiscal"
+      ],
+      "corpus_validation_outcome": "consistent",
+      "corpus_validated": true,
+      "temporal_validation_pending": true,
+      "legal_similarity_enabled": true,
+      "operational_case_created": false,
+      "can_control_legal_decision": false
+    },
+    {
+      "situation_id": "P-CBR-SIT-019",
+      "source": "prodecon",
+      "source_entry_id": "PRODECON-10",
+      "historical_regime_context": false,
+      "similarity_seed": {
+        "taxpayer_type": "individual",
+        "activity": "trabajo subordinado",
+        "tax": "ISR",
+        "problem_type": "determinacion_contribucion",
+        "authority_act": null,
+        "procedural_stage": null,
+        "fiscal_year": null,
+        "evidence_fact_ids": {
+          "taxpayer_type": [
+            "C4-P-FCT-019-01"
+          ],
+          "activity": [
+            "C4-P-FCT-019-03"
+          ],
+          "tax": [
+            "C4-P-FCT-019-04"
+          ],
+          "problem_type": [
+            "C4-P-FCT-019-01",
+            "C4-P-FCT-019-02",
+            "C4-P-FCT-019-03"
+          ]
+        }
+      },
+      "primary_family_id": "CBR-CALCULO",
+      "family_ids": [
+        "CBR-CALCULO",
+        "CBR-TRIBUTO",
+        "CBR-PERFIL",
+        "CBR-OBLIGACION",
+        "CBR-TEMPORALIDAD",
+        "CBR-SUJETO"
+      ],
+      "concept_ids": [
+        "determinacion_contribucion",
+        "regimen_isr"
+      ],
+      "corpus_validation_outcome": "blocked_content_mismatch",
+      "corpus_validated": false,
+      "temporal_validation_pending": true,
+      "legal_similarity_enabled": true,
+      "operational_case_created": false,
+      "can_control_legal_decision": false
+    },
+    {
+      "situation_id": "P-CBR-SIT-020",
+      "source": "prodecon",
+      "source_entry_id": "PRODECON-10",
+      "historical_regime_context": false,
+      "similarity_seed": {
+        "taxpayer_type": "individual",
+        "activity": "trabajo subordinado",
+        "tax": "ISR",
+        "problem_type": "determinacion_contribucion",
+        "authority_act": null,
+        "procedural_stage": null,
+        "fiscal_year": null,
+        "evidence_fact_ids": {
+          "taxpayer_type": [
+            "C4-P-FCT-020-01"
+          ],
+          "activity": [
+            "C4-P-FCT-020-02"
+          ],
+          "tax": [
+            "C4-P-FCT-020-03"
+          ],
+          "problem_type": [
+            "C4-P-FCT-020-01",
+            "C4-P-FCT-020-02",
+            "C4-P-FCT-020-03"
+          ]
+        }
+      },
+      "primary_family_id": "CBR-CALCULO",
+      "family_ids": [
+        "CBR-CALCULO",
+        "CBR-TRIBUTO",
+        "CBR-PERFIL",
+        "CBR-OBLIGACION",
+        "CBR-TEMPORALIDAD",
+        "CBR-SUJETO"
+      ],
+      "concept_ids": [
+        "determinacion_contribucion",
+        "regimen_isr"
+      ],
+      "corpus_validation_outcome": "no_explicit_citation",
+      "corpus_validated": false,
+      "temporal_validation_pending": true,
+      "legal_similarity_enabled": true,
+      "operational_case_created": false,
+      "can_control_legal_decision": false
+    },
+    {
+      "situation_id": "P-CBR-SIT-021",
+      "source": "prodecon",
+      "source_entry_id": "PRODECON-11",
+      "historical_regime_context": false,
+      "similarity_seed": {
+        "taxpayer_type": "individual",
+        "activity": "servicios profesionales independientes",
+        "tax": "ISR",
+        "problem_type": "determinacion_contribucion",
+        "authority_act": null,
+        "procedural_stage": null,
+        "fiscal_year": null,
+        "evidence_fact_ids": {
+          "taxpayer_type": [
+            "C4-P-FCT-021-01"
+          ],
+          "activity": [
+            "C4-P-FCT-021-02"
+          ],
+          "tax": [
+            "C4-P-FCT-021-04"
+          ],
+          "problem_type": [
+            "C4-P-FCT-021-01",
+            "C4-P-FCT-021-02",
+            "C4-P-FCT-021-03"
+          ]
+        }
+      },
+      "primary_family_id": "CBR-CALCULO",
+      "family_ids": [
+        "CBR-CALCULO",
+        "CBR-TRIBUTO",
+        "CBR-PERFIL",
+        "CBR-OBLIGACION",
+        "CBR-TEMPORALIDAD",
+        "CBR-SUJETO",
+        "CBR-AUTORIDAD",
+        "CBR-DEUDA",
+        "CBR-INCUMPLIMIENTO",
+        "CBR-DERECHOS",
+        "CBR-DEFENSA"
+      ],
+      "concept_ids": [
+        "determinacion_contribucion",
+        "cumplimiento_fiscal",
+        "regimen_isr",
+        "obligacion_tributaria"
+      ],
+      "corpus_validation_outcome": "consistent",
+      "corpus_validated": true,
+      "temporal_validation_pending": true,
+      "legal_similarity_enabled": true,
+      "operational_case_created": false,
+      "can_control_legal_decision": false
+    },
+    {
+      "situation_id": "P-CBR-SIT-022",
+      "source": "prodecon",
+      "source_entry_id": "PRODECON-11",
+      "historical_regime_context": false,
+      "similarity_seed": {
+        "taxpayer_type": "individual",
+        "activity": "servicios profesionales independientes",
+        "tax": "ISR",
+        "problem_type": "cumplimiento_fiscal",
+        "authority_act": null,
+        "procedural_stage": null,
+        "fiscal_year": null,
+        "evidence_fact_ids": {
+          "taxpayer_type": [
+            "C4-P-FCT-022-01"
+          ],
+          "activity": [
+            "C4-P-FCT-022-02"
+          ],
+          "tax": [
+            "C4-P-FCT-022-03"
+          ],
+          "problem_type": [
+            "C4-P-FCT-022-01",
+            "C4-P-FCT-022-02",
+            "C4-P-FCT-022-03"
+          ]
+        }
+      },
+      "primary_family_id": "CBR-OBLIGACION",
+      "family_ids": [
+        "CBR-OBLIGACION",
+        "CBR-PERFIL",
+        "CBR-SUJETO",
+        "CBR-AUTORIDAD",
+        "CBR-DEUDA",
+        "CBR-INCUMPLIMIENTO",
+        "CBR-DERECHOS",
+        "CBR-TRIBUTO",
+        "CBR-CALCULO",
+        "CBR-DEFENSA",
+        "CBR-TEMPORALIDAD"
+      ],
+      "concept_ids": [
+        "cumplimiento_fiscal",
+        "determinacion_contribucion",
+        "obligacion_tributaria",
+        "regimen_isr"
+      ],
+      "corpus_validation_outcome": "no_explicit_citation",
+      "corpus_validated": false,
+      "temporal_validation_pending": true,
+      "legal_similarity_enabled": true,
+      "operational_case_created": false,
+      "can_control_legal_decision": false
+    },
+    {
+      "situation_id": "P-CBR-SIT-023",
+      "source": "prodecon",
+      "source_entry_id": "PRODECON-12",
+      "historical_regime_context": true,
+      "similarity_seed": {
+        "taxpayer_type": "individual",
+        "activity": "RIF actividades empresariales y servicios no profesionales",
+        "tax": "ISR",
+        "problem_type": "determinacion_contribucion",
+        "authority_act": null,
+        "procedural_stage": null,
+        "fiscal_year": null,
+        "evidence_fact_ids": {
+          "taxpayer_type": [
+            "C4-P-FCT-023-01"
+          ],
+          "activity": [
+            "C4-P-FCT-023-03"
+          ],
+          "tax": [
+            "C4-P-FCT-023-02"
+          ],
+          "problem_type": [
+            "C4-P-FCT-023-01",
+            "C4-P-FCT-023-02",
+            "C4-P-FCT-023-03"
+          ]
+        }
+      },
+      "primary_family_id": "CBR-CALCULO",
+      "family_ids": [
+        "CBR-CALCULO",
+        "CBR-TRIBUTO",
+        "CBR-PERFIL",
+        "CBR-OBLIGACION",
+        "CBR-TEMPORALIDAD",
+        "CBR-SUJETO",
+        "CBR-INTERPRETACION"
+      ],
+      "concept_ids": [
+        "determinacion_contribucion",
+        "regimen_isr",
+        "tributo"
+      ],
+      "corpus_validation_outcome": "blocked_derogated",
+      "corpus_validated": false,
+      "temporal_validation_pending": true,
+      "legal_similarity_enabled": true,
+      "operational_case_created": false,
+      "can_control_legal_decision": false
+    },
+    {
+      "situation_id": "P-CBR-SIT-024",
+      "source": "prodecon",
+      "source_entry_id": "PRODECON-12",
+      "historical_regime_context": true,
+      "similarity_seed": {
+        "taxpayer_type": "individual",
+        "activity": "RIF actividades empresariales y servicios no profesionales",
+        "tax": "ISR",
+        "problem_type": "determinacion_contribucion",
+        "authority_act": null,
+        "procedural_stage": null,
+        "fiscal_year": null,
+        "evidence_fact_ids": {
+          "taxpayer_type": [
+            "C4-P-FCT-024-01"
+          ],
+          "activity": [
+            "C4-P-FCT-024-02"
+          ],
+          "tax": [
+            "C4-P-FCT-024-03"
+          ],
+          "problem_type": [
+            "C4-P-FCT-024-01",
+            "C4-P-FCT-024-02",
+            "C4-P-FCT-024-03"
+          ]
+        }
+      },
+      "primary_family_id": "CBR-CALCULO",
+      "family_ids": [
+        "CBR-CALCULO",
+        "CBR-TRIBUTO",
+        "CBR-PERFIL",
+        "CBR-OBLIGACION",
+        "CBR-TEMPORALIDAD",
+        "CBR-SUJETO",
+        "CBR-INTERPRETACION"
+      ],
+      "concept_ids": [
+        "determinacion_contribucion",
+        "regimen_isr",
+        "tributo"
+      ],
+      "corpus_validation_outcome": "no_explicit_citation",
+      "corpus_validated": false,
+      "temporal_validation_pending": true,
+      "legal_similarity_enabled": true,
+      "operational_case_created": false,
+      "can_control_legal_decision": false
+    },
+    {
+      "situation_id": "U-CBR-SIT-001",
+      "source": "unam",
+      "source_entry_id": "UNAM-V",
+      "historical_regime_context": false,
+      "similarity_seed": {
+        "taxpayer_type": "legal_entity",
+        "activity": "regimen general de personas morales",
+        "tax": "ISR",
+        "problem_type": "determinacion_contribucion",
+        "authority_act": null,
+        "procedural_stage": null,
+        "fiscal_year": 2017,
+        "evidence_fact_ids": {
+          "taxpayer_type": [
+            "C4-U-FCT-001-01"
+          ],
+          "activity": [
+            "C4-U-FCT-001-02"
+          ],
+          "tax": [
+            "C4-U-FCT-001-03"
+          ],
+          "fiscal_year": [
+            "C4-U-FCT-001-04"
+          ],
+          "problem_type": [
+            "C4-U-FCT-001-01",
+            "C4-U-FCT-001-02",
+            "C4-U-FCT-001-03"
+          ]
+        }
+      },
+      "primary_family_id": "CBR-CALCULO",
+      "family_ids": [
+        "CBR-CALCULO",
+        "CBR-TRIBUTO",
+        "CBR-PERFIL",
+        "CBR-OBLIGACION",
+        "CBR-TEMPORALIDAD",
+        "CBR-SUJETO",
+        "CBR-INTERPRETACION"
+      ],
+      "concept_ids": [
+        "determinacion_contribucion",
+        "regimen_isr",
+        "tributo"
+      ],
+      "corpus_validation_outcome": "consistent",
+      "corpus_validated": true,
+      "temporal_validation_pending": true,
+      "legal_similarity_enabled": true,
+      "operational_case_created": false,
+      "can_control_legal_decision": false
+    },
+    {
+      "situation_id": "U-CBR-SIT-002",
+      "source": "unam",
+      "source_entry_id": "UNAM-V",
+      "historical_regime_context": false,
+      "similarity_seed": {
+        "taxpayer_type": "legal_entity",
+        "activity": "regimen general de personas morales",
+        "tax": "ISR",
+        "problem_type": "determinacion_contribucion",
+        "authority_act": null,
+        "procedural_stage": null,
+        "fiscal_year": 2016,
+        "evidence_fact_ids": {
+          "taxpayer_type": [
+            "C4-U-FCT-002-01"
+          ],
+          "activity": [
+            "C4-U-FCT-002-02"
+          ],
+          "tax": [
+            "C4-U-FCT-002-03"
+          ],
+          "fiscal_year": [
+            "C4-U-FCT-002-04"
+          ],
+          "problem_type": [
+            "C4-U-FCT-002-01",
+            "C4-U-FCT-002-02",
+            "C4-U-FCT-002-03"
+          ]
+        }
+      },
+      "primary_family_id": "CBR-CALCULO",
+      "family_ids": [
+        "CBR-CALCULO",
+        "CBR-TRIBUTO",
+        "CBR-PERFIL",
+        "CBR-OBLIGACION",
+        "CBR-TEMPORALIDAD",
+        "CBR-SUJETO",
+        "CBR-INTERPRETACION"
+      ],
+      "concept_ids": [
+        "determinacion_contribucion",
+        "regimen_isr",
+        "tributo"
+      ],
+      "corpus_validation_outcome": "consistent",
+      "corpus_validated": true,
+      "temporal_validation_pending": true,
+      "legal_similarity_enabled": true,
+      "operational_case_created": false,
+      "can_control_legal_decision": false
+    },
+    {
+      "situation_id": "U-CBR-SIT-003",
+      "source": "unam",
+      "source_entry_id": "UNAM-V",
+      "historical_regime_context": false,
+      "similarity_seed": {
+        "taxpayer_type": "legal_entity",
+        "activity": "regimen general de personas morales",
+        "tax": "ISR",
+        "problem_type": "determinacion_contribucion",
+        "authority_act": null,
+        "procedural_stage": null,
+        "fiscal_year": 2017,
+        "evidence_fact_ids": {
+          "taxpayer_type": [
+            "C4-U-FCT-003-01"
+          ],
+          "activity": [
+            "C4-U-FCT-003-02"
+          ],
+          "tax": [
+            "C4-U-FCT-003-03"
+          ],
+          "fiscal_year": [
+            "C4-U-FCT-003-04"
+          ],
+          "problem_type": [
+            "C4-U-FCT-003-01",
+            "C4-U-FCT-003-02",
+            "C4-U-FCT-003-03"
+          ]
+        }
+      },
+      "primary_family_id": "CBR-CALCULO",
+      "family_ids": [
+        "CBR-CALCULO",
+        "CBR-TRIBUTO",
+        "CBR-PERFIL",
+        "CBR-OBLIGACION",
+        "CBR-TEMPORALIDAD",
+        "CBR-SUJETO",
+        "CBR-INTERPRETACION"
+      ],
+      "concept_ids": [
+        "determinacion_contribucion",
+        "regimen_isr",
+        "tributo"
+      ],
+      "corpus_validation_outcome": "consistent",
+      "corpus_validated": true,
+      "temporal_validation_pending": true,
+      "legal_similarity_enabled": true,
+      "operational_case_created": false,
+      "can_control_legal_decision": false
+    },
+    {
+      "situation_id": "U-CBR-SIT-004",
+      "source": "unam",
+      "source_entry_id": "UNAM-V",
+      "historical_regime_context": false,
+      "similarity_seed": {
+        "taxpayer_type": "legal_entity",
+        "activity": "regimen general de personas morales",
+        "tax": "ISR",
+        "problem_type": "determinacion_contribucion",
+        "authority_act": null,
+        "procedural_stage": null,
+        "fiscal_year": 2016,
+        "evidence_fact_ids": {
+          "taxpayer_type": [
+            "C4-U-FCT-004-01"
+          ],
+          "activity": [
+            "C4-U-FCT-004-02"
+          ],
+          "tax": [
+            "C4-U-FCT-004-03"
+          ],
+          "fiscal_year": [
+            "C4-U-FCT-004-04"
+          ],
+          "problem_type": [
+            "C4-U-FCT-004-01",
+            "C4-U-FCT-004-02",
+            "C4-U-FCT-004-03"
+          ]
+        }
+      },
+      "primary_family_id": "CBR-CALCULO",
+      "family_ids": [
+        "CBR-CALCULO",
+        "CBR-TRIBUTO",
+        "CBR-PERFIL",
+        "CBR-OBLIGACION",
+        "CBR-TEMPORALIDAD",
+        "CBR-SUJETO",
+        "CBR-INTERPRETACION"
+      ],
+      "concept_ids": [
+        "determinacion_contribucion",
+        "regimen_isr",
+        "tributo"
+      ],
+      "corpus_validation_outcome": "no_explicit_citation",
+      "corpus_validated": false,
+      "temporal_validation_pending": true,
+      "legal_similarity_enabled": true,
+      "operational_case_created": false,
+      "can_control_legal_decision": false
+    },
+    {
+      "situation_id": "U-CBR-SIT-005",
+      "source": "unam",
+      "source_entry_id": "UNAM-V",
+      "historical_regime_context": false,
+      "similarity_seed": {
+        "taxpayer_type": "legal_entity",
+        "activity": "regimen general de personas morales",
+        "tax": "ISR",
+        "problem_type": "determinacion_contribucion",
+        "authority_act": null,
+        "procedural_stage": null,
+        "fiscal_year": 2016,
+        "evidence_fact_ids": {
+          "taxpayer_type": [
+            "C4-U-FCT-005-01"
+          ],
+          "activity": [
+            "C4-U-FCT-005-02"
+          ],
+          "tax": [
+            "C4-U-FCT-005-03"
+          ],
+          "fiscal_year": [
+            "C4-U-FCT-005-04"
+          ],
+          "problem_type": [
+            "C4-U-FCT-005-01",
+            "C4-U-FCT-005-02",
+            "C4-U-FCT-005-03"
+          ]
+        }
+      },
+      "primary_family_id": "CBR-CALCULO",
+      "family_ids": [
+        "CBR-CALCULO",
+        "CBR-TRIBUTO",
+        "CBR-PERFIL",
+        "CBR-OBLIGACION",
+        "CBR-TEMPORALIDAD",
+        "CBR-SUJETO",
+        "CBR-INTERPRETACION"
+      ],
+      "concept_ids": [
+        "determinacion_contribucion",
+        "regimen_isr",
+        "tributo"
+      ],
+      "corpus_validation_outcome": "consistent",
+      "corpus_validated": true,
+      "temporal_validation_pending": true,
+      "legal_similarity_enabled": true,
+      "operational_case_created": false,
+      "can_control_legal_decision": false
+    },
+    {
+      "situation_id": "U-CBR-SIT-006",
+      "source": "unam",
+      "source_entry_id": "UNAM-V",
+      "historical_regime_context": false,
+      "similarity_seed": {
+        "taxpayer_type": "individual",
+        "activity": "trabajo subordinado",
+        "tax": "ISR",
+        "problem_type": "determinacion_contribucion",
+        "authority_act": null,
+        "procedural_stage": null,
+        "fiscal_year": null,
+        "evidence_fact_ids": {
+          "taxpayer_type": [
+            "C4-U-FCT-006-01"
+          ],
+          "activity": [
+            "C4-U-FCT-006-02"
+          ],
+          "tax": [
+            "C4-U-FCT-006-03"
+          ],
+          "problem_type": [
+            "C4-U-FCT-006-01",
+            "C4-U-FCT-006-02",
+            "C4-U-FCT-006-03"
+          ]
+        }
+      },
+      "primary_family_id": "CBR-CALCULO",
+      "family_ids": [
+        "CBR-CALCULO",
+        "CBR-TRIBUTO",
+        "CBR-PERFIL",
+        "CBR-OBLIGACION",
+        "CBR-TEMPORALIDAD",
+        "CBR-SUJETO",
+        "CBR-INTERPRETACION"
+      ],
+      "concept_ids": [
+        "determinacion_contribucion",
+        "regimen_isr",
+        "tributo"
+      ],
+      "corpus_validation_outcome": "consistent",
+      "corpus_validated": true,
+      "temporal_validation_pending": true,
+      "legal_similarity_enabled": true,
+      "operational_case_created": false,
+      "can_control_legal_decision": false
+    },
+    {
+      "situation_id": "U-CBR-SIT-007",
+      "source": "unam",
+      "source_entry_id": "UNAM-V",
+      "historical_regime_context": false,
+      "similarity_seed": {
+        "taxpayer_type": "individual",
+        "activity": "actividad empresarial papeleria",
+        "tax": "ISR",
+        "problem_type": "determinacion_contribucion",
+        "authority_act": null,
+        "procedural_stage": null,
+        "fiscal_year": 2017,
+        "evidence_fact_ids": {
+          "taxpayer_type": [
+            "C4-U-FCT-007-01"
+          ],
+          "activity": [
+            "C4-U-FCT-007-02"
+          ],
+          "tax": [
+            "C4-U-FCT-007-03"
+          ],
+          "fiscal_year": [
+            "C4-U-FCT-007-04"
+          ],
+          "problem_type": [
+            "C4-U-FCT-007-01",
+            "C4-U-FCT-007-02",
+            "C4-U-FCT-007-03"
+          ]
+        }
+      },
+      "primary_family_id": "CBR-CALCULO",
+      "family_ids": [
+        "CBR-CALCULO",
+        "CBR-TRIBUTO",
+        "CBR-PERFIL",
+        "CBR-OBLIGACION",
+        "CBR-TEMPORALIDAD",
+        "CBR-SUJETO",
+        "CBR-INTERPRETACION"
+      ],
+      "concept_ids": [
+        "determinacion_contribucion",
+        "regimen_isr",
+        "tributo"
+      ],
+      "corpus_validation_outcome": "consistent",
+      "corpus_validated": true,
+      "temporal_validation_pending": true,
+      "legal_similarity_enabled": true,
+      "operational_case_created": false,
+      "can_control_legal_decision": false
+    },
+    {
+      "situation_id": "U-CBR-SIT-008",
+      "source": "unam",
+      "source_entry_id": "UNAM-V",
+      "historical_regime_context": true,
+      "similarity_seed": {
+        "taxpayer_type": "individual",
+        "activity": "RIF fonda de cocina mexicana",
+        "tax": "ISR",
+        "problem_type": "determinacion_contribucion",
+        "authority_act": null,
+        "procedural_stage": null,
+        "fiscal_year": null,
+        "evidence_fact_ids": {
+          "taxpayer_type": [
+            "C4-U-FCT-008-01"
+          ],
+          "activity": [
+            "C4-U-FCT-008-02"
+          ],
+          "tax": [
+            "C4-U-FCT-008-03"
+          ],
+          "problem_type": [
+            "C4-U-FCT-008-01",
+            "C4-U-FCT-008-02",
+            "C4-U-FCT-008-03"
+          ]
+        }
+      },
+      "primary_family_id": "CBR-CALCULO",
+      "family_ids": [
+        "CBR-CALCULO",
+        "CBR-TRIBUTO",
+        "CBR-PERFIL",
+        "CBR-OBLIGACION",
+        "CBR-TEMPORALIDAD",
+        "CBR-SUJETO",
+        "CBR-INTERPRETACION"
+      ],
+      "concept_ids": [
+        "determinacion_contribucion",
+        "regimen_isr",
+        "tributo"
+      ],
+      "corpus_validation_outcome": "blocked_derogated",
+      "corpus_validated": false,
+      "temporal_validation_pending": true,
+      "legal_similarity_enabled": true,
+      "operational_case_created": false,
+      "can_control_legal_decision": false
+    },
+    {
+      "situation_id": "U-CBR-SIT-009",
+      "source": "unam",
+      "source_entry_id": "UNAM-V",
+      "historical_regime_context": false,
+      "similarity_seed": {
+        "taxpayer_type": "individual",
+        "activity": "servicios profesionales independientes",
+        "tax": "ISR",
+        "problem_type": "determinacion_contribucion",
+        "authority_act": null,
+        "procedural_stage": null,
+        "fiscal_year": null,
+        "evidence_fact_ids": {
+          "taxpayer_type": [
+            "C4-U-FCT-009-01"
+          ],
+          "activity": [
+            "C4-U-FCT-009-02"
+          ],
+          "tax": [
+            "C4-U-FCT-009-03"
+          ],
+          "problem_type": [
+            "C4-U-FCT-009-01",
+            "C4-U-FCT-009-02",
+            "C4-U-FCT-009-03"
+          ]
+        }
+      },
+      "primary_family_id": "CBR-CALCULO",
+      "family_ids": [
+        "CBR-CALCULO",
+        "CBR-TRIBUTO",
+        "CBR-PERFIL",
+        "CBR-OBLIGACION",
+        "CBR-TEMPORALIDAD",
+        "CBR-SUJETO",
+        "CBR-INTERPRETACION"
+      ],
+      "concept_ids": [
+        "determinacion_contribucion",
+        "regimen_isr",
+        "tributo"
+      ],
+      "corpus_validation_outcome": "consistent",
+      "corpus_validated": true,
+      "temporal_validation_pending": true,
+      "legal_similarity_enabled": true,
+      "operational_case_created": false,
+      "can_control_legal_decision": false
+    },
+    {
+      "situation_id": "U-CBR-SIT-010",
+      "source": "unam",
+      "source_entry_id": "UNAM-V",
+      "historical_regime_context": false,
+      "similarity_seed": {
+        "taxpayer_type": "individual",
+        "activity": "arrendamiento de inmuebles",
+        "tax": "ISR",
+        "problem_type": "determinacion_contribucion",
+        "authority_act": null,
+        "procedural_stage": null,
+        "fiscal_year": null,
+        "evidence_fact_ids": {
+          "taxpayer_type": [
+            "C4-U-FCT-010-01"
+          ],
+          "activity": [
+            "C4-U-FCT-010-02"
+          ],
+          "tax": [
+            "C4-U-FCT-010-03"
+          ],
+          "problem_type": [
+            "C4-U-FCT-010-01",
+            "C4-U-FCT-010-02",
+            "C4-U-FCT-010-03"
+          ]
+        }
+      },
+      "primary_family_id": "CBR-CALCULO",
+      "family_ids": [
+        "CBR-CALCULO",
+        "CBR-TRIBUTO",
+        "CBR-PERFIL",
+        "CBR-OBLIGACION",
+        "CBR-TEMPORALIDAD",
+        "CBR-SUJETO",
+        "CBR-INTERPRETACION"
+      ],
+      "concept_ids": [
+        "determinacion_contribucion",
+        "regimen_isr",
+        "tributo"
+      ],
+      "corpus_validation_outcome": "blocked_content_mismatch",
+      "corpus_validated": false,
+      "temporal_validation_pending": true,
+      "legal_similarity_enabled": true,
+      "operational_case_created": false,
+      "can_control_legal_decision": false
+    },
+    {
+      "situation_id": "U-CBR-SIT-011",
+      "source": "unam",
+      "source_entry_id": "UNAM-V",
+      "historical_regime_context": false,
+      "similarity_seed": {
+        "taxpayer_type": "individual",
+        "activity": "trabajo subordinado",
+        "tax": "ISR",
+        "problem_type": "determinacion_contribucion",
+        "authority_act": null,
+        "procedural_stage": null,
+        "fiscal_year": 2016,
+        "evidence_fact_ids": {
+          "taxpayer_type": [
+            "C4-U-FCT-011-01"
+          ],
+          "activity": [
+            "C4-U-FCT-011-02"
+          ],
+          "tax": [
+            "C4-U-FCT-011-03"
+          ],
+          "fiscal_year": [
+            "C4-U-FCT-011-04"
+          ],
+          "problem_type": [
+            "C4-U-FCT-011-01",
+            "C4-U-FCT-011-02",
+            "C4-U-FCT-011-03"
+          ]
+        }
+      },
+      "primary_family_id": "CBR-CALCULO",
+      "family_ids": [
+        "CBR-CALCULO",
+        "CBR-TRIBUTO",
+        "CBR-PERFIL",
+        "CBR-OBLIGACION",
+        "CBR-TEMPORALIDAD",
+        "CBR-SUJETO",
+        "CBR-INTERPRETACION"
+      ],
+      "concept_ids": [
+        "determinacion_contribucion",
+        "regimen_isr",
+        "tributo"
+      ],
+      "corpus_validation_outcome": "consistent",
+      "corpus_validated": true,
+      "temporal_validation_pending": true,
+      "legal_similarity_enabled": true,
+      "operational_case_created": false,
+      "can_control_legal_decision": false
+    },
+    {
+      "situation_id": "U-CBR-SIT-012",
+      "source": "unam",
+      "source_entry_id": "UNAM-V",
+      "historical_regime_context": false,
+      "similarity_seed": {
+        "taxpayer_type": "legal_entity",
+        "activity": "compraventa comercial",
+        "tax": "IVA",
+        "problem_type": "determinacion_contribucion",
+        "authority_act": null,
+        "procedural_stage": null,
+        "fiscal_year": null,
+        "evidence_fact_ids": {
+          "taxpayer_type": [
+            "C4-U-FCT-012-01"
+          ],
+          "activity": [
+            "C4-U-FCT-012-02"
+          ],
+          "tax": [
+            "C4-U-FCT-012-03"
+          ],
+          "problem_type": [
+            "C4-U-FCT-012-01",
+            "C4-U-FCT-012-02",
+            "C4-U-FCT-012-03"
+          ]
+        }
+      },
+      "primary_family_id": "CBR-CALCULO",
+      "family_ids": [
+        "CBR-CALCULO",
+        "CBR-TRIBUTO",
+        "CBR-PERFIL",
+        "CBR-OBLIGACION",
+        "CBR-TEMPORALIDAD",
+        "CBR-INTERPRETACION",
+        "CBR-SUJETO"
+      ],
+      "concept_ids": [
+        "determinacion_contribucion",
+        "tributo"
+      ],
+      "corpus_validation_outcome": "no_explicit_citation",
+      "corpus_validated": false,
+      "temporal_validation_pending": true,
+      "legal_similarity_enabled": true,
+      "operational_case_created": false,
+      "can_control_legal_decision": false
+    },
+    {
+      "situation_id": "U-CBR-SIT-013",
+      "source": "unam",
+      "source_entry_id": "UNAM-V",
+      "historical_regime_context": false,
+      "similarity_seed": {
+        "taxpayer_type": "individual",
+        "activity": "servicios profesionales de auditoria",
+        "tax": "IVA",
+        "problem_type": "determinacion_contribucion",
+        "authority_act": null,
+        "procedural_stage": null,
+        "fiscal_year": null,
+        "evidence_fact_ids": {
+          "taxpayer_type": [
+            "C4-U-FCT-013-01"
+          ],
+          "activity": [
+            "C4-U-FCT-013-02"
+          ],
+          "tax": [
+            "C4-U-FCT-013-03"
+          ],
+          "problem_type": [
+            "C4-U-FCT-013-01",
+            "C4-U-FCT-013-02",
+            "C4-U-FCT-013-03"
+          ]
+        }
+      },
+      "primary_family_id": "CBR-CALCULO",
+      "family_ids": [
+        "CBR-CALCULO",
+        "CBR-TRIBUTO",
+        "CBR-PERFIL",
+        "CBR-OBLIGACION",
+        "CBR-TEMPORALIDAD",
+        "CBR-INTERPRETACION",
+        "CBR-SUJETO"
+      ],
+      "concept_ids": [
+        "determinacion_contribucion",
+        "tributo"
+      ],
+      "corpus_validation_outcome": "consistent",
+      "corpus_validated": true,
+      "temporal_validation_pending": true,
+      "legal_similarity_enabled": true,
+      "operational_case_created": false,
+      "can_control_legal_decision": false
+    }
+  ],
+  "neighbors": [
+    {
+      "situation_id": "P-CBR-SIT-001",
+      "candidate_count": 20,
+      "returned_count": 5,
+      "matches": [
+        {
+          "rank": 1,
+          "situation_id": "P-CBR-SIT-002",
+          "source": "prodecon",
+          "primary_family_id": "CBR-CALCULO",
+          "similarity": 1.0,
+          "existing_cbr_field_similarity": 1.0,
+          "family_overlap_similarity": 1.0,
+          "taxonomy_overlap_similarity": 1.0,
+          "active_existing_cbr_fields": [
+            "problem_type"
+          ],
+          "corpus_validation_outcome": "no_explicit_citation",
+          "corpus_validated": false,
+          "historical_regime_context": false,
+          "requires_normative_review": true,
+          "requires_temporal_review": true,
+          "retrieval_eligible": true,
+          "operational_reuse_allowed": false
+        },
+        {
+          "rank": 2,
+          "situation_id": "P-CBR-SIT-019",
+          "source": "prodecon",
+          "primary_family_id": "CBR-CALCULO",
+          "similarity": 0.883333,
+          "existing_cbr_field_similarity": 1.0,
+          "family_overlap_similarity": 0.833333,
+          "taxonomy_overlap_similarity": 0.5,
+          "active_existing_cbr_fields": [
+            "problem_type"
+          ],
+          "corpus_validation_outcome": "blocked_content_mismatch",
+          "corpus_validated": false,
+          "historical_regime_context": false,
+          "requires_normative_review": true,
+          "requires_temporal_review": true,
+          "retrieval_eligible": true,
+          "operational_reuse_allowed": false
+        },
+        {
+          "rank": 3,
+          "situation_id": "P-CBR-SIT-020",
+          "source": "prodecon",
+          "primary_family_id": "CBR-CALCULO",
+          "similarity": 0.883333,
+          "existing_cbr_field_similarity": 1.0,
+          "family_overlap_similarity": 0.833333,
+          "taxonomy_overlap_similarity": 0.5,
+          "active_existing_cbr_fields": [
+            "problem_type"
+          ],
+          "corpus_validation_outcome": "no_explicit_citation",
+          "corpus_validated": false,
+          "historical_regime_context": false,
+          "requires_normative_review": true,
+          "requires_temporal_review": true,
+          "retrieval_eligible": true,
+          "operational_reuse_allowed": false
+        },
+        {
+          "rank": 4,
+          "situation_id": "P-CBR-SIT-005",
+          "source": "prodecon",
+          "primary_family_id": "CBR-CALCULO",
+          "similarity": 0.853571,
+          "existing_cbr_field_similarity": 1.0,
+          "family_overlap_similarity": 0.714286,
+          "taxonomy_overlap_similarity": 0.5,
+          "active_existing_cbr_fields": [
+            "problem_type"
+          ],
+          "corpus_validation_outcome": "consistent",
+          "corpus_validated": true,
+          "historical_regime_context": false,
+          "requires_normative_review": false,
+          "requires_temporal_review": true,
+          "retrieval_eligible": true,
+          "operational_reuse_allowed": false
+        },
+        {
+          "rank": 5,
+          "situation_id": "P-CBR-SIT-006",
+          "source": "prodecon",
+          "primary_family_id": "CBR-CALCULO",
+          "similarity": 0.853571,
+          "existing_cbr_field_similarity": 1.0,
+          "family_overlap_similarity": 0.714286,
+          "taxonomy_overlap_similarity": 0.5,
+          "active_existing_cbr_fields": [
+            "problem_type"
+          ],
+          "corpus_validation_outcome": "consistent",
+          "corpus_validated": true,
+          "historical_regime_context": false,
+          "requires_normative_review": false,
+          "requires_temporal_review": true,
+          "retrieval_eligible": true,
+          "operational_reuse_allowed": false
+        }
+      ]
+    },
+    {
+      "situation_id": "P-CBR-SIT-002",
+      "candidate_count": 20,
+      "returned_count": 5,
+      "matches": [
+        {
+          "rank": 1,
+          "situation_id": "P-CBR-SIT-001",
+          "source": "prodecon",
+          "primary_family_id": "CBR-CALCULO",
+          "similarity": 1.0,
+          "existing_cbr_field_similarity": 1.0,
+          "family_overlap_similarity": 1.0,
+          "taxonomy_overlap_similarity": 1.0,
+          "active_existing_cbr_fields": [
+            "problem_type"
+          ],
+          "corpus_validation_outcome": "consistent",
+          "corpus_validated": true,
+          "historical_regime_context": false,
+          "requires_normative_review": false,
+          "requires_temporal_review": true,
+          "retrieval_eligible": true,
+          "operational_reuse_allowed": false
+        },
+        {
+          "rank": 2,
+          "situation_id": "P-CBR-SIT-019",
+          "source": "prodecon",
+          "primary_family_id": "CBR-CALCULO",
+          "similarity": 0.883333,
+          "existing_cbr_field_similarity": 1.0,
+          "family_overlap_similarity": 0.833333,
+          "taxonomy_overlap_similarity": 0.5,
+          "active_existing_cbr_fields": [
+            "problem_type"
+          ],
+          "corpus_validation_outcome": "blocked_content_mismatch",
+          "corpus_validated": false,
+          "historical_regime_context": false,
+          "requires_normative_review": true,
+          "requires_temporal_review": true,
+          "retrieval_eligible": true,
+          "operational_reuse_allowed": false
+        },
+        {
+          "rank": 3,
+          "situation_id": "P-CBR-SIT-020",
+          "source": "prodecon",
+          "primary_family_id": "CBR-CALCULO",
+          "similarity": 0.883333,
+          "existing_cbr_field_similarity": 1.0,
+          "family_overlap_similarity": 0.833333,
+          "taxonomy_overlap_similarity": 0.5,
+          "active_existing_cbr_fields": [
+            "problem_type"
+          ],
+          "corpus_validation_outcome": "no_explicit_citation",
+          "corpus_validated": false,
+          "historical_regime_context": false,
+          "requires_normative_review": true,
+          "requires_temporal_review": true,
+          "retrieval_eligible": true,
+          "operational_reuse_allowed": false
+        },
+        {
+          "rank": 4,
+          "situation_id": "P-CBR-SIT-005",
+          "source": "prodecon",
+          "primary_family_id": "CBR-CALCULO",
+          "similarity": 0.853571,
+          "existing_cbr_field_similarity": 1.0,
+          "family_overlap_similarity": 0.714286,
+          "taxonomy_overlap_similarity": 0.5,
+          "active_existing_cbr_fields": [
+            "problem_type"
+          ],
+          "corpus_validation_outcome": "consistent",
+          "corpus_validated": true,
+          "historical_regime_context": false,
+          "requires_normative_review": false,
+          "requires_temporal_review": true,
+          "retrieval_eligible": true,
+          "operational_reuse_allowed": false
+        },
+        {
+          "rank": 5,
+          "situation_id": "P-CBR-SIT-006",
+          "source": "prodecon",
+          "primary_family_id": "CBR-CALCULO",
+          "similarity": 0.853571,
+          "existing_cbr_field_similarity": 1.0,
+          "family_overlap_similarity": 0.714286,
+          "taxonomy_overlap_similarity": 0.5,
+          "active_existing_cbr_fields": [
+            "problem_type"
+          ],
+          "corpus_validation_outcome": "consistent",
+          "corpus_validated": true,
+          "historical_regime_context": false,
+          "requires_normative_review": false,
+          "requires_temporal_review": true,
+          "retrieval_eligible": true,
+          "operational_reuse_allowed": false
+        }
+      ]
+    },
+    {
+      "situation_id": "P-CBR-SIT-003",
+      "candidate_count": 0,
+      "returned_count": 0,
+      "matches": []
+    },
+    {
+      "situation_id": "P-CBR-SIT-004",
+      "candidate_count": 0,
+      "returned_count": 0,
+      "matches": []
+    },
+    {
+      "situation_id": "P-CBR-SIT-005",
+      "candidate_count": 20,
+      "returned_count": 5,
+      "matches": [
+        {
+          "rank": 1,
+          "situation_id": "P-CBR-SIT-006",
+          "source": "prodecon",
+          "primary_family_id": "CBR-CALCULO",
+          "similarity": 1.0,
+          "existing_cbr_field_similarity": 1.0,
+          "family_overlap_similarity": 1.0,
+          "taxonomy_overlap_similarity": 1.0,
+          "active_existing_cbr_fields": [
+            "problem_type"
+          ],
+          "corpus_validation_outcome": "consistent",
+          "corpus_validated": true,
+          "historical_regime_context": false,
+          "requires_normative_review": false,
+          "requires_temporal_review": true,
+          "retrieval_eligible": true,
+          "operational_reuse_allowed": false
+        },
+        {
+          "rank": 2,
+          "situation_id": "P-CBR-SIT-010",
+          "source": "prodecon",
+          "primary_family_id": "CBR-CALCULO",
+          "similarity": 1.0,
+          "existing_cbr_field_similarity": 1.0,
+          "family_overlap_similarity": 1.0,
+          "taxonomy_overlap_similarity": 1.0,
+          "active_existing_cbr_fields": [
+            "problem_type"
+          ],
+          "corpus_validation_outcome": "blocked_derogated",
+          "corpus_validated": false,
+          "historical_regime_context": false,
+          "requires_normative_review": true,
+          "requires_temporal_review": true,
+          "retrieval_eligible": true,
+          "operational_reuse_allowed": false
+        },
+        {
+          "rank": 3,
+          "situation_id": "U-CBR-SIT-012",
+          "source": "unam",
+          "primary_family_id": "CBR-CALCULO",
+          "similarity": 1.0,
+          "existing_cbr_field_similarity": 1.0,
+          "family_overlap_similarity": 1.0,
+          "taxonomy_overlap_similarity": 1.0,
+          "active_existing_cbr_fields": [
+            "problem_type"
+          ],
+          "corpus_validation_outcome": "no_explicit_citation",
+          "corpus_validated": false,
+          "historical_regime_context": false,
+          "requires_normative_review": true,
+          "requires_temporal_review": true,
+          "retrieval_eligible": true,
+          "operational_reuse_allowed": false
+        },
+        {
+          "rank": 4,
+          "situation_id": "U-CBR-SIT-013",
+          "source": "unam",
+          "primary_family_id": "CBR-CALCULO",
+          "similarity": 1.0,
+          "existing_cbr_field_similarity": 1.0,
+          "family_overlap_similarity": 1.0,
+          "taxonomy_overlap_similarity": 1.0,
+          "active_existing_cbr_fields": [
+            "problem_type"
+          ],
+          "corpus_validation_outcome": "consistent",
+          "corpus_validated": true,
+          "historical_regime_context": false,
+          "requires_normative_review": false,
+          "requires_temporal_review": true,
+          "retrieval_eligible": true,
+          "operational_reuse_allowed": false
+        },
+        {
+          "rank": 5,
+          "situation_id": "P-CBR-SIT-009",
+          "source": "prodecon",
+          "primary_family_id": "CBR-CALCULO",
+          "similarity": 0.95,
+          "existing_cbr_field_similarity": 1.0,
+          "family_overlap_similarity": 1.0,
+          "taxonomy_overlap_similarity": 0.666667,
+          "active_existing_cbr_fields": [
+            "problem_type"
+          ],
+          "corpus_validation_outcome": "no_explicit_citation",
+          "corpus_validated": false,
+          "historical_regime_context": false,
+          "requires_normative_review": true,
+          "requires_temporal_review": true,
+          "retrieval_eligible": true,
+          "operational_reuse_allowed": false
+        }
+      ]
+    },
+    {
+      "situation_id": "P-CBR-SIT-006",
+      "candidate_count": 20,
+      "returned_count": 5,
+      "matches": [
+        {
+          "rank": 1,
+          "situation_id": "P-CBR-SIT-005",
+          "source": "prodecon",
+          "primary_family_id": "CBR-CALCULO",
+          "similarity": 1.0,
+          "existing_cbr_field_similarity": 1.0,
+          "family_overlap_similarity": 1.0,
+          "taxonomy_overlap_similarity": 1.0,
+          "active_existing_cbr_fields": [
+            "problem_type"
+          ],
+          "corpus_validation_outcome": "consistent",
+          "corpus_validated": true,
+          "historical_regime_context": false,
+          "requires_normative_review": false,
+          "requires_temporal_review": true,
+          "retrieval_eligible": true,
+          "operational_reuse_allowed": false
+        },
+        {
+          "rank": 2,
+          "situation_id": "P-CBR-SIT-010",
+          "source": "prodecon",
+          "primary_family_id": "CBR-CALCULO",
+          "similarity": 1.0,
+          "existing_cbr_field_similarity": 1.0,
+          "family_overlap_similarity": 1.0,
+          "taxonomy_overlap_similarity": 1.0,
+          "active_existing_cbr_fields": [
+            "problem_type"
+          ],
+          "corpus_validation_outcome": "blocked_derogated",
+          "corpus_validated": false,
+          "historical_regime_context": false,
+          "requires_normative_review": true,
+          "requires_temporal_review": true,
+          "retrieval_eligible": true,
+          "operational_reuse_allowed": false
+        },
+        {
+          "rank": 3,
+          "situation_id": "U-CBR-SIT-012",
+          "source": "unam",
+          "primary_family_id": "CBR-CALCULO",
+          "similarity": 1.0,
+          "existing_cbr_field_similarity": 1.0,
+          "family_overlap_similarity": 1.0,
+          "taxonomy_overlap_similarity": 1.0,
+          "active_existing_cbr_fields": [
+            "problem_type"
+          ],
+          "corpus_validation_outcome": "no_explicit_citation",
+          "corpus_validated": false,
+          "historical_regime_context": false,
+          "requires_normative_review": true,
+          "requires_temporal_review": true,
+          "retrieval_eligible": true,
+          "operational_reuse_allowed": false
+        },
+        {
+          "rank": 4,
+          "situation_id": "U-CBR-SIT-013",
+          "source": "unam",
+          "primary_family_id": "CBR-CALCULO",
+          "similarity": 1.0,
+          "existing_cbr_field_similarity": 1.0,
+          "family_overlap_similarity": 1.0,
+          "taxonomy_overlap_similarity": 1.0,
+          "active_existing_cbr_fields": [
+            "problem_type"
+          ],
+          "corpus_validation_outcome": "consistent",
+          "corpus_validated": true,
+          "historical_regime_context": false,
+          "requires_normative_review": false,
+          "requires_temporal_review": true,
+          "retrieval_eligible": true,
+          "operational_reuse_allowed": false
+        },
+        {
+          "rank": 5,
+          "situation_id": "P-CBR-SIT-009",
+          "source": "prodecon",
+          "primary_family_id": "CBR-CALCULO",
+          "similarity": 0.95,
+          "existing_cbr_field_similarity": 1.0,
+          "family_overlap_similarity": 1.0,
+          "taxonomy_overlap_similarity": 0.666667,
+          "active_existing_cbr_fields": [
+            "problem_type"
+          ],
+          "corpus_validation_outcome": "no_explicit_citation",
+          "corpus_validated": false,
+          "historical_regime_context": false,
+          "requires_normative_review": true,
+          "requires_temporal_review": true,
+          "retrieval_eligible": true,
+          "operational_reuse_allowed": false
+        }
+      ]
+    },
+    {
+      "situation_id": "P-CBR-SIT-007",
+      "candidate_count": 4,
+      "returned_count": 4,
+      "matches": [
+        {
+          "rank": 1,
+          "situation_id": "P-CBR-SIT-008",
+          "source": "prodecon",
+          "primary_family_id": "CBR-OBLIGACION",
+          "similarity": 1.0,
+          "existing_cbr_field_similarity": 1.0,
+          "family_overlap_similarity": 1.0,
+          "taxonomy_overlap_similarity": 1.0,
+          "active_existing_cbr_fields": [
+            "problem_type"
+          ],
+          "corpus_validation_outcome": "no_explicit_citation",
+          "corpus_validated": false,
+          "historical_regime_context": false,
+          "requires_normative_review": true,
+          "requires_temporal_review": true,
+          "retrieval_eligible": true,
+          "operational_reuse_allowed": false
+        },
+        {
+          "rank": 2,
+          "situation_id": "P-CBR-SIT-014",
+          "source": "prodecon",
+          "primary_family_id": "CBR-OBLIGACION",
+          "similarity": 0.95,
+          "existing_cbr_field_similarity": 1.0,
+          "family_overlap_similarity": 1.0,
+          "taxonomy_overlap_similarity": 0.666667,
+          "active_existing_cbr_fields": [
+            "problem_type"
+          ],
+          "corpus_validation_outcome": "consistent",
+          "corpus_validated": true,
+          "historical_regime_context": false,
+          "requires_normative_review": false,
+          "requires_temporal_review": true,
+          "retrieval_eligible": true,
+          "operational_reuse_allowed": false
+        },
+        {
+          "rank": 3,
+          "situation_id": "P-CBR-SIT-013",
+          "source": "prodecon",
+          "primary_family_id": "CBR-OBLIGACION",
+          "similarity": 0.902273,
+          "existing_cbr_field_similarity": 1.0,
+          "family_overlap_similarity": 0.909091,
+          "taxonomy_overlap_similarity": 0.5,
+          "active_existing_cbr_fields": [
+            "problem_type"
+          ],
+          "corpus_validation_outcome": "consistent",
+          "corpus_validated": true,
+          "historical_regime_context": false,
+          "requires_normative_review": false,
+          "requires_temporal_review": true,
+          "retrieval_eligible": true,
+          "operational_reuse_allowed": false
+        },
+        {
+          "rank": 4,
+          "situation_id": "P-CBR-SIT-022",
+          "source": "prodecon",
+          "primary_family_id": "CBR-OBLIGACION",
+          "similarity": 0.887273,
+          "existing_cbr_field_similarity": 1.0,
+          "family_overlap_similarity": 0.909091,
+          "taxonomy_overlap_similarity": 0.4,
+          "active_existing_cbr_fields": [
+            "problem_type"
+          ],
+          "corpus_validation_outcome": "no_explicit_citation",
+          "corpus_validated": false,
+          "historical_regime_context": false,
+          "requires_normative_review": true,
+          "requires_temporal_review": true,
+          "retrieval_eligible": true,
+          "operational_reuse_allowed": false
+        }
+      ]
+    },
+    {
+      "situation_id": "P-CBR-SIT-008",
+      "candidate_count": 4,
+      "returned_count": 4,
+      "matches": [
+        {
+          "rank": 1,
+          "situation_id": "P-CBR-SIT-007",
+          "source": "prodecon",
+          "primary_family_id": "CBR-OBLIGACION",
+          "similarity": 1.0,
+          "existing_cbr_field_similarity": 1.0,
+          "family_overlap_similarity": 1.0,
+          "taxonomy_overlap_similarity": 1.0,
+          "active_existing_cbr_fields": [
+            "problem_type"
+          ],
+          "corpus_validation_outcome": "no_explicit_citation",
+          "corpus_validated": false,
+          "historical_regime_context": false,
+          "requires_normative_review": true,
+          "requires_temporal_review": true,
+          "retrieval_eligible": true,
+          "operational_reuse_allowed": false
+        },
+        {
+          "rank": 2,
+          "situation_id": "P-CBR-SIT-014",
+          "source": "prodecon",
+          "primary_family_id": "CBR-OBLIGACION",
+          "similarity": 0.95,
+          "existing_cbr_field_similarity": 1.0,
+          "family_overlap_similarity": 1.0,
+          "taxonomy_overlap_similarity": 0.666667,
+          "active_existing_cbr_fields": [
+            "problem_type"
+          ],
+          "corpus_validation_outcome": "consistent",
+          "corpus_validated": true,
+          "historical_regime_context": false,
+          "requires_normative_review": false,
+          "requires_temporal_review": true,
+          "retrieval_eligible": true,
+          "operational_reuse_allowed": false
+        },
+        {
+          "rank": 3,
+          "situation_id": "P-CBR-SIT-013",
+          "source": "prodecon",
+          "primary_family_id": "CBR-OBLIGACION",
+          "similarity": 0.902273,
+          "existing_cbr_field_similarity": 1.0,
+          "family_overlap_similarity": 0.909091,
+          "taxonomy_overlap_similarity": 0.5,
+          "active_existing_cbr_fields": [
+            "problem_type"
+          ],
+          "corpus_validation_outcome": "consistent",
+          "corpus_validated": true,
+          "historical_regime_context": false,
+          "requires_normative_review": false,
+          "requires_temporal_review": true,
+          "retrieval_eligible": true,
+          "operational_reuse_allowed": false
+        },
+        {
+          "rank": 4,
+          "situation_id": "P-CBR-SIT-022",
+          "source": "prodecon",
+          "primary_family_id": "CBR-OBLIGACION",
+          "similarity": 0.75013,
+          "existing_cbr_field_similarity": 0.771429,
+          "family_overlap_similarity": 0.909091,
+          "taxonomy_overlap_similarity": 0.4,
+          "active_existing_cbr_fields": [
+            "taxpayer_type",
+            "activity",
+            "tax",
+            "problem_type"
+          ],
+          "corpus_validation_outcome": "no_explicit_citation",
+          "corpus_validated": false,
+          "historical_regime_context": false,
+          "requires_normative_review": true,
+          "requires_temporal_review": true,
+          "retrieval_eligible": true,
+          "operational_reuse_allowed": false
+        }
+      ]
+    },
+    {
+      "situation_id": "P-CBR-SIT-009",
+      "candidate_count": 12,
+      "returned_count": 5,
+      "matches": [
+        {
+          "rank": 1,
+          "situation_id": "U-CBR-SIT-006",
+          "source": "unam",
+          "primary_family_id": "CBR-CALCULO",
+          "similarity": 1.0,
+          "existing_cbr_field_similarity": 1.0,
+          "family_overlap_similarity": 1.0,
+          "taxonomy_overlap_similarity": 1.0,
+          "active_existing_cbr_fields": [
+            "taxpayer_type",
+            "tax",
+            "problem_type"
+          ],
+          "corpus_validation_outcome": "consistent",
+          "corpus_validated": true,
+          "historical_regime_context": false,
+          "requires_normative_review": false,
+          "requires_temporal_review": true,
+          "retrieval_eligible": true,
+          "operational_reuse_allowed": false
+        },
+        {
+          "rank": 2,
+          "situation_id": "U-CBR-SIT-007",
+          "source": "unam",
+          "primary_family_id": "CBR-CALCULO",
+          "similarity": 1.0,
+          "existing_cbr_field_similarity": 1.0,
+          "family_overlap_similarity": 1.0,
+          "taxonomy_overlap_similarity": 1.0,
+          "active_existing_cbr_fields": [
+            "taxpayer_type",
+            "tax",
+            "problem_type"
+          ],
+          "corpus_validation_outcome": "consistent",
+          "corpus_validated": true,
+          "historical_regime_context": false,
+          "requires_normative_review": false,
+          "requires_temporal_review": true,
+          "retrieval_eligible": true,
+          "operational_reuse_allowed": false
+        },
+        {
+          "rank": 3,
+          "situation_id": "U-CBR-SIT-009",
+          "source": "unam",
+          "primary_family_id": "CBR-CALCULO",
+          "similarity": 1.0,
+          "existing_cbr_field_similarity": 1.0,
+          "family_overlap_similarity": 1.0,
+          "taxonomy_overlap_similarity": 1.0,
+          "active_existing_cbr_fields": [
+            "taxpayer_type",
+            "tax",
+            "problem_type"
+          ],
+          "corpus_validation_outcome": "consistent",
+          "corpus_validated": true,
+          "historical_regime_context": false,
+          "requires_normative_review": false,
+          "requires_temporal_review": true,
+          "retrieval_eligible": true,
+          "operational_reuse_allowed": false
+        },
+        {
+          "rank": 4,
+          "situation_id": "U-CBR-SIT-010",
+          "source": "unam",
+          "primary_family_id": "CBR-CALCULO",
+          "similarity": 1.0,
+          "existing_cbr_field_similarity": 1.0,
+          "family_overlap_similarity": 1.0,
+          "taxonomy_overlap_similarity": 1.0,
+          "active_existing_cbr_fields": [
+            "taxpayer_type",
+            "tax",
+            "problem_type"
+          ],
+          "corpus_validation_outcome": "blocked_content_mismatch",
+          "corpus_validated": false,
+          "historical_regime_context": false,
+          "requires_normative_review": true,
+          "requires_temporal_review": true,
+          "retrieval_eligible": true,
+          "operational_reuse_allowed": false
+        },
+        {
+          "rank": 5,
+          "situation_id": "U-CBR-SIT-011",
+          "source": "unam",
+          "primary_family_id": "CBR-CALCULO",
+          "similarity": 1.0,
+          "existing_cbr_field_similarity": 1.0,
+          "family_overlap_similarity": 1.0,
+          "taxonomy_overlap_similarity": 1.0,
+          "active_existing_cbr_fields": [
+            "taxpayer_type",
+            "tax",
+            "problem_type"
+          ],
+          "corpus_validation_outcome": "consistent",
+          "corpus_validated": true,
+          "historical_regime_context": false,
+          "requires_normative_review": false,
+          "requires_temporal_review": true,
+          "retrieval_eligible": true,
+          "operational_reuse_allowed": false
+        }
+      ]
+    },
+    {
+      "situation_id": "P-CBR-SIT-010",
+      "candidate_count": 6,
+      "returned_count": 5,
+      "matches": [
+        {
+          "rank": 1,
+          "situation_id": "P-CBR-SIT-005",
+          "source": "prodecon",
+          "primary_family_id": "CBR-CALCULO",
+          "similarity": 1.0,
+          "existing_cbr_field_similarity": 1.0,
+          "family_overlap_similarity": 1.0,
+          "taxonomy_overlap_similarity": 1.0,
+          "active_existing_cbr_fields": [
+            "problem_type"
+          ],
+          "corpus_validation_outcome": "consistent",
+          "corpus_validated": true,
+          "historical_regime_context": false,
+          "requires_normative_review": false,
+          "requires_temporal_review": true,
+          "retrieval_eligible": true,
+          "operational_reuse_allowed": false
+        },
+        {
+          "rank": 2,
+          "situation_id": "P-CBR-SIT-006",
+          "source": "prodecon",
+          "primary_family_id": "CBR-CALCULO",
+          "similarity": 1.0,
+          "existing_cbr_field_similarity": 1.0,
+          "family_overlap_similarity": 1.0,
+          "taxonomy_overlap_similarity": 1.0,
+          "active_existing_cbr_fields": [
+            "problem_type"
+          ],
+          "corpus_validation_outcome": "consistent",
+          "corpus_validated": true,
+          "historical_regime_context": false,
+          "requires_normative_review": false,
+          "requires_temporal_review": true,
+          "retrieval_eligible": true,
+          "operational_reuse_allowed": false
+        },
+        {
+          "rank": 3,
+          "situation_id": "U-CBR-SIT-012",
+          "source": "unam",
+          "primary_family_id": "CBR-CALCULO",
+          "similarity": 1.0,
+          "existing_cbr_field_similarity": 1.0,
+          "family_overlap_similarity": 1.0,
+          "taxonomy_overlap_similarity": 1.0,
+          "active_existing_cbr_fields": [
+            "tax",
+            "problem_type"
+          ],
+          "corpus_validation_outcome": "no_explicit_citation",
+          "corpus_validated": false,
+          "historical_regime_context": false,
+          "requires_normative_review": true,
+          "requires_temporal_review": true,
+          "retrieval_eligible": true,
+          "operational_reuse_allowed": false
+        },
+        {
+          "rank": 4,
+          "situation_id": "U-CBR-SIT-013",
+          "source": "unam",
+          "primary_family_id": "CBR-CALCULO",
+          "similarity": 1.0,
+          "existing_cbr_field_similarity": 1.0,
+          "family_overlap_similarity": 1.0,
+          "taxonomy_overlap_similarity": 1.0,
+          "active_existing_cbr_fields": [
+            "tax",
+            "problem_type"
+          ],
+          "corpus_validation_outcome": "consistent",
+          "corpus_validated": true,
+          "historical_regime_context": false,
+          "requires_normative_review": false,
+          "requires_temporal_review": true,
+          "retrieval_eligible": true,
+          "operational_reuse_allowed": false
+        },
+        {
+          "rank": 5,
+          "situation_id": "P-CBR-SIT-001",
+          "source": "prodecon",
+          "primary_family_id": "CBR-CALCULO",
+          "similarity": 0.853571,
+          "existing_cbr_field_similarity": 1.0,
+          "family_overlap_similarity": 0.714286,
+          "taxonomy_overlap_similarity": 0.5,
+          "active_existing_cbr_fields": [
+            "problem_type"
+          ],
+          "corpus_validation_outcome": "consistent",
+          "corpus_validated": true,
+          "historical_regime_context": false,
+          "requires_normative_review": false,
+          "requires_temporal_review": true,
+          "retrieval_eligible": true,
+          "operational_reuse_allowed": false
+        }
+      ]
+    },
+    {
+      "situation_id": "P-CBR-SIT-011",
+      "candidate_count": 0,
+      "returned_count": 0,
+      "matches": []
+    },
+    {
+      "situation_id": "P-CBR-SIT-012",
+      "candidate_count": 0,
+      "returned_count": 0,
+      "matches": []
+    },
+    {
+      "situation_id": "P-CBR-SIT-013",
+      "candidate_count": 4,
+      "returned_count": 4,
+      "matches": [
+        {
+          "rank": 1,
+          "situation_id": "P-CBR-SIT-007",
+          "source": "prodecon",
+          "primary_family_id": "CBR-OBLIGACION",
+          "similarity": 0.902273,
+          "existing_cbr_field_similarity": 1.0,
+          "family_overlap_similarity": 0.909091,
+          "taxonomy_overlap_similarity": 0.5,
+          "active_existing_cbr_fields": [
+            "problem_type"
+          ],
+          "corpus_validation_outcome": "no_explicit_citation",
+          "corpus_validated": false,
+          "historical_regime_context": false,
+          "requires_normative_review": true,
+          "requires_temporal_review": true,
+          "retrieval_eligible": true,
+          "operational_reuse_allowed": false
+        },
+        {
+          "rank": 2,
+          "situation_id": "P-CBR-SIT-008",
+          "source": "prodecon",
+          "primary_family_id": "CBR-OBLIGACION",
+          "similarity": 0.902273,
+          "existing_cbr_field_similarity": 1.0,
+          "family_overlap_similarity": 0.909091,
+          "taxonomy_overlap_similarity": 0.5,
+          "active_existing_cbr_fields": [
+            "problem_type"
+          ],
+          "corpus_validation_outcome": "no_explicit_citation",
+          "corpus_validated": false,
+          "historical_regime_context": false,
+          "requires_normative_review": true,
+          "requires_temporal_review": true,
+          "retrieval_eligible": true,
+          "operational_reuse_allowed": false
+        },
+        {
+          "rank": 3,
+          "situation_id": "P-CBR-SIT-022",
+          "source": "prodecon",
+          "primary_family_id": "CBR-OBLIGACION",
+          "similarity": 0.868333,
+          "existing_cbr_field_similarity": 1.0,
+          "family_overlap_similarity": 0.833333,
+          "taxonomy_overlap_similarity": 0.4,
+          "active_existing_cbr_fields": [
+            "problem_type"
+          ],
+          "corpus_validation_outcome": "no_explicit_citation",
+          "corpus_validated": false,
+          "historical_regime_context": false,
+          "requires_normative_review": true,
+          "requires_temporal_review": true,
+          "retrieval_eligible": true,
+          "operational_reuse_allowed": false
+        },
+        {
+          "rank": 4,
+          "situation_id": "P-CBR-SIT-014",
+          "source": "prodecon",
+          "primary_family_id": "CBR-OBLIGACION",
+          "similarity": 0.712987,
+          "existing_cbr_field_similarity": 0.642857,
+          "family_overlap_similarity": 0.909091,
+          "taxonomy_overlap_similarity": 0.666667,
+          "active_existing_cbr_fields": [
+            "problem_type",
+            "procedural_stage"
+          ],
+          "corpus_validation_outcome": "consistent",
+          "corpus_validated": true,
+          "historical_regime_context": false,
+          "requires_normative_review": false,
+          "requires_temporal_review": true,
+          "retrieval_eligible": true,
+          "operational_reuse_allowed": false
+        }
+      ]
+    },
+    {
+      "situation_id": "P-CBR-SIT-014",
+      "candidate_count": 4,
+      "returned_count": 4,
+      "matches": [
+        {
+          "rank": 1,
+          "situation_id": "P-CBR-SIT-007",
+          "source": "prodecon",
+          "primary_family_id": "CBR-OBLIGACION",
+          "similarity": 0.95,
+          "existing_cbr_field_similarity": 1.0,
+          "family_overlap_similarity": 1.0,
+          "taxonomy_overlap_similarity": 0.666667,
+          "active_existing_cbr_fields": [
+            "problem_type"
+          ],
+          "corpus_validation_outcome": "no_explicit_citation",
+          "corpus_validated": false,
+          "historical_regime_context": false,
+          "requires_normative_review": true,
+          "requires_temporal_review": true,
+          "retrieval_eligible": true,
+          "operational_reuse_allowed": false
+        },
+        {
+          "rank": 2,
+          "situation_id": "P-CBR-SIT-008",
+          "source": "prodecon",
+          "primary_family_id": "CBR-OBLIGACION",
+          "similarity": 0.95,
+          "existing_cbr_field_similarity": 1.0,
+          "family_overlap_similarity": 1.0,
+          "taxonomy_overlap_similarity": 0.666667,
+          "active_existing_cbr_fields": [
+            "problem_type"
+          ],
+          "corpus_validation_outcome": "no_explicit_citation",
+          "corpus_validated": false,
+          "historical_regime_context": false,
+          "requires_normative_review": true,
+          "requires_temporal_review": true,
+          "retrieval_eligible": true,
+          "operational_reuse_allowed": false
+        },
+        {
+          "rank": 3,
+          "situation_id": "P-CBR-SIT-022",
+          "source": "prodecon",
+          "primary_family_id": "CBR-OBLIGACION",
+          "similarity": 0.902273,
+          "existing_cbr_field_similarity": 1.0,
+          "family_overlap_similarity": 0.909091,
+          "taxonomy_overlap_similarity": 0.5,
+          "active_existing_cbr_fields": [
+            "problem_type"
+          ],
+          "corpus_validation_outcome": "no_explicit_citation",
+          "corpus_validated": false,
+          "historical_regime_context": false,
+          "requires_normative_review": true,
+          "requires_temporal_review": true,
+          "retrieval_eligible": true,
+          "operational_reuse_allowed": false
+        },
+        {
+          "rank": 4,
+          "situation_id": "P-CBR-SIT-013",
+          "source": "prodecon",
+          "primary_family_id": "CBR-OBLIGACION",
+          "similarity": 0.712987,
+          "existing_cbr_field_similarity": 0.642857,
+          "family_overlap_similarity": 0.909091,
+          "taxonomy_overlap_similarity": 0.666667,
+          "active_existing_cbr_fields": [
+            "problem_type",
+            "procedural_stage"
+          ],
+          "corpus_validation_outcome": "consistent",
+          "corpus_validated": true,
+          "historical_regime_context": false,
+          "requires_normative_review": false,
+          "requires_temporal_review": true,
+          "retrieval_eligible": true,
+          "operational_reuse_allowed": false
+        }
+      ]
+    },
+    {
+      "situation_id": "P-CBR-SIT-015",
+      "candidate_count": 1,
+      "returned_count": 1,
+      "matches": [
+        {
+          "rank": 1,
+          "situation_id": "P-CBR-SIT-016",
+          "source": "prodecon",
+          "primary_family_id": "CBR-DEFENSA",
+          "similarity": 0.684211,
+          "existing_cbr_field_similarity": 0.473684,
+          "family_overlap_similarity": 1.0,
+          "taxonomy_overlap_similarity": 1.0,
+          "active_existing_cbr_fields": [
+            "problem_type",
+            "authority_act",
+            "procedural_stage"
+          ],
+          "corpus_validation_outcome": "no_explicit_citation",
+          "corpus_validated": false,
+          "historical_regime_context": false,
+          "requires_normative_review": true,
+          "requires_temporal_review": true,
+          "retrieval_eligible": true,
+          "operational_reuse_allowed": false
+        }
+      ]
+    },
+    {
+      "situation_id": "P-CBR-SIT-016",
+      "candidate_count": 1,
+      "returned_count": 1,
+      "matches": [
+        {
+          "rank": 1,
+          "situation_id": "P-CBR-SIT-015",
+          "source": "prodecon",
+          "primary_family_id": "CBR-DEFENSA",
+          "similarity": 0.684211,
+          "existing_cbr_field_similarity": 0.473684,
+          "family_overlap_similarity": 1.0,
+          "taxonomy_overlap_similarity": 1.0,
+          "active_existing_cbr_fields": [
+            "problem_type",
+            "authority_act",
+            "procedural_stage"
+          ],
+          "corpus_validation_outcome": "consistent",
+          "corpus_validated": true,
+          "historical_regime_context": false,
+          "requires_normative_review": false,
+          "requires_temporal_review": true,
+          "retrieval_eligible": true,
+          "operational_reuse_allowed": false
+        }
+      ]
+    },
+    {
+      "situation_id": "P-CBR-SIT-017",
+      "candidate_count": 0,
+      "returned_count": 0,
+      "matches": []
+    },
+    {
+      "situation_id": "P-CBR-SIT-018",
+      "candidate_count": 0,
+      "returned_count": 0,
+      "matches": []
+    },
+    {
+      "situation_id": "P-CBR-SIT-019",
+      "candidate_count": 12,
+      "returned_count": 5,
+      "matches": [
+        {
+          "rank": 1,
+          "situation_id": "P-CBR-SIT-020",
+          "source": "prodecon",
+          "primary_family_id": "CBR-CALCULO",
+          "similarity": 1.0,
+          "existing_cbr_field_similarity": 1.0,
+          "family_overlap_similarity": 1.0,
+          "taxonomy_overlap_similarity": 1.0,
+          "active_existing_cbr_fields": [
+            "taxpayer_type",
+            "activity",
+            "tax",
+            "problem_type"
+          ],
+          "corpus_validation_outcome": "no_explicit_citation",
+          "corpus_validated": false,
+          "historical_regime_context": false,
+          "requires_normative_review": true,
+          "requires_temporal_review": true,
+          "retrieval_eligible": true,
+          "operational_reuse_allowed": false
+        },
+        {
+          "rank": 2,
+          "situation_id": "P-CBR-SIT-009",
+          "source": "prodecon",
+          "primary_family_id": "CBR-CALCULO",
+          "similarity": 0.914286,
+          "existing_cbr_field_similarity": 1.0,
+          "family_overlap_similarity": 0.857143,
+          "taxonomy_overlap_similarity": 0.666667,
+          "active_existing_cbr_fields": [
+            "taxpayer_type",
+            "tax",
+            "problem_type"
+          ],
+          "corpus_validation_outcome": "no_explicit_citation",
+          "corpus_validated": false,
+          "historical_regime_context": false,
+          "requires_normative_review": true,
+          "requires_temporal_review": true,
+          "retrieval_eligible": true,
+          "operational_reuse_allowed": false
+        },
+        {
+          "rank": 3,
+          "situation_id": "U-CBR-SIT-006",
+          "source": "unam",
+          "primary_family_id": "CBR-CALCULO",
+          "similarity": 0.914286,
+          "existing_cbr_field_similarity": 1.0,
+          "family_overlap_similarity": 0.857143,
+          "taxonomy_overlap_similarity": 0.666667,
+          "active_existing_cbr_fields": [
+            "taxpayer_type",
+            "activity",
+            "tax",
+            "problem_type"
+          ],
+          "corpus_validation_outcome": "consistent",
+          "corpus_validated": true,
+          "historical_regime_context": false,
+          "requires_normative_review": false,
+          "requires_temporal_review": true,
+          "retrieval_eligible": true,
+          "operational_reuse_allowed": false
+        },
+        {
+          "rank": 4,
+          "situation_id": "U-CBR-SIT-011",
+          "source": "unam",
+          "primary_family_id": "CBR-CALCULO",
+          "similarity": 0.914286,
+          "existing_cbr_field_similarity": 1.0,
+          "family_overlap_similarity": 0.857143,
+          "taxonomy_overlap_similarity": 0.666667,
+          "active_existing_cbr_fields": [
+            "taxpayer_type",
+            "activity",
+            "tax",
+            "problem_type"
+          ],
+          "corpus_validation_outcome": "consistent",
+          "corpus_validated": true,
+          "historical_regime_context": false,
+          "requires_normative_review": false,
+          "requires_temporal_review": true,
+          "retrieval_eligible": true,
+          "operational_reuse_allowed": false
+        },
+        {
+          "rank": 5,
+          "situation_id": "P-CBR-SIT-001",
+          "source": "prodecon",
+          "primary_family_id": "CBR-CALCULO",
+          "similarity": 0.883333,
+          "existing_cbr_field_similarity": 1.0,
+          "family_overlap_similarity": 0.833333,
+          "taxonomy_overlap_similarity": 0.5,
+          "active_existing_cbr_fields": [
+            "problem_type"
+          ],
+          "corpus_validation_outcome": "consistent",
+          "corpus_validated": true,
+          "historical_regime_context": false,
+          "requires_normative_review": false,
+          "requires_temporal_review": true,
+          "retrieval_eligible": true,
+          "operational_reuse_allowed": false
+        }
+      ]
+    },
+    {
+      "situation_id": "P-CBR-SIT-020",
+      "candidate_count": 12,
+      "returned_count": 5,
+      "matches": [
+        {
+          "rank": 1,
+          "situation_id": "P-CBR-SIT-019",
+          "source": "prodecon",
+          "primary_family_id": "CBR-CALCULO",
+          "similarity": 1.0,
+          "existing_cbr_field_similarity": 1.0,
+          "family_overlap_similarity": 1.0,
+          "taxonomy_overlap_similarity": 1.0,
+          "active_existing_cbr_fields": [
+            "taxpayer_type",
+            "activity",
+            "tax",
+            "problem_type"
+          ],
+          "corpus_validation_outcome": "blocked_content_mismatch",
+          "corpus_validated": false,
+          "historical_regime_context": false,
+          "requires_normative_review": true,
+          "requires_temporal_review": true,
+          "retrieval_eligible": true,
+          "operational_reuse_allowed": false
+        },
+        {
+          "rank": 2,
+          "situation_id": "P-CBR-SIT-009",
+          "source": "prodecon",
+          "primary_family_id": "CBR-CALCULO",
+          "similarity": 0.914286,
+          "existing_cbr_field_similarity": 1.0,
+          "family_overlap_similarity": 0.857143,
+          "taxonomy_overlap_similarity": 0.666667,
+          "active_existing_cbr_fields": [
+            "taxpayer_type",
+            "tax",
+            "problem_type"
+          ],
+          "corpus_validation_outcome": "no_explicit_citation",
+          "corpus_validated": false,
+          "historical_regime_context": false,
+          "requires_normative_review": true,
+          "requires_temporal_review": true,
+          "retrieval_eligible": true,
+          "operational_reuse_allowed": false
+        },
+        {
+          "rank": 3,
+          "situation_id": "U-CBR-SIT-006",
+          "source": "unam",
+          "primary_family_id": "CBR-CALCULO",
+          "similarity": 0.914286,
+          "existing_cbr_field_similarity": 1.0,
+          "family_overlap_similarity": 0.857143,
+          "taxonomy_overlap_similarity": 0.666667,
+          "active_existing_cbr_fields": [
+            "taxpayer_type",
+            "activity",
+            "tax",
+            "problem_type"
+          ],
+          "corpus_validation_outcome": "consistent",
+          "corpus_validated": true,
+          "historical_regime_context": false,
+          "requires_normative_review": false,
+          "requires_temporal_review": true,
+          "retrieval_eligible": true,
+          "operational_reuse_allowed": false
+        },
+        {
+          "rank": 4,
+          "situation_id": "U-CBR-SIT-011",
+          "source": "unam",
+          "primary_family_id": "CBR-CALCULO",
+          "similarity": 0.914286,
+          "existing_cbr_field_similarity": 1.0,
+          "family_overlap_similarity": 0.857143,
+          "taxonomy_overlap_similarity": 0.666667,
+          "active_existing_cbr_fields": [
+            "taxpayer_type",
+            "activity",
+            "tax",
+            "problem_type"
+          ],
+          "corpus_validation_outcome": "consistent",
+          "corpus_validated": true,
+          "historical_regime_context": false,
+          "requires_normative_review": false,
+          "requires_temporal_review": true,
+          "retrieval_eligible": true,
+          "operational_reuse_allowed": false
+        },
+        {
+          "rank": 5,
+          "situation_id": "P-CBR-SIT-001",
+          "source": "prodecon",
+          "primary_family_id": "CBR-CALCULO",
+          "similarity": 0.883333,
+          "existing_cbr_field_similarity": 1.0,
+          "family_overlap_similarity": 0.833333,
+          "taxonomy_overlap_similarity": 0.5,
+          "active_existing_cbr_fields": [
+            "problem_type"
+          ],
+          "corpus_validation_outcome": "consistent",
+          "corpus_validated": true,
+          "historical_regime_context": false,
+          "requires_normative_review": false,
+          "requires_temporal_review": true,
+          "retrieval_eligible": true,
+          "operational_reuse_allowed": false
+        }
+      ]
+    },
+    {
+      "situation_id": "P-CBR-SIT-021",
+      "candidate_count": 12,
+      "returned_count": 5,
+      "matches": [
+        {
+          "rank": 1,
+          "situation_id": "P-CBR-SIT-009",
+          "source": "prodecon",
+          "primary_family_id": "CBR-CALCULO",
+          "similarity": 0.785,
+          "existing_cbr_field_similarity": 1.0,
+          "family_overlap_similarity": 0.5,
+          "taxonomy_overlap_similarity": 0.4,
+          "active_existing_cbr_fields": [
+            "taxpayer_type",
+            "tax",
+            "problem_type"
+          ],
+          "corpus_validation_outcome": "no_explicit_citation",
+          "corpus_validated": false,
+          "historical_regime_context": false,
+          "requires_normative_review": true,
+          "requires_temporal_review": true,
+          "retrieval_eligible": true,
+          "operational_reuse_allowed": false
+        },
+        {
+          "rank": 2,
+          "situation_id": "U-CBR-SIT-009",
+          "source": "unam",
+          "primary_family_id": "CBR-CALCULO",
+          "similarity": 0.785,
+          "existing_cbr_field_similarity": 1.0,
+          "family_overlap_similarity": 0.5,
+          "taxonomy_overlap_similarity": 0.4,
+          "active_existing_cbr_fields": [
+            "taxpayer_type",
+            "activity",
+            "tax",
+            "problem_type"
+          ],
+          "corpus_validation_outcome": "consistent",
+          "corpus_validated": true,
+          "historical_regime_context": false,
+          "requires_normative_review": false,
+          "requires_temporal_review": true,
+          "retrieval_eligible": true,
+          "operational_reuse_allowed": false
+        },
+        {
+          "rank": 3,
+          "situation_id": "P-CBR-SIT-005",
+          "source": "prodecon",
+          "primary_family_id": "CBR-CALCULO",
+          "similarity": 0.755,
+          "existing_cbr_field_similarity": 1.0,
+          "family_overlap_similarity": 0.5,
+          "taxonomy_overlap_similarity": 0.2,
+          "active_existing_cbr_fields": [
+            "problem_type"
+          ],
+          "corpus_validation_outcome": "consistent",
+          "corpus_validated": true,
+          "historical_regime_context": false,
+          "requires_normative_review": false,
+          "requires_temporal_review": true,
+          "retrieval_eligible": true,
+          "operational_reuse_allowed": false
+        },
+        {
+          "rank": 4,
+          "situation_id": "P-CBR-SIT-006",
+          "source": "prodecon",
+          "primary_family_id": "CBR-CALCULO",
+          "similarity": 0.755,
+          "existing_cbr_field_similarity": 1.0,
+          "family_overlap_similarity": 0.5,
+          "taxonomy_overlap_similarity": 0.2,
+          "active_existing_cbr_fields": [
+            "problem_type"
+          ],
+          "corpus_validation_outcome": "consistent",
+          "corpus_validated": true,
+          "historical_regime_context": false,
+          "requires_normative_review": false,
+          "requires_temporal_review": true,
+          "retrieval_eligible": true,
+          "operational_reuse_allowed": false
+        },
+        {
+          "rank": 5,
+          "situation_id": "P-CBR-SIT-001",
+          "source": "prodecon",
+          "primary_family_id": "CBR-CALCULO",
+          "similarity": 0.751136,
+          "existing_cbr_field_similarity": 1.0,
+          "family_overlap_similarity": 0.454545,
+          "taxonomy_overlap_similarity": 0.25,
+          "active_existing_cbr_fields": [
+            "problem_type"
+          ],
+          "corpus_validation_outcome": "consistent",
+          "corpus_validated": true,
+          "historical_regime_context": false,
+          "requires_normative_review": false,
+          "requires_temporal_review": true,
+          "retrieval_eligible": true,
+          "operational_reuse_allowed": false
+        }
+      ]
+    },
+    {
+      "situation_id": "P-CBR-SIT-022",
+      "candidate_count": 4,
+      "returned_count": 4,
+      "matches": [
+        {
+          "rank": 1,
+          "situation_id": "P-CBR-SIT-014",
+          "source": "prodecon",
+          "primary_family_id": "CBR-OBLIGACION",
+          "similarity": 0.902273,
+          "existing_cbr_field_similarity": 1.0,
+          "family_overlap_similarity": 0.909091,
+          "taxonomy_overlap_similarity": 0.5,
+          "active_existing_cbr_fields": [
+            "problem_type"
+          ],
+          "corpus_validation_outcome": "consistent",
+          "corpus_validated": true,
+          "historical_regime_context": false,
+          "requires_normative_review": false,
+          "requires_temporal_review": true,
+          "retrieval_eligible": true,
+          "operational_reuse_allowed": false
+        },
+        {
+          "rank": 2,
+          "situation_id": "P-CBR-SIT-007",
+          "source": "prodecon",
+          "primary_family_id": "CBR-OBLIGACION",
+          "similarity": 0.887273,
+          "existing_cbr_field_similarity": 1.0,
+          "family_overlap_similarity": 0.909091,
+          "taxonomy_overlap_similarity": 0.4,
+          "active_existing_cbr_fields": [
+            "problem_type"
+          ],
+          "corpus_validation_outcome": "no_explicit_citation",
+          "corpus_validated": false,
+          "historical_regime_context": false,
+          "requires_normative_review": true,
+          "requires_temporal_review": true,
+          "retrieval_eligible": true,
+          "operational_reuse_allowed": false
+        },
+        {
+          "rank": 3,
+          "situation_id": "P-CBR-SIT-013",
+          "source": "prodecon",
+          "primary_family_id": "CBR-OBLIGACION",
+          "similarity": 0.868333,
+          "existing_cbr_field_similarity": 1.0,
+          "family_overlap_similarity": 0.833333,
+          "taxonomy_overlap_similarity": 0.4,
+          "active_existing_cbr_fields": [
+            "problem_type"
+          ],
+          "corpus_validation_outcome": "consistent",
+          "corpus_validated": true,
+          "historical_regime_context": false,
+          "requires_normative_review": false,
+          "requires_temporal_review": true,
+          "retrieval_eligible": true,
+          "operational_reuse_allowed": false
+        },
+        {
+          "rank": 4,
+          "situation_id": "P-CBR-SIT-008",
+          "source": "prodecon",
+          "primary_family_id": "CBR-OBLIGACION",
+          "similarity": 0.75013,
+          "existing_cbr_field_similarity": 0.771429,
+          "family_overlap_similarity": 0.909091,
+          "taxonomy_overlap_similarity": 0.4,
+          "active_existing_cbr_fields": [
+            "taxpayer_type",
+            "activity",
+            "tax",
+            "problem_type"
+          ],
+          "corpus_validation_outcome": "no_explicit_citation",
+          "corpus_validated": false,
+          "historical_regime_context": false,
+          "requires_normative_review": true,
+          "requires_temporal_review": true,
+          "retrieval_eligible": true,
+          "operational_reuse_allowed": false
+        }
+      ]
+    },
+    {
+      "situation_id": "P-CBR-SIT-023",
+      "candidate_count": 2,
+      "returned_count": 2,
+      "matches": [
+        {
+          "rank": 1,
+          "situation_id": "P-CBR-SIT-024",
+          "source": "prodecon",
+          "primary_family_id": "CBR-CALCULO",
+          "similarity": 1.0,
+          "existing_cbr_field_similarity": 1.0,
+          "family_overlap_similarity": 1.0,
+          "taxonomy_overlap_similarity": 1.0,
+          "active_existing_cbr_fields": [
+            "taxpayer_type",
+            "activity",
+            "tax",
+            "problem_type"
+          ],
+          "corpus_validation_outcome": "no_explicit_citation",
+          "corpus_validated": false,
+          "historical_regime_context": true,
+          "requires_normative_review": true,
+          "requires_temporal_review": true,
+          "retrieval_eligible": true,
+          "operational_reuse_allowed": false
+        },
+        {
+          "rank": 2,
+          "situation_id": "U-CBR-SIT-008",
+          "source": "unam",
+          "primary_family_id": "CBR-CALCULO",
+          "similarity": 0.875325,
+          "existing_cbr_field_similarity": 0.792208,
+          "family_overlap_similarity": 1.0,
+          "taxonomy_overlap_similarity": 1.0,
+          "active_existing_cbr_fields": [
+            "taxpayer_type",
+            "activity",
+            "tax",
+            "problem_type"
+          ],
+          "corpus_validation_outcome": "blocked_derogated",
+          "corpus_validated": false,
+          "historical_regime_context": true,
+          "requires_normative_review": true,
+          "requires_temporal_review": true,
+          "retrieval_eligible": true,
+          "operational_reuse_allowed": false
+        }
+      ]
+    },
+    {
+      "situation_id": "P-CBR-SIT-024",
+      "candidate_count": 2,
+      "returned_count": 2,
+      "matches": [
+        {
+          "rank": 1,
+          "situation_id": "P-CBR-SIT-023",
+          "source": "prodecon",
+          "primary_family_id": "CBR-CALCULO",
+          "similarity": 1.0,
+          "existing_cbr_field_similarity": 1.0,
+          "family_overlap_similarity": 1.0,
+          "taxonomy_overlap_similarity": 1.0,
+          "active_existing_cbr_fields": [
+            "taxpayer_type",
+            "activity",
+            "tax",
+            "problem_type"
+          ],
+          "corpus_validation_outcome": "blocked_derogated",
+          "corpus_validated": false,
+          "historical_regime_context": true,
+          "requires_normative_review": true,
+          "requires_temporal_review": true,
+          "retrieval_eligible": true,
+          "operational_reuse_allowed": false
+        },
+        {
+          "rank": 2,
+          "situation_id": "U-CBR-SIT-008",
+          "source": "unam",
+          "primary_family_id": "CBR-CALCULO",
+          "similarity": 0.875325,
+          "existing_cbr_field_similarity": 0.792208,
+          "family_overlap_similarity": 1.0,
+          "taxonomy_overlap_similarity": 1.0,
+          "active_existing_cbr_fields": [
+            "taxpayer_type",
+            "activity",
+            "tax",
+            "problem_type"
+          ],
+          "corpus_validation_outcome": "blocked_derogated",
+          "corpus_validated": false,
+          "historical_regime_context": true,
+          "requires_normative_review": true,
+          "requires_temporal_review": true,
+          "retrieval_eligible": true,
+          "operational_reuse_allowed": false
+        }
+      ]
+    },
+    {
+      "situation_id": "U-CBR-SIT-001",
+      "candidate_count": 8,
+      "returned_count": 5,
+      "matches": [
+        {
+          "rank": 1,
+          "situation_id": "U-CBR-SIT-003",
+          "source": "unam",
+          "primary_family_id": "CBR-CALCULO",
+          "similarity": 1.0,
+          "existing_cbr_field_similarity": 1.0,
+          "family_overlap_similarity": 1.0,
+          "taxonomy_overlap_similarity": 1.0,
+          "active_existing_cbr_fields": [
+            "taxpayer_type",
+            "activity",
+            "tax",
+            "problem_type",
+            "fiscal_year"
+          ],
+          "corpus_validation_outcome": "consistent",
+          "corpus_validated": true,
+          "historical_regime_context": false,
+          "requires_normative_review": false,
+          "requires_temporal_review": true,
+          "retrieval_eligible": true,
+          "operational_reuse_allowed": false
+        },
+        {
+          "rank": 2,
+          "situation_id": "U-CBR-SIT-002",
+          "source": "unam",
+          "primary_family_id": "CBR-CALCULO",
+          "similarity": 0.9625,
+          "existing_cbr_field_similarity": 0.9375,
+          "family_overlap_similarity": 1.0,
+          "taxonomy_overlap_similarity": 1.0,
+          "active_existing_cbr_fields": [
+            "taxpayer_type",
+            "activity",
+            "tax",
+            "problem_type",
+            "fiscal_year"
+          ],
+          "corpus_validation_outcome": "consistent",
+          "corpus_validated": true,
+          "historical_regime_context": false,
+          "requires_normative_review": false,
+          "requires_temporal_review": true,
+          "retrieval_eligible": true,
+          "operational_reuse_allowed": false
+        },
+        {
+          "rank": 3,
+          "situation_id": "U-CBR-SIT-004",
+          "source": "unam",
+          "primary_family_id": "CBR-CALCULO",
+          "similarity": 0.9625,
+          "existing_cbr_field_similarity": 0.9375,
+          "family_overlap_similarity": 1.0,
+          "taxonomy_overlap_similarity": 1.0,
+          "active_existing_cbr_fields": [
+            "taxpayer_type",
+            "activity",
+            "tax",
+            "problem_type",
+            "fiscal_year"
+          ],
+          "corpus_validation_outcome": "no_explicit_citation",
+          "corpus_validated": false,
+          "historical_regime_context": false,
+          "requires_normative_review": true,
+          "requires_temporal_review": true,
+          "retrieval_eligible": true,
+          "operational_reuse_allowed": false
+        },
+        {
+          "rank": 4,
+          "situation_id": "U-CBR-SIT-005",
+          "source": "unam",
+          "primary_family_id": "CBR-CALCULO",
+          "similarity": 0.9625,
+          "existing_cbr_field_similarity": 0.9375,
+          "family_overlap_similarity": 1.0,
+          "taxonomy_overlap_similarity": 1.0,
+          "active_existing_cbr_fields": [
+            "taxpayer_type",
+            "activity",
+            "tax",
+            "problem_type",
+            "fiscal_year"
+          ],
+          "corpus_validation_outcome": "consistent",
+          "corpus_validated": true,
+          "historical_regime_context": false,
+          "requires_normative_review": false,
+          "requires_temporal_review": true,
+          "retrieval_eligible": true,
+          "operational_reuse_allowed": false
+        },
+        {
+          "rank": 5,
+          "situation_id": "P-CBR-SIT-005",
+          "source": "prodecon",
+          "primary_family_id": "CBR-CALCULO",
+          "similarity": 0.95,
+          "existing_cbr_field_similarity": 1.0,
+          "family_overlap_similarity": 1.0,
+          "taxonomy_overlap_similarity": 0.666667,
+          "active_existing_cbr_fields": [
+            "problem_type"
+          ],
+          "corpus_validation_outcome": "consistent",
+          "corpus_validated": true,
+          "historical_regime_context": false,
+          "requires_normative_review": false,
+          "requires_temporal_review": true,
+          "retrieval_eligible": true,
+          "operational_reuse_allowed": false
+        }
+      ]
+    },
+    {
+      "situation_id": "U-CBR-SIT-002",
+      "candidate_count": 8,
+      "returned_count": 5,
+      "matches": [
+        {
+          "rank": 1,
+          "situation_id": "U-CBR-SIT-004",
+          "source": "unam",
+          "primary_family_id": "CBR-CALCULO",
+          "similarity": 1.0,
+          "existing_cbr_field_similarity": 1.0,
+          "family_overlap_similarity": 1.0,
+          "taxonomy_overlap_similarity": 1.0,
+          "active_existing_cbr_fields": [
+            "taxpayer_type",
+            "activity",
+            "tax",
+            "problem_type",
+            "fiscal_year"
+          ],
+          "corpus_validation_outcome": "no_explicit_citation",
+          "corpus_validated": false,
+          "historical_regime_context": false,
+          "requires_normative_review": true,
+          "requires_temporal_review": true,
+          "retrieval_eligible": true,
+          "operational_reuse_allowed": false
+        },
+        {
+          "rank": 2,
+          "situation_id": "U-CBR-SIT-005",
+          "source": "unam",
+          "primary_family_id": "CBR-CALCULO",
+          "similarity": 1.0,
+          "existing_cbr_field_similarity": 1.0,
+          "family_overlap_similarity": 1.0,
+          "taxonomy_overlap_similarity": 1.0,
+          "active_existing_cbr_fields": [
+            "taxpayer_type",
+            "activity",
+            "tax",
+            "problem_type",
+            "fiscal_year"
+          ],
+          "corpus_validation_outcome": "consistent",
+          "corpus_validated": true,
+          "historical_regime_context": false,
+          "requires_normative_review": false,
+          "requires_temporal_review": true,
+          "retrieval_eligible": true,
+          "operational_reuse_allowed": false
+        },
+        {
+          "rank": 3,
+          "situation_id": "U-CBR-SIT-001",
+          "source": "unam",
+          "primary_family_id": "CBR-CALCULO",
+          "similarity": 0.9625,
+          "existing_cbr_field_similarity": 0.9375,
+          "family_overlap_similarity": 1.0,
+          "taxonomy_overlap_similarity": 1.0,
+          "active_existing_cbr_fields": [
+            "taxpayer_type",
+            "activity",
+            "tax",
+            "problem_type",
+            "fiscal_year"
+          ],
+          "corpus_validation_outcome": "consistent",
+          "corpus_validated": true,
+          "historical_regime_context": false,
+          "requires_normative_review": false,
+          "requires_temporal_review": true,
+          "retrieval_eligible": true,
+          "operational_reuse_allowed": false
+        },
+        {
+          "rank": 4,
+          "situation_id": "U-CBR-SIT-003",
+          "source": "unam",
+          "primary_family_id": "CBR-CALCULO",
+          "similarity": 0.9625,
+          "existing_cbr_field_similarity": 0.9375,
+          "family_overlap_similarity": 1.0,
+          "taxonomy_overlap_similarity": 1.0,
+          "active_existing_cbr_fields": [
+            "taxpayer_type",
+            "activity",
+            "tax",
+            "problem_type",
+            "fiscal_year"
+          ],
+          "corpus_validation_outcome": "consistent",
+          "corpus_validated": true,
+          "historical_regime_context": false,
+          "requires_normative_review": false,
+          "requires_temporal_review": true,
+          "retrieval_eligible": true,
+          "operational_reuse_allowed": false
+        },
+        {
+          "rank": 5,
+          "situation_id": "P-CBR-SIT-005",
+          "source": "prodecon",
+          "primary_family_id": "CBR-CALCULO",
+          "similarity": 0.95,
+          "existing_cbr_field_similarity": 1.0,
+          "family_overlap_similarity": 1.0,
+          "taxonomy_overlap_similarity": 0.666667,
+          "active_existing_cbr_fields": [
+            "problem_type"
+          ],
+          "corpus_validation_outcome": "consistent",
+          "corpus_validated": true,
+          "historical_regime_context": false,
+          "requires_normative_review": false,
+          "requires_temporal_review": true,
+          "retrieval_eligible": true,
+          "operational_reuse_allowed": false
+        }
+      ]
+    },
+    {
+      "situation_id": "U-CBR-SIT-003",
+      "candidate_count": 8,
+      "returned_count": 5,
+      "matches": [
+        {
+          "rank": 1,
+          "situation_id": "U-CBR-SIT-001",
+          "source": "unam",
+          "primary_family_id": "CBR-CALCULO",
+          "similarity": 1.0,
+          "existing_cbr_field_similarity": 1.0,
+          "family_overlap_similarity": 1.0,
+          "taxonomy_overlap_similarity": 1.0,
+          "active_existing_cbr_fields": [
+            "taxpayer_type",
+            "activity",
+            "tax",
+            "problem_type",
+            "fiscal_year"
+          ],
+          "corpus_validation_outcome": "consistent",
+          "corpus_validated": true,
+          "historical_regime_context": false,
+          "requires_normative_review": false,
+          "requires_temporal_review": true,
+          "retrieval_eligible": true,
+          "operational_reuse_allowed": false
+        },
+        {
+          "rank": 2,
+          "situation_id": "U-CBR-SIT-002",
+          "source": "unam",
+          "primary_family_id": "CBR-CALCULO",
+          "similarity": 0.9625,
+          "existing_cbr_field_similarity": 0.9375,
+          "family_overlap_similarity": 1.0,
+          "taxonomy_overlap_similarity": 1.0,
+          "active_existing_cbr_fields": [
+            "taxpayer_type",
+            "activity",
+            "tax",
+            "problem_type",
+            "fiscal_year"
+          ],
+          "corpus_validation_outcome": "consistent",
+          "corpus_validated": true,
+          "historical_regime_context": false,
+          "requires_normative_review": false,
+          "requires_temporal_review": true,
+          "retrieval_eligible": true,
+          "operational_reuse_allowed": false
+        },
+        {
+          "rank": 3,
+          "situation_id": "U-CBR-SIT-004",
+          "source": "unam",
+          "primary_family_id": "CBR-CALCULO",
+          "similarity": 0.9625,
+          "existing_cbr_field_similarity": 0.9375,
+          "family_overlap_similarity": 1.0,
+          "taxonomy_overlap_similarity": 1.0,
+          "active_existing_cbr_fields": [
+            "taxpayer_type",
+            "activity",
+            "tax",
+            "problem_type",
+            "fiscal_year"
+          ],
+          "corpus_validation_outcome": "no_explicit_citation",
+          "corpus_validated": false,
+          "historical_regime_context": false,
+          "requires_normative_review": true,
+          "requires_temporal_review": true,
+          "retrieval_eligible": true,
+          "operational_reuse_allowed": false
+        },
+        {
+          "rank": 4,
+          "situation_id": "U-CBR-SIT-005",
+          "source": "unam",
+          "primary_family_id": "CBR-CALCULO",
+          "similarity": 0.9625,
+          "existing_cbr_field_similarity": 0.9375,
+          "family_overlap_similarity": 1.0,
+          "taxonomy_overlap_similarity": 1.0,
+          "active_existing_cbr_fields": [
+            "taxpayer_type",
+            "activity",
+            "tax",
+            "problem_type",
+            "fiscal_year"
+          ],
+          "corpus_validation_outcome": "consistent",
+          "corpus_validated": true,
+          "historical_regime_context": false,
+          "requires_normative_review": false,
+          "requires_temporal_review": true,
+          "retrieval_eligible": true,
+          "operational_reuse_allowed": false
+        },
+        {
+          "rank": 5,
+          "situation_id": "P-CBR-SIT-005",
+          "source": "prodecon",
+          "primary_family_id": "CBR-CALCULO",
+          "similarity": 0.95,
+          "existing_cbr_field_similarity": 1.0,
+          "family_overlap_similarity": 1.0,
+          "taxonomy_overlap_similarity": 0.666667,
+          "active_existing_cbr_fields": [
+            "problem_type"
+          ],
+          "corpus_validation_outcome": "consistent",
+          "corpus_validated": true,
+          "historical_regime_context": false,
+          "requires_normative_review": false,
+          "requires_temporal_review": true,
+          "retrieval_eligible": true,
+          "operational_reuse_allowed": false
+        }
+      ]
+    },
+    {
+      "situation_id": "U-CBR-SIT-004",
+      "candidate_count": 8,
+      "returned_count": 5,
+      "matches": [
+        {
+          "rank": 1,
+          "situation_id": "U-CBR-SIT-002",
+          "source": "unam",
+          "primary_family_id": "CBR-CALCULO",
+          "similarity": 1.0,
+          "existing_cbr_field_similarity": 1.0,
+          "family_overlap_similarity": 1.0,
+          "taxonomy_overlap_similarity": 1.0,
+          "active_existing_cbr_fields": [
+            "taxpayer_type",
+            "activity",
+            "tax",
+            "problem_type",
+            "fiscal_year"
+          ],
+          "corpus_validation_outcome": "consistent",
+          "corpus_validated": true,
+          "historical_regime_context": false,
+          "requires_normative_review": false,
+          "requires_temporal_review": true,
+          "retrieval_eligible": true,
+          "operational_reuse_allowed": false
+        },
+        {
+          "rank": 2,
+          "situation_id": "U-CBR-SIT-005",
+          "source": "unam",
+          "primary_family_id": "CBR-CALCULO",
+          "similarity": 1.0,
+          "existing_cbr_field_similarity": 1.0,
+          "family_overlap_similarity": 1.0,
+          "taxonomy_overlap_similarity": 1.0,
+          "active_existing_cbr_fields": [
+            "taxpayer_type",
+            "activity",
+            "tax",
+            "problem_type",
+            "fiscal_year"
+          ],
+          "corpus_validation_outcome": "consistent",
+          "corpus_validated": true,
+          "historical_regime_context": false,
+          "requires_normative_review": false,
+          "requires_temporal_review": true,
+          "retrieval_eligible": true,
+          "operational_reuse_allowed": false
+        },
+        {
+          "rank": 3,
+          "situation_id": "U-CBR-SIT-001",
+          "source": "unam",
+          "primary_family_id": "CBR-CALCULO",
+          "similarity": 0.9625,
+          "existing_cbr_field_similarity": 0.9375,
+          "family_overlap_similarity": 1.0,
+          "taxonomy_overlap_similarity": 1.0,
+          "active_existing_cbr_fields": [
+            "taxpayer_type",
+            "activity",
+            "tax",
+            "problem_type",
+            "fiscal_year"
+          ],
+          "corpus_validation_outcome": "consistent",
+          "corpus_validated": true,
+          "historical_regime_context": false,
+          "requires_normative_review": false,
+          "requires_temporal_review": true,
+          "retrieval_eligible": true,
+          "operational_reuse_allowed": false
+        },
+        {
+          "rank": 4,
+          "situation_id": "U-CBR-SIT-003",
+          "source": "unam",
+          "primary_family_id": "CBR-CALCULO",
+          "similarity": 0.9625,
+          "existing_cbr_field_similarity": 0.9375,
+          "family_overlap_similarity": 1.0,
+          "taxonomy_overlap_similarity": 1.0,
+          "active_existing_cbr_fields": [
+            "taxpayer_type",
+            "activity",
+            "tax",
+            "problem_type",
+            "fiscal_year"
+          ],
+          "corpus_validation_outcome": "consistent",
+          "corpus_validated": true,
+          "historical_regime_context": false,
+          "requires_normative_review": false,
+          "requires_temporal_review": true,
+          "retrieval_eligible": true,
+          "operational_reuse_allowed": false
+        },
+        {
+          "rank": 5,
+          "situation_id": "P-CBR-SIT-005",
+          "source": "prodecon",
+          "primary_family_id": "CBR-CALCULO",
+          "similarity": 0.95,
+          "existing_cbr_field_similarity": 1.0,
+          "family_overlap_similarity": 1.0,
+          "taxonomy_overlap_similarity": 0.666667,
+          "active_existing_cbr_fields": [
+            "problem_type"
+          ],
+          "corpus_validation_outcome": "consistent",
+          "corpus_validated": true,
+          "historical_regime_context": false,
+          "requires_normative_review": false,
+          "requires_temporal_review": true,
+          "retrieval_eligible": true,
+          "operational_reuse_allowed": false
+        }
+      ]
+    },
+    {
+      "situation_id": "U-CBR-SIT-005",
+      "candidate_count": 8,
+      "returned_count": 5,
+      "matches": [
+        {
+          "rank": 1,
+          "situation_id": "U-CBR-SIT-002",
+          "source": "unam",
+          "primary_family_id": "CBR-CALCULO",
+          "similarity": 1.0,
+          "existing_cbr_field_similarity": 1.0,
+          "family_overlap_similarity": 1.0,
+          "taxonomy_overlap_similarity": 1.0,
+          "active_existing_cbr_fields": [
+            "taxpayer_type",
+            "activity",
+            "tax",
+            "problem_type",
+            "fiscal_year"
+          ],
+          "corpus_validation_outcome": "consistent",
+          "corpus_validated": true,
+          "historical_regime_context": false,
+          "requires_normative_review": false,
+          "requires_temporal_review": true,
+          "retrieval_eligible": true,
+          "operational_reuse_allowed": false
+        },
+        {
+          "rank": 2,
+          "situation_id": "U-CBR-SIT-004",
+          "source": "unam",
+          "primary_family_id": "CBR-CALCULO",
+          "similarity": 1.0,
+          "existing_cbr_field_similarity": 1.0,
+          "family_overlap_similarity": 1.0,
+          "taxonomy_overlap_similarity": 1.0,
+          "active_existing_cbr_fields": [
+            "taxpayer_type",
+            "activity",
+            "tax",
+            "problem_type",
+            "fiscal_year"
+          ],
+          "corpus_validation_outcome": "no_explicit_citation",
+          "corpus_validated": false,
+          "historical_regime_context": false,
+          "requires_normative_review": true,
+          "requires_temporal_review": true,
+          "retrieval_eligible": true,
+          "operational_reuse_allowed": false
+        },
+        {
+          "rank": 3,
+          "situation_id": "U-CBR-SIT-001",
+          "source": "unam",
+          "primary_family_id": "CBR-CALCULO",
+          "similarity": 0.9625,
+          "existing_cbr_field_similarity": 0.9375,
+          "family_overlap_similarity": 1.0,
+          "taxonomy_overlap_similarity": 1.0,
+          "active_existing_cbr_fields": [
+            "taxpayer_type",
+            "activity",
+            "tax",
+            "problem_type",
+            "fiscal_year"
+          ],
+          "corpus_validation_outcome": "consistent",
+          "corpus_validated": true,
+          "historical_regime_context": false,
+          "requires_normative_review": false,
+          "requires_temporal_review": true,
+          "retrieval_eligible": true,
+          "operational_reuse_allowed": false
+        },
+        {
+          "rank": 4,
+          "situation_id": "U-CBR-SIT-003",
+          "source": "unam",
+          "primary_family_id": "CBR-CALCULO",
+          "similarity": 0.9625,
+          "existing_cbr_field_similarity": 0.9375,
+          "family_overlap_similarity": 1.0,
+          "taxonomy_overlap_similarity": 1.0,
+          "active_existing_cbr_fields": [
+            "taxpayer_type",
+            "activity",
+            "tax",
+            "problem_type",
+            "fiscal_year"
+          ],
+          "corpus_validation_outcome": "consistent",
+          "corpus_validated": true,
+          "historical_regime_context": false,
+          "requires_normative_review": false,
+          "requires_temporal_review": true,
+          "retrieval_eligible": true,
+          "operational_reuse_allowed": false
+        },
+        {
+          "rank": 5,
+          "situation_id": "P-CBR-SIT-005",
+          "source": "prodecon",
+          "primary_family_id": "CBR-CALCULO",
+          "similarity": 0.95,
+          "existing_cbr_field_similarity": 1.0,
+          "family_overlap_similarity": 1.0,
+          "taxonomy_overlap_similarity": 0.666667,
+          "active_existing_cbr_fields": [
+            "problem_type"
+          ],
+          "corpus_validation_outcome": "consistent",
+          "corpus_validated": true,
+          "historical_regime_context": false,
+          "requires_normative_review": false,
+          "requires_temporal_review": true,
+          "retrieval_eligible": true,
+          "operational_reuse_allowed": false
+        }
+      ]
+    },
+    {
+      "situation_id": "U-CBR-SIT-006",
+      "candidate_count": 12,
+      "returned_count": 5,
+      "matches": [
+        {
+          "rank": 1,
+          "situation_id": "P-CBR-SIT-009",
+          "source": "prodecon",
+          "primary_family_id": "CBR-CALCULO",
+          "similarity": 1.0,
+          "existing_cbr_field_similarity": 1.0,
+          "family_overlap_similarity": 1.0,
+          "taxonomy_overlap_similarity": 1.0,
+          "active_existing_cbr_fields": [
+            "taxpayer_type",
+            "tax",
+            "problem_type"
+          ],
+          "corpus_validation_outcome": "no_explicit_citation",
+          "corpus_validated": false,
+          "historical_regime_context": false,
+          "requires_normative_review": true,
+          "requires_temporal_review": true,
+          "retrieval_eligible": true,
+          "operational_reuse_allowed": false
+        },
+        {
+          "rank": 2,
+          "situation_id": "U-CBR-SIT-011",
+          "source": "unam",
+          "primary_family_id": "CBR-CALCULO",
+          "similarity": 1.0,
+          "existing_cbr_field_similarity": 1.0,
+          "family_overlap_similarity": 1.0,
+          "taxonomy_overlap_similarity": 1.0,
+          "active_existing_cbr_fields": [
+            "taxpayer_type",
+            "activity",
+            "tax",
+            "problem_type"
+          ],
+          "corpus_validation_outcome": "consistent",
+          "corpus_validated": true,
+          "historical_regime_context": false,
+          "requires_normative_review": false,
+          "requires_temporal_review": true,
+          "retrieval_eligible": true,
+          "operational_reuse_allowed": false
+        },
+        {
+          "rank": 3,
+          "situation_id": "P-CBR-SIT-005",
+          "source": "prodecon",
+          "primary_family_id": "CBR-CALCULO",
+          "similarity": 0.95,
+          "existing_cbr_field_similarity": 1.0,
+          "family_overlap_similarity": 1.0,
+          "taxonomy_overlap_similarity": 0.666667,
+          "active_existing_cbr_fields": [
+            "problem_type"
+          ],
+          "corpus_validation_outcome": "consistent",
+          "corpus_validated": true,
+          "historical_regime_context": false,
+          "requires_normative_review": false,
+          "requires_temporal_review": true,
+          "retrieval_eligible": true,
+          "operational_reuse_allowed": false
+        },
+        {
+          "rank": 4,
+          "situation_id": "P-CBR-SIT-006",
+          "source": "prodecon",
+          "primary_family_id": "CBR-CALCULO",
+          "similarity": 0.95,
+          "existing_cbr_field_similarity": 1.0,
+          "family_overlap_similarity": 1.0,
+          "taxonomy_overlap_similarity": 0.666667,
+          "active_existing_cbr_fields": [
+            "problem_type"
+          ],
+          "corpus_validation_outcome": "consistent",
+          "corpus_validated": true,
+          "historical_regime_context": false,
+          "requires_normative_review": false,
+          "requires_temporal_review": true,
+          "retrieval_eligible": true,
+          "operational_reuse_allowed": false
+        },
+        {
+          "rank": 5,
+          "situation_id": "P-CBR-SIT-019",
+          "source": "prodecon",
+          "primary_family_id": "CBR-CALCULO",
+          "similarity": 0.914286,
+          "existing_cbr_field_similarity": 1.0,
+          "family_overlap_similarity": 0.857143,
+          "taxonomy_overlap_similarity": 0.666667,
+          "active_existing_cbr_fields": [
+            "taxpayer_type",
+            "activity",
+            "tax",
+            "problem_type"
+          ],
+          "corpus_validation_outcome": "blocked_content_mismatch",
+          "corpus_validated": false,
+          "historical_regime_context": false,
+          "requires_normative_review": true,
+          "requires_temporal_review": true,
+          "retrieval_eligible": true,
+          "operational_reuse_allowed": false
+        }
+      ]
+    },
+    {
+      "situation_id": "U-CBR-SIT-007",
+      "candidate_count": 12,
+      "returned_count": 5,
+      "matches": [
+        {
+          "rank": 1,
+          "situation_id": "P-CBR-SIT-009",
+          "source": "prodecon",
+          "primary_family_id": "CBR-CALCULO",
+          "similarity": 1.0,
+          "existing_cbr_field_similarity": 1.0,
+          "family_overlap_similarity": 1.0,
+          "taxonomy_overlap_similarity": 1.0,
+          "active_existing_cbr_fields": [
+            "taxpayer_type",
+            "tax",
+            "problem_type"
+          ],
+          "corpus_validation_outcome": "no_explicit_citation",
+          "corpus_validated": false,
+          "historical_regime_context": false,
+          "requires_normative_review": true,
+          "requires_temporal_review": true,
+          "retrieval_eligible": true,
+          "operational_reuse_allowed": false
+        },
+        {
+          "rank": 2,
+          "situation_id": "P-CBR-SIT-005",
+          "source": "prodecon",
+          "primary_family_id": "CBR-CALCULO",
+          "similarity": 0.95,
+          "existing_cbr_field_similarity": 1.0,
+          "family_overlap_similarity": 1.0,
+          "taxonomy_overlap_similarity": 0.666667,
+          "active_existing_cbr_fields": [
+            "problem_type"
+          ],
+          "corpus_validation_outcome": "consistent",
+          "corpus_validated": true,
+          "historical_regime_context": false,
+          "requires_normative_review": false,
+          "requires_temporal_review": true,
+          "retrieval_eligible": true,
+          "operational_reuse_allowed": false
+        },
+        {
+          "rank": 3,
+          "situation_id": "P-CBR-SIT-006",
+          "source": "prodecon",
+          "primary_family_id": "CBR-CALCULO",
+          "similarity": 0.95,
+          "existing_cbr_field_similarity": 1.0,
+          "family_overlap_similarity": 1.0,
+          "taxonomy_overlap_similarity": 0.666667,
+          "active_existing_cbr_fields": [
+            "problem_type"
+          ],
+          "corpus_validation_outcome": "consistent",
+          "corpus_validated": true,
+          "historical_regime_context": false,
+          "requires_normative_review": false,
+          "requires_temporal_review": true,
+          "retrieval_eligible": true,
+          "operational_reuse_allowed": false
+        },
+        {
+          "rank": 4,
+          "situation_id": "U-CBR-SIT-006",
+          "source": "unam",
+          "primary_family_id": "CBR-CALCULO",
+          "similarity": 0.862857,
+          "existing_cbr_field_similarity": 0.771429,
+          "family_overlap_similarity": 1.0,
+          "taxonomy_overlap_similarity": 1.0,
+          "active_existing_cbr_fields": [
+            "taxpayer_type",
+            "activity",
+            "tax",
+            "problem_type"
+          ],
+          "corpus_validation_outcome": "consistent",
+          "corpus_validated": true,
+          "historical_regime_context": false,
+          "requires_normative_review": false,
+          "requires_temporal_review": true,
+          "retrieval_eligible": true,
+          "operational_reuse_allowed": false
+        },
+        {
+          "rank": 5,
+          "situation_id": "U-CBR-SIT-009",
+          "source": "unam",
+          "primary_family_id": "CBR-CALCULO",
+          "similarity": 0.862857,
+          "existing_cbr_field_similarity": 0.771429,
+          "family_overlap_similarity": 1.0,
+          "taxonomy_overlap_similarity": 1.0,
+          "active_existing_cbr_fields": [
+            "taxpayer_type",
+            "activity",
+            "tax",
+            "problem_type"
+          ],
+          "corpus_validation_outcome": "consistent",
+          "corpus_validated": true,
+          "historical_regime_context": false,
+          "requires_normative_review": false,
+          "requires_temporal_review": true,
+          "retrieval_eligible": true,
+          "operational_reuse_allowed": false
+        }
+      ]
+    },
+    {
+      "situation_id": "U-CBR-SIT-008",
+      "candidate_count": 2,
+      "returned_count": 2,
+      "matches": [
+        {
+          "rank": 1,
+          "situation_id": "P-CBR-SIT-023",
+          "source": "prodecon",
+          "primary_family_id": "CBR-CALCULO",
+          "similarity": 0.875325,
+          "existing_cbr_field_similarity": 0.792208,
+          "family_overlap_similarity": 1.0,
+          "taxonomy_overlap_similarity": 1.0,
+          "active_existing_cbr_fields": [
+            "taxpayer_type",
+            "activity",
+            "tax",
+            "problem_type"
+          ],
+          "corpus_validation_outcome": "blocked_derogated",
+          "corpus_validated": false,
+          "historical_regime_context": true,
+          "requires_normative_review": true,
+          "requires_temporal_review": true,
+          "retrieval_eligible": true,
+          "operational_reuse_allowed": false
+        },
+        {
+          "rank": 2,
+          "situation_id": "P-CBR-SIT-024",
+          "source": "prodecon",
+          "primary_family_id": "CBR-CALCULO",
+          "similarity": 0.875325,
+          "existing_cbr_field_similarity": 0.792208,
+          "family_overlap_similarity": 1.0,
+          "taxonomy_overlap_similarity": 1.0,
+          "active_existing_cbr_fields": [
+            "taxpayer_type",
+            "activity",
+            "tax",
+            "problem_type"
+          ],
+          "corpus_validation_outcome": "no_explicit_citation",
+          "corpus_validated": false,
+          "historical_regime_context": true,
+          "requires_normative_review": true,
+          "requires_temporal_review": true,
+          "retrieval_eligible": true,
+          "operational_reuse_allowed": false
+        }
+      ]
+    },
+    {
+      "situation_id": "U-CBR-SIT-009",
+      "candidate_count": 12,
+      "returned_count": 5,
+      "matches": [
+        {
+          "rank": 1,
+          "situation_id": "P-CBR-SIT-009",
+          "source": "prodecon",
+          "primary_family_id": "CBR-CALCULO",
+          "similarity": 1.0,
+          "existing_cbr_field_similarity": 1.0,
+          "family_overlap_similarity": 1.0,
+          "taxonomy_overlap_similarity": 1.0,
+          "active_existing_cbr_fields": [
+            "taxpayer_type",
+            "tax",
+            "problem_type"
+          ],
+          "corpus_validation_outcome": "no_explicit_citation",
+          "corpus_validated": false,
+          "historical_regime_context": false,
+          "requires_normative_review": true,
+          "requires_temporal_review": true,
+          "retrieval_eligible": true,
+          "operational_reuse_allowed": false
+        },
+        {
+          "rank": 2,
+          "situation_id": "P-CBR-SIT-005",
+          "source": "prodecon",
+          "primary_family_id": "CBR-CALCULO",
+          "similarity": 0.95,
+          "existing_cbr_field_similarity": 1.0,
+          "family_overlap_similarity": 1.0,
+          "taxonomy_overlap_similarity": 0.666667,
+          "active_existing_cbr_fields": [
+            "problem_type"
+          ],
+          "corpus_validation_outcome": "consistent",
+          "corpus_validated": true,
+          "historical_regime_context": false,
+          "requires_normative_review": false,
+          "requires_temporal_review": true,
+          "retrieval_eligible": true,
+          "operational_reuse_allowed": false
+        },
+        {
+          "rank": 3,
+          "situation_id": "P-CBR-SIT-006",
+          "source": "prodecon",
+          "primary_family_id": "CBR-CALCULO",
+          "similarity": 0.95,
+          "existing_cbr_field_similarity": 1.0,
+          "family_overlap_similarity": 1.0,
+          "taxonomy_overlap_similarity": 0.666667,
+          "active_existing_cbr_fields": [
+            "problem_type"
+          ],
+          "corpus_validation_outcome": "consistent",
+          "corpus_validated": true,
+          "historical_regime_context": false,
+          "requires_normative_review": false,
+          "requires_temporal_review": true,
+          "retrieval_eligible": true,
+          "operational_reuse_allowed": false
+        },
+        {
+          "rank": 4,
+          "situation_id": "U-CBR-SIT-006",
+          "source": "unam",
+          "primary_family_id": "CBR-CALCULO",
+          "similarity": 0.862857,
+          "existing_cbr_field_similarity": 0.771429,
+          "family_overlap_similarity": 1.0,
+          "taxonomy_overlap_similarity": 1.0,
+          "active_existing_cbr_fields": [
+            "taxpayer_type",
+            "activity",
+            "tax",
+            "problem_type"
+          ],
+          "corpus_validation_outcome": "consistent",
+          "corpus_validated": true,
+          "historical_regime_context": false,
+          "requires_normative_review": false,
+          "requires_temporal_review": true,
+          "retrieval_eligible": true,
+          "operational_reuse_allowed": false
+        },
+        {
+          "rank": 5,
+          "situation_id": "U-CBR-SIT-007",
+          "source": "unam",
+          "primary_family_id": "CBR-CALCULO",
+          "similarity": 0.862857,
+          "existing_cbr_field_similarity": 0.771429,
+          "family_overlap_similarity": 1.0,
+          "taxonomy_overlap_similarity": 1.0,
+          "active_existing_cbr_fields": [
+            "taxpayer_type",
+            "activity",
+            "tax",
+            "problem_type"
+          ],
+          "corpus_validation_outcome": "consistent",
+          "corpus_validated": true,
+          "historical_regime_context": false,
+          "requires_normative_review": false,
+          "requires_temporal_review": true,
+          "retrieval_eligible": true,
+          "operational_reuse_allowed": false
+        }
+      ]
+    },
+    {
+      "situation_id": "U-CBR-SIT-010",
+      "candidate_count": 12,
+      "returned_count": 5,
+      "matches": [
+        {
+          "rank": 1,
+          "situation_id": "P-CBR-SIT-009",
+          "source": "prodecon",
+          "primary_family_id": "CBR-CALCULO",
+          "similarity": 1.0,
+          "existing_cbr_field_similarity": 1.0,
+          "family_overlap_similarity": 1.0,
+          "taxonomy_overlap_similarity": 1.0,
+          "active_existing_cbr_fields": [
+            "taxpayer_type",
+            "tax",
+            "problem_type"
+          ],
+          "corpus_validation_outcome": "no_explicit_citation",
+          "corpus_validated": false,
+          "historical_regime_context": false,
+          "requires_normative_review": true,
+          "requires_temporal_review": true,
+          "retrieval_eligible": true,
+          "operational_reuse_allowed": false
+        },
+        {
+          "rank": 2,
+          "situation_id": "P-CBR-SIT-005",
+          "source": "prodecon",
+          "primary_family_id": "CBR-CALCULO",
+          "similarity": 0.95,
+          "existing_cbr_field_similarity": 1.0,
+          "family_overlap_similarity": 1.0,
+          "taxonomy_overlap_similarity": 0.666667,
+          "active_existing_cbr_fields": [
+            "problem_type"
+          ],
+          "corpus_validation_outcome": "consistent",
+          "corpus_validated": true,
+          "historical_regime_context": false,
+          "requires_normative_review": false,
+          "requires_temporal_review": true,
+          "retrieval_eligible": true,
+          "operational_reuse_allowed": false
+        },
+        {
+          "rank": 3,
+          "situation_id": "P-CBR-SIT-006",
+          "source": "prodecon",
+          "primary_family_id": "CBR-CALCULO",
+          "similarity": 0.95,
+          "existing_cbr_field_similarity": 1.0,
+          "family_overlap_similarity": 1.0,
+          "taxonomy_overlap_similarity": 0.666667,
+          "active_existing_cbr_fields": [
+            "problem_type"
+          ],
+          "corpus_validation_outcome": "consistent",
+          "corpus_validated": true,
+          "historical_regime_context": false,
+          "requires_normative_review": false,
+          "requires_temporal_review": true,
+          "retrieval_eligible": true,
+          "operational_reuse_allowed": false
+        },
+        {
+          "rank": 4,
+          "situation_id": "U-CBR-SIT-006",
+          "source": "unam",
+          "primary_family_id": "CBR-CALCULO",
+          "similarity": 0.862857,
+          "existing_cbr_field_similarity": 0.771429,
+          "family_overlap_similarity": 1.0,
+          "taxonomy_overlap_similarity": 1.0,
+          "active_existing_cbr_fields": [
+            "taxpayer_type",
+            "activity",
+            "tax",
+            "problem_type"
+          ],
+          "corpus_validation_outcome": "consistent",
+          "corpus_validated": true,
+          "historical_regime_context": false,
+          "requires_normative_review": false,
+          "requires_temporal_review": true,
+          "retrieval_eligible": true,
+          "operational_reuse_allowed": false
+        },
+        {
+          "rank": 5,
+          "situation_id": "U-CBR-SIT-007",
+          "source": "unam",
+          "primary_family_id": "CBR-CALCULO",
+          "similarity": 0.862857,
+          "existing_cbr_field_similarity": 0.771429,
+          "family_overlap_similarity": 1.0,
+          "taxonomy_overlap_similarity": 1.0,
+          "active_existing_cbr_fields": [
+            "taxpayer_type",
+            "activity",
+            "tax",
+            "problem_type"
+          ],
+          "corpus_validation_outcome": "consistent",
+          "corpus_validated": true,
+          "historical_regime_context": false,
+          "requires_normative_review": false,
+          "requires_temporal_review": true,
+          "retrieval_eligible": true,
+          "operational_reuse_allowed": false
+        }
+      ]
+    },
+    {
+      "situation_id": "U-CBR-SIT-011",
+      "candidate_count": 12,
+      "returned_count": 5,
+      "matches": [
+        {
+          "rank": 1,
+          "situation_id": "P-CBR-SIT-009",
+          "source": "prodecon",
+          "primary_family_id": "CBR-CALCULO",
+          "similarity": 1.0,
+          "existing_cbr_field_similarity": 1.0,
+          "family_overlap_similarity": 1.0,
+          "taxonomy_overlap_similarity": 1.0,
+          "active_existing_cbr_fields": [
+            "taxpayer_type",
+            "tax",
+            "problem_type"
+          ],
+          "corpus_validation_outcome": "no_explicit_citation",
+          "corpus_validated": false,
+          "historical_regime_context": false,
+          "requires_normative_review": true,
+          "requires_temporal_review": true,
+          "retrieval_eligible": true,
+          "operational_reuse_allowed": false
+        },
+        {
+          "rank": 2,
+          "situation_id": "U-CBR-SIT-006",
+          "source": "unam",
+          "primary_family_id": "CBR-CALCULO",
+          "similarity": 1.0,
+          "existing_cbr_field_similarity": 1.0,
+          "family_overlap_similarity": 1.0,
+          "taxonomy_overlap_similarity": 1.0,
+          "active_existing_cbr_fields": [
+            "taxpayer_type",
+            "activity",
+            "tax",
+            "problem_type"
+          ],
+          "corpus_validation_outcome": "consistent",
+          "corpus_validated": true,
+          "historical_regime_context": false,
+          "requires_normative_review": false,
+          "requires_temporal_review": true,
+          "retrieval_eligible": true,
+          "operational_reuse_allowed": false
+        },
+        {
+          "rank": 3,
+          "situation_id": "P-CBR-SIT-005",
+          "source": "prodecon",
+          "primary_family_id": "CBR-CALCULO",
+          "similarity": 0.95,
+          "existing_cbr_field_similarity": 1.0,
+          "family_overlap_similarity": 1.0,
+          "taxonomy_overlap_similarity": 0.666667,
+          "active_existing_cbr_fields": [
+            "problem_type"
+          ],
+          "corpus_validation_outcome": "consistent",
+          "corpus_validated": true,
+          "historical_regime_context": false,
+          "requires_normative_review": false,
+          "requires_temporal_review": true,
+          "retrieval_eligible": true,
+          "operational_reuse_allowed": false
+        },
+        {
+          "rank": 4,
+          "situation_id": "P-CBR-SIT-006",
+          "source": "prodecon",
+          "primary_family_id": "CBR-CALCULO",
+          "similarity": 0.95,
+          "existing_cbr_field_similarity": 1.0,
+          "family_overlap_similarity": 1.0,
+          "taxonomy_overlap_similarity": 0.666667,
+          "active_existing_cbr_fields": [
+            "problem_type"
+          ],
+          "corpus_validation_outcome": "consistent",
+          "corpus_validated": true,
+          "historical_regime_context": false,
+          "requires_normative_review": false,
+          "requires_temporal_review": true,
+          "retrieval_eligible": true,
+          "operational_reuse_allowed": false
+        },
+        {
+          "rank": 5,
+          "situation_id": "P-CBR-SIT-019",
+          "source": "prodecon",
+          "primary_family_id": "CBR-CALCULO",
+          "similarity": 0.914286,
+          "existing_cbr_field_similarity": 1.0,
+          "family_overlap_similarity": 0.857143,
+          "taxonomy_overlap_similarity": 0.666667,
+          "active_existing_cbr_fields": [
+            "taxpayer_type",
+            "activity",
+            "tax",
+            "problem_type"
+          ],
+          "corpus_validation_outcome": "blocked_content_mismatch",
+          "corpus_validated": false,
+          "historical_regime_context": false,
+          "requires_normative_review": true,
+          "requires_temporal_review": true,
+          "retrieval_eligible": true,
+          "operational_reuse_allowed": false
+        }
+      ]
+    },
+    {
+      "situation_id": "U-CBR-SIT-012",
+      "candidate_count": 5,
+      "returned_count": 5,
+      "matches": [
+        {
+          "rank": 1,
+          "situation_id": "P-CBR-SIT-005",
+          "source": "prodecon",
+          "primary_family_id": "CBR-CALCULO",
+          "similarity": 1.0,
+          "existing_cbr_field_similarity": 1.0,
+          "family_overlap_similarity": 1.0,
+          "taxonomy_overlap_similarity": 1.0,
+          "active_existing_cbr_fields": [
+            "problem_type"
+          ],
+          "corpus_validation_outcome": "consistent",
+          "corpus_validated": true,
+          "historical_regime_context": false,
+          "requires_normative_review": false,
+          "requires_temporal_review": true,
+          "retrieval_eligible": true,
+          "operational_reuse_allowed": false
+        },
+        {
+          "rank": 2,
+          "situation_id": "P-CBR-SIT-006",
+          "source": "prodecon",
+          "primary_family_id": "CBR-CALCULO",
+          "similarity": 1.0,
+          "existing_cbr_field_similarity": 1.0,
+          "family_overlap_similarity": 1.0,
+          "taxonomy_overlap_similarity": 1.0,
+          "active_existing_cbr_fields": [
+            "problem_type"
+          ],
+          "corpus_validation_outcome": "consistent",
+          "corpus_validated": true,
+          "historical_regime_context": false,
+          "requires_normative_review": false,
+          "requires_temporal_review": true,
+          "retrieval_eligible": true,
+          "operational_reuse_allowed": false
+        },
+        {
+          "rank": 3,
+          "situation_id": "P-CBR-SIT-010",
+          "source": "prodecon",
+          "primary_family_id": "CBR-CALCULO",
+          "similarity": 1.0,
+          "existing_cbr_field_similarity": 1.0,
+          "family_overlap_similarity": 1.0,
+          "taxonomy_overlap_similarity": 1.0,
+          "active_existing_cbr_fields": [
+            "tax",
+            "problem_type"
+          ],
+          "corpus_validation_outcome": "blocked_derogated",
+          "corpus_validated": false,
+          "historical_regime_context": false,
+          "requires_normative_review": true,
+          "requires_temporal_review": true,
+          "retrieval_eligible": true,
+          "operational_reuse_allowed": false
+        },
+        {
+          "rank": 4,
+          "situation_id": "P-CBR-SIT-001",
+          "source": "prodecon",
+          "primary_family_id": "CBR-CALCULO",
+          "similarity": 0.853571,
+          "existing_cbr_field_similarity": 1.0,
+          "family_overlap_similarity": 0.714286,
+          "taxonomy_overlap_similarity": 0.5,
+          "active_existing_cbr_fields": [
+            "problem_type"
+          ],
+          "corpus_validation_outcome": "consistent",
+          "corpus_validated": true,
+          "historical_regime_context": false,
+          "requires_normative_review": false,
+          "requires_temporal_review": true,
+          "retrieval_eligible": true,
+          "operational_reuse_allowed": false
+        },
+        {
+          "rank": 5,
+          "situation_id": "P-CBR-SIT-002",
+          "source": "prodecon",
+          "primary_family_id": "CBR-CALCULO",
+          "similarity": 0.853571,
+          "existing_cbr_field_similarity": 1.0,
+          "family_overlap_similarity": 0.714286,
+          "taxonomy_overlap_similarity": 0.5,
+          "active_existing_cbr_fields": [
+            "problem_type"
+          ],
+          "corpus_validation_outcome": "no_explicit_citation",
+          "corpus_validated": false,
+          "historical_regime_context": false,
+          "requires_normative_review": true,
+          "requires_temporal_review": true,
+          "retrieval_eligible": true,
+          "operational_reuse_allowed": false
+        }
+      ]
+    },
+    {
+      "situation_id": "U-CBR-SIT-013",
+      "candidate_count": 5,
+      "returned_count": 5,
+      "matches": [
+        {
+          "rank": 1,
+          "situation_id": "P-CBR-SIT-005",
+          "source": "prodecon",
+          "primary_family_id": "CBR-CALCULO",
+          "similarity": 1.0,
+          "existing_cbr_field_similarity": 1.0,
+          "family_overlap_similarity": 1.0,
+          "taxonomy_overlap_similarity": 1.0,
+          "active_existing_cbr_fields": [
+            "problem_type"
+          ],
+          "corpus_validation_outcome": "consistent",
+          "corpus_validated": true,
+          "historical_regime_context": false,
+          "requires_normative_review": false,
+          "requires_temporal_review": true,
+          "retrieval_eligible": true,
+          "operational_reuse_allowed": false
+        },
+        {
+          "rank": 2,
+          "situation_id": "P-CBR-SIT-006",
+          "source": "prodecon",
+          "primary_family_id": "CBR-CALCULO",
+          "similarity": 1.0,
+          "existing_cbr_field_similarity": 1.0,
+          "family_overlap_similarity": 1.0,
+          "taxonomy_overlap_similarity": 1.0,
+          "active_existing_cbr_fields": [
+            "problem_type"
+          ],
+          "corpus_validation_outcome": "consistent",
+          "corpus_validated": true,
+          "historical_regime_context": false,
+          "requires_normative_review": false,
+          "requires_temporal_review": true,
+          "retrieval_eligible": true,
+          "operational_reuse_allowed": false
+        },
+        {
+          "rank": 3,
+          "situation_id": "P-CBR-SIT-010",
+          "source": "prodecon",
+          "primary_family_id": "CBR-CALCULO",
+          "similarity": 1.0,
+          "existing_cbr_field_similarity": 1.0,
+          "family_overlap_similarity": 1.0,
+          "taxonomy_overlap_similarity": 1.0,
+          "active_existing_cbr_fields": [
+            "tax",
+            "problem_type"
+          ],
+          "corpus_validation_outcome": "blocked_derogated",
+          "corpus_validated": false,
+          "historical_regime_context": false,
+          "requires_normative_review": true,
+          "requires_temporal_review": true,
+          "retrieval_eligible": true,
+          "operational_reuse_allowed": false
+        },
+        {
+          "rank": 4,
+          "situation_id": "P-CBR-SIT-001",
+          "source": "prodecon",
+          "primary_family_id": "CBR-CALCULO",
+          "similarity": 0.853571,
+          "existing_cbr_field_similarity": 1.0,
+          "family_overlap_similarity": 0.714286,
+          "taxonomy_overlap_similarity": 0.5,
+          "active_existing_cbr_fields": [
+            "problem_type"
+          ],
+          "corpus_validation_outcome": "consistent",
+          "corpus_validated": true,
+          "historical_regime_context": false,
+          "requires_normative_review": false,
+          "requires_temporal_review": true,
+          "retrieval_eligible": true,
+          "operational_reuse_allowed": false
+        },
+        {
+          "rank": 5,
+          "situation_id": "P-CBR-SIT-002",
+          "source": "prodecon",
+          "primary_family_id": "CBR-CALCULO",
+          "similarity": 0.853571,
+          "existing_cbr_field_similarity": 1.0,
+          "family_overlap_similarity": 0.714286,
+          "taxonomy_overlap_similarity": 0.5,
+          "active_existing_cbr_fields": [
+            "problem_type"
+          ],
+          "corpus_validation_outcome": "no_explicit_citation",
+          "corpus_validated": false,
+          "historical_regime_context": false,
+          "requires_normative_review": true,
+          "requires_temporal_review": true,
+          "retrieval_eligible": true,
+          "operational_reuse_allowed": false
+        }
+      ]
+    }
+  ],
+  "extends_existing_cbr_similarity": true,
+  "replaces_existing_cbr_similarity": false,
+  "changes_existing_field_weights": false,
+  "changes_existing_retrieval_threshold": false,
+  "creates_operational_cases": false,
+  "can_control_legal_decision": false
+}

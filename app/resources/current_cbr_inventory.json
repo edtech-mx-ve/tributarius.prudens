@@ -1,0 +1,220 @@
+{
+  "schema_version": "1.0",
+  "baseline_commit": "b65dc014e57042ef4826354fa5ccb9b0610c0c4f",
+  "purpose": "Inventario C.1 del CBR preexistente que servirá de línea base para CBR Primario 1.0. Registra estructura, persistencia, similitud, recuperación, reutilización, seguridad, trazabilidad e integración híbrida sin redefinir ni modificar el motor actual.",
+  "components": [
+    {
+      "path": "app/domain/cbr.py",
+      "role": "domain",
+      "responsibility": "Modelos de caso, consulta, similitud, reutilización, revisión y retención CBR."
+    },
+    {
+      "path": "app/domain/cbr_trace.py",
+      "role": "trace_domain",
+      "responsibility": "Modelos estructurados para la trazabilidad de recuperación y reutilización CBR."
+    },
+    {
+      "path": "app/models/cbr.py",
+      "role": "persistence_model",
+      "responsibility": "Modelo SQLAlchemy persistente para la tabla cbr_cases."
+    },
+    {
+      "path": "app/repositories/cbr.py",
+      "role": "repository",
+      "responsibility": "Persistencia y recuperación de casos activos o históricos desde la base de datos."
+    },
+    {
+      "path": "app/services/cbr_anonymizer.py",
+      "role": "anonymization",
+      "responsibility": "Redacción básica de identificadores y obligación de revisión humana posterior."
+    },
+    {
+      "path": "app/services/cbr_loader.py",
+      "role": "loader",
+      "responsibility": "Carga segura de corpus JSONL anonimizado y previamente validado."
+    },
+    {
+      "path": "app/services/cbr_reasoning.py",
+      "role": "reuse_reasoning",
+      "responsibility": "Control de reutilización, compatibilidad normativa y adaptación humana de casos."
+    },
+    {
+      "path": "app/services/cbr_retention.py",
+      "role": "retention",
+      "responsibility": "Creación determinista de candidatos de retención sin activación automática."
+    },
+    {
+      "path": "app/services/cbr_traceability.py",
+      "role": "traceability",
+      "responsibility": "Construcción determinista y auditable de la traza del razonamiento CBR."
+    },
+    {
+      "path": "cbr/engine.py",
+      "role": "retrieval_engine",
+      "responsibility": "Recuperación y ranking de casos con umbral mínimo y coincidencia de campos críticos."
+    },
+    {
+      "path": "cbr/similarity.py",
+      "role": "similarity",
+      "responsibility": "Normalización textual y cálculo ponderado de similitud por siete campos."
+    },
+    {
+      "path": "migrations/versions/0002_cbr_cases.py",
+      "role": "migration",
+      "responsibility": "Migración de base de datos que crea la persistencia de casos CBR."
+    },
+    {
+      "path": "scripts/load_cbr_cases.py",
+      "role": "cli_loader",
+      "responsibility": "Comando para validar o persistir un corpus CBR JSONL."
+    },
+    {
+      "path": "scripts/retrieve_similar_cases.py",
+      "role": "cli_retrieval",
+      "responsibility": "Comando para ejecutar recuperación explicable de casos desde archivos."
+    },
+    {
+      "path": "app/services/hybrid_orchestrator.py",
+      "role": "hybrid_integration",
+      "responsibility": "Integra recuperación y evaluación CBR dentro del orquestador híbrido RBS-CBR."
+    },
+    {
+      "path": "app/domain/orchestration.py",
+      "role": "orchestration_contract",
+      "responsibility": "Expone la consulta y el resultado CBR dentro del contrato de orquestación."
+    },
+    {
+      "path": "cbr/fixtures/cases_test.jsonl",
+      "role": "fixture_cases",
+      "responsibility": "Tres casos sintéticos usados para validar recuperación, estados y revisión."
+    },
+    {
+      "path": "cbr/fixtures/query_test.json",
+      "role": "fixture_query",
+      "responsibility": "Consulta sintética reproducible usada por las pruebas del CBR actual."
+    }
+  ],
+  "case_schema_fields": [
+    "case_id",
+    "status",
+    "taxpayer_type",
+    "activity",
+    "tax",
+    "problem_type",
+    "authority_act",
+    "procedural_stage",
+    "fiscal_year",
+    "resolution_summary",
+    "normative_refs",
+    "source_refs",
+    "anonymized",
+    "validated"
+  ],
+  "query_schema_fields": [
+    "taxpayer_type",
+    "activity",
+    "tax",
+    "problem_type",
+    "authority_act",
+    "procedural_stage",
+    "fiscal_year",
+    "top_k"
+  ],
+  "case_statuses": [
+    "active",
+    "historical",
+    "superseded",
+    "invalidated"
+  ],
+  "retrievable_statuses": [
+    "active",
+    "historical"
+  ],
+  "non_retrievable_statuses": [
+    "superseded",
+    "invalidated"
+  ],
+  "similarity_fields": [
+    "taxpayer_type",
+    "activity",
+    "tax",
+    "problem_type",
+    "authority_act",
+    "procedural_stage",
+    "fiscal_year"
+  ],
+  "field_weights": {
+    "taxpayer_type": 0.18,
+    "activity": 0.16,
+    "tax": 0.18,
+    "problem_type": 0.18,
+    "authority_act": 0.1,
+    "procedural_stage": 0.1,
+    "fiscal_year": 0.1
+  },
+  "exact_fields": [
+    "taxpayer_type",
+    "tax"
+  ],
+  "semantic_token_fields": [
+    "activity",
+    "problem_type"
+  ],
+  "optional_exact_fields": [
+    "authority_act",
+    "procedural_stage"
+  ],
+  "critical_fields": [
+    "taxpayer_type",
+    "tax",
+    "problem_type"
+  ],
+  "minimum_retrieval_similarity": 0.6,
+  "minimum_reuse_similarity": 0.75,
+  "query_top_k_default": 5,
+  "query_top_k_minimum": 1,
+  "query_top_k_maximum": 20,
+  "cbr_loader_max_bytes": 5242880,
+  "query_loader_max_bytes": 65536,
+  "storage_table": "cbr_cases",
+  "fixture_cases_file": "cbr/fixtures/cases_test.jsonl",
+  "fixture_query_file": "cbr/fixtures/query_test.json",
+  "fixture_case_ids": [
+    "CASE-ISR-001",
+    "CASE-ISR-002",
+    "CASE-IVA-003"
+  ],
+  "fixture_case_count": 3,
+  "source_tree_operational_case_files": [],
+  "source_tree_operational_case_count": 0,
+  "runtime_database_case_count_known": false,
+  "requires_anonymized_cases": true,
+  "requires_validated_cases": true,
+  "anonymizer_identifier_types": [
+    "email",
+    "rfc",
+    "curp"
+  ],
+  "retention_candidate_status": "pending_review",
+  "retention_proposed_case_status": "historical",
+  "primary_knowledge_cbr_families": [
+    "CBR-AUTORIDAD",
+    "CBR-CALCULO",
+    "CBR-DEFENSA",
+    "CBR-DERECHOS",
+    "CBR-DEUDA",
+    "CBR-INCUMPLIMIENTO",
+    "CBR-INTERPRETACION",
+    "CBR-OBLIGACION",
+    "CBR-PERFIL",
+    "CBR-SUJETO",
+    "CBR-TEMPORALIDAD",
+    "CBR-TRIBUTO"
+  ],
+  "primary_knowledge_cbr_family_count": 12,
+  "primary_family_registry_present_at_baseline": false,
+  "hybrid_orchestrator_integrated": true,
+  "cbr_traceability_integrated": true,
+  "cbr_is_normative_authority": false,
+  "can_modify_existing_cbr": false
+}
