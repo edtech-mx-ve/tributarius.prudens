@@ -40,3 +40,7 @@ class WebJurisprudenceUploadResponse(BaseModel):
     page_count: int | None = Field(default=None, ge=1)
     warnings: list[str] = Field(default_factory=list)
     extracted_metadata: dict[str, object] | None = None
+    sha256: str | None = Field(default=None, pattern=r"^[a-f0-9]{64}$")
+    chunk_count: int | None = Field(default=None, ge=1)
+    source_scope: str | None = Field(default=None, pattern=r"^session$")
+    user_attached: bool | None = None

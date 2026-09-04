@@ -12,7 +12,12 @@ from app.services.hybrid_orchestrator import HybridOrchestrator
 from app.services.integral_legal_analyzer import build_integral_legal_analysis
 from app.services.legal_decision import build_legal_decision
 from app.services.traceability import build_canonical_result
-from app.web.jurisprudence_session import load_web_jurisprudence_session
+from app.web.jurisprudence_session import (
+    load_web_jurisprudence_normative_relation_record,
+    load_web_jurisprudence_ratio_record,
+    load_web_jurisprudence_session,
+    load_web_jurisprudence_temporal_record,
+)
 from app.web.presenter import (
     present_canonical_result,
     present_integral_legal_analysis,
@@ -33,19 +38,29 @@ def _explanation_mode(mode: str) -> ExplanationMode:
 def _present_session_jurisprudence(
     result: SessionJurisprudenceHybridResult,
 ) -> list[dict[str, object | None]]:
-    metadata_by_document_id = {
-        item.document_id: item for item in result.applicability
+    applicability_by_page = {
+        (item.document_id, item.page_number): item for item in result.applicability
     }
+    integration_by_ref = {}
+    if result.evidence_integration is not None:
+        integration_by_ref = {
+            item.evidence_ref: item for item in result.evidence_integration.assessments
+        }
+
     items: list[dict[str, object | None]] = []
     for hit in result.retrieval.hits:
-        assessment = metadata_by_document_id.get(hit.document_id)
+        assessment = applicability_by_page.get((hit.document_id, hit.page_number))
         if assessment is None:
+            continue
+        ref_id = f"session-jurisprudence:{hit.document_id}:page:{hit.page_number}"
+        integration = integration_by_ref.get(ref_id)
+        if result.evidence_integration is not None and (
+            integration is None or not integration.authorized_for_evidence
+        ):
             continue
         items.append(
             {
-                "ref_id": (
-                    f"session-jurisprudence:{hit.document_id}:page:{hit.page_number}"
-                ),
+                "ref_id": ref_id,
                 "kind": "jurisprudence",
                 "role": "jurisprudence",
                 "source_type": "jurisprudencia",
@@ -58,7 +73,19 @@ def _present_session_jurisprudence(
                 "snippet": hit.text,
                 "applicable_candidate": assessment.applicable_candidate,
                 "relation_type": assessment.relation_type.value,
-                "requires_human_review": assessment.requires_human_review,
+                "authorized_for_evidence": (
+                    integration.authorized_for_evidence
+                    if integration is not None
+                    else assessment.applicable_candidate
+                ),
+                "evidence_decision": (
+                    integration.decision.value if integration is not None else None
+                ),
+                "requires_human_review": (
+                    integration.requires_human_review
+                    if integration is not None
+                    else assessment.requires_human_review
+                ),
             }
         )
     return items
@@ -75,12 +102,32 @@ class WebHybridRunner:
     def run(self, request: WebConsultationRequest) -> dict[str, object]:
         session_documents = []
         session_metadata = {}
+        session_normative_relations = {}
+        session_temporal_records = {}
+        session_ratio_records = {}
         if request.jurisprudence_session_id is not None:
             representation, metadata = load_web_jurisprudence_session(
                 request.jurisprudence_session_id
             )
             session_documents = [representation]
             session_metadata = {representation.document_id: metadata}
+            normative_relation = load_web_jurisprudence_normative_relation_record(
+                request.jurisprudence_session_id
+            )
+            temporal_record = load_web_jurisprudence_temporal_record(
+                request.jurisprudence_session_id
+            )
+            ratio_record = load_web_jurisprudence_ratio_record(
+                request.jurisprudence_session_id
+            )
+            if normative_relation is not None:
+                session_normative_relations[representation.document_id] = (
+                    normative_relation
+                )
+            if temporal_record is not None:
+                session_temporal_records[representation.document_id] = temporal_record
+            if ratio_record is not None:
+                session_ratio_records[representation.document_id] = ratio_record
 
         orchestration_request = HybridOrchestrationRequest(
             query=request.query,
@@ -90,6 +137,9 @@ class WebHybridRunner:
             explanation_mode=_explanation_mode(request.mode),
             session_jurisprudence_documents=session_documents,
             session_jurisprudence_metadata=session_metadata,
+            session_jurisprudence_normative_relations=session_normative_relations,
+            session_jurisprudence_temporal_records=session_temporal_records,
+            session_jurisprudence_ratio_records=session_ratio_records,
         )
         result = run_hybrid_with_session_jurisprudence(
             self.orchestrator,
@@ -111,15 +161,32 @@ class WebHybridRunner:
                 _present_session_jurisprudence(result.session_jurisprudence_result)
             )
             presented["evidence"] = evidence
+            integration = result.session_jurisprudence_result.evidence_integration
             presented["session_jurisprudence"] = {
                 "returned_count": (
                     result.session_jurisprudence_result.retrieval.returned_count
+                ),
+                "admitted_evidence_count": (
+                    integration.admitted_count if integration is not None else None
+                ),
+                "review_only_count": (
+                    integration.review_only_count if integration is not None else None
+                ),
+                "rejected_count": (
+                    integration.rejected_count if integration is not None else None
                 ),
                 "requires_human_review": (
                     result.session_jurisprudence_result.requires_human_review
                 ),
                 "has_conflict": (
                     result.session_jurisprudence_result.relations.has_conflict
+                ),
+                "e6_application": (
+                    result.session_jurisprudence_result.decision_application.model_dump(
+                        mode="json"
+                    )
+                    if result.session_jurisprudence_result.decision_application is not None
+                    else None
                 ),
             }
 

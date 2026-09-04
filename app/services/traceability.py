@@ -107,11 +107,14 @@ def _stage_review(
 def _session_jurisprudence_event_refs(
     result: HybridOrchestrationResult,
 ) -> list[str]:
-    if result.session_jurisprudence_result is None:
+    session = result.session_jurisprudence_result
+    if session is None:
         return []
+    if session.evidence_integration is not None:
+        return list(session.evidence_integration.authorized_evidence_refs)
     return [
         f"session-jurisprudence:{hit.document_id}:page:{hit.page_number}"
-        for hit in result.session_jurisprudence_result.retrieval.hits
+        for hit in session.retrieval.hits
     ]
 
 
@@ -283,7 +286,9 @@ def _jurisprudence_evidence(
             for hit in result.jurisprudence_result.hits
         )
 
-    if result.session_jurisprudence_result is not None:
+    session = result.session_jurisprudence_result
+    if session is not None:
+        authorized = set(_session_jurisprudence_event_refs(result))
         refs.extend(
             EvidenceReference(
                 ref_id=(
@@ -295,7 +300,11 @@ def _jurisprudence_evidence(
                 version="session",
                 score=hit.score,
             )
-            for hit in result.session_jurisprudence_result.retrieval.hits
+            for hit in session.retrieval.hits
+            if (
+                f"session-jurisprudence:{hit.document_id}:page:{hit.page_number}"
+                in authorized
+            )
         )
 
     return refs
@@ -398,6 +407,21 @@ def _uncertainties(
                         requires_human_review=True,
                     )
                 )
+        integration = result.session_jurisprudence_result.evidence_integration
+        if integration is not None:
+            for evidence_assessment in integration.assessments:
+                if not evidence_assessment.authorized_for_evidence:
+                    items.append(
+                        UncertaintyItem(
+                            code="SESSION_JURISPRUDENCE_EVIDENCE_GATE",
+                            message=(
+                                f"{evidence_assessment.evidence_ref}: "
+                                f"{', '.join(evidence_assessment.reasons)}"
+                            ),
+                            stage="jurisprudence",
+                            requires_human_review=True,
+                        )
+                    )
         if result.session_jurisprudence_result.relations.has_conflict:
             items.append(
                 UncertaintyItem(

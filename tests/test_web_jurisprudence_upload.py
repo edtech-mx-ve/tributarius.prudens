@@ -1,4 +1,5 @@
 from pathlib import Path
+from types import SimpleNamespace
 
 import pytest
 
@@ -7,6 +8,7 @@ from app.domain.jurisprudence_document import (
     JurisprudencePage,
 )
 from app.domain.jurisprudence_extraction import JurisprudenceExtractedMetadata
+from app.domain.jurisprudence_ingestion import JurisprudenceIngestionReceipt
 from app.web.jurisprudence_upload import (
     WebJurisprudenceUploadError,
     process_web_jurisprudence_upload,
@@ -83,13 +85,24 @@ def test_upload_uses_isolated_session_directory(
         requires_human_review=True,
     )
 
-    def fake_ingest(path: Path, session_dir: Path) -> FakeProcessed:
+    receipt = JurisprudenceIngestionReceipt(
+        jurisprudence_document_id="jurisprudencia-test",
+        original_filename="criterio.pdf",
+        source_sha256="a" * 64,
+        text_extracted=True,
+        extracted_characters=18,
+        page_count=1,
+        chunk_count=1,
+        processed_at_utc="2026-09-03T00:00:00+00:00",
+    )
+
+    def fake_ingest(path: Path, session_dir: Path) -> SimpleNamespace:
         captured["path"] = path
         captured["session_dir"] = session_dir
-        return FakeProcessed()
+        return SimpleNamespace(document=FakeProcessed(), receipt=receipt)
 
     monkeypatch.setattr(
-        "app.web.jurisprudence_upload.ingest_jurisprudence_pdf",
+        "app.web.jurisprudence_upload.ingest_jurisprudence_pdf_with_trace",
         fake_ingest,
     )
     monkeypatch.setattr(
@@ -101,7 +114,7 @@ def test_upload_uses_isolated_session_directory(
         lambda document: extracted,
     )
 
-    session_id, result_representation, result_metadata = (
+    session_id, result_representation, result_metadata, result_receipt = (
         process_web_jurisprudence_upload(
             content=b"%PDF-1.4 test",
             filename="../criterio.pdf",
@@ -114,4 +127,5 @@ def test_upload_uses_isolated_session_directory(
     assert captured["path"].name == "criterio.pdf"
     assert result_representation is representation
     assert result_metadata is extracted
+    assert result_receipt is receipt
     assert (captured["session_dir"] / "session-jurisprudence.json").exists()

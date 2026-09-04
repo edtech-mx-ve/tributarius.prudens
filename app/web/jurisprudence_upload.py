@@ -1,16 +1,32 @@
 from __future__ import annotations
 
 import re
+import shutil
 from pathlib import Path
 from tempfile import gettempdir
 from uuid import uuid4
 
 from app.domain.jurisprudence_document import JurisprudenceDocumentRepresentation
 from app.domain.jurisprudence_extraction import JurisprudenceExtractedMetadata
-from app.services.document_pipeline import MAX_PDF_SIZE_BYTES, InvalidDocumentError
-from app.services.jurisprudence_ingestion import ingest_jurisprudence_pdf
-from app.services.jurisprudence_metadata_extraction import extract_jurisprudence_metadata
-from app.services.jurisprudence_representation import represent_jurisprudence_document
+from app.domain.jurisprudence_ingestion import JurisprudenceIngestionReceipt
+from app.services.document_pipeline import MAX_PDF_SIZE_BYTES, DocumentPipelineError
+from app.services.jurisprudence_ingestion import ingest_jurisprudence_pdf_with_trace
+from app.services.jurisprudence_metadata_extraction import (
+    build_jurisprudence_metadata_record,
+    extract_jurisprudence_metadata,
+)
+from app.services.jurisprudence_normative_relations import (
+    build_jurisprudence_normative_relation_record,
+)
+from app.services.jurisprudence_ratio import build_jurisprudence_ratio_record
+from app.services.jurisprudence_representation import (
+    JurisprudenceRepresentationError,
+    represent_jurisprudence_document,
+)
+from app.services.jurisprudence_temporal_control import (
+    build_jurisprudence_temporal_record,
+)
+from app.services.legal_chunker import ChunkingError
 from app.web.jurisprudence_session import save_web_jurisprudence_session
 
 _SAFE_FILENAME_RE = re.compile(r"[^A-Za-z0-9._-]+")
@@ -39,6 +55,7 @@ def process_web_jurisprudence_upload(
     str,
     JurisprudenceDocumentRepresentation,
     JurisprudenceExtractedMetadata,
+    JurisprudenceIngestionReceipt,
 ]:
     """Procesa y registra un PDF jurisprudencial dentro de una sesión temporal."""
 
@@ -59,16 +76,37 @@ def process_web_jurisprudence_upload(
     pdf_path.write_bytes(content)
 
     try:
-        processed = ingest_jurisprudence_pdf(pdf_path, session_dir)
+        ingestion = ingest_jurisprudence_pdf_with_trace(pdf_path, session_dir)
+        processed = ingestion.document
         representation = represent_jurisprudence_document(processed)
         extracted = extract_jurisprudence_metadata(representation)
+        metadata_record = build_jurisprudence_metadata_record(
+            representation, extracted=extracted
+        )
+        normative_relation_record = build_jurisprudence_normative_relation_record(
+            representation, metadata_record=metadata_record
+        )
+        temporal_record = build_jurisprudence_temporal_record(metadata_record)
+        ratio_record = build_jurisprudence_ratio_record(metadata_record)
         save_web_jurisprudence_session(
             session_id=session_id,
             representation=representation,
             metadata=extracted,
+            ingestion_receipt=ingestion.receipt,
+            metadata_record=metadata_record,
+            normative_relation_record=normative_relation_record,
+            temporal_record=temporal_record,
+            ratio_record=ratio_record,
             temp_root=base,
         )
-    except InvalidDocumentError as exc:
-        raise WebJurisprudenceUploadError(str(exc)) from exc
+    except (
+        DocumentPipelineError,
+        ChunkingError,
+        JurisprudenceRepresentationError,
+        OSError,
+    ) as exc:
+        shutil.rmtree(session_dir, ignore_errors=True)
+        detail = str(exc).strip() or "No fue posible ingerir el PDF jurisprudencial."
+        raise WebJurisprudenceUploadError(detail) from exc
 
-    return session_id, representation, extracted
+    return session_id, representation, extracted, ingestion.receipt

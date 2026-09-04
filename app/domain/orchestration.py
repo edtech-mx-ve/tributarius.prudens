@@ -15,6 +15,11 @@ from app.domain.jurisprudence import JurisprudenceRetrievalResult
 from app.domain.jurisprudence_document import JurisprudenceDocumentRepresentation
 from app.domain.jurisprudence_extraction import JurisprudenceExtractedMetadata
 from app.domain.jurisprudence_hybrid import SessionJurisprudenceHybridResult
+from app.domain.jurisprudence_normative_relations import (
+    JurisprudenceNormativeRelationRecord,
+)
+from app.domain.jurisprudence_ratio import JurisprudenceRatioRecord
+from app.domain.jurisprudence_temporal import JurisprudenceTemporalRecord
 from app.domain.legal_heuristics import LegalHeuristicEvaluation
 from app.domain.legal_hypothesis import ControlledLegalHypothesisResult
 from app.domain.legal_hypothesis_verification import (
@@ -120,6 +125,15 @@ class HybridOrchestrationRequest(BaseModel):
     )
     session_jurisprudence_metadata: dict[str, JurisprudenceExtractedMetadata] = Field(
         default_factory=dict,
+    )
+    session_jurisprudence_normative_relations: dict[
+        str, JurisprudenceNormativeRelationRecord
+    ] = Field(default_factory=dict)
+    session_jurisprudence_temporal_records: dict[
+        str, JurisprudenceTemporalRecord
+    ] = Field(default_factory=dict)
+    session_jurisprudence_ratio_records: dict[str, JurisprudenceRatioRecord] = Field(
+        default_factory=dict
     )
 
 

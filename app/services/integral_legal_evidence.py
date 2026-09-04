@@ -53,19 +53,24 @@ def _cbr(result: HybridOrchestrationResult) -> IntegralLegalEvidenceItem:
 def _jurisprudence(
     result: HybridOrchestrationResult,
 ) -> IntegralLegalEvidenceItem:
-    jurisprudence = result.jurisprudence_result
-    if jurisprudence is None:
-        return IntegralLegalEvidenceItem(
-            channel=IntegralLegalEvidenceChannel.JURISPRUDENCE,
-            present=False,
-        )
+    refs: list[str] = []
+    review = False
 
-    refs = [hit.metadata.identifier for hit in jurisprudence.hits]
+    jurisprudence = result.jurisprudence_result
+    if jurisprudence is not None:
+        refs.extend(hit.metadata.identifier for hit in jurisprudence.hits)
+        review = review or jurisprudence.requires_human_review
+
+    session = result.session_jurisprudence_result
+    if session is not None:
+        refs.extend(session.evidence)
+        review = review or session.requires_human_review
+
     return IntegralLegalEvidenceItem(
         channel=IntegralLegalEvidenceChannel.JURISPRUDENCE,
         present=bool(refs),
-        references=refs,
-        requires_human_review=jurisprudence.requires_human_review,
+        references=list(dict.fromkeys(refs)),
+        requires_human_review=review,
     )
 
 

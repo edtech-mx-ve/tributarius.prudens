@@ -10,6 +10,7 @@ from app.domain.jurisprudence_document import (
     JurisprudencePage,
 )
 from app.domain.jurisprudence_extraction import JurisprudenceExtractedMetadata
+from app.domain.jurisprudence_ingestion import JurisprudenceIngestionReceipt
 from app.main import app
 from app.web.dependencies import get_web_consultation_service
 from app.web.schemas import WebConsultationRequest, WebConsultationResponse
@@ -90,6 +91,19 @@ def _metadata() -> JurisprudenceExtractedMetadata:
     )
 
 
+def _ingestion_receipt() -> JurisprudenceIngestionReceipt:
+    return JurisprudenceIngestionReceipt(
+        jurisprudence_document_id=DOCUMENT_ID,
+        original_filename="criterio.pdf",
+        source_sha256=SHA256,
+        text_extracted=True,
+        extracted_characters=44,
+        page_count=1,
+        chunk_count=1,
+        processed_at_utc="2026-09-03T00:00:00+00:00",
+    )
+
+
 def _client(service: FakeWebService) -> TestClient:
     app.dependency_overrides[get_web_consultation_service] = lambda: service
     return TestClient(app)
@@ -119,7 +133,9 @@ def test_e2e_upload_pdf_returns_temporal_session(
     monkeypatch.setattr(
         web_route,
         "process_web_jurisprudence_upload",
-        lambda **kwargs: (SESSION_ID, _representation(), _metadata()),
+        lambda **kwargs: (
+            SESSION_ID, _representation(), _metadata(), _ingestion_receipt()
+        ),
     )
 
     try:
@@ -142,6 +158,10 @@ def test_e2e_upload_pdf_returns_temporal_session(
     assert payload["document_id"] == DOCUMENT_ID
     assert payload["filename"] == "criterio.pdf"
     assert payload["page_count"] == 1
+    assert payload["sha256"] == SHA256
+    assert payload["chunk_count"] == 1
+    assert payload["source_scope"] == "session"
+    assert payload["user_attached"] is True
 
 
 def test_e2e_uploaded_session_reaches_consultation_and_evidence() -> None:
@@ -245,7 +265,9 @@ def test_e2e_cross_origin_upload_is_rejected(
     monkeypatch.setattr(
         web_route,
         "process_web_jurisprudence_upload",
-        lambda **kwargs: (SESSION_ID, _representation(), _metadata()),
+        lambda **kwargs: (
+            SESSION_ID, _representation(), _metadata(), _ingestion_receipt()
+        ),
     )
 
     try:

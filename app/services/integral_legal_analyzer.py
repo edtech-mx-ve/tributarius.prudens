@@ -96,6 +96,12 @@ def build_integral_legal_analysis(
         controlling_source=_controlling_source(result),
         analysis_priority=_analysis_priority(result),
         evidence_map=evidence_map,
+        jurisprudence_application=(
+            result.session_jurisprudence_result.decision_application.model_copy(deep=True)
+            if result.session_jurisprudence_result is not None
+            and result.session_jurisprudence_result.decision_application is not None
+            else None
+        ),
         readiness=readiness,
         requires_human_review=result.requires_human_review,
         status=_status(result, readiness.evidentiary_sufficiency),

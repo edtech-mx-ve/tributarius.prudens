@@ -10,6 +10,12 @@ from app.domain.orchestration import (
     StageTrace,
 )
 from app.services.jurisprudence_applicability import JurisprudenceApplicabilityError
+from app.services.jurisprudence_decision_application import (
+    evaluate_jurisprudence_for_legal_decision,
+)
+from app.services.jurisprudence_evidence_integration import (
+    JurisprudenceEvidenceIntegrationError,
+)
 from app.services.jurisprudence_hybrid_stage import run_session_jurisprudence_stage
 from app.services.query_fact_compat_19s_r15 import query_fact_value
 from jurisprudence.retrieval import JurisprudenceRetrievalError
@@ -37,8 +43,18 @@ def run_hybrid_with_session_jurisprudence(
             applicable_normative_refs=set(base_result.applicable_normative_refs),
             matter=query_fact_value(base_result.analysis.facts, "matter"),
             top_k=request.top_k,
+            normative_relation_records=(
+                request.session_jurisprudence_normative_relations
+            ),
+            temporal_records=request.session_jurisprudence_temporal_records,
+            ratio_records=request.session_jurisprudence_ratio_records,
+            query_date=request.query_date,
         )
-    except (JurisprudenceRetrievalError, JurisprudenceApplicabilityError):
+    except (
+        JurisprudenceRetrievalError,
+        JurisprudenceApplicabilityError,
+        JurisprudenceEvidenceIntegrationError,
+    ):
         return base_result.model_copy(
             update={
                 "traces": [
@@ -56,8 +72,31 @@ def run_hybrid_with_session_jurisprudence(
             }
         )
 
+    decision_application = evaluate_jurisprudence_for_legal_decision(
+        analysis=base_result.analysis,
+        session_result=session_result,
+        ratio_records=request.session_jurisprudence_ratio_records,
+        normative_relation_records=request.session_jurisprudence_normative_relations,
+    )
+    e6_requires_review = (
+        decision_application.requires_human_review
+        if decision_application.assessments
+        else session_result.requires_human_review
+    )
+    session_result = session_result.model_copy(
+        update={
+            "decision_application": decision_application,
+            "requires_human_review": e6_requires_review,
+        }
+    )
+
     applicable_count = sum(
         item.applicable_candidate for item in session_result.applicability
+    )
+    admitted_count = (
+        session_result.evidence_integration.admitted_count
+        if session_result.evidence_integration is not None
+        else len(session_result.evidence)
     )
 
     return base_result.model_copy(
@@ -71,7 +110,9 @@ def run_hybrid_with_session_jurisprudence(
                     detail=(
                         "Jurisprudencia temporal evaluada: "
                         f"{session_result.retrieval.returned_count} resultado(s); "
-                        f"candidatos aplicables={applicable_count}."
+                        f"candidatos previos={applicable_count}; "
+                        f"evidencia E.5 admitida={admitted_count}; "
+                        f"aplicación E.6={len(decision_application.applicable_document_ids)}."
                     ),
                 ),
             ],

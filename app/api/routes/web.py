@@ -50,9 +50,11 @@ async def upload_session_jurisprudence(
 ) -> WebJurisprudenceUploadResponse:
     content = await request.body()
     try:
-        session_id, representation, metadata = process_web_jurisprudence_upload(
-            content=content,
-            filename=x_filename,
+        session_id, representation, metadata, ingestion_receipt = (
+            process_web_jurisprudence_upload(
+                content=content,
+                filename=x_filename,
+            )
         )
     except WebJurisprudenceUploadError as exc:
         return WebJurisprudenceUploadResponse(
@@ -69,6 +71,10 @@ async def upload_session_jurisprudence(
         page_count=representation.page_count,
         warnings=[*representation.warnings, *metadata.warnings],
         extracted_metadata=metadata.model_dump(mode="json"),
+        sha256=ingestion_receipt.source_sha256,
+        chunk_count=ingestion_receipt.chunk_count,
+        source_scope=ingestion_receipt.source_scope.value,
+        user_attached=ingestion_receipt.user_attached,
     )
 
 

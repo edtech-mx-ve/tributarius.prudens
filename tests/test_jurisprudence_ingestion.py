@@ -42,6 +42,7 @@ def test_ingestion_forces_jurisprudence_source_type(
     monkeypatch.setattr(jurisprudence_ingestion, "process_pdf", fake_process_pdf)
 
     pdf_path = tmp_path / "criterio.pdf"
+    pdf_path.write_bytes(b"%PDF-1.4\ntributarius-test")
     session_dir = tmp_path / "session"
 
     with pytest.raises(RuntimeError, match="sentinel"):

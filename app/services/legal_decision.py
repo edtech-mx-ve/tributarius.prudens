@@ -60,6 +60,11 @@ def build_legal_decision(analysis: IntegralLegalAnalysis) -> LegalDecision:
         controlling_source=analysis.controlling_source,
         analysis_priority=list(analysis.analysis_priority),
         evidence_map=analysis.evidence_map.model_copy(deep=True),
+        jurisprudence_application=(
+            analysis.jurisprudence_application.model_copy(deep=True)
+            if analysis.jurisprudence_application is not None
+            else None
+        ),
         readiness=analysis.readiness.model_copy(deep=True),
         requires_human_review=analysis.requires_human_review,
         status=_decision_status(analysis),

@@ -8,6 +8,9 @@ from app.domain.integral_legal_analysis import IntegralLegalIssue
 from app.domain.integral_legal_evidence import IntegralLegalEvidenceMap
 from app.domain.integral_legal_readiness import LegalAnalysisReadiness
 from app.domain.isr import ISRCalculationResult
+from app.domain.jurisprudence_decision_application import (
+    JurisprudenceDecisionApplicationRecord,
+)
 from app.domain.legal_consequences import LegalConsequences
 from app.domain.legal_fact_assessment import LegalFactAssessment
 from app.domain.legal_reasoning_chain import LegalReasoningChain
@@ -46,6 +49,7 @@ class LegalDecision(BaseModel):
     controlling_source: str | None = Field(default=None, max_length=100)
     analysis_priority: list[str] = Field(default_factory=list, max_length=100)
     evidence_map: IntegralLegalEvidenceMap
+    jurisprudence_application: JurisprudenceDecisionApplicationRecord | None = None
     readiness: LegalAnalysisReadiness
     requires_human_review: bool = False
     status: LegalDecisionStatus

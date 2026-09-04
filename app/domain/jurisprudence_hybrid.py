@@ -5,6 +5,10 @@ from pydantic import BaseModel, ConfigDict, Field
 from app.domain.jurisprudence_applicability import (
     SessionJurisprudenceApplicabilityAssessment,
 )
+from app.domain.jurisprudence_decision_application import (
+    JurisprudenceDecisionApplicationRecord,
+)
+from app.domain.jurisprudence_evidence import JurisprudenceEvidenceIntegrationRecord
 from app.domain.jurisprudence_relations import JurisprudenceConflictAnalysis
 from app.domain.jurisprudence_session_retrieval import (
     SessionJurisprudenceRetrievalResult,
@@ -21,5 +25,7 @@ class SessionJurisprudenceHybridResult(BaseModel):
         default_factory=list
     )
     relations: JurisprudenceConflictAnalysis
+    evidence_integration: JurisprudenceEvidenceIntegrationRecord | None = None
+    decision_application: JurisprudenceDecisionApplicationRecord | None = None
     evidence: list[str] = Field(default_factory=list)
     requires_human_review: bool
