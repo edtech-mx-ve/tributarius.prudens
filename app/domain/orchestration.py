@@ -6,8 +6,15 @@ from enum import StrEnum
 from pydantic import BaseModel, Field, model_validator
 
 from app.domain.cbr import CBRQuery, CBRRetrievalResult, CBRReuseAssessment
+from app.domain.cbr_h1_contrast import CBRH1ContrastResult
 from app.domain.documents import SourceType
 from app.domain.hybrid_coordination import HybridCoordinationResult
+from app.domain.hybrid_legal_coordination import HybridLegalCoordinationResult
+from app.domain.hybrid_legal_verification import HybridLegalVerificationResult
+from app.domain.hybrid_llama_hypotheses import (
+    FiscalHypothesisH1Result,
+    JurisprudentialRatioH2Result,
+)
 from app.domain.hybrid_reasoning import NormalizedReasoningResult
 from app.domain.isr import ISRCalculationInput, ISRCalculationResult
 from app.domain.isr_trace import ISRCalculationTrace, ISRTraceVerification
@@ -25,6 +32,11 @@ from app.domain.legal_hypothesis import ControlledLegalHypothesisResult
 from app.domain.legal_hypothesis_verification import (
     LegalHypothesisVerificationResult,
 )
+from app.domain.llama_hybrid_context import (
+    InitialFiscalHypothesisContext,
+    JurisprudentialRatioContext,
+    PostDeterministicHybridReviewContext,
+)
 from app.domain.llm_trace import LLMTrace
 from app.domain.normative import (
     NormativeApplicabilityResult,
@@ -38,6 +50,7 @@ from app.domain.query import (
     QueryAnalysis,
     TemporalControlExecution,
 )
+from app.domain.rbs_h1_contrast import RBSH1ContrastResult
 from app.domain.rules import RuleEvaluationResult
 from llm.models import ExplanationMode, RAGExplanation
 from rag.retrieval.models import RetrievalResult
@@ -186,6 +199,17 @@ class HybridOrchestrationResult(BaseModel):
     initial_legal_hypothesis_verification: (
         LegalHypothesisVerificationResult | None
     ) = None
+    llama_initial_context: InitialFiscalHypothesisContext | None = None
+    llama_fiscal_hypothesis_h1: FiscalHypothesisH1Result | None = None
+    rbs_h1_contrast: RBSH1ContrastResult | None = None
+    cbr_h1_contrast: CBRH1ContrastResult | None = None
+    llama_jurisprudential_ratio_h2: list[JurisprudentialRatioH2Result] = Field(
+        default_factory=list
+    )
+    llama_jurisprudence_ratio_contexts: list[JurisprudentialRatioContext] = Field(
+        default_factory=list
+    )
+    llama_hybrid_review_context: PostDeterministicHybridReviewContext | None = None
     prodecon_evidence_refs: list[str] = Field(default_factory=list)
     unam_evidence_refs: list[str] = Field(default_factory=list)
     evidence_layers: list[EvidenceLayer] = Field(default_factory=list)
@@ -204,6 +228,8 @@ class HybridOrchestrationResult(BaseModel):
     rbs_reasoning: NormalizedReasoningResult | None = None
     cbr_reasoning: NormalizedReasoningResult | None = None
     hybrid_coordination: HybridCoordinationResult | None = None
+    hybrid_legal_coordination: HybridLegalCoordinationResult | None = None
+    hybrid_legal_verification: HybridLegalVerificationResult | None = None
     heuristic_evaluation: LegalHeuristicEvaluation | None = None
     explanation: RAGExplanation | None = None
     llm_trace: LLMTrace | None = None

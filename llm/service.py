@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from typing import cast
+
 from pydantic import ValidationError
 
 from llm.context import build_controlled_legal_context
@@ -12,6 +14,14 @@ from llm.models import (
     RAGExplanation,
 )
 from llm.provider import LLMProvider
+from llm.rag_compact_contracts import (
+    CompactRAGContractError,
+    CompactRAGExplanationDraft,
+    expand_compact_rag_answer,
+    rag_compact_response_schema,
+)
+from llm.rag_compact_prompting import build_compact_rag_messages
+from llm.structured_provider import StructuredMessageProvider
 from rag.retrieval.models import RetrievalResult
 
 
@@ -112,19 +122,34 @@ class LlamaRAGService:
             explanation_mode=explanation_mode,
             jurisprudence_retrieval=jurisprudence_retrieval,
         )
+        use_compact_transport = (
+            self._provider.provider_name == "llama-cpp-python"
+            and isinstance(self._provider, StructuredMessageProvider)
+        )
         try:
-            raw = self._provider.generate_json(
-                context,
-                response_schema=LlamaStructuredAnswer.model_json_schema(),
-            )
+            if use_compact_transport:
+                structured_provider = cast(StructuredMessageProvider, self._provider)
+                raw = structured_provider.generate_messages_json(
+                    build_compact_rag_messages(context),
+                    response_schema=rag_compact_response_schema(context),
+                )
+            else:
+                raw = self._provider.generate_json(
+                    context,
+                    response_schema=LlamaStructuredAnswer.model_json_schema(),
+                )
         except LLMGenerationError:
             raise
         except Exception as exc:
             raise LLMGenerationError("El proveedor LLM falló de forma controlada.") from exc
 
         try:
-            answer = LlamaStructuredAnswer.model_validate_json(raw)
-        except ValidationError as exc:
+            if use_compact_transport:
+                compact = CompactRAGExplanationDraft.model_validate_json(raw)
+                answer = expand_compact_rag_answer(compact, context=context)
+            else:
+                answer = LlamaStructuredAnswer.model_validate_json(raw)
+        except (ValidationError, CompactRAGContractError) as exc:
             raise LLMResponseValidationError(
                 "La salida LLM no satisface el contrato JSON esperado."
             ) from exc

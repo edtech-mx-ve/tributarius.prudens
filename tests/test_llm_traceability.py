@@ -67,8 +67,9 @@ def test_hybrid_orchestrator_builds_trace_after_explanation() -> None:
     source = Path("app/services/hybrid_orchestrator.py").read_text(encoding="utf-8")
     explain_pos = source.index("explanation = self._llm_service.explain(")
     trace_pos = source.index("llm_trace = build_llm_trace(")
-    return_pos = source.index("return HybridOrchestrationResult(")
+    result_pos = source.index("result = HybridOrchestrationResult(")
+    review_context_pos = source.index("return result.model_copy(")
 
-    assert explain_pos < trace_pos < return_pos
+    assert explain_pos < trace_pos < result_pos < review_context_pos
     assert "explanation_mode=request.explanation_mode" in source
     assert "llm_trace=llm_trace" in source

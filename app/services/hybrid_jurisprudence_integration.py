@@ -17,6 +17,10 @@ from app.services.jurisprudence_evidence_integration import (
     JurisprudenceEvidenceIntegrationError,
 )
 from app.services.jurisprudence_hybrid_stage import run_session_jurisprudence_stage
+from app.services.llama_hybrid_context import (
+    build_jurisprudential_ratio_contexts,
+    build_post_deterministic_hybrid_review_context,
+)
 from app.services.query_fact_compat_19s_r15 import query_fact_value
 from jurisprudence.retrieval import JurisprudenceRetrievalError
 
@@ -99,9 +103,16 @@ def run_hybrid_with_session_jurisprudence(
         else len(session_result.evidence)
     )
 
-    return base_result.model_copy(
+    ratio_contexts = build_jurisprudential_ratio_contexts(
+        session_result=session_result,
+        ratio_records=request.session_jurisprudence_ratio_records,
+        normative_relation_records=request.session_jurisprudence_normative_relations,
+        temporal_records=request.session_jurisprudence_temporal_records,
+    )
+    augmented = base_result.model_copy(
         update={
             "session_jurisprudence_result": session_result,
+            "llama_jurisprudence_ratio_contexts": ratio_contexts,
             "traces": [
                 *base_result.traces,
                 StageTrace(
@@ -120,5 +131,12 @@ def run_hybrid_with_session_jurisprudence(
                 base_result.requires_human_review
                 or session_result.requires_human_review
             ),
+        }
+    )
+    return augmented.model_copy(
+        update={
+            "llama_hybrid_review_context": (
+                build_post_deterministic_hybrid_review_context(augmented)
+            )
         }
     )

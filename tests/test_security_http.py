@@ -2,6 +2,8 @@ from fastapi.testclient import TestClient
 
 from app.main import app
 from app.security.dependencies import get_consultation_rate_limiter
+from app.web.dependencies import get_web_consultation_service
+from app.web.service import WebConsultationService
 
 client = TestClient(app)
 
@@ -83,7 +85,11 @@ def test_consultation_rate_limit_returns_429() -> None:
     limiter = get_consultation_rate_limiter()
     limiter.reset()
     original_max = limiter._max_requests
+    original_override = app.dependency_overrides.get(get_web_consultation_service)
     limiter._max_requests = 1
+    app.dependency_overrides[get_web_consultation_service] = (
+        lambda: WebConsultationService()
+    )
     try:
         first = client.post(
             "/api/v1/consultations",
@@ -96,6 +102,10 @@ def test_consultation_rate_limit_returns_429() -> None:
     finally:
         limiter._max_requests = original_max
         limiter.reset()
+        if original_override is None:
+            app.dependency_overrides.pop(get_web_consultation_service, None)
+        else:
+            app.dependency_overrides[get_web_consultation_service] = original_override
 
     assert first.status_code == 200
     assert second.status_code == 429

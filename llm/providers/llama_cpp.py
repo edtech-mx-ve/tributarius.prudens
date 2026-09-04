@@ -9,6 +9,45 @@ from llm.errors import LLMConfigurationError, LLMGenerationError
 from llm.models import LLMGenerationContext
 from llm.prompting import build_messages
 
+_GRAMMAR_UNSAFE_SCHEMA_KEYS = frozenset(
+    {
+        "minLength",
+        "maxLength",
+        "minItems",
+        "maxItems",
+        "minProperties",
+        "maxProperties",
+        "minimum",
+        "maximum",
+        "exclusiveMinimum",
+        "exclusiveMaximum",
+        "multipleOf",
+        "pattern",
+        "format",
+        "uniqueItems",
+    }
+)
+
+
+def _grammar_safe_json_schema(value: object) -> object:
+    """Reduce sólo restricciones que llama.cpp expande de forma explosiva.
+
+    El esquema estructural se conserva para la gramática local. Las restricciones
+    eliminadas siguen siendo obligatorias porque cada servicio valida después la
+    salida con el modelo Pydantic canónico completo.
+    """
+
+    if isinstance(value, dict):
+        sanitized: dict[str, object] = {}
+        for key, item in value.items():
+            if key in _GRAMMAR_UNSAFE_SCHEMA_KEYS:
+                continue
+            sanitized[key] = _grammar_safe_json_schema(item)
+        return sanitized
+    if isinstance(value, list):
+        return [_grammar_safe_json_schema(item) for item in value]
+    return value
+
 
 class _LlamaBackend(Protocol):
     def create_chat_completion(
@@ -34,6 +73,8 @@ class LlamaCppProvider:
         max_tokens: int = 700,
         seed: int = 42,
         chat_format: str | None = None,
+        n_threads: int = 1,
+        n_batch: int = 128,
     ) -> None:
         resolved = model_path.expanduser().resolve()
         if not resolved.exists() or not resolved.is_file():
@@ -44,6 +85,10 @@ class LlamaCppProvider:
             raise LLMConfigurationError("n_ctx fuera del rango permitido.")
         if not 32 <= max_tokens <= 8192:
             raise LLMConfigurationError("max_tokens fuera del rango permitido.")
+        if not 1 <= n_threads <= 256:
+            raise LLMConfigurationError("n_threads fuera del rango permitido.")
+        if not 8 <= n_batch <= 4096:
+            raise LLMConfigurationError("n_batch fuera del rango permitido.")
 
         try:
             module = importlib.import_module("llama_cpp")
@@ -58,6 +103,11 @@ class LlamaCppProvider:
             "model_path": str(resolved),
             "n_ctx": n_ctx,
             "n_gpu_layers": 0,
+            "n_threads": n_threads,
+            "n_threads_batch": n_threads,
+            "n_batch": n_batch,
+            "use_mmap": True,
+            "use_mlock": False,
             "verbose": False,
         }
         if chat_format is not None:
@@ -73,6 +123,7 @@ class LlamaCppProvider:
         self._model_path = resolved
         self._max_tokens = max_tokens
         self._seed = seed
+        self._last_generation_usage: dict[str, int | str | None] = {}
 
     @property
     def provider_name(self) -> str:
@@ -82,18 +133,24 @@ class LlamaCppProvider:
     def model_name(self) -> str:
         return self._model_path.stem
 
+    @property
+    def last_generation_usage(self) -> dict[str, int | str | None]:
+        """Metadatos de la última generación para diagnóstico F.12.1."""
+        return dict(self._last_generation_usage)
+
     def generate_messages_json(
         self,
         messages: list[dict[str, str]],
         *,
         response_schema: dict[str, object],
     ) -> str:
+        self._last_generation_usage = {}
         try:
             response = self._backend.create_chat_completion(
                 messages=messages,
                 response_format={
                     "type": "json_object",
-                    "schema": response_schema,
+                    "schema": _grammar_safe_json_schema(response_schema),
                 },
                 temperature=0.0,
                 max_tokens=self._max_tokens,
@@ -104,6 +161,15 @@ class LlamaCppProvider:
 
         if not isinstance(response, dict):
             raise LLMGenerationError("El backend Llama devolvió una respuesta inválida.")
+
+        usage = response.get("usage")
+        observed_usage: dict[str, int | str | None] = {}
+        if isinstance(usage, dict):
+            for key in ("prompt_tokens", "completion_tokens", "total_tokens"):
+                value = usage.get(key)
+                if isinstance(value, int) and value >= 0:
+                    observed_usage[key] = value
+
         choices = response.get("choices")
         if not isinstance(choices, list) or not choices:
             raise LLMGenerationError("La respuesta Llama no contiene choices.")
@@ -111,6 +177,11 @@ class LlamaCppProvider:
         first = choices[0]
         if not isinstance(first, dict):
             raise LLMGenerationError("Formato de choice inválido.")
+        finish_reason = first.get("finish_reason")
+        if finish_reason is not None:
+            observed_usage["finish_reason"] = str(finish_reason)
+        self._last_generation_usage = observed_usage
+
         message = first.get("message")
         if not isinstance(message, dict):
             raise LLMGenerationError("La respuesta Llama no contiene message.")

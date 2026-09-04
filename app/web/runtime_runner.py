@@ -3,11 +3,19 @@ from __future__ import annotations
 from dataclasses import dataclass
 from datetime import date
 
+from app.domain.hybrid_legal_decision import HybridLegalDecision
+from app.domain.hybrid_llama_runtime import HybridLlamaRuntimeResult
+from app.domain.integral_legal_analysis import IntegralLegalAnalysis
 from app.domain.jurisprudence_hybrid import SessionJurisprudenceHybridResult
-from app.domain.orchestration import HybridOrchestrationRequest
+from app.domain.legal_decision import LegalDecision
+from app.domain.orchestration import (
+    HybridOrchestrationRequest,
+    HybridOrchestrationResult,
+)
 from app.services.hybrid_jurisprudence_integration import (
     run_hybrid_with_session_jurisprudence,
 )
+from app.services.hybrid_llama_runtime import HybridLlamaRuntime
 from app.services.hybrid_orchestrator import HybridOrchestrator
 from app.services.integral_legal_analyzer import build_integral_legal_analysis
 from app.services.legal_decision import build_legal_decision
@@ -98,6 +106,7 @@ class WebHybridRunner:
     orchestrator: HybridOrchestrator
     retrieval_runtime: str
     explanation_runtime: str
+    hybrid_llama_runtime: HybridLlamaRuntime | None = None
 
     def run(self, request: WebConsultationRequest) -> dict[str, object]:
         session_documents = []
@@ -141,17 +150,26 @@ class WebHybridRunner:
             session_jurisprudence_temporal_records=session_temporal_records,
             session_jurisprudence_ratio_records=session_ratio_records,
         )
-        result = run_hybrid_with_session_jurisprudence(
-            self.orchestrator,
-            orchestration_request,
-        )
+        llama_runtime_result: HybridLlamaRuntimeResult | None = None
+        result: HybridOrchestrationResult
+        integral_analysis: IntegralLegalAnalysis
+        legal_decision: LegalDecision | HybridLegalDecision
+        if self.hybrid_llama_runtime is None:
+            result = run_hybrid_with_session_jurisprudence(
+                self.orchestrator,
+                orchestration_request,
+            )
+            integral_analysis = build_integral_legal_analysis(result)
+            legal_decision = build_legal_decision(integral_analysis)
+        else:
+            llama_runtime_result = self.hybrid_llama_runtime.run(orchestration_request)
+            result = llama_runtime_result.orchestration
+            integral_analysis = llama_runtime_result.analysis
+            legal_decision = llama_runtime_result.decision
+
         canonical = build_canonical_result(orchestration_request, result)
         presented = present_canonical_result(canonical, request)
-        integral_analysis = build_integral_legal_analysis(result)
-        presented["legal_analysis"] = present_integral_legal_analysis(
-            integral_analysis
-        )
-        legal_decision = build_legal_decision(integral_analysis)
+        presented["legal_analysis"] = present_integral_legal_analysis(integral_analysis)
         presented["legal_decision"] = present_legal_decision(legal_decision)
 
         if result.session_jurisprudence_result is not None:
@@ -190,8 +208,27 @@ class WebHybridRunner:
                 ),
             }
 
-        presented["runtime"] = {
+        runtime_payload: dict[str, object] = {
             "retrieval": self.retrieval_runtime,
             "explanation": self.explanation_runtime,
         }
+        if llama_runtime_result is not None:
+            runtime_payload.update(
+                {
+                    "llm_provider": llama_runtime_result.provider_name,
+                    "llm_model": llama_runtime_result.model_name,
+                    "hybrid_llama_status": llama_runtime_result.status.value,
+                    "real_llama": not llama_runtime_result.provider_is_test_double,
+                    "h1_generation_attempted": (
+                        llama_runtime_result.h1_generation_attempted
+                    ),
+                    "h2_generation_attempted": (
+                        llama_runtime_result.h2_generation_attempted
+                    ),
+                    "semantic_verification_attempted": (
+                        llama_runtime_result.semantic_verification_attempted
+                    ),
+                }
+            )
+        presented["runtime"] = runtime_payload
         return presented

@@ -1,0 +1,200 @@
+{
+  "schema_version": "1.0",
+  "baseline_commit": "06f06aa",
+  "baseline_label": "block-e-production-before-hybrid-llama-evolution",
+  "runtime": {
+    "explanation_provider": "MockLLMProvider",
+    "explanation_runtime": "deterministic_mock_until_sprint20",
+    "legal_hypothesis_service_configured": false,
+    "real_llm_active": false,
+    "legacy_hypothesis_contract_preserved": true,
+    "jurisprudence_optional": true,
+    "additive_evolution_only": true
+  },
+  "contracts": [
+    {
+      "contract_id": "F1-LLM-PROVIDER",
+      "component": "LLMProvider",
+      "kind": "callable",
+      "import_path": "llm.provider:LLMProvider.generate_json",
+      "required_parameters": ["self", "context", "response_schema"],
+      "notes": "El proveedor estructurado conserva generate_json(context, response_schema)."
+    },
+    {
+      "contract_id": "F1-LLAMA-EXPLAIN",
+      "component": "LlamaRAGService",
+      "kind": "callable",
+      "import_path": "llm.service:LlamaRAGService.explain",
+      "required_parameters": ["self", "retrieval", "deterministic_evidence", "explanation_mode", "jurisprudence_retrieval"],
+      "notes": "F.2-F.12 pueden extender el contexto, pero no romper el contrato de explicación existente."
+    },
+    {
+      "contract_id": "F1-LEGACY-HYPOTHESIS",
+      "component": "LlamaLegalHypothesisService",
+      "kind": "callable",
+      "import_path": "app.services.legal_hypothesis_generation:LlamaLegalHypothesisService.generate",
+      "required_parameters": ["self", "retrieval"],
+      "notes": "Contrato experimental histórico preservado; F.2/F.3 añadirán el nuevo H1 sin romperlo."
+    },
+    {
+      "contract_id": "F1-QUERY-ANALYSIS",
+      "component": "QueryAnalysis",
+      "kind": "pydantic_model",
+      "import_path": "app.domain.query:QueryAnalysis",
+      "required_fields": ["original_query", "normalized_query", "primary_intent", "secondary_intents", "facts", "entities", "missing_fields", "ambiguities", "jurisprudence_requested", "requires_clarification", "requires_human_review", "multidimensional", "primary_source_activation", "rbs_orientation", "cbr_orientation", "normative_ranking", "structural_navigation", "focused_rag_plan", "full_corpus_expansion_plan", "temporal_control_plan"],
+      "notes": "D.1-D.9 permanecen disponibles para el contexto híbrido posterior."
+    },
+    {
+      "contract_id": "F1-CONTROLLED-HYPOTHESIS",
+      "component": "ControlledLegalHypothesis",
+      "kind": "pydantic_model",
+      "import_path": "app.domain.legal_hypothesis:ControlledLegalHypothesis",
+      "required_fields": ["issue", "hypothesis", "investigation_targets", "evidence_ids", "uncertainties", "status", "requires_validation", "changes_deterministic_result", "asserts_external_legal_authority"],
+      "notes": "La hipótesis heredada sigue siendo no vinculante y sujeta a validación."
+    },
+    {
+      "contract_id": "F1-HYPOTHESIS-RESULT",
+      "component": "ControlledLegalHypothesisResult",
+      "kind": "pydantic_model",
+      "import_path": "app.domain.legal_hypothesis:ControlledLegalHypothesisResult",
+      "required_fields": ["generation_performed", "hypothesis", "authorized_evidence_ids", "requires_human_review", "trace"],
+      "notes": "Se preserva trazabilidad y frontera de evidencia de la hipótesis existente."
+    },
+    {
+      "contract_id": "F1-HYPOTHESIS-VERIFICATION",
+      "component": "LegalHypothesisVerificationResult",
+      "kind": "pydantic_model",
+      "import_path": "app.domain.legal_hypothesis_verification:LegalHypothesisVerificationResult",
+      "required_fields": ["state", "hypothesis_text", "deterministic_conclusions", "controlling_source", "authorized_evidence_preserved", "exact_text_match", "semantic_equivalence_asserted", "deterministic_result_preserved", "findings", "trace"],
+      "notes": "La verificación heredada no puede convertir coincidencia textual en validez jurídica."
+    },
+    {
+      "contract_id": "F1-RBS-RESULT",
+      "component": "RuleEvaluationResult",
+      "kind": "pydantic_model",
+      "import_path": "app.domain.rules:RuleEvaluationResult",
+      "required_fields": ["matched_rules", "traces", "derivations", "requires_human_review"],
+      "notes": "El RBS productivo y sus derivaciones se conservan sin reemplazo."
+    },
+    {
+      "contract_id": "F1-CBR-RESULT",
+      "component": "CBRRetrievalResult",
+      "kind": "pydantic_model",
+      "import_path": "app.domain.cbr:CBRRetrievalResult",
+      "required_fields": ["query", "candidate_count", "returned_count", "matches"],
+      "notes": "El CBR existente se preserva como motor de casos y no como fuente normativa."
+    },
+    {
+      "contract_id": "F1-HYBRID-RELATIONS",
+      "component": "HybridReasoningRelation",
+      "kind": "enum",
+      "import_path": "app.domain.hybrid_coordination:HybridReasoningRelation",
+      "required_values": ["confirmation", "correction", "contradiction", "exception", "insufficient_evidence", "human_review"],
+      "notes": "Las relaciones híbridas actuales permanecen válidas; nuevas relaciones deberán ser aditivas."
+    },
+    {
+      "contract_id": "F1-HYBRID-COORDINATION",
+      "component": "HybridCoordinationResult",
+      "kind": "pydantic_model",
+      "import_path": "app.domain.hybrid_coordination:HybridCoordinationResult",
+      "required_fields": ["relation", "conclusion", "controlling_source", "rbs_result", "cbr_result", "factors", "shared_legal_basis", "reasons", "requires_review", "trace"],
+      "notes": "La coordinación RBS-CBR existente conserva su conclusión y fuente controladora."
+    },
+    {
+      "contract_id": "F1-ORCHESTRATION-REQUEST",
+      "component": "HybridOrchestrationRequest",
+      "kind": "pydantic_model",
+      "import_path": "app.domain.orchestration:HybridOrchestrationRequest",
+      "required_fields": ["query", "query_date", "query_fiscal_year", "top_k", "normative_candidates", "isr_input", "cbr_query", "explanation_mode", "session_jurisprudence_documents", "session_jurisprudence_metadata", "session_jurisprudence_normative_relations", "session_jurisprudence_temporal_records", "session_jurisprudence_ratio_records"],
+      "notes": "La solicitud híbrida conserva contexto fiscal, CBR y jurisprudencia de sesión."
+    },
+    {
+      "contract_id": "F1-ORCHESTRATION-RESULT",
+      "component": "HybridOrchestrationResult",
+      "kind": "pydantic_model",
+      "import_path": "app.domain.orchestration:HybridOrchestrationResult",
+      "required_fields": ["analysis", "retrieval", "focused_rag_execution", "full_corpus_expansion_execution", "temporal_control_execution", "initial_legal_hypothesis", "initial_legal_hypothesis_verification", "normative_results", "normative_evidence_refs", "applicable_normative_refs", "jurisprudence_result", "session_jurisprudence_result", "rule_result", "cbr_result", "cbr_reuse_assessments", "rbs_reasoning", "cbr_reasoning", "hybrid_coordination", "heuristic_evaluation", "explanation", "llm_trace", "traces", "requires_human_review"],
+      "notes": "F.2-F.12 deben evolucionar el resultado de forma aditiva."
+    },
+    {
+      "contract_id": "F1-ORCHESTRATOR-INIT",
+      "component": "HybridOrchestrator.__init__",
+      "kind": "callable",
+      "import_path": "app.services.hybrid_orchestrator:HybridOrchestrator.__init__",
+      "required_parameters": ["self", "query_analyzer", "retriever", "llm_service", "rule_set", "legal_hypothesis_service", "isr_tariff", "isr_tariff_registry", "cbr_cases", "jurisprudence_retriever", "temporal_guard"],
+      "notes": "El constructor actual debe seguir aceptando todos los colaboradores existentes."
+    },
+    {
+      "contract_id": "F1-ORCHESTRATOR-RUN",
+      "component": "HybridOrchestrator.run",
+      "kind": "callable",
+      "import_path": "app.services.hybrid_orchestrator:HybridOrchestrator.run",
+      "required_parameters": ["self", "request"],
+      "notes": "La entrada pública del orquestador permanece HybridOrchestrationRequest."
+    },
+    {
+      "contract_id": "F1-LLM-CONTEXT",
+      "component": "LLMGenerationContext",
+      "kind": "pydantic_model",
+      "import_path": "llm.models:LLMGenerationContext",
+      "required_fields": ["question", "evidence", "deterministic_evidence", "explanation_mode", "audience_label", "communication_goal", "presentation_sections", "presentation_instructions"],
+      "notes": "El contexto LLM actual se preserva; H1/H2 tendrán contratos dedicados posteriores."
+    },
+    {
+      "contract_id": "F1-LLM-ANSWER",
+      "component": "LlamaStructuredAnswer",
+      "kind": "pydantic_model",
+      "import_path": "llm.models:LlamaStructuredAnswer",
+      "required_fields": ["summary", "analysis", "evidence_ids", "normative_refs", "rule_refs", "calculation_refs", "cbr_refs", "jurisprudence_refs", "uncertainties", "requires_human_review", "changes_deterministic_result", "asserts_external_legal_authority"],
+      "notes": "La explicación no puede modificar resultados ni aportar autoridad externa."
+    },
+    {
+      "contract_id": "F1-JURISPRUDENCE-SESSION",
+      "component": "SessionJurisprudenceHybridResult",
+      "kind": "pydantic_model",
+      "import_path": "app.domain.jurisprudence_hybrid:SessionJurisprudenceHybridResult",
+      "required_fields": ["retrieval", "applicability", "relations", "evidence_integration", "decision_application", "evidence", "requires_human_review"],
+      "notes": "El resultado E.1-E.6 queda disponible sin reabrir sus fronteras."
+    },
+    {
+      "contract_id": "F1-JURISPRUDENCE-DECISION",
+      "component": "JurisprudenceDecisionApplicationRecord",
+      "kind": "pydantic_model",
+      "import_path": "app.domain.jurisprudence_decision_application:JurisprudenceDecisionApplicationRecord",
+      "required_fields": ["assessments", "applicable_document_ids", "binding_evidence_refs", "application_evaluated", "analyzer_projection_required", "legal_decision_projection_required", "normative_basis_preserved", "single_conclusion_preserved", "jurisprudence_may_govern_interpretation", "jurisprudence_never_replaces_normative_basis", "requires_human_review"],
+      "notes": "La jurisprudencia puede gobernar interpretación, nunca reemplazar la base normativa."
+    },
+    {
+      "contract_id": "F1-ANALYZER",
+      "component": "IntegralLegalAnalysis",
+      "kind": "pydantic_model",
+      "import_path": "app.domain.integral_legal_analysis:IntegralLegalAnalysis",
+      "required_fields": ["schema_version", "issue", "facts", "missing_fields", "ambiguities", "applicable_normative_refs", "rule_conclusions", "calculation", "canonical_conclusion", "controlling_source", "analysis_priority", "evidence_map", "jurisprudence_application", "readiness", "requires_human_review", "status"],
+      "notes": "Analyzer 1.0 conserva una sola consolidación jurídica."
+    },
+    {
+      "contract_id": "F1-LEGAL-DECISION",
+      "component": "LegalDecision",
+      "kind": "pydantic_model",
+      "import_path": "app.domain.legal_decision:LegalDecision",
+      "required_fields": ["schema_version", "source_analysis_schema_version", "issue", "facts", "fact_assessments", "reasoning_chain", "consequences", "missing_fields", "ambiguities", "applicable_normative_refs", "rule_conclusions", "calculation", "conclusion", "controlling_source", "analysis_priority", "evidence_map", "jurisprudence_application", "readiness", "requires_human_review", "status"],
+      "notes": "Legal Decision 1.0 sigue siendo la única determinación formal."
+    },
+    {
+      "contract_id": "F1-ANALYZER-BUILDER",
+      "component": "build_integral_legal_analysis",
+      "kind": "callable",
+      "import_path": "app.services.integral_legal_analyzer:build_integral_legal_analysis",
+      "required_parameters": ["result"],
+      "notes": "Analyzer sigue consumiendo HybridOrchestrationResult sin una segunda ejecución."
+    },
+    {
+      "contract_id": "F1-DECISION-BUILDER",
+      "component": "build_legal_decision",
+      "kind": "callable",
+      "import_path": "app.services.legal_decision:build_legal_decision",
+      "required_parameters": ["analysis"],
+      "notes": "Legal Decision continúa derivándose exclusivamente de Analyzer."
+    }
+  ]
+}

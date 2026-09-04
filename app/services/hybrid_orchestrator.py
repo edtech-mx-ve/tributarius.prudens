@@ -4,9 +4,11 @@ from typing import Protocol
 
 from app.domain.cbr import CBRCase, CBRRetrievalResult, CBRReuseAssessment
 from app.domain.documents import SourceType
+from app.domain.hybrid_llama_hypotheses import FiscalHypothesisH1Result
 from app.domain.isr import ISRTariff
 from app.domain.jurisprudence import JurisprudenceRetrievalResult
 from app.domain.legal_heuristics import LegalHeuristicEvaluation
+from app.domain.llama_hybrid_context import InitialFiscalHypothesisContext
 from app.domain.normative import (
     NormativeApplicabilityRequest,
     NormativeApplicabilityResult,
@@ -26,6 +28,7 @@ from app.domain.query import (
     QueryIntent,
 )
 from app.domain.rules import RuleEvaluationResult, RuleSet
+from app.services.cbr_h1_contrast import contrast_h1_with_cbr
 from app.services.cbr_reasoning import assess_case_reuse
 from app.services.focused_normative_rag import execute_focused_rag
 from app.services.full_corpus_expansion import execute_full_corpus_expansion
@@ -51,6 +54,10 @@ from app.services.legal_hypothesis_stage import (
 from app.services.legal_hypothesis_verification_stage import (
     run_legal_hypothesis_verification_stage,
 )
+from app.services.llama_hybrid_context import (
+    build_initial_fiscal_hypothesis_context,
+    build_post_deterministic_hybrid_review_context,
+)
 from app.services.llm_traceability import build_llm_trace
 from app.services.normative_engine import evaluate_normative_applicability
 from app.services.normative_rag_bridge import (
@@ -59,6 +66,7 @@ from app.services.normative_rag_bridge import (
 )
 from app.services.normative_temporal_runtime_guard import TemporalRuntimeGuard
 from app.services.query_fact_compat_19s_r15 import query_fact_value
+from app.services.rbs_h1_contrast import contrast_h1_with_rbs
 from app.services.rule_engine import evaluate_rules
 from app.services.temporal_control import (
     execute_temporal_control,
@@ -87,6 +95,13 @@ class RetrieverLike(Protocol):
         top_k: int = 5,
         filters: RetrievalFilters | None = None,
     ) -> RetrievalResult: ...
+
+
+class HybridH1GeneratorLike(Protocol):
+    def generate(
+        self,
+        context: InitialFiscalHypothesisContext,
+    ) -> FiscalHypothesisH1Result: ...
 
 
 def _safe_fact_value(name: str, value: str) -> object:
@@ -385,6 +400,7 @@ class HybridOrchestrator:
         cbr_cases: list[CBRCase] | None = None,
         jurisprudence_retriever: JurisprudenceRetriever | None = None,
         temporal_guard: TemporalRuntimeGuard | None = None,
+        hybrid_h1_service: HybridH1GeneratorLike | None = None,
     ) -> None:
         self._query_analyzer = query_analyzer
         self._retriever = retriever
@@ -396,6 +412,11 @@ class HybridOrchestrator:
         self._cbr_cases = list(cbr_cases or [])
         self._jurisprudence_retriever = jurisprudence_retriever
         self._temporal_guard = temporal_guard
+        self._hybrid_h1_service = hybrid_h1_service
+
+    @property
+    def hybrid_h1_enabled(self) -> bool:
+        return self._hybrid_h1_service is not None
 
     def run(self, request: HybridOrchestrationRequest) -> HybridOrchestrationResult:
         traces: list[StageTrace] = []
@@ -409,6 +430,19 @@ class HybridOrchestrator:
                 detail=f"Intento principal: {analysis.primary_intent.value}.",
             )
         )
+
+        llama_initial_context = build_initial_fiscal_hypothesis_context(analysis)
+        llama_fiscal_hypothesis_h1 = None
+        hybrid_h1_review = False
+        if self._hybrid_h1_service is not None:
+            try:
+                llama_fiscal_hypothesis_h1 = self._hybrid_h1_service.generate(
+                    llama_initial_context
+                )
+            except LLMError:
+                hybrid_h1_review = True
+            else:
+                hybrid_h1_review = llama_fiscal_hypothesis_h1.requires_human_review
 
         focused_rag_execution = None
         focused_retrieval = None
@@ -755,6 +789,19 @@ class HybridOrchestrator:
                 )
             )
 
+        rbs_h1_contrast = None
+        cbr_h1_contrast = None
+        if llama_fiscal_hypothesis_h1 is not None:
+            rbs_h1_contrast = contrast_h1_with_rbs(
+                llama_fiscal_hypothesis_h1,
+                rule_result=rule_result,
+            )
+            cbr_h1_contrast = contrast_h1_with_cbr(
+                llama_fiscal_hypothesis_h1,
+                cbr_result=cbr_result,
+                reuse_assessments=cbr_assessments,
+            )
+
         rbs_reasoning = normalize_rbs_result(rule_result)
         cbr_reasoning = None
         hybrid_coordination = None
@@ -860,7 +907,7 @@ class HybridOrchestrator:
             explanation.answer.requires_human_review if explanation is not None else False
         )
 
-        return HybridOrchestrationResult(
+        result = HybridOrchestrationResult(
             analysis=analysis,
             retrieval=retrieval,
             focused_rag_execution=focused_rag_execution,
@@ -870,6 +917,10 @@ class HybridOrchestrator:
             initial_legal_hypothesis_verification=(
                 initial_legal_hypothesis_verification
             ),
+            llama_initial_context=llama_initial_context,
+            llama_fiscal_hypothesis_h1=llama_fiscal_hypothesis_h1,
+            rbs_h1_contrast=rbs_h1_contrast,
+            cbr_h1_contrast=cbr_h1_contrast,
             normative_candidates=effective_request.normative_candidates,
             normative_results=normative_results,
             normative_evidence_refs=normative_evidence_refs,
@@ -900,6 +951,24 @@ class HybridOrchestrator:
                     jurisprudence_review,
                     llm_review,
                     explanation_review,
+                    hybrid_h1_review,
+                    (
+                        rbs_h1_contrast.requires_human_review
+                        if rbs_h1_contrast is not None
+                        else False
+                    ),
+                    (
+                        cbr_h1_contrast.requires_human_review
+                        if cbr_h1_contrast is not None
+                        else False
+                    ),
                 )
             ),
+        )
+        return result.model_copy(
+            update={
+                "llama_hybrid_review_context": (
+                    build_post_deterministic_hybrid_review_context(result)
+                )
+            }
         )

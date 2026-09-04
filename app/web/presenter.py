@@ -3,14 +3,15 @@ from __future__ import annotations
 from typing import Any
 
 from app.domain.explanation_mode import ExplanationMode
+from app.domain.hybrid_legal_decision import HybridLegalDecision
 from app.domain.integral_legal_analysis import IntegralLegalAnalysis
 from app.domain.legal_decision import LegalDecision
 from app.domain.traceability import CanonicalExecutionResult, EvidenceReference
 from app.services.integral_legal_traceability import (
     integral_legal_analysis_sha256,
 )
-from app.services.legal_decision_traceability import legal_decision_sha256
 from app.services.legal_explanation_profile import get_legal_explanation_profile
+from app.services.traceability import canonical_sha256
 from app.web.schemas import WebConsultationRequest
 
 _SNIPPET_LIMIT = 360
@@ -204,12 +205,12 @@ def present_integral_legal_analysis(
 
 
 def present_legal_decision(
-    decision: LegalDecision,
+    decision: LegalDecision | HybridLegalDecision,
 ) -> dict[str, object]:
-    """Expone Legal Decision 1.0 sin recalcular ni reinterpretar su contenido."""
+    """Expone Legal Decision 1.0/F.9 sin recalcular ni reinterpretar su contenido."""
 
     payload: dict[str, object] = decision.model_dump(mode="json")
-    payload["integrity_sha256"] = legal_decision_sha256(decision)
+    payload["integrity_sha256"] = canonical_sha256(payload)
     return payload
 
 

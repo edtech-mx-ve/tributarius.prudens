@@ -17,16 +17,18 @@ def _service() -> dict[str, object]:
     return service
 
 
-def test_render_free_tier_does_not_define_shutdown_delay() -> None:
+def test_render_f11_uses_memory_profile_for_real_llama() -> None:
     service = _service()
-    assert service["plan"] == "free"
+    assert service["plan"] == "1c-2g"
     assert "maxShutdownDelaySeconds" not in service
 
 
-def test_render_build_runs_verified_runtime_bootstrap() -> None:
+def test_render_build_runs_verified_runtime_and_llama_bootstrap() -> None:
     service = _service()
     build_command = str(service["buildCommand"])
     assert "python -m scripts.bootstrap_runtime_release_19i18c" in build_command
+    assert "python -m scripts.bootstrap_llama_model_f11" in build_command
+    assert 'python -m pip install -e ".[llama]"' in build_command
 
 
 def test_render_pins_public_runtime_sha_and_external_url() -> None:
@@ -42,3 +44,7 @@ def test_render_pins_public_runtime_sha_and_external_url() -> None:
 
     assert by_key["RUNTIME_RELEASE_SHA256"]["value"] == PUBLIC_RUNTIME_SHA256
     assert by_key["RUNTIME_RELEASE_URL"]["sync"] is False
+    assert by_key["LLM_RUNTIME_PROVIDER"]["value"] == "llama_cpp"
+    assert by_key["REQUIRE_REAL_LLAMA"]["value"] == "true"
+    assert str(by_key["LLAMA_MODEL_PATH"]["value"]).endswith(".gguf")
+    assert len(str(by_key["LLAMA_MODEL_SHA256"]["value"])) == 64

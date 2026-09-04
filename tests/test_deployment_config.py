@@ -4,9 +4,11 @@ from app.core.config import Settings
 from scripts.validate_deployment import validate_render_blueprint
 
 
-def test_render_blueprint_is_free_and_stateless() -> None:
+def test_render_blueprint_is_real_llama_cpu_and_stateless() -> None:
     checks = validate_render_blueprint(Path("render.yaml"))
-    assert "plan=free" in checks
+    assert "plan=1c-2g" in checks
+    assert "real-llama-provider" in checks
+    assert "build-bootstraps-real-llama" in checks
     assert "sqlite-is-ephemeral" in checks
     assert "no-databases" in checks
     assert "no-disk" in checks

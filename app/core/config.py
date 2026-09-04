@@ -39,6 +39,21 @@ class Settings(BaseSettings):
     )
     require_temporal_provenance_registry: bool = False
 
+    # F.11: Llama real local mediante llama.cpp. El mock queda fuera del runtime.
+    llm_runtime_provider: str = Field(default="llama_cpp", pattern="^llama_cpp$")
+    require_real_llama: bool = True
+    llama_model_path: str = "models/Llama-3.2-1B-Instruct-Q4_K_M.gguf"
+    llama_model_sha256: str = Field(
+        default="3f5a22426976ab26cfe84dba63c1d08391717abb1af893e10f1b2968d862dcc1",
+        pattern=r"^[a-f0-9]{64}$",
+    )
+    llama_n_ctx: int = Field(default=4096, ge=512, le=131072)
+    llama_max_tokens: int = Field(default=700, ge=32, le=8192)
+    llama_seed: int = 42
+    llama_chat_format: str | None = None
+    llama_n_threads: int = Field(default=1, ge=1, le=256)
+    llama_n_batch: int = Field(default=128, ge=8, le=4096)
+
     def trusted_hosts(self) -> list[str]:
         """Hosts permitidos, normalizados desde una variable de entorno simple."""
         hosts = [item.strip() for item in self.trusted_hosts_csv.split(",") if item.strip()]

@@ -50,7 +50,7 @@ def validate_render_blueprint(path: Path) -> list[str]:
     checks = {
         "type=web": service.get("type") == "web",
         "runtime=python": service.get("runtime") == "python",
-        "plan=free": service.get("plan") == "free",
+        "plan=1c-2g": service.get("plan") == "1c-2g",
         "health=/health": service.get("healthCheckPath") == "/health",
         "start-binds-host": "0.0.0.0" in str(service.get("startCommand", "")),
         "start-uses-port": "$PORT" in str(service.get("startCommand", "")),
@@ -58,12 +58,20 @@ def validate_render_blueprint(path: Path) -> list[str]:
             'torch==2.13.0' in build_command
             and "download.pytorch.org/whl/cpu" in build_command
         ),
-        "build-installs-package": "pip install -e ." in build_command,
+        "build-installs-llama-cpp-cpu-wheel": (
+            'llama-cpp-python==0.3.35' in build_command
+            and "abetlen.github.io/llama-cpp-python/whl/cpu" in build_command
+            and "--only-binary=llama-cpp-python" in build_command
+        ),
+        "build-installs-package-with-llama": 'pip install -e ".[llama]"' in build_command,
         "build-validates-cpu-runtime": (
             "scripts.verify_cpu_runtime_19s_r14" in build_command
         ),
         "build-bootstraps-runtime": (
             "scripts.bootstrap_runtime_release_19i18c" in build_command
+        ),
+        "build-bootstraps-real-llama": (
+            "scripts.bootstrap_llama_model_f11" in build_command
         ),
         "no-databases": "databases" not in payload,
         "no-disk": "disk" not in service and "diskPath" not in service,
@@ -100,6 +108,25 @@ def validate_render_blueprint(path: Path) -> list[str]:
             "temporal-registry-required": (
                 _env_value(env, "REQUIRE_TEMPORAL_PROVENANCE_REGISTRY") or ""
             ).lower() == "true",
+            "python-3.12": (_env_value(env, "PYTHON_VERSION") or "").startswith("3.12."),
+            "real-llama-provider": _env_value(env, "LLM_RUNTIME_PROVIDER") == "llama_cpp",
+            "real-llama-required": (
+                _env_value(env, "REQUIRE_REAL_LLAMA") or ""
+            ).lower() == "true",
+            "llama-model-path-gguf": (
+                _env_value(env, "LLAMA_MODEL_PATH") or ""
+            ).endswith(".gguf"),
+            "llama-model-url-https": (
+                _env_value(env, "LLAMA_MODEL_URL") or ""
+            ).startswith("https://"),
+            "llama-model-sha-pinned": len(
+                _env_value(env, "LLAMA_MODEL_SHA256") or ""
+            ) == 64,
+            "llama-model-url-revision-pinned": (
+                "b69aef112e9f895e6f98d7ae0949f72ff09aa401"
+                in (_env_value(env, "LLAMA_MODEL_URL") or "")
+            ),
+            "llama-one-thread": _env_value(env, "LLAMA_N_THREADS") == "1",
             "release-url-external": (
                 release_url_item.get("sync") is False
                 and "value" not in release_url_item
@@ -120,7 +147,7 @@ def validate_render_blueprint(path: Path) -> list[str]:
     failed = [name for name, ok in checks.items() if not ok]
     if failed:
         raise DeploymentValidationError(
-            "Blueprint incompatible con el perfil gratuito CPU: "
+            "Blueprint incompatible con el perfil CPU F.11 de Llama real: "
             + ", ".join(failed)
         )
     return sorted(checks)

@@ -2,17 +2,21 @@ services:
   - type: web
     name: tributarius-prudens
     runtime: python
-    plan: free
+    plan: 1c-2g
     buildCommand: >-
       python -m pip install --upgrade pip &&
       python -m pip install "torch==2.13.0" --index-url https://download.pytorch.org/whl/cpu &&
-      python -m pip install -e . &&
+      python -m pip install "llama-cpp-python==0.3.35" --extra-index-url https://abetlen.github.io/llama-cpp-python/whl/cpu --only-binary=llama-cpp-python &&
+      python -m pip install -e ".[llama]" &&
       python -m scripts.verify_cpu_runtime_19s_r14 &&
-      python -m scripts.bootstrap_runtime_release_19i18c
+      python -m scripts.bootstrap_runtime_release_19i18c &&
+      python -m scripts.bootstrap_llama_model_f11
     startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT --workers 1
     healthCheckPath: /health
     autoDeployTrigger: checksPass
     envVars:
+      - key: PYTHON_VERSION
+        value: 3.12.11
       - key: ENVIRONMENT
         value: production
       - key: ENABLE_DOCS
@@ -39,6 +43,26 @@ services:
         value: knowledge/temporal/temporal_provenance_registry.json
       - key: REQUIRE_TEMPORAL_PROVENANCE_REGISTRY
         value: "true"
+      - key: LLM_RUNTIME_PROVIDER
+        value: llama_cpp
+      - key: REQUIRE_REAL_LLAMA
+        value: "true"
+      - key: LLAMA_MODEL_PATH
+        value: models/Llama-3.2-1B-Instruct-Q4_K_M.gguf
+      - key: LLAMA_MODEL_URL
+        value: https://huggingface.co/unsloth/Llama-3.2-1B-Instruct-GGUF/resolve/b69aef112e9f895e6f98d7ae0949f72ff09aa401/Llama-3.2-1B-Instruct-Q4_K_M.gguf
+      - key: LLAMA_MODEL_SHA256
+        value: 3f5a22426976ab26cfe84dba63c1d08391717abb1af893e10f1b2968d862dcc1
+      - key: LLAMA_N_CTX
+        value: "4096"
+      - key: LLAMA_MAX_TOKENS
+        value: "700"
+      - key: LLAMA_SEED
+        value: "42"
+      - key: LLAMA_N_THREADS
+        value: "1"
+      - key: LLAMA_N_BATCH
+        value: "128"
       - key: RUNTIME_RELEASE_URL
         sync: false
       - key: RUNTIME_RELEASE_SHA256
