@@ -1,9 +1,12 @@
 from __future__ import annotations
 
+import logging
 from typing import Protocol
 
 from app.security.input_guard import assess_prompt_injection
 from app.web.schemas import WebConsultationRequest, WebConsultationResponse
+
+logger = logging.getLogger(__name__)
 
 
 class ConsultationRunner(Protocol):
@@ -38,7 +41,12 @@ class WebConsultationService:
             )
         try:
             result = self._runner.run(request)
-        except (ValueError, RuntimeError):
+        except (ValueError, RuntimeError) as exc:
+            logger.exception(
+                "Fallo interno durante consulta web. cause_type=%s cause=%s",
+                type(exc).__name__,
+                str(exc),
+            )
             return WebConsultationResponse(
                 status="error",
                 message="La consulta no pudo procesarse de forma segura.",
