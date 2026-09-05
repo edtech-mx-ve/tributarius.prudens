@@ -7,7 +7,13 @@ from pathlib import Path
 from pydantic import ValidationError
 
 from app.core.config import Settings
+from app.domain.cloudflare_workers_ai_runtime import CloudflareWorkersAIRuntimeDescriptor
+from app.domain.openrouter_llama_runtime import OpenRouterLlamaRuntimeDescriptor
 from app.domain.real_llama_runtime import RealLlamaRuntimeDescriptor
+from app.services.cloudflare_workers_ai_runtime import (
+    CloudflareWorkersAIRuntimeError,
+    build_cloudflare_workers_ai_provider,
+)
 from app.services.hybrid_llama_runtime import (
     HybridLlamaRuntime,
     build_hybrid_llama_service_bundle,
@@ -17,12 +23,19 @@ from app.services.normative_temporal_runtime_guard import (
     TemporalRuntimeGuardError,
     load_temporal_runtime_guard,
 )
+from app.services.openrouter_llama_runtime import (
+    OpenRouterLlamaRuntimeError,
+    build_openrouter_llama_provider,
+)
 from app.services.real_llama_runtime import (
     RealLlamaRuntimeError,
     build_real_llama_provider,
 )
 from app.services.rule_loader import RuleLoadError, load_rule_set
 from app.web.runtime_runner import WebHybridRunner
+from llm.providers.cloudflare_workers_ai import CloudflareWorkersAIProvider
+from llm.providers.llama_cpp import LlamaCppProvider
+from llm.providers.openrouter import OpenRouterProvider
 from llm.providers.runtime_query import RuntimeQueryAnalyzerProvider
 from llm.query_analyzer import QueryAnalyzer
 from llm.service import LlamaRAGService
@@ -45,7 +58,11 @@ class RuntimeComponents:
     runner: WebHybridRunner
     artifact_dir: Path
     model_name: str
-    llama_runtime: RealLlamaRuntimeDescriptor
+    llama_runtime: (
+        RealLlamaRuntimeDescriptor
+        | OpenRouterLlamaRuntimeDescriptor
+        | CloudflareWorkersAIRuntimeDescriptor
+    )
     retrieval_backend: str = "semantic"
 
 
@@ -134,6 +151,42 @@ def _build_base_retriever(
     )
 
 
+
+
+def _build_runtime_llama_provider(
+    settings: Settings,
+) -> tuple[
+    LlamaCppProvider | OpenRouterProvider | CloudflareWorkersAIProvider,
+    (
+        RealLlamaRuntimeDescriptor
+        | OpenRouterLlamaRuntimeDescriptor
+        | CloudflareWorkersAIRuntimeDescriptor
+    ),
+]:
+    """Selecciona explícitamente el proveedor real; nunca degrada a mock."""
+
+    if settings.llm_runtime_provider == "openrouter":
+        return build_openrouter_llama_provider(settings)
+    if settings.llm_runtime_provider == "cloudflare_workers_ai":
+        return build_cloudflare_workers_ai_provider(settings)
+    return build_real_llama_provider(settings)
+
+
+def build_runtime_llama_provider(
+    settings: Settings,
+) -> tuple[
+    LlamaCppProvider | OpenRouterProvider | CloudflareWorkersAIProvider,
+    (
+        RealLlamaRuntimeDescriptor
+        | OpenRouterLlamaRuntimeDescriptor
+        | CloudflareWorkersAIRuntimeDescriptor
+    ),
+]:
+    """API pública para seleccionar el proveedor Llama real del runtime."""
+
+    return _build_runtime_llama_provider(settings)
+
+
 def build_runtime_components(settings: Settings) -> RuntimeComponents:
     artifact_dir, manifest = validate_runtime_assets(settings)
     backend = runtime_backend_name()
@@ -170,10 +223,18 @@ def build_runtime_components(settings: Settings) -> RuntimeComponents:
         raise _runtime_initialization_error(exc) from exc
 
     try:
-        llama_provider, llama_descriptor = build_real_llama_provider(settings)
+        llama_provider, llama_descriptor = build_runtime_llama_provider(settings)
     except RealLlamaRuntimeError as exc:
         raise RuntimeBuildError(
             "F.11 exige un Llama GGUF real y verificable para construir el runtime."
+        ) from exc
+    except OpenRouterLlamaRuntimeError as exc:
+        raise RuntimeBuildError(
+            "El prototipo web exige un Llama remoto real y verificable."
+        ) from exc
+    except CloudflareWorkersAIRuntimeError as exc:
+        raise RuntimeBuildError(
+            "El prototipo web exige un Llama remoto real y verificable."
         ) from exc
 
     llama_services = build_hybrid_llama_service_bundle(llama_provider)
@@ -190,6 +251,14 @@ def build_runtime_components(settings: Settings) -> RuntimeComponents:
         services=llama_services,
         provider_is_test_double=False,
     )
+    explanation_runtime = f"llama_cpp_real:{llama_provider.model_name}"
+    if llama_provider.provider_name == "openrouter":
+        explanation_runtime = f"openrouter_real:{llama_provider.model_name}"
+    elif llama_provider.provider_name == "cloudflare_workers_ai":
+        explanation_runtime = (
+            f"cloudflare_workers_ai_real:{llama_provider.model_name}"
+        )
+
     runner = WebHybridRunner(
         orchestrator=orchestrator,
         retrieval_runtime=(
@@ -197,7 +266,7 @@ def build_runtime_components(settings: Settings) -> RuntimeComponents:
             if backend == "lexical_cpu"
             else "legal_hybrid_19g"
         ),
-        explanation_runtime=f"llama_cpp_real:{llama_provider.model_name}",
+        explanation_runtime=explanation_runtime,
         hybrid_llama_runtime=hybrid_llama_runtime,
     )
     return RuntimeComponents(

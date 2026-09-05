@@ -38,6 +38,16 @@ class RealLikeReferenceProvider(F12ReferenceStructuredProvider):
         return "Llama-3.2-1B-Instruct-Q4_K_M"
 
 
+class CloudflareRealLikeProvider(RealLikeReferenceProvider):
+    @property
+    def provider_name(self) -> str:
+        return "cloudflare_workers_ai"
+
+    @property
+    def model_name(self) -> str:
+        return "@cf/meta/llama-3.3-70b-instruct-fp8-fast"
+
+
 class WrongProvider(F12ReferenceStructuredProvider):
     @property
     def provider_name(self) -> str:
@@ -111,11 +121,22 @@ def test_f12_reference_and_real_like_provider_pass_all_strict_gates() -> None:
 
 
 def test_f12_real_provider_cannot_be_a_non_llama_provider() -> None:
-    with pytest.raises(HybridLlamaBenchmarkError, match="llama-cpp-python"):
+    with pytest.raises(HybridLlamaBenchmarkError, match="proveedor Llama real"):
         run_hybrid_llama_benchmark(
             reference_provider=F12ReferenceStructuredProvider(),
             real_provider=WrongProvider(),
         )
+
+
+def test_f12_accepts_cloudflare_workers_ai_as_real_llama_transport() -> None:
+    report = run_hybrid_llama_benchmark(
+        reference_provider=F12ReferenceStructuredProvider(),
+        real_provider=CloudflareRealLikeProvider(),
+    )
+
+    assert report.real_llama.provider_name == "cloudflare_workers_ai"
+    assert report.real_llama.overall_passed is True
+    assert report.overall_passed is True
 
 
 def test_f12_hallucination_signal_fails_closed() -> None:
@@ -206,7 +227,8 @@ def test_f12_runtime_script_requires_real_llama_builder_not_mock() -> None:
         encoding="utf-8"
     )
 
-    assert "build_real_llama_provider(settings)" in source
+    assert "build_runtime_llama_provider(settings)" in source
+    assert "build_real_llama_provider(settings)" not in source
     assert "MockLLMProvider" not in source
     assert "F12ReferenceStructuredProvider" in source
     assert "overall_passed" in source

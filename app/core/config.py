@@ -1,11 +1,11 @@
-from functools import lru_cache
+﻿from functools import lru_cache
 
 from pydantic import Field
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
 class Settings(BaseSettings):
-    """Configuración validada de la aplicación."""
+    """ConfiguraciÃ³n validada de la aplicaciÃ³n."""
 
     model_config = SettingsConfigDict(
         env_file=".env",
@@ -39,8 +39,10 @@ class Settings(BaseSettings):
     )
     require_temporal_provenance_registry: bool = False
 
-    # F.11: Llama real local mediante llama.cpp. El mock queda fuera del runtime.
-    llm_runtime_provider: str = Field(default="llama_cpp", pattern="^llama_cpp$")
+    # F.11 + prototipo web: proveedor Llama real seleccionable; el mock queda fuera del runtime.
+    llm_runtime_provider: str = Field(
+        default="llama_cpp", pattern="^(llama_cpp|openrouter|cloudflare_workers_ai)$"
+    )
     require_real_llama: bool = True
     llama_model_path: str = "models/Llama-3.2-1B-Instruct-Q4_K_M.gguf"
     llama_model_sha256: str = Field(
@@ -54,6 +56,19 @@ class Settings(BaseSettings):
     llama_n_threads: int = Field(default=1, ge=1, le=256)
     llama_n_batch: int = Field(default=128, ge=8, le=4096)
 
+    # Compatibilidad histÃ³rica P.1/P.2: OpenRouter no es el proveedor objetivo actual.
+    openrouter_api_key: str | None = None
+    openrouter_model: str = "meta-llama/llama-3.3-70b-instruct"
+    openrouter_base_url: str = "https://openrouter.ai/api/v1"
+    openrouter_timeout_seconds: float = Field(default=180.0, gt=0, le=600)
+
+    # Prototipo web gratuito: inferencia Llama remota mediante Cloudflare Workers AI.
+    cloudflare_account_id: str | None = None
+    cloudflare_auth_token: str | None = None
+    cloudflare_workers_ai_model: str = "@cf/meta/llama-3.3-70b-instruct-fp8-fast"
+    cloudflare_workers_ai_base_url: str = "https://api.cloudflare.com/client/v4"
+    cloudflare_workers_ai_timeout_seconds: float = Field(default=180.0, gt=0, le=600)
+
     def trusted_hosts(self) -> list[str]:
         """Hosts permitidos, normalizados desde una variable de entorno simple."""
         hosts = [item.strip() for item in self.trusted_hosts_csv.split(",") if item.strip()]
@@ -64,5 +79,5 @@ class Settings(BaseSettings):
 
 @lru_cache
 def get_settings() -> Settings:
-    """Devuelve una instancia cacheada de configuración."""
+    """Devuelve una instancia cacheada de configuraciÃ³n."""
     return Settings()

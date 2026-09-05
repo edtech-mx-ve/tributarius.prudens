@@ -3,7 +3,10 @@ from __future__ import annotations
 from pathlib import Path
 
 from app.core.config import get_settings
-from app.services.real_llama_runtime import RealLlamaRuntimeError, build_real_llama_provider
+from app.services.cloudflare_workers_ai_runtime import CloudflareWorkersAIRuntimeError
+from app.services.openrouter_llama_runtime import OpenRouterLlamaRuntimeError
+from app.services.real_llama_runtime import RealLlamaRuntimeError
+from app.services.runtime_factory import build_runtime_llama_provider
 from evaluation.hybrid_llama_benchmark import (
     HybridLlamaBenchmarkError,
     export_hybrid_llama_benchmark_report,
@@ -14,23 +17,35 @@ from evaluation.hybrid_llama_fixtures import F12ReferenceStructuredProvider
 _DEFAULT_OUTPUT = Path("evaluation/reports/block_f12_hybrid_llama_benchmark.json")
 
 
+def _model_sha256_for_report(descriptor: object) -> str:
+    value = getattr(descriptor, "model_sha256", None)
+    if isinstance(value, str) and value:
+        return value
+    return "not_applicable_remote_provider"
+
+
 def main() -> int:
     settings = get_settings()
     try:
-        real_provider, descriptor = build_real_llama_provider(settings)
+        real_provider, descriptor = build_runtime_llama_provider(settings)
         report = run_hybrid_llama_benchmark(
             reference_provider=F12ReferenceStructuredProvider(),
             real_provider=real_provider,
         )
         output = export_hybrid_llama_benchmark_report(report, _DEFAULT_OUTPUT)
-    except (RealLlamaRuntimeError, HybridLlamaBenchmarkError) as exc:
+    except (
+        RealLlamaRuntimeError,
+        OpenRouterLlamaRuntimeError,
+        CloudflareWorkersAIRuntimeError,
+        HybridLlamaBenchmarkError,
+    ) as exc:
         print(f"ERROR: benchmark F.12 rechazado: {exc}")
         return 1
 
     print("F.12 benchmark híbrido: baseline determinista de prueba vs Llama real")
     print(f"- provider={descriptor.provider_name}")
     print(f"- model={descriptor.model_name}")
-    print(f"- model_sha256={descriptor.model_sha256}")
+    print(f"- model_sha256={_model_sha256_for_report(descriptor)}")
     print(f"- report={output}")
     print(f"- conclusion_stability={report.conclusion_stability:.3f}")
     print(f"- hallucination_rate={report.hallucination_rate:.3f}")

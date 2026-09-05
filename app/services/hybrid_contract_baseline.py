@@ -133,6 +133,10 @@ def _runtime_checks(baseline: HybridContractBaseline) -> list[HybridContractChec
     label_preserved_or_evolved = (
         f'explanation_runtime="{baseline_label}"' in runtime_factory
         or 'explanation_runtime=f"llama_cpp_real:' in runtime_factory
+        or (
+            'f"llama_cpp_real:' in runtime_factory
+            and "explanation_runtime=explanation_runtime" in runtime_factory
+        )
     )
     checks.append(
         HybridContractCheck(

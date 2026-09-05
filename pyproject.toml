@@ -17,6 +17,7 @@ dependencies = [
     "alembic>=1.16,<2.0",
     "psycopg[binary]>=3.2,<4.0",
     "pypdf>=5.9,<6.0",
+    "httpx>=0.28,<1.0",
     "numpy>=1.26,<3.0",
     "sentence-transformers>=6.0,<7.0",
     "faiss-cpu>=1.15,<2.0",
@@ -30,7 +31,6 @@ llama = [
 
 dev = [
     "pytest>=8.4,<9.0",
-    "httpx>=0.28,<1.0",
     "ruff>=0.12,<1.0",
     "mypy>=1.17,<2.0",
     "PyYAML>=6.0,<7.0",

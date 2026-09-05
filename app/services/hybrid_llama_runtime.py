@@ -55,8 +55,9 @@ class HybridLlamaRuntime:
     """Ejecuta F.2-F.9 sin convertir al LLM en autoridad jurídica.
 
     F.10 conecta los contratos ya cerrados. El proveedor se inyecta mediante
-    ``StructuredMessageProvider`` para que tests usen dobles deterministas y F.11
-    conecte ``LlamaCppProvider`` real sin reescribir la cadena jurídica.
+    ``StructuredMessageProvider`` para que tests usen dobles deterministas, F.11
+    conserve ``LlamaCppProvider`` local y el prototipo web pueda inyectar un
+    proveedor Llama remoto sin reescribir la cadena jurídica.
     """
 
     def __init__(

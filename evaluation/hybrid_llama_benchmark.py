@@ -50,6 +50,17 @@ class HybridLlamaBenchmarkError(RuntimeError):
     pass
 
 
+def _is_supported_real_llama_provider(provider_name: str, model_name: str) -> bool:
+    normalized_model = model_name.strip().casefold()
+    if provider_name == "llama-cpp-python":
+        return "llama" in normalized_model
+    if provider_name == "openrouter":
+        return normalized_model.startswith("meta-llama/")
+    if provider_name == "cloudflare_workers_ai":
+        return normalized_model.startswith("@cf/meta/llama")
+    return False
+
+
 def load_hybrid_llama_benchmark_suite(
     path: Path | None = None,
 ) -> HybridLlamaBenchmarkSuite:
@@ -473,9 +484,9 @@ def run_hybrid_llama_benchmark(
         suite=active_suite,
     )
     comparisons, conclusion_stability = _comparison(reference, real)
-    if real.provider_name != "llama-cpp-python":
+    if not _is_supported_real_llama_provider(real.provider_name, real.model_name):
         raise HybridLlamaBenchmarkError(
-            "F.12 exige llama-cpp-python como proveedor real comparado."
+            "F.12 exige un proveedor Llama real soportado y trazable."
         )
     if any(item.provider_is_test_double for item in real.cases):
         raise HybridLlamaBenchmarkError("F.12 rechazó un doble presentado como Llama real.")
