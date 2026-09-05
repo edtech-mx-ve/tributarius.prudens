@@ -1,11 +1,11 @@
-﻿from functools import lru_cache
+from functools import lru_cache
 
 from pydantic import Field
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
 class Settings(BaseSettings):
-    """ConfiguraciÃ³n validada de la aplicaciÃ³n."""
+    """Configuración validada de la aplicación."""
 
     model_config = SettingsConfigDict(
         env_file=".env",
@@ -34,6 +34,8 @@ class Settings(BaseSettings):
     verify_rag_integrity: bool = True
     legal_retrieval_policy_path: str = "app/resources/legal_retrieval_policy.json"
     runtime_rule_set_path: str = "rules/examples/basic_obligations.json"
+    runtime_rbs_inventory_path: str = "app/resources/current_rbs_inventory.json"
+    runtime_rule_set_dir: str = "rules/production"
     temporal_provenance_registry_path: str = (
         "knowledge/temporal/temporal_provenance_registry.json"
     )
@@ -56,7 +58,7 @@ class Settings(BaseSettings):
     llama_n_threads: int = Field(default=1, ge=1, le=256)
     llama_n_batch: int = Field(default=128, ge=8, le=4096)
 
-    # Compatibilidad histÃ³rica P.1/P.2: OpenRouter no es el proveedor objetivo actual.
+    # Compatibilidad histórica P.1/P.2: OpenRouter no es el proveedor objetivo actual.
     openrouter_api_key: str | None = None
     openrouter_model: str = "meta-llama/llama-3.3-70b-instruct"
     openrouter_base_url: str = "https://openrouter.ai/api/v1"
@@ -79,5 +81,5 @@ class Settings(BaseSettings):
 
 @lru_cache
 def get_settings() -> Settings:
-    """Devuelve una instancia cacheada de configuraciÃ³n."""
+    """Devuelve una instancia cacheada de configuración."""
     return Settings()

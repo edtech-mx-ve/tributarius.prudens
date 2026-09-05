@@ -6,6 +6,7 @@ from pathlib import Path
 from pydantic import ValidationError
 
 from app.domain.primary_rbs_inventory import CurrentRBSInventory
+from app.domain.rules import RuleSet
 from app.services.rule_loader import RuleLoadError, load_rule_set
 
 
@@ -72,3 +73,41 @@ def validate_current_rbs_inventory(
         raise CurrentRBSInventoryError(
             "El contenido RBS de producción no coincide con el inventario B.1."
         )
+
+
+def load_current_production_rule_set(
+    inventory_path: Path,
+    production_dir: Path,
+) -> RuleSet:
+    """Carga en memoria el RBS productivo exacto definido por B.1."""
+    inventory = load_current_rbs_inventory(inventory_path)
+    validate_current_rbs_inventory(inventory, production_dir)
+
+    resolved = production_dir.expanduser().resolve()
+    schema_versions: set[str] = set()
+    rules = []
+
+    try:
+        for filename in inventory.production_rule_files:
+            rule_set = load_rule_set(resolved / filename)
+            schema_versions.add(rule_set.schema_version)
+            rules.extend(rule_set.rules)
+    except RuleLoadError as exc:
+        raise CurrentRBSInventoryError(
+            "No fue posible ensamblar el RBS productivo B.1."
+        ) from exc
+
+    if len(schema_versions) != 1:
+        raise CurrentRBSInventoryError(
+            "Los archivos RBS de producci?n usan esquemas incompatibles."
+        )
+
+    if len(rules) != inventory.total_rules:
+        raise CurrentRBSInventoryError(
+            "El RBS ensamblado no coincide con total_rules de B.1."
+        )
+
+    return RuleSet(
+        schema_version=next(iter(schema_versions)),
+        rules=rules,
+    )

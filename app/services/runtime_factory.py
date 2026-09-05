@@ -27,6 +27,10 @@ from app.services.openrouter_llama_runtime import (
     OpenRouterLlamaRuntimeError,
     build_openrouter_llama_provider,
 )
+from app.services.primary_rbs_inventory import (
+    CurrentRBSInventoryError,
+    load_current_production_rule_set,
+)
 from app.services.real_llama_runtime import (
     RealLlamaRuntimeError,
     build_real_llama_provider,
@@ -97,11 +101,33 @@ def validate_runtime_assets(settings: Settings) -> tuple[Path, IndexManifest]:
         label="La política de recuperación jurídica",
         suffix=".json",
     )
-    _validated_file(
-        settings.runtime_rule_set_path,
-        label="El conjunto de reglas",
-        suffix=".json",
-    )
+    if settings.environment == "production":
+        inventory_path = _validated_file(
+            settings.runtime_rbs_inventory_path,
+            label="El inventario RBS B.1",
+            suffix=".json",
+        )
+        production_dir = Path(settings.runtime_rule_set_dir).expanduser().resolve()
+        if not production_dir.is_dir():
+            raise RuntimeBuildError(
+                "El directorio de reglas RBS de producci?n no est? disponible."
+            )
+        try:
+            load_current_production_rule_set(
+                inventory_path,
+                production_dir,
+            )
+        except CurrentRBSInventoryError as exc:
+            raise RuntimeBuildError(
+                "El RBS productivo no coincide con el inventario B.1."
+            ) from exc
+    else:
+        _validated_file(
+            settings.runtime_rule_set_path,
+            label="El conjunto de reglas",
+            suffix=".json",
+        )
+
     return artifact_dir, manifest
 
 
@@ -218,8 +244,19 @@ def build_runtime_components(settings: Settings) -> RuntimeComponents:
             base_retriever,
             Path(settings.legal_retrieval_policy_path),
         )
-        rule_set = load_rule_set(Path(settings.runtime_rule_set_path))
-    except (EmbeddingError, RetrievalError, RuleLoadError) as exc:
+        if settings.environment == "production":
+            rule_set = load_current_production_rule_set(
+                Path(settings.runtime_rbs_inventory_path),
+                Path(settings.runtime_rule_set_dir),
+            )
+        else:
+            rule_set = load_rule_set(Path(settings.runtime_rule_set_path))
+    except (
+        EmbeddingError,
+        RetrievalError,
+        RuleLoadError,
+        CurrentRBSInventoryError,
+    ) as exc:
         raise _runtime_initialization_error(exc) from exc
 
     try:
