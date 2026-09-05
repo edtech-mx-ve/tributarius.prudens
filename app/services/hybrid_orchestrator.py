@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import logging
 from typing import Protocol
 
 from app.domain.cbr import CBRCase, CBRRetrievalResult, CBRReuseAssessment
@@ -87,6 +88,8 @@ from llm.models import DeterministicEvidence
 from llm.service import LlamaRAGService
 from rag.retrieval.filters import RetrievalFilters
 from rag.retrieval.models import RetrievalResult
+
+logger = logging.getLogger(__name__)
 
 
 class QueryAnalyzerLike(Protocol):
@@ -993,7 +996,12 @@ class HybridOrchestrator:
                 deterministic_evidence=deterministic,
                 explanation_mode=request.explanation_mode,
             )
-        except LLMError:
+        except LLMError as exc:
+            logger.exception(
+                "Fallo LLM en etapa explanation. cause_type=%s cause=%s",
+                type(exc).__name__,
+                str(exc),
+            )
             llm_review = True
             traces.append(
                 StageTrace(

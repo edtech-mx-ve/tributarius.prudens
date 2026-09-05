@@ -28,6 +28,45 @@ def _shared_basis(
     return [ref for ref in rbs.legal_basis if ref in cbr_refs]
 
 
+def _rbs_rule_provenance(
+    rbs: NormalizedReasoningResult,
+) -> set[str]:
+    """Extrae referencias RBS estables desde la traza normalizada."""
+    refs: set[str] = set()
+
+    for item in rbs.trace:
+        parts = item.split(":")
+        if len(parts) >= 3 and parts[0].isdigit():
+            rule_version = parts[1]
+        elif len(parts) >= 2:
+            rule_version = parts[0]
+        else:
+            continue
+
+        if "@" not in rule_version:
+            continue
+
+        refs.add(f"RBS:{rule_version}")
+
+    return refs
+
+
+def _cbr_confirms_rbs_provenance(
+    rbs: NormalizedReasoningResult,
+    cbr: NormalizedReasoningResult,
+) -> bool:
+    """Confirma con procedencia RBS completa y sin hechos conflictivos."""
+    active_rbs_refs = _rbs_rule_provenance(rbs)
+
+    if not active_rbs_refs:
+        return False
+
+    if cbr.conflicting_facts:
+        return False
+
+    return active_rbs_refs <= set(cbr.references)
+
+
 def _trace(
     relation: HybridReasoningRelation,
     rbs: NormalizedReasoningResult,
@@ -109,7 +148,10 @@ def coordinate_rbs_cbr(
             "y no puede reutilizarse para desplazarla."
         ]
         review = False
-    elif _fold(rbs.conclusion) == _fold(cbr.conclusion):
+    elif (
+        _fold(rbs.conclusion) == _fold(cbr.conclusion)
+        or _cbr_confirms_rbs_provenance(rbs, cbr)
+    ):
         relation = HybridReasoningRelation.CONFIRMATION
         reasons = [
             "RBS y CBR alcanzan la misma conclusión y comparten fundamento jurídico."
