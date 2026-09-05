@@ -53,6 +53,7 @@ _ALLOWED_BLOCKED_PREFIX_FILES = {
     "deployment/runtime_artifacts/README.md",
     "traceability/exports/.gitkeep",
     "cbr/data/.gitkeep",
+    "cbr/data/production_cases.jsonl",
 }
 
 _ALLOWED_KNOWLEDGE_STRUCTURE = {

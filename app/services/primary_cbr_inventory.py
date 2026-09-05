@@ -25,6 +25,13 @@ class CurrentCBRInventoryError(RuntimeError):
     """Error controlado del inventario CBR C.1."""
 
 
+POST_BASELINE_OPERATIONAL_CASE_FILES = frozenset(
+    {
+        "cbr/data/production_cases.jsonl",
+    }
+)
+
+
 def load_current_cbr_inventory(path: Path) -> CurrentCBRInventory:
     resolved = path.expanduser().resolve()
     if not resolved.is_file():
@@ -131,14 +138,32 @@ def validate_current_cbr_inventory(
         raise CurrentCBRInventoryError("La consulta fixture CBR ya no es válida.") from exc
 
     data_dir = root / "cbr" / "data"
-    actual_operational_files = sorted(
-        path.relative_to(root).as_posix()
-        for path in data_dir.glob("*.jsonl")
-        if path.is_file()
+    actual_operational_files = {
+        item.relative_to(root).as_posix()
+        for item in data_dir.glob("*.jsonl")
+        if item.is_file()
+    }
+
+    baseline_operational_files = set(
+        inventory.source_tree_operational_case_files
     )
-    if actual_operational_files != inventory.source_tree_operational_case_files:
+
+    missing_baseline_files = sorted(
+        baseline_operational_files
+        - actual_operational_files
+    )
+
+    unexpected_operational_files = sorted(
+        actual_operational_files
+        - baseline_operational_files
+        - POST_BASELINE_OPERATIONAL_CASE_FILES
+    )
+
+    if missing_baseline_files or unexpected_operational_files:
         raise CurrentCBRInventoryError(
-            "El corpus operacional CBR versionado difiere del baseline C.1."
+            "El corpus operacional CBR versionado difiere "
+            "del baseline C.1 o contiene extensiones "
+            "posteriores no autorizadas."
         )
 
     actual_identifier_types = [kind for kind, _ in PATTERNS]

@@ -3,6 +3,7 @@ from pathlib import Path
 import pytest
 
 from app.services.primary_cbr_inventory import (
+    POST_BASELINE_OPERATIONAL_CASE_FILES,
     CurrentCBRInventoryError,
     load_current_cbr_inventory,
     validate_current_cbr_inventory,
@@ -90,3 +91,23 @@ def test_c1_detects_missing_component(tmp_path: Path) -> None:
 
     with pytest.raises(CurrentCBRInventoryError, match="Faltan componentes"):
         validate_current_cbr_inventory(inventory, missing_root)
+
+
+
+def test_c1_preserves_baseline_and_allows_p5_4_extension() -> None:
+    inventory = load_current_cbr_inventory(INVENTORY_PATH)
+
+    assert inventory.source_tree_operational_case_files == []
+    assert inventory.source_tree_operational_case_count == 0
+
+    assert POST_BASELINE_OPERATIONAL_CASE_FILES == frozenset(
+        {
+            "cbr/data/production_cases.jsonl",
+        }
+    )
+
+    assert (
+        ROOT / "cbr" / "data" / "production_cases.jsonl"
+    ).is_file()
+
+    validate_current_cbr_inventory(inventory, ROOT)
