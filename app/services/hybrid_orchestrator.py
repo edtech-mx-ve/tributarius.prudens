@@ -32,6 +32,10 @@ from app.services.cbr_h1_contrast import contrast_h1_with_cbr
 from app.services.cbr_reasoning import assess_case_reuse
 from app.services.focused_normative_rag import execute_focused_rag
 from app.services.full_corpus_expansion import execute_full_corpus_expansion
+from app.services.hybrid_h1_traceability import (
+    build_hybrid_h1_generation_trace,
+    build_hybrid_h1_verification_trace,
+)
 from app.services.hybrid_isr_stage import run_isr_stage
 from app.services.hybrid_reasoning_coordinator import coordinate_rbs_cbr
 from app.services.hybrid_reasoning_normalization import (
@@ -436,6 +440,7 @@ class HybridOrchestrator:
         llama_initial_context = build_initial_fiscal_hypothesis_context(analysis)
         llama_fiscal_hypothesis_h1 = None
         hybrid_h1_review = False
+        hybrid_h1_failed = False
         if self._hybrid_h1_service is not None:
             try:
                 llama_fiscal_hypothesis_h1 = self._hybrid_h1_service.generate(
@@ -443,6 +448,7 @@ class HybridOrchestrator:
                 )
             except LLMError:
                 hybrid_h1_review = True
+                hybrid_h1_failed = True
             else:
                 hybrid_h1_review = llama_fiscal_hypothesis_h1.requires_human_review
 
@@ -511,10 +517,30 @@ class HybridOrchestrator:
             )
         )
 
-        initial_legal_hypothesis, hypothesis_trace = run_legal_hypothesis_stage(
-            self._legal_hypothesis_service,
-            retrieval,
-        )
+        hypothesis_trace: StageTrace | None
+
+        if self._legal_hypothesis_service is not None:
+            (
+                initial_legal_hypothesis,
+                hypothesis_trace,
+            ) = run_legal_hypothesis_stage(
+                self._legal_hypothesis_service,
+                retrieval,
+            )
+        else:
+            initial_legal_hypothesis = None
+            hypothesis_trace = build_hybrid_h1_generation_trace(
+                service_configured=self._hybrid_h1_service is not None,
+                result=llama_fiscal_hypothesis_h1,
+                generation_failed=hybrid_h1_failed,
+            )
+            if hypothesis_trace is None:
+                _, hypothesis_trace = run_legal_hypothesis_stage(
+                    None,
+                    retrieval,
+                )
+
+        assert hypothesis_trace is not None
         traces.append(hypothesis_trace)
 
         rag_normative_candidates = build_normative_candidates(
@@ -864,13 +890,38 @@ class HybridOrchestrator:
 
         (
             initial_legal_hypothesis_verification,
-            hypothesis_verification_trace,
+            legacy_hypothesis_verification_trace,
         ) = run_legal_hypothesis_verification_stage(
             initial_legal_hypothesis,
             rule_result=rule_result,
             hybrid_coordination=hybrid_coordination,
         )
-        traces.append(hypothesis_verification_trace)
+
+        hypothesis_verification_trace = None
+        if self._legal_hypothesis_service is None:
+            hypothesis_verification_trace = build_hybrid_h1_verification_trace(
+                result=llama_fiscal_hypothesis_h1,
+                rbs_contrast_present=rbs_h1_contrast is not None,
+                cbr_contrast_present=cbr_h1_contrast is not None,
+                requires_human_review=(
+                    hybrid_h1_review
+                    or (
+                        rbs_h1_contrast.requires_human_review
+                        if rbs_h1_contrast is not None
+                        else False
+                    )
+                    or (
+                        cbr_h1_contrast.requires_human_review
+                        if cbr_h1_contrast is not None
+                        else False
+                    )
+                ),
+            )
+
+        traces.append(
+            hypothesis_verification_trace
+            or legacy_hypothesis_verification_trace
+        )
 
         deterministic = _deterministic_evidence(
             applicable_refs,
