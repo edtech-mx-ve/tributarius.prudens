@@ -255,6 +255,64 @@ def _accept_hit(
     return (not non_normative and not outside_focus, non_normative, outside_focus)
 
 
+def _select_diverse_candidates(
+    candidates: dict[str, _ScoredHit],
+    *,
+    top_k: int,
+) -> list[_ScoredHit]:
+    """Preserve exact seeds while preventing one source from monopolizing top_k."""
+    exact_by_source: dict[int, list[_ScoredHit]] = {}
+    semantic: list[_ScoredHit] = []
+
+    for item in candidates.values():
+        if item.exact_seed:
+            exact_by_source.setdefault(item.source_rank, []).append(item)
+        else:
+            semantic.append(item)
+
+    for bucket in exact_by_source.values():
+        bucket.sort(
+            key=lambda item: (
+                -item.final_score,
+                item.hit.chunk_id,
+            )
+        )
+
+    selected: list[_ScoredHit] = []
+    source_ranks = sorted(exact_by_source)
+
+    while len(selected) < top_k:
+        added = False
+
+        for source_rank in source_ranks:
+            bucket = exact_by_source[source_rank]
+            if not bucket:
+                continue
+
+            selected.append(bucket.pop(0))
+            added = True
+
+            if len(selected) >= top_k:
+                break
+
+        if not added:
+            break
+
+    if len(selected) < top_k:
+        semantic.sort(
+            key=lambda item: (
+                -item.final_score,
+                item.source_rank,
+                item.hit.chunk_id,
+            )
+        )
+        selected.extend(
+            semantic[: top_k - len(selected)]
+        )
+
+    return selected
+
+
 def _collect_result(
     candidates: dict[str, _ScoredHit],
     *,
@@ -265,15 +323,10 @@ def _collect_result(
     rejected_non_normative: int,
     rejected_outside_focus: int,
 ) -> FocusedRAGRun:
-    ordered = sorted(
-        candidates.values(),
-        key=lambda item: (
-            not item.exact_seed,
-            -item.final_score,
-            item.source_rank,
-            item.hit.chunk_id,
-        ),
-    )[:top_k]
+    ordered = _select_diverse_candidates(
+        candidates,
+        top_k=top_k,
+    )
     hits = [
         item.hit.model_copy(
             update={

@@ -25,6 +25,7 @@ from app.domain.query import (
     ExtractedFact,
     FactOrigin,
     QueryAnalysis,
+    QueryDimensionName,
     QueryIntent,
 )
 from app.domain.rules import RuleEvaluationResult, RuleSet
@@ -116,12 +117,63 @@ def _safe_fact_value(name: str, value: str) -> object:
     return clean
 
 
+_ACTIVITY_TO_RBS_INCOME_TYPE = {
+    "servicios profesionales independientes": (
+        "independent_professional_service"
+    ),
+    "trabajo subordinado": "subordinate_personal_service",
+    "arrendamiento de inmuebles": "real_estate_rental",
+    "actividad empresarial": "business_activity",
+}
+
+
 def build_fact_map(analysis: QueryAnalysis) -> dict[str, object]:
-    """Convierte hechos del analizador sin inferir datos ausentes."""
+    """Convierte hechos y dimensiones expl?citas D.1 al vocabulario RBS."""
     result: dict[str, object] = {}
+
     for fact in analysis.facts:
         key = fact.name.strip().lower()
         result[key] = _safe_fact_value(key, fact.value)
+
+    multidimensional = analysis.multidimensional
+    if multidimensional is None:
+        return result
+
+    for item in multidimensional.dimensions:
+        if item.origin is not FactOrigin.EXPLICIT:
+            continue
+
+        if item.dimension is QueryDimensionName.TAXPAYER_TYPE:
+            result.setdefault(
+                "taxpayer_type",
+                item.value,
+            )
+            continue
+
+        if item.dimension is QueryDimensionName.FISCAL_YEAR:
+            result.setdefault(
+                "fiscal_year",
+                _safe_fact_value("fiscal_year", item.value),
+            )
+            continue
+
+        if item.dimension is QueryDimensionName.TAX:
+            result.setdefault(
+                "matter",
+                item.value,
+            )
+            continue
+
+        if item.dimension is QueryDimensionName.ACTIVITY:
+            income_type = _ACTIVITY_TO_RBS_INCOME_TYPE.get(
+                item.value
+            )
+            if income_type is not None:
+                result.setdefault(
+                    "income_type",
+                    income_type,
+                )
+
     return result
 
 
