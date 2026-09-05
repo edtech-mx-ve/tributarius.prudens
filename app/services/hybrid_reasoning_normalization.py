@@ -128,7 +128,7 @@ def normalize_cbr_result(
             [
                 f"{score.field.value}: consulta={score.query_value}; caso={score.case_value}"
                 for score in best.field_scores
-                if score.score < 1
+                if score.weight > 0 and score.score < 1
             ]
             if best is not None
             else []
