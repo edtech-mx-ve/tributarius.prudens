@@ -45,7 +45,7 @@ class EvidenceReference(BaseModel):
 
 
 class UncertaintyItem(BaseModel):
-    code: str = Field(pattern=r"^[A-Z0-9_]{3,100}$")
+    code: str = Field(pattern=r"^[A-Z0-9_-]{3,100}$")
     message: str = Field(min_length=1, max_length=1000)
     stage: str = Field(min_length=1, max_length=100)
     requires_human_review: bool = False
