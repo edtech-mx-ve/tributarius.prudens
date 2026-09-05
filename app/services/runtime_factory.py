@@ -7,9 +7,11 @@ from pathlib import Path
 from pydantic import ValidationError
 
 from app.core.config import Settings
+from app.domain.cbr import CBRCase
 from app.domain.cloudflare_workers_ai_runtime import CloudflareWorkersAIRuntimeDescriptor
 from app.domain.openrouter_llama_runtime import OpenRouterLlamaRuntimeDescriptor
 from app.domain.real_llama_runtime import RealLlamaRuntimeDescriptor
+from app.services.cbr_loader import CBRLoadError, load_cbr_cases_jsonl
 from app.services.cloudflare_workers_ai_runtime import (
     CloudflareWorkersAIRuntimeError,
     build_cloudflare_workers_ai_provider,
@@ -77,6 +79,21 @@ def _validated_file(path_value: str, *, label: str, suffix: str) -> Path:
     return path
 
 
+
+def load_runtime_cbr_cases(settings: Settings) -> list[CBRCase]:
+    """Carga el corpus CBR operativo requerido por el runtime."""
+    path = _validated_file(
+        settings.runtime_cbr_cases_path,
+        label="El corpus CBR productivo",
+        suffix=".jsonl",
+    )
+    try:
+        return load_cbr_cases_jsonl(path)
+    except CBRLoadError as exc:
+        raise RuntimeBuildError(
+            "El corpus CBR productivo es invalido."
+        ) from exc
+
 def _load_manifest(artifact_dir: Path) -> IndexManifest:
     manifest_path = artifact_dir / "manifest.json"
     try:
@@ -121,6 +138,8 @@ def validate_runtime_assets(settings: Settings) -> tuple[Path, IndexManifest]:
             raise RuntimeBuildError(
                 "El RBS productivo no coincide con el inventario B.1."
             ) from exc
+
+        load_runtime_cbr_cases(settings)
     else:
         _validated_file(
             settings.runtime_rule_set_path,
@@ -259,6 +278,8 @@ def build_runtime_components(settings: Settings) -> RuntimeComponents:
     ) as exc:
         raise _runtime_initialization_error(exc) from exc
 
+    cbr_cases = load_runtime_cbr_cases(settings)
+
     try:
         llama_provider, llama_descriptor = build_runtime_llama_provider(settings)
     except RealLlamaRuntimeError as exc:
@@ -280,6 +301,7 @@ def build_runtime_components(settings: Settings) -> RuntimeComponents:
         retriever=legal_retriever,
         llm_service=LlamaRAGService(llama_provider),
         rule_set=rule_set,
+        cbr_cases=cbr_cases,
         temporal_guard=temporal_guard,
         hybrid_h1_service=llama_services.h1,
     )

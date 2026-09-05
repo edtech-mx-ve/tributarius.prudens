@@ -798,7 +798,7 @@ class HybridOrchestrator:
             cbr_assessments = [
                 assess_case_reuse(
                     item,
-                    current_normative_refs=set(applicable_refs),
+                    current_normative_refs=set(rule_normative_refs),
                 )
                 for item in cbr_result.matches
             ]

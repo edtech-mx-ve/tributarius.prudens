@@ -43,6 +43,8 @@ services:
         value: app/resources/current_rbs_inventory.json
       - key: RUNTIME_RULE_SET_DIR
         value: rules/production
+      - key: RUNTIME_CBR_CASES_PATH
+        value: cbr/data/production_cases.jsonl
       - key: TEMPORAL_PROVENANCE_REGISTRY_PATH
         value: knowledge/temporal/temporal_provenance_registry.json
       - key: REQUIRE_TEMPORAL_PROVENANCE_REGISTRY

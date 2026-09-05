@@ -131,6 +131,7 @@ traceability/exports/*
 
 cbr/data/*
 !cbr/data/.gitkeep
+!cbr/data/production_cases.jsonl
 
 uploads/
 exports/

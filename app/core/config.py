@@ -36,6 +36,7 @@ class Settings(BaseSettings):
     runtime_rule_set_path: str = "rules/examples/basic_obligations.json"
     runtime_rbs_inventory_path: str = "app/resources/current_rbs_inventory.json"
     runtime_rule_set_dir: str = "rules/production"
+    runtime_cbr_cases_path: str = "cbr/data/production_cases.jsonl"
     temporal_provenance_registry_path: str = (
         "knowledge/temporal/temporal_provenance_registry.json"
     )
