@@ -1,7 +1,9 @@
 from __future__ import annotations
 
 from collections.abc import Iterable
+from datetime import date
 
+from app.domain.canonical_normative_corpus import is_canonical_normative_document
 from app.domain.normative import (
     NormativeApplicabilityRequest,
     NormativeApplicabilityResult,
@@ -43,6 +45,22 @@ def _result(
     )
 
 
+def _canonical_current_corpus_applies(
+    request: NormativeApplicabilityRequest,
+) -> bool:
+    """Permite usar el corpus canonico para consultas de Derecho vigente."""
+    return (
+        is_canonical_normative_document(request.document_id)
+        and request.query_date == date.today()
+        and request.effective_from is None
+        and request.effective_to is None
+        and request.validity_status is NormativeValidityStatus.UNKNOWN
+        and request.validity_scope is NormativeValidityScope.UNKNOWN
+        and request.validity_basis is NormativeValidityBasis.UNKNOWN
+        and request.validity_verified_at is None
+    )
+
+
 def _verified_snapshot_applies(request: NormativeApplicabilityRequest) -> bool:
     return (
         request.validity_status is NormativeValidityStatus.VERIFIED_IN_FORCE
@@ -75,6 +93,19 @@ def evaluate_normative_applicability(
         )
 
     if request.effective_from is None and request.effective_to is None:
+        if _canonical_current_corpus_applies(request):
+            return _result(
+                request,
+                decision=NormativeDecision.APPLICABLE,
+                applicable=True,
+                reason=(
+                    "La norma pertenece al corpus normativo canonico "
+                    "suministrado y administrado por el propietario. "
+                    "Para una consulta de Derecho vigente se considera "
+                    "aplicable mientras permanezca en el corpus canonico."
+                ),
+            )
+
         if _verified_snapshot_applies(request):
             return _result(
                 request,

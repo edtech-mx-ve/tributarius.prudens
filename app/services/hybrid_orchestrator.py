@@ -286,6 +286,7 @@ def _evaluate_normative_candidates(
         result = evaluate_normative_applicability(
             NormativeApplicabilityRequest(
                 legal_unit_id=candidate.legal_unit_id,
+                document_id=candidate.document_id,
                 version_label=candidate.version_label,
                 effective_from=candidate.effective_from,
                 effective_to=candidate.effective_to,

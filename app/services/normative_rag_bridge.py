@@ -189,6 +189,7 @@ def candidate_from_normative_hit(
 
     return NormativeCandidate(
         ref=hit.chunk_id,
+        document_id=metadata.document_id.strip().casefold(),
         legal_unit_id=_stable_legal_unit_id(hit),
         version_label=metadata.version_label,
         effective_from=effective_from,

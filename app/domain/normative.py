@@ -41,6 +41,7 @@ class NormativeValidityBasis(StrEnum):
 
 class NormativeApplicabilityRequest(BaseModel):
     legal_unit_id: int = Field(gt=0)
+    document_id: str | None = Field(default=None, min_length=1, max_length=200)
     version_label: str = Field(min_length=1, max_length=200)
     effective_from: date | None = None
     effective_to: date | None = None

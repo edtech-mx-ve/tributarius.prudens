@@ -98,6 +98,7 @@ class EvidenceLayer(BaseModel):
 
 class NormativeCandidate(BaseModel):
     ref: str = Field(min_length=1, max_length=300)
+    document_id: str | None = Field(default=None, min_length=1, max_length=200)
     legal_unit_id: int = Field(gt=0)
     version_label: str = Field(min_length=1, max_length=100)
     effective_from: date | None = None
