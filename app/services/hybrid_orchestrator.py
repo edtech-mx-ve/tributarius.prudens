@@ -65,6 +65,7 @@ from app.services.normative_rag_bridge import (
     build_rule_normative_refs,
 )
 from app.services.normative_temporal_runtime_guard import TemporalRuntimeGuard
+from app.services.operational_cbr_query import resolve_operational_cbr_query
 from app.services.query_fact_compat_19s_r15 import query_fact_value
 from app.services.rbs_h1_contrast import contrast_h1_with_rbs
 from app.services.rule_engine import evaluate_rules
@@ -559,9 +560,21 @@ class HybridOrchestrator:
                     }
                 )
 
+        effective_cbr_query = resolve_operational_cbr_query(
+            analysis,
+            explicit_query=request.cbr_query,
+            fiscal_year=resolved_fiscal_year,
+            top_k=request.top_k,
+        )
+        cbr_query_derived = (
+            request.cbr_query is None
+            and effective_cbr_query is not None
+        )
+
         effective_request = request.model_copy(
             update={
                 "query_fiscal_year": resolved_fiscal_year,
+                "cbr_query": effective_cbr_query,
                 "normative_candidates": [
                     *request.normative_candidates,
                     *rag_normative_candidates,
@@ -755,7 +768,7 @@ class HybridOrchestrator:
         cbr_result = None
         cbr_assessments: list[CBRReuseAssessment] = []
         cbr_review = False
-        if request.cbr_query is None:
+        if effective_request.cbr_query is None:
             traces.append(
                 StageTrace(
                     stage=OrchestrationStage.CBR,
@@ -769,11 +782,19 @@ class HybridOrchestrator:
                 StageTrace(
                     stage=OrchestrationStage.CBR,
                     status=StageStatus.DEGRADED,
-                    detail="CBR solicitado, pero no hay corpus de casos disponible.",
+                    detail=(
+                        "CBR activado desde QueryAnalysis, pero no hay corpus "
+                        "de casos disponible."
+                        if cbr_query_derived
+                        else "CBR solicitado, pero no hay corpus de casos disponible."
+                    ),
                 )
             )
         else:
-            cbr_result = retrieve_similar_cases(request.cbr_query, self._cbr_cases)
+            cbr_result = retrieve_similar_cases(
+                effective_request.cbr_query,
+                self._cbr_cases,
+            )
             cbr_assessments = [
                 assess_case_reuse(
                     item,
@@ -807,7 +828,7 @@ class HybridOrchestrator:
         cbr_reasoning = None
         hybrid_coordination = None
         coordination_review = False
-        if request.cbr_query is None:
+        if effective_request.cbr_query is None:
             traces.append(
                 StageTrace(
                     stage=OrchestrationStage.HYBRID_COORDINATION,
