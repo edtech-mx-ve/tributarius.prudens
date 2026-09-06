@@ -289,12 +289,20 @@ footer {
 .evidence-group { margin-top: 1rem; }
 .evidence-group h4 { margin-bottom: .65rem; }
 
+.evidence-group,
+.evidence-list {
+  min-width: 0;
+  max-width: 100%;
+}
+
 .evidence-list {
   display: grid;
   gap: .75rem;
 }
 
 .evidence-card {
+  min-width: 0;
+  max-width: 100%;
   border: 1px solid var(--line);
   border-radius: .8rem;
   padding: .9rem;
@@ -303,18 +311,31 @@ footer {
 
 .evidence-card-header {
   display: flex;
+  min-width: 0;
+  max-width: 100%;
   align-items: flex-start;
   justify-content: space-between;
   gap: .75rem;
 }
 
 .evidence-card h5 {
+  min-width: 0;
+  max-width: 100%;
   margin: .1rem 0;
+  overflow-wrap: anywhere;
+  word-break: break-word;
   font-size: 1rem;
   line-height: 1.35;
 }
 
-.source-badge { flex: 0 0 auto; background: var(--paper); color: var(--muted); }
+.source-badge {
+  flex: 0 0 auto;
+  max-width: 100%;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  background: var(--paper);
+  color: var(--muted);
+}
 .source-badge.normative { background: #e6efe9; color: var(--accent-strong); }
 .source-badge.supporting { background: #edf0f4; color: #425268; }
 .source-badge.jurisprudence { background: #f2ebf5; color: #694078; }
@@ -407,8 +428,36 @@ footer {
   .block-heading,
   .evidence-card-header,
   .trace-event-heading {
-    align-items: flex-start;
+    align-items: stretch;
     flex-direction: column;
+  }
+
+  .evidence-card {
+    padding: .8rem;
+  }
+
+  .evidence-card-header {
+    gap: .45rem;
+  }
+
+  .evidence-card h5 {
+    width: 100%;
+    font-size: .95rem;
+  }
+
+  .source-badge {
+    align-self: flex-start;
+  }
+
+  .evidence-meta {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: .2rem;
+  }
+
+  .evidence-meta-item {
+    min-width: 0;
+    overflow-wrap: anywhere;
   }
 
   .trace-summary div,
