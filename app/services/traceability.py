@@ -501,7 +501,11 @@ def build_traceability_record(
         created_at_utc=created_at_utc,
         query_sha256=sha256_text(request.query),
         primary_intent=result.analysis.primary_intent.value,
-        query_fiscal_year=request.query_fiscal_year,
+        query_fiscal_year=(
+            result.temporal_control_execution.resolved_query_fiscal_year
+            if result.temporal_control_execution is not None
+            else request.query_fiscal_year
+        ),
         events=_build_events(result),
         evidence=evidence,
         jurisprudential_sources=_jurisprudence_evidence(result),
