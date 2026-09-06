@@ -501,7 +501,12 @@ class HybridOrchestrator:
                 llama_fiscal_hypothesis_h1 = self._hybrid_h1_service.generate(
                     llama_initial_context
                 )
-            except LLMError:
+            except LLMError as exc:
+                logger.exception(
+                    "Fallo LLM en etapa H1 F.3. cause_type=%s cause=%s",
+                    type(exc).__name__,
+                    str(exc),
+                )
                 hybrid_h1_review = True
                 hybrid_h1_failed = True
             else:
