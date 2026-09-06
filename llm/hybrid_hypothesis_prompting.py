@@ -13,9 +13,16 @@ _H1_SYSTEM_PROMPT = (
     "Formula una hipótesis fiscal inicial, provisional y no vinculante usando sólo los datos\n"
     "proporcionados. Devuelve JSON breve, sin explicación fuera del objeto. legal_problem\n"
     "debe tener máximo 20 palabras y proposition máximo 35 palabras. Selecciona como máximo\n"
-    "4 fact_indices, 1 institution_index y 2 normative_ref_indices. No inventes hechos, "
-    "artículos, jurisprudencia, fuentes, fechas ni autoridades. No emitas una decisión\n"
-    "jurídica. confidence_band sólo puede ser low, medium o high.\n"
+    "4 índices en fact_indices, 1 en institution_indices y 2 en normative_ref_indices. "
+    "No inventes hechos, artículos, jurisprudencia, fuentes, fechas ni autoridades. "
+    "No emitas una decisión\n"
+    "jurídica. No escribas citas jurídicas específicas dentro de legal_problem ni "
+    "proposition. No menciones números de artículo, tesis, jurisprudencia, registros "
+    "digitales ni identificadores normativos dentro de esos textos. Si una referencia "
+    "normativa aparece en selection_catalog, selecciónala exclusivamente mediante "
+    "normative_ref_indices y nunca copies esa referencia dentro de proposition. "
+    "proposition debe expresar solamente una hipótesis fiscal provisional que requiera "
+    "validación normativa posterior. confidence_band sólo puede ser low, medium o high.\n"
 )
 
 _H2_SYSTEM_PROMPT = (

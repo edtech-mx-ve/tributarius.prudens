@@ -32,11 +32,35 @@ class CompactFiscalHypothesisH1Draft(BaseModel):
 
     model_config = ConfigDict(extra="forbid")
 
-    legal_problem: str = Field(min_length=1, max_length=500)
-    proposition: str = Field(min_length=1, max_length=700)
+    legal_problem: str = Field(
+        min_length=1,
+        max_length=500,
+        description=(
+            "Problema fiscal inicial sin citas jurídicas específicas ni "
+            "números de artículo."
+        ),
+    )
+    proposition: str = Field(
+        min_length=1,
+        max_length=700,
+        description=(
+            "Hipótesis fiscal provisional sin citas jurídicas específicas, "
+            "números de artículo, tesis, jurisprudencia, registros digitales "
+            "ni identificadores normativos. Las referencias normativas se "
+            "seleccionan exclusivamente mediante normative_ref_indices."
+        ),
+    )
     fact_indices: list[int] = Field(default_factory=list, max_length=6)
     institution_indices: list[int] = Field(default_factory=list, max_length=2)
-    normative_ref_indices: list[int] = Field(default_factory=list, max_length=4)
+    normative_ref_indices: list[int] = Field(
+        default_factory=list,
+        max_length=4,
+        description=(
+            "Índices del catálogo normativo autorizado. No copiar esas "
+            "referencias dentro de proposition."
+        ),
+    )
+
     confidence_band: Literal["low", "medium", "high"] = "medium"
 
     @model_validator(mode="after")
