@@ -602,6 +602,7 @@ def build_canonical_result(
         calculations=payload["calculations"],
         cbr=payload["cbr"],
         hybrid_coordination=payload.get("hybrid_coordination"),
+        legal_heuristics=payload.get("legal_heuristics"),
         explanation=payload["explanation"],
         llm_trace=payload.get("llm_trace"),
         uncertainty=payload["uncertainty"],
@@ -622,6 +623,8 @@ def verify_canonical_integrity(result: CanonicalExecutionResult) -> bool:
     }
     if result.hybrid_coordination is not None:
         payload["hybrid_coordination"] = result.hybrid_coordination
+    if result.legal_heuristics is not None:
+        payload["legal_heuristics"] = result.legal_heuristics
     if result.jurisprudence is not None:
         payload["jurisprudence"] = result.jurisprudence
     if result.session_jurisprudence is not None:

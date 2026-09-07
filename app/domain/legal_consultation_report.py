@@ -11,6 +11,7 @@ from app.domain.legal_consultation_query_configuration import (
     LegalConsultationQueryConfiguration,
 )
 from app.domain.legal_decision import LegalDecision
+from app.domain.legal_heuristics import LegalHeuristicEvaluation
 from app.domain.traceability import TraceabilityRecord
 
 LegalReportAnalyzer = HybridIntegralLegalAnalysis | IntegralLegalAnalysis
@@ -28,6 +29,7 @@ class LegalConsultationReport(BaseModel):
     created_at_utc: datetime
     canonical_result_sha256: str = Field(pattern=r"^[a-f0-9]{64}$")
     query_configuration: LegalConsultationQueryConfiguration
+    heuristic_route: LegalHeuristicEvaluation | None = None
     analyzer: LegalReportAnalyzer
     legal_decision: LegalReportDecision
     traceability: TraceabilityRecord

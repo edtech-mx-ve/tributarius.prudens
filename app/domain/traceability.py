@@ -99,6 +99,7 @@ class CanonicalExecutionResult(BaseModel):
     calculations: dict[str, Any]
     cbr: dict[str, Any]
     hybrid_coordination: dict[str, Any] | None = None
+    legal_heuristics: dict[str, Any] | None = None
     explanation: dict[str, Any] | None
     llm_trace: dict[str, Any] | None = None
     uncertainty: dict[str, Any]
