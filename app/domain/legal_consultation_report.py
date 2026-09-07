@@ -130,6 +130,93 @@ class LegalConsultationReport(BaseModel):
                 "G.7 no admite jurisprudencia vinculante sin proyeccion juridica."
             )
 
+        if isinstance(analysis, HybridIntegralLegalAnalysis):
+            if not isinstance(decision, HybridLegalDecision):
+                raise ValueError(
+                    "G.8 exige que Analyzer y Legal Decision pertenezcan "
+                    "a la misma familia hibrida."
+                )
+
+            analyzer_projection = analysis.hybrid_projection
+            decision_projection = decision.hybrid_projection
+
+            if (
+                analyzer_projection.verification_packet_sha256
+                != decision_projection.source_verification_packet_sha256
+            ):
+                raise ValueError(
+                    "G.8 detecto paquetes F.7 distintos entre Analyzer y Legal Decision."
+                )
+
+            if (
+                analysis.canonical_conclusion
+                != decision_projection.source_canonical_conclusion
+            ):
+                raise ValueError(
+                    "G.8 detecto una conclusion fuente hibrida inconsistente."
+                )
+
+            if (
+                analyzer_projection.applicable_normative_refs
+                != decision_projection.applicable_normative_refs
+            ):
+                raise ValueError(
+                    "G.8 exige la misma base normativa en F.8 y F.9."
+                )
+
+            if (
+                analyzer_projection.reasoning_controller
+                != decision_projection.reasoning_controller
+            ):
+                raise ValueError(
+                    "G.8 exige preservar el mismo controlador de razonamiento."
+                )
+
+            if (
+                analyzer_projection.legal_authority_source
+                != decision_projection.legal_authority_source
+            ):
+                raise ValueError(
+                    "G.8 exige preservar la misma autoridad juridica."
+                )
+
+            if (
+                analyzer_projection.jurisprudence_effect
+                != decision_projection.jurisprudence_effect
+            ):
+                raise ValueError(
+                    "G.8 exige preservar el efecto jurisprudencial de F.8."
+                )
+
+            if (
+                analyzer_projection.binding_interpretation_required
+                != decision_projection.binding_interpretation_required
+            ):
+                raise ValueError(
+                    "G.8 exige preservar la interpretacion vinculante."
+                )
+
+            if not decision_projection.single_determination_preserved:
+                raise ValueError(
+                    "G.8 exige preservar una sola determinacion juridica."
+                )
+
+            if decision_projection.second_conclusion_created:
+                raise ValueError(
+                    "G.8 no admite una segunda conclusion juridica."
+                )
+
+        elif isinstance(decision, HybridLegalDecision):
+            raise ValueError(
+                "G.8 exige que Analyzer y Legal Decision pertenezcan "
+                "a la misma familia hibrida."
+            )
+
+        elif decision.controlling_source != analysis.controlling_source:
+            raise ValueError(
+                "G.8 exige preservar la fuente controladora de Analyzer 1.0."
+            )
+
         if decision.source_analysis_schema_version != analysis.schema_version:
             raise ValueError(
                 "G.1 detectó versiones incompatibles entre Analyzer y Legal Decision."
