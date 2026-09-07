@@ -13,6 +13,9 @@ from app.domain.legal_consultation_applied_rbs import (
 from app.domain.legal_consultation_query_configuration import (
     LegalConsultationQueryConfiguration,
 )
+from app.domain.legal_consultation_retrieved_cbr import (
+    LegalConsultationRetrievedCBR,
+)
 from app.domain.legal_decision import LegalDecision
 from app.domain.legal_heuristics import LegalHeuristicEvaluation
 from app.domain.traceability import TraceabilityRecord
@@ -33,6 +36,7 @@ class LegalConsultationReport(BaseModel):
     canonical_result_sha256: str = Field(pattern=r"^[a-f0-9]{64}$")
     query_configuration: LegalConsultationQueryConfiguration
     applied_rbs: LegalConsultationAppliedRBS
+    retrieved_cbr: LegalConsultationRetrievedCBR | None = None
     heuristic_route: LegalHeuristicEvaluation | None = None
     analyzer: LegalReportAnalyzer
     legal_decision: LegalReportDecision
