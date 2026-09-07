@@ -100,12 +100,24 @@ def test_web_analyzer_projection_is_mode_invariant(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
     orchestrator = _orchestrator(None)
-    result = orchestrator.run(_request())
+
+    def run_for_requested_mode(
+        _orchestrator_arg,
+        request_arg,
+    ):
+        mode_request = _request().model_copy(
+            update={
+                "explanation_mode": (
+                    request_arg.explanation_mode
+                )
+            }
+        )
+        return orchestrator.run(mode_request)
 
     monkeypatch.setattr(
         runtime_runner,
         "run_hybrid_with_session_jurisprudence",
-        lambda _orchestrator_arg, _request_arg: result,
+        run_for_requested_mode,
     )
     runner = WebHybridRunner(
         orchestrator=orchestrator,

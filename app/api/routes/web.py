@@ -3,8 +3,8 @@ from __future__ import annotations
 from pathlib import Path
 from typing import Annotated
 
-from fastapi import APIRouter, Depends, Header, Request
-from fastapi.responses import HTMLResponse
+from fastapi import APIRouter, Depends, Header, HTTPException, Request
+from fastapi.responses import HTMLResponse, Response
 from fastapi.templating import Jinja2Templates
 
 from app.security.dependencies import enforce_consultation_rate_limit, enforce_same_origin
@@ -12,6 +12,10 @@ from app.web.dependencies import get_web_consultation_service
 from app.web.jurisprudence_upload import (
     WebJurisprudenceUploadError,
     process_web_jurisprudence_upload,
+)
+from app.web.legal_consultation_pdf_store import (
+    WebLegalConsultationPdfStoreError,
+    load_web_legal_consultation_pdf_artifact,
 )
 from app.web.schemas import (
     WebConsultationRequest,
@@ -91,3 +95,40 @@ def create_consultation(
     service: WebService,
 ) -> WebConsultationResponse:
     return service.consult(payload)
+
+
+
+@router.get(
+    "/api/v1/consultations/{execution_id}/pdf",
+    dependencies=[Depends(enforce_same_origin)],
+)
+def download_consultation_pdf(
+    execution_id: str,
+) -> Response:
+    try:
+        artifact = load_web_legal_consultation_pdf_artifact(
+            execution_id
+        )
+    except WebLegalConsultationPdfStoreError as exc:
+        raise HTTPException(
+            status_code=404,
+            detail=str(exc),
+        ) from exc
+
+    return Response(
+        content=artifact.pdf_bytes,
+        media_type=artifact.media_type,
+        headers={
+            "Content-Disposition": (
+                f'attachment; filename="{artifact.filename}"'
+            ),
+            "Content-Length": str(
+                artifact.content_length
+            ),
+            "X-Content-SHA256": artifact.pdf_sha256,
+            "X-Canonical-Result-SHA256": (
+                artifact.source_canonical_result_sha256
+            ),
+            "Cache-Control": "private, no-store",
+        },
+    )

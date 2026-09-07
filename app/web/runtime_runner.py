@@ -18,6 +18,12 @@ from app.services.hybrid_jurisprudence_integration import (
 from app.services.hybrid_llama_runtime import HybridLlamaRuntime
 from app.services.hybrid_orchestrator import HybridOrchestrator
 from app.services.integral_legal_analyzer import build_integral_legal_analysis
+from app.services.legal_consultation_pdf_artifact import (
+    build_legal_consultation_pdf_artifact,
+)
+from app.services.legal_consultation_report import (
+    build_legal_consultation_report,
+)
 from app.services.legal_decision import build_legal_decision
 from app.services.traceability import build_canonical_result
 from app.web.jurisprudence_session import (
@@ -25,6 +31,9 @@ from app.web.jurisprudence_session import (
     load_web_jurisprudence_ratio_record,
     load_web_jurisprudence_session,
     load_web_jurisprudence_temporal_record,
+)
+from app.web.legal_consultation_pdf_store import (
+    save_web_legal_consultation_pdf_artifact,
 )
 from app.web.presenter import (
     present_canonical_result,
@@ -168,9 +177,41 @@ class WebHybridRunner:
             legal_decision = llama_runtime_result.decision
 
         canonical = build_canonical_result(orchestration_request, result)
+
+        report = build_legal_consultation_report(
+            web_request=request,
+            orchestration_request=orchestration_request,
+            result=result,
+            canonical=canonical,
+            analyzer=integral_analysis,
+            legal_decision=legal_decision,
+        )
+
+        pdf_artifact = build_legal_consultation_pdf_artifact(
+            report
+        )
+
+        save_web_legal_consultation_pdf_artifact(
+            pdf_artifact
+        )
+
         presented = present_canonical_result(canonical, request)
         presented["legal_analysis"] = present_integral_legal_analysis(integral_analysis)
         presented["legal_decision"] = present_legal_decision(legal_decision)
+        presented["pdf"] = {
+            "execution_id": pdf_artifact.execution_id,
+            "download_path": (
+                f"/api/v1/consultations/"
+                f"{pdf_artifact.execution_id}/pdf"
+            ),
+            "filename": pdf_artifact.filename,
+            "media_type": pdf_artifact.media_type,
+            "content_length": pdf_artifact.content_length,
+            "sha256": pdf_artifact.pdf_sha256,
+            "source_canonical_result_sha256": (
+                pdf_artifact.source_canonical_result_sha256
+            ),
+        }
 
         if result.session_jurisprudence_result is not None:
             existing = presented.get("evidence")
