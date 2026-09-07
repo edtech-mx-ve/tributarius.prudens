@@ -673,6 +673,58 @@ function renderLegalDecision(result) {
   block.hidden = false;
 }
 
+function renderPdfDownload(result) {
+  const block = document.querySelector("#pdf-download-block");
+  const link = document.querySelector("#pdf-download-link");
+  const meta = document.querySelector("#pdf-download-meta");
+
+  const pdf = result && typeof result.pdf === "object"
+    ? result.pdf
+    : null;
+
+  const path = typeof pdf?.download_path === "string"
+    ? pdf.download_path
+    : "";
+
+  const validPath =
+    /^\/api\/v1\/consultations\/TP-[A-F0-9]{32}\/pdf$/.test(path);
+
+  if (!validPath) {
+    block.hidden = true;
+    link.removeAttribute("href");
+    link.removeAttribute("download");
+    meta.textContent = "";
+    return;
+  }
+
+  const validFilename = (
+    typeof pdf.filename === "string"
+    && /^tributarius-prudens-TP-\d{8}-[A-F0-9]{12}\.pdf$/.test(
+      pdf.filename
+    )
+  );
+
+  const filename = validFilename
+    ? pdf.filename
+    : "tributarius-prudens.pdf";
+
+  link.href = path;
+  link.setAttribute("download", filename);
+
+  const sha256 = (
+    typeof pdf.sha256 === "string"
+    && /^[a-f0-9]{64}$/.test(pdf.sha256)
+  )
+    ? pdf.sha256
+    : "";
+
+  meta.textContent = sha256
+    ? `Archivo: ${filename} \u00b7 SHA-256: ${sha256}`
+    : `Archivo: ${filename}`;
+
+  block.hidden = false;
+}
+
 function renderResult(payload) {
   const result = payload.result;
   if (!result) {
@@ -693,6 +745,7 @@ function renderResult(payload) {
 
   renderLegalAnalysis(result);
   renderLegalDecision(result);
+  renderPdfDownload(result);
 
   explanation.textContent = result.explanation || "Sin explicación disponible.";
   explanationBlock.hidden = !result.explanation;
