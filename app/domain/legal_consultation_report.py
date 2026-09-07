@@ -15,7 +15,7 @@ LegalReportDecision = HybridLegalDecision | LegalDecision
 
 
 class LegalConsultationReport(BaseModel):
-    """G.1: agrega resultados jur?dicos ya calculados sin reejecutarlos."""
+    """G.1: agrega resultados jurídicos ya calculados sin reejecutarlos."""
 
     model_config = ConfigDict(extra="forbid")
 
@@ -36,27 +36,27 @@ class LegalConsultationReport(BaseModel):
 
         if self.execution_id != trace.execution_id:
             raise ValueError(
-                "G.1 exige el mismo execution_id que la trazabilidad can?nica."
+                "G.1 exige el mismo execution_id que la trazabilidad canónica."
             )
 
         if self.folio != trace.folio:
             raise ValueError(
-                "G.1 exige el mismo folio que la trazabilidad can?nica."
+                "G.1 exige el mismo folio que la trazabilidad canónica."
             )
 
         if self.created_at_utc != trace.created_at_utc:
             raise ValueError(
-                "G.1 exige la misma fecha de la ejecuci?n can?nica."
+                "G.1 exige la misma fecha de la ejecución canónica."
             )
 
         if self.canonical_result_sha256 != trace.canonical_result_sha256:
             raise ValueError(
-                "G.1 exige la huella del resultado can?nico de origen."
+                "G.1 exige la huella del resultado canónico de origen."
             )
 
         if decision.source_analysis_schema_version != analysis.schema_version:
             raise ValueError(
-                "G.1 detect? versiones incompatibles entre Analyzer y Legal Decision."
+                "G.1 detectó versiones incompatibles entre Analyzer y Legal Decision."
             )
 
         if decision.applicable_normative_refs != analysis.applicable_normative_refs:
@@ -69,12 +69,12 @@ class LegalConsultationReport(BaseModel):
             and decision.conclusion != analysis.canonical_conclusion
         ):
             raise ValueError(
-                "G.1 no permite crear una segunda conclusi?n jur?dica."
+                "G.1 no permite crear una segunda conclusión jurídica."
             )
 
         if decision.requires_human_review != analysis.requires_human_review:
             raise ValueError(
-                "G.1 debe preservar la revisi?n humana del resultado jur?dico."
+                "G.1 debe preservar la revisión humana del resultado jurídico."
             )
 
         return self
