@@ -7,6 +7,9 @@ from pydantic import BaseModel, ConfigDict, Field, model_validator
 from app.domain.hybrid_integral_legal_analysis import HybridIntegralLegalAnalysis
 from app.domain.hybrid_legal_decision import HybridLegalDecision
 from app.domain.integral_legal_analysis import IntegralLegalAnalysis
+from app.domain.legal_consultation_query_configuration import (
+    LegalConsultationQueryConfiguration,
+)
 from app.domain.legal_decision import LegalDecision
 from app.domain.traceability import TraceabilityRecord
 
@@ -24,6 +27,7 @@ class LegalConsultationReport(BaseModel):
     folio: str = Field(pattern=r"^TP-\d{8}-[A-F0-9]{12}$")
     created_at_utc: datetime
     canonical_result_sha256: str = Field(pattern=r"^[a-f0-9]{64}$")
+    query_configuration: LegalConsultationQueryConfiguration
     analyzer: LegalReportAnalyzer
     legal_decision: LegalReportDecision
     traceability: TraceabilityRecord
@@ -52,6 +56,19 @@ class LegalConsultationReport(BaseModel):
         if self.canonical_result_sha256 != trace.canonical_result_sha256:
             raise ValueError(
                 "G.1 exige la huella del resultado canónico de origen."
+            )
+
+        if self.query_configuration.query_sha256 != trace.query_sha256:
+            raise ValueError(
+                "G.3 exige la misma consulta que la trazabilidad canonica."
+            )
+
+        if (
+            self.query_configuration.resolved_fiscal_year
+            != trace.query_fiscal_year
+        ):
+            raise ValueError(
+                "G.3 exige el mismo ejercicio fiscal resuelto que la trazabilidad."
             )
 
         if decision.source_analysis_schema_version != analysis.schema_version:

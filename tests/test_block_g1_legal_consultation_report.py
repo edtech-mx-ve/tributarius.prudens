@@ -8,8 +8,12 @@ from pydantic import ValidationError
 from app.domain.legal_consultation_report import LegalConsultationReport
 from app.services.hybrid_legal_decision import build_hybrid_legal_decision
 from app.services.integral_legal_analyzer import build_integral_legal_analysis
+from app.services.legal_consultation_query_configuration import (
+    build_legal_consultation_query_configuration,
+)
 from app.services.legal_decision import build_legal_decision
 from app.services.traceability import build_canonical_result
+from app.web.schemas import WebConsultationRequest
 from tests.test_block12_4_hypothesis_verification import _orchestrator, _request
 from tests.test_block_f9_hybrid_legal_decision import _verified_analysis
 
@@ -35,11 +39,24 @@ def _report(
 
     assert trace.canonical_result_sha256 is not None
 
+    orchestration_request = _request()
+    web_request = WebConsultationRequest(
+        query=orchestration_request.query,
+        mode=orchestration_request.explanation_mode.value,
+        fiscal_year=orchestration_request.query_fiscal_year,
+    )
+    query_configuration = build_legal_consultation_query_configuration(
+        web_request,
+        orchestration_request,
+        canonical,
+    )
+
     return LegalConsultationReport(
         execution_id=canonical.execution_id,
         folio=canonical.folio,
         created_at_utc=canonical.created_at_utc,
         canonical_result_sha256=trace.canonical_result_sha256,
+        query_configuration=query_configuration,
         analyzer=analyzer if analyzer is not None else base_analysis,
         legal_decision=(
             legal_decision if legal_decision is not None else base_decision
@@ -66,23 +83,16 @@ def test_g1_aggregates_existing_legal_results_without_recomputing_them() -> None
 
 
 def test_g1_rejects_a_second_legal_conclusion() -> None:
-    canonical, analysis, decision = _components()
-    trace = canonical.traceability
-    assert trace.canonical_result_sha256 is not None
+    _, analysis, decision = _components()
 
     altered_decision = decision.model_copy(
         update={"conclusion": "Conclusion juridica diferente."}
     )
 
     with pytest.raises(ValidationError, match="segunda conclusi"):
-        LegalConsultationReport(
-            execution_id=canonical.execution_id,
-            folio=canonical.folio,
-            created_at_utc=canonical.created_at_utc,
-            canonical_result_sha256=trace.canonical_result_sha256,
+        _report(
             analyzer=analysis,
             legal_decision=altered_decision,
-            traceability=trace,
         )
 
 
