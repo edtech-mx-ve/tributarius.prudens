@@ -17,6 +17,8 @@ def test_mock_analyzer_detects_isr_and_adds_required_missing_fields() -> None:
     assert {item.name for item in result.missing_fields} == {
         "fiscal_year",
         "taxpayer_type",
+        "isr_period",
+        "taxable_base",
     }
     assert result.requires_clarification is True
 

@@ -1,7 +1,9 @@
 ﻿from __future__ import annotations
 
 import json
+import re
 import unicodedata
+from decimal import Decimal, InvalidOperation
 from typing import Any
 
 from app.domain.query import QueryIntent
@@ -10,6 +12,171 @@ from app.domain.query import QueryIntent
 def _fold(text: str) -> str:
     normalized = unicodedata.normalize("NFKD", text.casefold())
     return "".join(char for char in normalized if not unicodedata.combining(char))
+
+
+_MONTHS = {
+    "enero": 1,
+    "febrero": 2,
+    "marzo": 3,
+    "abril": 4,
+    "mayo": 5,
+    "junio": 6,
+    "julio": 7,
+    "agosto": 8,
+    "septiembre": 9,
+    "setiembre": 9,
+    "octubre": 10,
+    "noviembre": 11,
+    "diciembre": 12,
+}
+
+_TAXABLE_BASE_RE = re.compile(
+    r"\bbase\s+gravable"
+    r"(?:\s+(?:mensual|anual))?"
+    r"\s*(?:de|por|es|fue|:)?"
+    r"\s*\$?\s*"
+    r"([0-9][0-9,]*(?:\.[0-9]{1,2})?)"
+)
+
+
+def _append_fact(
+    facts: list[dict[str, str]],
+    *,
+    name: str,
+    value: str,
+) -> None:
+    if any(item["name"] == name for item in facts):
+        return
+
+    facts.append(
+        {
+            "name": name,
+            "value": value,
+            "origin": "explicit",
+        }
+    )
+
+
+def _money_value(raw: str) -> str | None:
+    clean = raw.replace(",", "").strip()
+
+    try:
+        value = Decimal(clean)
+    except (InvalidOperation, ValueError):
+        return None
+
+    if value < 0:
+        return None
+
+    return format(value, "f")
+
+
+def _extract_isr_runtime_facts(
+    user_message: str,
+    facts: list[dict[str, str]],
+) -> None:
+    folded = _fold(user_message)
+
+    if "persona fisica" in folded:
+        _append_fact(
+            facts,
+            name="taxpayer_type",
+            value="individual",
+        )
+    elif "persona moral" in folded:
+        _append_fact(
+            facts,
+            name="taxpayer_type",
+            value="legal_entity",
+        )
+
+    years = re.findall(
+        r"(?<!\d)(19\d{2}|20\d{2}|21\d{2}|2200)(?!\d)",
+        folded,
+    )
+    if years:
+        _append_fact(
+            facts,
+            name="fiscal_year",
+            value=years[-1],
+        )
+
+    if (
+        "servicios profesionales" in folded
+        or "profesional independiente" in folded
+        or "profesionista independiente" in folded
+    ):
+        _append_fact(
+            facts,
+            name="activity",
+            value="servicios profesionales independientes",
+        )
+
+    if "actividades empresariales y profesionales" in folded:
+        _append_fact(
+            facts,
+            name="fiscal_regime",
+            value="actividades empresariales y profesionales",
+        )
+
+    month = next(
+        (
+            number
+            for name, number in _MONTHS.items()
+            if re.search(
+                rf"(?<![a-z0-9]){name}(?![a-z0-9])",
+                folded,
+            )
+        ),
+        None,
+    )
+
+    if (
+        "mensual" in folded
+        or "por ese mes" in folded
+        or month is not None
+    ):
+        _append_fact(
+            facts,
+            name="isr_period",
+            value="monthly",
+        )
+    elif "anual" in folded:
+        _append_fact(
+            facts,
+            name="isr_period",
+            value="annual",
+        )
+
+    if month is not None:
+        _append_fact(
+            facts,
+            name="isr_month",
+            value=str(month),
+        )
+
+    base_match = _TAXABLE_BASE_RE.search(folded)
+    if base_match is not None:
+        amount = _money_value(
+            base_match.group(1)
+        )
+        if amount is not None:
+            _append_fact(
+                facts,
+                name="taxable_base",
+                value=amount,
+            )
+
+    if (
+        "mxn" in folded
+        or "pesos mexicanos" in folded
+        or "peso mexicano" in folded
+    ):
+        _append_fact(
+            facts,
+            name="currency",
+            value="MXN",
+        )
 
 
 class RuntimeQueryAnalyzerProvider:
@@ -171,20 +338,22 @@ class RuntimeQueryAnalyzerProvider:
         )
         facts: list[dict[str, str]] = []
         if "iva" in folded:
-            facts.append(
-                {
-                    "name": "matter",
-                    "value": "IVA",
-                    "origin": "explicit",
-                }
+            _append_fact(
+                facts,
+                name="matter",
+                value="IVA",
             )
         elif "isr" in folded:
-            facts.append(
-                {
-                    "name": "matter",
-                    "value": "ISR",
-                    "origin": "explicit",
-                }
+            _append_fact(
+                facts,
+                name="matter",
+                value="ISR",
+            )
+
+        if intent == QueryIntent.CALCULATE_ISR:
+            _extract_isr_runtime_facts(
+                user_message,
+                facts,
             )
 
         payload: dict[str, object] = {

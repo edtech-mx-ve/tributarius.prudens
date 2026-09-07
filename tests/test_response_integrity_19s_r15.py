@@ -48,10 +48,24 @@ def _hit(document_id: str, text: str) -> SimpleNamespace:
 
 def test_fiscal_year_request_context_removes_false_missing_field() -> None:
     analyzer = QueryAnalyzer(RuntimeQueryAnalyzerProvider())
-    analysis = analyzer.analyze("Soy persona física y quiero calcular mi ISR.")
-    assert {item.name for item in analysis.missing_fields} >= {
+    analysis = analyzer.analyze(
+        "Soy persona fisica y quiero calcular mi ISR."
+    )
+
+    assert any(
+        fact.name == "taxpayer_type"
+        and fact.value == "individual"
+        and fact.origin == FactOrigin.EXPLICIT
+        for fact in analysis.facts
+    )
+
+    assert {
+        item.name
+        for item in analysis.missing_fields
+    } == {
         "fiscal_year",
-        "taxpayer_type",
+        "isr_period",
+        "taxable_base",
     }
 
     request = HybridOrchestrationRequest(
@@ -59,7 +73,11 @@ def test_fiscal_year_request_context_removes_false_missing_field() -> None:
         query_date=date(2026, 8, 30),
         query_fiscal_year=2026,
     )
-    merged = _merge_request_context(analysis, request)
+
+    merged = _merge_request_context(
+        analysis,
+        request,
+    )
 
     assert any(
         fact.name == "fiscal_year"
@@ -67,9 +85,14 @@ def test_fiscal_year_request_context_removes_false_missing_field() -> None:
         and fact.origin == FactOrigin.EXPLICIT
         for fact in merged.facts
     )
-    assert "fiscal_year" not in {item.name for item in merged.missing_fields}
-    assert "taxpayer_type" in {item.name for item in merged.missing_fields}
 
+    assert {
+        item.name
+        for item in merged.missing_fields
+    } == {
+        "isr_period",
+        "taxable_base",
+    }
 
 def test_rights_query_does_not_promote_rmf_by_temporal_availability() -> None:
     analysis = _analysis(

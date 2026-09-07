@@ -23,9 +23,20 @@ from llm.query_prompting import build_query_analysis_messages, normalize_query_t
 from llm.structured_provider import StructuredMessageProvider
 
 _REQUIRED_FACTS_BY_INTENT: dict[QueryIntent, tuple[str, ...]] = {
-    QueryIntent.CALCULATE_ISR: ("fiscal_year", "taxpayer_type"),
+    QueryIntent.CALCULATE_ISR: (
+        "fiscal_year",
+        "taxpayer_type",
+        "isr_period",
+    ),
     QueryIntent.CALCULATE_IVA: ("fiscal_year", "taxpayer_type"),
 }
+
+_ISR_CALCULATION_BASE_FACTS = frozenset(
+    {
+        "taxable_base",
+        "gross_income",
+    }
+)
 
 _HIGH_REVIEW_INTENTS = {
     QueryIntent.ANALYZE_AUTHORITY_ACT,
@@ -61,6 +72,25 @@ class QueryAnalyzer:
                     )
                 )
                 missing_names.add(required)
+
+        if (
+            draft.primary_intent == QueryIntent.CALCULATE_ISR
+            and not (
+                fact_names
+                & _ISR_CALCULATION_BASE_FACTS
+            )
+            and "taxable_base" not in missing_names
+        ):
+            draft.missing_fields.append(
+                MissingField(
+                    name="taxable_base",
+                    reason=(
+                        "Se requiere una base gravable explicita o "
+                        "componentes suficientes para construirla."
+                    ),
+                )
+            )
+            missing_names.add("taxable_base")
 
         if draft.missing_fields:
             draft.requires_clarification = True
