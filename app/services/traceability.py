@@ -593,6 +593,13 @@ def build_canonical_result(
         payload["session_jurisprudence"] = (
             result.session_jurisprudence_result.model_dump(mode="json")
         )
+    if request.session_jurisprudence_ratio_records:
+        payload["session_jurisprudence_ratios"] = {
+            document_id: record.model_dump(mode="json")
+            for document_id, record in sorted(
+                request.session_jurisprudence_ratio_records.items()
+            )
+        }
     if result.llm_trace is not None:
         payload["llm_trace"] = result.llm_trace.model_dump(mode="json")
 
@@ -606,6 +613,9 @@ def build_canonical_result(
         normative=payload["normative"],
         jurisprudence=payload.get("jurisprudence"),
         session_jurisprudence=payload.get("session_jurisprudence"),
+        session_jurisprudence_ratios=payload.get(
+            "session_jurisprudence_ratios"
+        ),
         rules=payload["rules"],
         rbs_reasoning=payload.get("rbs_reasoning"),
         cbr_reasoning=payload.get("cbr_reasoning"),
@@ -643,6 +653,10 @@ def verify_canonical_integrity(result: CanonicalExecutionResult) -> bool:
         payload["jurisprudence"] = result.jurisprudence
     if result.session_jurisprudence is not None:
         payload["session_jurisprudence"] = result.session_jurisprudence
+    if result.session_jurisprudence_ratios is not None:
+        payload["session_jurisprudence_ratios"] = (
+            result.session_jurisprudence_ratios
+        )
     if result.llm_trace is not None:
         payload["llm_trace"] = result.llm_trace
 

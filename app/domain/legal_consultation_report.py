@@ -16,6 +16,9 @@ from app.domain.legal_consultation_query_configuration import (
 from app.domain.legal_consultation_retrieved_cbr import (
     LegalConsultationRetrievedCBR,
 )
+from app.domain.legal_consultation_session_jurisprudence import (
+    LegalConsultationSessionJurisprudence,
+)
 from app.domain.legal_decision import LegalDecision
 from app.domain.legal_heuristics import LegalHeuristicEvaluation
 from app.domain.traceability import TraceabilityRecord
@@ -37,6 +40,9 @@ class LegalConsultationReport(BaseModel):
     query_configuration: LegalConsultationQueryConfiguration
     applied_rbs: LegalConsultationAppliedRBS
     retrieved_cbr: LegalConsultationRetrievedCBR | None = None
+    session_jurisprudence: LegalConsultationSessionJurisprudence = Field(
+        default_factory=LegalConsultationSessionJurisprudence
+    )
     heuristic_route: LegalHeuristicEvaluation | None = None
     analyzer: LegalReportAnalyzer
     legal_decision: LegalReportDecision
@@ -79,6 +85,49 @@ class LegalConsultationReport(BaseModel):
         ):
             raise ValueError(
                 "G.3 exige el mismo ejercicio fiscal resuelto que la trazabilidad."
+            )
+
+        if (
+            self.query_configuration.session_jurisprudence_attached
+            != self.session_jurisprudence.user_attached
+        ):
+            raise ValueError(
+                "G.7 exige coherencia entre adjunto jurisprudencial y reporte."
+            )
+
+        analysis_application = getattr(
+            analysis,
+            "jurisprudence_application",
+            None,
+        )
+        decision_application = getattr(
+            decision,
+            "jurisprudence_application",
+            None,
+        )
+
+        if analysis_application != decision_application:
+            raise ValueError(
+                "G.7 exige la misma aplicacion jurisprudencial en Analyzer y Legal Decision."
+            )
+
+        session_application = (
+            self.session_jurisprudence.session_result.decision_application
+            if self.session_jurisprudence.session_result is not None
+            else None
+        )
+
+        if session_application != analysis_application:
+            raise ValueError(
+                "G.7 exige preservar exactamente la aplicacion E.6 de origen."
+            )
+
+        if (
+            self.session_jurisprudence.binding_jurisprudence_applies
+            and analysis_application is None
+        ):
+            raise ValueError(
+                "G.7 no admite jurisprudencia vinculante sin proyeccion juridica."
             )
 
         if decision.source_analysis_schema_version != analysis.schema_version:

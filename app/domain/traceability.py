@@ -98,6 +98,7 @@ class CanonicalExecutionResult(BaseModel):
     cbr_reasoning: dict[str, Any] | None = None
     jurisprudence: dict[str, Any] | None = None
     session_jurisprudence: dict[str, Any] | None = None
+    session_jurisprudence_ratios: dict[str, Any] | None = None
     calculations: dict[str, Any]
     cbr: dict[str, Any]
     hybrid_coordination: dict[str, Any] | None = None
