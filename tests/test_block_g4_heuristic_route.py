@@ -16,6 +16,9 @@ from app.services.canonical_execution_snapshot import (
     build_canonical_execution_snapshot,
 )
 from app.services.integral_legal_analyzer import build_integral_legal_analysis
+from app.services.legal_consultation_applied_rbs import (
+    build_legal_consultation_applied_rbs,
+)
 from app.services.legal_consultation_heuristic_route import (
     LegalConsultationHeuristicRouteError,
     build_legal_consultation_heuristic_route,
@@ -106,6 +109,11 @@ def _report_from_execution(
         canonical,
     )
 
+    applied_rbs = build_legal_consultation_applied_rbs(
+        result,
+        canonical,
+    )
+
     trace = canonical.traceability
     assert trace.canonical_result_sha256 is not None
 
@@ -115,6 +123,7 @@ def _report_from_execution(
         created_at_utc=canonical.created_at_utc,
         canonical_result_sha256=trace.canonical_result_sha256,
         query_configuration=query_configuration,
+        applied_rbs=applied_rbs,
         heuristic_route=route,
         analyzer=analysis,
         legal_decision=decision,

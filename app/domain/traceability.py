@@ -94,6 +94,7 @@ class CanonicalExecutionResult(BaseModel):
     retrieval: dict[str, Any]
     normative: dict[str, Any]
     rules: dict[str, Any]
+    rbs_reasoning: dict[str, Any] | None = None
     jurisprudence: dict[str, Any] | None = None
     session_jurisprudence: dict[str, Any] | None = None
     calculations: dict[str, Any]

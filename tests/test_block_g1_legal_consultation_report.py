@@ -8,6 +8,9 @@ from pydantic import ValidationError
 from app.domain.legal_consultation_report import LegalConsultationReport
 from app.services.hybrid_legal_decision import build_hybrid_legal_decision
 from app.services.integral_legal_analyzer import build_integral_legal_analysis
+from app.services.legal_consultation_applied_rbs import (
+    build_legal_consultation_applied_rbs,
+)
 from app.services.legal_consultation_query_configuration import (
     build_legal_consultation_query_configuration,
 )
@@ -51,12 +54,21 @@ def _report(
         canonical,
     )
 
+    orchestration_result = _orchestrator(None).run(
+        orchestration_request
+    )
+    applied_rbs = build_legal_consultation_applied_rbs(
+        orchestration_result,
+        canonical,
+    )
+
     return LegalConsultationReport(
         execution_id=canonical.execution_id,
         folio=canonical.folio,
         created_at_utc=canonical.created_at_utc,
         canonical_result_sha256=trace.canonical_result_sha256,
         query_configuration=query_configuration,
+        applied_rbs=applied_rbs,
         analyzer=analyzer if analyzer is not None else base_analysis,
         legal_decision=(
             legal_decision if legal_decision is not None else base_decision

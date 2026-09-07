@@ -571,6 +571,10 @@ def build_canonical_result(
             ],
         },
     }
+    if result.rbs_reasoning is not None:
+        payload["rbs_reasoning"] = result.rbs_reasoning.model_dump(
+            mode="json"
+        )
     if result.hybrid_coordination is not None:
         payload["hybrid_coordination"] = result.hybrid_coordination.model_dump(
             mode="json"
@@ -599,6 +603,7 @@ def build_canonical_result(
         jurisprudence=payload.get("jurisprudence"),
         session_jurisprudence=payload.get("session_jurisprudence"),
         rules=payload["rules"],
+        rbs_reasoning=payload.get("rbs_reasoning"),
         calculations=payload["calculations"],
         cbr=payload["cbr"],
         hybrid_coordination=payload.get("hybrid_coordination"),
@@ -621,6 +626,8 @@ def verify_canonical_integrity(result: CanonicalExecutionResult) -> bool:
         "explanation": result.explanation,
         "uncertainty": result.uncertainty,
     }
+    if result.rbs_reasoning is not None:
+        payload["rbs_reasoning"] = result.rbs_reasoning
     if result.hybrid_coordination is not None:
         payload["hybrid_coordination"] = result.hybrid_coordination
     if result.legal_heuristics is not None:

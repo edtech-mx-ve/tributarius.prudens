@@ -7,6 +7,9 @@ from pydantic import BaseModel, ConfigDict, Field, model_validator
 from app.domain.hybrid_integral_legal_analysis import HybridIntegralLegalAnalysis
 from app.domain.hybrid_legal_decision import HybridLegalDecision
 from app.domain.integral_legal_analysis import IntegralLegalAnalysis
+from app.domain.legal_consultation_applied_rbs import (
+    LegalConsultationAppliedRBS,
+)
 from app.domain.legal_consultation_query_configuration import (
     LegalConsultationQueryConfiguration,
 )
@@ -29,6 +32,7 @@ class LegalConsultationReport(BaseModel):
     created_at_utc: datetime
     canonical_result_sha256: str = Field(pattern=r"^[a-f0-9]{64}$")
     query_configuration: LegalConsultationQueryConfiguration
+    applied_rbs: LegalConsultationAppliedRBS
     heuristic_route: LegalHeuristicEvaluation | None = None
     analyzer: LegalReportAnalyzer
     legal_decision: LegalReportDecision
