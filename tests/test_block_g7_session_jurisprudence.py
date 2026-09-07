@@ -18,6 +18,9 @@ from app.services.jurisprudence_decision_application import (
 from app.services.legal_consultation_applied_rbs import (
     build_legal_consultation_applied_rbs,
 )
+from app.services.legal_consultation_mode_explanation import (
+    build_legal_consultation_mode_explanation,
+)
 from app.services.legal_consultation_query_configuration import (
     build_legal_consultation_query_configuration,
 )
@@ -209,6 +212,10 @@ def test_g7_report_preserves_same_e6_application_and_single_conclusion() -> None
         request,
         canonical,
     )
+    mode_explanation = build_legal_consultation_mode_explanation(
+        canonical,
+        query_configuration,
+    )
 
     trace = canonical.traceability
     assert trace.canonical_result_sha256 is not None
@@ -219,6 +226,7 @@ def test_g7_report_preserves_same_e6_application_and_single_conclusion() -> None
         created_at_utc=canonical.created_at_utc,
         canonical_result_sha256=trace.canonical_result_sha256,
         query_configuration=query_configuration,
+        mode_explanation=mode_explanation,
         applied_rbs=applied_rbs,
         session_jurisprudence=jurisprudence,
         analyzer=analysis,

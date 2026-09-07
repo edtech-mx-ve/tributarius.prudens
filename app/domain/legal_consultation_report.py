@@ -10,6 +10,9 @@ from app.domain.integral_legal_analysis import IntegralLegalAnalysis
 from app.domain.legal_consultation_applied_rbs import (
     LegalConsultationAppliedRBS,
 )
+from app.domain.legal_consultation_mode_explanation import (
+    LegalConsultationModeExplanation,
+)
 from app.domain.legal_consultation_query_configuration import (
     LegalConsultationQueryConfiguration,
 )
@@ -38,6 +41,7 @@ class LegalConsultationReport(BaseModel):
     created_at_utc: datetime
     canonical_result_sha256: str = Field(pattern=r"^[a-f0-9]{64}$")
     query_configuration: LegalConsultationQueryConfiguration
+    mode_explanation: LegalConsultationModeExplanation
     applied_rbs: LegalConsultationAppliedRBS
     retrieved_cbr: LegalConsultationRetrievedCBR | None = None
     session_jurisprudence: LegalConsultationSessionJurisprudence = Field(
@@ -85,6 +89,23 @@ class LegalConsultationReport(BaseModel):
         ):
             raise ValueError(
                 "G.3 exige el mismo ejercicio fiscal resuelto que la trazabilidad."
+            )
+
+        if (
+            self.mode_explanation.mode
+            is not self.query_configuration.explanation_mode
+        ):
+            raise ValueError(
+                "G.9 exige el mismo modo en configuracion y explicacion."
+            )
+
+        explanation = self.mode_explanation.explanation
+        if (
+            explanation is not None
+            and explanation.question != self.query_configuration.query
+        ):
+            raise ValueError(
+                "G.9 exige la misma consulta en configuracion y explicacion."
             )
 
         if (

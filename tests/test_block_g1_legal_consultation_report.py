@@ -11,6 +11,9 @@ from app.services.integral_legal_analyzer import build_integral_legal_analysis
 from app.services.legal_consultation_applied_rbs import (
     build_legal_consultation_applied_rbs,
 )
+from app.services.legal_consultation_mode_explanation import (
+    build_legal_consultation_mode_explanation,
+)
 from app.services.legal_consultation_query_configuration import (
     build_legal_consultation_query_configuration,
 )
@@ -53,6 +56,10 @@ def _report(
         orchestration_request,
         canonical,
     )
+    mode_explanation = build_legal_consultation_mode_explanation(
+        canonical,
+        query_configuration,
+    )
 
     orchestration_result = _orchestrator(None).run(
         orchestration_request
@@ -68,6 +75,7 @@ def _report(
         created_at_utc=canonical.created_at_utc,
         canonical_result_sha256=trace.canonical_result_sha256,
         query_configuration=query_configuration,
+        mode_explanation=mode_explanation,
         applied_rbs=applied_rbs,
         analyzer=analyzer if analyzer is not None else base_analysis,
         legal_decision=(
