@@ -3,15 +3,138 @@
 {% block title %}AppTech · Tributarius Prudens{% endblock %}
 
 {% block content %}
-<main id="main-content" class="info-page">
+<main id="main-content" class="info-page tech-page">
+
   <section class="shell info-page-hero">
     <p class="eyebrow">Tributarius Prudens</p>
     <h1>AppTech</h1>
-    <p class="info-page-subtitle">Tecnología, infraestructura y visión escalable.</p>
+    <p class="info-page-subtitle">
+      Integración tecnológica del prototipo con visión escalable.
+    </p>
   </section>
 
-  <section class="shell info-page-panel">
-    <p>Arquitectura técnica del prototipo, componentes funcionales y ruta de migración hacia infraestructura productiva de pago.</p>
+  <section class="shell tech-layout">
+
+    <article class="info-page-panel tech-main">
+      <p class="eyebrow">Arquitectura actual</p>
+      <h2>Una aplicación completa construida por capas</h2>
+
+      <div class="architecture-flow">
+        <div class="architecture-node">
+          <strong>Frontend web</strong>
+          <span>Jinja2 + HTML + CSS + JavaScript</span>
+        </div>
+
+        <span class="flow-arrow">→</span>
+
+        <div class="architecture-node">
+          <strong>FastAPI</strong>
+          <span>API, seguridad y coordinación</span>
+        </div>
+
+        <span class="flow-arrow">→</span>
+
+        <div class="architecture-node">
+          <strong>Orquestación híbrida</strong>
+          <span>Consulta, evidencia y razonamiento</span>
+        </div>
+      </div>
+
+      <div class="tech-module-grid">
+        <article>
+          <strong>Query Analyzer</strong>
+          <span>Estructura hechos, intención y datos faltantes.</span>
+        </article>
+        <article>
+          <strong>RAG normativo</strong>
+          <span>Recupera evidencia del corpus jurídico controlado.</span>
+        </article>
+        <article>
+          <strong>RBS</strong>
+          <span>Aplica reglas determinativas.</span>
+        </article>
+        <article>
+          <strong>CBR</strong>
+          <span>Contrasta el problema con casos semejantes.</span>
+        </article>
+        <article>
+          <strong>Cálculos</strong>
+          <span>Ejecuta operaciones fiscales deterministas.</span>
+        </article>
+        <article>
+          <strong>Llama</strong>
+          <span>Apoya hipótesis y explicación sin sustituir la autoridad jurídica.</span>
+        </article>
+        <article>
+          <strong>Analyzer 1.0</strong>
+          <span>Integra suficiencia, evidencia y conclusión.</span>
+        </article>
+        <article>
+          <strong>Legal Decision 1.0</strong>
+          <span>Formaliza la determinación jurídica estructurada.</span>
+        </article>
+        <article>
+          <strong>PDF</strong>
+          <span>Genera el reporte conclusivo trazable.</span>
+        </article>
+      </div>
+    </article>
+
+    <aside class="tech-side">
+
+      <article class="help-card">
+        <div class="info-card-heading">
+          <span class="info-icon">⚙</span>
+          <div>
+            <h2>Infraestructura del prototipo</h2>
+          </div>
+        </div>
+        <ul class="tech-list">
+          <li>Python 3.12 + FastAPI</li>
+          <li>Jinja2, CSS y JavaScript</li>
+          <li>GitHub Actions para CI</li>
+          <li>Render para despliegue</li>
+          <li>RAG con artefactos locales controlados</li>
+          <li>Runtime Llama mediante llama.cpp</li>
+          <li>Persistencia ligera para el entorno actual</li>
+        </ul>
+      </article>
+
+      <article class="help-card tech-scale-card">
+        <div class="info-card-heading">
+          <span class="info-icon">↗</span>
+          <div>
+            <h2>Visión escalable</h2>
+          </div>
+        </div>
+
+        <p>
+          Los límites operativos del prototipo pertenecen a la infraestructura,
+          no a su arquitectura conceptual.
+        </p>
+
+        <ul class="tech-list">
+          <li>PostgreSQL dedicado</li>
+          <li>Almacenamiento persistente de documentos</li>
+          <li>Redis, colas y workers</li>
+          <li>Búsqueda vectorial e híbrida a mayor escala</li>
+          <li>Inferencia LLM con mayor capacidad</li>
+          <li>Observabilidad, métricas y alertas</li>
+          <li>Escalamiento horizontal y balanceo</li>
+        </ul>
+      </article>
+
+    </aside>
   </section>
+
+  <section class="shell tech-note">
+    <strong>Prototipo funcional y migrable</strong>
+    <p>
+      Tributarius Prudens puede trasladarse a infraestructura de pago y mayor
+      capacidad sin sustituir su modelo de razonamiento ni sus fronteras
+      de autoridad jurídica.
+    </p>
+  </section>
+
 </main>
 {% endblock %}

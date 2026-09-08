@@ -2,16 +2,258 @@
 
 {% block title %}Ayuda · Tributarius Prudens{% endblock %}
 
+{% block description %}
+Propósito, funcionamiento y buenas prácticas de uso de Tributarius Prudens.
+{% endblock %}
+
 {% block content %}
-<main id="main-content" class="info-page">
-  <section class="shell info-page-hero">
+<main id="main-content" class="info-page help-page">
+
+  <section class="shell info-page-hero help-hero">
     <p class="eyebrow">Tributarius Prudens</p>
     <h1>Ayuda</h1>
-    <p class="info-page-subtitle">Propósito y funcionamiento de Tributarius Prudens.</p>
+    <p class="info-page-subtitle">
+      Propósito y funcionamiento esencial de la aplicación.
+    </p>
   </section>
 
-  <section class="shell info-page-panel">
-    <p>Conoce cómo formular una consulta, cómo se analiza la evidencia y cómo interpretar los resultados de la aplicación.</p>
+  <section class="shell help-grid">
+
+    <article class="help-card help-purpose">
+      <div class="info-card-heading">
+        <span class="info-icon" aria-hidden="true">◎</span>
+        <div>
+          <h2>¿Qué hace Tributarius Prudens?</h2>
+          <p class="section-kicker">
+            Orientación jurídico-fiscal explicable y trazable.
+          </p>
+        </div>
+      </div>
+
+      <p>
+        Tributarius Prudens analiza consultas fiscales mexicanas mediante
+        evidencia normativa controlada, reglas jurídicas, cálculos
+        deterministas y razonamiento asistido.
+      </p>
+
+      <p>
+        Su finalidad es identificar la cuestión jurídica, recuperar
+        las fuentes pertinentes y construir una determinación sustentada,
+        conservando la trazabilidad de la ejecución.
+      </p>
+    </article>
+
+
+    <article class="help-card help-flow">
+      <div class="info-card-heading">
+        <span class="info-icon" aria-hidden="true">⚙</span>
+        <div>
+          <h2>¿Cómo funciona?</h2>
+          <p class="section-kicker">
+            De la consulta al resultado verificable.
+          </p>
+        </div>
+      </div>
+
+      <ol class="help-steps">
+        <li>
+          <span class="step-number">1</span>
+          <div>
+            <strong>Formula la consulta</strong>
+            <p>
+              Describe los hechos relevantes, el ejercicio fiscal y el tipo
+              de contribuyente cuando resulten necesarios.
+            </p>
+          </div>
+        </li>
+
+        <li>
+          <span class="step-number">2</span>
+          <div>
+            <strong>Identifica hechos e intención</strong>
+            <p>
+              La aplicación estructura los datos expresados en la consulta
+              y detecta información faltante.
+            </p>
+          </div>
+        </li>
+
+        <li>
+          <span class="step-number">3</span>
+          <div>
+            <strong>Recupera evidencia</strong>
+            <p>
+              Consulta la base normativa controlada y separa las fuentes
+              jurídicas de los materiales complementarios.
+            </p>
+          </div>
+        </li>
+
+        <li>
+          <span class="step-number">4</span>
+          <div>
+            <strong>Aplica razonamiento y cálculo</strong>
+            <p>
+              Las reglas determinan consecuencias jurídicas, los casos
+              sirven de contraste y los algoritmos realizan los cálculos
+              disponibles.
+            </p>
+          </div>
+        </li>
+
+        <li>
+          <span class="step-number">5</span>
+          <div>
+            <strong>Entrega un resultado trazable</strong>
+            <p>
+              Analyzer 1.0 y Legal Decision 1.0 consolidan la respuesta,
+              junto con evidencia, incertidumbres y reporte conclusivo en PDF.
+            </p>
+          </div>
+        </li>
+      </ol>
+    </article>
+
+
+    <article class="help-card">
+      <div class="info-card-heading">
+        <span class="info-icon" aria-hidden="true">▤</span>
+        <div>
+          <h2>¿Qué resultados entrega?</h2>
+        </div>
+      </div>
+
+      <ul class="help-result-list">
+        <li>
+          <strong>Analyzer 1.0</strong>
+          <span>
+            Organiza hechos, evidencia, suficiencia y conclusión jurídica.
+          </span>
+        </li>
+
+        <li>
+          <strong>Determinación jurídica</strong>
+          <span>
+            Formaliza la conclusión respaldada por la evidencia disponible.
+          </span>
+        </li>
+
+        <li>
+          <strong>Normativa y evidencia</strong>
+          <span>
+            Permite identificar qué fuentes participaron en la respuesta.
+          </span>
+        </li>
+
+        <li>
+          <strong>Trazabilidad</strong>
+          <span>
+            Conserva las etapas y la identidad técnica de la ejecución.
+          </span>
+        </li>
+
+        <li>
+          <strong>Reporte PDF</strong>
+          <span>
+            Genera un artefacto conclusivo de la misma ejecución jurídica.
+          </span>
+        </li>
+      </ul>
+    </article>
+
+
+    <article class="help-card">
+      <div class="info-card-heading">
+        <span class="info-icon" aria-hidden="true">⚠</span>
+        <div>
+          <h2>¿Cuándo requiere revisión humana?</h2>
+        </div>
+      </div>
+
+      <div class="help-warning">
+        La aplicación no debe producir un cierre automático cuando
+        la evidencia resulte insuficiente, contradictoria o no exista una
+        fuente controladora que permita sostener la determinación.
+      </div>
+
+      <p>
+        Los asuntos complejos, atípicos, controvertidos o con hechos
+        incompletos requieren valorar la información adicional y, cuando
+        corresponda, la intervención de una persona especialista.
+      </p>
+    </article>
+
+
+    <article class="help-card help-practices">
+      <div class="info-card-heading">
+        <span class="info-icon" aria-hidden="true">✓</span>
+        <div>
+          <h2>Buenas prácticas para consultar</h2>
+        </div>
+      </div>
+
+      <ul class="practice-list">
+        <li>
+          <strong>Indica el ejercicio fiscal.</strong>
+          <span>Ejemplo: 2026.</span>
+        </li>
+        <li>
+          <strong>Identifica al contribuyente.</strong>
+          <span>Persona física, persona moral o régimen aplicable.</span>
+        </li>
+        <li>
+          <strong>Describe los hechos relevantes.</strong>
+          <span>Actividad, operación, monto, base o circunstancia.</span>
+        </li>
+        <li>
+          <strong>Señala el periodo.</strong>
+          <span>Mensual, anual o intervalo aplicable.</span>
+        </li>
+        <li>
+          <strong>Evita datos personales innecesarios.</strong>
+          <span>
+            No incluyas contraseñas, cuentas bancarias, RFC, CURP
+            ni otros identificadores salvo que sean indispensables.
+          </span>
+        </li>
+      </ul>
+    </article>
+
+
+    <aside class="help-card help-jurisprudence">
+      <div class="info-card-heading">
+        <span class="info-icon" aria-hidden="true">§</span>
+        <div>
+          <h2>Jurisprudencia aportada por el usuario</h2>
+        </div>
+      </div>
+
+      <p>
+        Cuando sea necesario analizar un criterio jurisprudencial, puedes
+        adjuntar el PDF correspondiente a la consulta.
+      </p>
+
+      <p>
+        Esa jurisprudencia se utiliza como evidencia temporal de la sesión.
+        No se incorpora automáticamente a la base normativa permanente.
+      </p>
+    </aside>
+
   </section>
+
+  <section class="shell help-bottom">
+    <div>
+      <strong>¿Quieres probar el sistema?</strong>
+      <p>
+        Regresa a Inicio y formula una consulta fiscal con hechos suficientemente
+        precisos.
+      </p>
+    </div>
+
+    <a class="button primary" href="/#consulta">
+      Ir a Inicio
+    </a>
+  </section>
+
 </main>
 {% endblock %}
