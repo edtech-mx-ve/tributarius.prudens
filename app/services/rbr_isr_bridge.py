@@ -73,16 +73,50 @@ def build_isr_input_from_rbr(
             "El hecho 'isr_period' no contiene una periodicidad ISR soportada."
         ) from exc
 
+    has_gross_income = (
+        "gross_income" in facts
+        and facts.get("gross_income") is not None
+    )
+    has_taxable_base = (
+        "taxable_base" in facts
+        and facts.get("taxable_base") is not None
+    )
+
+    if not has_gross_income and not has_taxable_base:
+        raise RBRISRBridgeError(
+            "El RBR activó el cálculo ISR, pero falta una base de cálculo: "
+            "'gross_income' o 'taxable_base'."
+        )
+
     try:
         return ISRCalculationInput(
             fiscal_year=fiscal_year,
             period=period,
-            gross_income=_decimal_fact(facts, "gross_income"),
-            exempt_income=_decimal_fact(facts, "exempt_income", default="0"),
-            authorized_deductions=_decimal_fact(
-                facts, "authorized_deductions", default="0"
+            gross_income=(
+                _decimal_fact(facts, "gross_income")
+                if has_gross_income
+                else None
             ),
-            credits=_decimal_fact(facts, "credits", default="0"),
+            taxable_base=(
+                _decimal_fact(facts, "taxable_base")
+                if has_taxable_base
+                else None
+            ),
+            exempt_income=_decimal_fact(
+                facts,
+                "exempt_income",
+                default="0",
+            ),
+            authorized_deductions=_decimal_fact(
+                facts,
+                "authorized_deductions",
+                default="0",
+            ),
+            credits=_decimal_fact(
+                facts,
+                "credits",
+                default="0",
+            ),
             normative_ref=tariff.normative_ref,
         )
     except RBRISRBridgeError:

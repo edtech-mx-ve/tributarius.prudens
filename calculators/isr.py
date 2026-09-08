@@ -66,13 +66,55 @@ def calculate_isr(
             "La referencia normativa validada no coincide con la tarifa."
         )
 
-    taxable_base = money(
-        calculation_input.gross_income
-        - calculation_input.exempt_income
-        - calculation_input.authorized_deductions
-    )
+    if calculation_input.taxable_base is not None:
+        if calculation_input.gross_income is None:
+            if (
+                calculation_input.exempt_income != Decimal("0")
+                or calculation_input.authorized_deductions != Decimal("0")
+            ):
+                raise ISRCalculationError(
+                    "No pueden aplicarse componentes de ingreso sin gross_income."
+                )
+
+            taxable_base = money(calculation_input.taxable_base)
+            taxable_base_formula = "declared_taxable_base"
+        else:
+            derived_base = money(
+                calculation_input.gross_income
+                - calculation_input.exempt_income
+                - calculation_input.authorized_deductions
+            )
+            declared_base = money(calculation_input.taxable_base)
+
+            if derived_base != declared_base:
+                raise ISRCalculationError(
+                    "La base gravable declarada contradice la base derivada."
+                )
+
+            taxable_base = declared_base
+            taxable_base_formula = (
+                "declared_taxable_base == "
+                "gross_income - exempt_income - authorized_deductions"
+            )
+    else:
+        if calculation_input.gross_income is None:
+            raise ISRCalculationError(
+                "No existe una base válida para ejecutar el cálculo ISR."
+            )
+
+        taxable_base = money(
+            calculation_input.gross_income
+            - calculation_input.exempt_income
+            - calculation_input.authorized_deductions
+        )
+        taxable_base_formula = (
+            "gross_income - exempt_income - authorized_deductions"
+        )
+
     if taxable_base < 0:
-        raise ISRCalculationError("La base gravable calculada no puede ser negativa.")
+        raise ISRCalculationError(
+            "La base gravable calculada no puede ser negativa."
+        )
 
     bracket = select_bracket(taxable_base, tariff)
     excess = money(taxable_base - bracket.lower_limit)
@@ -83,7 +125,7 @@ def calculate_isr(
     steps = [
         ISRCalculationStep(
             code="taxable_base",
-            formula="gross_income - exempt_income - authorized_deductions",
+            formula=taxable_base_formula,
             result=taxable_base,
         ),
         ISRCalculationStep(

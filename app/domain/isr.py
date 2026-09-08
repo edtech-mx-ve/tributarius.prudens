@@ -86,7 +86,18 @@ class ISRTariff(BaseModel):
 class ISRCalculationInput(BaseModel):
     fiscal_year: int = Field(ge=1900, le=2200)
     period: ISRPeriod
-    gross_income: Decimal = Field(ge=0, max_digits=18, decimal_places=2)
+    gross_income: Decimal | None = Field(
+        default=None,
+        ge=0,
+        max_digits=18,
+        decimal_places=2,
+    )
+    taxable_base: Decimal | None = Field(
+        default=None,
+        ge=0,
+        max_digits=18,
+        decimal_places=2,
+    )
     exempt_income: Decimal = Field(default=Decimal("0"), ge=0)
     authorized_deductions: Decimal = Field(default=Decimal("0"), ge=0)
     credits: Decimal = Field(default=Decimal("0"), ge=0)
@@ -94,8 +105,45 @@ class ISRCalculationInput(BaseModel):
 
     @model_validator(mode="after")
     def validate_components(self) -> ISRCalculationInput:
+        has_gross_income = self.gross_income is not None
+        has_taxable_base = self.taxable_base is not None
+
+        if not has_gross_income and not has_taxable_base:
+            raise ValueError(
+                "Se requiere gross_income o taxable_base para calcular ISR."
+            )
+
+        if self.gross_income is None:
+            if (
+                self.exempt_income != Decimal("0")
+                or self.authorized_deductions != Decimal("0")
+            ):
+                raise ValueError(
+                    "Los componentes de ingreso sólo pueden aplicarse "
+                    "cuando existe gross_income."
+                )
+            return self
+
         if self.exempt_income > self.gross_income:
-            raise ValueError("El ingreso exento no puede superar el ingreso bruto.")
+            raise ValueError(
+                "El ingreso exento no puede superar el ingreso bruto."
+            )
+
+        derived_base = (
+            self.gross_income
+            - self.exempt_income
+            - self.authorized_deductions
+        )
+
+        if (
+            self.taxable_base is not None
+            and derived_base != self.taxable_base
+        ):
+            raise ValueError(
+                "taxable_base contradice la base derivada de los "
+                "componentes de ingreso."
+            )
+
         return self
 
 

@@ -37,14 +37,19 @@ def merge_structured_isr_facts(
     if isr_input is None:
         return merged
 
-    structured = {
+    structured: dict[str, Any] = {
         "fiscal_year": isr_input.fiscal_year,
         "isr_period": isr_input.period.value,
-        "gross_income": isr_input.gross_income,
         "exempt_income": isr_input.exempt_income,
         "authorized_deductions": isr_input.authorized_deductions,
         "credits": isr_input.credits,
     }
+
+    if isr_input.gross_income is not None:
+        structured["gross_income"] = isr_input.gross_income
+
+    if isr_input.taxable_base is not None:
+        structured["taxable_base"] = isr_input.taxable_base
     for name, value in structured.items():
         merged.setdefault(name, value)
     return merged
