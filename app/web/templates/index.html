@@ -1,35 +1,9 @@
-<!doctype html>
-<html lang="es">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description"
-        content="Tributarius prudens: orientación fiscal explicable y trazable.">
-  <title>{{ app_name }}</title>
-  <link rel="stylesheet" href="{{ url_for('static', path='/css/app.css') }}">
-  <script src="{{ url_for('static', path='/js/app.js') }}" defer></script>
-</head>
-<body>
-  <a class="skip-link" href="#main-content">Saltar al contenido principal</a>
+{% extends "base.html" %}
 
-  <header class="site-header">
-    <div class="shell header-inner">
-      <a class="brand" href="/" aria-label="Tributarius prudens, inicio">
-        <span class="brand-mark" aria-hidden="true">TP</span>
-        <span>
-          <strong>Tributarius prudens</strong>
-          <small>Orientación fiscal explicable y trazable</small>
-        </span>
-      </a>
-      <nav aria-label="Navegación principal">
-        <a href="#consulta">Consulta</a>
-        <a href="#como-funciona">Cómo funciona</a>
-        <a href="/docs">API</a>
-      </nav>
-    </div>
-  </header>
+{% block title %}Tributarius Prudens{% endblock %}
 
-  <main id="main-content">
+{% block content %}
+<main id="main-content">
     <section class="hero shell" aria-labelledby="hero-title">
       <div>
         <p class="eyebrow">Sistema híbrido de apoyo fiscal</p>
@@ -383,14 +357,8 @@
       </div>
     </section>
   </main>
+{% endblock %}
 
-  <footer>
-    <div class="shell">
-      <p>
-        Herramienta de orientación y apoyo. Los asuntos de alto impacto,
-        controversia o evidencia insuficiente requieren revisión profesional.
-      </p>
-    </div>
-  </footer>
-</body>
-</html>
+{% block page_scripts %}
+  <script src="{{ url_for('static', path='/js/app.js') }}" defer></script>
+{% endblock %}

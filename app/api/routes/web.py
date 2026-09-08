@@ -34,12 +34,59 @@ WebService = Annotated[
 ]
 
 
+def _page_context(active_page: str) -> dict[str, str]:
+    return {
+        "app_name": "Tributarius Prudens",
+        "active_page": active_page,
+    }
+
+
 @router.get("/", response_class=HTMLResponse, include_in_schema=False)
 def home(request: Request) -> HTMLResponse:
     return templates.TemplateResponse(
         request=request,
         name="index.html",
-        context={"app_name": "Tributarius prudens"},
+        context=_page_context("inicio"),
+    )
+
+
+@router.get("/ayuda", response_class=HTMLResponse, include_in_schema=False)
+def help_page(request: Request) -> HTMLResponse:
+    return templates.TemplateResponse(
+        request=request,
+        name="ayuda.html",
+        context=_page_context("ayuda"),
+    )
+
+
+@router.get("/apptech", response_class=HTMLResponse, include_in_schema=False)
+def apptech_page(request: Request) -> HTMLResponse:
+    return templates.TemplateResponse(
+        request=request,
+        name="apptech.html",
+        context=_page_context("apptech"),
+    )
+
+
+@router.get(
+    "/preguntas-guia",
+    response_class=HTMLResponse,
+    include_in_schema=False,
+)
+def guide_questions_page(request: Request) -> HTMLResponse:
+    return templates.TemplateResponse(
+        request=request,
+        name="preguntas_guia.html",
+        context=_page_context("preguntas-guia"),
+    )
+
+
+@router.get("/fuentes", response_class=HTMLResponse, include_in_schema=False)
+def sources_page(request: Request) -> HTMLResponse:
+    return templates.TemplateResponse(
+        request=request,
+        name="fuentes.html",
+        context=_page_context("fuentes"),
     )
 
 

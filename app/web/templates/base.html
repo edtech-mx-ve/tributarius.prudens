@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description"
+        content="{% block description %}Tributarius Prudens: inteligencia jurídica fiscal para México.{% endblock %}">
+  <title>{% block title %}{{ app_name }}{% endblock %}</title>
+  <link rel="stylesheet"
+        href="{{ url_for('static', path='/css/app.css') }}">
+  {% block head %}{% endblock %}
+</head>
+<body>
+  <a class="skip-link" href="#main-content">
+    Saltar al contenido principal
+  </a>
+
+  <header class="site-header">
+    <div class="shell header-inner">
+      <a class="brand"
+         href="/"
+         aria-label="Tributarius Prudens, inicio">
+        <img
+          class="brand-logo"
+          src="{{ url_for('static', path='/img/tributarius-prudens-logo.png') }}"
+          alt=""
+          width="48"
+          height="48"
+        >
+        <span class="brand-copy">
+          <strong>Tributarius Prudens</strong>
+          <small>Inteligencia jurídica fiscal para México</small>
+        </span>
+      </a>
+
+      <nav class="primary-nav"
+           aria-label="Navegación principal">
+        <a
+          href="/"
+          {% if active_page == "inicio" %}aria-current="page"{% endif %}
+        >Inicio</a>
+        <a
+          href="/ayuda"
+          {% if active_page == "ayuda" %}aria-current="page"{% endif %}
+        >Ayuda</a>
+        <a
+          href="/apptech"
+          {% if active_page == "apptech" %}aria-current="page"{% endif %}
+        >AppTech</a>
+        <a
+          href="/preguntas-guia"
+          {% if active_page == "preguntas-guia" %}aria-current="page"{% endif %}
+        >Preguntas-guía</a>
+        <a
+          href="/fuentes"
+          {% if active_page == "fuentes" %}aria-current="page"{% endif %}
+        >Fuentes</a>
+      </nav>
+    </div>
+  </header>
+
+  {% block content %}{% endblock %}
+
+  <footer class="site-footer">
+    <div class="shell site-footer-inner">
+      <p>Powered by Sképsis Apps · © 2026 Sképsis Apps</p>
+    </div>
+  </footer>
+
+  {% block page_scripts %}{% endblock %}
+</body>
+</html>
