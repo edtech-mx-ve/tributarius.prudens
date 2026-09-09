@@ -18,6 +18,7 @@ def _payload(
     *,
     fiscal_year: int,
     period: str = "annual",
+    month: int | None = None,
     version: str = "TEST-1.0",
     normative_ref: str = "NORM_TEST_ISR",
 ) -> dict[str, object]:
@@ -26,6 +27,16 @@ def _payload(
         "version": version,
         "fiscal_year": fiscal_year,
         "period": period,
+        "month": (
+            month
+            if month is not None
+            else (1 if period == "monthly" else None)
+        ),
+        "tariff_scope": (
+            "year_to_month"
+            if period == "monthly"
+            else "annual"
+        ),
         "normative_ref": normative_ref,
         "source_reference": "FIXTURE_ONLY_NOT_FOR_FISCAL_USE",
         "verified": True,
@@ -169,3 +180,103 @@ def test_registry_exposes_stable_audit_order(tmp_path: Path) -> None:
         (2026, "annual", "TEST-1.0"),
         (2026, "monthly", "M-2026"),
     ]
+
+def test_registry_selects_exact_monthly_tariff(
+    tmp_path: Path,
+) -> None:
+    january = _write(
+        tmp_path / "january.json",
+        _payload(
+            fiscal_year=2026,
+            period="monthly",
+            month=1,
+            version="M-2026-01",
+            normative_ref="lisr:articulo_106",
+        ),
+    )
+    september = _write(
+        tmp_path / "september.json",
+        _payload(
+            fiscal_year=2026,
+            period="monthly",
+            month=9,
+            version="M-2026-09",
+            normative_ref="lisr:articulo_106",
+        ),
+    )
+
+    registry = load_isr_tariff_registry(
+        [january, september]
+    )
+
+    assert (
+        registry.get(
+            2026,
+            ISRPeriod.MONTHLY,
+            1,
+        ).version
+        == "M-2026-01"
+    )
+    assert (
+        registry.get(
+            2026,
+            ISRPeriod.MONTHLY,
+            9,
+        ).version
+        == "M-2026-09"
+    )
+
+    with pytest.raises(
+        ISRTariffRegistryError,
+        match="No existe una tarifa ISR verificada",
+    ):
+        registry.get(
+            2026,
+            ISRPeriod.MONTHLY,
+            8,
+        )
+
+
+def test_loader_rejects_monthly_tariff_without_month(
+    tmp_path: Path,
+) -> None:
+    payload = _payload(
+        fiscal_year=2026,
+        period="monthly",
+        normative_ref="lisr:articulo_106",
+    )
+    payload["month"] = None
+
+    path = _write(
+        tmp_path / "monthly_without_month.json",
+        payload,
+    )
+
+    with pytest.raises(
+        ISRTariffRegistryError,
+        match="tarifa ISR",
+    ):
+        load_isr_tariff(path)
+
+
+def test_loader_rejects_monthly_tariff_with_annual_scope(
+    tmp_path: Path,
+) -> None:
+    payload = _payload(
+        fiscal_year=2026,
+        period="monthly",
+        month=9,
+        normative_ref="lisr:articulo_106",
+    )
+    payload["tariff_scope"] = "annual"
+
+    path = _write(
+        tmp_path / "monthly_wrong_scope.json",
+        payload,
+    )
+
+    with pytest.raises(
+        ISRTariffRegistryError,
+        match="tarifa ISR",
+    ):
+        load_isr_tariff(path)

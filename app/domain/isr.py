@@ -18,6 +18,11 @@ class ISRPeriod(StrEnum):
     ANNUAL = "annual"
 
 
+class ISRTariffScope(StrEnum):
+    ANNUAL = "annual"
+    YEAR_TO_MONTH = "year_to_month"
+
+
 class ISRBracket(BaseModel):
     lower_limit: Decimal = Field(ge=0, max_digits=18, decimal_places=2)
     upper_limit: Decimal | None = Field(
@@ -59,11 +64,39 @@ class ISRTariff(BaseModel):
     version: str = Field(min_length=1, max_length=50)
     fiscal_year: int = Field(ge=1900, le=2200)
     period: ISRPeriod
+    month: int | None = Field(default=None, ge=1, le=12)
+    tariff_scope: ISRTariffScope = ISRTariffScope.ANNUAL
     normative_ref: str = Field(min_length=1, max_length=300)
     source_reference: str = Field(min_length=1, max_length=1000)
     verified: bool
     legal_metadata: ISRTariffLegalMetadata | None = None
     brackets: list[ISRBracket] = Field(min_length=1, max_length=100)
+
+    @model_validator(mode="after")
+    def validate_temporal_scope(self) -> ISRTariff:
+        if self.period == ISRPeriod.MONTHLY:
+            if self.month is None:
+                raise ValueError(
+                    "Una tarifa ISR mensual requiere month."
+                )
+            if self.tariff_scope != ISRTariffScope.YEAR_TO_MONTH:
+                raise ValueError(
+                    "Una tarifa ISR mensual requiere "
+                    "tariff_scope=year_to_month."
+                )
+            return self
+
+        if self.month is not None:
+            raise ValueError(
+                "Una tarifa ISR anual no puede declarar month."
+            )
+
+        if self.tariff_scope != ISRTariffScope.ANNUAL:
+            raise ValueError(
+                "Una tarifa ISR anual requiere tariff_scope=annual."
+            )
+
+        return self
 
     @model_validator(mode="after")
     def require_verified_source(self) -> ISRTariff:

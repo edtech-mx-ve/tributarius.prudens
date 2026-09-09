@@ -23,35 +23,58 @@ class ISRTariffRegistry:
                 "El registro de tarifas ISR no puede estar vacío."
             )
 
-        by_key: dict[tuple[int, ISRPeriod], ISRTariff] = {}
+        by_key: dict[
+            tuple[int, ISRPeriod, int | None],
+            ISRTariff,
+        ] = {}
         for tariff in tariffs:
             validate_tariff(tariff)
-            key = (tariff.fiscal_year, tariff.period)
+            key = (
+                tariff.fiscal_year,
+                tariff.period,
+                tariff.month,
+            )
             if key in by_key:
                 raise ISRTariffRegistryError(
-                    "Existe más de una tarifa ISR para el mismo ejercicio y periodicidad."
+                    "Existe más de una tarifa ISR para el mismo ejercicio, periodicidad y mes."
                 )
             by_key[key] = tariff
 
         self._by_key = by_key
 
-    def get(self, fiscal_year: int, period: ISRPeriod) -> ISRTariff:
-        """Obtiene una tarifa exacta; nunca sustituye silenciosamente otro ejercicio."""
+    def get(
+        self,
+        fiscal_year: int,
+        period: ISRPeriod,
+        month: int | None = None,
+    ) -> ISRTariff:
+        """Obtiene una tarifa exacta sin sustituciones silenciosas."""
         try:
-            return self._by_key[(fiscal_year, period)]
+            return self._by_key[
+                (
+                    fiscal_year,
+                    period,
+                    month,
+                )
+            ]
         except KeyError as exc:
             raise ISRTariffRegistryError(
-                "No existe una tarifa ISR verificada para el ejercicio y periodicidad "
-                "solicitados."
+                "No existe una tarifa ISR verificada para el "
+                "ejercicio, periodicidad y mes solicitados."
             ) from exc
 
     def select_for_fiscal_use(
         self,
         fiscal_year: int,
         period: ISRPeriod,
+        month: int | None = None,
     ) -> ISRTariff:
         """Selecciona tarifa exacta con sustento jurídico temporal verificable."""
-        tariff = self.get(fiscal_year, period)
+        tariff = self.get(
+            fiscal_year,
+            period,
+            month,
+        )
         metadata = require_tariff_legal_metadata(tariff)
 
         if metadata.validity_status != NormativeValidityStatus.VERIFIED_IN_FORCE:
@@ -73,7 +96,11 @@ class ISRTariffRegistry:
         """Devuelve las tarifas en orden estable para auditoría."""
         return [
             self._by_key[key]
-            for key in sorted(self._by_key, key=lambda item: (item[0], item[1].value))
+            for key in sorted(self._by_key, key=lambda item: (
+                item[0],
+                item[1].value,
+                item[2] or 0,
+            ))
         ]
 
 

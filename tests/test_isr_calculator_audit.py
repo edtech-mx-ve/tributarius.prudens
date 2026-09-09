@@ -10,6 +10,7 @@ from app.domain.isr import (
     ISRCalculationInput,
     ISRPeriod,
     ISRTariff,
+    ISRTariffScope,
 )
 from calculators.isr import (
     ISRCalculationError,
@@ -28,11 +29,19 @@ def _tariff(
     period: ISRPeriod = ISRPeriod.MONTHLY,
     normative_ref: str = NORMATIVE_REF,
 ) -> ISRTariff:
+    is_monthly = period == ISRPeriod.MONTHLY
+
     return ISRTariff(
         schema_version="1.0",
         version="audit-6.1",
         fiscal_year=fiscal_year,
         period=period,
+        month=1 if is_monthly else None,
+        tariff_scope=(
+            ISRTariffScope.YEAR_TO_MONTH
+            if is_monthly
+            else ISRTariffScope.ANNUAL
+        ),
         normative_ref=normative_ref,
         source_reference="Fuente controlada de prueba para auditoría determinística.",
         verified=True,
@@ -174,6 +183,8 @@ def test_unverified_tariff_is_rejected_by_domain_contract() -> None:
             version="unverified",
             fiscal_year=2026,
             period=ISRPeriod.MONTHLY,
+            month=1,
+            tariff_scope=ISRTariffScope.YEAR_TO_MONTH,
             normative_ref=NORMATIVE_REF,
             source_reference="Fuente no verificada.",
             verified=False,
@@ -224,6 +235,8 @@ def test_tariff_rejects_overlapping_brackets() -> None:
         version="overlap",
         fiscal_year=2026,
         period=ISRPeriod.MONTHLY,
+        month=1,
+        tariff_scope=ISRTariffScope.YEAR_TO_MONTH,
         normative_ref=NORMATIVE_REF,
         source_reference="Fuente controlada de prueba.",
         verified=True,
@@ -253,6 +266,8 @@ def test_tariff_rejects_open_range_before_last_bracket() -> None:
         version="open-before-last",
         fiscal_year=2026,
         period=ISRPeriod.MONTHLY,
+        month=1,
+        tariff_scope=ISRTariffScope.YEAR_TO_MONTH,
         normative_ref=NORMATIVE_REF,
         source_reference="Fuente controlada de prueba.",
         verified=True,
@@ -285,6 +300,8 @@ def test_gap_between_brackets_fails_closed_when_base_has_no_range() -> None:
         version="gap",
         fiscal_year=2026,
         period=ISRPeriod.MONTHLY,
+        month=1,
+        tariff_scope=ISRTariffScope.YEAR_TO_MONTH,
         normative_ref=NORMATIVE_REF,
         source_reference="Fuente controlada de prueba.",
         verified=True,

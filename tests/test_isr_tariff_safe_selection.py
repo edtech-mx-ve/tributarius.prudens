@@ -17,19 +17,43 @@ CONTROLLED_TARIFF = Path(
 
 
 def _verified_payload(
-    *, fiscal_year: int, period: str, effective_from: str | None = "2026-01-01"
+    *,
+    fiscal_year: int,
+    period: str,
+    month: int | None = None,
+    effective_from: str | None = "2026-01-01",
 ) -> dict[str, object]:
     return {
         "schema_version": "1.0",
         "version": f"SAFE-{fiscal_year}-{period}",
         "fiscal_year": fiscal_year,
         "period": period,
-        "normative_ref": "lisr:articulo_152",
+        "month": (
+            month
+            if month is not None
+            else (1 if period == "monthly" else None)
+        ),
+        "tariff_scope": (
+            "year_to_month"
+            if period == "monthly"
+            else "annual"
+        ),
+        "normative_ref": (
+            "lisr:articulo_106"
+            if period == "monthly"
+            else "lisr:articulo_152"
+        ),
         "source_reference": "CONTROLLED_TEST_SOURCE",
         "verified": True,
         "legal_metadata": {
             "source_document_id": "lisr",
-            "legal_basis_refs": ["lisr:articulo_152"],
+            "legal_basis_refs": [
+                (
+                    "lisr:articulo_106"
+                    if period == "monthly"
+                    else "lisr:articulo_152"
+                )
+            ],
             "publication_date": None,
             "effective_from": effective_from,
             "effective_to": None,
@@ -123,3 +147,36 @@ def test_safe_selection_requires_effective_from(tmp_path: Path) -> None:
 
     with pytest.raises(ISRTariffRegistryError, match="fecha inicial de vigencia"):
         registry.select_for_fiscal_use(2026, ISRPeriod.ANNUAL)
+
+def test_safe_selection_requires_exact_month(
+    tmp_path: Path,
+) -> None:
+    path = _write(
+        tmp_path / "september.json",
+        _verified_payload(
+            fiscal_year=2026,
+            period="monthly",
+            month=9,
+        ),
+    )
+    registry = load_isr_tariff_registry([path])
+
+    selected = registry.select_for_fiscal_use(
+        2026,
+        ISRPeriod.MONTHLY,
+        9,
+    )
+
+    assert selected.month == 9
+    assert selected.tariff_scope.value == "year_to_month"
+    assert selected.normative_ref == "lisr:articulo_106"
+
+    with pytest.raises(
+        ISRTariffRegistryError,
+        match="No existe una tarifa ISR verificada",
+    ):
+        registry.select_for_fiscal_use(
+            2026,
+            ISRPeriod.MONTHLY,
+            8,
+        )
