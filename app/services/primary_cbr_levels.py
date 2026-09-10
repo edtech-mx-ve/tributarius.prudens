@@ -178,7 +178,11 @@ def build_primary_cbr_level_registry(
                 operational_level_eligible=operational_level_eligible,
                 corpus_validation_outcome=c7.validation_outcome,
                 corpus_validated=c7.corpus_validated,
-                validated_normative_refs=_consistent_normative_refs(c7),
+                validated_normative_refs=(
+                    _consistent_normative_refs(c7)
+                    if validated_level_eligible
+                    else []
+                ),
                 required_case_fields=required_fields,
                 unresolved_required_case_fields=missing_fields,
                 temporal_validation_pending=c7.temporal_validation_pending,

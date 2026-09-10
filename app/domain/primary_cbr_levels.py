@@ -92,6 +92,11 @@ class PrimaryCBRLevelAssessment(BaseModel):
             raise ValueError("Toda situación C.2/C.3 pertenece al nivel primario.")
         if self.validated_level_eligible != self.corpus_validated:
             raise ValueError("El nivel validado C.10 debe conservar exactamente C.7.")
+        if not self.corpus_validated and self.validated_normative_refs:
+            raise ValueError(
+                "C.10 no admite validated_normative_refs "
+                "cuando corpus_validated es falso."
+            )
         if self.operational_level_eligible:
             if not self.validated_level_eligible:
                 raise ValueError("Un caso operativo debe haber superado el nivel validado.")

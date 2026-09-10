@@ -2,10 +2,14 @@ from __future__ import annotations
 
 from pathlib import Path
 
+import pytest
+from pydantic import ValidationError
+
 from app.domain.cbr import CBRCase
 from app.domain.primary_cbr_corpus_validation import PrimaryCBRCorpusValidationOutcome
 from app.domain.primary_cbr_levels import (
     PrimaryCBRKnowledgeLevel,
+    PrimaryCBRLevelAssessment,
     PrimaryCBROperationalBlocker,
 )
 from app.services.primary_cbr_corpus_validation import (
@@ -167,3 +171,47 @@ def test_c10_is_reproducible_from_c6_c7_and_c9() -> None:
     )
 
     validate_primary_cbr_level_registry(registry, c6, c7, c9)
+
+
+def test_c10_unvalidated_corpus_never_exposes_validated_normative_refs() -> None:
+    registry = _load_registry()
+
+    unvalidated = [
+        item
+        for item in registry.assessments
+        if not item.corpus_validated
+    ]
+
+    assert len(unvalidated) == 17
+    assert all(
+        item.validated_normative_refs == []
+        for item in unvalidated
+    )
+
+    validated = _assessment(
+        registry,
+        "U-CBR-SIT-009",
+    )
+    assert validated.corpus_validated
+    assert validated.validated_normative_refs == [
+        "lisr:articulo_106"
+    ]
+
+
+def test_c10_contract_rejects_validated_refs_on_unvalidated_corpus() -> None:
+    registry = _load_registry()
+    item = _assessment(
+        registry,
+        "U-CBR-SIT-010",
+    )
+
+    payload = item.model_dump(mode="json")
+    payload["validated_normative_refs"] = [
+        "lisr:articulo_116"
+    ]
+
+    with pytest.raises(
+        ValidationError,
+        match="validated_normative_refs",
+    ):
+        PrimaryCBRLevelAssessment.model_validate(payload)

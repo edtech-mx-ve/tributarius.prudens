@@ -1329,9 +1329,7 @@
       "operational_level_eligible": false,
       "corpus_validation_outcome": "blocked_content_mismatch",
       "corpus_validated": false,
-      "validated_normative_refs": [
-        "lisr:articulo_116"
-      ],
+      "validated_normative_refs": [],
       "required_case_fields": [
         "taxpayer_type",
         "activity",
