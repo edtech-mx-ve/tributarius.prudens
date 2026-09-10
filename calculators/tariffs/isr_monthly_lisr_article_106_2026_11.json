@@ -1,0 +1,93 @@
+{
+  "schema_version": "1.0",
+  "version": "RMF-ANEXO8-2026-ART106-M11",
+  "fiscal_year": 2026,
+  "period": "monthly",
+  "month": 11,
+  "tariff_scope": "year_to_month",
+  "normative_ref": "lisr:articulo_106",
+  "source_reference": "Anexo 8 de la RMF para 2026; DOF 28-12-2025; apartado VI; tarifa del mes 11 para pagos provisionales del articulo 106 de la LISR.",
+  "verified": true,
+  "legal_metadata": {
+    "source_document_id": "anexo_8_rmf_2026",
+    "legal_basis_refs": [
+      "lisr:articulo_106"
+    ],
+    "publication_date": "2025-12-28",
+    "effective_from": "2026-01-01",
+    "effective_to": "2026-12-31",
+    "validity_status": "verified_in_force",
+    "validity_scope": "fiscal_year",
+    "validity_basis": "fiscal_year_rule",
+    "validity_verified_at": "2026-09-10",
+    "official_source": "Diario Oficial de la Federacion, 28 de diciembre de 2025, Anexo 8 de la RMF para 2026."
+  },
+  "brackets": [
+    {
+      "lower_limit": "0.01",
+      "upper_limit": "9290.49",
+      "fixed_fee": "0.00",
+      "rate_percent": "1.92"
+    },
+    {
+      "lower_limit": "9290.50",
+      "upper_limit": "78853.61",
+      "fixed_fee": "178.42",
+      "rate_percent": "6.40"
+    },
+    {
+      "lower_limit": "78853.62",
+      "upper_limit": "138578.22",
+      "fixed_fee": "4630.45",
+      "rate_percent": "10.88"
+    },
+    {
+      "lower_limit": "138578.23",
+      "upper_limit": "161091.04",
+      "fixed_fee": "11128.48",
+      "rate_percent": "16.00"
+    },
+    {
+      "lower_limit": "161091.05",
+      "upper_limit": "192870.04",
+      "fixed_fee": "14730.54",
+      "rate_percent": "17.92"
+    },
+    {
+      "lower_limit": "192870.05",
+      "upper_limit": "388991.13",
+      "fixed_fee": "20425.24",
+      "rate_percent": "21.36"
+    },
+    {
+      "lower_limit": "388991.14",
+      "upper_limit": "613103.48",
+      "fixed_fee": "62316.76",
+      "rate_percent": "23.52"
+    },
+    {
+      "lower_limit": "613103.49",
+      "upper_limit": "1170515.50",
+      "fixed_fee": "115027.99",
+      "rate_percent": "30.00"
+    },
+    {
+      "lower_limit": "1170515.51",
+      "upper_limit": "1560687.26",
+      "fixed_fee": "282251.53",
+      "rate_percent": "32.00"
+    },
+    {
+      "lower_limit": "1560687.27",
+      "upper_limit": "4682061.89",
+      "fixed_fee": "407106.59",
+      "rate_percent": "34.00"
+    },
+    {
+      "lower_limit": "4682061.90",
+      "upper_limit": null,
+      "fixed_fee": "1468373.94",
+      "rate_percent": "35.00"
+    }
+  ]
+}
