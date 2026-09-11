@@ -73,8 +73,13 @@ def build_isr_calculation_trace(
             fiscal_year=calculation_input.fiscal_year,
             period=calculation_input.period,
             gross_income=calculation_input.gross_income,
+            taxable_base=calculation_input.taxable_base,
             exempt_income=calculation_input.exempt_income,
             authorized_deductions=calculation_input.authorized_deductions,
+            prior_provisional_payments=(
+                calculation_input.prior_provisional_payments
+            ),
+            isr_withholding=calculation_input.isr_withholding,
             credits=calculation_input.credits,
             normative_ref=calculation_input.normative_ref,
         ),
@@ -108,20 +113,60 @@ def build_isr_calculation_trace(
 
 def verify_isr_calculation_trace(trace: ISRCalculationTrace) -> ISRTraceVerification:
     """Reejecuta aritmética esencial y verifica enlaces jurídicos sin LLM."""
-    taxable_base = money(
-        trace.input.gross_income
-        - trace.input.exempt_income
-        - trace.input.authorized_deductions
-    )
+    base_components_consistent = True
+
+    if trace.input.taxable_base is not None:
+        taxable_base = money(trace.input.taxable_base)
+
+        if trace.input.gross_income is None:
+            base_components_consistent = (
+                trace.input.exempt_income == Decimal("0")
+                and trace.input.authorized_deductions == Decimal("0")
+            )
+        else:
+            derived_taxable_base = money(
+                trace.input.gross_income
+                - trace.input.exempt_income
+                - trace.input.authorized_deductions
+            )
+            base_components_consistent = (
+                derived_taxable_base == taxable_base
+            )
+
+    elif trace.input.gross_income is not None:
+        taxable_base = money(
+            trace.input.gross_income
+            - trace.input.exempt_income
+            - trace.input.authorized_deductions
+        )
+
+    else:
+        taxable_base = trace.taxable_base
+        base_components_consistent = False
+
     excess = money(taxable_base - trace.bracket.lower_limit)
     marginal_tax = money(excess * trace.bracket.rate_percent / HUNDRED)
     tax_before_credits = money(trace.bracket.fixed_fee + marginal_tax)
+
+    prior_provisional_payments = money(
+        trace.input.prior_provisional_payments
+    )
+    isr_withholding = money(trace.input.isr_withholding)
+    credits = money(trace.input.credits)
+
     final_tax = money(
-        max(Decimal("0"), tax_before_credits - trace.input.credits)
+        max(
+            Decimal("0"),
+            tax_before_credits
+            - prior_provisional_payments
+            - isr_withholding
+            - credits,
+        )
     )
 
     mathematically_consistent = (
-        taxable_base == trace.taxable_base
+        base_components_consistent
+        and taxable_base == trace.taxable_base
         and tax_before_credits == trace.tax_before_credits
         and final_tax == trace.final_tax
     )

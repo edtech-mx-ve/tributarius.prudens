@@ -11,6 +11,7 @@ from app.domain.isr import (
     ISRPeriod,
     ISRTariff,
     ISRTariffLegalMetadata,
+    ISRTariffScope,
 )
 from app.domain.normative import NormativeValidityStatus
 from app.domain.rules import RuleConclusion, RuleEvaluationResult
@@ -188,3 +189,69 @@ def test_trace_rejects_mismatched_tariff_version() -> None:
             mismatched_tariff,
             _rules(),
         )
+
+def test_trace_supports_declared_year_to_month_base_and_article_106_subtractions() -> None:
+    normative_ref = "lisr:articulo_106"
+
+    tariff = ISRTariff(
+        schema_version="1.0",
+        version="TEST-2026-M09",
+        fiscal_year=2026,
+        period=ISRPeriod.MONTHLY,
+        month=9,
+        tariff_scope=ISRTariffScope.YEAR_TO_MONTH,
+        normative_ref=normative_ref,
+        source_reference="RMF Anexo 8 test",
+        verified=True,
+        legal_metadata=ISRTariffLegalMetadata(
+            source_document_id="rmf_2026",
+            legal_basis_refs=[normative_ref],
+            effective_from=date(2026, 1, 1),
+            effective_to=date(2026, 12, 31),
+            validity_status=NormativeValidityStatus.VERIFIED_IN_FORCE,
+        ),
+        brackets=[
+            ISRBracket(
+                lower_limit=Decimal("7601.32"),
+                upper_limit=Decimal("64516.59"),
+                fixed_fee=Decimal("145.98"),
+                rate_percent=Decimal("6.40"),
+            ),
+        ],
+    )
+
+    calculation_input = ISRCalculationInput(
+        fiscal_year=2026,
+        period=ISRPeriod.MONTHLY,
+        taxable_base=Decimal("35000.00"),
+        prior_provisional_payments=Decimal("1200.00"),
+        isr_withholding=Decimal("200.00"),
+        normative_ref=normative_ref,
+    )
+
+    result = calculate_isr(calculation_input, tariff)
+
+    trace = build_isr_calculation_trace(
+        calculation_input,
+        result,
+        tariff,
+        _rules(),
+    )
+    verification = verify_isr_calculation_trace(trace)
+
+    assert trace.input.gross_income is None
+    assert trace.input.taxable_base == Decimal("35000.00")
+    assert (
+        trace.input.prior_provisional_payments
+        == Decimal("1200.00")
+    )
+    assert trace.input.isr_withholding == Decimal("200.00")
+
+    assert trace.taxable_base == Decimal("35000.00")
+    assert trace.tax_before_credits == Decimal("1899.50")
+    assert trace.final_tax == Decimal("499.50")
+
+    assert verification.mathematically_consistent is True
+    assert verification.legally_linked is True
+    assert verification.rbr_authorized is True
+    assert verification.verified is True

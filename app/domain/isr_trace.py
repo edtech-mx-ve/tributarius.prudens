@@ -11,9 +11,12 @@ from app.domain.normative import NormativeValidityStatus
 class ISRInputTrace(BaseModel):
     fiscal_year: int
     period: ISRPeriod
-    gross_income: Decimal
+    gross_income: Decimal | None = None
+    taxable_base: Decimal | None = None
     exempt_income: Decimal
     authorized_deductions: Decimal
+    prior_provisional_payments: Decimal = Decimal("0")
+    isr_withholding: Decimal = Decimal("0")
     credits: Decimal
     normative_ref: str
 
