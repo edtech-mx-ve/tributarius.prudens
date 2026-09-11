@@ -107,6 +107,19 @@ function displayValue(value, fallback = "No disponible") {
   return String(value);
 }
 
+function formatMoney(value) {
+  const numeric = Number(value);
+  if (!Number.isFinite(numeric)) {
+    return displayValue(value);
+  }
+  return new Intl.NumberFormat("es-MX", {
+    style: "currency",
+    currency: "MXN",
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  }).format(numeric);
+}
+
 function formatScore(score) {
   if (typeof score !== "number" || !Number.isFinite(score)) {
     return null;
@@ -501,6 +514,31 @@ function renderAnalyzerPending(analysis) {
   block.hidden = pending.length === 0;
 }
 
+function renderAnalyzerCalculation(analysis) {
+  const block = document.querySelector("#analyzer-calculation-block");
+  const calculation = analysis.calculation;
+
+  if (!calculation || typeof calculation !== "object") {
+    block.hidden = true;
+    return;
+  }
+
+  document.querySelector("#analyzer-calculation-base").textContent =
+    formatMoney(calculation.taxable_base);
+  document.querySelector("#analyzer-calculation-tax-before").textContent =
+    formatMoney(calculation.tax_before_credits);
+  document.querySelector("#analyzer-calculation-prior-payments").textContent =
+    formatMoney(calculation.prior_provisional_payments);
+  document.querySelector("#analyzer-calculation-withholding").textContent =
+    formatMoney(calculation.isr_withholding);
+  document.querySelector("#analyzer-calculation-final").textContent =
+    formatMoney(calculation.final_tax);
+  document.querySelector("#analyzer-calculation-tariff").textContent =
+    `${displayValue(calculation.tariff_version)} / ${displayValue(calculation.normative_ref)}`;
+
+  block.hidden = false;
+}
+
 function renderLegalAnalysis(result) {
   const block = document.querySelector("#analyzer-block");
   const analysis = result.legal_analysis;
@@ -540,6 +578,7 @@ function renderLegalAnalysis(result) {
   conclusionBlock.hidden = !conclusion;
 
   renderAnalyzerFacts(analysis);
+  renderAnalyzerCalculation(analysis);
   renderAnalyzerReadiness(analysis);
   renderAnalyzerEvidenceMap(analysis);
   renderAnalyzerPriorities(analysis);

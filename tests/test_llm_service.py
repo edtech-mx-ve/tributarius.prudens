@@ -189,3 +189,17 @@ def test_context_copies_deterministic_evidence_before_enrichment() -> None:
 
     # Enrichment must not mutate the caller-owned deterministic object.
     assert deterministic.normative_evidence_refs == []
+
+
+def test_standard_transport_may_omit_calculation_selection() -> None:
+    calculation = "ISR: taxable_base=35000.00; final_tax=499.50"
+    provider = StaticProvider(valid_payload())
+    deterministic = DeterministicEvidence(calculations=[calculation])
+
+    result = LlamaRAGService(provider).explain(
+        retrieval_with_hit(),
+        deterministic_evidence=deterministic,
+    )
+
+    assert result.generation_performed is True
+    assert result.answer.calculation_refs == []

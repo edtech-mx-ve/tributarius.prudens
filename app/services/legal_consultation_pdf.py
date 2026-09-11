@@ -509,6 +509,37 @@ def generate_legal_consultation_pdf(
             styles,
         )
 
+    if analysis.calculation is not None:
+        calculation = analysis.calculation
+
+        _add(
+            story,
+            "Cálculo determinístico ISR:",
+            styles["label"],
+        )
+
+        _bullets(
+            story,
+            [
+                f"Base gravable acumulada: ${calculation.taxable_base:,.2f}",
+                (
+                    "ISR acumulado antes de pagos y retenciones: "
+                    f"${calculation.tax_before_credits:,.2f}"
+                ),
+                (
+                    "Pagos provisionales anteriores: "
+                    f"${calculation.prior_provisional_payments:,.2f}"
+                ),
+                f"ISR retenido: ${calculation.isr_withholding:,.2f}",
+                f"ISR provisional a pagar: ${calculation.final_tax:,.2f}",
+                (
+                    f"Tarifa: {calculation.tariff_version}; "
+                    f"fundamento: {calculation.normative_ref}."
+                ),
+            ],
+            styles,
+        )
+
     if analysis.applicable_normative_refs:
         _add(
             story,

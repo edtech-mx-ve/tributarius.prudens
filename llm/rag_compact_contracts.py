@@ -102,6 +102,32 @@ def rag_compact_response_schema(context: LLMGenerationContext) -> dict[str, Any]
             property_name=property_name,
             count=len(catalog[catalog_name]),
         )
+    calculation_count = len(catalog["calculation_refs"])
+    if calculation_count:
+        properties = schema.get("properties")
+        if not isinstance(properties, dict):
+            raise CompactRAGContractError(
+                "El schema compacto no contiene properties."
+            )
+
+        calculation_schema = properties.get("calculation_ref_indices")
+        if not isinstance(calculation_schema, dict):
+            raise CompactRAGContractError(
+                "El schema compacto no contiene calculation_ref_indices."
+            )
+
+        calculation_schema["minItems"] = calculation_count
+        calculation_schema["maxItems"] = calculation_count
+        calculation_schema["uniqueItems"] = True
+
+        required = schema.setdefault("required", [])
+        if not isinstance(required, list):
+            raise CompactRAGContractError(
+                "El schema compacto contiene required inv?lido."
+            )
+        if "calculation_ref_indices" not in required:
+            required.append("calculation_ref_indices")
+
     return schema
 
 

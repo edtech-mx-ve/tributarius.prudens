@@ -12,6 +12,9 @@ _SYSTEM_PROMPT = (
     "Para citar, selecciona índices; nunca copies ni inventes ids, normas o resultados.\n"
     "Si existe incertidumbre material usa uncertainty_note y requires_human_review=true.\n"
     "No cambies resultados deterministas ni introduzcas autoridad jurídica externa.\n"
+    "Si deterministic_summary.calculations contiene resultados, "
+    "debes incorporarlos literalmente, seleccionar sus calculation_ref_indices "
+    "y no afirmar que faltan datos para calcular.\n"
 )
 
 
@@ -39,6 +42,9 @@ def build_compact_rag_messages(context: LLMGenerationContext) -> list[dict[str, 
                     context.deterministic_evidence.hybrid_controlling_source
                 ),
                 "hybrid_relation": context.deterministic_evidence.hybrid_relation,
+                "calculations": list(
+                    context.deterministic_evidence.calculations
+                ),
                 "requires_human_review": (
                     context.deterministic_evidence.requires_human_review
                 ),
