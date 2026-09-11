@@ -120,3 +120,38 @@ def test_isr_without_calculation_base_requests_it_explicitly() -> None:
 
     assert missing == {"taxable_base"}
     assert hardened.requires_clarification is True
+
+
+def test_cumulative_isr_public_query_preserves_explicit_facts() -> None:
+    query = (
+        "Soy persona fisica con actividad profesional. "
+        "De enero a septiembre de 2026 tengo una base gravable "
+        "acumulada de $35,000.00. He realizado pagos provisionales "
+        "de ISR por $1,200.00 en los meses anteriores y me han "
+        "retenido $200.00 de ISR. Cuanto ISR provisional debo "
+        "pagar en septiembre de 2026 y que fundamento legal aplica?"
+    )
+
+    facts, analysis = _facts(query)
+
+    assert analysis.primary_intent.value == "calculate_isr"
+
+    assert facts["matter"] == "ISR"
+    assert facts["taxpayer_type"] == "individual"
+    assert facts["fiscal_year"] == "2026"
+    assert facts["activity"] == (
+        "servicios profesionales independientes"
+    )
+    assert facts["isr_period"] == "monthly"
+    assert facts["isr_month"] == "9"
+
+    assert facts["taxable_base"] == "35000.00"
+    assert facts["taxable_base_scope"] == "year_to_month"
+
+    assert facts["prior_provisional_payments"] == "1200.00"
+    assert facts["isr_withholding"] == "200.00"
+
+    assert "gross_income" not in facts
+
+    assert analysis.missing_fields == []
+    assert analysis.requires_clarification is False

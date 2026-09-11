@@ -39,6 +39,11 @@ from app.services.real_llama_runtime import (
 )
 from app.services.rule_loader import RuleLoadError, load_rule_set
 from app.web.runtime_runner import WebHybridRunner
+from calculators.isr_tariff_registry import (
+    ISRTariffRegistry,
+    ISRTariffRegistryError,
+    load_isr_tariff_registry,
+)
 from llm.providers.cloudflare_workers_ai import CloudflareWorkersAIProvider
 from llm.providers.llama_cpp import LlamaCppProvider
 from llm.providers.openrouter import OpenRouterProvider
@@ -53,6 +58,11 @@ from rag.retrieval.retriever import FaissRetriever, RetrievalError
 
 _REQUIRED_RAG_FILES = ("index.faiss", "chunks.jsonl", "manifest.json")
 _ALLOWED_RUNTIME_BACKENDS = frozenset({"semantic", "lexical_cpu"})
+
+_ISR_2026_MONTHLY_TARIFF_NAMES = tuple(
+    f"isr_monthly_lisr_article_106_2026_{month:02d}.json"
+    for month in range(1, 13)
+)
 
 
 class RuntimeBuildError(RuntimeError):
@@ -93,6 +103,44 @@ def load_runtime_cbr_cases(settings: Settings) -> list[CBRCase]:
         raise RuntimeBuildError(
             "El corpus CBR productivo es invalido."
         ) from exc
+
+def load_runtime_isr_tariff_registry() -> ISRTariffRegistry:
+    """Carga exactamente las 12 tarifas mensuales ISR 2026 controladas."""
+    tariff_dir = (
+        Path(__file__).resolve().parents[2]
+        / "calculators"
+        / "tariffs"
+    )
+
+    expected = set(_ISR_2026_MONTHLY_TARIFF_NAMES)
+    actual = {
+        path.name
+        for path in tariff_dir.glob(
+            "isr_monthly_lisr_article_106_2026_*.json"
+        )
+    }
+
+    if actual != expected:
+        missing = ", ".join(sorted(expected - actual)) or "<ninguna>"
+        unexpected = ", ".join(sorted(actual - expected)) or "<ninguna>"
+        raise RuntimeBuildError(
+            "El registro de tarifas ISR 2026 no coincide con el "
+            "conjunto controlado. "
+            f"Faltan: {missing}. Sobran: {unexpected}."
+        )
+
+    paths: list[str | Path] = [
+        tariff_dir / name
+        for name in _ISR_2026_MONTHLY_TARIFF_NAMES
+    ]
+
+    try:
+        return load_isr_tariff_registry(paths)
+    except ISRTariffRegistryError as exc:
+        raise RuntimeBuildError(
+            "El registro ISR 2026 del runtime es inválido."
+        ) from exc
+
 
 def _load_manifest(artifact_dir: Path) -> IndexManifest:
     manifest_path = artifact_dir / "manifest.json"
@@ -279,6 +327,7 @@ def build_runtime_components(settings: Settings) -> RuntimeComponents:
         raise _runtime_initialization_error(exc) from exc
 
     cbr_cases = load_runtime_cbr_cases(settings)
+    isr_tariff_registry = load_runtime_isr_tariff_registry()
 
     try:
         llama_provider, llama_descriptor = build_runtime_llama_provider(settings)
@@ -301,6 +350,7 @@ def build_runtime_components(settings: Settings) -> RuntimeComponents:
         retriever=legal_retriever,
         llm_service=LlamaRAGService(llama_provider),
         rule_set=rule_set,
+        isr_tariff_registry=isr_tariff_registry,
         cbr_cases=cbr_cases,
         temporal_guard=temporal_guard,
         hybrid_h1_service=llama_services.h1,

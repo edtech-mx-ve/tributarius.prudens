@@ -42,6 +42,10 @@ def merge_structured_isr_facts(
         "isr_period": isr_input.period.value,
         "exempt_income": isr_input.exempt_income,
         "authorized_deductions": isr_input.authorized_deductions,
+        "prior_provisional_payments": (
+            isr_input.prior_provisional_payments
+        ),
+        "isr_withholding": isr_input.isr_withholding,
         "credits": isr_input.credits,
     }
 
@@ -73,6 +77,25 @@ def _coerce_period(value: object) -> ISRPeriod:
         ) from exc
 
 
+def _coerce_month(value: object) -> int:
+    if isinstance(value, bool):
+        raise RBRISRBridgeError(
+            "El mes ISR para seleccionar la tarifa es inválido."
+        )
+    try:
+        month = int(str(value))
+    except (TypeError, ValueError) as exc:
+        raise RBRISRBridgeError(
+            "El mes ISR para seleccionar la tarifa es inválido."
+        ) from exc
+
+    if not 1 <= month <= 12:
+        raise RBRISRBridgeError(
+            "El mes ISR para seleccionar la tarifa debe estar entre 1 y 12."
+        )
+    return month
+
+
 def _select_tariff(
     *,
     facts: Mapping[str, Any],
@@ -95,7 +118,21 @@ def _select_tariff(
                 "El ejercicio fiscal para la tarifa ISR es inválido."
             ) from exc
         period = _coerce_period(period_raw)
-        return tariff_registry.select_for_fiscal_use(fiscal_year, period)
+
+        month = None
+        if period is ISRPeriod.MONTHLY:
+            month_raw = facts.get("isr_month")
+            if month_raw is None:
+                raise RBRISRBridgeError(
+                    "Falta el mes ISR para seleccionar una tarifa mensual."
+                )
+            month = _coerce_month(month_raw)
+
+        return tariff_registry.select_for_fiscal_use(
+            fiscal_year,
+            period,
+            month,
+        )
 
     if legacy_tariff is not None:
         return legacy_tariff

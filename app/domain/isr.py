@@ -133,6 +133,18 @@ class ISRCalculationInput(BaseModel):
     )
     exempt_income: Decimal = Field(default=Decimal("0"), ge=0)
     authorized_deductions: Decimal = Field(default=Decimal("0"), ge=0)
+    prior_provisional_payments: Decimal = Field(
+        default=Decimal("0"),
+        ge=0,
+        max_digits=18,
+        decimal_places=2,
+    )
+    isr_withholding: Decimal = Field(
+        default=Decimal("0"),
+        ge=0,
+        max_digits=18,
+        decimal_places=2,
+    )
     credits: Decimal = Field(default=Decimal("0"), ge=0)
     normative_ref: str = Field(min_length=1, max_length=300)
 
@@ -195,6 +207,8 @@ class ISRCalculationResult(BaseModel):
     fixed_fee: Decimal
     rate_percent: Decimal
     tax_before_credits: Decimal
+    prior_provisional_payments: Decimal
+    isr_withholding: Decimal
     credits: Decimal
     final_tax: Decimal
     normative_ref: str

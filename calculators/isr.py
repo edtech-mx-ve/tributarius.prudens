@@ -7,7 +7,9 @@ from app.domain.isr import (
     ISRCalculationInput,
     ISRCalculationResult,
     ISRCalculationStep,
+    ISRPeriod,
     ISRTariff,
+    ISRTariffScope,
 )
 
 
@@ -66,6 +68,22 @@ def calculate_isr(
             "La referencia normativa validada no coincide con la tarifa."
         )
 
+    has_article_106_subtractions = (
+        calculation_input.prior_provisional_payments != Decimal("0")
+        or calculation_input.isr_withholding != Decimal("0")
+    )
+
+    if has_article_106_subtractions and not (
+        tariff.period == ISRPeriod.MONTHLY
+        and tariff.tariff_scope == ISRTariffScope.YEAR_TO_MONTH
+        and tariff.normative_ref == "lisr:articulo_106"
+    ):
+        raise ISRCalculationError(
+            "Los pagos provisionales previos y las retenciones ISR "
+            "solo pueden aplicarse al contrato mensual acumulado "
+            "controlado del articulo 106."
+        )
+
     if calculation_input.taxable_base is not None:
         if calculation_input.gross_income is None:
             if (
@@ -120,7 +138,28 @@ def calculate_isr(
     excess = money(taxable_base - bracket.lower_limit)
     marginal_tax = money(excess * bracket.rate_percent / HUNDRED)
     tax_before_credits = money(bracket.fixed_fee + marginal_tax)
-    final_tax = money(max(Decimal("0"), tax_before_credits - calculation_input.credits))
+
+    prior_provisional_payments = money(
+        calculation_input.prior_provisional_payments
+    )
+
+    isr_withholding = money(
+        calculation_input.isr_withholding
+    )
+
+    credits = money(
+        calculation_input.credits
+    )
+
+    final_tax = money(
+        max(
+            Decimal("0"),
+            tax_before_credits
+            - prior_provisional_payments
+            - isr_withholding
+            - credits,
+        )
+    )
 
     steps = [
         ISRCalculationStep(
@@ -143,12 +182,37 @@ def calculate_isr(
             formula="fixed_fee + marginal_tax",
             result=tax_before_credits,
         ),
+    ]
+
+    if prior_provisional_payments != Decimal("0.00"):
+        steps.append(
+            ISRCalculationStep(
+                code="prior_provisional_payments",
+                formula="declared_prior_provisional_payments",
+                result=prior_provisional_payments,
+            )
+        )
+
+    if isr_withholding != Decimal("0.00"):
+        steps.append(
+            ISRCalculationStep(
+                code="isr_withholding",
+                formula="declared_isr_withholding",
+                result=isr_withholding,
+            )
+        )
+
+    steps.append(
         ISRCalculationStep(
             code="final_tax",
-            formula="max(0, tax_before_credits - credits)",
+            formula=(
+                "max(0, tax_before_credits - "
+                "prior_provisional_payments - "
+                "isr_withholding - credits)"
+            ),
             result=final_tax,
-        ),
-    ]
+        )
+    )
 
     return ISRCalculationResult(
         fiscal_year=calculation_input.fiscal_year,
@@ -159,7 +223,9 @@ def calculate_isr(
         fixed_fee=bracket.fixed_fee,
         rate_percent=bracket.rate_percent,
         tax_before_credits=tax_before_credits,
-        credits=calculation_input.credits,
+        prior_provisional_payments=prior_provisional_payments,
+        isr_withholding=isr_withholding,
+        credits=credits,
         final_tax=final_tax,
         normative_ref=tariff.normative_ref,
         tariff_version=tariff.version,

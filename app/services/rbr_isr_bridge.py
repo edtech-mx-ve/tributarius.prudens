@@ -112,6 +112,16 @@ def build_isr_input_from_rbr(
                 "authorized_deductions",
                 default="0",
             ),
+            prior_provisional_payments=_decimal_fact(
+                facts,
+                "prior_provisional_payments",
+                default="0",
+            ),
+            isr_withholding=_decimal_fact(
+                facts,
+                "isr_withholding",
+                default="0",
+            ),
             credits=_decimal_fact(
                 facts,
                 "credits",

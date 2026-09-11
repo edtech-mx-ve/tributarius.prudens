@@ -32,8 +32,28 @@ _MONTHS = {
 
 _TAXABLE_BASE_RE = re.compile(
     r"\bbase\s+gravable"
-    r"(?:\s+(?:mensual|anual))?"
+    r"(?:\s+(?:mensual|anual|acumulad[ao]))?"
     r"\s*(?:de|por|es|fue|:)?"
+    r"\s*\$?\s*"
+    r"([0-9][0-9,]*(?:\.[0-9]{1,2})?)"
+)
+
+_PRIOR_PROVISIONAL_PAYMENTS_RE = re.compile(
+    r"\bpagos?\s+provisionales?"
+    r"(?:\s+de\s+isr)?"
+    r"\s*(?:por|de|:)?"
+    r"\s*\$?\s*"
+    r"([0-9][0-9,]*(?:\.[0-9]{1,2})?)"
+)
+
+_ISR_WITHHOLDING_RE = re.compile(
+    r"\b(?:"
+    r"me\s+han\s+retenido"
+    r"|me\s+retuvieron"
+    r"|isr\s+retenido"
+    r"|retenciones?\s+de\s+isr"
+    r")"
+    r"\s*(?:por|de|:)?"
     r"\s*\$?\s*"
     r"([0-9][0-9,]*(?:\.[0-9]{1,2})?)"
 )
@@ -105,6 +125,8 @@ def _extract_isr_runtime_facts(
         "servicios profesionales" in folded
         or "profesional independiente" in folded
         or "profesionista independiente" in folded
+        or "actividad profesional" in folded
+        or "actividades profesionales" in folded
     ):
         _append_fact(
             facts,
@@ -119,16 +141,21 @@ def _extract_isr_runtime_facts(
             value="actividades empresariales y profesionales",
         )
 
-    month = next(
+    month_occurrences = sorted(
         (
-            number
-            for name, number in _MONTHS.items()
-            if re.search(
-                rf"(?<![a-z0-9]){name}(?![a-z0-9])",
-                folded,
-            )
-        ),
-        None,
+            match.start(),
+            number,
+        )
+        for name, number in _MONTHS.items()
+        for match in re.finditer(
+            rf"(?<![a-z0-9]){name}(?![a-z0-9])",
+            folded,
+        )
+    )
+    month = (
+        month_occurrences[-1][1]
+        if month_occurrences
+        else None
     )
 
     if (
@@ -164,6 +191,44 @@ def _extract_isr_runtime_facts(
             _append_fact(
                 facts,
                 name="taxable_base",
+                value=amount,
+            )
+
+    if re.search(
+        r"\bbase\s+gravable\s+acumulad[ao]\b",
+        folded,
+    ):
+        _append_fact(
+            facts,
+            name="taxable_base_scope",
+            value="year_to_month",
+        )
+
+    prior_payments_match = (
+        _PRIOR_PROVISIONAL_PAYMENTS_RE.search(folded)
+    )
+    if prior_payments_match is not None:
+        amount = _money_value(
+            prior_payments_match.group(1)
+        )
+        if amount is not None:
+            _append_fact(
+                facts,
+                name="prior_provisional_payments",
+                value=amount,
+            )
+
+    withholding_match = _ISR_WITHHOLDING_RE.search(
+        folded
+    )
+    if withholding_match is not None:
+        amount = _money_value(
+            withholding_match.group(1)
+        )
+        if amount is not None:
+            _append_fact(
+                facts,
+                name="isr_withholding",
                 value=amount,
             )
 
